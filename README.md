@@ -1,8 +1,8 @@
 [ CHECK LIST ]
 
 Landing page
-[x] Fill up images
-[x] Input text
+[ ] Fill up images
+[ ] Input text
 [ ] Identify use of read more
 [ ] Fix some layout ( NOTE CHANGES )
 
