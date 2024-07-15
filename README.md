@@ -1,7 +1,7 @@
 [ CHECK LIST ]
 
 Landing page
-[ ] Fill up images
+[X] Fill up images
 [ ] Input text 
 [ ] Identify use of read more
 [ ] Fix some layout ( NOTE CHANGES ) 
