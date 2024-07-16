@@ -128,33 +128,43 @@
                   </div>
               </div>
               <div class="row">
-                <div class="col-12 col-md-12 col-lg-4">
-                    <div class="card text-white text-center bg-dark pb-2">
+                <div class="col-12 col-md-12 col-lg-3">
+                    <div class="h-100 card text-white text-center bg-dark pb-2">
                         <div class="card-body">
                             <i class="bi bi-laptop"></i>
                             <h3 class="card-title">Tune Up</h3>
                             <p class="lead">We provide tune-up services available solely for the generators.</p>
-                            <button class="btn bg-warning text-dark">Read More</button>
+                            <button class="btn bg-warning text-dark mt-auto">Read More</button>
                         </div>
                     </div>
                 </div>
-                  <div class="col-12 col-md-12 col-lg-4">
-                      <div class="card text-white text-center bg-dark pb-2">
+                  <div class="col-12 col-md-12 col-lg-3">
+                      <div class="h-100 card text-white text-center bg-dark pb-2">
                           <div class="card-body">
                             <i class="bi bi-journal"></i>
                               <h3 class="card-title">Maintenance</h3>
                               <p class="lead">We provide maintenance services, such as oil changes or fuse replacements.</p>
-                              <button class="btn bg-warning text-dark">Read More</button>
+                              <button class="btn bg-warning text-dark mt-4">Read More</button>
                           </div>
                       </div>
                   </div>
-                  <div class="col-12 col-md-12 col-lg-4">
-                      <div class="card text-white text-center bg-dark pb-2">
+                  <div class="col-12 col-md-12 col-lg-3">
+                      <div class="h-100 card text-white text-center bg-dark pb-2">
                           <div class="card-body">
                             <i class="bi bi-intersect"></i>
                               <h3 class="card-title">Installation</h3>
                               <p class="lead">Our service provides installation for generators from us or outside sources.</p>
-                              <button class="btn bg-warning text-dark">Read More</button>
+                              <button class="btn bg-warning text-dark mt-4">Read More</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-12 col-lg-3">
+                      <div class="h-100 card text-white text-center bg-dark pb-2">
+                          <div class="card-body">
+                            <i class="bi bi-intersect"></i>
+                              <h3 class="card-title">Installation</h3>
+                              <p class="lead">Our service provides installation for generators from us or outside sources.</p>
+                              <button class="btn bg-warning text-dark mt-4">Read More</button>
                           </div>
                       </div>
                   </div>
