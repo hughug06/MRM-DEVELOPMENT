@@ -190,7 +190,7 @@
                           <div class="img-area mb-4">
                               <img src="img/project-1.jpg" class="img-fluid" alt="">
                           </div>
-                            <h3 class="card-title">Building Make</h3>
+                            <h3 class="card-title">Project 1</h3>
                             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
                             <button class="btn bg-warning text-dark">Learn More</button>
                         </div>
@@ -202,7 +202,7 @@
                           <div class="img-area mb-4">
                               <img src="img/project-2.jpg" class="img-fluid" alt="">
                           </div>
-                            <h3 class="card-title">Building Make</h3>
+                            <h3 class="card-title">Project 2</h3>
                             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
                             <button class="btn bg-warning text-dark">learn More</button>
                         </div>
@@ -214,7 +214,7 @@
                           <div class="img-area mb-4">
                               <img src="img/project-3.jpg" class="img-fluid" alt="">
                           </div>
-                            <h3 class="card-title">Building Make</h3>
+                            <h3 class="card-title">Project 3</h3>
                             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
                             <button class="btn bg-warning text-dark">Learn More</button>
                         </div>
