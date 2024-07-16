@@ -65,24 +65,24 @@
             <img src="img/home-1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>POWER GENERATOR</h5>
-                              <p>Our company provides many types of generators, from different brands to many specifications.</p>
-                              <p><a href="#" class="btn btn-warning mt-3" >Learn More</a></p>
+                <p>Our company provides many types of generators, from different brands to many specifications.</p>
+                <p><a href="#" class="btn btn-warning mt-3" >Learn More</a></p>
             </div>
           </div>
           <div class="carousel-item">
             <img src="img/home-2.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>SOLAR</h5>
-                              <p>We provide solar panels with a complete set for our clients.</p>
-                              <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+                <p>We provide solar panels with a complete set for our clients.</p>
+                <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
             </div>
           </div>
           <div class="carousel-item">
             <img src="img/home-3.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>SERVICE</h5>
-                              <p>We also have different services along with our products, or we provide services only to our clients.</p>
-                              <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+                <p>We also have different services along with our products, or we provide services only to our clients.</p>
+                <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
             </div>
           </div>
         </div>
