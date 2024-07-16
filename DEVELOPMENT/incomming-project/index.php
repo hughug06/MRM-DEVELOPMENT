@@ -232,7 +232,6 @@
                 <div class="col-md-12">
                     <div class="section-header text-center pb-5">
                         <h2>Our Team</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur <br>adipisicing elit. Non, quo.</p>
                     </div>
                 </div>
             </div>
@@ -241,8 +240,8 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="img/team-1.jpg" alt="" class="img-fluid rounded-circle">
-                        <h3 class="card-title py-2">MISS CHAVIZ</h3>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam nostrum illo tempora esse quibusdam.</p>
+                        <h3 class="card-title py-2">RUBY CHAVEZ</h3>
+                        <p class="card-text">The CEO of the company and the main head of the team.</p>
                         
 
                         <p class="socials">
@@ -258,8 +257,8 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="img/team-2.jpg" alt="" class="img-fluid rounded-circle">
-                        <h3 class="card-title py-2">MISS CHAVIZ</h3>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam nostrum illo tempora esse quibusdam.</p>
+                        <h3 class="card-title py-2">MICHAEL MATA</h3>
+                        <p class="card-text">Operations Manager, and the one responsible for the operations in the company.</p>
                         <p class="socials">
                             <i class="bi bi-twitter text-dark mx-1"></i>
                         <i class="bi bi-facebook text-dark mx-1"></i>
@@ -273,8 +272,8 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="img/team-3.jpg" alt="" class="img-fluid rounded-circle">
-                        <h3 class="card-title py-2">MISS CHAVIZ</h3>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam nostrum illo tempora esse quibusdam.</p>
+                        <h3 class="card-title py-2">RALPH MATA</h3>
+                        <p class="card-text">Sales Manager, responsible for the sales of the company.</p>
                         <p class="socials">
                             <i class="bi bi-twitter text-dark mx-1"></i>
                         <i class="bi bi-facebook text-dark mx-1"></i>
@@ -288,8 +287,8 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="img/team-4.jpg" alt="" class="img-fluid rounded-circle">
-                        <h3 class="card-title py-2">MISS CHAVIZ</h3>
-                        <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ipsam nostrum illo tempora esse quibusdam.</p>
+                        <h3 class="card-title py-2">GIZELLE GAMBALA</h3>
+                        <p class="card-text">Administrator, responsible in ensuring the company operates smoothly.</p>
                         <p class="socials">
                             <i class="bi bi-twitter text-dark mx-1"></i>
                         <i class="bi bi-facebook text-dark mx-1"></i>
