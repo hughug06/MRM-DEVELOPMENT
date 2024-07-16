@@ -180,7 +180,6 @@
                 <div class="col-md-12">
                     <div class="section-header text-center pb-5">
                         <h2>Our Projects</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur <br>adipisicing elit. Non, quo.</p>
                     </div>
                 </div>
             </div>
@@ -309,7 +308,7 @@
                 <div class="col-md-12">
                     <div class="section-header text-center pb-5">
                         <h2>Contact Us</h2>
-                        <p>Send your email and message to us</p>
+                        <p>Send your email and message us for more information</p>
                     </div>
                 </div>
             </div>
