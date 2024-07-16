@@ -65,7 +65,7 @@
             <img src="img/home-1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>POWER GENERATOR</h5>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                              <p>Our company provides many types of generators, from different brands to many specifications.</p>
                               <p><a href="#" class="btn btn-warning mt-3" >Learn More</a></p>
             </div>
           </div>
@@ -73,7 +73,7 @@
             <img src="img/home-2.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>SOLAR</h5>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                              <p>We provide solar panels with a complete set for our clients.</p>
                               <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
             </div>
           </div>
@@ -81,7 +81,7 @@
             <img src="img/home-3.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
               <h5>SERVICE</h5>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+                              <p>We also have different services along with our products, or we provide services only to our clients.</p>
                               <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
             </div>
           </div>
@@ -108,7 +108,7 @@
                   <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
                       <div class="about-text">
                             <h2>We Provide the Best Quality <br/> Services Ever</h2>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam, labore reiciendis. Assumenda eos quod animi! Soluta nesciunt inventore dolores excepturi provident, culpa beatae tempora, explicabo corporis quibusdam corrupti. Autem, quaerat. Assumenda quo aliquam vel, nostrum explicabo ipsum dolor, ipsa perferendis porro doloribus obcaecati placeat natus iste odio est non earum?</p>
+                            <p>Our services include tune-up, maintenance, installation, and repairs for our clients to have the best condition for their generators and to provide the best performance available. By giving </p>
                             <a href="#" class="btn btn-warning">Learn More</a>
                       </div>
                   </div>
@@ -123,7 +123,7 @@
                   <div class="col-md-12">
                       <div class="section-header text-center pb-5">
                           <h2>Our Services</h2>
-                          <p>Lorem ipsum dolor sit amet, consectetur <br>adipisicing elit. Non, quo.</p>
+                          <p>We provide Services available to <br>our clients and to those who only needs service</p>
                       </div>
                   </div>
               </div>
@@ -133,7 +133,7 @@
                         <div class="card-body">
                             <i class="bi bi-laptop"></i>
                             <h3 class="card-title">Tune Up</h3>
-                            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
+                            <p class="lead">We provide tune-up services available solely for the generators.</p>
                             <button class="btn bg-warning text-dark">Read More</button>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                           <div class="card-body">
                             <i class="bi bi-journal"></i>
                               <h3 class="card-title">Maintenance</h3>
-                              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
+                              <p class="lead">We provide maintenance services, such as oil changes or fuse replacements.</p>
                               <button class="btn bg-warning text-dark">Read More</button>
                           </div>
                       </div>
@@ -153,7 +153,7 @@
                           <div class="card-body">
                             <i class="bi bi-intersect"></i>
                               <h3 class="card-title">Installation</h3>
-                              <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eligendi modi temporibus alias iste. Accusantium?</p>
+                              <p class="lead">Our service provides installation for generators from us or outside sources.</p>
                               <button class="btn bg-warning text-dark">Read More</button>
                           </div>
                       </div>
@@ -300,7 +300,7 @@
                 <div class="col-md-12">
                     <div class="section-header text-center pb-5">
                         <h2>Contact Us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur <br>adipisicing elit. Non, quo.</p>
+                        <p>Send your email and message to us</p>
                     </div>
                 </div>
             </div>
