@@ -108,7 +108,7 @@
                   <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
                       <div class="about-text">
                             <h2>We Provide the Best Quality <br/> Services Ever</h2>
-                            <p>Our services include tune-up, maintenance, installation, and repairs for our clients to have the best condition for their generators and to provide the best performance available. By giving </p>
+                            <p>Our services include tune-up, maintenance, installation, and repairs for our clients to have the best condition for their generators and to provide the best performance available.</p>
                             <a href="#" class="btn btn-warning">Learn More</a>
                       </div>
                   </div>
@@ -153,7 +153,7 @@
                           <div class="card-body">
                             <i class="bi bi-intersect"></i>
                               <h3 class="card-title">Installation</h3>
-                              <p class="lead">Our service provides installation for generators from us or outside sources.</p>
+                              <p class="lead">We provide installation for generators from us or outside sources.</p>
                               <button class="btn bg-warning text-dark mt-4">Read More</button>
                           </div>
                       </div>
@@ -162,8 +162,8 @@
                       <div class="h-100 card text-white text-center bg-dark pb-2">
                           <div class="card-body">
                             <i class="bi bi-intersect"></i>
-                              <h3 class="card-title">Installation</h3>
-                              <p class="lead">Our service provides installation for generators from us or outside sources.</p>
+                              <h3 class="card-title">Repair</h3>
+                              <p class="lead">We provide repairs for generators in case the clients encounter problems.</p>
                               <button class="btn bg-warning text-dark mt-4">Read More</button>
                           </div>
                       </div>
