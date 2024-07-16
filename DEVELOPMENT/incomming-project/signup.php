@@ -534,11 +534,11 @@
                                                 <input class="form-control" placeholder="Enter your password" type="password">
                                             </div>
                                             <div class="d-grid">
-                                                <a href="index.html" class="btn btn-primary">Create Account</a>
+                                                <a href="index.php" class="btn btn-primary">Create Account</a>
                                             </div>
                                         </form>
                                         <div class="text-start mt-5 ms-0">
-                                            <p class="mb-0">Already have an account? <a href="signin.html">Sign In</a></p>
+                                            <p class="mb-0">Already have an account? <a href="signin.php">Sign In</a></p>
                                         </div>
                                     </div>
                                 </div>
