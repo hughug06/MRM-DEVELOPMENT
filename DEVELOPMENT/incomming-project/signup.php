@@ -27,16 +27,6 @@
     <!-- Icons Css -->
     <link href="../assets/css/icons.css" rel="stylesheet" >
 
-    <script>
-        if(localStorage.spruhalandingdarktheme){
-            document.querySelector("html").setAttribute("data-theme-mode","dark")
-        }
-        if(localStorage.spruhalandingrtl){
-            document.querySelector("html").setAttribute("dir","rtl")
-            document.querySelector("#style")?.setAttribute("href", "../assets/libs/bootstrap/css/bootstrap.rtl.min.css");
-        }
-    </script>
-
 </head>
 
 <body class="error-1">
@@ -510,16 +500,15 @@
         <!-- Start::row-1 -->
         <div class="row signpages text-center">
             <div class="col-md-12">
-                <div class="card mb-0">
+                <div class="card">
                     <div class="row row-sm">
                         <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-primary details">
-                            <div class="mt-5 pt-4 p-2 position-absolute">
+                            <div class="mt-5 pt-5 p-2 position-absolute">
                                 <a href="index.html">
-                                    
                                     <img src="../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo">
                                 </a>
                                 <div class="clearfix"></div>
-                                <img src="../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user">
+                                <img src="../assets/images/svgs/user.svg" class="ht-100 mb-0" alt="user">
                                 <h5 class="mt-4">Create Your Account</h5>
                                 <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span>
                             </div>
@@ -529,9 +518,13 @@
                                 <div class="row row-sm">
                                     <div class="card-body mt-2 mb-2">
                                         <div class="clearfix"></div>
+                                        <h5 class="text-start mb-2">Signup for Free</h5>
+                                        <p class="mb-4 text-muted fs-13 ms-0 text-start">It's free to signup and only takes a minute.</p>
                                         <form>
-                                            <h5 class="text-start mb-2">Signin to Your Account</h5>
-                                            <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p>
+                                            <div class="form-group text-start">
+                                                <label class="form-label">Name</label>
+                                                <input class="form-control" placeholder="Enter your Name" type="text">
+                                            </div>
                                             <div class="form-group text-start">
                                                 <label class="form-label">Email</label>
                                                 <input class="form-control" placeholder="Enter your email" type="text">
@@ -541,13 +534,11 @@
                                                 <input class="form-control" placeholder="Enter your password" type="password">
                                             </div>
                                             <div class="d-grid">
-                                                <a href="user-solar-panel.php" class="btn btn-primary">Sign In</a>
-                                                <a href="index.php" class="btn btn-danger">back</a>
+                                                <a href="index.html" class="btn btn-primary">Create Account</a>
                                             </div>
                                         </form>
                                         <div class="text-start mt-5 ms-0">
-                                            <div class="mb-1"><a href="forgot.html">Forgot password?</a></div>
-                                            <div>Don't have an account? <a href="signup.php">Register Here</a></div>
+                                            <p class="mb-0">Already have an account? <a href="signin.html">Sign In</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -561,11 +552,11 @@
 
     </div>
 
-    <!-- Custom-Switcher JS -->
-    <script src="../assets/js/custom-switcher.min.js"></script>
+   <!-- Custom-Switcher JS -->
+   <script src="../assets/js/custom-switcher.min.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap JS -->
+   <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     
 
 </body>

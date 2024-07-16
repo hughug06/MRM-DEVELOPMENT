@@ -23,7 +23,7 @@
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Homec2</a>
+                <a class="nav-link" href="#">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
@@ -44,7 +44,7 @@
                 <a class="nav-link ms-4" href="signin.php"><span class="text-success">Sign in</span></a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href=""><span class="text-warning" style="color: orange;" >Sign up</span></a>
+                <a class="nav-link" href="signup.php"><span class="text-warning" style="color: orange;" >Sign up</span></a>
               </li>        
             </ul>
           </div>
