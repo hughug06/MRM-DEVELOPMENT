@@ -2,7 +2,7 @@
 
 Landing page
 [ ] Fill up images
-[ ] Input text
+[x] Input text ( INCOMPLETE:Project info )
 [ ] Identify use of read more
 [ ] Fix some layout ( NOTE CHANGES )
 
@@ -16,7 +16,7 @@ Sign page
 ---
 
 Sign up ( not yet created )
-[x] create layout
+[ ] create layout
 
 ---
 
