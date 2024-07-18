@@ -53,8 +53,8 @@
                                     <div class="card-body mt-2 mb-2">
                                         <div class="clearfix"></div>
                                         <h5 class="text-start mb-2">Signup for Free</h5>
-                                        <p class="mb-4 text-muted fs-13 ms-0 text-start">It's free to signup and only takes a minute.</p>
-                                        <form action="Database/signup_db.php" method="post" >
+                                        <p class="mb-4 text-muted fs-13 ms-0 text-start">It's free to signup and only takes a minute.</p>                                      
+                                        <form action="database/signup_db.php" method="post" >                                                                                
                                             <div class="form-group text-start">
                                                 <label class="form-label">Name</label>
                                                 <input class="form-control" placeholder="Enter your Name" type="text" name="fullName">
@@ -68,7 +68,7 @@
                                                 <input class="form-control" placeholder="Enter your password" type="password" name="passWord">
                                             </div>
                                             <div class="d-grid">
-                                                <a href="" class="btn btn-primary">Create Account</a>
+                                                <input href="" class="btn btn-primary" type="submit">Create Account</input>
                                             </div>
                                         </form>
                                         <div class="text-start mt-5 ms-0">
