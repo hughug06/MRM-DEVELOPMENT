@@ -30,9 +30,7 @@
 </head>
 
 <body class="error-1">
-
     <div class="page main-signin-wrapper">
-
         <!-- Start::row-1 -->
         <div class="row signpages text-center">
             <div class="col-md-12">
@@ -56,7 +54,7 @@
                                         <div class="clearfix"></div>
                                         <h5 class="text-start mb-2">Signup for Free</h5>
                                         <p class="mb-4 text-muted fs-13 ms-0 text-start">It's free to signup and only takes a minute.</p>
-                                        <form method="post" action="signup_db.php">
+                                        <form action="Database/signup_db.php" method="post" >
                                             <div class="form-group text-start">
                                                 <label class="form-label">Name</label>
                                                 <input class="form-control" placeholder="Enter your Name" type="text" name="fullName">
