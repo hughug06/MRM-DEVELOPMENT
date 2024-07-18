@@ -16,7 +16,7 @@ Sign page
 ---
 
 Sign up ( not yet created )
-[ ] create layout
+[X] create layout
 
 ---
 
