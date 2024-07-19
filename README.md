@@ -30,7 +30,7 @@ Product solar and generator
 [ ] fix catogories card naming
 [x] remove download report, filter and import
 Product details
-[ ] remove buy now
+[x] remove buy now
 [ ] Remove colors and quantity
 [ ] Remove ratings below
 

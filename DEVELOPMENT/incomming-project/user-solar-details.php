@@ -106,7 +106,6 @@
                                                         </div>
                                                         <div class="text-center mt-4 mb-4 btn-list">
                                                             <a href="ecommerce-cart.html" class="btn ripple btn-primary d-inline-flex align-items-center"><i class="fe fe-shopping-cart me-1"> </i> Add to cart</a>
-                                                            <a href="ecommerce-checkout.html" class="btn ripple btn-secondary d-inline-flex align-items-center"><i class="fe fe-credit-card me-1"> </i> Buy Now</a>
                                                         </div>
                                                     </div>
                                                 </div>
