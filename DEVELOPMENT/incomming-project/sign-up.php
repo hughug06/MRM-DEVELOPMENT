@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<div class="wrapper">
-            <form action="" id="wizard">
+            <form action="signup_db.php" id="wizard">
         		<!-- SECTION 1 -->
                 <h2></h2>
                 <section>
@@ -30,23 +30,23 @@
 							<p>Please fill with your details</p>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="First Name" class="form-control">
+									<input type="text" placeholder="First Name" class="form-control" name="firstName">
 								</div>
 								<div class="form-holder">
-									<input type="text" placeholder="Last Name" class="form-control">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="Your Email" class="form-control">
-								</div>
-								<div class="form-holder">
-									<input type="text" placeholder="Phone Number" class="form-control">
+									<input type="text" placeholder="Last Name" class="form-control" name="lastName">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="Age" class="form-control">
+									<input type="text" placeholder="Your Email" class="form-control" name="emailAddress">
+								</div>
+								<div class="form-holder">
+									<input type="text" placeholder="Phone Number" class="form-control" name="phoneNumber">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-holder">
+									<input type="text" placeholder="Age" class="form-control" name="age">
 								</div>
 								<div class="form-holder" style="align-self: flex-end; transform: translateY(4px);">
 									<div class="checkbox-tick">
@@ -85,31 +85,22 @@
 							<p>Please fill with additional info</p>
 							<div class="form-row">
 								<div class="form-holder w-100">
-									<input type="text" placeholder="Address" class="form-control">
+									<input type="text" placeholder="Address" class="form-control" name="address"> 
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="City" class="form-control">
+									<input type="text" placeholder="City" class="form-control" name="city">
 								</div>
 								<div class="form-holder">
-									<input type="text" placeholder="Zip Code" class="form-control">
+									<input type="text" placeholder="Zip Code" class="form-control" name="zipCode">
 								</div>
 							</div>
 
 							<div class="form-row">
-								<div class="select">
-									<div class="form-holder">
-										<div class="select-control">Your country</div>
-										<i class="zmdi zmdi-caret-down"></i>
-									</div>
-									<ul class="dropdown">
-										<li rel="United States">United States</li>
-										<li rel="United Kingdom">United Kingdom</li>
-										<li rel="Viet Nam">Viet Nam</li>
-									</ul>
-								</div>
-								<div class="form-holder"></div>
+								<div class="form-holder">
+									<input type="text" placeholder="Country" class="form-control" name="country">
+								</div>								
 							</div>
 						</div>
 					</div>
@@ -126,7 +117,7 @@
 							<div class="form-header">
 								<h3>Registration</h3>
 							</div>
-							<p>Send an optional message</p>
+							<p>Input code authentication</p>
 							<div class="form-row">
 								<div class="form-holder w-100">
 									<textarea name="" id="" placeholder="Your messagere here!" class="form-control" style="height: 99px;"></textarea>
@@ -138,9 +129,9 @@
 									<span class="checkmark"></span>
 								</label>
 							</div>
-						</div>
-					</div>
+						</div>			
                 </section>
+				
             </form>
 		</div>
 
