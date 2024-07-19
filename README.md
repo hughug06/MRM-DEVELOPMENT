@@ -28,7 +28,7 @@ After log in
 Product solar and generator
 [x] remove star
 [ ] fix catogories card naming
-[ ] remove download report, filter and import
+[x] remove download report, filter and import
 Product details
 [ ] remove buy now
 [ ] Remove colors and quantity
