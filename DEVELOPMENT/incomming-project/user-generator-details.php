@@ -120,48 +120,6 @@
                                             <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized .</p>
                                             <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
                                         </div>
-                                        <div class="d-flex  mt-2">
-                                            <div class="mt-2 sizes">Quantity:</div>
-                                            <div class="d-flex ms-2">
-                                                <div class="form-group">
-                                                    <select name="quantity" id="select-countries17" class="form-control  wd-150" data-trigger>
-                                                        <option value="1" selected="">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="colors d-flex me-3 mt-2">
-                                            <span class="mt-2">colors:</span>
-                                            <div class="d-flex gutters-xs ms-4">
-                                                <div class="me-2">
-                                                    <label class="colorinput">
-                                                        <input name="color" type="radio" value="azure" class="colorinput-input" checked="">
-                                                        <span class="colorinput-color bg-info"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="me-2">
-                                                    <label class="colorinput">
-                                                        <input name="color" type="radio" value="indigo" class="colorinput-input">
-                                                        <span class="colorinput-color bg-secondary"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="me-2">
-                                                    <label class="colorinput">
-                                                        <input name="color" type="radio" value="purple" class="colorinput-input">
-                                                        <span class="colorinput-color bg-danger"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="me-2">
-                                                    <label class="colorinput">
-                                                        <input name="color" type="radio" value="pink" class="colorinput-input">
-                                                        <span class="colorinput-color bg-pink"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mt-4">

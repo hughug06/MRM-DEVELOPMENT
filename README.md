@@ -31,7 +31,7 @@ Product solar and generator
 [x] remove download report, filter and import
 Product details
 [x] remove buy now
-[ ] Remove colors and quantity
+[x] Remove colors and quantity
 [x] Remove ratings below
 
 ---
