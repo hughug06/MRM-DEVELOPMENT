@@ -46,7 +46,7 @@ img {
 }
 .wrapper {
 	height: 100vh;
-	background: #f9f6f1;
+	background: orange;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -75,14 +75,14 @@ img {
 	    width: 12px;
 	    height: 12px;
 	    border-radius: 50%;
-	    background: #e9e0cf;
+	    background: orange;
 	    margin-right: 78px;
 	    position: relative;
 	    &:before {
 	    	content: "";
 	    	width: 58px;
 	    	height: 2px;
-	    	background: #e9e0cf;
+	    	background: orange;
 	    	position: absolute;
 	    	right: 22px;
 	    	top: 5px;
@@ -91,7 +91,7 @@ img {
 	    	content: "";
 	    	width: 0;
 	    	height: 2px;
-	    	background: #6d7f52;
+	    	background: orange;
 	    	position: absolute;
 	    	left: -68px;
 	    	top: 5px;
@@ -100,12 +100,12 @@ img {
 	}
 	&.first {
 		a {
-			background: #6d7f52;
+			background: orange;
 		}
 	}
 	&.checked {
 		a {
-			background: #6d7f52;
+			background:orange;
 		    &:after {
 		    	width: 58px;
 		    }
@@ -133,7 +133,7 @@ img {
 }
 .inner {
 	display: flex;
-	background: #fff;
+	background: orange;
 	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
@@ -156,7 +156,7 @@ img {
 h3 {
 	font-family: "Muli-SemiBold";
 	font-size: 22px;
-	color: #453e79;
+	color: #000000;
 	text-transform: uppercase;
 	letter-spacing: 7px;
 	padding: 5px 15px;
@@ -167,7 +167,7 @@ h3 {
 p {
 	font-family: "Muli-SemiBold";
 	font-size: 20px;
-	color: #6d7f52;
+	color: #000000;
 	text-align: center;
 	margin-bottom: 26px;
 }
@@ -216,7 +216,7 @@ p {
 		li {
 			padding: 5px 10px;
 			&:hover {
-				background: #81acee;
+				background: orange;
 				color: #fff;
 			}
 		}
@@ -319,10 +319,10 @@ textarea.form-control {
 		&:last-child {
 			a {
 				width: 124px;
-				background: #6d7f52;
+				background: #000000;
 				color: #fff;
 				&:hover {
-					background: #849963;
+					background: orange;
 				}
 				&:before {
 					content: '\f26b';
@@ -342,10 +342,10 @@ textarea.form-control {
 		&[aria-disabled="false"] {
 			& ~ li {
 				a {
-					background: #6d7f52;
+					background: #000000;
 					color: #fff;
 					&:hover {
-						background: #849963;
+						background: orange;
 					}
 				}
 			}
@@ -411,9 +411,9 @@ textarea.form-control {
 		line-height: 1.9;
 		transform: translateY(-5px);
 		a {
-			color: #6d7f52;
+			color: #000000;
 			&:hover {
-				color: #89b843;
+				color: orange;
 			}
 		}
 	}
