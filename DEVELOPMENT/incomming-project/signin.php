@@ -530,7 +530,7 @@
                                     <div class="card-body mt-2 mb-2">
                                         <div class="clearfix"></div>
                                         <form>
-                                            <h5 class="text-start mb-2">Signin to Your Account</h5>
+                                            <h5 class="text-start mb-2">Sign in to Your Account</h5>
                                             <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p>
                                             <div class="form-group text-start">
                                                 <label class="form-label">Email</label>
