@@ -26,7 +26,7 @@ After log in
 ---
 
 Product solar and generator
-[ ] remove star
+[x] remove star
 [ ] fix catogories card naming
 [ ] remove download report, filter and import
 Product details
