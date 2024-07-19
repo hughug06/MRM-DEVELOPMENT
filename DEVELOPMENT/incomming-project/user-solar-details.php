@@ -115,15 +115,6 @@
                                     <div class="col-xl-6 col-lg-12 col-md-12">
                                         <div class="mt-4 mb-4">
                                             <h4 class="mt-1 mb-3">SOLAR</h4>
-
-                                            <p class="text-muted float-start me-3">
-                                                <span class="fe fe-star text-warning"></span>
-                                                <span class="fe fe-star text-warning"></span>
-                                                <span class="fe fe-star text-warning"></span>
-                                                <span class="fe fe-star text-warning"></span>
-                                                <span class="fe fe-star"></span>
-                                            </p>
-                                            <p class="text-muted mb-4">( 135 Customers Review )</p>
                                             <h6 class="mt-4 fs-16">Description</h6>
                                             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
                                             <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized .</p>
@@ -229,13 +220,7 @@
                                                                     <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
                                                                 </h5>
                                                                 <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-                                                                <div class="text-warning mt-1">
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star"></i>
-                                                                 </div>
+
                                                                 <p class="font-13  mb-2 mt-2">
                                                                    Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
                                                                 </p>
@@ -253,13 +238,7 @@
                                                                     <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
                                                                 </h5>
                                                                 <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-                                                                <div class="text-warning mt-1">
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star"></i>
-                                                                 </div>
+
                                                                 <p class="font-13  mb-2 mt-2">
                                                                    Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
                                                                 </p>
@@ -277,13 +256,7 @@
                                                                     <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
                                                                 </h5>
                                                                 <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-                                                                <div class="text-warning mt-1">
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star active"></i>
-                                                                    <i class="bx bxs-star text-light"></i>
-                                                                 </div>
+
                                                                 <p class="font-13  mb-2 mt-2">
                                                                    Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
                                                                 </p>

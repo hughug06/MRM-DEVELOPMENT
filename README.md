@@ -32,7 +32,7 @@ Product solar and generator
 Product details
 [x] remove buy now
 [ ] Remove colors and quantity
-[ ] Remove ratings below
+[x] Remove ratings below
 
 ---
 
