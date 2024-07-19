@@ -44,7 +44,7 @@
                 <a class="nav-link ms-4" href="signin.php"><span class="text-success">Sign in</span></a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="signup.php"><span class="text-warning" style="color: orange;" >Sign up</span></a>
+                <a class="nav-link" href="sign-up.php"><span class="text-warning" style="color: orange;" >Sign up</span></a>
               </li>        
             </ul>
           </div>
