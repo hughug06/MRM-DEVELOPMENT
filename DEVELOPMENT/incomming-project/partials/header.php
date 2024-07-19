@@ -495,20 +495,6 @@
 
         <!-- Start::header-element -->
         <div class="main-header-center d-none d-lg-block  header-link">
-            <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <select class="js-example-basic-single" name="state" data-trigger>
-                        <option value="s-1">Choose one</option>
-                        <option value="s-2">T-Projects...</option>
-                        <option value="s-3">Microsoft Project</option>
-                        <option value="s-4">Risk Management</option>
-                        <option value="s-5">Team Building</option>
-                    </select>
-                </div>
-                <input type="text" class="form-control" id="typehead" placeholder="Search for results..."
-                autocomplete="off">
-            <button class="btn btn-primary"><i class="fe fe-search" aria-hidden="true"></i></button>
-            </div>
             <div id="headersearch" class="header-search">
                 <div class="p-3">
                     <div class="">
