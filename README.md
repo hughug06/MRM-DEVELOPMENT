@@ -21,7 +21,9 @@ Sign up ( not yet created )
 ---
 
 After log in
-[ ] remove header dropdown, search, and search logo
+[ ] remove header dropdown
+[ ] remove search
+[ ] remove search logo
 
 ---
 
