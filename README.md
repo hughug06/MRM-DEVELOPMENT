@@ -8,7 +8,7 @@ Landing page
 
 ---
 
-Sign page
+Sign in page
 [ ] edit image
 [ ] edit color design
 [ ] Edit overall layout ( note changes )
