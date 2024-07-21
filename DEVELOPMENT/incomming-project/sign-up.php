@@ -1,146 +1,52 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>REGISTRATION</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="author" content="colorlib.com">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/signup-style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title>Document</title>
+</head>
+<body>
+	<div class="container-fluid mx-auto" style="width: 1500px;" id="container">
+		<form action="">
+			<div class="d-flex justify-content-center ">
+				<H2>MRM POWER GENERATION TOOL</H2>								
+			</div>
 
-		<!-- MATERIAL DESIGN ICONIC FONT -->
-		<link rel="stylesheet" href="../assets/icon-fonts/form-fonts/material-design-iconic-font/css/material-design-iconic-font.css">
+			<hr width="100%">
 
-		<!-- STYLE CSS -->
-		<link rel="stylesheet" href="../assets/css/signup_css/style.css" >
-		
-	</head>
-	<body>
-		<div class="wrapper">
-            <form action="signup_db.php" id="wizard">
-        		<!-- SECTION 1 -->
-                <h2></h2>
-                <section>
-                    <div class="inner">
-						<div class="image-holder">
-							<img src="" alt="">
-						</div>
-						<div class="form-content" >
-							<div class="form-header">
-								<h3>Registration</h3>
-							</div>
-							<p>Please fill with your details</p>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="First Name" class="form-control" name="firstName">
-								</div>
-								<div class="form-holder">
-									<input type="text" placeholder="Last Name" class="form-control" name="lastName">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="Your Email" class="form-control" name="emailAddress">
-								</div>
-								<div class="form-holder">
-									<input type="text" placeholder="Phone Number" class="form-control" name="phoneNumber">
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="Age" class="form-control" name="age">
-								</div>
-								<div class="form-holder" style="align-self: flex-end; transform: translateY(4px);">
-									<div class="checkbox-tick">
-										<label class="male">
-											<input type="radio" name="gender" value="male" checked> Male<br>
-											<span class="checkmark"></span>
-										</label>
-										<label class="female">
-											<input type="radio" name="gender" value="female"> Female<br>
-											<span class="checkmark"></span>
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="checkbox-circle">
-								<label>
-									<input type="checkbox" checked> Nor again is there anyone who loves or pursues or desires to obtaini.
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-                </section>
+			<div class="row mt-3">
+				<div class="col">
+					<input  type="text" name="userName" placeholder="First Name" >	
+				</div>
+				<div class="col">
+					<input  type="text" name="userName" placeholder="Last Name" >	
+				</div>
+				<div class="col">
+					<input  type="text" name="userName" placeholder="MI" >		
+				</div>
+						
+			</div>
 
-				<!-- SECTION 2 -->
-                <h2></h2>
-                <section>
-                    <div class="inner">
-						<div class="image-holder">
-							<img src="" alt="">
-						</div>
-						<div class="form-content">
-							<div class="form-header">
-								<h3>Registration</h3>
-							</div>
-							<p>Please fill with additional info</p>
-							<div class="form-row">
-								<div class="form-holder w-100">
-									<input type="text" placeholder="Address" class="form-control" name="address"> 
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="City" class="form-control" name="city">
-								</div>
-								<div class="form-holder">
-									<input type="text" placeholder="Zip Code" class="form-control" name="zipCode">
-								</div>
-							</div>
 
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="text" placeholder="Country" class="form-control" name="country">
-								</div>								
-							</div>
-						</div>
-					</div>
-                </section>
+			<div class="row mt-3">
+				<input class="col " type="text" name="userName" placeholder="User Name" >				
+			</div>
+			<div class="row mt-3">
+				<input class="col " type="password" name="passWord" placeholder="Password" >				
+			</div>
+			<div class="row mt-3">
+				<input class="col " type="text" name="emailAddress" placeholder="Email Address" >				
+			</div>
+			<div class="row mt-3">
+				<input class="col " type="text" name="contactNumber" placeholder="Cellphone Number" >				
+			</div>
+			<div class="row mt-3">
+				<input class="col " type="text" name="physicalAddress" placeholder="Physical Address" >				
+			</div>
+		</form>
 
-                <!-- SECTION 3 -->
-                <h2></h2>
-                <section>
-                    <div class="inner">
-						<div class="image-holder">
-							<img src="" alt="">
-						</div>
-						<div class="form-content">
-							<div class="form-header">
-								<h3>Registration</h3>
-							</div>
-							<p>Input code authentication</p>
-							<div class="form-row">
-								<div class="form-holder w-100">
-									<textarea name="" id="" placeholder="Your messagere here!" class="form-control" style="height: 99px;"></textarea>
-								</div>
-							</div>
-							<div class="checkbox-circle mt-24">
-								<label>
-									<input type="checkbox" checked>  Please accept <a href="#">terms and conditions ?</a>
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</div>			
-                </section>
-				
-            </form>
-		</div>
-
-		<!-- JQUERY -->
-		<script src="../assets/js/fornm-js/jquery-3.3.1.min.js"></script>
-
-		<!-- JQUERY STEP -->
-		<script src="../assets/js/fornm-js/jquery.steps.js"></script>
-		<script src="../assets/js/fornm-js/main.js"></script>
-		<!-- Template created and distributed by Colorlib -->
+	</div>
 </body>
 </html>

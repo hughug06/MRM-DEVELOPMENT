@@ -1,0 +1,9 @@
+#container{
+    border: solid black 1px;
+    box-shadow: 5px 7px orange;
+    border-radius: 5px;
+    margin-top: 150PX;
+    padding: 60px;
+    
+}
+
