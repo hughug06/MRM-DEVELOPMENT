@@ -62,3 +62,4 @@ Content and product description for landing page
 [ ]About Us
 [ ]Company Description
 [ ]Update List of Products in Excel
+[ ]Company team basic description
