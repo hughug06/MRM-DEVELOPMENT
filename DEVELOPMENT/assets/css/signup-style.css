@@ -1,29 +1,13 @@
-*{
-    max-height: 900px;
-    max-width: 900;
+#card-body:hover{
+    box-shadow: 5px 5px orange;
+}
+#card-body{
+    border-radius: 25px;
+    transition:  2s;
 }
 
 
-#container{
-    border: solid black 1px;
-    box-shadow: 5px 7px orange;
-    border-radius: 5px;
-    margin-top: 150PX;
-    padding: 60px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 
-input {
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: rgb(0, 0, 0)
-  }
-  input:focus {
-    border-color: blue;
-    outline: 1px dotted #000
-  }
 
-#btn-submit{
-   
-}
+
 
