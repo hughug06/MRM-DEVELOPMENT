@@ -4,6 +4,18 @@
     border-radius: 5px;
     margin-top: 150PX;
     padding: 60px;
-    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+input {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(0, 0, 0)
+  }
+  input:focus {
+    border-color: blue;
+    outline: 1px dotted #000
+  }
+
+
 
