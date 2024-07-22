@@ -38,7 +38,7 @@ Product details
 [x] Remove colors and quantity
 [x] Remove ratings below
 [x] remove favorite in generator page
-[ ] remove favorite in solar panel page
+[x] remove favorite in solar panel page
 
 ---
 
