@@ -31,7 +31,7 @@ Product solar and generator
 [x] fix catogories card naming for generator
 [x] fix catogories card naming for solar panel
 [x] remove download report, filter and import
-[ ] Change Generator names
+[x] Change Generator names
 [ ] Change Solar Panel Names
 Product details
 [x] remove buy now
