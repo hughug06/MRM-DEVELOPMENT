@@ -106,7 +106,7 @@
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fe fe-file side-menu__icon"></i>
-                    <span class="side-menu__label">Forum</span>
+                    <span class="side-menu__label">Chaintercom</span>
                 </a>
             </li>
             <!-- End::slide -->
