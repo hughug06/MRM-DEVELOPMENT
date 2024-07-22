@@ -1,8 +1,7 @@
 #card-body:hover{
     box-shadow: 5px 5px orange;
 }
-#card-body{
-    
+#card-body{  
     border-radius: 25px;
     transition:  2s;
 }
