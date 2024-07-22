@@ -1,3 +1,9 @@
+*{
+    max-height: 900px;
+    max-width: 900;
+}
+
+
 #container{
     border: solid black 1px;
     box-shadow: 5px 7px orange;
@@ -17,5 +23,7 @@ input {
     outline: 1px dotted #000
   }
 
-
+#btn-submit{
+   
+}
 
