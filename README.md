@@ -33,6 +33,7 @@ Product solar and generator
 [x] remove download report, filter and import
 [x] Change Generator names
 [ ] Change Solar Panel Names
+[ ] Create Functioning Pagination
 Product details
 [x] remove buy now
 [x] Remove colors and quantity

@@ -40,7 +40,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="user-generator.php" class="side-menu__item">
+                <a href="user-generator_Pg1.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
