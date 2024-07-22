@@ -40,7 +40,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="user-generator.php" class="side-menu__item">
+                <a href="user-generator_Pg1.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -106,7 +106,7 @@
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fe fe-file side-menu__icon"></i>
-                    <span class="side-menu__label">Forum</span>
+                    <span class="side-menu__label">Chaintercom</span>
                 </a>
             </li>
             <!-- End::slide -->

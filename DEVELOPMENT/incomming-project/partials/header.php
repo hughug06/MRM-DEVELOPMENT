@@ -495,6 +495,11 @@
 
         <!-- Start::header-element -->
         <div class="main-header-center d-none d-lg-block  header-link">
+        <div class="input-group">
+                <input type="text" class="form-control" id="typehead" placeholder="Search for results..."
+                autocomplete="off">
+            <button class="btn btn-primary"><i class="fe fe-search" aria-hidden="true"></i></button>
+            </div>
             <div id="headersearch" class="header-search">
                 <div class="p-3">
                     <div class="">

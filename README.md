@@ -31,10 +31,18 @@ Product solar and generator
 [x] fix catogories card naming for generator
 [x] fix catogories card naming for solar panel
 [x] remove download report, filter and import
+[x] Change Generator names
+[ ] Change Solar Panel Names
+[ ] Create Functioning Pagination
+[ ] Sort products into sets for pagination (generators)
+[ ] Sort products into sets for pagination (solar panels)
+[ ] generator: change slash into dash in KVA
 Product details
 [x] remove buy now
 [x] Remove colors and quantity
 [x] Remove ratings below
+[x] remove favorite in generator page
+[x] remove favorite in solar panel page
 
 ---
 
@@ -62,3 +70,4 @@ Content and product description for landing page
 [ ]About Us
 [ ]Company Description
 [ ]Update List of Products in Excel
+[ ]Company team basic description
