@@ -34,6 +34,8 @@ Product solar and generator
 [x] Change Generator names
 [ ] Change Solar Panel Names
 [ ] Create Functioning Pagination
+[ ] Sort products into sets for pagination (generators)
+[ ] Sort products into sets for pagination (solar panels)
 Product details
 [x] remove buy now
 [x] Remove colors and quantity
