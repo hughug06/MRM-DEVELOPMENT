@@ -377,57 +377,34 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
+                                            <label class="form-label">KVA</label>
                                             <select name="beast" id="select-beast" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
+                                                <option value="1">20</option>
+                                                <option value="2">25</option>
+                                                <option value="3">30</option>
+                                                <option value="4">33</option>
+                                                <option value="5">40</option>
+                                                <option value="6">50</option>
+                                                <option value="7">60</option>
+                                                <option value="8">75</option>
+                                                <option value="9">100</option>
+                                                <option value="10">125</option>
+                                                <option value="11">150</option>
+                                                <option value="12">165</option>
+                                                <option value="13">200</option>
+                                                <option value="14">250</option>
+                                                <option value="15">300</option>
+                                                <option value="16">350</option>
+                                                <option value="17">375</option>
+                                                <option value="18">400</option>
+                                                <option value="19">450</option>
+                                                <option value="20">500</option>
+                                                <option value="21">550</option>
+                                                <option value="22">600</option>
+                                                <option value="23">625</option>
+                                                <option value="24">750</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast1" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                                <option value="6">MRM POWER</option>
-                                                <option value="7">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast2" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast3" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER </label>
-                                            <select name="beast" id="select-beast4" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        
                                         <div class="d-grid">
                                             <a class="btn ripple btn-primary btn-block" href="javascript:void(0);">Apply Filter</a>
                                         </div>

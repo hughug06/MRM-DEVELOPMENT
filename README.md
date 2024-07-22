@@ -17,6 +17,7 @@ Sign in page
 
 Sign up ( not yet created )
 [X] create layout
+[ ]Finishing form for registration
 
 ---
 
@@ -27,7 +28,8 @@ After log in
 
 Product solar and generator
 [x] remove star
-[ ] fix catogories card naming
+[x] fix catogories card naming for generator
+[x] fix catogories card naming for solar panel
 [x] remove download report, filter and import
 Product details
 [x] remove buy now
@@ -42,7 +44,7 @@ Services maintenance, tuneup, repair, installation
 
 ---
 
-Forum
+Chatbox (Former Forum)
 [ ] fix UI
 [ ] create form for user to inquire for service
 
@@ -51,3 +53,12 @@ Forum
 Kanban
 [ ] Create account for agent
 [ ] add functionalities ( note all add features )
+
+Content and product description for landing page
+[ ]Generator Details
+[ ]Solar Panel Details
+[ ]Generator Images
+[ ]Solar Panel Images
+[ ]About Us
+[ ]Company Description
+[ ]Update List of Products in Excel
