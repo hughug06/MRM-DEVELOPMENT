@@ -31,12 +31,14 @@ Product solar and generator
 [x] fix catogories card naming for generator
 [x] fix catogories card naming for solar panel
 [x] remove download report, filter and import
+[ ] Change Generator names
+[ ] Change Solar Panel Names
 Product details
 [x] remove buy now
 [x] Remove colors and quantity
 [x] Remove ratings below
-[x]remove favorite in generator page
-[ ]remove favorite in solar panel page
+[x] remove favorite in generator page
+[ ] remove favorite in solar panel page
 
 ---
 
