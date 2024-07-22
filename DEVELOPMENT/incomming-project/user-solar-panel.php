@@ -378,54 +378,22 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast1" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                                <option value="6">MRM POWER</option>
-                                                <option value="7">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast2" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER</label>
-                                            <select name="beast" id="select-beast3" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">MRM POWER </label>
+                                            <label class="form-label">Watts </label>
                                             <select name="beast" id="select-beast4" class="form-control" data-trigger>
-                                                <option value="1">MRM POWER</option>
-                                                <option value="2">MRM POWER</option>
-                                                <option value="3">MRM POWER</option>
-                                                <option value="4">MRM POWER</option>
-                                                <option value="5">MRM POWER</option>
+                                                <option value="1">MONO 350w</option>
+                                                <option value="2">MONO 375w</option>
+                                                <option value="3">MONO 400w</option>
+                                                <option value="4">MONO 410w</option>
+                                                <option value="5">MONO 450w</option>
+                                                <option value="6">MONO 455w</option>
+                                                <option value="7">MONO 500w</option>
+                                                <option value="8">MONO 545w</option>
+                                                <option value="9">MONO 550w</option>
+                                                <option value="10">MONO 555w</option>
+                                                <option value="11">MONO 590w</option>
+                                                <option value="12">MONO 600w</option>
+                                                <option value="13">MONO 605w</option>
+                                                <option value="14">MONO 650w</option>
                                             </select>
                                         </div>
                                         
