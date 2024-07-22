@@ -43,7 +43,7 @@
 			<div class="row mt-5">
 				<input class="col " type="text" name="physicalAddress" placeholder="Physical Address" >				
 			</div>
-			<div class="row" id="btn-submit">
+			<div class="d-flex justify-content-center" id="btn-submit">
 				 <input class="mt-5" type="submit" style="width: 250px;" >
 			</div>
 
