@@ -87,7 +87,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/2.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/1.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -117,7 +117,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/4.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/3.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -146,7 +146,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/7.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/8.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -175,7 +175,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/9.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/10.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -204,7 +204,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/11.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/12.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -233,7 +233,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/2.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/2.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -263,7 +263,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/5.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/6.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
@@ -293,7 +293,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -322,7 +322,7 @@
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
                                                 </a>
-                                                <a class="product-like-icon" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
