@@ -33,7 +33,7 @@ Product solar and generator
 [x] remove download report, filter and import
 [x] Change Generator names
 [x] Change Solar Panel Names
-[ ] Create Functioning Pagination
+[x] Create Functioning Pagination
 [x] Sort products into sets for pagination (generators)
 [x] Sort products into sets for pagination (solar panels)
 [ ] generator: change slash into dash in KVA
