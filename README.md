@@ -43,6 +43,10 @@ Product details
 [x] Remove ratings below
 [x] remove favorite in generator page
 [x] remove favorite in solar panel page
+[ ] Solar: Add pages for each item
+[ ] Generator: Add pages for each item
+[ ] Solar: change description for each item
+[ ] Generator: change description for each item
 
 ---
 
