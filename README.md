@@ -67,11 +67,15 @@ Kanban
 [ ] add functionalities ( note all add features )
 
 Content and product description for landing page
-[ ]Generator Details
-[ ]Solar Panel Details
-[ ]Generator Images
-[ ]Solar Panel Images
-[ ]About Us
-[ ]Company Description
-[ ]Update List of Products in Excel
+[x]Generator Details
+[x]Solar Panel Details
+[x]Generator Images
+[x]Solar Panel Images
+[x]Generator Product Description
+[x]Solar Panel Product Description
+[x]What can it power? (Per Model KVA) Generator
+[x]What can it power? (Per Model Kilowat) Solar Panel
+[x]About Us
+[x]Company Description
+[x]Update List of Products in Excel
 [ ]Company team basic description
