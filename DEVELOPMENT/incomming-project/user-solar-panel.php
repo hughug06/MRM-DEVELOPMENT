@@ -100,7 +100,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 350</a></h3>
                                                 
                                                 
                                             </div>
@@ -130,7 +130,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>                                           
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 375</a></h3>                                           
                                                 
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 400</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 410</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 450</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -246,7 +246,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 455</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -277,7 +277,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 500</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -306,7 +306,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 545</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -335,7 +335,152 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SOLAR</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 550</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-solar-details.php" class="image">
+                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
+                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
+                                                </a>
+                                                
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-solar-details.php">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 555</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-solar-details.php" class="image">
+                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
+                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
+                                                </a>
+                                                
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-solar-details.php">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 590</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-solar-details.php" class="image">
+                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
+                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
+                                                </a>
+                                                
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-solar-details.php">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 600</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-solar-details.php" class="image">
+                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
+                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
+                                                </a>
+                                                
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-solar-details.php">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 605</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-solar-details.php" class="image">
+                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
+                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
+                                                </a>
+                                                
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-solar-details.php">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="javascript:void(0);">MONO 650</a></h3>
                                                 
                                             </div>
                                         </div>
