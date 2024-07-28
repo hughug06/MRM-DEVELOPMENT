@@ -36,7 +36,7 @@ Product solar and generator
 [x] Create Functioning Pagination
 [x] Sort products into sets for pagination (generators)
 [x] Sort products into sets for pagination (solar panels)
-[ ] generator: change slash into dash in KVA
+[x] generator: change slash into dash in KVA
 Product details
 [x] remove buy now
 [x] Remove colors and quantity

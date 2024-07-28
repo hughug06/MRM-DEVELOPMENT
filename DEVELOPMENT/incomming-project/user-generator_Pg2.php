@@ -99,7 +99,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC165GFS KVA/165</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC165GFS KVA-165</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC200GFS KVA/200</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC200GFS KVA-200</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC150GFS KVA/250</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC150GFS KVA-250</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC300GFS KVA/300</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC300GFS KVA-300</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC350GFS KVA/350</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC350GFS KVA-350</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -244,7 +244,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC375GFS KVA/375</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC375GFS KVA-375</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -273,7 +273,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC400GFS KVA/400</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC400GFS KVA-400</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -302,7 +302,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC450GFS KVA/450</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC450GFS KVA-450</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -331,7 +331,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC500GFS KVA/500</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC500GFS KVA-500</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -360,7 +360,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC550GFS KVA/550</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC550GFS KVA-550</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -389,7 +389,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC600GFS KVA/600</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC600GFS KVA-600</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -418,7 +418,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC625GFS KVA/625</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC625GFS KVA-625</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -447,7 +447,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC750GFS KVA/750</a></h3>
+                                                <h3 class="title"><a href="javascript:void(0);">SC750GFS KVA-750</a></h3>
                                                 
                                             </div>
                                         </div>
