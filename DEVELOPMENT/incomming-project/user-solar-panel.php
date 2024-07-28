@@ -83,7 +83,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-solar-details.php" class="image">
+                                                <a href="user-solar-details-mono_350.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/2.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/1.png">
                                                 </a>
@@ -93,14 +93,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-solar-details.php">
+                                                    <a href="user-solar-details-mono_350.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">MONO 350</a></h3>
+                                                <h3 class="title"><a href="user-solar-details-mono_350.php">MONO 350</a></h3>
                                                 
                                                 
                                             </div>
