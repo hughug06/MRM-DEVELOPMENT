@@ -521,10 +521,7 @@
                                 <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
                                 <li class="page-item active"><a class="page-link" href="user-generator_Pg1">1</a></li>
                                 <li class="page-item"><a class="page-link" href="user-generator_Pg2">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="user-generator_Pg2">Next</a></li>
                             </ul>
                         </nav>
                     </div>
