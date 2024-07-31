@@ -82,7 +82,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SLF20GF_KVA-20.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/2.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/1.png">
                                                 </a>
@@ -92,14 +92,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SLF20GF_KVA-20.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SLF20GF KVA-20</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SLF20GF_KVA-20.php">SLF20GF KVA-20</a></h3>
                                                 
                                                 
                                             </div>
@@ -112,7 +112,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SLF30GF_KVA-33.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/4.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/3.png">
                                                 </a>
@@ -122,14 +122,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SLF30GF_KVA-33.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SLF30GF KVA-33</a></h3>                                           
+                                                <h3 class="title"><a href="user-generator-details_SLF30GF_KVA-33.php">SLF30GF KVA-33</a></h3>                                           
                                                 
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SLF40GF_KVA-40.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/7.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/8.png">
                                                 </a>
@@ -151,14 +151,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SLF40GF_KVA-40.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SLF40GF KVA-40</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SLF40GF_KVA-40.php">SLF40GF KVA-40</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SLF66GF_KVA-66.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/9.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/10.png">
                                                 </a>
@@ -180,14 +180,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SLF66GF_KVA-66.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SLF66GF KVA-66</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SLF66GF_KVA-66.php">SLF66GF KVA-66</a></h3>
                                                 
                                             </div>
                                         </div>
