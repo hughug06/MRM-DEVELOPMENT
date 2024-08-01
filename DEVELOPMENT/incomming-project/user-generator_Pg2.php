@@ -82,7 +82,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC165GFS_KVA-165.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -92,14 +92,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC165GFS_KVA-165.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC165GFS KVA-165</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC165GFS_KVA-165.php">SC165GFS KVA-165</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC200GFS_KVA-200.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -121,14 +121,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC200GFS_KVA-200.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC200GFS KVA-200</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC200GFS_KVA-200.php">SC200GFS KVA-200</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC150GFS_KVA-250.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -150,14 +150,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC150GFS_KVA-250.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC150GFS KVA-250</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC150GFS_KVA-250.php">SC150GFS KVA-250</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC300GFS_KVA-300.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -179,14 +179,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC300GFS_KVA-300.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC300GFS KVA-300</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC300GFS_KVA-300.php">SC300GFS KVA-300</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -198,7 +198,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC350GFS_KVA-350.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -208,14 +208,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC350GFS_KVA-350.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC350GFS KVA-350</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC350GFS_KVA-350.php">SC350GFS KVA-350</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -227,7 +227,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC375GFS_KVA-375.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -237,14 +237,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC375GFS_KVA-375.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC375GFS KVA-375</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC375GFS_KVA-375.php">SC375GFS KVA-375</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -256,7 +256,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC400GFS_KVA-400.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -266,14 +266,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC400GFS_KVA-400.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC400GFS KVA-400</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC400GFS_KVA-400.php">SC400GFS KVA-400</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -285,7 +285,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC450GFS_KVA-450.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -295,14 +295,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC450GFS_KVA-450.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC450GFS KVA-450</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC450GFS_KVA-450.php">SC450GFS KVA-450</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -314,7 +314,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC500GFS_KVA-500.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -324,14 +324,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC500GFS_KVA-500.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC500GFS KVA-500</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC500GFS_KVA-500.php">SC500GFS KVA-500</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -343,7 +343,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC550GFS_KVA-550.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -353,14 +353,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC550GFS_KVA-550.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC550GFS KVA-550</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC550GFS_KVA-550.php">SC550GFS KVA-550</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -372,7 +372,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC600GFS_KVA-600.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -382,14 +382,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC600GFS_KVA-600.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC600GFS KVA-600</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC600GFS_KVA-600.php">SC600GFS KVA-600</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -401,7 +401,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC625GFS_KVA-625.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -411,14 +411,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC625GFS_KVA-625.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC625GFS KVA-625</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC625GFS_KVA-625.php">SC625GFS KVA-625</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -430,7 +430,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details.php" class="image">
+                                                <a href="user-generator-details_SC750GFS_KVA-750.php" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>
@@ -440,14 +440,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-generator-details.php">
+                                                    <a href="user-generator-details_SC750GFS_KVA-750.php">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="javascript:void(0);">SC750GFS KVA-750</a></h3>
+                                                <h3 class="title"><a href="user-generator-details_SC750GFS_KVA-750.php">SC750GFS KVA-750</a></h3>
                                                 
                                             </div>
                                         </div>
