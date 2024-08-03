@@ -126,37 +126,57 @@
                                     <h5 class="mb-3">Specifications :</h5>
                                     <div class="">
                                         <div class="row">
-                                            <div class="col-xl-12">
+                                        <div class="col-xl-12">
                                                 <div class="table-responsive">
                                                     <table class="table mb-0 border table-bordered text-nowrap">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row">Category</th>
-                                                                <td>Watches</td>
+                                                                <th scope="row">Power Output:</th>
+                                                                <td>20 KVA</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Brand</th>
-                                                                <td>Willful</td>
+                                                                <th scope="row">Fuel Type:</th>
+                                                                <td>Diesel</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Color</th>
-                                                                <td>White</td>
+                                                                <th scope="row">Runtime:</th>
+                                                                <td>12 hours at full load, 20 hours at half load</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Connections</th>
-                                                                <td>Bluetooth</td>
+                                                                <th scope="row">Noise Level:</th>
+                                                                <td>68 dB at 7 meters</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Application</th>
-                                                                <td>Messages, Phone, Pedometer, Heart Rate Monitor</td>
+                                                                <th scope="row">Dimensions:</th>
+                                                                <td>180 cm (L) x 80 cm (W) x 100 cm (H)</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Supported </th>
-                                                                <td>Fitness Tracker, Sleep Monitor, Reminders</td>
+                                                                <th scope="row">Weight:</th>
+                                                                <td>450 kg</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Warranty Summary</th>
-                                                                <td>1 Year</td>
+                                                                <th scope="row">Voltage Output:</th>
+                                                                <td>120V / 240V</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Outlets:</th>
+                                                                <td>4 x 120V, 2 x 240V, 2 x USB ports</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Automatic Voltage Regulation(AVR):</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Low-oil Shutoff:</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Overload Protection:</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Carbon monoxide Detection and Automatic Shutoff:</th>
+                                                                <td>Yes</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
