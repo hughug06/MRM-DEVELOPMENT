@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-12">
                                         <div class="mt-4 mb-4">
-                                            <h4 class="mt-1 mb-3">GENERATOR</h4>
+                                            <h4 class="mt-1 mb-3">SC600GFS KVA600</h4>
                                             <h6 class="mt-4 fs-16">Description</h6>
                                             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
                                             <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized .</p>
@@ -126,37 +126,57 @@
                                     <h5 class="mb-3">Specifications :</h5>
                                     <div class="">
                                         <div class="row">
-                                            <div class="col-xl-12">
+                                        <div class="col-xl-12">
                                                 <div class="table-responsive">
                                                     <table class="table mb-0 border table-bordered text-nowrap">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row">Category</th>
-                                                                <td>Watches</td>
+                                                                <th scope="row">Power Output:</th>
+                                                                <td>600 KVA</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Brand</th>
-                                                                <td>Willful</td>
+                                                                <th scope="row">Fuel Type:</th>
+                                                                <td>Gasoline</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Color</th>
-                                                                <td>White</td>
+                                                                <th scope="row">Runtime:</th>
+                                                                <td>1.5 hours at full load, 2 hours at half load</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Connections</th>
-                                                                <td>Bluetooth</td>
+                                                                <th scope="row">Noise Level:</th>
+                                                                <td>100 dB at 7 meters</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Application</th>
-                                                                <td>Messages, Phone, Pedometer, Heart Rate Monitor</td>
+                                                                <th scope="row">Dimensions:</th>
+                                                                <td>500 cm (L) x 270 cm (W) x 290 cm (H)</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Supported </th>
-                                                                <td>Fitness Tracker, Sleep Monitor, Reminders</td>
+                                                                <th scope="row">Weight:</th>
+                                                                <td>11000 kg</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">Warranty Summary</th>
-                                                                <td>1 Year</td>
+                                                                <th scope="row">Voltage Output:</th>
+                                                                <td>120V / 240V</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Outlets:</th>
+                                                                <td>50 x 120V, 20 x 240V, 20 x USB ports</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Automatic Voltage Regulation(AVR):</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Low-oil Shutoff:</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Overload Protection:</th>
+                                                                <td>Yes</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Carbon monoxide Detection and Automatic Shutoff:</th>
+                                                                <td>Yes</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

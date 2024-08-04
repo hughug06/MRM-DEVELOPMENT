@@ -132,27 +132,27 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">Power Output:</th>
-                                                                <td>20 KVA</td>
+                                                                <td>50 KVA</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Fuel Type:</th>
-                                                                <td>Diesel</td>
+                                                                <td>Gasoline</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Runtime:</th>
-                                                                <td>12 hours at full load, 20 hours at half load</td>
+                                                                <td>8 hours at full load, 14 hours at half load</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Noise Level:</th>
-                                                                <td>68 dB at 7 meters</td>
+                                                                <td>73 dB at 7 meters</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Dimensions:</th>
-                                                                <td>180 cm (L) x 80 cm (W) x 100 cm (H)</td>
+                                                                <td>210 cm (L) x 100 cm (W) x 120 cm (H)</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Weight:</th>
-                                                                <td>450 kg</td>
+                                                                <td>700 kg</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Voltage Output:</th>
@@ -160,7 +160,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Outlets:</th>
-                                                                <td>4 x 120V, 2 x 240V, 2 x USB ports</td>
+                                                                <td>6 x 120V, 2 x 240V, 2 x USB ports</td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Automatic Voltage Regulation(AVR):</th>

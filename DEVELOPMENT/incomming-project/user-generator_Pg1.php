@@ -491,7 +491,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-generator-details_SC150GFS_KVA-150.php" class="image">
+                                                <a href="user-generator-details_SC150GFS_KVA-150" class="image">
                                                     <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
                                                     <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
                                                 </a>

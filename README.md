@@ -48,7 +48,7 @@ Product details
 [ ] Solar: change description for each items
 [ ] Generator: change description for each item
 [x] Solar: Add Specification on each item
-[ ] Generator: Add Specification on each item
+[x] Generator: Add Specification on each item
 
 ---
 
