@@ -20,13 +20,30 @@ if(isset($_POST['submit'])){
   if($passWord !== $passWords){
     array_push($errors , "password do not match");
   }
+
+  require_once('../incomming-project/Database/database.php');
+  $sql = "SELECT * FROM REGISTRATION WHERE email = '$emailAddress'";
+  $result = mysqli_query($conn, $sql);
+  $row_count = mysqli_num_rows($result);
+  if($row_count > 0){
+    array_push($errors , "Email already exist");
+  }
   if(count($errors)>0){
-      
+   
   }
   else{
     require_once('../incomming-project/Database/database.php');
-    $sql_insert = "INSERT INTO REGISTRATION (fullname , emailaddress , password
-                  VALUES(?,?,?)";
+    $sql_insert = "INSERT INTO REGISTRATION (Fullname , email , password)
+                  VALUES (?,?,?)";
+   $stmt = mysqli_stmt_init($conn);
+   $preparestmt = mysqli_stmt_prepare($stmt , $sql_insert);
+  if($preparestmt){
+     $bindparam = mysqli_stmt_bind_param($stmt , "sss" ,$fullName ,$emailAddress , $passwordHaSH);
+     mysqli_stmt_execute($stmt);
+     header("Location: index.php");
+  }else{
+    die("Failed");
+  }
   }
 }
   
@@ -100,6 +117,13 @@ if(isset($_POST['submit'])){
                     </label>
                   </div>
 
+                  <?php 
+                   foreach($errors as $error){
+                    echo "<div class='alert alert-danger'> $error </div>" ;
+                     } 
+                  ?>
+
+
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" name="submit"></input>
                   </div>
@@ -107,9 +131,7 @@ if(isset($_POST['submit'])){
                 </form>
 
               </div>
-              <?php foreach($errors as $error){
-        echo "<div class='alert alert-danger'> $error </div>" ;
-         } ?>
+              <?php ?>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 border-start border-5 border-dark">
               
                 <img src="../assets/MRM IMAGES/solar-images-1.jpg"
