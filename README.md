@@ -44,11 +44,11 @@ Product details
 [x] remove favorite in generator page
 [x] remove favorite in solar panel page
 [x] Solar: Add pages for each item
-[ ] Generator: Add pages for each item
+[x] Generator: Add pages for each item
 [ ] Solar: change description for each items
 [ ] Generator: change description for each item
 [x] Solar: Add Specification on each item
-[ ] Generator: Add Specification on each item
+[x] Generator: Add Specification on each item
 
 ---
 
