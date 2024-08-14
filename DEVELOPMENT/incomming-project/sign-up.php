@@ -21,9 +21,7 @@ if(isset($_POST['submit'])){
     array_push($errors , "password do not match");
   }
   if(count($errors)>0){
-      foreach($errors as $error){
-        echo "<div class='alert alert-danger'> $error </div>" ;
-      }
+      
   }
   else{
     require_once('../incomming-project/Database/database.php');
@@ -31,8 +29,7 @@ if(isset($_POST['submit'])){
                   VALUES(?,?,?)";
   }
 }
-
-
+  
 ?>
 
 
@@ -41,7 +38,6 @@ if(isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <p>example branch</p>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/signup-style.css">
@@ -111,8 +107,11 @@ if(isset($_POST['submit'])){
                 </form>
 
               </div>
+              <?php foreach($errors as $error){
+        echo "<div class='alert alert-danger'> $error </div>" ;
+         } ?>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 border-start border-5 border-dark">
-
+              
                 <img src="../assets/MRM IMAGES/solar-images-1.jpg"
                   class="img-fluid">
               </div>
