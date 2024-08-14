@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
-        <p>try sign in features merging</p>
+<p>example branch</p>
 <head>
 
     <!-- Meta Data -->

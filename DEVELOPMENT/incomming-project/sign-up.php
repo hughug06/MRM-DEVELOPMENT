@@ -41,6 +41,7 @@ if(isset($_POST['submit'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <p>example branch</p>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/signup-style.css">
