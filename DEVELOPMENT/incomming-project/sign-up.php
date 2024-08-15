@@ -1,11 +1,11 @@
 <?php
 //  fullName, emailAddress, passWord
-if(isset($_POST['submit'])){
+if(isset($_POST['signup'])){
   $fullName = $_POST['fullName'];
   $emailAddress = $_POST['emailAddress'];
   $passWord = $_POST['passWord']; 
   $passWords = $_POST['passWords']; 
-  $passwordHaSH = password_hash($passWord , PASSWORD_DEFAULT);
+
   $errors = array();
 
   if(empty( $fullName ) or empty( $emailAddress ) or  empty( $passWord ) or empty( $passWords )){
@@ -25,11 +25,14 @@ if(isset($_POST['submit'])){
   $sql = "SELECT * FROM REGISTRATION WHERE email = '$emailAddress'";
   $result = mysqli_query($conn, $sql);
   $row_count = mysqli_num_rows($result);
+
   if($row_count > 0){
     array_push($errors , "Email already exist");
   }
   if(count($errors)>0){
-   
+    foreach($errors as $error){
+      echo "<div class='alert alert-danger'> $error </div>" ;
+       } 
   }
   else{
     require_once('../incomming-project/Database/database.php');
@@ -38,7 +41,7 @@ if(isset($_POST['submit'])){
    $stmt = mysqli_stmt_init($conn);
    $preparestmt = mysqli_stmt_prepare($stmt , $sql_insert);
   if($preparestmt){
-     $bindparam = mysqli_stmt_bind_param($stmt , "sss" ,$fullName ,$emailAddress , $passwordHaSH);
+     $bindparam = mysqli_stmt_bind_param($stmt , "sss" ,$fullName ,$emailAddress , $passWord);
      mysqli_stmt_execute($stmt);
      header("Location: index.php");
   }else{
@@ -118,14 +121,14 @@ if(isset($_POST['submit'])){
                   </div>
 
                   <?php 
-                   foreach($errors as $error){
-                    echo "<div class='alert alert-danger'> $error </div>" ;
-                     } 
+                  
+                    
+                  
                   ?>
 
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" name="submit"></input>
+                    <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" name="signup"></input>
                   </div>
 
                 </form>
