@@ -156,9 +156,7 @@
                                 <li class="slide">
                                     <a href="projects-calendar.php" class="side-menu__item">Calendar</a>
                                 </li>
-                                <li class="slide">
-                                    <a href="projects-procurement.php" class="side-menu__item">Product Procurement</a>
-                                </li>
+                                
                                 <li class="slide">
                                     <a href="projects-logs.php" class="side-menu__item">Project Logs</a>
                                 </li>
