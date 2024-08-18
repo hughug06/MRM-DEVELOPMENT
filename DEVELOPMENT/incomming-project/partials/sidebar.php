@@ -3,12 +3,12 @@
 <!-- Start::main-sidebar-header -->
 <div class="main-sidebar-header">
     <a href="index.html" class="header-logo">
-        <img src="../assets/images/brand-logos/desktop-white.png" class="desktop-white" alt="logo">
-        <img src="../assets/images/brand-logos/toggle-white.png" class="toggle-white" alt="logo">
-        <img src="../assets/images/brand-logos/desktop-logo.png" class="desktop-logo" alt="logo">
-        <img src="../assets/images/brand-logos/toggle-dark.png" class="toggle-dark" alt="logo">
-        <img src="../assets/images/brand-logos/toggle-logo.png" class="toggle-logo" alt="logo">
-        <img src="../assets/images/brand-logos/desktop-dark.png" class="desktop-dark" alt="logo">
+        <img src="../../assets/images/brand-logos/desktop-white.png" class="desktop-white" alt="logo">
+        <img src="../../assets/images/brand-logos/toggle-white.png" class="toggle-white" alt="logo">
+        <img src="../../assets/images/brand-logos/desktop-logo.png" class="desktop-logo" alt="logo">
+        <img src="../../assets/images/brand-logos/toggle-dark.png" class="toggle-dark" alt="logo">
+        <img src="../../assets/images/brand-logos/toggle-logo.png" class="toggle-logo" alt="logo">
+        <img src="../../assets/images/brand-logos/desktop-dark.png" class="desktop-dark" alt="logo">
     </a>
 </div>
 <!-- End::main-sidebar-header -->
@@ -29,7 +29,7 @@
         
             <!-- Start::slide -->
             <li class="slide">
-                <a href="user-solar-panel.php" class="side-menu__item">
+                <a href="../solar/user-solar.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -40,7 +40,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="user-generator_Pg1.php" class="side-menu__item">
+                <a href="../generator/user-generator.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -55,7 +55,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="services-maintenance.php" class="side-menu__item">
+                <a href="" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fa fa-address-book side-menu__icon"></i>
@@ -66,7 +66,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="services-installation.php" class="side-menu__item">
+                <a href="../services/installation/services-installation.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fa fa-address-book side-menu__icon"></i>
