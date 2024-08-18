@@ -99,7 +99,7 @@
                                                 <input class="form-control" placeholder="Enter your password" type="password" name="Password">
                                             </div>
                                             <div class="d-grid">
-                                                <input type="submit" name="login">                                           
+                                               <a href="../products/solar/user-solar.php"> submit </a>                                         
                                             </div>
                                         </form>
                                         <div class="text-start mt-5 ms-0">
