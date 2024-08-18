@@ -36,19 +36,19 @@
 	<meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
     
     <!-- Favicon -->
-    <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/images/brand-logos/favicon.ico" type="image/x-icon">
 
     <!-- Authentication-main Js -->
-    <script src="../../assets/js/authentication-main.js"></script>
+    <script src="../assets/js/authentication-main.js"></script>
     
     <!-- Bootstrap Css -->
-    <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <link id="style" href="../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
 
     <!-- Style Css -->
-    <link href="../../assets/css/styles.min.css" rel="stylesheet" >
+    <link href="../assets/css/styles.min.css" rel="stylesheet" >
 
     <!-- Icons Css -->
-    <link href="../../assets/css/icons.css" rel="stylesheet" >
+    <link href="../assets/css/icons.css" rel="stylesheet" >
 
     <script>
         if(localStorage.spruhalandingdarktheme){
@@ -74,10 +74,10 @@
                             <div class="mt-5 pt-4 p-2 position-absolute">
                                 <a href="index.html">
                                     
-                                    <img src="../../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo">
+                                    <img src="../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo">
                                 </a>
                                 <div class="clearfix"></div>
-                                <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user">
+                                <img src="../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user">
                                 <h5 class="mt-4">Create Your Account</h5>
                                 <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span>
                             </div>
@@ -119,10 +119,10 @@
     </div>
 
     <!-- Custom-Switcher JS -->
-    <script src="../../assets/js/custom-switcher.min.js"></script>
+    <script src="../assets/js/custom-switcher.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     
 
 </body>
