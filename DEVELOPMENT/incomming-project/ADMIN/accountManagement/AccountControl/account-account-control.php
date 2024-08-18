@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -50,24 +48,23 @@
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once('partials/header.php'); ?>
+         <?php include_once('partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once('partials/sidebar.php'); ?>
+        <?php include_once('partials/sidebar.php') ?>
         <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
 
- 
+               
 
                 <!-- Start::row-1 -->
                  
                 <div class="row row-sm mt-5">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
-                       
                             <div class="card-header border-bottom-0 pb-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0 pt-1">USER TABLE</label>
