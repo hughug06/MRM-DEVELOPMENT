@@ -1,38 +1,3 @@
-<?php 
-   require 'database/function.php';
-// name , username, password, email, role , save , saveUser , is_ban
-
-
-if(isset($_POST['saveUser'])){
-    $name = validate($_POST['name']);
-    $username = validate($_POST['username']);
-    $password = validate($_POST['password']);
-    $email = validate($_POST['email']);
-    $role = validate($_POST['role']);
-    $is_ban = validate($_POST['is_ban'])  == true ? 1 : 0;
-     
-    if($name != '' || $username != '' || $password != '' || $email != '') 
-    {
-       $sql_insert = "INSERT INTO users (name,username,email,password,is_ban,role)  VALUES ('$name' , '$username' , '$email' , '$password' , '$is_ban' , '$role')";
-       $result = mysqli_query($conn , $sql_insert);
-       if($result)
-       {
-            redirect('account-account-control.php' , 'Added Successfully');
-       }
-       else
-       {
-        redirect('account-account-control-add-user.php' , 'Something Went Wrong');
-       }
-    }
-    else{
-       redirect('account-account-control-add-user.php' , 'Please fill all the input fields');
-    }
-}
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -96,7 +61,6 @@ if(isset($_POST['saveUser'])){
              <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="card">
-                        <?= alertMessage(); ?>
                         <div class="card-header p-3">
                             <h4>
                                 Add User
@@ -104,7 +68,7 @@ if(isset($_POST['saveUser'])){
                             </h4>
                         </div>
                         <div class="card-body">
-                            <form action="account-account-control-add-user.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -114,20 +78,20 @@ if(isset($_POST['saveUser'])){
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                        <label for="">Username</label>
-                                        <input type="text" name="username" class="form-control">
+                                        <label for=""></label>
+                                        <input type="text" name="name" class="form-control">
                                      </div>
                                     </div>
-                                    <div class="col-md-6">   
+                                    <div class="col-md-6">
                                         <div class="mb-3">
                                         <label for="">Password</label>
-                                        <input type="text" name="password" class="form-control">
+                                        <input type="text" name="name" class="form-control">
                                      </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                         <label for="">Email</label>
-                                        <input type="text" name="email" class="form-control">
+                                        <input type="text" name="name" class="form-control">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
@@ -141,14 +105,14 @@ if(isset($_POST['saveUser'])){
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label>Is ban</label>
+                                        <label>Select role</label>
                                         <br>
                                         <input type="checkbox" name="is_ban" style="width: 30px; height: 30px;">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                        <button type="submit" name="saveUser" class="btn btn-success">SAVE</button>
+                                        <button type="submit" class="btn btn-success">SAVE</button>
                                     </div>
                                     </div>
                                 </div>                                       

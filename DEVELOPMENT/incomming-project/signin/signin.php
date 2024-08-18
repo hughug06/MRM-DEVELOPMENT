@@ -1,27 +1,8 @@
 
-<?php
-    if(isset($_POST['login'])){
-    $Emailaddress = $_POST['Emailaddress'];
-    $Password = $_POST['Password'];
-    require_once "database/database.php";
-    $sql = "SELECT * FROM REGISTRATION WHERE email = '$Emailaddress' AND password = '$Password'";
-    $result = mysqli_query($conn , $sql);
-    
-    if(mysqli_num_rows($result)){
-        header("Location: user-solar-panel.php");
-    }
-    else{
-        echo "testing";
-    }
-
-    }
-   
-
-?>
 
 
 
-<!DOCTYPE html>
+<!DOCTYPE ht
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
 <head>
@@ -99,7 +80,11 @@
                                                 <input class="form-control" placeholder="Enter your password" type="password" name="Password">
                                             </div>
                                             <div class="d-grid">
+<<<<<<< HEAD
                                                 <input type="submit" name="login">                                           
+=======
+                                               <a href="../services/installation/services-installation.php"> submit </a>                                         
+>>>>>>> ea3cd501c84f7cbe3f321719fd58228480ac1402
                                             </div>
                                         </form>
                                         <div class="text-start mt-5 ms-0">
