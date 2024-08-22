@@ -1,59 +1,3 @@
-<?php
-//  fullName, emailAddress, passWord
-if(isset($_POST['signup'])){
-  $fullName = $_POST['fullName'];
-  $emailAddress = $_POST['emailAddress'];
-  $passWord = $_POST['passWord']; 
-  $passWords = $_POST['passWords']; 
-
-  $errors = array();
-
-  if(empty( $fullName ) or empty( $emailAddress ) or  empty( $passWord ) or empty( $passWords )){
-      array_push($errors , 'all fields are required');
-  }
-  if(!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)){
-    array_push($errors , "Email is invalid");
-  }
-  if(strlen($passWord) < 8){
-    array_push($errors , "Password must be at least 8 characters long");
-  }
-  if($passWord !== $passWords){
-    array_push($errors , "password do not match");
-  }
-
-  require_once('../incomming-project/Database/database.php');
-  $sql = "SELECT * FROM REGISTRATION WHERE email = '$emailAddress'";
-  $result = mysqli_query($conn, $sql);
-  $row_count = mysqli_num_rows($result);
-
-  if($row_count > 0){
-    array_push($errors , "Email already exist");
-  }
-  if(count($errors)>0){
-    foreach($errors as $error){
-      echo "<div class='alert alert-danger'> $error </div>" ;
-       } 
-  }
-  else{
-    require_once('../incomming-project/Database/database.php');
-    $sql_insert = "INSERT INTO REGISTRATION (Fullname , email , password)
-                  VALUES (?,?,?)";
-   $stmt = mysqli_stmt_init($conn);
-   $preparestmt = mysqli_stmt_prepare($stmt , $sql_insert);
-  if($preparestmt){
-     $bindparam = mysqli_stmt_bind_param($stmt , "sss" ,$fullName ,$emailAddress , $passWord);
-     mysqli_stmt_execute($stmt);
-     header("Location: index.php");
-  }else{
-    die("Failed");
-  }
-  }
-}
-  
-?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,12 +24,20 @@ if(isset($_POST['signup'])){
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                <form class="mx-1 mx-md-4" action="sign-up.php"  method="POST">
+                <form class="mx-1 mx-md-4" action="function.php"  method="POST">
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div data-mdb-input-init class="form-outline flex-fill mb-0">
 				          	<label class="form-label" for="fullname"> Full name</label>
                     <input type="text" id="fullname" class="form-control" placeholder="example: Jonathan Villapando" name="fullName" required value=""/>                  
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+				            	<label class="form-label" for="email" >Username</label>
+                      <input type="text" id="" placeholder="Example: hughug06" class="form-control" name="username"/>
                     </div>
                   </div>
 

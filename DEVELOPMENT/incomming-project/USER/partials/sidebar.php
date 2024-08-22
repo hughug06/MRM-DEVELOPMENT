@@ -29,7 +29,7 @@
         
             <!-- Start::slide -->
             <li class="slide">
-                <a href="/incomming-project/USER/solar/solar.php" class="side-menu__item ">
+                <a href="../solar/solar.php" class="side-menu__item ">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -40,7 +40,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="/incomming-project/USER/generator/generator.php" class="side-menu__item">
+                <a href="../generator/generator.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -55,7 +55,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="/incomming-project/USER/services/service.php" class="side-menu__item">
+                <a href="../services/service.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fa fa-address-book side-menu__icon"></i>
@@ -71,7 +71,7 @@
 
              <!-- Start::slide -->
              <li class="slide">
-                <a href="/incomming-project/USER/chaintercom/chaintercom.php" class="side-menu__item">
+                <a href="../chaintercom/chaintercom.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fe fe-file side-menu__icon"></i>
@@ -87,7 +87,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="/incomming-project/USER/settings/settings.php" class="side-menu__item">
+                <a href="../settings/settings.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="ion-ios-settings side-menu__icon"></i>
@@ -167,7 +167,7 @@
                             </a>
                             <ul class="slide-menu child1">
                                 <li class="slide">
-                                    <a href="account-account-control.php" class="side-menu__item">Account Control</a>
+                                    <a href="../../ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item">Account Control</a>
                                 </li>
                                 <li class="slide">
                                     <a href="account-account-logs.php" class="side-menu__item">Account Activity Logs</a>
