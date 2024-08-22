@@ -60,6 +60,26 @@
 
                
                 <form action="function.php" method="POST">
+
+
+        <?php 
+        require 'function.php';
+        $paramresult = checkparamId('Id');
+        if($paramresult === false){
+            echo '<h5>No valid ID found</h5>';
+            return false;
+        }
+        if(!is_numeric($paramresult)){
+            echo '<h5>Invalid ID. Must be a number.</h5>';
+            return false;
+        }
+
+// Proceed with processing the valid numeric ID
+echo '<h5>Valid ID: ' . $paramresult . '</h5>'
+
+       // $user =getById('users' , check)
+        ?>
+
                     <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
