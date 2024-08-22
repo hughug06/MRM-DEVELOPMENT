@@ -59,7 +59,8 @@
             <div class="container-fluid">
 
                
-                <div class="row row-sm">
+                <form action="function.php" method="POST">
+                    <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header justify-content-between">
@@ -75,25 +76,25 @@
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Full Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="fullname">
+                                                aria-label="Full Name" name="fullname" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Username</label>
                                             <input type="text" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="username">
+                                                aria-label="Username" name="username" required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Password</label>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <input type="text" class="form-control" placeholder="Password"
-                                                    aria-label="Password" name="password">
+                                                    aria-label="Password" name="password" required>
                                                 </div>
                                                 
                                                 
                                                 <div class="col-xxl-6 col-xl-12 mb-3">
                                                 <label class="form-label">Role</label>
-                                                    <select id="inputState1" class="form-select" name="role">
+                                                    <select id="inputState1" class="form-select" name="role" required>
                                                         <option selected>Select Role</option>
                                                         <option value="user">user</option>
                                                         <option value="admin">admin</option>
@@ -107,22 +108,19 @@
                                                 <div class="col-xl-12 mb-3">
                                                     <label class="form-label">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email" name="email">
-                                                </div>        
-                                                <div class="form-check mb-3">
-                                              
-                                                <input class="form-check-input" type="checkbox" id="gridCheck" name="is_ban">
-                                                <label class="form-check-label" for="gridCheck">
-                                                    ban
-                                                </label>
-                                            </div>                   
+                                                    aria-label="email" name="email" required>
+                                                </div>                                                                      
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-12 mb-3">
+                                                    <label class="form-label">Is ban</label>
+                                                    <input type="checkbox"  name="is_ban" required>
+                                                </div>                                                                      
                                             </div>
                                         </div>
-                                      
+                                        
                                        
-                                        <div class="col-md-6">
-                                            
-                                        </div>
+
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
@@ -239,6 +237,8 @@
                             </div>
                        </div>                   
                     </div>
+
+                </form>
 
             </div>
         </div>

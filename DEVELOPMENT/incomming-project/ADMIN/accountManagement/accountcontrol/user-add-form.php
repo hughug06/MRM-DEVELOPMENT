@@ -68,7 +68,7 @@
                                         Add user
                                     </div>
                                     <div class="prism-toggle">
-                                       <a href="user-management.php"> <button class="btn btn-sm btn-primary-light">BACK<i class="ri-eye-line ms-2 d-inline-block align-middle fs-14"></i></button></a>
+                                       <a href="user-management.php"> BACK</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -110,14 +110,17 @@
                                                     <input type="email" class="form-control" placeholder="Email"
                                                     aria-label="email" name="email">
                                                 </div>        
-                                                                 
+                                                <div class="row">
+                                                <div class="col-xl-12 mb-3">
+                                                    <label class="form-label">Is ban</label>
+                                                    <input type="checkbox" name="is_ban" required>
+                                                </div>                                                                      
+                                            </div>         
                                             </div>
                                         </div>
-                                      
+                                        
                                        
-                                        <div class="col-md-6">
-                                            
-                                        </div>
+                                        
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary" name="saveuser">Save</button>
                                         </div>

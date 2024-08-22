@@ -98,6 +98,7 @@
                                                 <th class="wd-lg-20p"><span>email</span></th>
                                                 <th class="wd-lg-20p"><span>Username</span></th>
                                                 <th class="wd-lg-20p"><span>Role</span></th>
+                                                <th class="wd-lg-20p"><span>is ban</span></th>
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -115,8 +116,9 @@
                                                 <td><?= $resultItem['email']?></td>
                                                 <td> <?= $resultItem['username']?> </td>
                                                 <td><?= $resultItem['role']?></td>
+                                                <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="user-edit-form.php?id=<?= $resultItem['Id'];?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="user-delete-form.php" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
