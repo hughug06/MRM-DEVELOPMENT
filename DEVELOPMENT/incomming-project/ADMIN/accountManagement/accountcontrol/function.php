@@ -1,4 +1,4 @@
-<?php 
+;<?php 
 
 require '../../Database/database.php';
 
@@ -25,6 +25,7 @@ if(isset($_POST['saveuser']))
             if (mysqli_query($conn, $sql_insert)) {
                 echo "New record created successfully";
                 header('location: user-management.php');
+                exit();
               } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
               }
