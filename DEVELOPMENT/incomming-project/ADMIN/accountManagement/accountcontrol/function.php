@@ -3,25 +3,39 @@
 require '../../Database/database.php';
 
 //NEED TO FIX
-function checkparamId($paramtype){
-    if(isset($_GET[$paramtype])){
-        if(!empty($_GET[$paramtype])){
-            return $_GET[$paramtype];
-        } else {
-            return false; // No ID provided
+/*function checkparamId($paramtype){
+
+    if(isset($P_POST[$paramtype])){
+        if($_POST[$paramtype] != null){
+            return $_POST[$paramtype];
         }
-    } else {
-        return false; // Parameter not present
+        else{
+            return 'no id given'; //error message 
+        }
+    } 
+    else{
+        return 'no id'; //error message
     }
-}
+    }*/
+
+//HOLD USER ID WHEN ADMIN CLICK EDIT BUTTON
+
+
 //EDIT USER
 
-function getById($tableName , $Id){
+
+
+ 
+  
+
+
+
+/*function getById($tableName , $Id){
     global $conn;
     $table = $tableName;
     $id = $Id;
 
-    $sql = "Select * from $table where id='$id' LIMIT 1";
+    $sql = "Select * from $table where Id='$id' LIMIT 1";
     $result = mysqli_query($conn , $sql);
 
     if($result){
@@ -49,7 +63,7 @@ function getById($tableName , $Id){
         ];
         return $response;
     }
-}
+}*/
 
 
 
@@ -79,6 +93,6 @@ if(isset($_POST['saveuser']))
     }
 }
 
-mysqli_close($conn);
+
 
 ?>

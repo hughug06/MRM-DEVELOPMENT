@@ -1,3 +1,55 @@
+<?php 
+include_once '../../Database/database.php';
+global $conn;
+  $id="";
+  $name="";
+  $email="";
+  $username = "";
+  $password = "";
+  $role = "";
+  $is_ban = "";
+  $error="";
+  $success="";
+
+  if($_SERVER["REQUEST_METHOD"]=='GET'){
+    if(!isset($_GET['id'])){
+      header("location: user-managment.php");
+      exit;
+    }
+    $id = $_GET['id'];
+    $sql = "select * from users where id=$id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    while(!$row){
+      header("location: user-managment.php");
+      exit;
+    }
+
+    $name=$row["name"];
+    $email=$row["email"];
+    $username=$row["username"];
+    $password = $row["password"];
+    $role = $row["role"];
+    $is_ban = $row["is_ban"];
+
+  }
+  else{
+    $id = $_POST["id"];
+    $name= $_POST['name'];
+    $email=$_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+    $is_ban = $_POST['is_ban'];
+
+    $sql = "update users set name='ARIES' where Id=''";
+    $result = mysqli_query($conn , $sql);
+    header("location: user-management.php");
+    
+    
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -59,25 +111,9 @@
             <div class="container-fluid">
 
                
-                <form action="function.php" method="POST">
-
-
+                <form  method="POST">
         <?php 
-        require 'function.php';
-        $paramresult = checkparamId('Id');
-        if($paramresult === false){
-            echo '<h5>No valid ID found</h5>';
-            return false;
-        }
-        if(!is_numeric($paramresult)){
-            echo '<h5>Invalid ID. Must be a number.</h5>';
-            return false;
-        }
-
-// Proceed with processing the valid numeric ID
-echo '<h5>Valid ID: ' . $paramresult . '</h5>'
-
-       // $user =getById('users' , check)
+         
         ?>
 
                     <div class="row row-sm">
@@ -94,21 +130,22 @@ echo '<h5>Valid ID: ' . $paramresult . '</h5>'
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
+                                            <input type="hidden" name="id" <?= $id ?>>
                                             <label class="form-label">Full Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="fullname" required>
+                                                aria-label="Full Name" name="name" required value="<?= $name?>">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Username</label>
                                             <input type="text" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="username" required>
+                                                aria-label="Username" name="username" required value="<?= $username?>">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Password</label>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <input type="text" class="form-control" placeholder="Password"
-                                                    aria-label="Password" name="password" required>
+                                                    aria-label="Password" name="password" required value="<?= $password?>">
                                                 </div>
                                                 
                                                 
@@ -116,9 +153,9 @@ echo '<h5>Valid ID: ' . $paramresult . '</h5>'
                                                 <label class="form-label">Role</label>
                                                     <select id="inputState1" class="form-select" name="role" required>
                                                         <option selected>Select Role</option>
-                                                        <option value="user">user</option>
-                                                        <option value="admin">admin</option>
-                                                        <option value="agent">agent</option>
+                                                        <option value="user" <?= $role == 'user' ? 'selected' : ''?>>user</option>
+                                                        <option value="admin" <?= $role == 'admin'? 'selected' : ''?>>admin</option>
+                                                        <option value="agent" <?= $role == 'agent' ? 'selected' : ''?>>agent</option>
                                                     </select>
                                                 </div>                                                                
                                             </div>
@@ -128,13 +165,13 @@ echo '<h5>Valid ID: ' . $paramresult . '</h5>'
                                                 <div class="col-xl-12 mb-3">
                                                     <label class="form-label">Email</label>
                                                     <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email" name="email" required>
+                                                    aria-label="email" name="email" required value="<?= $email?>"> 
                                                 </div>                                                                      
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <label class="form-label">Is ban</label>
-                                                    <input type="checkbox"  name="is_ban" required>
+                                                    <input type="checkbox"  name="is_ban" required <?= $is_ban == true ? 'checked' : ''?>>
                                                 </div>                                                                      
                                             </div>
                                         </div>

@@ -105,6 +105,7 @@
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';
+                                           require 'function.php';
                                            $select = "Select * from users";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
@@ -118,7 +119,7 @@
                                                 <td><?= $resultItem['role']?></td>
                                                 <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['Id'];?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="user-edit-form.php?id=<?= $resultItem['Id'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="user-delete-form.php" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
