@@ -98,21 +98,56 @@
 
       
 <!-- Modal SIGN UP -->
-<div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
+<div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">SIGN UP</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+      <div class="card mb-0 border-0">
+          <div class="row row-sm gx-0">
+              <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-warning details rounded-start">
+                  <div class="mt-5 pt-4 p-2">
+                      <a href="index.html">
+                          <!-- <img src="../../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo"> -->
+                      </a>
+                      <div class="clearfix"></div>
+                      <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
+                      <!-- <h5 class="mt-4">Create Your Account</h5>
+                      <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
+                  </div>
+              </div>
+              <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
+                  <div class="main-container container-fluid">
+                      <div class="row row-sm gx-0">
+                          <div class="card-body p-5">
+                              <div class="clearfix"></div>
+                              <form action="user/signup/function.php" method="POST">
+                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Sign Up</h1>
+                                  <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
+                                  <div class="form-group text-start pb-3">
+                                      <label class="form-label text-muted ">Email Address</label>
+                                      <input class="form-control" placeholder="" type="text" name="Emailaddress">
+                                  </div>
+                                  <div class="form-group text-start">
+                                      <label class="form-label text-muted">Password</label>
+                                      <input class="form-control" placeholder="" type="password" name="Password">
+                                  </div>
+                                  <div class="text-start d-flex justify-content-end pb-5">
+                                  <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
+                                  </div>
+                                  <div class="d-grid pb-2">
+                                      <a href="../solar/solar.php" class="btn btn-warning text-white">Login<a>           
+                                  </div>
+                              </form>
+                              <div class="d-flex justify-content-center mt-3 gap-1">Already have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
     </div>
+      
+    </div>
+    
   </div>
 </div>
 
@@ -120,28 +155,53 @@
 <div class="modal fade" id="signinmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signinmodal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">SIGN IN</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="user/signin/function.php" method="POST">
-                <div class="row">
-                    <label for="">USERNAME:</label>
-                    <input type="text" name="username">
-                </div>
-                <div class="row">
-                    <label for="">PASSWORD</label>
-                    <input type="password" name="password">
-                </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="signin">SIGN IN</button>
-      </div>
-      </form>
+    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+      <div class="card mb-0 border-0">
+          <div class="row row-sm gx-0">
+              <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-warning details rounded-start">
+                  <div class="mt-5 pt-4 p-2">
+                      <a href="index.html">
+                          <!-- <img src="../../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo"> -->
+                      </a>
+                      <div class="clearfix"></div>
+                      <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
+                      <!-- <h5 class="mt-4">Create Your Account</h5>
+                      <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
+                  </div>
+              </div>
+              <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
+                  <div class="main-container container-fluid">
+                      <div class="row row-sm gx-0">
+                          <div class="card-body p-5">
+                              <div class="clearfix"></div>
+                              <form action="user/signin/function.php" method="POST">
+                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Welcome Back</h1>
+                                  <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
+                                  <div class="form-group text-start pb-3">
+                                      <label class="form-label text-muted ">Email Address</label>
+                                      <input class="form-control" placeholder="" type="text" name="Emailaddress">
+                                  </div>
+                                  <div class="form-group text-start">
+                                      <label class="form-label text-muted">Password</label>
+                                      <input class="form-control" placeholder="" type="password" name="Password">
+                                  </div>
+                                  <div class="text-start d-flex justify-content-end pb-5">
+                                  <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
+                                  </div>
+                                  <div class="d-grid pb-2">
+                                      <a href="../solar/solar.php" class="btn btn-warning text-white">Login<a>           
+                                  </div>
+                              </form>
+                              <div class="d-flex justify-content-center mt-3 gap-1">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
     </div>
+      
+    </div>
+    
   </div>
 </div>
 
