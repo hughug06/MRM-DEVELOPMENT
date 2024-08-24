@@ -29,7 +29,7 @@
         
             <!-- Start::slide -->
             <li class="slide">
-                <a href="../solar/solar.php" class="side-menu__item ">
+                <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/solar/solar.php" class="side-menu__item ">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -40,7 +40,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="../generator/generator.php" class="side-menu__item">
+                <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/generator/generator.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -55,7 +55,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="../services/service.php" class="side-menu__item">
+                <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/services/service.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fa fa-address-book side-menu__icon"></i>
@@ -71,7 +71,7 @@
 
              <!-- Start::slide -->
              <li class="slide">
-                <a href="../chaintercom/chaintercom.php" class="side-menu__item">
+                <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/chaintercom/chaintercom.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fe fe-file side-menu__icon"></i>
@@ -87,7 +87,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="../settings/settings.php" class="side-menu__item">
+                <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/settings/settings.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="ion-ios-settings side-menu__icon"></i>
