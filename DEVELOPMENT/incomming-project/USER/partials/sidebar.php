@@ -143,9 +143,6 @@
                                 <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
                             <ul class="slide-menu child1">
-                            <li class="slide">
-                                    <a href="marketing-add-product.php" class="side-menu__item">Add product</a>
-                                </li>
                                 <li class="slide">
                                     <a href="marketing-product-control" class="side-menu__item">Product Control</a>
                                 </li>
