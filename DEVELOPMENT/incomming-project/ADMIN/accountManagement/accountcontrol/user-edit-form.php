@@ -34,17 +34,21 @@ global $conn;
 
   }
   else{
-    $id = $_POST["id"];
-    $name= $_POST['name'];
-    $email=$_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
-    $is_ban = $_POST['is_ban'];
 
-    $sql = "update users set name='ARIES' where Id=''";
-    $result = mysqli_query($conn , $sql);
-    header("location: user-management.php");
+   
+        $id = $_POST["id"];
+        $name= $_POST['name'];
+        $email=$_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
+        $is_ban = $_POST['is_ban'] == true ? 1:0;
+        $sql = "update users set name='$name' , username= '$username' , email= '$email' , password='$password' , is_ban= '$is_ban', role='$role' where Id='$id'";
+        $result = mysqli_query($conn , $sql);
+        header("location: user-management.php");
+        exit();
+        
+
     
     
   }
@@ -111,10 +115,8 @@ global $conn;
             <div class="container-fluid">
 
                
-                <form  method="POST">
-        <?php 
-         
-        ?>
+                <form  method="POST" action="user-edit-form.php">
+        
 
                     <div class="row row-sm">
                         <div class="col-xl-6">
@@ -130,7 +132,7 @@ global $conn;
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="hidden" name="id" <?= $id ?>>
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
                                             <label class="form-label">Full Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
                                                 aria-label="Full Name" name="name" required value="<?= $name?>">
@@ -171,13 +173,10 @@ global $conn;
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <label class="form-label">Is ban</label>
-                                                    <input type="checkbox"  name="is_ban" required <?= $is_ban == true ? 'checked' : ''?>>
+                                                    <input type="checkbox"  name="is_ban"  <?= $is_ban == true ? 'checked' : ''?>>
                                                 </div>                                                                      
                                             </div>
                                         </div>
-                                        
-                                       
-
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
