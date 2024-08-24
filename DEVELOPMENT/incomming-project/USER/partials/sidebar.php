@@ -118,14 +118,7 @@
                                 </li>
                                 <li class="slide">
                                     <a href="projects-forum.php" class="side-menu__item">Forum</a>
-                                </li>
-                                <li class="slide">
-                                    <a href="projects-approved.php" class="side-menu__item">Approved Projects</a>
-                                </li>
-                                <li class="slide">
-                                    <a href="projects-calendar.php" class="side-menu__item">Calendar</a>
-                                </li>
-                                
+                                </li>                          
                                 <li class="slide">
                                     <a href="projects-logs.php" class="side-menu__item">Project Logs</a>
                                 </li>

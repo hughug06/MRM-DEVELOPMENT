@@ -40,19 +40,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
               </li> 
-              <li class="nav-item">
-                <a class="nav-link ms-4" href="user/signin/signin.php"><span class="text-success">Sign in</span></a>
+              <li class="nav-item"> <!-- TRIGGER MODAL SIGN IN -->
+                <a class="nav-link ms-4" href="" data-bs-toggle="modal" data-bs-target="#signinmodal"><span class="text-success">Sign in</span></a>
               </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="user/signup/sign-up.php"><span class="text-warning" style="color: orange;" >Sign up</span></a>
+              <li class="nav-item"> <!-- TRIGGER MODAL SIGN UP -->
+                <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#signupmodal"><span class="text-warning" style="color: orange;">Sign up</span></a>
               </li>        
             </ul>
           </div>
-        </div>
-                
+        </div>            
       </nav>
-         
-         
+   
+      
+
          
          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -95,6 +95,56 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+
+      
+<!-- Modal SIGN UP -->
+<div class="modal fade" id="signupmodal" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SIGN UP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal SIGN IN -->
+<div class="modal fade" id="signinmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signinmodal" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">SIGN IN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="user/signin/function.php" method="POST">
+                <div class="row">
+                    <label for="">USERNAME:</label>
+                    <input type="text" name="username">
+                </div>
+                <div class="row">
+                    <label for="">PASSWORD</label>
+                    <input type="password" name="password">
+                </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="signin">SIGN IN</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
       <!-- about section starts -->
       <section id="about" class="about section-padding">
