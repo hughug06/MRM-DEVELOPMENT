@@ -144,7 +144,7 @@
                             </a>
                             <ul class="slide-menu child1">
                                 <li class="slide">
-                                    <a href="marketing-product-control" class="side-menu__item">Product Control</a>
+                                    <a href="../../ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item">Product Control</a>
                                 </li>
                                 <li class="slide">
                                     <a href="marketing-products-overview.php" class="side-menu__item">Product Overview</a>
