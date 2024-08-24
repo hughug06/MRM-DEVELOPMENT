@@ -144,7 +144,7 @@
                             </a>
                             <ul class="slide-menu child1">
                                 <li class="slide">
-                                    <a href="../../ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item">Product Control</a>
+                                    <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item">Product Control</a>
                                 </li>
                                 <li class="slide">
                                     <a href="marketing-products-overview.php" class="side-menu__item">Product Overview</a>
@@ -164,7 +164,7 @@
                             </a>
                             <ul class="slide-menu child1">
                                 <li class="slide">
-                                    <a href="../../ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item">Account Control</a>
+                                    <a href="/MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item">Account Control</a>
                                 </li>
                                 <li class="slide">
                                     <a href="account-account-logs.php" class="side-menu__item">Account Activity Logs</a>
