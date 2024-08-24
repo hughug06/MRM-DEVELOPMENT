@@ -59,46 +59,59 @@
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
-            <div class="main-content app-content">
-                <div class="container-fluid border border border-warning mt-4">
+            <div class="main-content app-content d-flex align-items-center">
+                <div class="container-fluid w-50 rounded-3 p-4 shadow-lg">
                     <div class="card-body">
-                    <div class="d-flex mt-3  justify-content-center btn btn-teal-light btn-border-down" disable=""> <h2>REPAIR</h4></div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Brand</label>
-                                            <input type="text" class="form-control" placeholder="First name"
-                                                aria-label="First name">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Product name</label>
-                                            <input type="text" class="form-control" placeholder="Last name"
-                                                aria-label="Last name">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email">
-                                                </div>
-                                                
-                                                <div class="col-xl-12">
-                                                
-                                 
-                               
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Contact Number</label>
-                                            <input type="number" class="form-control" placeholder="Phone number"
-                                                aria-label="Phone number">
-                                        </div>
-                                        <div class="col-md-12 d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-info btn-w-lg btn-wave">Submit</button>
-                                        </div>
-                                    </div>
+                        <div class="d-flex mb-4 rounded-2 justify-content-center btn btn-warning-light btn-border-down" disable=""><h2 class="mt-2">SERVICES</h2></div>
+                        <form method="" action="">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Client Name</label>
+                                    <input type="text" class="form-control"
+                                        aria-label="First name">
                                 </div>
+                                <!-- <div class="col-md-6 mb-3">
+                                    <label class="form-label">Company's Name</label>
+                                    <input type="text" class="form-control"
+                                        aria-label="Last name">
+                                </div> -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label" for="inputGroupSelect01">Product Type</label>
+                                    <select class="form-select p-2" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Solar Panel</option>
+                                        <option value="2">Generator</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Specification</label>
+                                    <input type="email" class="form-control"
+                                    aria-label="email">
+                                </div>
+                                <!-- <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date</label>
+                                    <input type="number" class="form-control"
+                                        aria-label="Phone number">
+                                </div> -->
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label" for="inputGroupSelect01">Service Type</label>
+                                    <select class="form-select p-2" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">Maintenance</option>
+                                        <option value="2">Tune-up</option>
+                                        <option value="3">Repair</option>
+                                        <option value="4">Installation</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    
+                                </div>
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning btn-w-lg btn-wave">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <!--APP-CONTENT CLOSE-->
