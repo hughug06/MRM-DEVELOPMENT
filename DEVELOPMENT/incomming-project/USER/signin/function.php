@@ -1,19 +1,20 @@
 
 <?php
-    if(isset($_POST[''])){
-    $Emailaddress = $_POST['Emailaddress'];
-    $Password = $_POST['Password'];
-    require_once "database/database.php";
-    $sql = "SELECT * FROM REGISTRATION WHERE email = '$Emailaddress' AND password = '$Password'";
+    if(isset($_POST['signin'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    require_once "../Database/database.php";
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = mysqli_query($conn , $sql);
     
     if(mysqli_num_rows($result)){
-        header("Location: user-solar-panel.php");
+        header("Location: ../solar/solar.php");
+        exit();
     }
     else{
         echo "testing";
     }
-
+    echo "testing";
     }
    
 
