@@ -60,9 +60,9 @@
 
             <!--APP-CONTENT START-->
             <div class="main-content app-content d-flex align-items-center">
-                <div class="container-fluid w-50 rounded-3 p-4 shadow-lg">
-                    <div class="card-body">
-                        <div class="d-flex mb-4 rounded-2 justify-content-center btn btn-warning-light btn-border-down" disable=""><h2 class="mt-2">SERVICES</h2></div>
+                <div class="container-fluid w-50">
+                    <div class="card-body shadow rounded p-5">
+                        <div class="d-flex mb-4 rounded-2 justify-content-center btn btn-warning-light btn-border-down disabled"><h2 class="mt-2">SERVICES</h2></div>
                         <form method="" action="">
                             <div class="row">
                                 <div class="col-md-12 mb-3">
