@@ -130,29 +130,30 @@
                               <form action="user/signup/function.php" method="POST">
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="fullName" id="su_FullName">
+                                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName">
                                       <label for="su_FullName" class="text-muted">Full Name</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="userName" id="su_UserName">
+                                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName">
                                       <label for="su_UserName" class="text-muted">Username</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="Emailaddress" id="su_Email">
+                                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
                                       <label for="su_Email" class="text-muted">Email Address</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
                                   <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
-                                      <input class="form-control" placeholder="" type="password" name="Password" id="su_Password">
+                                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password">
                                       <label for="su_Password" class="text-muted">Password</label>
                                   </div>
                                   <div class="form-floating text-start mb-5">
-                                      <input class="form-control" placeholder="" type="password" name="Password" id="su_RepeatPassword">
+                                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword">
                                       <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
                                   </div>
                                   <div class="text-start"></div>
                                   <div class="d-grid pb-2">
-                                      <a href="../solar/solar.php" class="btn btn-warning text-white py-2">Register<a>           
+                                    <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>
+                                            
                                   </div>
                               </form>
                               <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Already have an account?<a class="text-warning" href="signin.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
@@ -192,26 +193,26 @@
                       <div class="row row-sm gx-0">
                           <div class="card-body p-5">
                               <div class="clearfix"></div>
-                              <form action="user/signin/function.php" method="POST">
+                              <form action="user/signin/function.php" method="POST">                              
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">LOGIN</h1>
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
                                   
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
-                                      <label class="form-label text-muted">Email Address</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="Emailaddress">
+                                      <label class="form-label text-muted">Username</label>
+                                      <input class="form-control py-2" placeholder="" type="text" name="username">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label text-muted">Password</label>
-                                      <input class="form-control py-2" placeholder="" type="password" name="Password">
+                                      <input class="form-control py-2" placeholder="" type="password" name="password">
                                       
                                   </div>
                                   <div class="text-start d-flex justify-content-end pb-5">
                                   <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
                                   </div>
                                   <div class="d-grid pb-2">
-                                      <a href="../solar/solar.php" class="btn btn-warning text-white py-2">Login<a>           
+                                  <button name="signin" type="submit" class="btn btn-warning text-white py-2">Login</button>                                 
                                   </div>
                               </form>
                               <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
