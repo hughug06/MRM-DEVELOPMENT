@@ -150,6 +150,7 @@
                                       <input class="form-control" placeholder="" type="password" name="Password" id="su_RepeatPassword">
                                       <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
                                   </div>
+                                  <div class="text-start"></div>
                                   <div class="d-grid pb-2">
                                       <a href="../solar/solar.php" class="btn btn-warning text-white py-2">Register<a>           
                                   </div>
