@@ -77,61 +77,43 @@
                                         Add user
                                     </div>
                                     <div class="prism-toggle">
-                                       <a href="user-management.php"> BACK</a>
+                                       <a href="marketing-product-control.php"> BACK</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Full Name</label>
+                                            <label class="form-label">Product Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="fullname">
+                                                aria-label="Full Name" name="ProductName">
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="username">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Password</label>
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                    aria-label="Password" name="password">
-                                                </div>
-                                                
-                                                
-                                                <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Role</label>
-                                                    <select id="inputState1" class="form-select" name="role">
-                                                        <option selected>Select Role</option>
-                                                        <option value="user">user</option>
-                                                        <option value="admin">admin</option>
-                                                        <option value="agent">agent</option>
+                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                                <label class="form-label">Type</label>
+                                                    <select id="inputState1" class="form-select" name="Type">
+                                                        <option selected>Select Type</option>
+                                                        <option value="Generator">Generator</option>
+                                                        <option value="Solar Panel">Solar Panel</option>
                                                     </select>
-                                                </div>                                                                
-                                            </div>
-                                        </div>
+                                        </div> 
                                         <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email" name="email">
-                                                </div>        
-                                                <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Is ban</label>
-                                                    <input type="checkbox" name="is_ban" required>
-                                                </div>                                                                      
-                                            </div>         
-                                            </div>
+                                            <label class="form-label">Watts</label>
+                                            <input type="number" class="form-control" placeholder="Username"
+                                                aria-label="Username" name="Watts">
+                                        </div>                                                                                                               
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Stock</label>
+                                            <input type="number" class="form-control" placeholder="Stock"
+                                                aria-label="email" name="Stock">                                                                             
                                         </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Availability</label>
+                                            <input type="checkbox" name="Availability" required>
+                                        </div>    
                                         
                                        
                                         
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary" name="saveuser">Save</button>
+                                            <button type="submit" class="btn btn-primary" name="saveuser">Add</button>
                                         </div>
                                     </div>
                                 </div>

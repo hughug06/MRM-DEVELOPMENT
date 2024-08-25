@@ -64,14 +64,31 @@
         <!-- End::app-sidebar -->
 
         <!--APP-CONTENT START-->
-                <div class="main-content app-content">
-                    <div class="container-fluid">
-                    
-                    
-                    
-                    <div class="card-body">
-                    <div class="table-responsive userlist-table">
-                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               
+
+                <!-- Start::row-1 -->
+                 
+                <div class="row row-sm mt-5">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0 pb-0 d-block">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0 pt-1">USER TABLE</label>
+                                    
+                                    <div class="position-absolute bottom-0 end-0 me-3 ">                                      
+                                      <a href="product-add-form.php">  <button type="button" class="btn btn-primary my-2 btn-icon-text d-inline-flex align-items-center" >
+                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD USER
+                                        </button></a>
+                                    </div>
+                             
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive userlist-table">
+                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
                                         <thead>
                                             <tr>
                                                 <th class="wd-lg-8p"><span>ProductID</span></th>
@@ -102,6 +119,7 @@
                                                 <td>                                                 
                                                     <a href="user-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"> <i class="ri-add-box-line"></i>  </a>
                                                 </td>
                                             </tr>
 
@@ -117,16 +135,35 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <nav aria-label="...">
+                                    <ul class="pagination mt-4 mb-0 float-end">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">2</span>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0);">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                    </div>
+                        </div>
+                    </div><!-- COL END -->
                 </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
         <!--APP-CONTENT CLOSE-->
 
         
         <!-- Footer Start -->
         <?php include_once('../../../USER/partials/footer.php') ?>
         <!-- Footer End -->
-       
+
     </div>
 
     
