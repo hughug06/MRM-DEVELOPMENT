@@ -66,6 +66,20 @@
         <!--APP-CONTENT START-->
                 <div class="main-content app-content">
                     <div class="container-fluid">
+                    
+                    <div class="card-header border-bottom-0 pb-0 d-block">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0 pt-1">USER TABLE</label>
+                                    
+                                    <div class="position-absolute bottom-0 end-0 me-3 ">                                      
+                                      <a href="user-add-form.php">  <button type="button" class="btn btn-primary my-2 btn-icon-text d-inline-flex align-items-center" >
+                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD USER
+                                        </button></a>
+                                    </div>
+                             
+                                </div>
+                            </div>
+                    
                     <div class="card-body">
                     <div class="table-responsive userlist-table">
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">

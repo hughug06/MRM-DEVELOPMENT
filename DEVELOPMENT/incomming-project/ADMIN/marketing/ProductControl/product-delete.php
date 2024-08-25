@@ -1,7 +1,7 @@
 <?php
     include "../../Database/database.php";
-    if(isset($_GET['ProductID'])){
-        $ProductID = $_GET['ProductID'];
+    if(isset($_GET['id'])){
+        $ProductID = $_GET['id'];
         $sql = "DELETE from `products` where ProductID=$ProductID";
         $result = mysqli_query($conn , $sql);
     }
