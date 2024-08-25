@@ -75,17 +75,6 @@
                                         </button></a>
                                     </div>
                              
-                                    <div class="ms-auto float-end">
-                                        <div class="">
-                                            <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-horizontal"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="javascript:void(0);">Today</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
