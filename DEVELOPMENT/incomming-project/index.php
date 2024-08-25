@@ -110,16 +110,17 @@
     <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
       <div class="card mb-0 border-0">
           <div class="row row-sm gx-0">
-              <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-warning details rounded-start">
-                  <div class="mt-5 pt-4 p-2">
-                      <a href="index.html">
-                          <!-- <img src="../../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo"> -->
-                      </a>
-                      <div class="clearfix"></div>
-                      <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
-                      <!-- <h5 class="mt-4">Create Your Account</h5>
-                      <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
-                  </div>
+              <div class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start">
+                <!-- <a href="index.html">
+                    <img src="../assets/images/sigin/logo_login.png" class="header-brand-img mb-4" alt="logo">
+                </a> -->
+                <div class="d-flex align-items-center">
+                    <h3 class="text-white px-4">WELCOME TO MRM! JOIN NOW FOR A BRIGHTER FUTURE</h3>
+                </div>
+                <div class="clearfix"></div>
+                <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
+                <!-- <h5 class="mt-4">Create Your Account</h5>
+                <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
               </div>
               <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
                   <div class="main-container container-fluid">
@@ -127,24 +128,33 @@
                           <div class="card-body p-5">
                               <div class="clearfix"></div>
                               <form action="user/signup/function.php" method="POST">
-                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Sign Up</h1>
-                                  <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
-                                  <div class="form-group text-start pb-3">
-                                      <label class="form-label text-muted ">Email Address</label>
-                                      <input class="form-control" placeholder="" type="text" name="Emailaddress">
+                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
+                                  <div class="form-floating text-start mb-3">
+                                      <input class="form-control" placeholder="" type="text" name="fullName" id="su_FullName">
+                                      <label for="su_FullName" class="text-muted">Full Name</label>
                                   </div>
-                                  <div class="form-group text-start">
-                                      <label class="form-label text-muted">Password</label>
-                                      <input class="form-control" placeholder="" type="password" name="Password">
+                                  <div class="form-floating text-start mb-3">
+                                      <input class="form-control" placeholder="" type="text" name="userName" id="su_UserName">
+                                      <label for="su_UserName" class="text-muted">Username</label>
                                   </div>
-                                  <div class="text-start d-flex justify-content-end pb-5">
-                                  <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
+                                  <div class="form-floating text-start mb-3">
+                                      <input class="form-control" placeholder="" type="text" name="Emailaddress" id="su_Email">
+                                      <label for="su_Email" class="text-muted">Email Address</label>
+                                  </div>
+                                  <div class="form-floating text-start mb-3">
+                                  <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
+                                      <input class="form-control" placeholder="" type="password" name="Password" id="su_Password">
+                                      <label for="su_Password" class="text-muted">Password</label>
+                                  </div>
+                                  <div class="form-floating text-start mb-5">
+                                      <input class="form-control" placeholder="" type="password" name="Password" id="su_RepeatPassword">
+                                      <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
                                   </div>
                                   <div class="d-grid pb-2">
-                                      <a href="../solar/solar.php" class="btn btn-warning text-white">Login<a>           
+                                      <a href="../solar/solar.php" class="btn btn-warning text-white py-2">Register<a>           
                                   </div>
                               </form>
-                              <div class="d-flex justify-content-center mt-3 gap-1">Already have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
+                              <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Already have an account?<a class="text-warning" href="signin.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
                           </div>
                       </div>
                   </div>
@@ -194,6 +204,7 @@
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label text-muted">Password</label>
                                       <input class="form-control py-2" placeholder="" type="password" name="Password">
+                                      
                                   </div>
                                   <div class="text-start d-flex justify-content-end pb-5">
                                   <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
@@ -466,18 +477,19 @@
       </footer>
       <!-- footer ends -->
 
-
-
-
-
-
-
-
-    
-    
     <!-- All Js -->
+    <script>
+        const togglePassword = document.querySelector("#toggle_Pass");
+        const pass = document.querySelector("#su_Password");
+        togglePassword.addEventListener("click", (e) => {
+            const type = pass.getAttribute("type") === "password" ? "text" : "password";
+            pass.setAttribute("type", type);
+            e.target.classList.toggle("ri-eye-off-line");
+        });
+    </script>
     <script src="../assets/landing_js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>
 

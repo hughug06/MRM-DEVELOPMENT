@@ -135,6 +135,8 @@ body {
   }
 }
 
+/* Login Section */
+
 .form-group {
   position: relative;
 }
@@ -142,6 +144,7 @@ body {
 .icon {
   color: rgb(255, 193, 7);
 }
+
 .icon-a {
   position: absolute;
   top: calc(42%);
@@ -161,4 +164,13 @@ body {
 }
 .btn-close-custom::before {
   color: rgb(255, 193, 7);
+}
+
+/* Sign up section */
+
+.icon-c {
+  position: absolute;
+  top: calc(25%);
+  right: 1.1rem;
+  font-size: 1.3rem;
 }
