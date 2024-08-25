@@ -76,11 +76,11 @@
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 pb-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0 pt-1">USER TABLE</label>
+                                    <label class="main-content-label mb-0 pt-1">PRODUCT TABLE</label>
                                     
                                     <div class="position-absolute bottom-0 end-0 me-3 ">                                      
                                       <a href="product-add-form.php">  <button type="button" class="btn btn-primary my-2 btn-icon-text d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD USER
+                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD PRODUCT
                                         </button></a>
                                     </div>
                              
@@ -117,9 +117,9 @@
                                                 <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
-                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"> <i class="ri-add-box-line"></i>  </a>
+                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"> <i class="ri-add-box-line"></i>  </a>
                                                 </td>
                                             </tr>
 
