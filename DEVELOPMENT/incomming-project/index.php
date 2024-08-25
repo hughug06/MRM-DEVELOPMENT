@@ -11,6 +11,12 @@
     <link href="../assets/landing_css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/landing_css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/brand-logos/favicon.ico" type="image/x-icon">
+    <!-- Icons Css -->
+    <link href="../assets/css/icons.css" rel="stylesheet" >
+
 </head>
 <body>
     
@@ -158,16 +164,17 @@
     <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
       <div class="card mb-0 border-0">
           <div class="row row-sm gx-0">
-              <div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-warning details rounded-start">
-                  <div class="mt-5 pt-4 p-2">
-                      <a href="index.html">
-                          <!-- <img src="../../assets/images/brand-logos/desktop-white.png" class="header-brand-img mb-4" alt="logo"> -->
-                      </a>
-                      <div class="clearfix"></div>
-                      <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
-                      <!-- <h5 class="mt-4">Create Your Account</h5>
-                      <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
-                  </div>
+              <div class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start">
+                <!-- <a href="index.html">
+                    <img src="../assets/images/sigin/logo_login.png" class="header-brand-img mb-4" alt="logo">
+                </a> -->
+                <div class="d-flex align-items-center">
+                    <h1 class="text-white px-4">WELCOME BACK</h1>
+                </div>
+                <div class="clearfix"></div>
+                <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
+                <!-- <h5 class="mt-4">Create Your Account</h5>
+                <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
               </div>
               <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
                   <div class="main-container container-fluid">
@@ -175,24 +182,27 @@
                           <div class="card-body p-5">
                               <div class="clearfix"></div>
                               <form action="user/signin/function.php" method="POST">
-                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Welcome Back</h1>
+                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">LOGIN</h1>
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
+                                  
                                   <div class="form-group text-start pb-3">
-                                      <label class="form-label text-muted ">Email Address</label>
-                                      <input class="form-control" placeholder="" type="text" name="Emailaddress">
+                                  <i class="ri-mail-fill icon icon-a"></i>
+                                      <label class="form-label text-muted">Email Address</label>
+                                      <input class="form-control py-2" placeholder="" type="text" name="Emailaddress">
                                   </div>
                                   <div class="form-group text-start">
+                                  <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label text-muted">Password</label>
-                                      <input class="form-control" placeholder="" type="password" name="Password">
+                                      <input class="form-control py-2" placeholder="" type="password" name="Password">
                                   </div>
                                   <div class="text-start d-flex justify-content-end pb-5">
                                   <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
                                   </div>
                                   <div class="d-grid pb-2">
-                                      <a href="../solar/solar.php" class="btn btn-warning text-white">Login<a>           
+                                      <a href="../solar/solar.php" class="btn btn-warning text-white py-2">Login<a>           
                                   </div>
                               </form>
-                              <div class="d-flex justify-content-center mt-3 gap-1">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
+                              <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
                           </div>
                       </div>
                   </div>
