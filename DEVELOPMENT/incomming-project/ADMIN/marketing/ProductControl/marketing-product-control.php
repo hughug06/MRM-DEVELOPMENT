@@ -77,7 +77,6 @@
                                                 <th class="wd-lg-20p"><span>Watts</span></th>
                                                 <th class="wd-lg-20p"><span>Stock</span></th>
                                                 <th class="wd-lg-20p"><span>Availability</span></th>
-                                                <th class="wd-lg-20p"><span>Image</span></th>
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -85,22 +84,21 @@
                                            <?php 
                                            require '../../Database/database.php';
                                            require 'function.php';
-                                           $select = "Select * from users";
+                                           $select = "Select * from products";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                <td><?= $resultItem['ProductId']?></td>
+                                                <td><?= $resultItem['ProductID']?></td>
                                                 <td><?= $resultItem['ProductName']?></td>
                                                 <td><?= $resultItem['Type']?></td>
                                                 <td><?= $resultItem['Watts']?> </td>
                                                 <td><?= $resultItem['Stock']?></td>
-                                                <td><?= $resultItem['Is_Available'] == 1 ? "Available":"Not Available"?></td>
-                                                <td><?= $resultItem['Image']?></td>
+                                                <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['Id'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
-                                                    <a href="user-delete-form.php?id=<?= $resultItem['Id'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="user-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 

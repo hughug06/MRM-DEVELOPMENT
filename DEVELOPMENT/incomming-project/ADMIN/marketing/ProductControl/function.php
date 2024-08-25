@@ -4,19 +4,19 @@ require '../../Database/database.php';
 
 if(isset($_POST['????']))
 {
-    $fullname = $_POST['fullname'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $role = $_POST['role'];
-    $ban = $_POST['is_ban'] == true ? 1:0;
+    $ProductID = $_POST['ProductID'];
+    $ProductName = $_POST['ProductName'];
+    $Type = $_POST['Type'];
+    $Watts = $_POST['Watts'];
+    $Stock = $_POST['Stock'];
+    $Availability = $_POST['Availability'] == true ? 1:0;
  
     if($fullname != '' || $username != '' || $password != '' || $email != ''){
-            $sql_insert = "insert into users (name,username,email,password,is_ban,role) 
-                            VALUES ('$fullname' , '$username' , '$email' , '$password', ' $ban'  , '$role')";
+            $sql_insert = "insert into users (ProductID,ProductName,Type,Watts,Stock,Availability) 
+                            VALUES ('$ProductID' , '$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "New record created successfully";
-                header('location: user-management.php');
+                header('location: marketing-product-control.php');
                 exit();
               } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
