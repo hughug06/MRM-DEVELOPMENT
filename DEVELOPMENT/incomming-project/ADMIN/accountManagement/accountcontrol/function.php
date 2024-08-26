@@ -2,6 +2,10 @@
 
 require '../../Database/database.php';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> jolo
 //ADD USER
 if(isset($_POST['saveuser']))
 {

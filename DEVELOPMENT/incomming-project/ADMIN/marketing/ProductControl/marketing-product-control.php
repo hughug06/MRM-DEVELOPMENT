@@ -64,105 +64,106 @@
         <!-- End::app-sidebar -->
 
         <!--APP-CONTENT START-->
-                <div class="main-content app-content">
-                    <div class="container-fluid">
-                    <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table text-nowrap">
-                                        <thead class="table-primary">
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+               
+
+                <!-- Start::row-1 -->
+                 
+                <div class="row row-sm mt-5">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0 pb-0 d-block">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0 pt-1">PRODUCT TABLE</label>
+                                    
+                                    <div class="position-absolute bottom-0 end-0 me-3 ">                                      
+                                      <a href="product-add-form.php">  <button type="button" class="btn btn-primary my-2 btn-icon-text d-inline-flex align-items-center" >
+                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD PRODUCT
+                                        </button></a>
+                                    </div>
+                             
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive userlist-table">
+                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+                                        <thead>
                                             <tr>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Product Id</th>
-                                                <th scope="col">Created</th>
-                                                <th scope="col">Status</th>
+                                                <th class="wd-lg-8p"><span>ProductID</span></th>
+                                                <th class="wd-lg-20p"><span>Product Name</span></th>
+                                                <th class="wd-lg-20p"><span>Type</span></th>
+                                                <th class="wd-lg-20p"><span>Watts</span></th>
+                                                <th class="wd-lg-20p"><span>Stock</span></th>
+                                                <th class="wd-lg-20p"><span>Availability</span></th>
+                                                <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">MRM SOLAR</th>
-                                                <td>#12345</td>
-                                                <td>24 May 2022</td>
-                                                <td>
-                                                    <div class="hstack gap-2 fs-15">
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-success-transparent rounded-pill"><i
-                                                                class="ri-download-2-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-info-transparent rounded-pill"><i
-                                                                class="ri-edit-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-danger-transparent rounded-pill"><i
-                                                                class="ri-delete-bin-line"></i></a>
-                                                    </div>
+                                           <?php 
+                                           require '../../Database/database.php';
+                                           require 'function.php';
+                                           $select = "Select * from products";
+                                           $result = mysqli_query($conn , $select);
+                                           if(mysqli_num_rows($result) > 0){
+                                            foreach($result as $resultItem){
+                                                ?> 
+                                                 <tr>
+                                                <td><?= $resultItem['ProductID']?></td>
+                                                <td><?= $resultItem['ProductName']?></td>
+                                                <td><?= $resultItem['Type']?></td>
+                                                <td><?= $resultItem['Watts']?> </td>
+                                                <td><?= $resultItem['Stock']?></td>
+                                                <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
+                                                <td>                                                 
+                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"> <i class="ri-add-box-line"></i>  </a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">MRM SOLAR</th>
-                                                <td>#12345</td>
-                                                <td>02 July 2022</td>
-                                                <td>
-                                                    <div class="hstack gap-2 fs-15">
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-success-transparent rounded-pill"><i
-                                                                class="ri-download-2-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-info-transparent rounded-pill"><i
-                                                                class="ri-edit-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-danger-transparent rounded-pill"><i
-                                                                class="ri-delete-bin-line"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">MRM SOLAR</th>
-                                                <td>#12345</td>
-                                                <td>15 April 2022</td>
-                                                <td>
-                                                    <div class="hstack gap-2 fs-15">
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-success-transparent rounded-pill"><i
-                                                                class="ri-download-2-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-info-transparent rounded-pill"><i
-                                                                class="ri-edit-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-danger-transparent rounded-pill"><i
-                                                                class="ri-delete-bin-line"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">MRM SOLAR</th>
-                                                <td>#123456</td>
-                                                <td>17 March 2022</td>
-                                                <td>
-                                                    <div class="hstack gap-2 fs-15">
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-success-transparent rounded-pill"><i
-                                                                class="ri-download-2-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-info-transparent rounded-pill"><i
-                                                                class="ri-edit-line"></i></a>
-                                                        <a href="javascript:void(0);"
-                                                            class="btn btn-icon btn-sm btn-danger-transparent rounded-pill"><i
-                                                                class="ri-delete-bin-line"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                                <?php 
+                                            }
+                                            
+                                           }
+                                           else{
+
+                                           }
+                                           ?>
+                                                    
                                         </tbody>
                                     </table>
                                 </div>
+                                <nav aria-label="...">
+                                    <ul class="pagination mt-4 mb-0 float-end">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">2</span>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0);">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                    </div>
+                        </div>
+                    </div><!-- COL END -->
                 </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
         <!--APP-CONTENT CLOSE-->
 
         
         <!-- Footer Start -->
         <?php include_once('../../../USER/partials/footer.php') ?>
         <!-- Footer End -->
-       
+
     </div>
 
     
