@@ -59,7 +59,7 @@
 
          <!-- Start::slide -->
          <li class="slide">
-                <a href="/incomming-project/USER/generator/generator.php" class="side-menu__item ">
+                <a href="/incomming-project/USER/solar/solar.php" class="side-menu__item ">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -70,7 +70,7 @@
 
             <!-- Start::slide -->
             <li class="slide">
-                <a href="/incomming-project/generator/generator.php" class="side-menu__item">
+                <a href="/incomming-project/USER/generator/generator.php" class="side-menu__item">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
