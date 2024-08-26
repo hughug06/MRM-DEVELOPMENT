@@ -1,5 +1,5 @@
-<?php
-
+<?php 
+include '../../authetincation.php';
 require '../../Database/database.php';
 
 if(isset($_POST['AddProduct']))

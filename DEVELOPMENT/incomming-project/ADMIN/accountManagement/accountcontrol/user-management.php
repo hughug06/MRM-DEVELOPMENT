@@ -1,3 +1,7 @@
+<?php 
+include '../../authetincation.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -65,7 +69,7 @@
                 <div class="row row-sm mt-5">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
-                            <div class="card-header border-bottom-0 pb-0 d-block">
+                            <div class="card-header border-bottom-0 pb-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0 pt-1">USER TABLE</label>
                                     

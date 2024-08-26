@@ -1,5 +1,7 @@
 <?php
     include "../../Database/database.php";
+    include '../../authetincation.php';
+    
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $sql = "DELETE from `users` where Id=$id";

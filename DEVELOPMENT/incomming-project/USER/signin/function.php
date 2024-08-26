@@ -1,8 +1,6 @@
 
 <?php
-
-  
-
+    session_start();
     if(isset($_POST['signin'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -17,16 +15,15 @@
         exit();
     }
     else
-    {
+    { 
         $result = mysqli_query($conn , $sql);
         if($result){
             if(mysqli_num_rows($result))
             {
                 $row = mysqli_fetch_array($result , MYSQLI_ASSOC);
                 if($row['role'] == 'admin')
-                {
-                   
-                    $_SESSION['authorization'] = true;
+                {         
+                    $_SESSION['auth'] = true;
                     $_SESSION['loggedinuserrole'] = $row['role'];
                     $_SESSION['loggedinuser'] =
                      [
@@ -43,7 +40,7 @@
                         //SHOW BAN ERROR
                         exit();
                     }
-                    $_SESSION['authorization'] = true;
+                    $_SESSION['auth'] = true;
                     $_SESSION['loggedinuserrole'] = $row['role'];
                     $_SESSION['loggedinuser'] =
                      [
@@ -51,29 +48,28 @@
                         'email' => $row['email']
                     ];
                     //PUT SUCCESS MESSAGE
-                    header("Location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/solar/solar.php");
+                    header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/solar/solar.php");
                     exit();
                 }
                 
             }
             else
             {
-                
+                header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");
+                        //SHOW ERROR MESSAGE
+                        exit();
             }
         }
         else
         {
-             header("location: ../../../../index.php");               //ERROR MESSAGE WHEN $result false
+            header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");         //ERROR MESSAGE WHEN $result false
              exit();
         }
 
 
         
-        //IF FALSE
+       
     }
-
-
-
     }
    
 

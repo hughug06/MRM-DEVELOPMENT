@@ -1,11 +1,7 @@
 <?php 
 
 require '../../Database/database.php';
-
-<<<<<<< HEAD
-=======
-
->>>>>>> jolo
+include '../../authetincation.php';
 //ADD USER
 if(isset($_POST['saveuser']))
 {

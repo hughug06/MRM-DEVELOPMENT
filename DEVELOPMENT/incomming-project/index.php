@@ -1,3 +1,18 @@
+<?php 
+session_start();
+if(isset($_SESSION['auth'])){
+    $role = $_SESSION['loggedinuserrole'];
+    if($role == 'user'){
+        header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/USER/solar/solar.php");
+        exit();
+    }
+    else{
+        header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/accountManagement/accountcontrol/user-management.php");
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->
@@ -162,12 +177,12 @@
                   </div>
               </div>
           </div>
+    </div>     
     </div>
-      
-    </div>
-    
   </div>
 </div>
+
+
 
 <!-- Modal SIGN IN -->
 <div class="modal fade" id="signinmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signinmodal" aria-hidden="true">
