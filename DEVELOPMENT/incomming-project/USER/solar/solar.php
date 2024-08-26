@@ -1,3 +1,10 @@
+<?php
+    require_once '../../Admin/Database/database.php';
+
+    $sql = "SELECT * FROM products Where Availability = 1 and Type = 'Solar Panel'";
+    $all_products = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -53,9 +60,6 @@
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
         <?php include_once(__DIR__. '/../partials/sidebar.php')?>
-         <!-- Start::slide -->
-         
-        <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
@@ -80,6 +84,11 @@
                 <div class="row row-sm">
                     <div class="col-md-8 col-lg-9">
                         <div class="row row-sm">
+
+                        <?php
+                        while($row = mysqli_fetch_assoc($all_products)){
+                        ?>
+
                             <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
                                 <div class="card custom-card">
                                     <div class="p-0 ht-100p">
@@ -102,96 +111,8 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details-mono_350.php">MONO 350</a></h3>
+                                                <h3 class="title"><a href="user-solar-details-mono_350.php"><?php echo $row["ProductName"] ?></a></h3>
                                                 
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-solar-details-mono_375.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../../assets/images/pngs/4.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../../assets/images/pngs/3.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-product-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-solar-details-mono_375.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details-mono_375.php">MONO 375</a></h3>                                           
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-solar-details-mono_400.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../../assets/images/pngs/7.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../../assets/images/pngs/8.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-product-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-solar-details-mono_400.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details-mono_400.php">MONO 400</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                                                              
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-solar-details-mono_555.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../../assets/images/pngs/33.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../../assets/images/pngs/32.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-product-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-solar-details-mono_555.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details-mono_555.php">MONO 555</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -199,7 +120,11 @@
                                 </div>
                             </div>
                             
-                         
+                            <?php
+                            }
+                            ?>
+
+                            
                         </div>
                         <nav>
                             <ul class="pagination justify-content-end">
