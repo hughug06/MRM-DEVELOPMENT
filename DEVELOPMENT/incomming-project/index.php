@@ -10,16 +10,15 @@
     <!-- All CSS -->
     <link href="../assets/landing_css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/landing_css/style.css">
+    <link rel="stylesheet" href="assets/landing_css/style.css">
 
     <!-- Favicon -->
     <link rel="icon" href="../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     <!-- Icons Css -->
-    <link href="../assets/css/icons.css" rel="stylesheet" >
+    <link href="../assets/css/icons.css" rel="stylesheet">
 
 </head>
-<body>
-    
+<body>  
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
           <a class="navbar-brand" href="#"><span style="color: orange;">MRM</span>POWER</a>
