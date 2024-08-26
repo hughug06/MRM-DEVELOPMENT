@@ -113,7 +113,7 @@
                                                 <td><?= $resultItem['ProductID']?></td>
                                                 <td><?= $resultItem['ProductName']?></td>
                                                 <td><?= $resultItem['Type']?></td>
-                                                <td><?= $resultItem['Watts']?> </td>
+                                                <td><?= $resultItem['Watts']?>w </td>
                                                 <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td>                                                 
