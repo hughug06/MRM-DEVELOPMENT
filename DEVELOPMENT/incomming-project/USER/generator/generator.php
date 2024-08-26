@@ -4,7 +4,7 @@
 <head>
 
     <!-- Meta Data -->
-    <?php include_once(__DIR__.'/../partials/head.php')?>
+    <?php include_once('../partials/head.php')?>
     <title> Products Overview </title>
     <!-- Favicon -->
     <link rel="icon" href="../../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -49,21 +49,21 @@
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once(__DIR__.'/../partials/header.php')?>
+         <?php include_once('../partials/header.php')?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once(__DIR__. '/../partials/sidebar.php')?>
+        <?php include_once('../partials/sidebar.php')?>
         
         
         
 
          <!-- Start::slide -->
          <li class="slide">
-                <a href="/incomming-project/solar/solar.php" class="side-menu__item ">
+                <a href="/incomming-project/USER/generator/generator.php" class="side-menu__item ">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
-                    <span class="side-menu__label">Solar Panel</span>
+                    <span class="side-menu__label">Generator</span>
                 </a>
             </li>
             <!-- End::slide -->
@@ -126,385 +126,6 @@
                                             <div class="product-content">
                                                 <h3 class="title"><a href="user-generator-details_SLF20GF_KVA-20.php">SLF20GF KVA-20</a></h3>
                                                 
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SLF30GF_KVA-33.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/4.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/3.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SLF30GF_KVA-33.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SLF30GF_KVA-33.php">SLF30GF KVA-33</a></h3>                                           
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SLF40GF_KVA-40.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/7.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/8.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SLF40GF_KVA-40.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SLF40GF_KVA-40.php">SLF40GF KVA-40</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SLF66GF_KVA-66.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/9.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/10.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SLF66GF_KVA-66.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SLF66GF_KVA-66.php">SLF66GF KVA-66</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SI20GFS_KVA-20.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/11.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/12.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SI20GFS_KVA-20.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SI20GFS_KVA-20.php">SI20GFS KVA-20</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SI25GFS_KVA-25.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/2.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/2.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SI25GFS_KVA-25.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SI25GFS_KVA-25.php">SI25GFS KVA-25</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SI30GFS_KVA-30.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/5.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/6.png">
-                                                </a>
-                                                
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SI30GFS_KVA-30.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SI30GFS_KVA-30.php">SI30GFS KVA-30</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SI40GFS_KVA-40.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SI40GFS_KVA-40.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SI40GFS_KVA-40.php">SI40GFS KVA-40</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SI50GFS_KVA-50.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/33.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/32.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SI50GFS_KVA-50.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SI50GFS_KVA-50.php">SI50GFS KVA-50</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SC50GFS_KVA-50.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SC50GFS_KVA-50.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SC50GFS_KVA-50.php">SC50GFS KVA-50</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SC60GFS_KVA-60.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SC60GFS_KVA-60.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SC60GFS_KVA-60.php">SC60GFS KVA-60</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SC75GFS_KVA-75.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SC75GFS_KVA-75.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SC75GFS_KVA-75.php">SC75GFS KVA-75</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SC100GFS_KVA-100.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SC100GFS_KVA-100.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SC100GFS_KVA-100.php">SC100GFS KVA-100</a></h3>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-generator-details_SC125GFS_KVA-125.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../assets/images/pngs/13.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../assets/images/pngs/31.png">
-                                                </a>
-                                                
-                                                <div class="product-link">
-                                                    <a href="user-generator-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-generator-details_SC125GFS_KVA-125.php">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-generator-details_SC125GFS_KVA-125.php">SC125GFS KVA-125</a></h3>
                                                 
                                             </div>
                                         </div>
@@ -618,7 +239,7 @@
 
         
         <!-- Footer Start -->
-        <?php  include_once(__DIR__.'/../partials/footer.php')?>
+        <?php  include_once('../partials/footer.php')?>
         <!-- Footer End -->
        
     </div>
