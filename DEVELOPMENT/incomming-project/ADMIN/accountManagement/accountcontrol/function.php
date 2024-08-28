@@ -1,7 +1,7 @@
 <?php 
 
 require '../../Database/database.php';
-include '../../authetincation.php';
+
 //ADD USER
 if(isset($_POST['saveuser']))
 {
