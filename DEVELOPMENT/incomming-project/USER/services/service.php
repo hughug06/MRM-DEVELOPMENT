@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -6,7 +7,7 @@
     <!-- Meta Data -->
     <?php
     include_once(__DIR__.'/../partials/head.php');
-    include '../../ADMIN/authetincation.php';  
+    // include '../../ADMIN/authetincation.php';  CURRENTLY ON COMMENT FOR REVISION OF FILE
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
@@ -120,7 +121,7 @@
                                             <option value="Choice 4">Tune Up</option>
                                         </select>
                                         <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
+                                            <button type="submit" name="Sumbit_Srv" class="btn btn-warning text-white py-2">Submit</button>   
                                         </div>
                                     </form>
                                 </div>
@@ -136,34 +137,34 @@
                         <div class="login_form">
                             <div class="main-container container-fluid">
                                 <div class="card-body p-5">
-                                    <form action="user/signup/function.php" method="POST">
+                                    <form action="function.php" method="POST">
                                         <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Solar Panels' Services</h1>
                                         <div class="form-group text-start mb-3">
                                             <label for="su_FullName" class="text-muted">Full Name</label>
-                                            <input class="form-control" placeholder="" type="text" name="name" id="s_fName" disabled>
+                                            <input class="form-control" placeholder="" value="" type="text" name="Name" id="s_fName">
                                         </div>
                                         <div class="form-group text-start mb-3">
                                             <label for="su_UserName" class="text-muted">Brand</label>
-                                            <input class="form-control" placeholder="" type="text" name="username" id="s_Brand">
+                                            <input class="form-control" placeholder="" type="text" name="Brand" id="s_Brand">
                                         </div>
                                         <label for="s_KVA" class="text-muted">KVA</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_KVA">
-                                            <option value="Choice 1">Choice 1</option>
+                                        <select class="form-control" data-trigger name="KVA" id="s_KVA">
+                                            <option value="Choice 1">12</option>
                                             <option value="Choice 2">Choice 2</option>
                                             <option value="Choice 3">Choice 3</option>
                                         </select>
                                         <div class="form-group text-start mb-3">
                                             <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                            <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
+                                            <input class="form-control" placeholder="" type="numbers" name="RunningHoursUnit" id="su_Email">
                                         </div>
                                         <label for="s_Type" class="text-muted">Service Type</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_Type">
+                                        <select class="form-control" data-trigger name="ServiceType" id="s_Type">
                                             <option value="Choice 1">Maintenance</option>
                                             <option value="Choice 2">Repair</option>
                                             <option value="Choice 3">Installation</option>
                                         </select>
                                         <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
+                                            <button type="submit" name="Sumbit_Srv" class="btn btn-warning text-white py-2">Submit</button>   
                                         </div>
                                     </form>
                                 </div>
