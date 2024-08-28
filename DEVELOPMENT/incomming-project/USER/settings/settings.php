@@ -4,7 +4,10 @@
 <head>
 
     <!-- Meta Data -->
-    <?php include_once(__DIR__. '/../partials/head.php')?>
+    <?php 
+    include_once(__DIR__. '/../partials/head.php');
+    include '../../ADMIN/authetincation.php';
+    ?>
     <title> Inquries </title>
     <!-- Favicon -->
     <link rel="icon" href="../../../assets/images/brand-logos/favicon.ico" type="image/x-icon">

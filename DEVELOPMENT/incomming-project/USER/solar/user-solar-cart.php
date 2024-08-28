@@ -4,7 +4,10 @@
 <head>
 
     <!-- Meta Data -->
-    <?php include_once('partials/head.php')?>
+    <?php 
+    include_once('partials/head.php');
+    include '../../ADMIN/authetincation.php';
+    ?>
     
     <title> CART </title>
     <!-- Favicon -->

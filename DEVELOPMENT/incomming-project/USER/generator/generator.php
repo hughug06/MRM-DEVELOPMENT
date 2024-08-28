@@ -1,6 +1,6 @@
 <?php
     require_once '../../Admin/Database/database.php';
-
+    include '../../ADMIN/authetincation.php';
     $sql = "SELECT * FROM products Where Availability = 1 and Type = 'Generator'";
     $all_products = $conn->query($sql);
 ?>
