@@ -10,6 +10,11 @@ if(isset($_SESSION['auth'])){
         header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/accountManagement/accountcontrol/user-management.php");
     }
 }
+else{
+    
+}
+
+
 
 ?>
 

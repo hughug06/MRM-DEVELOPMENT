@@ -40,6 +40,10 @@ if(isset($_SESSION['auth']))
         }
     }   
 }
+else{
+    header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");
+    exit();
+}
 
 
 
