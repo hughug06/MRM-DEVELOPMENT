@@ -1,5 +1,6 @@
 
 <?php
+include '../../ADMIN/verify.php';
     session_start();
     if(isset($_POST['signin'])){
     $username = $_POST['username'];
@@ -34,10 +35,11 @@
                     header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/accountManagement/accountcontrol/user-management.php");
                     exit();
                 }
-                else{
+                else
+                {
                     if($row['is_ban'] == 1){
                         header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");
-                        //SHOW BAN ERROR
+                        echo "TESTING";
                         exit();
                     }
                     $_SESSION['auth'] = true;
@@ -64,11 +66,7 @@
         {
             header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");         //ERROR MESSAGE WHEN $result false
              exit();
-        }
-
-
-        
-       
+        }  
     }
     }
    

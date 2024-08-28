@@ -1,4 +1,5 @@
 <?php
+include '../../ADMIN/verify.php';
 //  fullName, emailAddress, passWord
 if(isset($_POST['signup']))
 {

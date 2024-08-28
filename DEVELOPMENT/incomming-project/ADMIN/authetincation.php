@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../../verify.php';
 include_once 'database/database.php';
 if(isset($_SESSION['auth']))
 {
@@ -25,7 +26,7 @@ if(isset($_SESSION['auth']))
                     unset($_SESSION['auth']);
                     unset($_SESSION['loggedinuserrole']);
                     unset($_SESSION['loggedinuser']);
-                header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");
+                 header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/index.php");
                 exit();
                 }
             }

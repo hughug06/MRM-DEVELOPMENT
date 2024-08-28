@@ -1,5 +1,5 @@
 <?php 
-include '../../authetincation.php';
+include '../../verify.php';
 ?>
 
 <!DOCTYPE html>

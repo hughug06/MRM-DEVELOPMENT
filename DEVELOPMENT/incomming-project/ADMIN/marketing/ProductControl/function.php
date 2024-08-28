@@ -1,6 +1,6 @@
 <?php 
 require '../../Database/database.php';
-
+include '../../verify.php';
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];

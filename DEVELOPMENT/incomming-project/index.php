@@ -10,11 +10,6 @@ if(isset($_SESSION['auth'])){
         header("location: /MRM-DEVELOPMENT/DEVELOPMENT/incomming-project/ADMIN/accountManagement/accountcontrol/user-management.php");
     }
 }
-else{
-    
-}
-
-
 
 ?>
 
@@ -171,8 +166,7 @@ else{
                                   </div>
                                   <div class="text-start"></div>
                                   <div class="d-grid pb-2">
-                                    <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>
-                                            
+                                    <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>                                         
                                   </div>
                               </form>
                               <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Already have an account?<a class="text-warning" href="signin.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
