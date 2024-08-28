@@ -6,7 +6,7 @@
     <!-- Meta Data -->
     <?php
     include_once(__DIR__.'/../partials/head.php');
-    include '../../ADMIN/authetincation.php';
+    include '../../ADMIN/authetincation.php';  
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
@@ -62,59 +62,115 @@
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
-            <div class="main-content app-content d-flex align-items-center">
-                <div class="container-fluid w-50">
-                    <div class="card-body shadow rounded p-5">
-                        <div class="d-flex mb-4 rounded-2 justify-content-center btn btn-warning-light btn-border-down disabled"><h2 class="mt-2">SERVICES</h2></div>
-                        <form method="" action="">
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Client Name</label>
-                                    <input type="text" class="form-control"
-                                        aria-label="First name">
-                                </div>
-                                <!-- <div class="col-md-6 mb-3">
-                                    <label class="form-label">Company's Name</label>
-                                    <input type="text" class="form-control"
-                                        aria-label="Last name">
-                                </div> -->
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="inputGroupSelect01">Product Type</label>
-                                    <select class="form-select p-2" id="inputGroupSelect01">
-                                        <option selected>Choose...</option>
-                                        <option value="1">Solar Panel</option>
-                                        <option value="2">Generator</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Specification</label>
-                                    <input type="email" class="form-control"
-                                    aria-label="email">
-                                </div>
-                                <!-- <div class="col-md-6 mb-3">
-                                    <label class="form-label">Date</label>
-                                    <input type="number" class="form-control"
-                                        aria-label="Phone number">
-                                </div> -->
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label" for="inputGroupSelect01">Service Type</label>
-                                    <select class="form-select p-2" id="inputGroupSelect01">
-                                        <option selected>Choose...</option>
-                                        <option value="1">Maintenance</option>
-                                        <option value="2">Tune-up</option>
-                                        <option value="3">Repair</option>
-                                        <option value="4">Installation</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    
-                                </div>
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-warning btn-w-lg btn-wave">Submit</button>
+            <div class="main-content app-content">
+                <div class="container-fluid">
+                <!-- <div class="div-text-start mt-3 justify-self-center"><h1>SERVICES</h1></div> -->
+                    <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
+                        <div class="card custom-card">
+                            <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title fw-semibold">Generator</h6>
+                                <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                                <button type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#generator-services-modal">Avail Now</button>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title fw-semibold">Solar Panel</h6>
+                                <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                                <button type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#solar-services-modal">Avail Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="generator-services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
+                    <div class="modal-content">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                        <div class="login_form">
+                            <div class="main-container container-fluid">
+                                <div class="card-body p-5">
+                                    <form action="user/signup/function.php" method="POST">
+                                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATORS' SERVICES</h1>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="g_fName" class="text-muted">Full Name</label>
+                                            <input class="form-control" placeholder="" type="text" name="name" id="g_fName" disabled>
+                                        </div>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="g_Brand" class="text-muted">Brand</label>
+                                            <input class="form-control" placeholder="" type="text" name="username" id="g_Brand">
+                                        </div>
+                                        <label for="g_KVA" class="text-muted">KVA Type</label>
+                                        <select class="form-control" data-trigger name="choices-single-default" id="g_KVA">
+                                            <option value="">Select...</option>
+                                            <option value="Choice 1">Choice 1</option>
+                                            <option value="Choice 2">Choice 2</option>
+                                            <option value="Choice 3">Choice 3</option>
+                                        </select>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="g_RHU" class="text-muted">Running Hours Unit</label>
+                                            <input class="form-control" placeholder="" type="text" name="email" id="g_RHU">
+                                        </div>
+                                        <label for="g_Type" class="text-muted">Service Type</label>
+                                        <select class="form-control" data-trigger name="choices-single-default" id="g_Type">
+                                            <option value="Choice 1">Maintenance</option>
+                                            <option value="Choice 2">Repair</option>
+                                            <option value="Choice 3">Installation</option>
+                                            <option value="Choice 4">Tune Up</option>
+                                        </select>
+                                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
+                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
+                </div>
+                </div>
+                <div class="modal fade" id="solar-services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="solar-services-modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
+                    <div class="modal-content">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                        <div class="login_form">
+                            <div class="main-container container-fluid">
+                                <div class="card-body p-5">
+                                    <form action="user/signup/function.php" method="POST">
+                                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Solar Panels' Services</h1>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="su_FullName" class="text-muted">Full Name</label>
+                                            <input class="form-control" placeholder="" type="text" name="name" id="s_fName" disabled>
+                                        </div>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="su_UserName" class="text-muted">Brand</label>
+                                            <input class="form-control" placeholder="" type="text" name="username" id="s_Brand">
+                                        </div>
+                                        <label for="s_KVA" class="text-muted">KVA</label>
+                                        <select class="form-control" data-trigger name="choices-single-default" id="s_KVA">
+                                            <option value="Choice 1">Choice 1</option>
+                                            <option value="Choice 2">Choice 2</option>
+                                            <option value="Choice 3">Choice 3</option>
+                                        </select>
+                                        <div class="form-group text-start mb-3">
+                                            <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                            <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
+                                        </div>
+                                        <label for="s_Type" class="text-muted">Service Type</label>
+                                        <select class="form-control" data-trigger name="choices-single-default" id="s_Type">
+                                            <option value="Choice 1">Maintenance</option>
+                                            <option value="Choice 2">Repair</option>
+                                            <option value="Choice 3">Installation</option>
+                                        </select>
+                                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
+                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
             <!--APP-CONTENT CLOSE-->
