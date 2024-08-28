@@ -6,7 +6,6 @@
     <!-- Meta Data -->
     <?php 
     include_once('partials/head.php');
-    include '../../ADMIN/verify.php';
     ?>
     <title> DETAILS </title>
     <!-- Favicon -->

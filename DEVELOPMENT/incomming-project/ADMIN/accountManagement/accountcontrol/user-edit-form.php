@@ -1,5 +1,5 @@
 <?php 
-include '../../verify.php';
+
 include_once '../../Database/database.php';
 global $conn;
   $id="";

@@ -7,7 +7,6 @@
     <?php 
     
     include_once(__DIR__. '/../partials/head.php');
-    include '../../ADMIN/verify.php';;
     ?>
     <title> Inquries </title>
     <!-- Favicon -->

@@ -1,5 +1,4 @@
 <?php
-    include '../../ADMIN/verify.php';
     require_once '../../Admin/Database/database.php';
     $sql = "SELECT * FROM products Where Availability = 1 and Type = 'Solar Panel'";
     $all_products = $conn->query($sql);

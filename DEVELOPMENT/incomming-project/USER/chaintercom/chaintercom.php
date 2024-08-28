@@ -6,7 +6,7 @@
     <!-- Meta Data -->
     <?php 
     include_once(__DIR__. '/../partials/head.php');
-    include '../../ADMIN/verify.php';
+
     ?>
     <title> Chaintercom </title>
     <!-- Favicon -->

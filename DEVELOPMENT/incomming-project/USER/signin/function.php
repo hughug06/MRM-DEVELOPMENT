@@ -1,6 +1,6 @@
 
 <?php
-include '../../ADMIN/verify.php';
+
     session_start();
     if(isset($_POST['signin'])){
     $username = $_POST['username'];

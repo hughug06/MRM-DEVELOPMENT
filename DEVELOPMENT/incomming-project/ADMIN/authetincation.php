@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../verify.php';
+
 include_once 'database/database.php';
 if(isset($_SESSION['auth']))
 {

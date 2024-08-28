@@ -1,5 +1,5 @@
 <?php
-    include '../../verify.php';
+    
     include "../../Database/database.php";
     if(isset($_GET['id'])){
         $ProductID = $_GET['id'];
