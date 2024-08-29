@@ -15,7 +15,7 @@
 
 <!-- Start::main-sidebar -->
 <div class="main-sidebar" id="sidebar-scroll">
-<?php echo $page = substr($_SERVER['SCRIPT_NAME'] , strrpos($_SERVER['SCRIPT_NAME'],"/")+1)?>
+<?php  $page = substr($_SERVER['SCRIPT_NAME'] , strrpos($_SERVER['SCRIPT_NAME'],"/")+1)?>
     <!-- Start::nav -->
     <nav class="main-menu-container nav nav-pills flex-column sub-open">
         <div class="slide-left" id="slide-left">
