@@ -15,7 +15,7 @@
 
 <!-- Start::main-sidebar -->
 <div class="main-sidebar" id="sidebar-scroll">
-
+<?php  $page = substr($_SERVER['SCRIPT_NAME'] , strrpos($_SERVER['SCRIPT_NAME'],"/")+1)?>
     <!-- Start::nav -->
     <nav class="main-menu-container nav nav-pills flex-column sub-open">
         <div class="slide-left" id="slide-left">
@@ -28,8 +28,8 @@
             <!-- End::slide__category -->
         
             <!-- Start::slide -->
-            <li class="slide">
-                <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item ">
+            <li class="slide <?= $page == "solar.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -39,8 +39,8 @@
             <!-- End::slide -->
 
             <!-- Start::slide -->
-            <li class="slide">
-                <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item">
+            <li class="slide <?= $page == "generator.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="bi-bag side-menu__icon"></i>
@@ -54,8 +54,8 @@
             <!-- End::slide__category -->
 
             <!-- Start::slide -->
-            <li class="slide">
-                <a href="/MRM-DEVELOPMENT/USER/services/service.php" class="side-menu__item">
+            <li class="slide <?= $page == "service.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/USER/services/service.php" class="side-menu__item <?= $page == "service.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fa fa-address-book side-menu__icon"></i>
@@ -70,8 +70,8 @@
          <!-- End::slide__category -->
 
              <!-- Start::slide -->
-             <li class="slide">
-                <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom.php" class="side-menu__item">
+             <li class="slide <?= $page == "chaintercom.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom.php" class="side-menu__item <?= $page == "chaintercom.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="fe fe-file side-menu__icon"></i>
@@ -86,8 +86,8 @@
 
 
             <!-- Start::slide -->
-            <li class="slide">
-                <a href="/MRM-DEVELOPMENT/USER/settings/settings.php" class="side-menu__item">
+            <li class="slide <?= $page == "settings.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/USER/settings/settings.php" class="side-menu__item <?= $page == "settings.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="ion-ios-settings side-menu__icon"></i>
@@ -125,45 +125,29 @@
                             </ul>
                         </li>
                          <!-- End::slide -->
-
-                         <!-- Start::slide -->
-                     <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">
-                                <span class="shape1"></span>
-                                <span class="shape2"></span>
-                                <i class="bi-basket side-menu__icon"></i>
-                                <span class="side-menu__label">Marketing</span>
-                                <i class="fe fe-chevron-right side-menu__angle"></i>
-                            </a>
-                            <ul class="slide-menu child1">
-                                <li class="slide">
-                                    <a href="/MRM-DEVELOPMENT/ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item">Product Control</a>
+                                           
+                                  <!-- Start::slide -->
+                                  <li class="slide <?= $page == "marketing-product-control.php" ? 'active':''?>">
+                                  <a href="/MRM-DEVELOPMENT/ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item <?= $page == "marketing-product-control.php" ? 'active':''?>">
+                                        <span class="shape1"></span>
+                                        <span class="shape2"></span>
+                                        <i class="ion-ios-settings side-menu__icon"></i>
+                                        <span class="side-menu__label">Products</span>
+                                    </a>
                                 </li>
-                                <li class="slide">
-                                    <a href="marketing-products-overview.php" class="side-menu__item">Product Overview</a>
-                                </li>                               
-                            </ul>
-                        </li>
+ 
                          <!-- End::slide -->
 
-                         <!-- Start::slide -->
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">
-                                <span class="shape1"></span>
-                                <span class="shape2"></span>
-                                <i class="si-people side-menu__icon"></i>
-                                <span class="side-menu__label">Account Management</span>
-                                <i class="fe fe-chevron-right side-menu__angle"></i>
-                            </a>
-                            <ul class="slide-menu child1">
-                                <li class="slide">
-                                    <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item">Account Control</a>
+                          <!-- Start::slide -->
+                          <li class="slide <?= $page == "user-management.php" ? 'active':''?>">
+                          <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == "user-management.php" ? 'active':''?>">
+                                        <span class="shape1"></span>
+                                        <span class="shape2"></span>
+                                        <i class="ion-ios-settings side-menu__icon"></i>
+                                        <span class="side-menu__label">Accounts</span>
+                                    </a>
                                 </li>
-                                <li class="slide">
-                                    <a href="account-account-logs.php" class="side-menu__item">Account Activity Logs</a>
-                               </li>                                
-                            </ul>
-                        </li>
+ 
                          <!-- End::slide -->
 
 
