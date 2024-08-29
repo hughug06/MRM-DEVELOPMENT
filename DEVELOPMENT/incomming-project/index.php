@@ -144,24 +144,24 @@ if(isset($_SESSION['auth'])){
                               <form action="user/signup/function.php" method="POST">
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName">
+                                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName" required>
                                       <label for="su_FullName" class="text-muted">Full Name</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName">
+                                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" required>
                                       <label for="su_UserName" class="text-muted">Username</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
+                                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" required>
                                       <label for="su_Email" class="text-muted">Email Address</label>
                                   </div>
                                   <div class="form-floating text-start mb-3">
                                   <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
-                                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password">
+                                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" required>
                                       <label for="su_Password" class="text-muted">Password</label>
                                   </div>
                                   <div class="form-floating text-start mb-5">
-                                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword">
+                                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" required> 
                                       <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
                                   </div>
                                   <div class="text-start"></div>
@@ -213,12 +213,12 @@ if(isset($_SESSION['auth'])){
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
                                       <label class="form-label text-muted">Username</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="username">
+                                      <input class="form-control py-2" placeholder="" type="text" name="username" required>
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label text-muted">Password</label>
-                                      <input class="form-control py-2" placeholder="" type="password" name="password">
+                                      <input class="form-control py-2" placeholder="" type="password" name="password" required>
                                       
                                   </div>
                                   <div class="text-start d-flex justify-content-end pb-5">

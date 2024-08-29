@@ -6,7 +6,6 @@
     <!-- Meta Data -->
     <?php
     include_once(__DIR__.'/../partials/head.php');
-    include '../../ADMIN/authetincation.php';  
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
