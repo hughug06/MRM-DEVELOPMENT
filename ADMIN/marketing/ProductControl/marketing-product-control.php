@@ -99,6 +99,7 @@
                                                 <th class="wd-lg-20p"><span>Watts</span></th>
                                                 <th class="wd-lg-20p"><span>Stock</span></th>
                                                 <th class="wd-lg-20p"><span>Availability</span></th>
+                                                <th class="wd-lg-20p"><span>Image</span></th>
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -118,6 +119,7 @@
                                                 <td><?= $resultItem['Watts']?>w </td>
                                                 <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
+                                                <td><?= $resultItem['ImageName'] >= true? $resultItem['ImageName']:"No Image"?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>

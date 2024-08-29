@@ -11,9 +11,9 @@ if(isset($_POST['AddProduct']))
  
     //WITH IMAGE SUBMISSION
     if($ProductName != '' || $Type != '' || $Watts != '' || $Stock != ''){  
-      if(isset($_FILES['Image']) && $_FILES['Image']['size'] > 0){
-        $ImageName = $_FILES['Image']['Name'];
-        $ImageData = addslashes(file_get_contents($_FILES['Image']['Name']));
+      if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
+        $ImageName = $_FILES['image']['name'];
+        $ImageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
             
             $sql_insert = "insert into products (ProductName,Type,Watts,Stock,Availability, ImageName, ImageData) 
                             VALUES ('$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability', '$ImageName', '$ImageData')";

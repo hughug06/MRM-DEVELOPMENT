@@ -70,7 +70,7 @@
             <div class="container-fluid">
 
                
-                <form action="function.php" method="POST">
+                <form action="function.php" method="POST" enctype="multipart/form-data">
                 <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
@@ -110,7 +110,9 @@
                                             <label class="form-label">Availability</label>
                                             <input type="checkbox" name="Availability" required>
                                         </div>    
-                                        
+                                        <div class="col-xl-12 mb-3">
+                                                <input type="file" name="image">
+                                        </div>    
                                        
                                         
                                         <div class="col-md-12">
