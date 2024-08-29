@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include 'action.php';
 if(isset($_SESSION['auth'])){
     $role = $_SESSION['loggedinuserrole'];
     if($role == 'user'){
@@ -121,64 +122,58 @@ if(isset($_SESSION['auth'])){
 <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
       <div class="card mb-0 border-0">
-          <div class="row row-sm gx-0">
-              <div class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start">
-                <!-- <a href="index.html">
-                    <img src="../assets/images/sigin/logo_login.png" class="header-brand-img mb-4" alt="logo">
-                </a> -->
-                <div class="d-flex align-items-center">
-                    <h3 class="text-white px-4">WELCOME TO MRM! JOIN NOW FOR A BRIGHTER FUTURE</h3>
-                </div>
-                <div class="clearfix"></div>
-                <!-- <img src="../../assets/images/sigin/example.jpg" class="ht-100 mb-0" alt="user"> -->
-                <!-- <h5 class="mt-4">Create Your Account</h5>
-                <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
-              </div>
-              <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
-                  <div class="main-container container-fluid">
-                      <div class="row row-sm gx-0">
-                          <div class="card-body p-5">
-                              <div class="clearfix"></div>
-                              <form action="user/signup/function.php" method="POST">
-                                  <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
-                                  <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName" required>
-                                      <label for="su_FullName" class="text-muted">Full Name</label>
-                                  </div>
-                                  <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" required>
-                                      <label for="su_UserName" class="text-muted">Username</label>
-                                  </div>
-                                  <div class="form-floating text-start mb-3">
-                                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" required>
-                                      <label for="su_Email" class="text-muted">Email Address</label>
-                                  </div>
-                                  <div class="form-floating text-start mb-3">
-                                  <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
-                                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" required>
-                                      <label for="su_Password" class="text-muted">Password</label>
-                                  </div>
-                                  <div class="form-floating text-start mb-5">
-                                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" required> 
-                                      <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
-                                  </div>
-                                  <div class="text-start"></div>
-                                  <div class="d-grid pb-2">
-                                    <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>                                         
-                                  </div>
-                              </form>
-                              <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Already have an account?<a class="text-warning" href="signin.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+        <div class="row row-sm gx-0">
+          <div class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start">
+            <div class="d-flex align-items-center">
+              <h3 class="text-white px-4">WELCOME TO MRM! JOIN NOW FOR A BRIGHTER FUTURE</h3>
+            </div>
           </div>
-    </div>     
+          <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form">
+            <div class="main-container container-fluid">
+              <div class="row row-sm gx-0">
+                <div class="card-body p-5">
+                  <form id="signupForm" method="POST">
+                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
+                    <div class="form-floating text-start mb-3">
+                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName" required>
+                      <label for="su_FullName" class="text-muted">Full Name</label>
+                    </div>
+                    <div class="form-floating text-start mb-3">
+                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" required>
+                      <label for="su_UserName" class="text-muted">Username</label>
+                    </div>
+                    <div class="form-floating text-start mb-3">
+                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" required>
+                      <label for="su_Email" class="text-muted">Email Address</label>
+                    </div>
+                    <div class="form-floating text-start mb-3">
+                      <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
+                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" required>
+                      <label for="su_Password" class="text-muted">Password</label>
+                    </div>
+                    <div class="form-floating text-start mb-5">
+                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" required>
+                      <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
+                    </div>
+                    <div class="d-grid pb-2">
+                      <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>
+                    </div>
+                  </form>
+                  <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Already have an account?<a class="text-warning" href="signin.php" data-bs-toggle="modal" data-bs-target="#signinmodal">Login Here</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     
     </div>
   </div>
 </div>
+
+<div id="resultMessage"></div> <!-- For displaying success/error messages -->
+
 
 
 
@@ -504,7 +499,9 @@ if(isset($_SESSION['auth'])){
     </script>
     <script src="assets/landing_js/bootstrap.bundle.min.js"></script>
     <!-- <script src="js/script.js"></script> -->
-
+    <!-- SWEET ALERT JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     
 </body>
 </html>
 
