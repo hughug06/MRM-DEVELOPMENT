@@ -12,11 +12,19 @@ if(isset($_POST['AddProduct']))
     //WITH IMAGE SUBMISSION
     if($ProductName != '' || $Type != '' || $Watts != '' || $Stock != ''){  
       if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
-        $ImageName = $_FILES['image']['name'];
-        $ImageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-            
-            $sql_insert = "insert into products (ProductName,Type,Watts,Stock,Availability, ImageName, ImageData) 
-                            VALUES ('$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability', '$ImageName', '$ImageData')";
+        $Image = $_FILES['image'];
+        $ImageFileName = $Image['name'];
+        $ImageTempName = $Image['tmp_name'];
+        $FilenameSeperate = explode('.',$ImageFileName);
+        $FileExtension = strtolower(end($FilenameSeperate));
+
+        $extension = array('jpeg','jpg','png');
+        if(in_array($FileExtension,$extension)){
+          $uploadedImage = 'images/'.$ImageFileName;
+          move_uploaded_file($ImageTempName,$uploadedImage);
+
+          $sql_insert = "insert into products (ProductName,Type,Watts,Stock,Availability, Image) 
+                            VALUES ('$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability', '$uploadedImage')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
                 header('location: marketing-product-control.php');
@@ -24,11 +32,13 @@ if(isset($_POST['AddProduct']))
               } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
               }
+        }
+            
       }
       //WITHOUT IMAGE SUBMISSION
       else{                                                               
-        $sql_insert = "insert into products (ProductName,Type,Watts,Stock,Availability, ImageName, ImageData) 
-                            VALUES ('$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability', NULL, NULL)";
+        $sql_insert = "insert into products (ProductName,Type,Watts,Stock,Availability, Image) 
+                            VALUES ('$ProductName' , '$Type' , '$Watts', ' $Stock'  , '$Availability', NULL)";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
                 header('location: marketing-product-control.php');
