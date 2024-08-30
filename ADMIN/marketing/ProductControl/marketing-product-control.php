@@ -119,7 +119,7 @@
                                                 <td><?= $resultItem['Watts']?>w </td>
                                                 <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
-                                                <td><?= $resultItem['Image'] >= true?  $resultItem['Image']: "No Image"?></td>
+                                                <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>

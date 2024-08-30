@@ -89,6 +89,7 @@
 
                         <?php
                         while($row = mysqli_fetch_assoc($all_products)){
+                            $dispImg = '../../ADMIN/marketing/ProductControl/'.$row["Image"];
                         ?>
 
                             <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
@@ -97,8 +98,8 @@
                                         <div class="product-grid">
                                             <div class="product-image">
                                                 <a href="user-solar-details-mono_350.php" class="image">
-                                                    <img class="pic-1" alt="product-image-1" src="../../assets/images/pngs/2.png">
-                                                    <img class="pic-2" alt="product-image-2" src="../../assets/images/pngs/1.png">
+                                                    <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../ADMIN/marketing/ProductControl/'.$row['Image']:"../../ADMIN/marketing/ProductControl/images/No-Image-Avail.png" ?>">
+                                                    <img class="pic-2" alt="" src="<?php echo $row['Image']== true? '../../ADMIN/marketing/ProductControl/'.$row['Image']:"../../ADMIN/marketing/ProductControl/images/No-Image-Avail.png" ?>">
                                                 </a>
                                                 
                                                 <div class="product-link">

@@ -96,8 +96,8 @@
                                         <div class="product-grid">
                                             <div class="product-image">
                                                 <a href="user-solar-details-mono_350.php" class="image">
-                                                    <img class="pic-1" alt="<?php echo $row["Image"]; ?>" src="<?php echo $row["Image"]; ?>">
-                                                    <img class="pic-2" alt="<?php echo $row["Image"]; ?>" src="<?php echo $row["Image"]; ?>">
+                                                    <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../ADMIN/marketing/ProductControl/'.$row['Image']:"../../ADMIN/marketing/ProductControl/images/No-Image-Avail.png" ?>">
+                                                    <img class="pic-2" alt="" src="<?php echo $row['Image']== true? '../../ADMIN/marketing/ProductControl/'.$row['Image']:"../../ADMIN/marketing/ProductControl/images/No-Image-Avail.png" ?>">
                                                 </a>
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
