@@ -9,6 +9,7 @@ global $conn;
   $Watts = "";
   $Stock = "";
   $Availability = "";
+  $Image = "";
   $error="";
   $success="";
 
@@ -31,6 +32,7 @@ global $conn;
     $Watts=$row["Watts"];
     $Stock = $row["Stock"];
     $Availability = $row["Availability"];
+    $Image = $row["Image"];
 
   }
   else{
@@ -42,10 +44,33 @@ global $conn;
         $Watts = $_POST['Watts'];
         $Stock = $_POST['Stock'];
         $Availability = $_POST['Availability'] == true ? 1:0;
-        $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability' where ProductID='$id'";
-        $result = mysqli_query($conn , $sql);
-        header("location: marketing-product-control.php");
-        exit();
+        
+        //WITH IMAGE SUBMISSION
+        if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
+            $Image = $_FILES['image'];
+            $ImageFileName = $Image['name'];
+            $ImageTempName = $Image['tmp_name'];
+            $FilenameSeperate = explode('.',$ImageFileName);
+            $FileExtension = strtolower(end($FilenameSeperate));
+
+            $extension = array('jpeg','jpg','png');
+            if(in_array($FileExtension,$extension)){
+                $uploadedImage = 'images/'.$ImageFileName;
+                move_uploaded_file($ImageTempName,$uploadedImage);
+
+                $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage' where ProductID='$id'";
+                $result = mysqli_query($conn , $sql);
+                header("location: marketing-product-control.php");
+                exit();
+            }
+        }
+        //WITHOUT IMAGE SUBMISSION
+        else{
+            $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability' where ProductID='$id'";
+                $result = mysqli_query($conn , $sql);
+                header("location: marketing-product-control.php");
+                exit();
+        }
         
 
     
@@ -116,7 +141,7 @@ global $conn;
             <div class="container-fluid">
 
                
-                <form  method="POST" action="product-edit-form.php">
+                <form  method="POST" action="product-edit-form.php" enctype="multipart/form-data">
         
 
                     <div class="row row-sm">
@@ -169,6 +194,9 @@ global $conn;
                                                 </div>                                                                      
                                             </div>
                                         </div>
+                                        <div class="col-xl-12 mb-3">
+                                                <input type="file" name="image">
+                                        </div>  
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
