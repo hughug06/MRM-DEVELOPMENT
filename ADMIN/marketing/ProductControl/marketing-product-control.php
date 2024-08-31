@@ -73,19 +73,17 @@
 
                 <!-- Start::row-1 -->
                  
-                <div class="row row-sm mt-5">
+                <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
-                            <div class="card-header border-bottom-0 pb-0 d-block">
+                            <div class="card-header border-bottom-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0 pt-1">PRODUCT TABLE</label>
-                                    
-                                    <div class="position-absolute bottom-0 end-0 me-3 ">                                      
-                                      <a href="product-add-form.php">  <button type="button" class="btn btn-primary my-2 btn-icon-text d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud me-2 fs-14"></i>ADD PRODUCT
-                                        </button></a>
-                                    </div>
-                             
+                                    <label class="main-content-label">PRODUCT TABLE</label>
+                                    <a href="product-add-form.php">
+                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
+                                        <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -121,9 +119,9 @@
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
-                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
-                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
-                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"> <i class="ri-add-box-line"></i>  </a>
+                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
+                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
                                                 </td>
                                             </tr>
 

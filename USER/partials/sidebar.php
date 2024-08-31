@@ -170,8 +170,8 @@
                             </ul>
                         </li>
                          <!-- End::slide -->
-            
-                <a href="/MRM-DEVELOPMENT/ADMIN/logout/function.php"><button name="logout">LOGOUT</button></a>
+                        
+                
           
             <!-- End::slide -->            
         </ul>

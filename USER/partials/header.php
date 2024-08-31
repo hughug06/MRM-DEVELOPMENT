@@ -537,164 +537,11 @@
             </a>
             <!-- End::header-link -->
         </div>
-        <!-- End::header-element -->
 
         <!-- Start::header-element -->
         <div class="header-element cart-dropdown d-xl-flex d-none">
-            <!-- Start::header-link|dropdown-toggle -->
-            <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown">
-                <i class="fe fe-shopping-cart header-link-icon"></i>
-                <span class="badge bg-primary header-icon-badge" id="cart-icon-badge">5</span>
-            </a>
-            <!-- End::header-link|dropdown-toggle -->
-            <!-- Start::main-header-dropdown -->
-            <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
-                <div class="p-3">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <p class="mb-0 fs-17 fw-semibold">Cart Items</p>
-                        <span class="badge bg-primary rounded-pill" id="cart-data">5 Items</span>
-                    </div>
-                </div>
-                <div><hr class="dropdown-divider"></div>
                 <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-center cart-dropdown-item">
-                            <img src="../assets/images/ecommerce/jpg/1.jpg" alt="img" class="avatar avatar-sm br-5 me-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-start justify-content-between mb-0">
-                                    <div class="mb-0 fs-13 text-dark fw-medium">
-                                        <a href="ecommerce-cart.html" class="text-dark">Smart Watch</a>
-                                    </div>
-                                    <div>
-                                        <span class="text-black mb-1 fw-medium">$1,299.00</span>
-                                    </div>
-                                </div>
-                                <div class="min-w-fit-content d-flex align-items-start justify-content-between">
-                                    <ul class="header-product-item d-flex">
-                                        <li>Qty: 1</li>
-                                        <li>Status: <span class="text-success">In Stock</span></li>
-                                    </ul>
-                                    <div class="ms-auto">
-                                        <a href="javascript:void(0);" class="header-cart-remove float-end dropdown-item-close"><i class="ri-delete-bin-2-line"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-center cart-dropdown-item">
-                            <img src="../assets/images/ecommerce/jpg/3.jpg" alt="img" class="avatar avatar-sm br-5 me-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-start justify-content-between mb-0">
-                                    <div class="mb-0 fs-13 text-dark fw-medium">
-                                        <a href="ecommerce-cart.html" class="text-dark">Flowers</a>
-                                    </div>
-                                    <div>
-                                        <span class="text-black mb-1 fw-medium">$179.29</span>
-                                    </div>
-                                </div>
-                                <div class="min-w-fit-content d-flex align-items-start justify-content-between">
-                                    <ul class="header-product-item">
-                                        <li>Qty: 2</li>
-                                        <li><span class="badge bg-pink-transparent fs-10">Free shipping</span></li>
-                                    </ul>
-                                    <div class="ms-auto">
-                                        <a href="javascript:void(0);" class="header-cart-remove float-end dropdown-item-close"><i class="ri-delete-bin-2-line"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-center cart-dropdown-item">
-                            <img src="../assets/images/ecommerce/jpg/5.jpg" alt="img" class="avatar avatar-sm br-5 me-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-start justify-content-between mb-0">
-                                    <div class="mb-0 fs-13 text-dark fw-medium">
-                                        <a href="ecommerce-cart.html" class="text-dark">Running Shoes</a>
-                                    </div>
-                                    <div>
-                                        <span class="text-black mb-1 fw-medium">$29.00</span>
-                                    </div>
-                                </div>
-                                <div class="min-w-fit-content d-flex align-items-start justify-content-between">
-                                    <ul class="header-product-item d-flex">
-                                        <li>Qty: 4</li>
-                                        <li>Status: <span class="text-danger">Out Stock</span></li>
-                                    </ul>
-                                    <div class="ms-auto">
-                                        <a href="javascript:void(0);" class="header-cart-remove float-end dropdown-item-close"><i class="ri-delete-bin-2-line"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-center cart-dropdown-item">
-                            <img src="../assets/images/ecommerce/jpg/4.jpg" alt="img" class="avatar avatar-sm br-5 me-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-start justify-content-between mb-0">
-                                    <div class="mb-0 fs-13 text-dark fw-medium">
-                                        <a href="ecommerce-cart.html" class="text-dark">Furniture</a>
-                                    </div>
-                                    <div>
-                                        <span class="text-black mb-1 fw-medium">$4,999.00</span>
-                                    </div>
-                                </div>
-                                <div class="min-w-fit-content d-flex align-items-start justify-content-between">
-                                    <ul class="header-product-item d-flex">
-                                        <li>Gray</li>
-                                        <li>50LB</li>
-                                    </ul>
-                                    <div class="ms-auto">
-                                        <a href="javascript:void(0);" class="header-cart-remove float-end dropdown-item-close"><i class="ri-delete-bin-2-line"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-center cart-dropdown-item">
-                            <img src="../assets/images/ecommerce/jpg/6.jpg" alt="img" class="avatar avatar-sm br-5 me-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-start justify-content-between mb-0">
-                                    <div class="mb-0 fs-13 text-dark fw-medium">
-                                        <a href="ecommerce-cart.html" class="text-dark">Tourist Bag</a>
-                                    </div>
-                                    <div>
-                                        <span class="text-black mb-1 fw-medium">$129.00</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start justify-content-between">
-                                    <ul class="header-product-item d-flex">
-                                        <li>Qty: 1</li>
-                                        <li>Status: <span class="text-success">In Stock</span></li>
-                                    </ul>
-                                    <div class="ms-auto">
-                                        <a href="javascript:void(0);" class="header-cart-remove float-end dropdown-item-close"><i class="ri-delete-bin-2-line"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
-                <div class="p-3 empty-header-item border-top">
-                    <div class="d-grid">
-                        <a href="ecommerce-checkout.html" class="btn btn-primary">Proceed to checkout</a>
-                    </div>
-                </div>
-                <div class="p-5 empty-item d-none">
-                    <div class="text-center">
-                        <span class="avatar avatar-xl avatar-rounded bg-warning-transparent">
-                            <i class="ri-shopping-cart-2-line fs-2"></i>
-                        </span>
-                        <h6 class="fw-bold mb-1 mt-3">Your Cart is Empty</h6>
-                        <span class="mb-3 fw-normal fs-13 d-block">Add some items to make me happy :)</span>
-                        <a href="ecommerce-products.html" class="btn btn-primary btn-wave btn-sm m-1" data-abc="true">continue shopping <i class="bi bi-arrow-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- End::main-header-dropdown -->
         </div>
         <!-- End::header-element -->
 
@@ -812,125 +659,24 @@
                 </div>
             </div>
             <!-- End::main-header-dropdown -->
+             
         </div>
         <!-- End::header-element -->
 
         <!-- Start::header-element -->
-        <div class="header-element header-shortcuts-dropdown d-xl-flex d-none">
-            <!-- Start::header-link|dropdown-toggle -->
-            
-            <!-- End::header-link|dropdown-toggle -->
-            <!-- Start::main-header-dropdown -->
-            <div class="main-header-dropdown header-shortcuts-dropdown dropdown-menu pb-0 dropdown-menu-end" aria-labelledby="notificationDropdown">
-                <div class="p-3">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <p class="mb-0 fs-17 fw-semibold">Related Apps</p>
-                    </div>
+         
+        <div class="header-element d-xl-flex d-none">
+                <div class="main-header-shortcuts" id="header-shortcut-scroll">
                 </div>
-                <div class="dropdown-divider mb-0"></div>
-                <div class="main-header-shortcuts p-2" id="header-shortcut-scroll">
-                   <div class="row g-2">
-                       <div class="col-4">
-                           <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/figma.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Figma</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/microsoft-powerpoint.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Power Point</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/microsoft-word.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">MS Word</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/calender.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Calendar</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/sketch.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Sketch</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/google-docs.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Docs</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/google.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Google</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/translate.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Translate</span>
-                                </div>
-                            </a>
-                       </div>
-                       <div class="col-4">
-                            <a href="javascript:void(0);" class="text-dark">
-                                <div class="text-center p-3 related-app">
-                                    <span class="avatar avatar-sm rounded-2 p-1 bg-primary-transparent">
-                                        <img src="../assets/images/apps/google-sheets.png" alt="">
-                                    </span>
-                                    <span class="d-block fs-12">Sheets</span>
-                                </div>
-                            </a>
-                       </div>
-                   </div>
-                </div>
-                <div class="p-3 border-top">
-                    <div class="d-grid">
-                        <a href="javascript:void(0);" class="btn btn-primary">View All</a>
-                    </div>
-                </div>
-            </div>
-            <!-- End::main-header-dropdown -->
         </div>
         <!-- End::header-element -->
+        <div class="header-element d-xl-flex align-items-center">
+            <!-- Start::header-link -->
+            <a href="/MRM-DEVELOPMENT/ADMIN/logout/function.php" class="header-link" name="logout">
+                <i class="si si-logout header-link-icon"></i>
+            </a>
+            <!-- End::header-link -->
+        </div>
     </div>
     <!-- End::header-content-right -->
 
