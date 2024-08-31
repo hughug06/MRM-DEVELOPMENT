@@ -137,28 +137,28 @@ if(isset($_SESSION['auth'])){
                   <form id="signupForm" method="POST">
                     <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="firstname" id="su_FirstName" required>
+                      <input class="form-control" placeholder="" type="text" name="first_name" id="su_FirstName" >
                       <label for="su_FirstName" class="text-muted">First Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="lastname" id="su_LastName" required>
+                      <input class="form-control" placeholder="" type="text" name="last_name" id="su_LastName" >
                       <label for="su_LastName" class="text-muted">Last Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" required>
+                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" >
                       <label for="su_UserName" class="text-muted">Username</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" required>
+                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" >
                       <label for="su_Email" class="text-muted">Email Address</label>
                     </div>
                     <div class="form-floating text-start mb-3">
                       <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
-                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" required>
+                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" >
                       <label for="su_Password" class="text-muted">Password</label>
                     </div>
                     <div class="form-floating text-start mb-5">
-                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" required>
+                      <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" >
                       <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
                     </div>
                     <div class="d-grid pb-2">
