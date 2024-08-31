@@ -154,7 +154,7 @@ global $conn;
                                         <div class="mt-4 mb-4">
                                             <h4 class="mt-1 mb-3"><?= $ProductName ?></h4>
                                             <h6 class="mt-4 fs-16">Description</h6>
-                                            <p><?= $Description ?></p>
+                                            <pre style="text-wrap: wrap; text-align: justify;"><?= $Description ?></pre>
                                         </div>
                                     </div>
                                 </div>
