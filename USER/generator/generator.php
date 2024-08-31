@@ -88,6 +88,7 @@
                         
                         <?php
                         while($row = mysqli_fetch_assoc($all_products)){
+                            $id=$row['ProductID']
                         ?>
 
                             <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
@@ -95,7 +96,7 @@
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div class="product-image">
-                                                <a href="user-solar-details-mono_350.php" class="image">
+                                                <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>" class="image">
                                                     <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
                                                 </a>
                                                 <div class="product-link">
@@ -103,14 +104,14 @@
                                                         <i class="fa fa-shopping-cart"></i>
                                                         <span>Add to cart</span>
                                                     </a>
-                                                    <a href="user-solar-details-mono_350.php">
+                                                    <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details-mono_350.php"><?php echo $row["ProductName"] ?></a></h3>
+                                                <h3 class="title"><a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>"><?php echo $row["ProductName"] ?></a></h3>
                                                 
                                                 
                                             </div>

@@ -203,11 +203,11 @@ global $conn;
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
-                                            <textarea name="Description" rows="6" cols="50"><?= $Description?></textarea>                                                                      
+                                            <textarea name="Description" rows="6" cols="60"><?= $Description?></textarea>                                                                      
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" cols="50"><?= $Specification?></textarea>                                                                      
+                                            <textarea name="Specification" rows="6" cols="60"><?= $Specification?></textarea>                                                                      
                                         </div>
                                         <div class="col-md-6 mb-3">
                                                 <input type="file" name="image">
