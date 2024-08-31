@@ -111,6 +111,14 @@
                                             <input type="checkbox" name="Availability" required>
                                         </div>    
                                         <div class="col-xl-12 mb-3">
+                                            <label for="Description">Description</label>
+                                            <textarea id="Description" name="Description" rows="6" cols="50"></textarea>                                                                      
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label for="Specification">Specification</label>
+                                            <textarea id="Specification" name="Specification" rows="6" cols="50"></textarea>                                                                      
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
                                                 <input type="file" name="image">
                                         </div>    
                                        
