@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2024 at 05:33 PM
+-- Generation Time: Aug 31, 2024 at 10:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,8 +33,23 @@ CREATE TABLE `products` (
   `Type` varchar(20) NOT NULL,
   `Watts` int(100) NOT NULL,
   `Stock` int(100) NOT NULL,
-  `Availability` tinyint(1) NOT NULL
+  `Availability` tinyint(1) NOT NULL,
+  `Image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`ProductID`, `ProductName`, `Type`, `Watts`, `Stock`, `Availability`, `Image`) VALUES
+(1013, 'SLF20GF', 'Generator', 20, 150, 1, NULL),
+(1014, 'SLF30GF', 'Generator', 33, 150, 1, NULL),
+(1015, 'SLF40GF', 'Generator', 40, 150, 1, NULL),
+(1016, 'SLF66GF', 'Generator', 66, 150, 1, NULL),
+(1017, 'MONO 350w', 'Solar Panel', 350, 150, 1, NULL),
+(1018, 'MONO 375w', 'Solar Panel', 375, 150, 1, NULL),
+(1019, 'MONO 400w', 'Solar Panel', 400, 150, 1, NULL),
+(1020, 'MONO 410w', 'Solar Panel', 410, 150, 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -54,7 +69,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1008;
+  MODIFY `ProductID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1035;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
