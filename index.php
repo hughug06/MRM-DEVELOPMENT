@@ -149,7 +149,7 @@ if(isset($_SESSION['auth'])){
                       <label for="su_UserName" class="text-muted">Username</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="email" id="su_Email" >
+                      <input class="form-control" placeholder="" type="email" name="email" id="su_Email" >
                       <label for="su_Email" class="text-muted">Email Address</label>
                     </div>
                     <div class="form-floating text-start mb-3">
