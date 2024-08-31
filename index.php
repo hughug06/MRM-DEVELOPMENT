@@ -137,8 +137,12 @@ if(isset($_SESSION['auth'])){
                   <form id="signupForm" method="POST">
                     <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="name" id="su_FullName" required>
-                      <label for="su_FullName" class="text-muted">Full Name</label>
+                      <input class="form-control" placeholder="" type="text" name="firstname" id="su_FirstName" required>
+                      <label for="su_FirstName" class="text-muted">First Name</label>
+                    </div>
+                    <div class="form-floating text-start mb-3">
+                      <input class="form-control" placeholder="" type="text" name="lastname" id="su_LastName" required>
+                      <label for="su_LastName" class="text-muted">Last Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
                       <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" required>
