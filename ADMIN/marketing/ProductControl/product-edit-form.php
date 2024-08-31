@@ -12,6 +12,8 @@ global $conn;
   $Image = "";
   $error="";
   $success="";
+  $Description="";
+  $Specification="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
@@ -33,6 +35,8 @@ global $conn;
     $Stock = $row["Stock"];
     $Availability = $row["Availability"];
     $Image = $row["Image"];
+    $Description = $row["Description"];
+    $Specification = $row["Specification"];
 
   }
   else{
@@ -44,6 +48,8 @@ global $conn;
         $Watts = $_POST['Watts'];
         $Stock = $_POST['Stock'];
         $Availability = $_POST['Availability'] == true ? 1:0;
+        $Description=$_POST['Description'];
+        $Specification=$_POST['Specification'];
         
         //WITH IMAGE SUBMISSION
         if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
@@ -55,10 +61,11 @@ global $conn;
 
             $extension = array('jpeg','jpg','png');
             if(in_array($FileExtension,$extension)){
-                $uploadedImage = 'images/'.$ImageFileName;
-                move_uploaded_file($ImageTempName,$uploadedImage);
+                $uploadedImage = 'Product-Images/'.$ImageFileName;
+                $upload = '/assets/images/Product-Images/'.$ImageFileName;
+                move_uploaded_file($ImageTempName,$upload);
 
-                $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage' where ProductID='$id'";
+                $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -66,7 +73,7 @@ global $conn;
         }
         //WITHOUT IMAGE SUBMISSION
         else{
-            $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability' where ProductID='$id'";
+            $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -195,6 +202,14 @@ global $conn;
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea name="Description" rows="6" cols="60"><?= $Description?></textarea>                                                                      
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Specification</label>
+                                            <textarea name="Specification" rows="6" cols="60"><?= $Specification?></textarea>                                                                      
+                                        </div>
+                                        <div class="col-md-6 mb-3">
                                                 <input type="file" name="image">
                                         </div>  
                                         <div class="col-md-12">

@@ -1,3 +1,36 @@
+<?php 
+
+include_once '../../Admin/Database/database.php';
+global $conn;
+  $id="";
+  $ProductName="";
+  $Image = "";
+  $error="";
+  $success="";
+  $Description="";
+  $Specification="";
+
+  if($_SERVER["REQUEST_METHOD"]=='GET'){
+    if(!isset($_GET['id'])){
+      header("location: solar.php");
+      exit;
+    }
+    $id = $_GET['id'];
+    $sql = "select * from products where ProductID=$id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    while(!$row){
+      header("location: solar.php");
+      exit;
+    }
+
+    $ProductName=$row["ProductName"];
+    $Image = $row["Image"];
+    $Description = $row["Description"];
+    $Specification = $row["Specification"];
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -5,7 +38,7 @@
 
     <!-- Meta Data -->
     <?php 
-    include_once('partials/head.php');
+    include_once(__DIR__. '/../partials/head.php');
 
     ?>
     <title> DETAILS </title>
@@ -55,10 +88,10 @@
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once('partials/header.php') ?>
+         <?php include_once(__DIR__. '/../partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once('partials/sidebar.php') ?>
+        <?php include_once(__DIR__. '/../partials/sidebar.php') ?>
         <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
@@ -105,7 +138,7 @@
                                                 <div class="product-carousel">
                                                     <div id="carousel" class="carousel slide" data-bs-ride="false">
                                                         <div class="carousel-inner">
-                                                            <div class="carousel-item active"><img src="../assets/images/pngs/24.png" alt="img" class="img-fluid mx-auto d-block"></div>
+                                                            <div class="carousel-item active"><img src="<?php echo $Image == true? '../../assets/images/'.$Image :"../../assets/images/Product-Images/No-Image-Avail.png" ?>" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/26.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/25.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/23.png" alt="img" class="img-fluid mx-auto d-block"></div>
@@ -120,11 +153,9 @@
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-12">
                                         <div class="mt-4 mb-4">
-                                            <h4 class="mt-1 mb-3">GENERATOR</h4>
+                                            <h4 class="mt-1 mb-3"><?= $ProductName ?></h4>
                                             <h6 class="mt-4 fs-16">Description</h6>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-                                            <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized .</p>
-                                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
+                                            <p><?= $Description ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -133,41 +164,10 @@
                                     <div class="">
                                         <div class="row">
                                             <div class="col-xl-12">
-                                                <div class="table-responsive">
-                                                    <table class="table mb-0 border table-bordered text-nowrap">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">Category</th>
-                                                                <td>Watches</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Brand</th>
-                                                                <td>Willful</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Color</th>
-                                                                <td>White</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Connections</th>
-                                                                <td>Bluetooth</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Application</th>
-                                                                <td>Messages, Phone, Pedometer, Heart Rate Monitor</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Supported </th>
-                                                                <td>Fitness Tracker, Sleep Monitor, Reminders</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Warranty Summary</th>
-                                                                <td>1 Year</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                <pre><?= $Specification ?></pre>
                                             </div>
+
+                                            
                                             <div class="col-xl-12 mt-4">
                                                 <div class="card">
                                                     <div>
