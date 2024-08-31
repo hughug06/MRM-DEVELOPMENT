@@ -55,8 +55,9 @@ global $conn;
 
             $extension = array('jpeg','jpg','png');
             if(in_array($FileExtension,$extension)){
-                $uploadedImage = 'images/'.$ImageFileName;
-                move_uploaded_file($ImageTempName,$uploadedImage);
+                $uploadedImage = 'Product-Images/'.$ImageFileName;
+                $upload = '/assets/images/Product-Images/'.$ImageFileName;
+                move_uploaded_file($ImageTempName,$upload);
 
                 $sql = "update products set ProductName='$ProductName' , Type= '$Type' , Watts= '$Watts' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);

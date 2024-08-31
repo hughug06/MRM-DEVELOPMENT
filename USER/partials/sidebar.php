@@ -8,7 +8,7 @@
         <img src="../assets/images/brand-logos/desktop-logo.png" class="desktop-logo" alt="logo">
         <img src="../assets/images/brand-logos/toggle-dark.png" class="toggle-dark" alt="logo">
         <img src="../assets/images/brand-logos/toggle-logo.png" class="toggle-logo" alt="logo">
-        <img src="../assets/images/brand-logos/desktop-dark.png" class="desktop-dark" alt="logo">
+        <img src="../../assets/images/mrm-images/logo_login.png" class="desktop-dark" alt="logo">
     </a>
 </div>
 <!-- End::main-sidebar-header -->
