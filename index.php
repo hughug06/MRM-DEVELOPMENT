@@ -1,9 +1,8 @@
 <?php 
 session_start();
-include 'action.php';
 if(isset($_SESSION['auth'])){
     $role = $_SESSION['loggedinuserrole'];
-    if($role == 'user'){
+    if($role == 'client'){
         header("location: /MRM-DEVELOPMENT/USER/solar/solar.php");
         exit();
     }
@@ -16,7 +15,6 @@ if(isset($_SESSION['auth'])){
 
 <!DOCTYPE html>
 <html lang="en">
-<!--divinectorweb.com-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -117,7 +115,7 @@ if(isset($_SESSION['auth'])){
         </button>
       </div>
 
-      
+<?php include 'action.php'; ?>     
 <!-- Modal SIGN UP -->
 <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -205,19 +203,24 @@ if(isset($_SESSION['auth'])){
                       <div class="row row-sm gx-0">
                           <div class="card-body p-5">
                               <div class="clearfix"></div>
-                              <form action="user/signin/function.php" method="POST">                              
+                              <form action="user/signin/function.php" id="signinform" method="POST">                              
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">LOGIN</h1>
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
-                                  
+                                  <?php 
+                                  if(isset($_SESSION['status'] ))
+                                  {
+                                      echo $_SESSION['status'];
+                                      unset($_SESSION['status']);
+                                  } ?>
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
                                       <label class="form-label text-muted">Username</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="username" required>
+                                      <input class="form-control py-2" placeholder="" type="text" name="username" id="userName">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label text-muted">Password</label>
-                                      <input class="form-control py-2" placeholder="" type="password" name="password" required>
+                                      <input class="form-control py-2" placeholder="" type="password" name="password" id="passWord">
                                       
                                   </div>
                                   <div class="text-start d-flex justify-content-end pb-5">
@@ -233,10 +236,8 @@ if(isset($_SESSION['auth'])){
                   </div>
               </div>
           </div>
+    </div>   
     </div>
-      
-    </div>
-    
   </div>
 </div>
 
