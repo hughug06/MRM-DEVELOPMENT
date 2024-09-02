@@ -1,6 +1,6 @@
 <?php
     
-    include "../../../Database/database.php";
+    include "../../Database/database.php";
     if(isset($_GET['id'])){
         $ProductID = $_GET['id'];
         $getImage = "Select Image from `products` where ProductID=$ProductID";
