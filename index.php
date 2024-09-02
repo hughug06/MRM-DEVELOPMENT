@@ -1,3 +1,6 @@
+
+
+
 <?php 
 session_start();
 if(isset($_SESSION['auth'])){
@@ -132,19 +135,19 @@ if(isset($_SESSION['auth'])){
             <div class="main-container container-fluid">
               <div class="row row-sm gx-0">
                 <div class="card-body p-5">
-                  <form id="signupForm" method="POST">
+                  <form id="signupForm" method="POST" action="user/signup/function.php">
                     <h1 class="text-start pb-4 d-flex justify-content-center text-warning fw-bold">SIGN UP</h1>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="first_name" id="su_FirstName" >
+                      <input class="form-control" placeholder="" type="text" name="firstname" id="su_FirstName" >
                       <label for="su_FirstName" class="text-muted">First Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="last_name" id="su_LastName" >
+                      <input class="form-control" placeholder="" type="text" name="lastname" id="su_LastName" >
                       <label for="su_LastName" class="text-muted">Last Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="middle_Initial" id="su_MiddleInitial" >
-                      <label for="su_MiddleInitial" class="text-muted">Middle Initial</label>
+                      <input class="form-control" placeholder="" type="text" name="middlename" id="su_MiddleInitial" >
+                      <label for="su_MiddleInitial" class="text-muted">Middle Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
                       <input class="form-control" placeholder="" type="email" name="email" id="su_Email" >
@@ -206,12 +209,6 @@ if(isset($_SESSION['auth'])){
                               <form action="user/signin/function.php" id="signinform" method="POST">                              
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">LOGIN</h1>
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
-                                  <?php 
-                                  if(isset($_SESSION['status'] ))
-                                  {
-                                      echo $_SESSION['status'];
-                                      unset($_SESSION['status']);
-                                  } ?>
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
                                       <label class="form-label">Username</label>
@@ -517,4 +514,9 @@ if(isset($_SESSION['auth'])){
 
 
 
-<!--for getting the form download the code from download button-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+
+    
+</script>

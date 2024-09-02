@@ -10,14 +10,14 @@ require '../../vendor/autoload.php';
 if(isset($_POST['signup']))
 {
   
-  $first_name = $_POST['first_name'];
-  $last_name = $_POST['last_name'];
-  $username = $_POST['username'];
+  $firstname = $_POST['firstname'];
+  $lastname = $_POST['lastname'];
+  $middlename= $_POST['middlename'];
   $email = $_POST['email'];
-  $password = $_POST['password'];
+  $password = password_hash($_POST['password'] , PASSWORD_DEFAULT);
   $verify_token = md5(rand());
 
-    $sql_select = "select email from users where email='$email' LIMIT 1";
+    $sql_select = "select user_info";
     $select_result = mysqli_query($conn , $sql_select);
     if(mysqli_num_rows($select_result) > 0)
     {
