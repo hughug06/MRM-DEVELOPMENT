@@ -211,8 +211,8 @@ if(isset($_SESSION['auth'])){
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
-                                      <label class="form-label">Username</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="username" id="userName">
+                                      <label class="form-label">Email Address</label>
+                                      <input class="form-control py-2" placeholder="" type="text" name="email" id="userName">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>

@@ -17,22 +17,33 @@ if(isset($_POST['signup']))
   $password = password_hash($_POST['password'] , PASSWORD_DEFAULT);
   $verify_token = md5(rand());
 
-    $sql_select = "select user_info";
+    $sql_select = "select * from user_info where email = '$email'";
     $select_result = mysqli_query($conn , $sql_select);
     if(mysqli_num_rows($select_result) > 0)
     {
-      echo "email_exists"; //return to ajax
+      echo "EMAIL ALREADY EXISTED";  //AJAX ERROR
+      exit();
     }
     else
     {
-      email_veritication($first_name,$email,$verify_token);
-      $sql_insert = "insert into users (firstname,lastname,username,email,password,is_ban,role,verify_token) 
-      VALUES ('$first_name' , '$last_name' , '$username' , '$email' , '$password', '0'  , 'client' , '$verify_token')";
-      $insert_result = mysqli_query($conn , $sql_insert); 
       
-    }
-    
+      $insert_userinfo = "insert into user_info(email,first_name,middle_name,last_name) values('$email','$firstname','$middlename','$lastname')";
+      $userinfo_result = mysqli_query($conn , $insert_userinfo);
+      if($userinfo_result)
+      {
+          $user_id = $conn->insert_id;
+          $insert_accounts = "insert into accounts(user_id,email,password,verify_token) values('$user_id' , '$email' , '$password' , '$verify_token')";
+          $accounts_result = mysqli_query($conn , $insert_accounts);
+
+      }
+
+      email_veritication($firstname . " " . $lastname ,$email,$verify_token);   
+     
+      
+    }   
 }
+
+
 
 function email_veritication($name,$email,$verify_token){
   $mail = new PHPMailer(true);
