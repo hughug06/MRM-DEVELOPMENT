@@ -103,7 +103,7 @@
                                         </thead>
                                         <tbody>
                                            <?php 
-                                           require '../../Database/database.php';
+                                           require '../../../Database/database.php';
                                            require 'function.php';
                                            $select = "Select * from products";
                                            $result = mysqli_query($conn , $select);

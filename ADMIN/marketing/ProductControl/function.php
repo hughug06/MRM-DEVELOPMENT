@@ -1,5 +1,5 @@
 <?php 
-require '../../Database/database.php';
+require '../../../Database/database.php';
 
 if(isset($_POST['AddProduct']))
 {

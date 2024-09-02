@@ -1,6 +1,6 @@
 <?php
 
-include "../../Database/database.php";
+include "../../../Database/database.php";
 if(isset($_GET['id'])){
   $id = $_GET['id'];
   $sql = "select * from products where ProductID=$id";
