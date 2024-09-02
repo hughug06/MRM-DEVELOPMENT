@@ -1,6 +1,6 @@
 <?php 
 
-include_once '../../Admin/Database/database.php';
+include_once '../../Database/database.php';
 global $conn;
   $id="";
   $ProductName="";
