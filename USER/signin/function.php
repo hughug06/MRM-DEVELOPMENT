@@ -33,11 +33,7 @@
                         header("location: /MRM-DEVELOPMENT/index.php");
                         exit();                       
                     }
-                    if($row['verify_status'] == 0){
-                        $_SESSION['status'] = "verify ka muna gar";
-                        header("location: /MRM-DEVELOPMENT/index.php");
-                        exit();
-                    }
+                   
                     $_SESSION['auth'] = true;
                     $_SESSION['loggedinuserrole'] = $row['role'];
                     $_SESSION['loggedinuser'] =
