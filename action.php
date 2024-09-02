@@ -2,6 +2,7 @@
 
 
 <script>
+    //SIGN UP AJAX
  $(document).ready(function() {
     $('#signupForm').on('submit', function(e) {
         e.preventDefault(); // Prevent the form from submitting normally
@@ -106,7 +107,7 @@
                     $('#signupmodal').modal('hide'); // Close the modal on success
                     Swal.fire({
                         title: "Great",
-                        text: "Your account has been created successfully",
+                        text: "Check your email for account verification",
                         icon: "success"
                     });
 
@@ -126,6 +127,9 @@
         });
     });
 });
+
+
+//SIGN IN
 
 
 

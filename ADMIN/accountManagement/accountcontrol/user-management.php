@@ -106,15 +106,16 @@
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                <td><?= $resultItem['Id']?></td>
-                                                <td><?= $resultItem['name']?></td>
+                                                <td><?= $resultItem['userid']?></td>
+                                                <td><?= $resultItem['firstname']?></td>
+                                                <td><?= $resultItem['lastname']?></td>
                                                 <td><?= $resultItem['email']?></td>
                                                 <td> <?= $resultItem['username']?> </td>
                                                 <td><?= $resultItem['role']?></td>
                                                 <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['Id'];  ?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
-                                                    <a href="user-delete-form.php?id=<?= $resultItem['Id'];  ?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="user-edit-form.php?id=<?= $resultItem['userid']?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="user-delete-form.php?id=<?= $resultItem['userid']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 

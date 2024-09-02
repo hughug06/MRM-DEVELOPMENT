@@ -6,21 +6,12 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
     require_once "../Database/database.php";
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1" ;
-    
-    
-    if($username == '' || $password == '')
-    {
-        //PUT ERROR MESSAGE
-        header("location: /MRM-DEVELOPMENT/index.php"); 
-        exit();
-    }
-    else
-    { 
-        $result = mysqli_query($conn , $sql);
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password' LIMIT 1" ;   
+    $result = mysqli_query($conn , $sql);
         if($result){
             if(mysqli_num_rows($result))
             {
+        
                 $row = mysqli_fetch_array($result , MYSQLI_ASSOC);
                 if($row['role'] == 'admin')
                 {         
@@ -37,11 +28,12 @@
                 }
                 else
                 {
-                    if($row['is_ban'] == 1){
+                    if($row['is_ban'] == 1){                   
+                        $_SESSION['status'] = "BAN KA DAW";
                         header("location: /MRM-DEVELOPMENT/index.php");
-                        echo "TESTING";
-                        exit();
+                        exit();                       
                     }
+                   
                     $_SESSION['auth'] = true;
                     $_SESSION['loggedinuserrole'] = $row['role'];
                     $_SESSION['loggedinuser'] =
@@ -68,7 +60,7 @@
              exit();
         }  
     }
-    }
+    
    
 
 ?>
