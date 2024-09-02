@@ -128,12 +128,12 @@ if(isset($_SESSION['auth'])){
               <h3 class="text-white px-4">WELCOME TO MRM! JOIN NOW FOR A BRIGHTER FUTURE</h3>
             </div>
           </div>
-          <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form">
+          <div class="col-lg-7 col-xl-7 col-xs-12 col-sm-12 login_form">
             <div class="main-container container-fluid">
               <div class="row row-sm gx-0">
                 <div class="card-body p-5">
                   <form id="signupForm" method="POST">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SIGN UP</h1>
+                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning fw-bold">SIGN UP</h1>
                     <div class="form-floating text-start mb-3">
                       <input class="form-control" placeholder="" type="text" name="first_name" id="su_FirstName" >
                       <label for="su_FirstName" class="text-muted">First Name</label>
@@ -143,8 +143,8 @@ if(isset($_SESSION['auth'])){
                       <label for="su_LastName" class="text-muted">Last Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="username" id="su_UserName" >
-                      <label for="su_UserName" class="text-muted">Username</label>
+                      <input class="form-control" placeholder="" type="text" name="middle_Initial" id="su_MiddleInitial" >
+                      <label for="su_MiddleInitial" class="text-muted">Middle Initial</label>
                     </div>
                     <div class="form-floating text-start mb-3">
                       <input class="form-control" placeholder="" type="email" name="email" id="su_Email" >
@@ -155,10 +155,10 @@ if(isset($_SESSION['auth'])){
                       <input class="form-control" placeholder="" type="password" name="password" id="su_Password" >
                       <label for="su_Password" class="text-muted">Password</label>
                     </div>
-                    <div class="form-floating text-start mb-5">
+                    <!-- <div class="form-floating text-start mb-5">
                       <input class="form-control" placeholder="" type="password" name="passWord" id="su_RepeatPassword" >
                       <label for="su_RepeatPassword" class="text-muted">Repeat Password</label>
-                    </div>
+                    </div> -->
                     <div class="d-grid pb-2">
                       <button type="submit" name="signup" class="btn btn-warning text-white py-2">Register</button>
                     </div>
@@ -198,7 +198,7 @@ if(isset($_SESSION['auth'])){
                 <!-- <h5 class="mt-4">Create Your Account</h5>
                 <span class="text-white-6 fs-13 mb-5 mt-xl-0">Signup to create, discover and connect with the global community</span> -->
               </div>
-              <div class="col-lg-6 col-xl-7 col-xs-12 col-sm-12 login_form ">
+              <div class="col-lg-7 col-xl-7 col-xs-12 col-sm-12 login_form ">
                   <div class="main-container container-fluid">
                       <div class="row row-sm gx-0">
                           <div class="card-body p-5">
@@ -214,23 +214,27 @@ if(isset($_SESSION['auth'])){
                                   } ?>
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
-                                      <label class="form-label text-muted">Username</label>
+                                      <label class="form-label">Username</label>
                                       <input class="form-control py-2" placeholder="" type="text" name="username" id="userName">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
-                                      <label class="form-label text-muted">Password</label>
+                                      <label class="form-label">Password</label>
                                       <input class="form-control py-2" placeholder="" type="password" name="password" id="passWord">
                                       
                                   </div>
-                                  <div class="text-start d-flex justify-content-end pb-5">
-                                  <a href="forgot.html" class="text-warning"><small>Forgot password?</small></a>
+                                  <div class="form-check d-flex mt-2 pb-5 gap-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                                        <label class="form-check-label" for="invalidCheck">
+                                            <small class="text-warning">Remember me</small>
+                                        </label>
+                                        <a href="forgot.html" class="text-warning ms-auto text-decoration-none"><small>Forgot password?</small></a>
                                   </div>
                                   <div class="d-grid pb-2">
-                                  <button name="signin" type="submit" class="btn btn-warning text-white py-2">Login</button>                                 
+                                  <button name="signin" type="submit" class="btn btn-warning text-white py-2 fw-normal">Login</button>                                 
                                   </div>
                               </form>
-                              <div class="d-flex justify-content-center mt-3 gap-1 text-muted">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
+                              <div class="d-flex justify-content-center mt-3 gap-1">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
                           </div>
                       </div>
                   </div>
