@@ -215,12 +215,12 @@ if(isset($_SESSION['login'])){
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
                                       <label class="form-label">Email Address</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="email" id="su_email">
+                                      <input class="form-control py-2" placeholder="" type="text" name="email" id="signin_email">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label">Password</label>
-                                      <input class="form-control py-2" placeholder="" type="password" name="password" id="su_password">
+                                      <input class="form-control py-2" placeholder="" type="password" name="password" id="signin_password">
                                       
                                   </div>
                                   <div class="form-check d-flex mt-2 pb-5 gap-2">
