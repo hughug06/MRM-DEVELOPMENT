@@ -32,20 +32,25 @@ global $conn;
   else{
 
    
-        $id = $_POST["id"];
-        $firstname= $_POST['firstname'];
-        $lastname=$_POST['lastname'];
-        $email = $_POST['email'];
-        $role = $_POST['role'];
-        $is_ban = $_POST['is_ban'] == true ? 1:0;
-        $sql = "update user_info INNER JOIN accounts on user_info.user_id = accounts.user_id set user_info.first_name='$firstname' , user_info.last_name= '$lastname' ,
-         user_info.email= '$email' , accounts.is_ban= '$is_ban', role='$role' where accounts.user_id='$id'";
-        $result = mysqli_query($conn , $sql);
-        header("location: user-management.php");
-        exit();
+        if(isset($_POST['save']))
+        {
+            $id = $_POST["id"];
+            $firstname= $_POST['firstname'];
+            $lastname=$_POST['lastname'];
+            $email = $_POST['email'];
+            $role = $_POST['role'];
+            $is_ban = $_POST['is_ban'] == true ? 1:0;
+            $sql = "update user_info INNER JOIN accounts on user_info.user_id = accounts.user_id set user_info.first_name='$firstname' , user_info.last_name= '$lastname' ,
+             user_info.email= '$email' , accounts.is_ban= '$is_ban', role='$role' where accounts.user_id='$id'";
+            $result = mysqli_query($conn , $sql);
+            header("location: user-management.php");
+            exit();
+
+        }
         
 
-    
+        header("location: user-management.php");
+        exit();
     
   }
 ?>
@@ -167,7 +172,7 @@ global $conn;
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </div>                           
