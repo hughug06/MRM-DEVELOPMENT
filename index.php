@@ -499,7 +499,7 @@ if(isset($_SESSION['login'])){
     <!-- All Js -->
     <script>
         const togglePassword = document.querySelector("#toggle_Pass");
-        const pass = document.querySelector("#su_Password");
+        const pass = document.querySelector("#su_password");
         togglePassword.addEventListener("click", (e) => {
             const type = pass.getAttribute("type") === "password" ? "text" : "password";
             pass.setAttribute("type", type);
