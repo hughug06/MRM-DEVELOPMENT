@@ -20,6 +20,7 @@ session_start();
                 $password_hashed = $row['password'];
                 $verify_status = $row['verify_status'];
                 $ban = $row['is_ban'];
+                $role = $row['role'];
                 if (password_verify($password, $password_hashed)) {
                     // Successful login
                     if($verify_status == '0'){
@@ -30,7 +31,18 @@ session_start();
                     }
                     else{
                         $_SESSION['login'] = true;
-                        echo json_encode(['success' => true, 'message' => "LOG IN SUCCESS"]);
+                        $_SESSION['role'] = $role;
+                        if($role == 'admin')
+                        {
+                            
+                            echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
+                        }
+                        else if($role == 'user')
+                        {
+                            echo json_encode(['success' => true, 'redirect' => 'USER\solar\solar.php']);
+
+                        }
+                        
                     }
                     
                 } else {

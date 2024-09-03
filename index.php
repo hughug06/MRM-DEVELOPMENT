@@ -3,15 +3,19 @@
 
 <?php 
 session_start();
-if(isset($_SESSION['auth'])){
-    $role = $_SESSION['loggedinuserrole'];
-    if($role == 'client'){
+if(isset($_SESSION['login'])){
+    if($_SESSION['login'] == true)  {
+      $role = $_SESSION['role'];
+      if($role == 'user'){
         header("location: /MRM-DEVELOPMENT/USER/solar/solar.php");
         exit();
     }
     else{
         header("location: /MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php");
+        exit();
     }
+    }
+    
 }
 
 ?>
@@ -579,7 +583,7 @@ $(document).ready(function() {
                   text: response.message,
                   confirmButtonText: 'ok'
                 })
-               //  window.location.href = "USER/generator/generator.php";  // REDIRECT
+                 window.location.href = response.redirect;  // REDIRECT
               } else {
                   Swal.fire({
                   title: 'Error!',
