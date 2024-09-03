@@ -96,6 +96,13 @@
                                                         <option value="Solar Panel">Solar Panel</option>
                                                     </select>
                                         </div> 
+                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                                <label class="form-label">Watts</label>
+                                                    <select id="inputState1" class="form-select" name="Type">
+                                                        <option selected value="Generator">Generator</option>
+                                                        <option value="Solar Panel">Solar Panel</option>
+                                                    </select>
+                                        </div> 
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Watts</label>
                                             <input type="number" class="form-control" placeholder="Watts"
