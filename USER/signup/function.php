@@ -59,13 +59,12 @@ $password_hash = password_hash($password, PASSWORD_DEFAULT);
       
       $insert_userinfo = "insert into user_info(email,first_name,middle_name,last_name) values('$email','$firstname','$middlename','$lastname')";
       $userinfo_result = mysqli_query($conn , $insert_userinfo);
-      if($userinfo_result)
-      {
+    
           $user_id = $conn->insert_id;
           $insert_accounts = "insert into accounts(user_id,email,password,verify_token) values('$user_id' , '$email' , '$password_hash' , '$verify_token')";
           $accounts_result = mysqli_query($conn , $insert_accounts);
 
-      }
+      
       echo json_encode(['success' => true, 'message' => 'SUCCESS']);
       email_veritication($firstname . " " . $lastname ,$email,$verify_token);   
       

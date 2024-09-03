@@ -1,5 +1,5 @@
 <?php
-require_once 'admin/Database/database.php';
+require_once 'Database/database.php';
 
 if(isset($_GET['token']))
 {

@@ -87,7 +87,7 @@
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="wd-lg-8p"><span>Id</span></th>
+                                                <th class="wd-lg-8p"><span>userID</span></th>
                                                 <th class="wd-lg-20p"><span>Name</span></th>
                                                 <th class="wd-lg-20p"><span>email</span></th>
                                                 <th class="wd-lg-20p"><span>Username</span></th>
