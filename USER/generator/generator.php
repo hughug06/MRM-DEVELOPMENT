@@ -1,5 +1,5 @@
 <?php
-    require_once '../../Admin/Database/database.php';
+    require_once '../../Database/database.php';
     $sql = "SELECT * FROM products Where Availability = 1 and Type = 'Generator'";
     $all_products = $conn->query($sql);
 ?>
