@@ -160,7 +160,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label class="form-label">Watts </label>
+                                            <label class="form-label">Watts/KVA </label>
                                             <select name="beast" id="select-beast4" class="form-control" data-trigger>
                                                 <option value="1">MONO 350w</option>
                                                 <option value="2">MONO 375w</option>

@@ -70,63 +70,35 @@
             <div class="container-fluid">
 
                
-                <form action="function.php" method="POST" enctype="multipart/form-data">
+                <form action="function.php" method="POST">
                 <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header justify-content-between">
                                     <div class="card-title">
-                                        Add Product
+                                        Add Watts/KVA
                                     </div>
                                     <div class="prism-toggle">
                                        <a href="marketing-product-control.php"> BACK</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" placeholder="Product Name"
-                                                aria-label="Full Name" name="ProductName">
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                    <div class="row">   
+                                    <div class="col-xxl-6 col-xl-12 mb-3">
                                                 <label class="form-label">Type</label>
-                                                    <select id="inputState1" class="form-select" name="Type">
-                                                        <option value="Generator">Generator</option>
+                                                    <select id="inputState1" class="form-select" name="newType">
+                                                        <option active value="Generator">Generator</option>
                                                         <option value="Solar Panel">Solar Panel</option>
                                                     </select>
-                                        </div> 
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Watts/KVA</label>
-                                                    <select id="inputState1" class="form-select" name="WattsKVA">
-                                                        <option selected value="350">350</option>
-                                                        <option value="50">50</option>
-                                                    </select>
-                                        </div>                                                                                                             
+                                        </div>                                                                                                           
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Stock</label>
+                                            <label class="form-label">Watts/KVA</label>
                                             <input type="number" class="form-control" placeholder="Stock"
-                                                aria-label="email" name="Stock">                                                                             
+                                                aria-label="email" name="newWattsKVA">                                                                             
                                         </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Availability</label>
-                                            <input type="checkbox" name="Availability" required>
-                                        </div>    
-                                        <div class="col-xl-12 mb-3">
-                                            <label for="Description">Description</label>
-                                            <textarea id="Description" name="Description" rows="6" cols="50"></textarea>                                                                      
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label for="Specification">Specification</label>
-                                            <textarea id="Specification" name="Specification" rows="6" cols="50"></textarea>                                                                      
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                                <input type="file" name="image">
-                                        </div>    
-                                       
                                         
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary" name="AddProduct">Add</button>
+                                            <button type="submit" class="btn btn-primary" name="AddNewWattsKVA">Add</button>
                                         </div>
                                     </div>
                                 </div>
