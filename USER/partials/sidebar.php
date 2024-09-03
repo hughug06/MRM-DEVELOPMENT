@@ -128,7 +128,7 @@
                                            
                                   <!-- Start::slide -->
                                   <li class="slide <?= $page == "marketing-product-control.php" ? 'active':''?>">
-                                  <a href="/MRM-DEVELOPMENT/ADMIN/marketing/ProductControl/marketing-product-control.php" class="side-menu__item <?= $page == "marketing-product-control.php" ? 'active':''?>">
+                                  <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == "marketing-product-control.php" ? 'active':''?>">
                                         <span class="shape1"></span>
                                         <span class="shape2"></span>
                                         <i class="ion-ios-settings side-menu__icon"></i>
