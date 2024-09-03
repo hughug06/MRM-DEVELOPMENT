@@ -87,12 +87,11 @@
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="wd-lg-8p"><span>userID</span></th>
+                                                <th class="wd-lg-8p"><span>AccountID</span></th>
                                                 <th class="wd-lg-20p"><span>Name</span></th>
                                                 <th class="wd-lg-20p"><span>email</span></th>
-                                                <th class="wd-lg-20p"><span>Username</span></th>
                                                 <th class="wd-lg-20p"><span>Role</span></th>
-                                                <th class="wd-lg-20p"><span>is ban</span></th>
+                                                <th class="wd-lg-20p"><span>Ban</span></th>                                               
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -100,22 +99,20 @@
                                            <?php 
                                            require '../../../Database/database.php';
                                            require 'function.php';
-                                           $select = "Select * from users";
+                                           $select = "Select * from user_info INNER JOIN accounts on user_info.email = accounts.email";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                <td><?= $resultItem['userid']?></td>
-                                                <td><?= $resultItem['firstname']?></td>
-                                                <td><?= $resultItem['lastname']?></td>
-                                                <td><?= $resultItem['email']?></td>
-                                                <td> <?= $resultItem['username']?> </td>
+                                                <td><?= $resultItem['account_id']?></td>
+                                                <td><?= $resultItem['first_name']. " " . $resultItem['last_name']?></td>
+                                                <td><?= $resultItem['email']?></td>                        
                                                 <td><?= $resultItem['role']?></td>
                                                 <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['userid']?>" class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
-                                                    <a href="user-delete-form.php?id=<?= $resultItem['userid']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="user-edit-form.php?id=<?= $resultItem['user_id']?>"  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="user-delete-form.php?id=<?= $resultItem['user_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 
@@ -131,21 +128,27 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <nav aria-label="...">
-                                    <ul class="pagination mt-4 mb-0 float-end">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">Previous</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link">2</span>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0);">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                               
                             </div>
+
+                            <!-- USER-EDIT-FORM -->
+                            <!-- <div class="modal fade" id="edit_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="edit_form" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Understood</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div> -->
                         </div>
                     </div><!-- COL END -->
                 </div>
