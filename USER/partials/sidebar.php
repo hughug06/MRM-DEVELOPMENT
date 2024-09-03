@@ -32,7 +32,8 @@
                 <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
-                    <i class="bi-bag side-menu__icon"></i>
+                    <i class="fa-solid fa-solar-panel side-menu__icon"></i>
+                    <!-- <i class="las la-car-battery "></i> -->
                     <span class="side-menu__label">Solar Panel</span>
                 </a>
             </li>
@@ -43,7 +44,8 @@
                 <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
-                    <i class="bi-bag side-menu__icon"></i>
+                    <!-- <i class="bi-bag side-menu__icon"></i> -->
+                    <i class="fa-solid fa-car-battery side-menu__icon"></i>
                     <span class="side-menu__label">Generator</span>
                 </a>
             </li>
@@ -58,7 +60,8 @@
                 <a href="/MRM-DEVELOPMENT/USER/services/service.php" class="side-menu__item <?= $page == "service.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
-                    <i class="fa fa-address-book side-menu__icon"></i>
+                    <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
+                    <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
                     <span class="side-menu__label">Services</span>
                 </a>
             </li>
@@ -74,7 +77,8 @@
                 <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom.php" class="side-menu__item <?= $page == "chaintercom.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
-                    <i class="fe fe-file side-menu__icon"></i>
+                    <!-- <i class="fe fe-file side-menu__icon"></i> -->
+                    <i class="fa-solid fa-chalkboard-user side-menu__icon"></i>
                     <span class="side-menu__label">Chaintercom</span>
                 </a>
             </li>
@@ -90,7 +94,8 @@
                 <a href="/MRM-DEVELOPMENT/USER/settings/settings.php" class="side-menu__item <?= $page == "settings.php" ? 'active':''?>">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
-                    <i class="ion-ios-settings side-menu__icon"></i>
+                    <i class="fa-solid fa-gears side-menu__icon"></i>
+                    <!-- <i class="ion-ios-settings side-menu__icon"></i> -->
                     <span class="side-menu__label">Settings</span>
                 </a>
             </li>
@@ -108,7 +113,8 @@
                             <a href="javascript:void(0);" class="side-menu__item">
                                 <span class="shape1"></span>
                                 <span class="shape2"></span>
-                                <i class="la-edit side-menu__icon"></i>
+                                <!-- <i class="la-edit side-menu__icon"></i> -->
+                                <i class="fa-solid fa-bars-progress side-menu__icon"></i>
                                 <span class="side-menu__label">Projects</span>
                                 <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
@@ -131,7 +137,8 @@
                                   <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == "marketing-product-control.php" ? 'active':''?>">
                                         <span class="shape1"></span>
                                         <span class="shape2"></span>
-                                        <i class="ion-ios-settings side-menu__icon"></i>
+                                        <!-- <i class="ion-ios-settings side-menu__icon"></i> -->
+                                        <i class="fa-solid fa-box side-menu__icon"></i>
                                         <span class="side-menu__label">Products</span>
                                     </a>
                                 </li>
@@ -143,7 +150,8 @@
                           <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == "user-management.php" ? 'active':''?>">
                                         <span class="shape1"></span>
                                         <span class="shape2"></span>
-                                        <i class="ion-ios-settings side-menu__icon"></i>
+                                        <!-- <i class="ion-ios-settings side-menu__icon"></i> -->
+                                        <i class="fa-solid fa-user-pen side-menu__icon"></i>
                                         <span class="side-menu__label">Accounts</span>
                                     </a>
                                 </li>
@@ -156,7 +164,8 @@
                             <a href="javascript:void(0);" class="side-menu__item">
                                 <span class="shape1"></span>
                                 <span class="shape2"></span>
-                                <i class="ion-md-filing side-menu__icon"></i>
+                                <!-- <i class="ion-md-filing side-menu__icon"></i> -->
+                                 <i class="fa-solid fa-warehouse side-menu__icon"></i>
                                 <span class="side-menu__label">Inventory</span>
                                 <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
