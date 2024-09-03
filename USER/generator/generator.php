@@ -162,20 +162,21 @@
                                         <div class="form-group">
                                             <label class="form-label">Watts/KVA </label>
                                             <select name="beast" id="select-beast4" class="form-control" data-trigger>
-                                                <option value="1">MONO 350w</option>
-                                                <option value="2">MONO 375w</option>
-                                                <option value="3">MONO 400w</option>
-                                                <option value="4">MONO 410w</option>
-                                                <option value="5">MONO 450w</option>
-                                                <option value="6">MONO 455w</option>
-                                                <option value="7">MONO 500w</option>
-                                                <option value="8">MONO 545w</option>
-                                                <option value="9">MONO 550w</option>
-                                                <option value="10">MONO 555w</option>
-                                                <option value="11">MONO 590w</option>
-                                                <option value="12">MONO 600w</option>
-                                                <option value="13">MONO 605w</option>
-                                                <option value="14">MONO 650w</option>
+                                            <?php 
+                                                        require '../../Database/database.php';
+
+                                                        $select = "Select * from watts_kva_category Where Type='Generator'";
+                                                        $result = mysqli_query($conn , $select);
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                        ?> 
+                                                            <option value="<?= $resultItem['Watts_KVA']?>"><?= $resultItem['Watts_KVA'].'KVA'?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        else{
+                                                        }
+                                                    ?>
                                             </select>
                                         </div>
                                         
