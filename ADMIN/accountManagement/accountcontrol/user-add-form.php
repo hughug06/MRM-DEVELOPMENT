@@ -81,14 +81,24 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="fullname">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" placeholder="First name"
+                                                aria-label="First name" name="firstname">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="username">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" placeholder="Last name"
+                                                aria-label="Last name" name="lastname">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Middle Name</label>
+                                            <input type="text" class="form-control" placeholder="middle name"
+                                                aria-label="middle name" name="middlename">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">email</label>
+                                            <input type="text" class="form-control" placeholder="email"
+                                                aria-label="email" name="email">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Password</label>
@@ -102,7 +112,6 @@
                                                 <div class="col-xxl-6 col-xl-12 mb-3">
                                                 <label class="form-label">Role</label>
                                                     <select id="inputState1" class="form-select" name="role">
-                                                        <option selected>Select Role</option>
                                                         <option value="user">user</option>
                                                         <option value="admin">admin</option>
                                                         <option value="agent">agent</option>
@@ -110,21 +119,7 @@
                                                 </div>                                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email" name="email">
-                                                </div>        
-                                                <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Is ban</label>
-                                                    <input type="checkbox" name="is_ban">
-                                                </div>                                                                      
-                                            </div>         
-                                            </div>
-                                        </div>
+                                      
                                         
                                        
                                         
@@ -134,112 +129,6 @@
                                     </div>
                                 </div>
                                 <div class="card-footer d-none border-top-0">
-<!-- Prism Code -->
-<pre class="language-html"><code class="language-html">&lt;div class="row"&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;First Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="First name"
-            aria-label="First name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Last Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="Last name"
-            aria-label="Last name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Address&lt;/label&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Street"
-                aria-label="Street"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Landmark"
-                aria-label="Landmark"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="City"
-                aria-label="City"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputState1" class="form-select"&gt;
-                    &lt;option selected&gt;State/Province&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Postal/Zip code"
-                aria-label="Postal/Zip code"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputCountry" class="form-select"&gt;
-                    &lt;option selected&gt;Country&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;Email&lt;/label&gt;
-                &lt;input type="email" class="form-control" placeholder="Email"
-                aria-label="email"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;D.O.B&lt;/label&gt;
-                &lt;input type="date" class="form-control"
-                aria-label="dateofbirth"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;div class="row"&gt;
-                    &lt;label class="form-label mb-1"&gt;Maritial Status&lt;/label&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-married" required=""&gt;
-                            &lt;label class="form-check-label" for="status-married"&gt;
-                                Married
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-unmarried" required=""&gt;
-                            &lt;label class="form-check-label" for="status-unmarried"&gt;
-                                Single
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12"&gt;
-
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Contact Number&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Alternative Contact&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;div class="form-check mb-3"&gt;
-            &lt;input class="form-check-input" type="checkbox" id="gridCheck"&gt;
-            &lt;label class="form-check-label" for="gridCheck"&gt;
-                Check me out
-            &lt;/label&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;button type="submit" class="btn btn-primary"&gt;Sign in&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt; </code></pre>
-<!-- Prism Code -->
                                 </div>
                             </div>
                        </div>                   

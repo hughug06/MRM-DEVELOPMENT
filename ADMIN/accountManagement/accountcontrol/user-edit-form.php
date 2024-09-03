@@ -1,6 +1,6 @@
 <?php 
 
-include_once '../../Database/database.php';
+include_once '../../../Database/database.php';
 global $conn;
   $id="";
   $name="";
@@ -14,37 +14,32 @@ global $conn;
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
-      header("location: user-managment.php");
+      header("location: user-management.php");
       exit;
     }
     $id = $_GET['id'];
-    $sql = "select * from users where id=$id";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    while(!$row){
-      header("location: user-managment.php");
-      exit;
-    }
-
-    $name=$row["name"];
+    $select = "Select * from user_info INNER JOIN accounts on user_info.user_id = accounts.user_id where accounts.user_id = '$id'";
+    $result = mysqli_query($conn , $select);
+    $row = mysqli_fetch_assoc($result);
+    
+    $firstname=$row["first_name"];
+    $lastname=$row["last_name"];
     $email=$row["email"];
-    $username=$row["username"];
-    $password = $row["password"];
     $role = $row["role"];
     $is_ban = $row["is_ban"];
-
+    
   }
   else{
 
    
         $id = $_POST["id"];
-        $name= $_POST['name'];
-        $email=$_POST['email'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $firstname= $_POST['firstname'];
+        $lastname=$_POST['lastname'];
+        $email = $_POST['email'];
         $role = $_POST['role'];
         $is_ban = $_POST['is_ban'] == true ? 1:0;
-        $sql = "update users set name='$name' , username= '$username' , email= '$email' , password='$password' , is_ban= '$is_ban', role='$role' where Id='$id'";
+        $sql = "update user_info INNER JOIN accounts on user_info.user_id = accounts.user_id set user_info.first_name='$firstname' , user_info.last_name= '$lastname' ,
+         user_info.email= '$email' , accounts.is_ban= '$is_ban', role='$role' where accounts.user_id='$id'";
         $result = mysqli_query($conn , $sql);
         header("location: user-management.php");
         exit();
@@ -120,8 +115,6 @@ global $conn;
 
                
                 <form  method="POST" action="user-edit-form.php">
-        
-
                     <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
@@ -137,24 +130,23 @@ global $conn;
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                         <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
-                                            <label class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="name" required value="<?= $name?>">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" placeholder="firstname"
+                                                aria-label="Full Name" name="firstname" required value="<?= $firstname?>">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="username" required value="<?= $username?>">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" placeholder="lastname"
+                                                aria-label="Username" name="lastname" required value="<?= $lastname?>">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Password</label>
+                                            <label class="form-label">email</label>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
-                                                    <input type="text" class="form-control" placeholder="Password"
-                                                    aria-label="Password" name="password" required value="<?= $password?>">
+                                                    <input type="text" class="form-control" placeholder="email"
+                                                    aria-label="email" name="email" required value="<?= $email?>">
                                                 </div>
-                                                
-                                                
+                                                                                               
                                                 <div class="col-xxl-6 col-xl-12 mb-3">
                                                 <label class="form-label">Role</label>
                                                     <select id="inputState1" class="form-select" name="role" required>
@@ -166,18 +158,11 @@ global $conn;
                                                 </div>                                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                    aria-label="email" name="email" required value="<?= $email?>"> 
-                                                </div>                                                                      
-                                            </div>
+                                        <div class="col-md-6 mb-3">                                            
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <label class="form-label">Is ban</label>
-                                                    <input type="checkbox"  name="is_ban"  <?= $is_ban == true ? 'checked' : ''?>>
+                                                    <input type="checkbox"  name="is_ban"  <?= $is_ban == 1 ? 'checked' : ''?>>
                                                 </div>                                                                      
                                             </div>
                                         </div>
@@ -185,119 +170,10 @@ global $conn;
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer d-none border-top-0">
-<!-- Prism Code -->
-<pre class="language-html"><code class="language-html">&lt;div class="row"&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;First Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="First name"
-            aria-label="First name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Last Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="Last name"
-            aria-label="Last name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Address&lt;/label&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Street"
-                aria-label="Street"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Landmark"
-                aria-label="Landmark"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="City"
-                aria-label="City"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputState1" class="form-select"&gt;
-                    &lt;option selected&gt;State/Province&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Postal/Zip code"
-                aria-label="Postal/Zip code"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputCountry" class="form-select"&gt;
-                    &lt;option selected&gt;Country&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;Email&lt;/label&gt;
-                &lt;input type="email" class="form-control" placeholder="Email"
-                aria-label="email"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;D.O.B&lt;/label&gt;
-                &lt;input type="date" class="form-control"
-                aria-label="dateofbirth"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;div class="row"&gt;
-                    &lt;label class="form-label mb-1"&gt;Maritial Status&lt;/label&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-married" required=""&gt;
-                            &lt;label class="form-check-label" for="status-married"&gt;
-                                Married
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-unmarried" required=""&gt;
-                            &lt;label class="form-check-label" for="status-unmarried"&gt;
-                                Single
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12"&gt;
-
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Contact Number&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Alternative Contact&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;div class="form-check mb-3"&gt;
-            &lt;input class="form-check-input" type="checkbox" id="gridCheck"&gt;
-            &lt;label class="form-check-label" for="gridCheck"&gt;
-                Check me out
-            &lt;/label&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;button type="submit" class="btn btn-primary"&gt;Sign in&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt; </code></pre>
-<!-- Prism Code -->
-                                </div>
+                                </div>                           
                             </div>
                        </div>                   
                     </div>
-
                 </form>
 
             </div>
