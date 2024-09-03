@@ -27,17 +27,21 @@ global $conn;
     $WattsKVA=$row["Watts_KVA"];
 
   }
-  else{
+  elseif(isset($_POST['save'])){
 
         $id = $_POST["id"];
         $Type=$_POST['Type'];
         $WattsKVA = $_POST['WattsKVA'];
         
-            $sql = "update watts_kva_category set Type='$Type' , Watts_KVA= '$WattsKVA' where ID='$id'";
-                $result = mysqli_query($conn , $sql);
-                header("location: marketing-product-control.php");
-                exit();
+        $sql = "update watts_kva_category set Type='$Type' , Watts_KVA= '$WattsKVA' where ID='$id'";
+        $result = mysqli_query($conn , $sql);
+        header("location: marketing-product-control.php");
+        exit();
     
+  }
+  else{
+    header("location: marketing-product-control.php");
+        exit();
   }
 ?>
 
@@ -139,7 +143,7 @@ global $conn;
                                         </div>
 
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </div>

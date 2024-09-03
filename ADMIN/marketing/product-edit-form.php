@@ -39,7 +39,7 @@ global $conn;
     $Specification = $row["Specification"];
 
   }
-  else{
+  elseif(isset($_POST['save'])){
 
    
         $id = $_POST["id"];
@@ -82,6 +82,10 @@ global $conn;
 
     
     
+  }
+  else{
+    header("location: marketing-product-control.php");
+    exit();
   }
 ?>
 
@@ -173,8 +177,22 @@ global $conn;
                                         <div class="col-xxl-6 col-xl-12 mb-3">
                                                 <label class="form-label">Watts/KVA</label>
                                                     <select id="inputState1" class="form-select" name="WattsKVA">
-                                                        <option selected value="350">350</option>
-                                                        <option value="50">50</option>
+
+                                                        <?php 
+                                                        require '../../Database/database.php';
+
+                                                        $select = "Select * from watts_kva_category";
+                                                        $result = mysqli_query($conn , $select);
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                        ?> 
+                                                            <option <?= $resultItem['Watts_KVA'] == $WattsKVA? 'selected value='.$resultItem['Watts_KVA'] : 'value='.$resultItem['Watts_KVA']; ?>><?= $resultItem['Watts_KVA']?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        else{
+                                                        }
+                                                    ?>
                                                     </select>
                                         </div>  
                                         <div class="col-md-6 mb-3">
@@ -215,7 +233,7 @@ global $conn;
                                                 <input type="file" name="image">
                                         </div>  
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </div>
