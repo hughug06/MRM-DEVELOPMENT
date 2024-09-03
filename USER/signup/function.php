@@ -1,5 +1,5 @@
 <?php
-require_once('../Database/database.php');
+require_once('../../Database/database.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

@@ -1,6 +1,6 @@
 <?php 
 
-require '../../Database/database.php';
+require '../../../Database/database.php';
 
 //ADD USER
 if(isset($_POST['saveuser']))

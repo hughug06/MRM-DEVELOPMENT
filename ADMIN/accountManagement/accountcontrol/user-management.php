@@ -98,7 +98,7 @@
                                         </thead>
                                         <tbody>
                                            <?php 
-                                           require '../../Database/database.php';
+                                           require '../../../Database/database.php';
                                            require 'function.php';
                                            $select = "Select * from users";
                                            $result = mysqli_query($conn , $select);

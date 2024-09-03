@@ -1,6 +1,6 @@
 
 <?php
-require_once "../Database/database.php";
+require_once('../../Database/database.php');
 session_start();
 
     $email = $_POST['email'];
