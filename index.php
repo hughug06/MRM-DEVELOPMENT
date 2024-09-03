@@ -1,14 +1,21 @@
+
+
+
 <?php 
 session_start();
-if(isset($_SESSION['auth'])){
-    $role = $_SESSION['loggedinuserrole'];
-    if($role == 'client'){
+if(isset($_SESSION['login'])){
+    if($_SESSION['login'] == true)  {
+      $role = $_SESSION['role'];
+      if($role == 'user'){
         header("location: /MRM-DEVELOPMENT/USER/solar/solar.php");
         exit();
     }
     else{
         header("location: /MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php");
+        exit();
     }
+    }
+    
 }
 
 ?>
@@ -115,7 +122,6 @@ if(isset($_SESSION['auth'])){
         </button>
       </div>
 
-<?php include 'action.php'; ?>     
 <!-- Modal SIGN UP -->
 <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -132,27 +138,27 @@ if(isset($_SESSION['auth'])){
             <div class="main-container container-fluid">
               <div class="row row-sm gx-0">
                 <div class="card-body p-5">
-                  <form id="signupForm" method="POST">
+                  <form id="signupForm" method="POST" action="user/signup/function.php">
                     <h1 class="text-start pb-4 d-flex justify-content-center text-warning fw-bold">SIGN UP</h1>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="first_name" id="su_FirstName" >
+                      <input class="form-control" placeholder="" type="text" name="firstname" id="su_firstname" >
                       <label for="su_FirstName" class="text-muted">First Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="last_name" id="su_LastName" >
+                      <input class="form-control" placeholder="" type="text" name="lastname" id="su_lastname" >
                       <label for="su_LastName" class="text-muted">Last Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="text" name="middle_Initial" id="su_MiddleInitial" >
-                      <label for="su_MiddleInitial" class="text-muted">Middle Initial</label>
+                      <input class="form-control" placeholder="" type="text" name="middlename" id="su_middlename" >
+                      <label for="su_MiddleInitial" class="text-muted">Middle Name</label>
                     </div>
                     <div class="form-floating text-start mb-3">
-                      <input class="form-control" placeholder="" type="email" name="email" id="su_Email" >
+                      <input class="form-control" placeholder="" type="email" name="email" id="su_email" >
                       <label for="su_Email" class="text-muted">Email Address</label>
                     </div>
                     <div class="form-floating text-start mb-3">
                       <i class="ri-eye-fill icon icon-c" id="toggle_Pass"></i>
-                      <input class="form-control" placeholder="" type="password" name="password" id="su_Password" >
+                      <input class="form-control" placeholder="" type="password" name="password" id="su_password" >
                       <label for="su_Password" class="text-muted">Password</label>
                     </div>
                     <!-- <div class="form-floating text-start mb-5">
@@ -174,7 +180,7 @@ if(isset($_SESSION['auth'])){
   </div>
 </div>
 
-<div id="resultMessage"></div> <!-- For displaying success/error messages -->
+
 
 
 
@@ -206,21 +212,15 @@ if(isset($_SESSION['auth'])){
                               <form action="user/signin/function.php" id="signinform" method="POST">                              
                                   <h1 class="text-start pb-4 d-flex justify-content-center text-warning">LOGIN</h1>
                                   <!-- <p class="mb-4 text-muted fs-13 ms-0 text-start">Signin to create, discover and connect with the global community</p> -->
-                                  <?php 
-                                  if(isset($_SESSION['status'] ))
-                                  {
-                                      echo $_SESSION['status'];
-                                      unset($_SESSION['status']);
-                                  } ?>
                                   <div class="form-group text-start pb-3">
                                   <i class="ri-mail-fill icon icon-a"></i>
-                                      <label class="form-label">Username</label>
-                                      <input class="form-control py-2" placeholder="" type="text" name="username" id="userName">
+                                      <label class="form-label">Email Address</label>
+                                      <input class="form-control py-2" placeholder="" type="text" name="email" id="su_email">
                                   </div>
                                   <div class="form-group text-start">
                                   <i class="ri-lock-fill icon icon-b"></i>
                                       <label class="form-label">Password</label>
-                                      <input class="form-control py-2" placeholder="" type="password" name="password" id="passWord">
+                                      <input class="form-control py-2" placeholder="" type="password" name="password" id="su_password">
                                       
                                   </div>
                                   <div class="form-check d-flex mt-2 pb-5 gap-2">
@@ -231,7 +231,7 @@ if(isset($_SESSION['auth'])){
                                         <a href="forgot.html" class="text-warning ms-auto text-decoration-none"><small>Forgot password?</small></a>
                                   </div>
                                   <div class="d-grid pb-2">
-                                  <button name="signin" type="submit" class="btn btn-warning text-white py-2 fw-normal">Login</button>                                 
+                                  <button name="login" type="submit" class="btn btn-warning text-white py-2 fw-normal">Login</button>                                 
                                   </div>
                               </form>
                               <div class="d-flex justify-content-center mt-3 gap-1">Don't have an account?<a class="text-warning" href="signup.php" data-bs-toggle="modal" data-bs-target="#signupmodal">Register Here</a></div>
@@ -517,4 +517,88 @@ if(isset($_SESSION['auth'])){
 
 
 
-<!--for getting the form download the code from download button-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#signupForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var formData = {
+            firstname: $('#su_firstname').val(),
+            lastname: $('#su_lastname').val(),
+            middlename: $('#su_middlename').val(),
+            email: $('#su_email').val(),
+            password: $('#su_password').val(),
+            signup: true
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "user/signup/function.php",
+            data: formData,
+            dataType: "json", // Expect JSON response from the server
+            success: function(response) {
+                if (response.success) {
+                  Swal.fire({
+                title: "Account Created",
+                text: "Verification has ben send to your email",
+                icon: "success"
+                 });
+                    $('#signupmodal').modal('hide');
+                  //  window.location.href = "USER/generator/generator.php";
+                } else {
+                  Swal.fire({
+                  title: 'Error!',
+                  text: response.message,
+                  icon: 'error',
+                  confirmButtonText: 'ok'
+                })
+                    
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Something went wrong. Please try again.");
+                console.log(xhr.responseText);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#signinform').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var formData = $(this).serialize(); // Serialize form data
+
+        $.ajax({
+            url: 'user/signin/function.php', // URL to your PHP script
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                  Swal.fire({
+                  title: 'Success!',
+                  text: response.message,
+                  confirmButtonText: 'ok'
+                })
+                 window.location.href = response.redirect;  // REDIRECT
+              } else {
+                  Swal.fire({
+                  title: 'Error!',
+                  text: response.message,
+                  icon: 'error',
+                  confirmButtonText: 'ok'
+                })
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('AJAX error: ' + textStatus + ' : ' + errorThrown);
+                console.log('Response text: ' + jqXHR.responseText);
+                alert('An error occurred while processing the request.');
+            }
+        });
+    });
+});
+</script>

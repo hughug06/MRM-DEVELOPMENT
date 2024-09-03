@@ -1,9 +1,8 @@
 <?php
 
         session_start();
-        unset($_SESSION['auth']);
-        unset($_SESSION['loggedinuserrole']);
-        unset($_SESSION['loggedinuser']);
+        unset($_SESSION['login']);
+        unset($_SESSION['role']);
         header("location: /MRM-DEVELOPMENT/index.php"); 
         exit();
 ?>
