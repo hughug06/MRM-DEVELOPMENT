@@ -63,22 +63,16 @@
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
-            <div class="container-fluid">
-
-               
-                <form action="function.php" method="POST">
-                <div class="row row-sm">
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        Add user
-                                    </div>
-                                    <div class="prism-toggle">
-                                       <a href="user-management.php"> BACK</a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
+            <div class="container-fluid">              
+                <div class="row justify-content-center mt-5">
+                    <div class="col-xl-6 mt-2">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Add user</div>
+                                <a href="user-management.php" class="btn btn-close p-0"></a>
+                            </div>
+                            <div class="card-body">
+                                <form action="function.php" method="POST">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">First Name</label>
@@ -92,49 +86,39 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Middle Name</label>
-                                            <input type="text" class="form-control" placeholder="middle name"
+                                            <input type="text" class="form-control" placeholder="Middle name"
                                                 aria-label="middle name" name="middlename">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">email</label>
-                                            <input type="text" class="form-control" placeholder="email"
+                                            <label class="form-label">Email</label>
+                                            <input type="text" class="form-control" placeholder="Email"
                                                 aria-label="email" name="email">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Password</label>
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                    aria-label="Password" name="password">
-                                                </div>
-                                                
-                                                
-                                                <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Role</label>
-                                                    <select id="inputState1" class="form-select" name="role">
-                                                        <option value="user">user</option>
-                                                        <option value="admin">admin</option>
-                                                        <option value="agent">agent</option>
-                                                    </select>
-                                                </div>                                                                
+                                            <div class="col-xl-12 mb-3">
+                                                <label class="form-label">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password"
+                                                aria-label="Password" name="password">
                                             </div>
-                                        </div>
-                                      
-                                        
-                                       
-                                        
-                                        <div class="col-md-12">
+                                                                             
+                                        </div>         
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Role</label>
+                                                <select id="inputState1" class="form-select" name="role">
+                                                    <option value="user">User</option>
+                                                    <option value="admin">Admin</option>
+                                                    <option value="agent">Agent</option>
+                                                </select>
+                                            </div>                                                       
+                                        <div class="col-md-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary" name="saveuser">Save</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer d-none border-top-0">
-                                </div>
+                                </form>
                             </div>
-                       </div>                   
-                    </div>
-                </form>
-
+                        </div>
+                    </div>                   
+                </div>
             </div>
         </div>
         <!-- End::app-content -->

@@ -117,70 +117,54 @@ global $conn;
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
-
-               
-                <form  method="POST" action="user-edit-form.php">
-                    <div class="row row-sm">
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        Edit User
-                                    </div>
-                                    <div class="prism-toggle">
-                                       <a href="user-management.php"> <button class="btn btn-sm btn-primary-light">BACK<i class="ri-eye-line ms-2 d-inline-block align-middle fs-14"></i></button></a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-xl-6 mt-2">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Edit User</div>
+                                <a href="user-management.php" class="btn btn-close p-0"></a>
+                            </div>
+                            <div class="card-body">
+                                <form  method="POST" action="user-edit-form.php">
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
+                                        <div class="col-xl-12 mb-3">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" class="form-control" placeholder="firstname"
+                                            <input type="text" class="form-control" placeholder="First name"
                                                 aria-label="Full Name" name="firstname" required value="<?= $firstname?>">
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-xl-12 mb-3">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" placeholder="lastname"
+                                            <input type="text" class="form-control" placeholder="Last name"
                                                 aria-label="Username" name="lastname" required value="<?= $lastname?>">
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">email</label>
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <input type="text" class="form-control" placeholder="email"
-                                                    aria-label="email" name="email" required value="<?= $email?>">
-                                                </div>
-                                                                                               
-                                                <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Role</label>
-                                                    <select id="inputState1" class="form-select" name="role" required>
-                                                        <option selected>Select Role</option>
-                                                        <option value="user" <?= $role == 'user' ? 'selected' : ''?>>user</option>
-                                                        <option value="admin" <?= $role == 'admin'? 'selected' : ''?>>admin</option>
-                                                        <option value="agent" <?= $role == 'agent' ? 'selected' : ''?>>agent</option>
-                                                    </select>
-                                                </div>                                                                
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">                                            
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Is ban</label>
-                                                    <input type="checkbox"  name="is_ban"  <?= $is_ban == 1 ? 'checked' : ''?>>
-                                                </div>                                                                      
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
+                                        <div class="col-xl-12 mb-3">
+                                        <label class="form-label">Email</label>
+                                            <input type="text" class="form-control" placeholder="Email"
+                                            aria-label="email" name="email" required value="<?= $email?>">
+                                        </div>                        
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Role</label>
+                                            <select id="inputState1" class="form-select" name="role" required>
+                                                <option selected>Select Role</option>
+                                                <option value="user" <?= $role == 'user' ? 'selected' : ''?>>User</option>
+                                                <option value="admin" <?= $role == 'admin'? 'selected' : ''?>>Admin</option>
+                                                <option value="agent" <?= $role == 'agent' ? 'selected' : ''?>>Agent</option>
+                                            </select>
+                                        </div>                                                                
+                                        <div class="col-xl-12 mb-3 d-flex align-items-center gap-1">
+                                            <input type="checkbox"  name="is_ban" id="banning" <?= $is_ban == 1 ? 'checked' : ''?>>
+                                            <label for="banning">Ban</label>
+                                        </div>                                                                      
+                                        <div class="col-md-12 d-flex justify-content-end">
                                             <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
-                                </div>                           
-                            </div>
-                       </div>                   
-                    </div>
-                </form>
-
+                                </form>
+                            </div>                           
+                        </div>
+                    </div>                   
+                </div>
             </div>
         </div>
         <!-- End::app-content -->
