@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -42,6 +44,36 @@
     <!-- Prism CSS -->
     <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .calendar-container {
+            margin: 20px auto;
+        }
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .calendar-day {
+            padding: 20px;
+            border: 1px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        .calendar-day button {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
 </head>
 
 <body>
@@ -69,7 +101,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Generator</h6>
                                 <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                <button type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#generator-services-modal">Avail Now</button>
+                                <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
                             </div>
                         </div>
                         <div class="card custom-card">
@@ -77,99 +109,51 @@
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Solar Panel</h6>
                                 <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                <button type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#solar-services-modal">Avail Now</button>
+                                <button name="solar" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="generator-services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
+                <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered w-50">
                     <div class="modal-content">
                     <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
                         <div class="login_form">
                             <div class="main-container container-fluid">
                                 <div class="card-body p-5">
-                                    <form action="user/signup/function.php" method="POST">
-                                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATORS' SERVICES</h1>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="g_fName" class="text-muted">Full Name</label>
-                                            <input class="form-control" placeholder="" type="text" name="name" id="g_fName" disabled>
+                                
+                                <div class="container calendar-container">
+                                    <div class="calendar-header">
+                                        <h3 id="monthYear"></h3>
+                                        <button class="btn btn-outline-primary" id="prevMonth">Previous</button>
+                                        <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                    </div>
+                                    <div class="calendar-body" id="calendarDays"></div>
+                                </div>
+
+                                <!-- Modal to display available time slots -->
+                                <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul id="availableTimes" class="list-group">
+                                                    <!-- Available times will be dynamically loaded here -->
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="g_Brand" class="text-muted">Brand</label>
-                                            <input class="form-control" placeholder="" type="text" name="username" id="g_Brand">
-                                        </div>
-                                        <label for="g_KVA" class="text-muted">KVA Type</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="g_KVA">
-                                            <option value="">Select...</option>
-                                            <option value="Choice 1">Choice 1</option>
-                                            <option value="Choice 2">Choice 2</option>
-                                            <option value="Choice 3">Choice 3</option>
-                                        </select>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="g_RHU" class="text-muted">Running Hours Unit</label>
-                                            <input class="form-control" placeholder="" type="text" name="email" id="g_RHU">
-                                        </div>
-                                        <label for="g_Type" class="text-muted">Service Type</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="g_Type">
-                                            <option value="Choice 1">Maintenance</option>
-                                            <option value="Choice 2">Repair</option>
-                                            <option value="Choice 3">Installation</option>
-                                            <option value="Choice 4">Tune Up</option>
-                                        </select>
-                                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
-                                        </div>
-                                    </form>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 </div>
-                <div class="modal fade" id="solar-services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="solar-services-modal" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
-                    <div class="modal-content">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
-                        <div class="login_form">
-                            <div class="main-container container-fluid">
-                                <div class="card-body p-5">
-                                    <form action="user/signup/function.php" method="POST">
-                                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Solar Panels' Services</h1>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_FullName" class="text-muted">Full Name</label>
-                                            <input class="form-control" placeholder="" type="text" name="name" id="s_fName" disabled>
-                                        </div>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_UserName" class="text-muted">Brand</label>
-                                            <input class="form-control" placeholder="" type="text" name="username" id="s_Brand">
-                                        </div>
-                                        <label for="s_KVA" class="text-muted">KVA</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_KVA">
-                                            <option value="Choice 1">Choice 1</option>
-                                            <option value="Choice 2">Choice 2</option>
-                                            <option value="Choice 3">Choice 3</option>
-                                        </select>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                            <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
-                                        </div>
-                                        <label for="s_Type" class="text-muted">Service Type</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_Type">
-                                            <option value="Choice 1">Maintenance</option>
-                                            <option value="Choice 2">Repair</option>
-                                            <option value="Choice 3">Installation</option>
-                                        </select>
-                                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                
             </div>
             <!--APP-CONTENT CLOSE-->
 
@@ -224,3 +208,88 @@
 </body>
 
 </html>
+
+<script>
+    // JavaScript to generate the calendar dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarDays = document.getElementById('calendarDays');
+        const monthYear = document.getElementById('monthYear');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        let currentDate = new Date();
+
+        function renderCalendar(date) {
+            calendarDays.innerHTML = ''; // Clear previous days
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+            
+            // Get the first day of the month and the total number of days
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Add empty placeholders for days of the previous month
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                calendarDays.innerHTML += '<div></div>';
+            }
+
+            // Generate the days of the current month
+            for (let day = 1; day <= daysInMonth; day++) {
+                calendarDays.innerHTML += `
+                    <div class="calendar-day">
+                        ${day}
+                      <button class="btn btn-sm btn-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" 
+                        style="width: 10px; height: 10px; font-size: 0.8rem; padding: 0;" 
+                        onclick="openTimeSlotsModal('${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}')">
+                        <i class="bi bi-clock"></i> <!-- You can replace this with text if you want -->
+                    </button>
+
+                    </div>`;
+            }
+        }
+
+        // Move to the previous month
+        prevMonthBtn.addEventListener('click', function () {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar(currentDate);
+        });
+
+        // Move to the next month
+        nextMonthBtn.addEventListener('click', function () {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar(currentDate);
+        });
+
+        // Initialize the calendar
+        renderCalendar(currentDate);
+    });
+
+    // Function to open the modal and fetch available time slots for a selected date
+    function openTimeSlotsModal(date) {
+        $('#selectedDate').text(date);  // Display the selected date in the modal
+        $('#availableTimes').empty();  // Clear previous time slots
+
+        // AJAX request to get available time slots for the selected date
+        $.post('get_available_slots.php', { appointment_date: date }, function (response) {
+            const slots = JSON.parse(response);
+            if (slots.length > 0) {
+                slots.forEach(function (slot) {
+                    $('#availableTimes').append(
+                        `<li class="list-group-item">${slot.start_time} - ${slot.end_time} 
+                        <a href="book_requirements.php" class="btn btn-success btn-sm float-end" role="button">Book</a>`
+                    );
+                });
+            } else {
+                $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
+            }
+        });
+
+        // Show the modal
+        $('#timeSlotsModal').modal('show');
+    }
+</script>
+
+<!-- Bootstrap 5 JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
