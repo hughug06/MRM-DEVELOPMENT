@@ -3,8 +3,8 @@
 
 include_once '../../Database/database.php';
 global $conn;
-  $id="";
-  $Type="";
+  $ProductTypeID="";
+  $ProductType="";
   $WattsKVA = "";
   $error="";
   $success="";
@@ -14,8 +14,8 @@ global $conn;
       header("location: marketing-product-control.php");
       exit;
     }
-    $id = $_GET['id'];
-    $sql = "select * from watts_kva_category where ID=$id";
+    $ProductTypeID = $_GET['id'];
+    $sql = "select * from product_type where ProductTypeID=$ProductTypeID";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
@@ -23,17 +23,17 @@ global $conn;
       exit;
     }
 
-    $Type=$row["Type"];
+    $ProductType=$row["ProductType"];
     $WattsKVA=$row["Watts_KVA"];
 
   }
   elseif(isset($_POST['save'])){
 
-        $id = $_POST["id"];
-        $Type=$_POST['Type'];
+        $ProductTypeID = $_POST["ProductTypeID"];
+        $ProductType=$_POST['ProductType'];
         $WattsKVA = $_POST['WattsKVA'];
         
-        $sql = "update watts_kva_category set Type='$Type' , Watts_KVA= '$WattsKVA' where ID='$id'";
+        $sql = "update product_type set ProductType='$ProductType' , Watts_KVA= '$WattsKVA' where ProductTypeID='$ProductTypeID'";
         $result = mysqli_query($conn , $sql);
         header("location: marketing-product-control.php");
         exit();
@@ -123,7 +123,7 @@ global $conn;
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
+                                            <input type="hidden" name="ProductTypeID" value="<?php echo $ProductTypeID; ?>" class="form-control"> <br>
                                             <label class="form-label">Watts/KVA</label>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
@@ -133,10 +133,10 @@ global $conn;
                                                 
                                                 
                                                 <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Type</label>
-                                                    <select id="inputState1" class="form-select" name="Type" required>
-                                                        <option value="Solar Panel" <?= $Type == 'Solar Panel'? 'selected' : ''?>>Solar Panel</option>
-                                                        <option value="Generator" <?= $Type == 'Generator' ? 'selected' : ''?>>Generator</option>
+                                                <label class="form-label">Product Type</label>
+                                                    <select id="inputState1" class="form-select" name="ProductType" required>
+                                                        <option value="Solar Panel" <?= $ProductType == 'Solar Panel'? 'selected' : ''?>>Solar Panel</option>
+                                                        <option value="Generator" <?= $ProductType == 'Generator' ? 'selected' : ''?>>Generator</option>
                                                     </select>
                                                 </div>                                                                
                                             </div>

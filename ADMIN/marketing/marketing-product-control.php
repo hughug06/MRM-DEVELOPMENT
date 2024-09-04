@@ -78,7 +78,7 @@
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label">PRODUCT TABLE</label>
+                                    <label class="main-content-label">PRODUCT SPECIFICATION TABLE</label>
                                     <a href="product-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
                                         <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
@@ -93,7 +93,7 @@
                                             <tr>
                                                 <th class="wd-lg-8p"><span>ProductID</span></th>
                                                 <th class="wd-lg-20p"><span>Product Name</span></th>
-                                                <th class="wd-lg-20p"><span>Type</span></th>
+                                                <th class="wd-lg-20p"><span>Product Type</span></th>
                                                 <th class="wd-lg-20p"><span>Watts/KVA</span></th>
                                                 <th class="wd-lg-20p"><span>Stock</span></th>
                                                 <th class="wd-lg-20p"><span>Availability</span></th>
@@ -104,7 +104,7 @@
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';
-                                           $select = "Select * from products";
+                                           $select = "Select * from products inner join product_type on products.ProductTypeID = product_type.ProductTypeID";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
@@ -112,8 +112,8 @@
                                                  <tr>
                                                 <td><?= $resultItem['ProductID']?></td>
                                                 <td><?= $resultItem['ProductName']?></td>
-                                                <td><?= $resultItem['Type']?></td>
-                                                <td><?= $resultItem['Type'] == 'Solar Panel'? $resultItem['WattsKVA'].'W':$resultItem['WattsKVA'].'KVA'; ?></td>
+                                                <td><?= $resultItem['ProductType']?></td>
+                                                <td><?= $resultItem['Watts_KVA']?></td>
                                                 <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
@@ -158,7 +158,7 @@
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label">Watts/KVA Category TABLE</label>
+                                    <label class="main-content-label">Product Specification Category TABLE</label>
                                     <a href="watts_KVA-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
                                         <i class="fe fe-download-cloud pe-2"></i>ADD new Watts/KVA Category
@@ -172,25 +172,25 @@
                                         <thead>
                                             <tr>
                                                 <th class="wd-lg-8p"><span>ID</span></th>
-                                                <th class="wd-lg-8p"><span>Type</span></th>
+                                                <th class="wd-lg-8p"><span>Product Type</span></th>
                                                 <th class="wd-lg-8p"><span>Watts/KVA</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';
-                                           $select = "Select * from watts_kva_category";
+                                           $select = "Select * from product_type";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                    <td><?= $resultItem['ID']?></td>
-                                                    <td><?= $resultItem['Type']?></td>
-                                                    <td><?= $resultItem['Type'] == 'Solar Panel'? $resultItem['Watts_KVA'].'W':$resultItem['Watts_KVA'].'KVA'; ?></td>
+                                                    <td><?= $resultItem['ProductTypeID']?></td>
+                                                    <td><?= $resultItem['ProductType']?></td>
+                                                    <td><?= $resultItem['ProductType'] == 'Solar Panel'? $resultItem['Watts_KVA'].'W':$resultItem['Watts_KVA'].'KVA'; ?></td>
                                                 <td>                                   
-                                                    <a href="watts_KVA-edit-form.php?id=<?= $resultItem['ID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="watts_KVA-delete.php?id=<?= $resultItem['ID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
+                                                    <a href="watts_KVA-edit-form.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="watts_KVA-delete.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 

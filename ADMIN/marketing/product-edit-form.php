@@ -5,8 +5,7 @@ include_once '../../Database/database.php';
 global $conn;
   $id="";
   $ProductName="";
-  $Type="";
-  $WattsKVA = "";
+  $ProductTypeID="";
   $Stock = "";
   $Availability = "";
   $Image = "";
@@ -14,6 +13,8 @@ global $conn;
   $success="";
   $Description="";
   $Specification="";
+  $ProductType="";
+  $Watts_KVA="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
@@ -21,7 +22,7 @@ global $conn;
       exit;
     }
     $id = $_GET['id'];
-    $sql = "select * from products where ProductID=$id";
+    $sql = "select * from products INNER JOIN product_type on products.ProductTypeID = product_type.ProductTypeID where ProductID=$id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
@@ -30,13 +31,15 @@ global $conn;
     }
 
     $ProductName=$row["ProductName"];
-    $Type=$row["Type"];
-    $WattsKVA=$row["WattsKVA"];
+    $ProductTypeID=$row["ProductTypeID"];
     $Stock = $row["Stock"];
     $Availability = $row["Availability"];
     $Image = $row["Image"];
     $Description = $row["Description"];
     $Specification = $row["Specification"];
+    $wattskvaidentifier = $row["Watts_KVA"];
+    $Watts_KVA = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
+    $ProductType = $row["ProductType"];
 
   }
   elseif(isset($_POST['save'])){
@@ -44,7 +47,7 @@ global $conn;
    
         $id = $_POST["id"];
         $ProductName= $_POST['ProductName'];
-        $Type=$_POST['Type'];
+        $ProductTypeID=$_POST['ProductTypeID'];
         $WattsKVA = $_POST['WattsKVA'];
         $Stock = $_POST['Stock'];
         $Availability = $_POST['Availability'] == true ? 1:0;
@@ -65,7 +68,7 @@ global $conn;
                 $upload = '../../assets/images/Product-Images/'.$ImageFileName;
                 move_uploaded_file($ImageTempName,$upload);
 
-                $sql = "update products set ProductName='$ProductName' , Type= '$Type' , WattsKVA= '$WattsKVA' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
+                $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , WattsKVA= '$WattsKVA' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -73,7 +76,7 @@ global $conn;
         }
         //WITHOUT IMAGE SUBMISSION
         else{
-            $sql = "update products set ProductName='$ProductName' , Type= '$Type' , WattsKVA= '$WattsKVA' , Stock='$Stock' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
+            $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' ,  Stock='$Stock' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -175,26 +178,39 @@ global $conn;
                                                 aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>">
                                         </div>
                                         <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Watts/KVA</label>
-                                                    <select id="inputState1" class="form-select" name="WattsKVA">
+                                            <label class="form-label">Type</label>
+                                            <select id="ProdType" class="form-select" name="" required>
+                                                <option <?= $ProductType == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
+                                                <option <?= $ProductType == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
+                                            </select>
+                                        </div>
 
-                                                        <?php 
-                                                        require '../../Database/database.php';
+                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                            <label class="form-label">Watts/KVA</label>
+                                            <select id="WattsKVAList" class="form-select" name="ProductTypeID">
+                                            <?php 
+                                            require '../../Database/database.php';
+                                            $select = "Select Watts_KVA, ProductTypeID from product_type where ProductType ='".$ProductType."'";
+                                            $result = mysqli_query($conn , $select);
+                                            if(mysqli_num_rows($result) > 0){
+                                            foreach($result as $resultItem){
+                                                $wattskva = $resultItem['Watts_KVA'];
+                                                $PTypeID = $resultItem['ProductTypeID'];
+                                                ?> 
+                                                <option <?= $wattskva == $wattskvaidentifier? 'selected value="'.$PTypeID.'"' : 'value="'.$PTypeID.'"' ;?>><?= $wattskva ?></option>
 
-                                                        $select = "Select * from watts_kva_category";
-                                                        $result = mysqli_query($conn , $select);
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                        ?> 
-                                                            <option <?= $resultItem['Watts_KVA'] == $WattsKVA? 'selected value='.$resultItem['Watts_KVA'] : 'value='.$resultItem['Watts_KVA']; ?>><?= $resultItem['Watts_KVA']?></option>
-                                                        <?php 
-                                                            }
-                                                        }
-                                                        else{
-                                                        }
-                                                    ?>
-                                                    </select>
-                                        </div>  
+                                            <?php 
+                                            }
+                                            
+                                            }
+                                            else{
+
+                                            }
+                                            ?>
+
+
+                                            </select>
+                                        </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Stock</label>
                                             <div class="row">
@@ -202,15 +218,7 @@ global $conn;
                                                     <input type="number" class="form-control" placeholder="Username"
                                                     aria-label="Username" name="Stock" required value="<?= $Stock?>">
                                                 </div>
-                                                
-                                                
-                                                <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Type</label>
-                                                    <select id="inputState1" class="form-select" name="Type" required>
-                                                        <option value="Solar Panel" <?= $Type == 'Solar Panel'? 'selected' : ''?>>Solar Panel</option>
-                                                        <option value="Generator" <?= $Type == 'Generator' ? 'selected' : ''?>>Generator</option>
-                                                    </select>
-                                                </div>                                                                
+                                                                                                            
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -360,6 +368,38 @@ global $conn;
         <?php include_once('../../USER/partials/footer.php') ?>
         <!-- Footer End -->
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#ProdType').change(function() {
+                $('#WattsKVAList').append('<option value="">Select Product Type</option>');
+                var ProdType = $(this).val();
+                if (ProdType) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data: { PrType: ProdType },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                $('#WattsKVAList').empty();
+                                $.each(response.data.WattsKVA, function(index, item) {
+                                    $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                });
+                            } else {
+                                alert('No Watts/KVA');
+                            }
+                        }
+                    });
+                } else {
+                    $('#WattsKVAList').empty();
+                    $('#WattsKVAList').append('<option value="">Select Product Type</option>');
+                }
+            });
+        });
+    </script>
 
     
     <!-- Scroll To Top -->

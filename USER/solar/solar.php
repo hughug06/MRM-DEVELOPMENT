@@ -1,6 +1,6 @@
 <?php
     require_once '../../Database/database.php';
-    $sql = "SELECT * FROM products Where Availability = 1 and Type = 'Solar Panel'";
+    $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductType = 'Solar Panel'";
     $all_products = $conn->query($sql);
 ?>
 
@@ -164,7 +164,7 @@
                                             <?php 
                                                         require '../../Database/database.php';
 
-                                                        $select = "Select * from watts_kva_category Where Type='Solar Panel'";
+                                                        $select = "Select * from product_type Where ProductType='Solar Panel'";
                                                         $result = mysqli_query($conn , $select);
                                                         if(mysqli_num_rows($result) > 0){
                                                             foreach($result as $resultItem){

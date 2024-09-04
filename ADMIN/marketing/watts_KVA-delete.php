@@ -2,8 +2,8 @@
     
     include "../../Database/database.php";
     if(isset($_GET['id'])){
-        $ID = $_GET['id'];
-        $sql = "DELETE from `watts_kva_category` where ID=$ID";
+        $id = $_GET['id'];
+        $sql = "DELETE from product_type where ProductTypeID=$id";
         $result = mysqli_query($conn , $sql);
     }
     header('location: marketing-product-control.php');
