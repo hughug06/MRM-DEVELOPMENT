@@ -1,20 +1,20 @@
 <?php
-echo "BOOK KA NA <3";
-exit();
-// session_start();
-// include '../../Database/database.php';
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $user_id = $_SESSION['user_id'];  // Assuming the user is logged in
-//     $availability_id = $_POST['availability_id']; // The selected time slot
-
-//     // Insert the booking into the bookings table
-//     $sql = "INSERT INTO bookings (user_id, availability_id) VALUES ('$user_id', '$availability_id')";
-    
-//     if (mysqli_query($conn, $sql)) {
-//         echo "Booking successful!";
-//     } else {
-//         echo "Error: " . mysqli_error($conn);
-//     }
-// }
+session_start();
+include '../../Database/database.php';
+if(isset($_POST['book']))
+    {
+        $brand = $_POST['brand'];
+        $product = $_POST['product'];
+        $power = $_POST['power'];
+        $running = $_POST['running_hours'];
+        $service_type = $_POST['service_type'];
+        $account_id = $_SESSION['account_id'];
+        $availability_id = $_SESSION['availability_id'];
+        $start_time = $_SESSION['start_time'];
+        $end_time = $_SESSION['end_time'];
+        $sql = "insert into appointments(account_id , availability_id , brand , product , power , running_hours , service_type  , start_time, end_time)
+                            VALUES('$account_id','$availability_id','$brand','$product','$power','$running','$service_type','$start_time','$end_time')";
+        $result = mysqli_query($conn , $sql);
+        
+    }
 ?>

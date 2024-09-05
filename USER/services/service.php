@@ -8,6 +8,7 @@
     <!-- Meta Data -->
     <?php
     include_once(__DIR__.'/../partials/head.php');
+    
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
@@ -94,24 +95,31 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                <!-- <div class="div-text-start mt-3 justify-self-center"><h1>SERVICES</h1></div> -->
+                <!--  <div class="div-text-start mt-3 justify-self-center"><h1>SERVICES</h1></div> -->
                     <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
                         <div class="card custom-card">
                             <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <form action="service.php" method="POST">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Generator</h6>
                                 <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
+                               
                             </div>
+                            </form>
                         </div>
                         <div class="card custom-card">
                             <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <form action="service.php" method="POST">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Solar Panel</h6>
                                 <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                <button name="solar" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
+                                
                             </div>
+                            </form>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                    <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
                     </div>
                 </div>
                 <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
@@ -266,27 +274,34 @@
 
     // Function to open the modal and fetch available time slots for a selected date
     function openTimeSlotsModal(date) {
-        $('#selectedDate').text(date);  // Display the selected date in the modal
-        $('#availableTimes').empty();  // Clear previous time slots
+    $('#selectedDate').text(date);  // Display the selected date in the modal
+    $('#availableTimes').empty();   // Clear previous time slots
 
-        // AJAX request to get available time slots for the selected date
-        $.post('get_available_slots.php', { appointment_date: date }, function (response) {
-            const slots = JSON.parse(response);
-            if (slots.length > 0) {
-                slots.forEach(function (slot) {
-                    $('#availableTimes').append(
-                        `<li class="list-group-item">${slot.start_time} - ${slot.end_time} 
-                        <a href="book_requirements.php" class="btn btn-success btn-sm float-end" role="button">Book</a>`
-                    );
-                });
-            } else {
-                $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
-            }
-        });
+    // AJAX request to get available time slots for the selected date
+    $.post('get_available_slots.php', { appointment_date: date }, function (response) {
+        const slots = JSON.parse(response);
+        if (slots.length > 0) {
+            slots.forEach(function (slot) {
+                $('#availableTimes').append(`
+                    <li class="list-group-item">
+                        ${slot.start_time} - ${slot.end_time} 
+                        <a href="book_requirements.php?availability_id=${slot.availability_id}&date=${date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
+                           class="btn btn-success btn-sm float-end">
+                           Book
+                        </a>
+                    </li>
+                `);
+            });
+        } else {
+            $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
+        }
+    });
 
-        // Show the modal
-        $('#timeSlotsModal').modal('show');
-    }
+    // Show the modal
+    $('#timeSlotsModal').modal('show');
+}
+
+
 </script>
 
 <!-- Bootstrap 5 JS and Popper.js -->

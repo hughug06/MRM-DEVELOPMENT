@@ -1,3 +1,32 @@
+<?php
+//get the data from service.php after the book trigger
+session_start();
+if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
+    $_SESSION['availability_id'] = $_GET['availability_id'];
+    $_SESSION['date'] = $_GET['date'];
+    $_SESSION['start_time'] = $_GET['start_time'];
+    $_SESSION['end_time'] = $_GET['end_time'];
+
+    // Now you have the availability_id, date, start_time, and end_time to process further
+   // echo "Booking confirmed for availability ID: $availability_id on $date from $start_time to $end_time.";
+    
+} 
+
+if(isset($_POST['book']))
+    {
+        $brand = $_POST['brand'];
+        $product = $_POST['product'];
+        $power = $_POST['power'];
+        $running = $_POST['running_hours'];
+        $service_type = $_POST['service_type'];
+        echo $brand .$product .$power .$running .$service_type;
+        
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -63,44 +92,68 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                    <form action="">
-                        <div class="login_form">
-                            <div class="main-container container-fluid">
-                                <div class="card-body p-5">
-                                    <form action="user/signup/function.php" method="POST">
-                                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">Solar Panels' Services</h1>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_FullName" class="text-muted">Full Name</label>
-                                            <input class="form-control" placeholder="" type="text" name="name" id="s_fName" disabled>
-                                        </div>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_UserName" class="text-muted">Brand</label>
-                                            <input class="form-control" placeholder="" type="text" name="username" id="s_Brand">
-                                        </div>
-                                        <label for="s_KVA" class="text-muted">KVA</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_KVA">
-                                            <option value="Choice 1">Choice 1</option>
-                                            <option value="Choice 2">Choice 2</option>
-                                            <option value="Choice 3">Choice 3</option>
-                                        </select>
-                                        <div class="form-group text-start mb-3">
-                                            <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                            <input class="form-control" placeholder="" type="text" name="email" id="su_Email">
-                                        </div>
-                                        <label for="s_Type" class="text-muted">Service Type</label>
-                                        <select class="form-control" data-trigger name="choices-single-default" id="s_Type">
-                                            <option value="Choice 1">Maintenance</option>
-                                            <option value="Choice 2">Repair</option>
-                                            <option value="Choice 3">Installation</option>
-                                        </select>
-                                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                                            <button type="submit" name="signup" class="btn btn-warning text-white py-2">Submit</button>   
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <form action="book_appointment.php" method="POST" id="serviceForm">
+                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
+                    <?php
+
+                    require_once '../../Database/database.php';
+                    
+                    $user = $_SESSION['user_id'];
+                    $sql = "select * from user_info where user_id = '$user'";
+                    $result = mysqli_query($conn, $sql);
+                   
+                    if(mysqli_num_rows($result))
+                    {
+                        $row = mysqli_fetch_assoc($result);
+                        $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
+                        
+                            
+                    ?>
+                    <div class="form-group text-start mb-3">
+                        <label for="s_fName" class="text-muted">Full Name</label>
+                        <input class="form-control" type="text" name="name" id="s_fName" disabled placeholder="" value="<?= $name ?>">
+                    </div>
+
+                    <?php 
+                    }
+                    ?>
+
+                    <div class="form-group text-start mb-3">
+                        <label for="s_Brand" class="text-muted">Brand</label>
+                        <input class="form-control" type="text" name="brand" id="s_Brand" placeholder="">
+                    </div>
+                    
+                    <div class="form-group text-start mb-3">
+                        <label for="s_Product" class="text-muted">Product</label>
+                        <select class="form-control" name="product" id="s_Product">
+                            <option value="solar">Solar</option>
+                            <option value="generator">Generator</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group text-start mb-3">
+                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                        <input class="form-control" type="text" name="power" id="powerInput" placeholder="">
+                    </div>
+                    
+                    <div class="form-group text-start mb-3">
+                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                        <input class="form-control" type="text" name="running_hours" id="su_Email" placeholder="">
+                    </div>
+                    
+                    <div class="form-group text-start mb-3">
+                        <label for="s_Type" class="text-muted">Service Type</label>
+                        <select class="form-control" name="service_type" id="s_Type">
+                            <option value="maintenance">Maintenance</option>
+                            <option value="repair">Repair</option>
+                            <option value="installation">Installation</option>
+                            <option value="tune_up">Tune-up</option>
+                        </select>
+                    </div>
+            <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
+                <button type="submit" name="book" class="btn btn-warning text-white py-2">Book</button>
+            </div>
+        </form>
                 </div>
             </div>
             <!--APP-CONTENT CLOSE-->
@@ -156,3 +209,22 @@
 </body>
 
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Event listener for product selection
+    $('#s_Product').on('change', function() {
+        var product = $(this).val(); // Get the selected product
+        
+        // Change the label for KVA/Watts
+        if (product === 'generator') {
+            $('#powerLabel').text('KVA');  // Change label to KVA for Generator
+            $('#s_Type option[value="tune_up"]').prop('disabled', false);  // Enable Tune-up
+        } else if (product === 'solar') {
+            $('#powerLabel').text('Watts');  // Change label to Watts for Solar
+            $('#s_Type option[value="tune_up"]').prop('disabled', true);  // Disable Tune-up
+        }
+    });
+});
+</script>

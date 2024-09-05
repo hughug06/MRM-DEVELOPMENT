@@ -3,6 +3,8 @@
 session_start();
 include '../../Database/database.php'; // Include your database connection
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment_date = $_POST['appointment_date'];
 
