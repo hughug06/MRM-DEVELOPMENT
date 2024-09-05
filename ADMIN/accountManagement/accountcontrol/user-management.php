@@ -84,7 +84,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
-                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
                                                 <th class="wd-lg-8p"><span>AccountID</span></th>
