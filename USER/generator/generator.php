@@ -160,22 +160,22 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label class="form-label">Watts/KVA </label>
-                                            <select name="beast" id="select-beast4" class="form-control" data-trigger>
+                                            <label class="form-label">KVA</label>
+                                            <select name="beast" id="Category" class="form-control" data-trigger>
+                                            <option selected value="">All</option>
                                             <?php 
-                                                        require '../../Database/database.php';
-
-                                                        $select = "Select * from product_type Where ProductType='Generator'";
-                                                        $result = mysqli_query($conn , $select);
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                        ?> 
-                                                            <option value="<?= $resultItem['Watts_KVA']?>"><?= $resultItem['Watts_KVA'].'KVA'?></option>
-                                                        <?php 
-                                                            }
-                                                        }
-                                                        else{
-                                                        }
+                                                require '../../Database/database.php';
+                                                $select = "Select Watts_KVA, ProductTypeID from product_type Where ProductType='Generator'";
+                                                $result = mysqli_query($conn , $select);
+                                                if(mysqli_num_rows($result) > 0){
+                                                    foreach($result as $resultItem){
+                                                ?> 
+                                                        <option value="<?= $resultItem['ProductTypeID']?>"><?= $resultItem['Watts_KVA'].'KVA'?></option>
+                                                <?php 
+                                                    }
+                                                }
+                                                else{
+                                                    }
                                                     ?>
                                             </select>
                                         </div>
@@ -209,6 +209,16 @@
     </div>
     <div id="responsive-overlay"></div>
     <!-- Scroll To Top -->
+
+    <script>
+        document.getElementById('Category').addEventListener('change', function() {
+            var selectedValue = this.value;
+            if (selectedValue) {
+                // Redirect to the same page with the selected value as a query parameter
+                window.location.href = "generator-filter.php?watts=" + selectedValue;
+            }
+        });
+    </script>
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
