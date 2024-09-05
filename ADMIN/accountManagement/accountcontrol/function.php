@@ -1,5 +1,5 @@
 <?php 
-
+require_once '../../authetincation.php';
 require '../../../Database/database.php';
 
 //ADD USER

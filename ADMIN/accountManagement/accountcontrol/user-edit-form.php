@@ -1,5 +1,5 @@
 <?php 
-
+require_once '../../authetincation.php';
 include_once '../../../Database/database.php';
 global $conn;
   $id="";

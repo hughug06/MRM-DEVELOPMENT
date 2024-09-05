@@ -1,3 +1,5 @@
+
+
 <aside class="app-sidebar sticky" id="sidebar">
 
 <!-- Start::main-sidebar-header -->
@@ -119,17 +121,26 @@
                                 <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
                             <ul class="slide-menu child1">
-                            <li class="slide">
+                            <li class="slide ">
                                     <a href="projects-dashboard.php" class="side-menu__item">Dashboard</a>
                                 </li>
                                 <li class="slide">
                                     <a href="projects-forum.php" class="side-menu__item">Forum</a>
                                 </li>                          
-                                <li class="slide">
-                                    <a href="projects-logs.php" class="side-menu__item">Project Logs</a>
-                                </li>
+
                             </ul>
                         </li>
+
+                         <!-- Start::slide -->
+            <li class="slide <?= $page == "services.php" ? 'active':''?>">
+                <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item <?= $page == "services.php" ? 'active':''?>">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="fa-solid fa-gears side-menu__icon"></i>
+                    <!-- <i class="ion-ios-settings side-menu__icon"></i> -->
+                    <span class="side-menu__label">Services</span>
+                </a>
+            </li>
                          <!-- End::slide -->
                                            
                                   <!-- Start::slide -->

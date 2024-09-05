@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2024 at 08:35 PM
+-- Generation Time: Sep 05, 2024 at 10:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,49 +24,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_service`
+-- Table structure for table `user_info`
 --
 
-CREATE TABLE `product_service` (
-  `product_service_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `service_id` int(11) NOT NULL,
+CREATE TABLE `user_info` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_info`
+--
+
+INSERT INTO `user_info` (`user_id`, `email`, `first_name`, `middle_name`, `last_name`, `created_at`, `updated_at`) VALUES
+(30, 'janariesimpuerto13@gmail.com', 'ARRR', 'Solis', 'VILLAPANDO', '2024-09-03 09:26:00', '2024-09-03 19:12:05'),
+(67, 'user@gmail.com', 'User', 'User', 'User', '2024-09-04 20:30:24', '2024-09-04 20:30:24');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `product_service`
+-- Indexes for table `user_info`
 --
-ALTER TABLE `product_service`
-  ADD PRIMARY KEY (`product_service_id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `service_id` (`service_id`);
+ALTER TABLE `user_info`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `product_service`
+-- AUTO_INCREMENT for table `user_info`
 --
-ALTER TABLE `product_service`
-  MODIFY `product_service_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `product_service`
---
-ALTER TABLE `product_service`
-  ADD CONSTRAINT `product_service_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `product_service_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`) ON DELETE CASCADE;
+ALTER TABLE `user_info`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
