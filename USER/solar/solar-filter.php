@@ -1,7 +1,16 @@
 <?php
     require_once '../../Database/database.php';
-    $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductType = 'Solar Panel'";
+    $wattsID="";
+    if(!isset($_GET['watts'])){
+        echo "HELLO";
+        header("location: solar.php");
+        exit; 
+    }
+    else{
+    $wattsID = $_GET['watts'];
+    $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductTypeID = '$wattsID'";
     $all_products = $conn->query($sql);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +98,7 @@
 
                         <?php
                         while($row = mysqli_fetch_assoc($all_products)){
-                            $id=$row['ProductID']
+                            $wattsID=$row['ProductID']
                         ?>
 
                             <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
@@ -209,14 +218,14 @@
     <!-- Scroll To Top -->
 
     <script>
-        document.getElementById('Category').addEventListener('change', function() {
-            var selectedValue = this.value;
-            if (selectedValue) {
-                // Redirect to the same page with the selected value as a query parameter
-                window.location.href = "solar-filter.php?watts=" + selectedValue;
-            }
-        });
-    </script>
+    document.getElementById('Category').addEventListener('change', function() {
+        var selectedValue = this.value;
+        if (selectedValue) {
+            // Redirect to the same page with the selected value as a query parameter
+            window.location.href = "?watts=" + selectedValue;
+        }
+    });
+</script>
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
