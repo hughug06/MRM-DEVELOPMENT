@@ -3,26 +3,19 @@
 
 include_once '../../Database/database.php';
 global $conn;
-  $id="";
-  $ProductName="";
   $ProductTypeID="";
-  $Stock = "";
-  $Availability = "";
-  $Image = "";
+  $ProductType="";
+  $WattsKVA = "";
   $error="";
   $success="";
-  $Description="";
-  $Specification="";
-  $ProductType="";
-  $Watts_KVA="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
       header("location: marketing-product-control.php");
       exit;
     }
-    $id = $_GET['id'];
-    $sql = "select * from products INNER JOIN product_type on products.ProductTypeID = product_type.ProductTypeID where ProductID=$id";
+    $ProductTypeID = $_GET['id'];
+    $sql = "select * from product_type where ProductTypeID=$ProductTypeID";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
@@ -30,65 +23,25 @@ global $conn;
       exit;
     }
 
-    $ProductName=$row["ProductName"];
-    $ProductTypeID=$row["ProductTypeID"];
-    $Stock = $row["Stock"];
-    $Availability = $row["Availability"];
-    $Image = $row["Image"];
-    $Description = $row["Description"];
-    $Specification = $row["Specification"];
-    $wattskvaidentifier = $row["Watts_KVA"];
-    $Watts_KVA = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
-    $ProductType = $row["ProductType"];
+    $ProductType=$row["ProductType"];
+    $WattsKVA=$row["Watts_KVA"];
 
   }
   elseif(isset($_POST['save'])){
 
-   
-        $id = $_POST["id"];
-        $ProductName= $_POST['ProductName'];
-        $ProductTypeID=$_POST['ProductTypeID'];
+        $ProductTypeID = $_POST["ProductTypeID"];
+        $ProductType=$_POST['ProductType'];
         $WattsKVA = $_POST['WattsKVA'];
-        $Stock = $_POST['Stock'];
-        $Availability = $_POST['Availability'] == true ? 1:0;
-        $Description=$_POST['Description'];
-        $Specification=$_POST['Specification'];
         
-        //WITH IMAGE SUBMISSION
-        if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
-            $Image = $_FILES['image'];
-            $ImageFileName = $Image['name'];
-            $ImageTempName = $Image['tmp_name'];
-            $FilenameSeperate = explode('.',$ImageFileName);
-            $FileExtension = strtolower(end($FilenameSeperate));
-
-            $extension = array('jpeg','jpg','png');
-            if(in_array($FileExtension,$extension)){
-                $uploadedImage = 'Product-Images/'.$ImageFileName;
-                $upload = '../../assets/images/Product-Images/'.$ImageFileName;
-                move_uploaded_file($ImageTempName,$upload);
-
-                $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , WattsKVA= '$WattsKVA' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
-                $result = mysqli_query($conn , $sql);
-                header("location: marketing-product-control.php");
-                exit();
-            }
-        }
-        //WITHOUT IMAGE SUBMISSION
-        else{
-            $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' ,  Stock='$Stock' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
-                $result = mysqli_query($conn , $sql);
-                header("location: marketing-product-control.php");
-                exit();
-        }
-        
-
-    
+        $sql = "update product_type set ProductType='$ProductType' , Watts_KVA= '$WattsKVA' where ProductTypeID='$ProductTypeID'";
+        $result = mysqli_query($conn , $sql);
+        header("location: marketing-product-control.php");
+        exit();
     
   }
   else{
     header("location: marketing-product-control.php");
-    exit();
+        exit();
   }
 ?>
 
@@ -155,15 +108,13 @@ global $conn;
             <div class="container-fluid">
 
                
-                <form  method="POST" action="product-edit-form.php" enctype="multipart/form-data">
-        
-
+                <form  method="POST" action="watts_KVA-edit-form.php">
                     <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header justify-content-between">
                                     <div class="card-title">
-                                        Edit Product
+                                        Edit Watts/KVA
                                     </div>
                                     <div class="prism-toggle">
                                        <a href="marketing-product-control.php"> <button class="btn btn-sm btn-primary-light">BACK<i class="ri-eye-line ms-2 d-inline-block align-middle fs-14"></i></button></a>
@@ -172,74 +123,25 @@ global $conn;
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
-                                            <label class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>">
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
-                                            <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select" name="" required>
-                                                <option <?= $ProductType == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
-                                                <option <?= $ProductType == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                            <input type="hidden" name="ProductTypeID" value="<?php echo $ProductTypeID; ?>" class="form-control"> <br>
                                             <label class="form-label">Watts/KVA</label>
-                                            <select id="WattsKVAList" class="form-select" name="ProductTypeID">
-                                            <?php 
-                                            require '../../Database/database.php';
-                                            $select = "Select Watts_KVA, ProductTypeID from product_type where ProductType ='".$ProductType."'";
-                                            $result = mysqli_query($conn , $select);
-                                            if(mysqli_num_rows($result) > 0){
-                                            foreach($result as $resultItem){
-                                                $wattskva = $resultItem['Watts_KVA'];
-                                                $PTypeID = $resultItem['ProductTypeID'];
-                                                ?> 
-                                                <option <?= $wattskva == $wattskvaidentifier? 'selected value="'.$PTypeID.'"' : 'value="'.$PTypeID.'"' ;?>><?= $wattskva ?></option>
-
-                                            <?php 
-                                            }
-                                            
-                                            }
-                                            else{
-
-                                            }
-                                            ?>
-
-
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Stock</label>
                                             <div class="row">
                                                 <div class="col-xl-12 mb-3">
                                                     <input type="number" class="form-control" placeholder="Username"
-                                                    aria-label="Username" name="Stock" required value="<?= $Stock?>">
+                                                    aria-label="Username" name="WattsKVA" required value="<?= $WattsKVA?>">
                                                 </div>
-                                                                                                            
+                                                
+                                                
+                                                <div class="col-xxl-6 col-xl-12 mb-3">
+                                                <label class="form-label">Product Type</label>
+                                                    <select id="inputState1" class="form-select" name="ProductType" required>
+                                                        <option value="Solar Panel" <?= $ProductType == 'Solar Panel'? 'selected' : ''?>>Solar Panel</option>
+                                                        <option value="Generator" <?= $ProductType == 'Generator' ? 'selected' : ''?>>Generator</option>
+                                                    </select>
+                                                </div>                                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Availability</label>
-                                                    <input type="checkbox"  name="Availability"  <?= $Availability == true ? 'checked' : ''?>>
-                                                </div>                                                                      
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Description</label>
-                                            <textarea name="Description" rows="6" cols="60"><?= $Description?></textarea>                                                                      
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" cols="60"><?= $Specification?></textarea>                                                                      
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                                <input type="file" name="image">
-                                        </div>  
+
                                         <div class="col-md-12">
                                             <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
@@ -368,38 +270,6 @@ global $conn;
         <?php include_once('../../USER/partials/footer.php') ?>
         <!-- Footer End -->
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#ProdType').change(function() {
-                $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                var ProdType = $(this).val();
-                if (ProdType) {
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data: { PrType: ProdType },
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.success) {
-                                $('#WattsKVAList').empty();
-                                $.each(response.data.WattsKVA, function(index, item) {
-                                    $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                });
-                            } else {
-                                alert('No Watts/KVA');
-                            }
-                        }
-                    });
-                } else {
-                    $('#WattsKVAList').empty();
-                    $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                }
-            });
-        });
-    </script>
 
     
     <!-- Scroll To Top -->

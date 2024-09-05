@@ -70,66 +70,35 @@
             <div class="container-fluid">
 
                
-                <form action="function.php" method="POST" enctype="multipart/form-data">
+                <form action="function.php" method="POST">
                 <div class="row row-sm">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header justify-content-between">
                                     <div class="card-title">
-                                        Add Product
+                                        Add Watts/KVA
                                     </div>
-                                    <div class="">
+                                    <div class="prism-toggle">
                                        <a href="marketing-product-control.php"> BACK</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row">   
+                                    <div class="col-xxl-6 col-xl-12 mb-3">
+                                                <label class="form-label">Type</label>
+                                                    <select id="inputState1" class="form-select" name="newProductType">
+                                                        <option active value="Generator">Generator</option>
+                                                        <option value="Solar Panel">Solar Panel</option>
+                                                    </select>
+                                        </div>                                                                                                           
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" placeholder="Product Name"
-                                                aria-label="Full Name" name="ProductName">
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
-                                            <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select" name="" required>
-                                                <option value="">Select Type</option>
-                                                <option value="Generator">Generator</option>
-                                                <option value="Solar Panel">Solar Panel</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <select id="WattsKVAList" class="form-select" name="ProductTypeID">
-                                            </select>
-                                        </div>
-
-                                        
-
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Stock</label>
                                             <input type="number" class="form-control" placeholder="Stock"
-                                                aria-label="email" name="Stock">                                                                             
+                                                aria-label="email" name="newWattsKVA">                                                                             
                                         </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Availability</label>
-                                            <input type="checkbox" name="Availability" required>
-                                        </div>    
-                                        <div class="col-xl-12 mb-3">
-                                            <label for="Description">Description</label>
-                                            <textarea id="Description" name="Description" rows="6" cols="50"></textarea>                                                                      
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                            <label for="Specification">Specification</label>
-                                            <textarea id="Specification" name="Specification" rows="6" cols="50"></textarea>                                                                      
-                                        </div>
-                                        <div class="col-xl-12 mb-3">
-                                                <input type="file" name="image">
-                                        </div>    
-                                       
                                         
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary" name="AddProduct">Add</button>
+                                            <button type="submit" class="btn btn-primary" name="AddNewWattsKVA">Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -150,38 +119,6 @@
     </div>
     <div id="responsive-overlay"></div>
     <!-- Scroll To Top -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-    <script>
-        $(document).ready(function() {
-            $('#ProdType').change(function() {
-                $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                var ProdType = $(this).val();
-                if (ProdType) {
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data: { PrType: ProdType },
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.success) {
-                                $('#WattsKVAList').empty();
-                                $.each(response.data.WattsKVA, function(index, item) {
-                                    $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                });
-                            } else {
-                                alert('No Watts/KVA');
-                            }
-                        }
-                    });
-                } else {
-                    $('#WattsKVAList').empty();
-                    $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                }
-            });
-        });
-    </script>
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
@@ -216,7 +153,6 @@
 
     <!-- Custom JS -->
     <script src="../../assets/js/custom.js"></script>
-
 
 </body>
 
