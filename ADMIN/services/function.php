@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../authetincation.php';
 include '../../Database/database.php';
 
 

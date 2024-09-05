@@ -1,5 +1,7 @@
 
-
+<?php 
+require_once '../authetincation.php';
+?>
 
 
 <!DOCTYPE html>

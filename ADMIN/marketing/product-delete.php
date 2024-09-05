@@ -1,5 +1,5 @@
 <?php
-    
+   require_once '../authetincation.php'; 
     include "../../Database/database.php";
     if(isset($_GET['id'])){
         $ProductID = $_GET['id'];

@@ -1,6 +1,6 @@
 <?php 
 require '../../Database/database.php';
-
+require_once '../authetincation.php';
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];
