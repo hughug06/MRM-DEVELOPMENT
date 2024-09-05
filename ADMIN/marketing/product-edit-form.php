@@ -44,7 +44,6 @@ global $conn;
   }
   elseif(isset($_POST['save'])){
 
-   
         $id = $_POST["id"];
         $ProductName= $_POST['ProductName'];
         $ProductTypeID=$_POST['ProductTypeID'];
@@ -81,10 +80,6 @@ global $conn;
                 header("location: marketing-product-control.php");
                 exit();
         }
-        
-
-    
-    
   }
   else{
     header("location: marketing-product-control.php");
@@ -138,10 +133,6 @@ global $conn;
 
 <body>
 
-   
-
-
-
     <div class="page">
          <!-- app-header -->
          <?php include_once('../../USER/partials/header.php') ?>
@@ -153,216 +144,84 @@ global $conn;
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
-
-               
-                <form  method="POST" action="product-edit-form.php" enctype="multipart/form-data">
-        
-
-                    <div class="row row-sm">
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        Edit Product
-                                    </div>
-                                    <div class="prism-toggle">
-                                       <a href="marketing-product-control.php"> <button class="btn btn-sm btn-primary-light">BACK<i class="ri-eye-line ms-2 d-inline-block align-middle fs-14"></i></button></a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
+                <div class="row row-sm">
+                    <div class="col-xl-12 p-3">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Edit Product</div>
+                                <a href="marketing-product-control.php" class="btn btn-close p-0"></a>
+                            </div>
+                            <div class="card-body">
+                                <form  method="POST" action="product-edit-form.php" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control"> <br>
+                                        <div class="col-xl-12 mb-3">
+                                            <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
                                                 aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>">
                                         </div>
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                        <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select" name="" required>
+                                            <select id="ProdType" class="form-select py-2" name="" required>
                                                 <option <?= $ProductType == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
                                                 <option <?= $ProductType == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
                                             </select>
                                         </div>
-
-                                        <div class="col-xxl-6 col-xl-12 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <select id="WattsKVAList" class="form-select" name="ProductTypeID">
-                                            <?php 
-                                            require '../../Database/database.php';
-                                            $select = "Select Watts_KVA, ProductTypeID from product_type where ProductType ='".$ProductType."'";
-                                            $result = mysqli_query($conn , $select);
-                                            if(mysqli_num_rows($result) > 0){
-                                            foreach($result as $resultItem){
-                                                $wattskva = $resultItem['Watts_KVA'];
-                                                $PTypeID = $resultItem['ProductTypeID'];
-                                                ?> 
-                                                <option <?= $wattskva == $wattskvaidentifier? 'selected value="'.$PTypeID.'"' : 'value="'.$PTypeID.'"' ;?>><?= $wattskva ?></option>
+                                            <select id="WattsKVAList" class="form-select py-2" name="ProductTypeID">
+                                                <?php 
+                                                    require '../../Database/database.php';
+                                                    $select = "Select Watts_KVA, ProductTypeID from product_type where ProductType ='".$ProductType."'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    if(mysqli_num_rows($result) > 0) {
+                                                        foreach($result as $resultItem){
+                                                            $wattskva = $resultItem['Watts_KVA'];
+                                                            $PTypeID = $resultItem['ProductTypeID']; ?> 
+                                                            <option <?= $wattskva == $wattskvaidentifier? 'selected value="'.$PTypeID.'"' : 'value="'.$PTypeID.'"' ;?>><?= $wattskva ?></option>
+                                                            <?php 
+                                                        }
+                                                    }
+                                                    else {
 
-                                            <?php 
-                                            }
-                                            
-                                            }
-                                            else{
-
-                                            }
-                                            ?>
-
-
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Stock</label>
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <input type="number" class="form-control" placeholder="Username"
-                                                    aria-label="Username" name="Stock" required value="<?= $Stock?>">
-                                                </div>
-                                                                                                            
-                                            </div>
+                                            <div class="col-xl-12 mb-3">
+                                                <input type="number" class="form-control" placeholder="Username"
+                                                aria-label="Username" name="Stock" required value="<?= $Stock?>">
+                                            </div>                                       
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <div class="row">
-                                                <div class="col-xl-12 mb-3">
-                                                    <label class="form-label">Availability</label>
-                                                    <input type="checkbox"  name="Availability"  <?= $Availability == true ? 'checked' : ''?>>
-                                                </div>                                                                      
-                                            </div>
+                                            <label class="form-label">Availability</label>
+                                            <input type="checkbox"  name="Availability"  <?= $Availability == true ? 'checked' : ''?>>
                                         </div>
-                                        <div class="col-xl-12 mb-3">
+                                        <div class="col-xl-12  mb-3">
                                             <label class="form-label">Description</label>
-                                            <textarea name="Description" rows="6" cols="60"><?= $Description?></textarea>                                                                      
+                                            <textarea name="Description" class="col-xl-12 col-md-12 col-sm-12" rows="6"><?= $Description?></textarea>                                                                      
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" cols="60"><?= $Specification?></textarea>                                                                      
+                                            <textarea name="Specification" class="col-xl-12 col-md-12 col-sm-12" rows="6"><?= $Specification?></textarea>                                                                      
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                                <input type="file" name="image">
+                                            <input type="file" name="image">
                                         </div>  
-                                        <div class="col-md-12">
+                                        <div class="col-xl-12 d-flex justify-content-end">
                                             <button name="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer d-none border-top-0">
-<!-- Prism Code -->
-<pre class="language-html"><code class="language-html">&lt;div class="row"&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;First Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="First name"
-            aria-label="First name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Last Name&lt;/label&gt;
-        &lt;input type="text" class="form-control" placeholder="Last name"
-            aria-label="Last name"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Address&lt;/label&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Street"
-                aria-label="Street"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Landmark"
-                aria-label="Landmark"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="City"
-                aria-label="City"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputState1" class="form-select"&gt;
-                    &lt;option selected&gt;State/Province&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;input type="text" class="form-control" placeholder="Postal/Zip code"
-                aria-label="Postal/Zip code"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-6 mb-3"&gt;
-                &lt;select id="inputCountry" class="form-select"&gt;
-                    &lt;option selected&gt;Country&lt;/option&gt;
-                    &lt;option&gt;...&lt;/option&gt;
-                &lt;/select&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;Email&lt;/label&gt;
-                &lt;input type="email" class="form-control" placeholder="Email"
-                aria-label="email"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;label class="form-label"&gt;D.O.B&lt;/label&gt;
-                &lt;input type="date" class="form-control"
-                aria-label="dateofbirth"&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12 mb-3"&gt;
-                &lt;div class="row"&gt;
-                    &lt;label class="form-label mb-1"&gt;Maritial Status&lt;/label&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-married" required=""&gt;
-                            &lt;label class="form-check-label" for="status-married"&gt;
-                                Married
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="col-xl-6"&gt;
-                        &lt;div class="form-check"&gt;
-                            &lt;input class="form-check-input" type="checkbox" value="" id="status-unmarried" required=""&gt;
-                            &lt;label class="form-check-label" for="status-unmarried"&gt;
-                                Single
-                            &lt;/label&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="col-xl-12"&gt;
-
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Contact Number&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-6 mb-3"&gt;
-        &lt;label class="form-label"&gt;Alternative Contact&lt;/label&gt;
-        &lt;input type="number" class="form-control" placeholder="Phone number"
-            aria-label="Phone number"&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;div class="form-check mb-3"&gt;
-            &lt;input class="form-check-input" type="checkbox" id="gridCheck"&gt;
-            &lt;label class="form-check-label" for="gridCheck"&gt;
-                Check me out
-            &lt;/label&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="col-md-12"&gt;
-        &lt;button type="submit" class="btn btn-primary"&gt;Sign in&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt; </code></pre>
-<!-- Prism Code -->
-                                </div>
+                                </form>
                             </div>
-                       </div>                   
-                    </div>
-
-                </form>
-
+                        </div>
+                    </div>                   
+                </div> 
             </div>
         </div>
         <!-- End::app-content -->
-
         
         <!-- Footer Start -->
         <?php include_once('../../USER/partials/footer.php') ?>
@@ -403,10 +262,6 @@ global $conn;
 
     
     <!-- Scroll To Top -->
-    <div class="scrollToTop">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
     <!-- Scroll To Top -->
 
     <!-- Popper JS -->
