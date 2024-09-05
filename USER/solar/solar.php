@@ -161,7 +161,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Watts</label>
                                             <select name="beast" id="Category" class="form-control" data-trigger>
-                                            <option value="">Select Watts</option>
+                                            <option selected value="">All</option>
                                             <?php 
                                                 require '../../Database/database.php';
                                                 $select = "Select Watts_KVA, ProductTypeID from product_type Where ProductType='Solar Panel'";
