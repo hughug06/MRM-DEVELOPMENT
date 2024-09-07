@@ -13,7 +13,7 @@ require_once '../authetincation.php';
     <?php include_once(__DIR__.'../../../USER/partials/head.php')?>
     <title> Inquries </title>
     <!-- Favicon -->
-    <link rel="icon" href="../assets/images/brand-logos/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
     <!-- Choices JS -->
     <script src="../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -44,8 +44,6 @@ require_once '../authetincation.php';
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
 
-<!-- Prism CSS -->
-<link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-coy.min.css">
 
 </head>
 
@@ -67,56 +65,141 @@ require_once '../authetincation.php';
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-           
+        
+
     
-               <!-- Bootstrap 5 Form - Modern Design with Restricted Date Picker -->
-               <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg">
-    <h3 class="text-center mb-4 fw-bold text-primary">Set Your Availability</h3>
+                        
+                <!-- MODAL FOR SET AVAILABILITY -->                       
+            <div class="modal fade" id="availability" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="availability" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">ADD TIME FOR BOOKING</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg" id="availabilityForm">
+                    <h3 class="text-center mb-4 fw-bold text-primary">Set Your Availability</h3>
 
-    <div class="mb-4">
-        <label for="date" class="form-label fw-semibold">Select Date:</label>
-        <div class="input-group">
-            <span class="input-group-text bg-primary text-white">
-                <i class="bi bi-calendar3"></i>
-            </span>
-            <input type="text" id="date" name="date" class="form-control flatpickr-date" placeholder="Choose a date" required>
-        </div>
-    </div>
+                    <div class="mb-4">
+                        <label for="date" class="form-label fw-semibold">Select Date:</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary text-white">
+                                <i class="bi bi-calendar3"></i>
+                            </span>
+                            <input type="text" id="date" name="date" class="form-control flatpickr-date" placeholder="Choose a date" required>
+                        </div>
+                    </div>
 
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <label for="start_time" class="form-label fw-semibold">Start Time:</label>
-            <div class="input-group">
-                <span class="input-group-text bg-success text-white">
-                    <i class="bi bi-clock"></i>
-                </span>
-                <select id="start_time" name="start_time" class="form-select" required>
-                    <option value="" disabled selected>Select start time</option>
-                </select>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="start_time" class="form-label fw-semibold">Start Time:</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-success text-white">
+                                    <i class="bi bi-clock"></i>
+                                </span>
+                                <select id="start_time" name="start_time" class="form-select" required>
+                                    <option value="" disabled selected>Select start time</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="end_time" class="form-label fw-semibold">End Time:</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-danger text-white">
+                                    <i class="bi bi-clock-fill"></i>
+                                </span>
+                                <select id="end_time" name="end_time" class="form-select" required>
+                                    <option value="" disabled selected>Select end time</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" name="confirm" class="btn btn-primary btn-lg shadow-sm">
+                            <i class="bi bi-check-circle me-2"></i> Confirm Availability
+                        </button>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <label for="end_time" class="form-label fw-semibold">End Time:</label>
-            <div class="input-group">
-                <span class="input-group-text bg-danger text-white">
-                    <i class="bi bi-clock-fill"></i>
-                </span>
-                <select id="end_time" name="end_time" class="form-select" required>
-                    <option value="" disabled selected>Select end time</option>
-                </select>
             </div>
-        </div>
-    </div>
-
-    <div class="d-grid">
-        <button type="submit" class="btn btn-primary btn-lg shadow-sm">
-            <i class="bi bi-check-circle me-2"></i> Confirm Availability
-        </button>
-    </div>
-</form>
 
 
+                <!--  SHOW ALREADY CREATED TIME -->
+                <div class="row row-sm mt-3">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                        <div class="card custom-card">
+                            <div class="card-header border-bottom-0 d-block">                            
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0">USER TABLE</label>
+                                    
+                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#availability">
+                                        <i class="fe fe-download-cloud pe-2"></i>ADD TIME
+                                        </button>
+                                   
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive userlist-table">
+                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                        <thead>
+                                            <tr>
+                                            <th class="wd-lg-20p"><span>admin</span></th>       
+                                                <th class="wd-lg-8p"><span>Date</span></th>
+                                                <th class="wd-lg-20p"><span>Start time</span></th>
+                                                <th class="wd-lg-20p"><span>End Time</span></th>                                                   
+                                                <th class="wd-lg-20p">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           <?php 
+                                           require '../../Database/database.php';                                          
+                                           $select = "Select * from admin_availability";
+                                           $result = mysqli_query($conn , $select);
+                                           if(mysqli_num_rows($result) > 0){
+                                            foreach($result as $resultItem){
+                                                ?> 
+                                                 <tr>
+                                                 <td><?= $resultItem['account_id']?></td>     
+                                                <td><?= $resultItem['date']?></td>                                        
+                                                <td><?= $resultItem['start_time']?></td>                        
+                                                <td><?= $resultItem['end_time']?></td>                                           
+                                                <td>                                                 
+                                                    <a href=""  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                </td>
+                                            </tr>
+
+                                                <?php 
+                                            }
+                                            
+                                           }
+                                           else{
+
+                                           }
+                                           ?>
+                                                    
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+
+                           
+                        </div>
+                    </div><!-- COL END -->
+                </div>
+
+
+                
                </div>
             </div>
             <!--APP-CONTENT CLOSE-->
@@ -136,38 +219,38 @@ require_once '../authetincation.php';
     <!-- Scroll To Top -->
 
     <!-- Popper JS -->
-    <script src="../../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
+    <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="../../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Defaultmenu JS -->
-    <script src="../../../assets/js/defaultmenu.min.js"></script>
+    <script src="../../assets/js/defaultmenu.min.js"></script>
 
     <!-- Node Waves JS-->
-    <script src="../../../../assets/libs/node-waves/waves.min.js"></script>
+    <script src="../../assets/libs/node-waves/waves.min.js"></script>
 
     <!-- Sticky JS -->
-    <script src="../../../../assets/js/sticky.js"></script>
+    <script src="../../../assets/js/sticky.js"></script>
 
     <!-- Simplebar JS -->
-    <script src="../../../assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="../../../assets/js/simplebar.js"></script>
+    <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/simplebar.js"></script>
 
     <!-- Color Picker JS -->
-    <script src="../../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+    <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
 
 
     
     <!-- Custom-Switcher JS -->
-    <script src="../../../assets/js/custom-switcher.min.js"></script>
+    <script src="../../assets/js/custom-switcher.min.js"></script>
 
     <!-- Prism JS -->
-    <script src="../../../assets/libs/prismjs/prism.js"></script>
-    <script src="../../../assets/js/prism-custom.js"></script>
+    <script src="../../assets/libs/prismjs/prism.js"></script>
+    <script src="../../assets/js/prism-custom.js"></script>
 
     <!-- Custom JS -->
-    <script src="../../../assets/js/custom.js"></script>
+    <script src="../../assets/js/custom.js"></script>
 
 </body>
 
@@ -181,8 +264,10 @@ require_once '../authetincation.php';
 
 <!-- Flatpickr JS (for custom date picker) -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+ <!-- SWEET ALERT JS -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
     // Initialize Flatpickr for the date input with restriction to disable past dates
     flatpickr(".flatpickr-date", {
         dateFormat: "Y-m-d",  
@@ -248,4 +333,34 @@ require_once '../authetincation.php';
 
     // Initial population of start times
     populateStartTimes();
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#availabilityForm').on('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            $.ajax({
+                url: "function.php", // URL specified in the form's action attribute
+                type: 'POST', // Use POST method
+                data: $(this).serialize(), // Serialize the form data
+                success: function(response) {
+                    // Handle the successful response here
+                   
+                    // Optionally, you can reset the form here
+                    if(response.success == true){
+                        Swal.fire({
+                title: "Account Created",
+                text: "Verification has ben send to your email",
+                icon: "success"
+                 })
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    alert('An error occurred: ' + error);
+                }
+            });
+        });
+    });
 </script>
