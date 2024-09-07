@@ -1,9 +1,6 @@
 <?php
-<<<<<<< HEAD
     require_once '../authetincation.php';
-=======
     header('Content-Type: application/json');
->>>>>>> jolo
     include "../../Database/database.php";
     if(isset($_GET['id'])){
         $id = $_GET['id'];
