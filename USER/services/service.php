@@ -45,8 +45,9 @@
     <!-- Prism CSS -->
     <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <style>
         .calendar-container {
             margin: 20px auto;
@@ -68,13 +69,14 @@
             background-color: #f8f9fa;
             position: relative;
         }
-        .calendar-day button {
+        .calendar-day button { 
             position: absolute;
             bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
         }
     </style>
+
 </head>
 
 <body>
@@ -305,6 +307,6 @@
 </script>
 
 <!-- Bootstrap 5 JS and Popper.js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>   -->
 
 
