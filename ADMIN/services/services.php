@@ -68,8 +68,7 @@ require_once '../authetincation.php';
             <div class="main-content app-content">
                 <div class="container-fluid">
            
-            <h1>SET AVAILABLE TIME</h1>
-                <!-- Bootstrap 5 Form -->
+    
                <!-- Bootstrap 5 Form - Modern Design with Restricted Date Picker -->
                <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg">
     <h3 class="text-center mb-4 fw-bold text-primary">Set Your Availability</h3>
