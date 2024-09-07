@@ -1,7 +1,23 @@
 <?php
     require_once '../../Database/database.php';
-    $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductType = 'Solar Panel'";
-    $all_products = $conn->query($sql);
+    $wattsID="";
+    $selectedWatts = "";
+    if(!isset($_GET['watts'])){
+        header("location: solar.php");
+        exit; 
+    }
+    else{
+    $wattsID = $_GET['watts'];
+        if($wattsID == "All"){
+            header("location: solar.php");
+            exit; 
+        }
+        else{
+        $selectedWatts = $wattsID;
+        $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and product_type.ProductTypeID = '$wattsID'";
+        $all_products = $conn->query($sql);
+    }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +105,7 @@
 
                         <?php
                         while($row = mysqli_fetch_assoc($all_products)){
-                            $id=$row['ProductID']
+                            $wattsID=$row['ProductID']
                         ?>
 
                             <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
@@ -161,21 +177,21 @@
                                         <div class="form-group">
                                             <label class="form-label">Watts</label>
                                             <select name="beast" id="Category" class="form-control" data-trigger>
-                                            <option selected value="">All</option>
-                                            <?php 
-                                                require '../../Database/database.php';
-                                                $select = "Select Watts_KVA, ProductTypeID from product_type Where ProductType='Solar Panel'";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                            ?> 
-                                                        <option value="<?= $resultItem['ProductTypeID']?>"><?= $resultItem['Watts_KVA'].'W'?></option>
-                                            <?php 
+                                                <option value="All">All</option>
+                                                <?php 
+                                                    require '../../Database/database.php';
+                                                    $select = "Select Watts_KVA, ProductTypeID from product_type Where ProductType='Solar Panel'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                ?> 
+                                                            <option <?= $selectedWatts == $resultItem['ProductTypeID']? "selected value='".$resultItem['ProductTypeID']."'":"value='".$resultItem['ProductTypeID']."'"?>><?= $resultItem['Watts_KVA'].'W'?></option>
+                                                <?php 
+                                                        }
                                                     }
-                                                }
-                                                else{
-                                                }
-                                            ?>
+                                                    else{
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                         
@@ -209,14 +225,14 @@
     <!-- Scroll To Top -->
 
     <script>
-        document.getElementById('Category').addEventListener('change', function() {
-            var selectedValue = this.value;
-            if (selectedValue) {
-                // Redirect to the same page with the selected value as a query parameter
-                window.location.href = "solar-filter.php?watts=" + selectedValue;
-            }
-        });
-    </script>
+    document.getElementById('Category').addEventListener('change', function() {
+        var selectedValue = this.value;
+        if (selectedValue) {
+            // Redirect to the same page with the selected value as a query parameter
+            window.location.href = "?watts=" + selectedValue;
+        }
+    });
+</script>
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>

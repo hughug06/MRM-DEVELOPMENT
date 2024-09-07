@@ -88,7 +88,7 @@ require_once '../authetincation.php';
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
-                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
                                                 <th class="wd-lg-8p"><span>ProductID</span></th>
@@ -168,12 +168,13 @@ require_once '../authetincation.php';
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
-                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
-                                            <tr>
+                                            <tr class="">
                                                 <th class="wd-lg-8p"><span>ID</span></th>
                                                 <th class="wd-lg-8p"><span>Product Type</span></th>
                                                 <th class="wd-lg-8p"><span>Watts/KVA</span></th>
+                                                <th class="wd-lg-8p"><span>Actions</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>

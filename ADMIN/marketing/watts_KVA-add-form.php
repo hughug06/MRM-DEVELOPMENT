@@ -50,11 +50,6 @@ require_once '../authetincation.php';
 
 <body>
 
-    
-
-
-    
-
     <div class="page">
 
          <!-- app-header -->
@@ -68,57 +63,45 @@ require_once '../authetincation.php';
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
             <div class="container-fluid">
-
-               
-                <form action="function.php" method="POST">
-                <div class="row row-sm">
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header justify-content-between">
-                                    <div class="card-title">
-                                        Add Watts/KVA
-                                    </div>
-                                    <div class="prism-toggle">
-                                       <a href="marketing-product-control.php"> BACK</a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
+                <div class="row row-sm d-flex justify-content-center mt-5">
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Add Watts/KVA</div>
+                                <a href="marketing-product-control.php" class="btn btn-close p-0"></a>
+                            </div>
+                            <div class="card-body">
+                                <form action="function.php" method="POST">
                                     <div class="row">   
-                                    <div class="col-xxl-6 col-xl-12 mb-3">
-                                                <label class="form-label">Type</label>
-                                                    <select id="inputState1" class="form-select" name="newProductType">
-                                                        <option active value="Generator">Generator</option>
-                                                        <option value="Solar Panel">Solar Panel</option>
-                                                    </select>
-                                        </div>                                                                                                           
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-xl-12">
+                                            <label class="form-label">Type</label>
+                                            <select id="inputState1" class="form-select mb-3" name="newProductType">
+                                                <option active value="Generator">Generator</option>
+                                                <option value="Solar Panel">Solar Panel</option>
+                                            </select>
+                                        </div>                                                                                         
+                                        <div class="col-xl-12 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <input type="number" class="form-control" placeholder="Stock"
-                                                aria-label="email" name="newWattsKVA">                                                                             
+                                            <input type="number" class="form-control" placeholder="Stock"aria-label="email" name="newWattsKVA">                                                                   
                                         </div>
-                                        
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary" name="AddNewWattsKVA">Add</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer d-none border-top-0">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>       
         <!--APP-CONTENT CLOSE-->
-
         
         <!-- Footer Start -->
         <?php include_once('../../USER/partials/footer.php') ?>
         <!-- Footer End -->
        
     </div>
-
-    
-    <!-- Scroll To Top -->
-    <div class="scrollToTop">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
-    <!-- Scroll To Top -->
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
