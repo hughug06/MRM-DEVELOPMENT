@@ -119,7 +119,7 @@ require_once '../authetincation.php';
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a id="DeleteProduct" href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
+                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                     <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
                                                 </td>
                                             </tr>
@@ -191,7 +191,7 @@ require_once '../authetincation.php';
                                                     <td><?= $resultItem['ProductType'] == 'Solar Panel'? $resultItem['Watts_KVA'].'W':$resultItem['Watts_KVA'].'KVA'; ?></td>
                                                 <td>                                   
                                                     <a href="watts_KVA-edit-form.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a id="DeleteWattsKVA" href="watts_KVA-delete.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
+                                                    <a href="watts_KVA-delete.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-danger delete-btn-WattsKVA"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 
@@ -251,7 +251,7 @@ require_once '../authetincation.php';
 
     <script>
     $(document).ready(function(){
-        $("#DeleteWattsKVA").click(function(event){
+        $(".delete-btn-WattsKVA").click(function(event){
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
 
                 var deleteUrl = $(this).attr('href');
@@ -275,7 +275,7 @@ require_once '../authetincation.php';
         });
     });
     $(document).ready(function(){
-        $("#DeleteProduct").click(function(event){
+        $(".delete-btn-Product").click(function(event){
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
 
                 var deleteUrl = $(this).attr('href');

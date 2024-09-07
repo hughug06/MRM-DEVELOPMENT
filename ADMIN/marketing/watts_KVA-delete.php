@@ -7,7 +7,7 @@
         $sql = "DELETE from product_type where ProductTypeID=$id";
         try{
             if($result = mysqli_query($conn , $sql)){
-                echo json_encode(['status' => true, 'message' => 'Item deleted successfully']);
+                echo json_encode(['status' => true, 'message' => 'Product Type deleted successfully']);
             }else{
                 throw new Exception("Deletion failed");
             }
