@@ -1,17 +1,21 @@
 <?php
     require_once '../authetincation.php';
+    header('Content-Type: application/json');
     include "../../Database/database.php";
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $sql = "DELETE from product_type where ProductTypeID=$id";
         try{
-        $result = mysqli_query($conn , $sql);
+            if($result = mysqli_query($conn , $sql)){
+                echo json_encode(['status' => true, 'message' => 'Product Type deleted successfully']);
+            }else{
+                throw new Exception("Deletion failed");
+            }
         }
         catch(Exception){
-            echo "Cannot Delete Because the Selected Type is in use in Products Specification Table";
-            exit();
+            $error = "Deletion failed!: The Watts/KVA is currently in use on Products";
+            echo json_encode(['status' => false, 'message' => $error]);
         }
     }
-    header('location: marketing-product-control.php');
     exit;
 ?>
