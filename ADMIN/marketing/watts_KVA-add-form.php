@@ -68,7 +68,7 @@ require_once '../authetincation.php';
                         <div class="card custom-card">
                             <div class="card-header justify-content-between">
                                 <div class="card-title">Add Watts/KVA</div>
-                                <a href="marketing-product-control.php" class="btn btn-close p-0"></a>
+                                <a href="Category-Control.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
                                 <form action="function.php" method="POST">

@@ -19,7 +19,7 @@ global $conn;
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
-      header("location: marketing-product-control.php");
+      header("location: Category-Control.php");
       exit;
     }
 
@@ -35,12 +35,12 @@ global $conn;
         
         $sql = "update product_type set ProductType='$ProductType' , Watts_KVA= '$WattsKVA' where ProductTypeID='$ProductTypeID'";
         $result = mysqli_query($conn , $sql);
-        header("location: marketing-product-control.php");
+        header("location: Category-Control.php");
         exit();
     
   }
   else{
-    header("location: marketing-product-control.php");
+    header("location: Category-Control.php");
         exit();
   }
 ?>
@@ -107,7 +107,7 @@ global $conn;
                         <div class="card custom-card">
                             <div class="card-header justify-content-between">
                                 <div class="card-title">Edit Watts/KVA</div>
-                                <a href="marketing-product-control.php" class="btn btn-close p-0"></a>
+                                <a href="Category-Control.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
                                 <form  method="POST" action="watts_KVA-edit-form.php">
