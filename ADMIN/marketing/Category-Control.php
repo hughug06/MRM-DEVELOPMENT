@@ -192,9 +192,7 @@ require_once '../authetincation.php';
                                 confirmButtonText: 'OK' // Add an OK button
                             }).then((result) => {
                                 // Reload the page when the user clicks the OK button
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
+                                location.reload();
                             });
                         } else if(response.status === false) {
                             // Handle the error response

@@ -201,18 +201,16 @@ require_once '../authetincation.php';
                                 confirmButtonText: 'OK' // Add an OK button
                             }).then((result) => {
                                 // Reload the page when the user clicks the OK button
-                                if (result.isConfirmed) {
                                     location.reload();
-                                }
                             });
                         }
                         else{
                             Swal.fire({
-                  title: 'Error!',
-                  text: response.message,
-                  icon: 'error',
-                  confirmButtonText: 'ok'
-                })
+                            title: 'Error!',
+                            text: response.message,
+                            icon: 'error',
+                            confirmButtonText: 'ok'
+                            })
                         }
                     }
                 });
