@@ -62,7 +62,7 @@ elseif(isset($_POST['AddNewWattsKVA'])){
                             VALUES ('$newWattsKVA', '$newProductType')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Category Added successfully";
-                header('location: marketing-product-control.php');
+                header('location: Category-Control.php');
                 exit();
             }
             else {

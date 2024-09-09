@@ -10,7 +10,7 @@ require_once '../authetincation.php';
 
     <?php include_once('../../USER/partials/head.php') ?>
 
-    <title> Product control</title>
+    <title> Category control</title>
     
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -75,13 +75,14 @@ require_once '../authetincation.php';
                  
                 <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label">PRODUCT SPECIFICATION TABLE</label>
-                                    <a href="product-add-form.php">
+                                    <label class="main-content-label">Product Specification Category TABLE</label>
+                                    <a href="watts_KVA-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
+                                        <i class="fe fe-download-cloud pe-2"></i>ADD new Watts/KVA Category
                                         </button>
                                     </a>
                                 </div>
@@ -90,37 +91,28 @@ require_once '../authetincation.php';
                                 <div class="table-responsive userlist-table">
                                 <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
-                                            <tr>
-                                                <th class="wd-lg-8p"><span>ProductID</span></th>
-                                                <th class="wd-lg-20p"><span>Product Name</span></th>
-                                                <th class="wd-lg-20p"><span>Product Type</span></th>
-                                                <th class="wd-lg-20p"><span>Watts/KVA</span></th>
-                                                <th class="wd-lg-20p"><span>Stock</span></th>
-                                                <th class="wd-lg-20p"><span>Availability</span></th>
-                                                <th class="wd-lg-20p"><span>Image</span></th>
-                                                <th class="wd-lg-20p">Action</th>
+                                            <tr class="">
+                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                <th class="wd-lg-8p"><span>Product Type</span></th>
+                                                <th class="wd-lg-8p"><span>Watts/KVA</span></th>
+                                                <th class="wd-lg-8p"><span>Actions</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';
-                                           $select = "Select * from products inner join product_type on products.ProductTypeID = product_type.ProductTypeID";
+                                           $select = "Select * from product_type";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                <td><?= $resultItem['ProductID']?></td>
-                                                <td><?= $resultItem['ProductName']?></td>
-                                                <td><?= $resultItem['ProductType']?></td>
-                                                <td><?= $resultItem['Watts_KVA']?></td>
-                                                <td><?= $resultItem['Stock']?></td>
-                                                <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
-                                                <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
-                                                <td>                                                 
-                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
-                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
+                                                    <td><?= $resultItem['ProductTypeID']?></td>
+                                                    <td><?= $resultItem['ProductType']?></td>
+                                                    <td><?= $resultItem['ProductType'] == 'Solar Panel'? $resultItem['Watts_KVA'].'W':$resultItem['Watts_KVA'].'KVA'; ?></td>
+                                                <td>                                   
+                                                    <a href="watts_KVA-edit-form.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="watts_KVA-delete.php?id=<?= $resultItem['ProductTypeID'];  ?>" class="btn btn-sm btn-danger delete-btn-WattsKVA"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 
@@ -131,8 +123,7 @@ require_once '../authetincation.php';
                                            else{
 
                                            }
-                                           ?>
-                                                    
+                                           ?> 
                                         </tbody>
                                     </table>
                                 </div>
@@ -183,7 +174,7 @@ require_once '../authetincation.php';
 
     <script>
     $(document).ready(function(){
-        $(".delete-btn-Product").click(function(event){
+        $(".delete-btn-WattsKVA").click(function(event){
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
 
                 var deleteUrl = $(this).attr('href');
@@ -196,15 +187,15 @@ require_once '../authetincation.php';
                         if(response.status === true) {
                             // Handle the successful response
                             Swal.fire({
-                                title: "Product Deleted",
+                                title: "Category Deleted",
                                 icon: "success",
                                 confirmButtonText: 'OK' // Add an OK button
                             }).then((result) => {
                                 // Reload the page when the user clicks the OK button
-                                    location.reload();
+                                location.reload();
                             });
-                        }
-                        else{
+                        } else if(response.status === false) {
+                            // Handle the error response
                             Swal.fire({
                             title: 'Error!',
                             text: response.message,
