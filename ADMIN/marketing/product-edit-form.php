@@ -6,7 +6,6 @@ global $conn;
   $id="";
   $ProductName="";
   $ProductTypeID="";
-  $Stock = "";
   $Availability = "";
   $Image = "";
   $error="";
@@ -32,7 +31,6 @@ global $conn;
 
     $ProductName=$row["ProductName"];
     $ProductTypeID=$row["ProductTypeID"];
-    $Stock = $row["Stock"];
     $Availability = $row["Availability"];
     $Image = $row["Image"];
     $Description = $row["Description"];
@@ -48,7 +46,6 @@ global $conn;
         $ProductName= $_POST['ProductName'];
         $ProductTypeID=$_POST['ProductTypeID'];
         $WattsKVA = $_POST['WattsKVA'];
-        $Stock = $_POST['Stock'];
         $Availability = $_POST['Availability'] == true ? 1:0;
         $Description=$_POST['Description'];
         $Specification=$_POST['Specification'];
@@ -67,7 +64,7 @@ global $conn;
                 $upload = '../../assets/images/Product-Images/'.$ImageFileName;
                 move_uploaded_file($ImageTempName,$upload);
 
-                $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , WattsKVA= '$WattsKVA' , Stock='$Stock' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
+                $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , WattsKVA= '$WattsKVA' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -75,7 +72,7 @@ global $conn;
         }
         //WITHOUT IMAGE SUBMISSION
         else{
-            $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' ,  Stock='$Stock' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
+            $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -187,13 +184,6 @@ global $conn;
                                                     }
                                                 ?>
                                             </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Stock</label>
-                                            <div class="col-xl-12 mb-3">
-                                                <input type="number" class="form-control" placeholder="Username"
-                                                aria-label="Username" name="Stock" required value="<?= $Stock?>">
-                                            </div>
                                         </div>
                                         <div class="col-xl-12  mb-3">
                                             <label class="form-label">Description</label>

@@ -95,11 +95,6 @@ require_once '../authetincation.php';
                                             <select id="WattsKVAList" class="form-select py-2" name="ProductTypeID">
                                             </select>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Stock</label>
-                                            <input type="number" class="form-control" placeholder="Stock"
-                                                aria-label="email" name="Stock">
-                                        </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
                                             <textarea id="Description" name="Description" rows="6" class="col-xl-12 col-md-12 col-sm-12"></textarea>                              
