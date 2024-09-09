@@ -171,7 +171,7 @@
                             <div class="col-md-12 col-lg-12">
                                 <div class="card custom-card">
                                     <div class="card-header custom-card-header">
-                                        <h6 class="main-content-label mb-3">Categories</h6>
+                                        <h6 class="main-content-label">Categories</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
