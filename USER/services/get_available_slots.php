@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment_date = $_POST['appointment_date'];
 
     // Query to fetch available time slots for the selected date
-    $sql = "SELECT availability_id, start_time, end_time 
+    $sql = "SELECT availability_id, date , start_time, end_time 
             FROM admin_availability 
             WHERE date = '$appointment_date'";
     $result = mysqli_query($conn, $sql);
-    $date =  $_SESSION['date'];
+   
     
     $slots = array();
     if (mysqli_num_rows($result) > 0) {

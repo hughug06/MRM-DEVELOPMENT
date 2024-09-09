@@ -129,36 +129,40 @@
                     <div class="modal-content">
                     <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
                         <div class="login_form">
-                            <div class="main-container container-fluid">
-                                <div class="card-body p-5">
-                                
+                        <div class="main-container container-fluid">
+                            <div class="card p-5 shadow-lg">
                                 <div class="container calendar-container">
-                                    <div class="calendar-header">
+                                    <!-- Calendar Header -->
+                                    <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
                                         <h3 id="monthYear"></h3>
-                                        <button class="btn btn-outline-primary" id="prevMonth">Previous</button>
-                                        <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                        <div>
+                                            <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
+                                            <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                        </div>
                                     </div>
-                                    <div class="calendar-body" id="calendarDays"></div>
+                                    <!-- Calendar Body -->
+                                    <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
                                 </div>
+                            </div>
 
-                                <!-- Modal to display available time slots -->
-                                <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <ul id="availableTimes" class="list-group">
-                                                    <!-- Available times will be dynamically loaded here -->
-                                                </ul>
-                                            </div>
+                            <!-- Modal for Available Time Slots -->
+                            <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul id="availableTimes" class="list-group">
+                                                <!-- Available times will be dynamically loaded here -->
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
                             </div>
+                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -220,7 +224,6 @@
 </html>
 
 <script>
-    // JavaScript to generate the calendar dynamically
     document.addEventListener('DOMContentLoaded', function () {
         const calendarDays = document.getElementById('calendarDays');
         const monthYear = document.getElementById('monthYear');
@@ -233,28 +236,28 @@
             const year = date.getFullYear();
             const month = date.getMonth();
             monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
-            
-            // Get the first day of the month and the total number of days
+
+            const today = new Date();
             const firstDayOfMonth = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-            // Add empty placeholders for days of the previous month
+            // Add empty placeholders for days before the first day of the current month
             for (let i = 0; i < firstDayOfMonth; i++) {
-                calendarDays.innerHTML += '<div></div>';
+                calendarDays.innerHTML += '<div class="col"></div>';
             }
 
-            // Generate the days of the current month
+            // Generate days for the current month
             for (let day = 1; day <= daysInMonth; day++) {
-                calendarDays.innerHTML += `
-                    <div class="calendar-day">
-                        ${day}
-                      <button class="btn btn-sm btn-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center" 
-                        style="width: 10px; height: 10px; font-size: 0.8rem; padding: 0;" 
-                        onclick="openTimeSlotsModal('${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}')">
-                        <i class="bi bi-clock"></i> <!-- You can replace this with text if you want -->
-                    </button>
+                const fullDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                const isPast = new Date(year, month, day) < today.setHours(0, 0, 0, 0);
 
-                    </div>`;
+                // Disable past dates
+                const disabledClass = isPast ? 'disabled text-muted' : 'btn-primary';
+                const button = isPast
+                    ? `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" disabled>${day}</button>`
+                    : `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" onclick="openTimeSlotsModal('${fullDate}')">${day}</button>`;
+
+                calendarDays.innerHTML += `<div class="col text-center">${button}</div>`;
             }
         }
 
@@ -270,43 +273,42 @@
             renderCalendar(currentDate);
         });
 
-        // Initialize the calendar
+        // Initialize the calendar with the current date
         renderCalendar(currentDate);
     });
 
     // Function to open the modal and fetch available time slots for a selected date
     function openTimeSlotsModal(date) {
-    $('#selectedDate').text(date);  // Display the selected date in the modal
-    $('#availableTimes').empty();   // Clear previous time slots
+        $('#selectedDate').text(date);  // Display the selected date in the modal
+        $('#availableTimes').empty();   // Clear previous time slots
 
-    // AJAX request to get available time slots for the selected date
-    $.post('get_available_slots.php', { appointment_date: date }, function (response) {
-        const slots = JSON.parse(response);
-        if (slots.length > 0) {
-            slots.forEach(function (slot) {
-                $('#availableTimes').append(`
-                    <li class="list-group-item">
-                        ${slot.start_time} - ${slot.end_time} 
-                        <a href="book_requirements.php?availability_id=${slot.availability_id}&date=${date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
-                           class="btn btn-success btn-sm float-end">
-                           Book
-                        </a>
-                    </li>
-                `);
-            });
-        } else {
-            $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
-        }
-    });
+        // AJAX request to fetch available time slots from the PHP script
+        $.post('get_available_slots.php', { appointment_date: date }, function (response) {
+            const slots = JSON.parse(response);
+            if (slots.length > 0) {
+                slots.forEach(function (slot) {
+                    $('#availableTimes').append(`
+                        <li class="list-group-item">
+                            ${slot.start_time} - ${slot.end_time}
+                            <a href="book_requirements.php?availability_id=${slot.availability_id}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
+                               class="btn btn-success btn-sm float-end">
+                               Book
+                            </a>
+                        </li>
+                    `);
+                });
+            } else {
+                $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
+            }
+        });
 
-    // Show the modal
-    $('#timeSlotsModal').modal('show');
-}
-
-
+        // Show the modal
+        $('#timeSlotsModal').modal('show');
+    }
 </script>
 
-<!-- Bootstrap 5 JS and Popper.js -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>   -->
+
+
+
 
 
