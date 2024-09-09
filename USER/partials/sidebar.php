@@ -154,8 +154,8 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->  
-                <li class="slide has-sub <?= $page == 'services.php' || $page == '' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'services.php' || $page == '' ? 'active':''?>">
+                <li class="slide has-sub <?= $page == 'services.php' || $page == 'appointment.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'services.php' || $page == 'appointment.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
@@ -166,8 +166,8 @@
                         <li class="slide <?= $page == "services.php" ? 'active':''?>">
                             <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item <?= $page == 'services.php' ? 'active':''?>">Time Management</a>
                         </li> 
-                        <li class="slide <?= $page == '' ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Appointment</a>
+                        <li class="slide <?= $page == 'appointment.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/services/appointment.php" class="side-menu__item <?= $page == 'appointment.php' ? 'active':''?>">Appointment</a>
                         </li>                                
                     </ul>
                 </li>
