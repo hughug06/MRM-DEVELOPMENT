@@ -123,15 +123,14 @@
                 </li>
 
                 <!-- Start::slide -->
-                <li class="slide <?= $page == "services.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item <?= $page == "services.php" ? 'active':''?>">
+                <!-- <li class="slide ">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-gears side-menu__icon"></i>
-                        <!-- <i class="ion-ios-settings side-menu__icon"></i> -->
                         <span class="side-menu__label">Services</span>
                     </a>
-                </li>
+                </li> -->
                 <!-- End::slide -->                                           
                 
                 <!-- Start::slide -->  
@@ -153,6 +152,27 @@
                     </ul>
                 </li>
                 <!-- End::slide -->
+
+                <!-- Start::slide -->  
+                <li class="slide has-sub <?= $page == "marketing-product-control.php" || $page == 'Category-Control.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == "marketing-product-control.php" || $page == 'Category-Control.php' ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-gears side-menu__icon"></i>
+                        <span class="side-menu__label">Services</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1 active">
+                        <li class="slide <?= $page == "marketing-product-control.php" ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == "marketing-product-control.php" ? 'active':''?>">Time Management</a>
+                        </li> 
+                        <li class="slide <?= $page == "Category-Control.php" ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/marketing/Category-Control.php" class="side-menu__item <?= $page == "Category-Control.php" ? 'active':''?>">Appointment</a>
+                        </li>                                
+                    </ul>
+                </li>
+                <!-- End::slide -->
+
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "user-management.php" ? 'active':''?>">
