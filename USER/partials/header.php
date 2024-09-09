@@ -672,7 +672,7 @@
         <!-- End::header-element -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
-            <a href="/MRM-DEVELOPMENT/ADMIN/logout/function.php" class="header-link" name="logout">
+            <a href="#" id="logout-link" class="header-link" name="logout">
                 <i class="si si-logout header-link-icon"></i>
             </a>
             <!-- End::header-link -->
@@ -684,3 +684,53 @@
 <!-- End::main-header-container -->
 
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#logout-link').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            // Display SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for logout
+                    $.ajax({
+                        url: '/MRM-DEVELOPMENT/ADMIN/logout/function.php',
+                        success: function(response) {
+                            // Handle successful logout
+                            Swal.fire({
+                                title: 'Logged Out!',
+                                text: 'You have been successfully logged out.',
+                                icon: 'success',
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = '/MRM-DEVELOPMENT/index.php';
+                            });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error logging out. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>

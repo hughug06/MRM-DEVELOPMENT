@@ -581,9 +581,11 @@ $(document).ready(function() {
                   Swal.fire({
                   title: 'Success!',
                   text: response.message,
-                  confirmButtonText: 'ok'
-                })
-                 window.location.href = response.redirect;  // REDIRECT
+                  timer:2000,
+                  showConfirmButton: false // Hide the confirm button
+                }).then(() => {
+                  window.location.href = response.redirect;  // REDIRECT
+                });
               } else {
                   Swal.fire({
                   title: 'Error!',
