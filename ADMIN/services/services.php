@@ -335,32 +335,3 @@ require_once '../authetincation.php';
     populateStartTimes();
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('#availabilityForm').on('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            $.ajax({
-                url: "function.php", // URL specified in the form's action attribute
-                type: 'POST', // Use POST method
-                data: $(this).serialize(), // Serialize the form data
-                success: function(response) {
-                    // Handle the successful response here
-                   
-                    // Optionally, you can reset the form here
-                    if(response.success == true){
-                        Swal.fire({
-                title: "Account Created",
-                text: "Verification has ben send to your email",
-                icon: "success"
-                 })
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors here
-                    alert('An error occurred: ' + error);
-                }
-            });
-        });
-    });
-</script>
