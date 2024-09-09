@@ -713,6 +713,7 @@
                                 title: 'Logged Out!',
                                 text: 'You have been successfully logged out.',
                                 icon: 'success',
+                                allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer
                                 showConfirmButton: false // Hide the confirm button
                             }).then(() => {

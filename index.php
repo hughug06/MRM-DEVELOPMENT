@@ -543,7 +543,8 @@ $(document).ready(function() {
                   Swal.fire({
                 title: "Account Created",
                 text: "Verification has ben send to your email",
-                icon: "success"
+                icon: "success",
+                allowOutsideClick: false
                  });
                     $('#signupmodal').modal('hide');
                   //  window.location.href = "USER/generator/generator.php";
@@ -580,7 +581,9 @@ $(document).ready(function() {
                 if (response.success) {
                   Swal.fire({
                   title: 'Success!',
-                  text: response.message,
+                  text: 'Successfully Signed in!',
+                  icon: 'success',
+                  allowOutsideClick: false,
                   timer:2000,
                   showConfirmButton: false // Hide the confirm button
                 }).then(() => {
