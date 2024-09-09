@@ -139,7 +139,7 @@ require_once '../authetincation.php';
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">USER TABLE</label>
+                                    <label class="main-content-label mb-0">TIME MANAGEMENT</label>
                                     
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#availability">
                                         <i class="fe fe-download-cloud pe-2"></i>ADD TIME
