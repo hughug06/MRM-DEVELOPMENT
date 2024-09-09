@@ -95,7 +95,6 @@ require_once '../authetincation.php';
                                                 <th class="wd-lg-20p"><span>Product Name</span></th>
                                                 <th class="wd-lg-20p"><span>Product Type</span></th>
                                                 <th class="wd-lg-20p"><span>Watts/KVA</span></th>
-                                                <th class="wd-lg-20p"><span>Stock</span></th>
                                                 <th class="wd-lg-20p"><span>Availability</span></th>
                                                 <th class="wd-lg-20p"><span>Image</span></th>
                                                 <th class="wd-lg-20p">Action</th>
@@ -114,7 +113,6 @@ require_once '../authetincation.php';
                                                 <td><?= $resultItem['ProductName']?></td>
                                                 <td><?= $resultItem['ProductType']?></td>
                                                 <td><?= $resultItem['Watts_KVA']?></td>
-                                                <td><?= $resultItem['Stock']?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 

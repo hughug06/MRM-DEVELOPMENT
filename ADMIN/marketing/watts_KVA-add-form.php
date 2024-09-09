@@ -82,7 +82,7 @@ require_once '../authetincation.php';
                                         </div>                                                                                         
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <input type="number" class="form-control" placeholder="Stock"aria-label="email" name="newWattsKVA">                                                                   
+                                            <input type="number" class="form-control" placeholder="Watts/KVA"aria-label="email" name="newWattsKVA">                                                                   
                                         </div>
                                         <div class="col-md-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary" name="AddNewWattsKVA">Add</button>
