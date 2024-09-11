@@ -105,7 +105,9 @@ require_once '../../authetincation.php';
                                         <div class="col-md-6 mb-3">
                                                 <label class="form-label">Role</label>
                                                 <select id="inputState1" class="form-select" name="role">
-                                                    <option value="user">User</option>
+                                                    <option value="admin">admin</option>
+                                                    <option value="agent">agent</option>
+                                                    <option value="service_worker">service worker</option>
                                                 </select>
                                             </div>                                                       
                                         <div class="col-md-12 d-flex justify-content-end">

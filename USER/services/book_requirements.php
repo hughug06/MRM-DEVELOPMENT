@@ -12,16 +12,7 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
     
 } 
 
-if(isset($_POST['book']))
-    {
-        $brand = $_POST['brand'];
-        $product = $_POST['product'];
-        $power = $_POST['power'];
-        $running = $_POST['running_hours'];
-        $service_type = $_POST['service_type'];
-        echo $brand .$product .$power .$running .$service_type;
-        
-    }
+
 
 
 ?>

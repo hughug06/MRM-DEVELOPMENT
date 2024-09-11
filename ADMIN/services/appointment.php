@@ -73,17 +73,35 @@ require_once '../authetincation.php';
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     <div class="card" style="width: 18rem;">
-                
+                 <?php 
+                        $sql = "Select * from user_info INNER JOIN accounts on user_info.user_id = accounts.user_id where role = 'service_worker'";
+                        $result = mysqli_query($conn , $sql);
+                        if(mysqli_num_rows($result) > 0)
+                        {
+
+                                
+                                foreach($result as $resultitem)
+                                {                
+                        ?>
                         <div class="card-body">
-                            <h5 class="card-title">NAME EXAMPLE</h5>
-                            <p class="card-text">WORKER DESCRIPTION</p>
-                            <a href="#" class="btn btn-primary text-center">PICK</a>
+                            <form action="assign_worker.php" method="POST">
+                            <input type="hidden" name="user_id" id="user_id">
+                            <input type="hidden" name="appointment_id" id="appointment_id">
+                            <input type="hidden" name="account_id" value="<?= $resultitem['account_id'] ?>">
+                            <h5 class="card-title">NAME:<?= $resultitem['first_name']. " " . $resultitem['last_name'] ?></h5>
+                            <p class="card-text">ROLE: <?= $resultitem['role']?></p>
+                            <button name="pick"> pick </button>
+                            </form>
                         </div>
+                        <?php
+                                }
+                        }
+                        ?>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -137,14 +155,20 @@ require_once '../authetincation.php';
                                                                                 $delete_admin = "DELETE FROM admin_availability WHERE date < CURDATE()";
                                                                                 $admin = mysqli_query($conn , $delete_admin);
                                                                             }
-                                                                        } elseif ($resultItem['status'] === 'Approved') { 
+                                                                        } elseif ($resultItem['status'] === 'confirmed') { 
                                                                             echo 'table-success';  // Green for approved
                                                                         } 
                                                                         ?>">
                                                                         <?= $resultItem['status'] ?>
                                                                     </td>                               
                                                                     <td>                                                 
-                                                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">  <i class="fe fe-edit-2">ASSIGN</i> </button>
+                                                                    <a href="#" class="btn btn-sm btn-info assign-btn" 
+                                                                    data-account-id="<?= $resultItem['account_id'] ?>" 
+                                                                    data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#staticBackdrop">
+                                                                        <i class="fe fe-edit-2">ASSIGN</i>
+                                                                    </a>
                                                                         <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
                                                                     </td>
                                                                 </tr>
@@ -234,101 +258,21 @@ require_once '../authetincation.php';
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
  <!-- SWEET ALERT JS -->
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  $(document).ready(function() {
+    // When the assign button is clicked
+    $('.assign-btn').on('click', function() {
+    
+         // Get the account_id and appointment_id from data attributes
+         var userId = $(this).data('account-id');
+        var appointmentId = $(this).data('appointment-id');
 
-    // Initialize Flatpickr for the date input with restriction to disable past dates
-    flatpickr(".flatpickr-date", {
-        dateFormat: "Y-m-d",  
-        minDate: "today",
-        disableMobile: "true"
+        // Set the values in the modal's hidden fields or display them as needed
+        $('#user_id').val(userId);
+        $('#appointment_id').val(appointmentId);
+     
     });
-
-    // Generate time options for both start and end times
-    const startTimeSelect = document.getElementById('start_time');
-    const endTimeSelect = document.getElementById('end_time');
-
-    // Function to generate time options (9:00 AM - 6:00 PM in 30-minute intervals)
-    function generateTimeOptions() {
-        const times = [];
-        let startHour = 7 // Start time 9:00 AM
-        let endHour = 18;  // End time 6:00 PM
-
-        for (let i = startHour; i <= endHour; i++) {
-            let hour = i < 12 ? i : i - 12;
-            let suffix = i < 12 ? 'AM' : 'PM';
-            if (i === 12) suffix = 'PM'; // Noon case
-            if (i === 0) hour = 12; // Midnight case
-            times.push(`${hour}:00 ${suffix}`);
-            if (i !== endHour) times.push(`${hour}:30 ${suffix}`);
-        }
-
-        return times;
-    }
-
-    // Populate start time dropdown
-    function populateStartTimes() {
-        const times = generateTimeOptions();
-        times.forEach(time => {
-            const option = document.createElement('option');
-            option.value = time;
-            option.textContent = time;
-            startTimeSelect.appendChild(option);
-        });
-    }
-
-    // Populate end time dropdown with filtered times after start time
-    function populateEndTimes(startTime) {
-        // Clear existing options
-        endTimeSelect.innerHTML = '<option value="" disabled selected>Select end time</option>';
-
-        const times = generateTimeOptions();
-        const startIndex = times.indexOf(startTime) + 1; // Only show times after selected start time
-
-        // Populate end time options starting from the next available time
-        for (let i = startIndex; i < times.length; i++) {
-            const option = document.createElement('option');
-            option.value = times[i];
-            option.textContent = times[i];
-            endTimeSelect.appendChild(option);
-        }
-    }
-
-    // Event listener to handle dynamic end time population based on start time
-    startTimeSelect.addEventListener('change', function() {
-        const selectedStartTime = this.value;
-        populateEndTimes(selectedStartTime);
-    });
-
-    // Initial population of start times
-    populateStartTimes();
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#availabilityForm').on('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            $.ajax({
-                url: "function.php", // URL specified in the form's action attribute
-                type: 'POST', // Use POST method
-                data: $(this).serialize(), // Serialize the form data
-                success: function(response) {
-                    // Handle the successful response here
-                   
-                    // Optionally, you can reset the form here
-                    if(response.success == true){
-                        Swal.fire({
-                title: "Account Created",
-                text: "Verification has ben send to your email",
-                icon: "success"
-                 })
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors here
-                    alert('An error occurred: ' + error);
-                }
-            });
-        });
-    });
+  });
 </script>

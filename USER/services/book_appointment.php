@@ -26,6 +26,13 @@ if(isset($_POST['book']))
             $sql = "insert into appointments(account_id , availability_id , name , brand , product , power , running_hours , service_type, date , start_time, end_time)
                                 VALUES('$account_id','$availability_id', '$fullname' , '$brand','$power','$power','$running','$service_type','$date','$start_time','$end_time')";
             $result = mysqli_query($conn , $sql);
+
+            // UNSET ALL SESSION
+            unset($_SESSION['availability_id']);
+            unset($_SESSION['date']);
+            unset($_SESSION['start_time']);
+            unset($_SESSION['end_time']);
+            
         }       
     }
 ?>

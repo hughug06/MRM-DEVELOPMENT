@@ -174,8 +174,8 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->  
-                <li class="slide has-sub <?= $page == 'user-management.php' || $page == '' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == "user-management.php" || $page == '' ? 'active':''?>">
+                <li class="slide has-sub <?= $page == 'user-management.php' || $page == 'admin_management.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == "user-management.php" || $page == 'admin_management.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-user-pen side-menu__icon"></i>
@@ -184,10 +184,10 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == 'user-management.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == 'user-management.php' ? 'active':''?>">Admin</a>
+                            <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == 'user-management.php' ? 'active':''?>">Client</a>
                         </li> 
-                        <li class="slide <?= $page == "" ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == "" ? 'active':''?>">Client</a>
+                        <li class="slide <?= $page == "admin_management.php" ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/admin/admin_management.php" class="side-menu__item <?= $page == "admin_management.php" ? 'active':''?>">Admin</a>
                         </li>                                
                     </ul>
                 </li>

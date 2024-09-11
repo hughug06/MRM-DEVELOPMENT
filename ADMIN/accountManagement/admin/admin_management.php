@@ -1,6 +1,5 @@
 <?php 
   require_once '../../authetincation.php';
- 
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +73,7 @@
                             <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0">USER TABLE</label>
-                                    <a href="user-add-form.php">
+                                    <a href="admin-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
                                         <i class="fe fe-download-cloud pe-2"></i>ADD USER
                                         </button>
@@ -98,7 +97,7 @@
                                            <?php 
                                            require '../../../Database/database.php';
                                            require 'function.php';
-                                           $select = "Select * from user_info INNER JOIN accounts on user_info.email = accounts.email where role = 'user'";
+                                           $select = "Select * from user_info INNER JOIN accounts on user_info.email = accounts.email where role = 'admin' || role = 'service_worker' || role = 'agent'";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
@@ -109,8 +108,20 @@
                                                 <td><?= $resultItem['email']?></td>                        
                                                 <td><?= $resultItem['role']?></td>
                                                 <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
-                                                <td>                                                                                                   
-                                                    <a href="user-edit-form.php?id=<?= $resultItem['user_id']?>"  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                <td>                                                 
+                                                  <?php 
+
+                                                    $active = $_SESSION['admin_id'];
+                                                    if($active == $resultItem['account_id']){                                               
+                                                    ?>                                   
+                                                    <p class="text-success">Currently in use</p>
+                                                    <?php
+                                                
+                                                    }
+                                                    else{
+                                                                                                  
+                                                        ?>   
+                                                    <a href="admin-edit-form.php?id=<?= $resultItem['user_id']?>"  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <button data-id="<?= $resultItem['user_id'] ?>" class="btn btn-sm btn-danger delete-user">
                                                     <i class="fe fe-trash"></i>
                                                     </button>
@@ -118,6 +129,7 @@
                                             </tr>
 
                                                 <?php 
+                                                    }
                                             }
                                             
                                            }
@@ -194,6 +206,7 @@
 </body>
 
 </html>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).on('click', '.delete-user', function (e) {
@@ -203,7 +216,7 @@
     var userId = $(this).data('id');
     
         
-        Swal.fire({
+                Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
@@ -215,7 +228,7 @@
         if (result.isConfirmed) {
            
             $.ajax({
-        url: 'user-delete-form.php', // Your delete form PHP script
+        url: 'admin-delete-form.php', // Your delete form PHP script
         type: 'POST',
         data: { id: userId },
         success: function(response) {
