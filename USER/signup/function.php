@@ -17,17 +17,22 @@ if(isset($_POST['signup']))
   $password = $_POST['password'];
   $verify_token = md5(rand());
   $name_pattern = "/^[a-zA-Z\s]+$/"; // For names
-  $password_pattern = "/^[A-Za-z\d]{6,10}$/"; //for password
+  $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/"; 
 
   //update details ( start with upper case and the rest is lower case)
   $firstname = ucfirst(strtolower($firstname));
   $lastname = ucfirst(strtolower($lastname));
   $middlename = ucfirst(strtolower($middlename));
 //VALIDATE FIRSTNAME
+    if(empty($firstname) || empty($lastname) || empty($middlename) || empty($email) || empty($password)){
+      echo json_encode(['success' => false, 'message' => 'Please fill up required information']);
+      exit();
+    }
+
     if (!preg_match($name_pattern, $firstname)) {
       echo json_encode(['success' => false, 'message' => 'First name can only contain letters and spaces']);
       exit();
-  }
+    }
 //VALIDATE LASTNAME
   if (!preg_match($name_pattern, $lastname)) {
       echo json_encode(['success' => false, 'message' => 'Last name can only contain letters and spaces']);
@@ -41,9 +46,9 @@ if(isset($_POST['signup']))
 
   // Validate password
   if (!preg_match($password_pattern, $password)) {
-    echo json_encode(['success' => false, 'message' => 'Password must be 6-10 characters long and contain only letters and numbers']);
+    echo json_encode(['success' => false, 'message' => 'Password must be 6-10 characters long, contain at least one lowercase letter, one uppercase letter, and one number']);
     exit();
-}
+  }
 //HASH PASSWORD, REGEX PURPOSES THATS WHY ITS POSITION HERE
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
