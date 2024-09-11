@@ -187,11 +187,11 @@ global $conn;
                                         </div>
                                         <div class="col-xl-12  mb-3">
                                             <label class="form-label">Description</label>
-                                            <textarea name="Description" class="col-xl-12 col-md-12 col-sm-12" rows="6"><?= $Description?></textarea>
+                                            <textarea name="Description" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Description?></textarea>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" class="col-xl-12 col-md-12 col-sm-12" rows="6"><?= $Specification?></textarea>                            
+                                            <textarea name="Specification" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Specification?></textarea>                            
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox"  name="Availability"  <?= $Availability == true ? 'checked' : ''?>>
