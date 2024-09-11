@@ -84,24 +84,33 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select" name="" required>
+                                            <select id="ProdType" class="form-select py-2" name="" required>
                                                 <option value="">Select Type</option>
                                                 <option value="Generator">Generator</option>
                                                 <option value="Solar Panel">Solar Panel</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label">Watts/KVA</label>
                                             <select id="WattsKVAList" class="form-select py-2" name="ProductTypeID">
                                             </select>
                                         </div>
+                                        <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
+                                            <input id="Custom" type="checkbox" name="" required>
+                                            <label for="Custom" class="fw-bold">Custom</label>
+                                        </div>
+                                        <div class="col-xl-12 col-12 mb-3 d-none">
+                                            <label class="form-label">Custom Watts/KVA</label>
+                                            <input type="number" class="form-control py-2" id="input-number" placeholder="Watts/KVA">
+                                            </select>
+                                        </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
-                                            <textarea id="Description" name="Description" rows="6" class="col-xl-12 col-md-12 col-sm-12"></textarea>                              
+                                            <textarea id="Description" name="Description" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" class="col-xl-12 col-md-12 col-sm-12"></textarea>                              
+                                            <textarea name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox" name="Availability" required>

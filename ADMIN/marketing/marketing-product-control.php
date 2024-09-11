@@ -77,8 +77,15 @@ require_once '../authetincation.php';
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-2">
                                     <label class="main-content-label">PRODUCT SPECIFICATION TABLE</label>
+                                    <div class="ms-auto">
+                                        <select id="" class="form-select bg-outline-primary py-2 rounded-1" name="" required>
+                                            <option value="All">All</option>
+                                            <option value="Generator">Generator</option>
+                                            <option value="Solar Panel">Solar Panel</option>
+                                        </select>
+                                    </div>
                                     <a href="product-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
                                         <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
