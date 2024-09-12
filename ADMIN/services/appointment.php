@@ -12,7 +12,7 @@ require_once '../authetincation.php';
 <head>
 
     <!-- Meta Data -->
-    <?php include_once(__DIR__.'../../../USER/partials/head.php')?>
+    <?php include_once(__DIR__.'../../../partials/head.php')?>
     <title> Inquries </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -58,10 +58,10 @@ require_once '../authetincation.php';
     <div class="page">
 
              <!-- app-header -->
-             <?php include_once( __DIR__.'../../../USER/partials/header.php')?>
+             <?php include_once( __DIR__.'../../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__.'../../../USER/partials/sidebar.php')?>
+            <?php include_once(__DIR__.'../../../partials/sidebar.php')?>
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
@@ -123,7 +123,7 @@ require_once '../authetincation.php';
                                                         <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                                             <thead>
                                                                 <tr>
-                                                                <th class="wd-lg-20p"><span>Name</span></th>      
+                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
                                                                     <th class="wd-lg-8p"><span>Service type</span></th> 
                                                                     <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
                                                                     <th class="wd-lg-20p"><span>Schedule</span></th>      
@@ -198,7 +198,7 @@ require_once '../authetincation.php';
 
         
         <!-- Footer Start -->
-        <?php include_once(__DIR__.'../../../USER/partials/footer.php') ?>
+        <?php include_once(__DIR__.'../../../partials/footer.php') ?>
         <!-- Footer End -->  
     </div>
 

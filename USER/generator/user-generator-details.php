@@ -38,7 +38,7 @@ global $conn;
 
     <!-- Meta Data -->
     <?php 
-    include_once(__DIR__. '/../partials/head.php');
+    include_once(__DIR__. '/../../partials/head.php');
 
     ?>
     <title> DETAILS </title>
@@ -88,10 +88,10 @@ global $conn;
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once(__DIR__. '/../partials/header.php') ?>
+         <?php include_once(__DIR__. '/../../partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once(__DIR__. '/../partials/sidebar.php') ?>
+        <?php include_once(__DIR__. '/../../partials/sidebar.php') ?>
         <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
@@ -279,7 +279,7 @@ global $conn;
 
        
         <!-- Footer Start -->
-        <?php include_once('partials/footer.php') ?>
+        <?php include_once(__DIR__. '/../../partials/footers.php') ?>
         <!-- Footer End -->
         
 

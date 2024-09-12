@@ -90,7 +90,7 @@ global $conn;
 <head>
 
     <!-- Meta Data -->
-    <?php include_once('../../USER/partials/head.php') ?>
+    <?php include_once('../../partials/head.php') ?>
     <title> Account Control </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -132,10 +132,10 @@ global $conn;
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once('../../USER/partials/header.php') ?>
+         <?php include_once('../../partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once('../../USER/partials/sidebar.php') ?>
+        <?php include_once('../../partials/sidebar.php') ?>
         <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
@@ -214,7 +214,7 @@ global $conn;
         <!-- End::app-content -->
         
         <!-- Footer Start -->
-        <?php include_once('../../USER/partials/footer.php') ?>
+        <?php include_once('../../partials/footer.php') ?>
         <!-- Footer End -->
     </div>
 

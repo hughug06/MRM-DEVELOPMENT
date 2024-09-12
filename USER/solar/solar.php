@@ -10,7 +10,7 @@
 <head>
 
     <!-- Meta Data -->
-    <?php include_once(__DIR__. '/../partials/head.php')?>
+    <?php include_once(__DIR__. '/../../partials/head.php')?>
     <title> Products Overview </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -58,10 +58,10 @@
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once(__DIR__. '/../partials/header.php')?>
+         <?php include_once(__DIR__. '/../../partials/header.php')?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once(__DIR__. '/../partials/sidebar.php')?>
+        <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
@@ -192,7 +192,7 @@
         <!-- End::app-content -->
         
         <!-- Footer Start -->
-        <?php  include_once(__DIR__. '/../partials/footer.php')?>
+        <?php  include_once(__DIR__. '/../../partials/footer.php')?>
         <!-- Footer End -->
        
 

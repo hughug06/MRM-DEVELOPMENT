@@ -6,7 +6,7 @@
     <!-- Meta Data -->
     <?php 
     
-    include_once(__DIR__. '/../partials/head.php');
+    include_once(__DIR__. '/../../partials/head.php');
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
@@ -54,10 +54,10 @@
     <div class="page">
 
              <!-- app-header -->
-             <?php include_once(__DIR__. '/../partials/header.php')?>
+             <?php include_once(__DIR__. '/../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__. '/../partials/sidebar.php')?>
+            <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
@@ -68,7 +68,7 @@
 
         
         <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../partials/footer.php') ?>
+        <?php include_once(__DIR__. '/../../partials/footer.php') ?>
         <!-- Footer End -->  
     </div>
 

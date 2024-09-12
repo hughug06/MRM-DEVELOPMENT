@@ -93,10 +93,10 @@ global $conn;
 
     <div class="page">
          <!-- app-header -->
-         <?php include_once('../../USER/partials/header.php') ?>
+         <?php include_once('../../partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
-        <?php include_once('../../USER/partials/sidebar.php') ?>
+        <?php include_once('../../partials/sidebar.php') ?>
         <!-- End::app-sidebar -->
 
         <!-- Start::app-content -->
@@ -141,7 +141,7 @@ global $conn;
         <!-- End::app-content -->
 
         <!-- Footer Start -->
-        <?php include_once('../../USER/partials/footer.php') ?>
+        <?php include_once('../../partials/footer.php') ?>
         <!-- Footer End -->
     </div>
 
