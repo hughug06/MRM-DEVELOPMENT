@@ -228,6 +228,15 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN - WORKER</span></li>
                 <!-- End::slide__category -->
+
+                <li class="slide <?= $page == "dashboard.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/worker/dashboard.php" class="side-menu__item <?= $page == "dashboard.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-chart-line side-menu__icon"></i>
+                        <span class="side-menu__label">Dashboard</span>
+                    </a>
+                </li>
                 
                 <li class="slide has-sub <?= $page == '' || $page == '' ? 'active open':''?>">
                     <a href="javascript:void(0);" class="side-menu__item <?= $page == "" || $page == '' ? 'active':''?>">
@@ -246,6 +255,8 @@
                         </li>                                
                     </ul>
                 </li>
+
+                
 
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>
