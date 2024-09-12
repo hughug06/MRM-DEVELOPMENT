@@ -1,10 +1,44 @@
+<?php 
+session_start();
+require_once '../../Database/database.php';       
+               
+$userid = $_SESSION['user_id'];
+$select = "select * from user_info left join accounts on user_info.user_id = accounts.user_id where accounts.user_id = '$userid'";
+$result = mysqli_query($conn , $select);
+
+        if(mysqli_num_rows($result) > 0)
+        {
+            $row = mysqli_fetch_assoc($result);
+            $fullname = $row['first_name'] . " " .$row['last_name'];
+            $firstname = $row['first_name'];
+            $lastname = $row['last_name'];
+            $middlename = $row['middle_name'];
+            $email = $row['email'];
+        
+        }
+
+
+        if(isset($_POST['save_edit'])){
+            $fname = $_POST['firstname'];
+            $lname = $_POST['lastname'];
+            $mname = $_POST['middlename'];
+         
+            $upd = "UPDATE user_info SET first_name='$fname', last_name='$lname' , middle_name='$mname' WHERE user_id='$userid'";
+            $upd_result = mysqli_query($conn , $upd);
+            header("Location: profile.php");
+            
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
 <head>
 
     <!-- Meta Data -->
-    <?php include_once(__DIR__. '/../../partials/head.php')?>
+    <?php
+    include_once(__DIR__. '/../../partials/head.php')
+    ?>
     <title> Products Overview </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -51,7 +85,7 @@
 
         <!-- Start::app-sidebar -->
         <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
-
+       
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
@@ -62,18 +96,9 @@
                                 <div class="panel profile-cover">
                                     <div class="profile-cover__img">
                                         <img src="../../assets/images/faces/1.jpg" alt="img">
-                                        <h3 class="h3">Sonia Taylor</h3>
+                                        <h3 class="h3"><?= $fullname ?></h3>
                                     </div>
-                                    <div class="btn-profile">
-                                        <button class="btn rounded-10 btn-danger">
-                                            <i class="fa fa-plus"></i>
-                                            <span>Follow</span>
-                                        </button>
-                                        <button class="btn rounded-10 btn-success">
-                                            <i class="fa fa-comment"></i>
-                                            <span>Message</span>
-                                        </button>
-                                    </div>
+                                    
                                     <div class="profile-cover__action bg-img"></div>
                                     <div class="profile-cover__info">
                                         <ul class="nav">
@@ -88,8 +113,7 @@
                                         <a class="nav-link" data-bs-toggle="tab" href="#edit">Edit Profile</a>
                                         <a class="nav-link" data-bs-toggle="tab" href="#chaintercom">Chaintercom</a>
                                         <a class="nav-link" data-bs-toggle="tab" href="#service">Service</a>
-                                        <!-- <a class="nav-link" data-bs-toggle="tab" href="#friends">Friends</a>
-                                        <a class="nav-link" data-bs-toggle="tab" href="#settings">Account Settings</a> -->
+
                                     </nav>
                                 </div>
                             </div>
@@ -162,25 +186,16 @@
                                         <div class="main-content-body tab-pane p-4 border-top-0" id="edit">
                                             <div class="card-body border">
                                                 <div class="mb-4 main-content-label">Personal Information</div>
-                                                <form class="form-horizontal">
-                                                    <div class="mb-4 main-content-label">Name</div>
-                                                    <div class="form-group ">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">User Name</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="User Name" value="Mack Adamia">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <form class="form-horizontal" method="POST" action="profile.php">
+                                                   
+                                                    
                                                     <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
                                                                 <label class="form-label">First Name</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="First Name" value="Mack Adamia">
+                                                                <input type="text" class="form-control" placeholder="First Name" value="<?= $firstname ?>" name="firstname">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,105 +205,44 @@
                                                                 <label class="form-label">last Name</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="Last Name" value="Mack Adamia">
+                                                                <input type="text" class="form-control" placeholder="Last Name" value="<?= $lastname ?>" name="lastname">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
-                                                                <label class="form-label">Nick Name</label>
+                                                                <label class="form-label">Middle Name</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="Nick Name" value="Spruha">
+                                                                <input type="text" class="form-control" placeholder="Middle Name" value="<?= $middlename ?>" name="middlename">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group ">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Designation</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="Designation" value="Web Designer">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                  
                                                     <div class="mb-4 main-content-label">Contact Info</div>
                                                     <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
-                                                                <label class="form-label">Email<i>(required)</i></label>
+                                                                <label class="form-label">Email<i>(fixed)</i></label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="Email" value="info@Spruha.in">
+                                                                <input type="text" class="form-control" placeholder="Email" value="<?= $email ?>" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group ">
+                                                    <!-- <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
-                                                                <label class="form-label">Website</label>
+                                                                <label class="form-label">Contact number</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="Website" value="@spruko.w">
+                                                                <input type="text" class="form-control" value="info@Spruha.in">
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Phone</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" placeholder="phone number" value="+245 354 654">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Address</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <textarea class="form-control" name="example-textarea-input" rows="2" placeholder="Address">San Francisco, CA</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4 main-content-label">About Yourself</div>
-                                                    <div class="form-group ">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Biographical Info</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <textarea class="form-control" name="example-textarea-input" rows="4" placeholder="">pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure..</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-4 main-content-label">Email Preferences</div>
-                                                    <div class="form-group mb-0">
-                                                        <div class="row row-sm">
-                                                            <div class="col-md-3">
-                                                                <label class="form-label">Verified User</label>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
-                                                                    <label class="form-check-label" for="flexCheckDefault1">
-                                                                        Accept to receive post or page notification emails
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
-                                                                    <label class="form-check-label" for="flexCheckDefault2">
-                                                                        Accept to receive email sent to multiple recipients
-                                                                    </label>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    </div> -->
+                                                                                                                                                       
+                                                    <button name="save_edit">Save</button>
                                                 </form>
                                             </div>
                                         </div>
