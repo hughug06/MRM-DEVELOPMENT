@@ -182,18 +182,29 @@
                                             <option selected value="All">All</option>
                                             <?php 
                                                 require '../../Database/database.php';
-                                                $select = "Select Watts_KVA from products Where ProductType='Generator'";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                                ?> 
-                                                        <option <?= $resultItem['Watts_KVA'] == $selectedWatts? "selected value=".$resultItem['Watts_KVA']  : "value=".$resultItem['Watts_KVA']  ?>><?= $resultItem['Watts_KVA'].'KVA'?></option>
-                                                <?php 
+                                                $select = "SELECT Watts_KVA FROM products WHERE ProductType='Generator'";
+                                                $result = mysqli_query($conn, $select);
+
+                                                if (mysqli_num_rows($result) > 0) {
+                                                    $KVAList = []; // Array to keep track of already displayed Watts_KVA values
+                                                    
+                                                    foreach ($result as $resultItem) {
+                                                        // Check if the Watts_KVA value is already in the array
+                                                        if (!in_array($resultItem['Watts_KVA'], $KVAList)) {
+                                                            // Add the current Watts_KVA value to the array to avoid duplicates
+                                                            $KVAList[] = $resultItem['Watts_KVA'];
+                                                            
+                                                            ?>
+                                                            <option <?= $resultItem['Watts_KVA'] == $selectedWatts ? "selected value=".$resultItem['Watts_KVA']  : "value=".$resultItem['Watts_KVA']  ?>>
+                                                                <?= $resultItem['Watts_KVA'] == $selectedWatts ? $resultItem['Watts_KVA']."KVA - Selected" : $resultItem['Watts_KVA']."KVA" ?>
+                                                            </option>
+                                                            <?php 
+                                                        }
                                                     }
+                                                } else {
+                                                    // Handle case when there are no results
                                                 }
-                                                else{
-                                                    }
-                                                    ?>
+                                            ?>
                                             </select>
                                         </div>
                                         

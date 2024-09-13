@@ -90,19 +90,18 @@ require_once '../authetincation.php';
                                                 <option value="Solar Panel">Solar Panel</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6 col-6 mb-3">
+                                        <div id="WattsKVAInputDisplay" class="col-md-6 col-6 mb-3">
                                             <label class="form-label">Watts/KVA</label>
                                             <select id="WattsKVAList" class="form-select py-2" name="WattsKVA">
                                             </select>
                                         </div>
-                                        <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
-                                            <input id="Custom" type="checkbox" name="Custom_WK_Check" value="1">
-                                            <label for="Custom" class="fw-bold">Custom</label>
-                                        </div>
-                                        <div class="col-xl-12 col-12 mb-3">
+                                        <div class="col-md-6 col-6 mb-3" id="CustomWattsKVAContainer" style="display: none;">
                                             <label class="form-label">Custom Watts/KVA</label>
                                             <input type="number" class="form-control py-2" id="InputCustomWattsKVA" placeholder="Watts/KVA" name="CustomWattsKVA">
-                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
+                                            <input id="Custom" type="checkbox" name="Custom_WK_Check" value="1" onclick="toggleCustomWattsKVA()">
+                                            <label for="Custom" class="fw-bold">Custom</label>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
@@ -176,6 +175,19 @@ require_once '../authetincation.php';
                 }
             });
         });
+        function toggleCustomWattsKVA() {
+            var customCheckbox = document.getElementById("Custom");
+            var customWattsInput = document.getElementById("CustomWattsKVAContainer");
+            var WattsKVAInputDisplay = document.getElementById("WattsKVAInputDisplay");
+
+            if (customCheckbox.checked) {
+                customWattsInput.style.display = "block";
+                WattsKVAInputDisplay.style.display = "none";
+            } else {
+                customWattsInput.style.display = "none";
+                WattsKVAInputDisplay.style.display = "block";
+            }
+        }
     </script>
 
     <!-- Popper JS -->
