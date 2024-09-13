@@ -161,8 +161,14 @@ require_once '../authetincation.php';
                         success: function(response) {
                             if (response.success) {
                                 $('#WattsKVAList').empty();
+                                var existingValues = []; // Array to track existing values
+                                
                                 $.each(response.data.WattsKVA, function(index, item) {
-                                    $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                    // Check if the value is already in the existingValues array
+                                    if (!existingValues.includes(item.value)) {
+                                        $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                        existingValues.push(item.value); // Add value to the array
+                                    }
                                 });
                             } else {
                                 alert('No Watts/KVA');
