@@ -1,7 +1,9 @@
 <?php
+
     require_once '../../Database/database.php';
     $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductType = 'Generator'";
     $all_products = $conn->query($sql);
+    session_start();
 ?>
 
 <!DOCTYPE html>

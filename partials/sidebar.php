@@ -1,6 +1,4 @@
-<?php 
-
-?>
+>
 
 <aside class="app-sidebar sticky" id="sidebar">
 
@@ -102,7 +100,6 @@
                     </a>
                 </li>
                 <?php 
-                
                 if($_SESSION['auth'] == true)
                 {
             
