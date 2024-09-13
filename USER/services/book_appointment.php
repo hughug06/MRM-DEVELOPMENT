@@ -13,6 +13,7 @@ if(isset($_POST['book']))
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
             $fullname = $first_name . " " .$last_name;   
+            $location = $_POST['location'];
             $brand = $_POST['brand'];
             $product = $_POST['product'];
             $power = $_POST['power'];
@@ -23,16 +24,16 @@ if(isset($_POST['book']))
             $date = $_SESSION['date'];
             $start_time = $_SESSION['start_time'];
             $end_time = $_SESSION['end_time'];
-            $sql = "insert into appointments(account_id , availability_id , name , brand , product , power , running_hours , service_type, date , start_time, end_time)
-                                VALUES('$account_id','$availability_id', '$fullname' , '$brand','$power','$power','$running','$service_type','$date','$start_time','$end_time')";
+            $sql = "insert into appointments(account_id , availability_id , name, location , brand , product , power , running_hours , service_type, date , start_time, end_time)
+                                VALUES('$account_id','$availability_id', '$fullname', '$location' , '$brand','$power','$power','$running','$service_type','$date','$start_time','$end_time')";
             $result = mysqli_query($conn , $sql);
-
+         
             // UNSET ALL SESSION
             unset($_SESSION['availability_id']);
             unset($_SESSION['date']);
             unset($_SESSION['start_time']);
             unset($_SESSION['end_time']);
-            
+            header("Location: service.php");
         }       
     }
 ?>
