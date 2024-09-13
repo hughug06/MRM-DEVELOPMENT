@@ -1,12 +1,9 @@
 <?php
 // get_available_slots.php
-session_start();
+
 include '../../Database/database.php'; // Include your database connection
 
-$delete_appoint = "DELETE FROM appointments WHERE date < CURDATE()";
-$delete_admin = "DELETE FROM admin_availability WHERE date < CURDATE()";
-$appoint = mysqli_query($conn , $delete_appoint);
-$admin = mysqli_query($conn , $delete_admin);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment_date = $_POST['appointment_date'];
