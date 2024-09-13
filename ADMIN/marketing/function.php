@@ -4,13 +4,19 @@ require_once '../authetincation.php';
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];
-    $ProductTypeID = $_POST['ProductTypeID'];
     $Availability = $_POST['Availability'] == true ? 1:0;
     $Description = $_POST['Description'];
     $Specification = $_POST['Specification'];
- 
+    $ProductType = $_POST['ProductType'];
+
+    if (isset($_POST['Custom_WK_Check']) && $_POST['Custom_WK_Check'] === '1') {
+      $WattsKVA = $_POST['CustomWattsKVA'];
+    } else {
+      $WattsKVA = $_POST['WattsKVA'];
+    }
+
     //WITH IMAGE SUBMISSION
-    if($ProductName != '' || $ProductTypeID != ''){  
+    if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
       if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
         $Image = $_FILES['image'];
         $ImageFileName = $Image['name'];
@@ -24,8 +30,8 @@ if(isset($_POST['AddProduct']))
           $upload = '../../assets/images/Product-Images/'.$ImageFileName;
           move_uploaded_file($ImageTempName,$upload);
 
-          $sql_insert = "insert into products (ProductName,ProductTypeID,Availability, Image, Description, Specification) 
-                            VALUES ('$ProductName' , '$ProductTypeID' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
+          $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification) 
+                            VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
                 header('location: marketing-product-control.php');
@@ -39,8 +45,8 @@ if(isset($_POST['AddProduct']))
       }
       //WITHOUT IMAGE SUBMISSION
       else{                                                               
-        $sql_insert = "insert into products (ProductName,ProductTypeID,Availability, Image, Description, Specification) 
-                            VALUES ('$ProductName' , '$ProductTypeID' , '$Availability', NULL, '$Description', '$Specification')";
+        $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification) 
+                            VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
                 header('location: marketing-product-control.php');
@@ -54,23 +60,10 @@ if(isset($_POST['AddProduct']))
         //ERROR MESSAGE
     }
 }
-elseif(isset($_POST['AddNewWattsKVA'])){
-  $newWattsKVA = $_POST['newWattsKVA'];
-  $newProductType = $_POST['newProductType'];
-  $sql_insert = "insert into product_type (Watts_KVA, ProductType) 
-                            VALUES ('$newWattsKVA', '$newProductType')";
-            if (mysqli_query($conn, $sql_insert)) {
-                echo "Category Added successfully";
-                header('location: Category-Control.php');
-                exit();
-            }
-            else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-}elseif (isset($_POST['PrType'])) {
+elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
-  $sql = "SELECT Watts_KVA, ProductTypeID FROM product_type WHERE ProductType = ?";
+  $sql = "SELECT Watts_KVA FROM products WHERE ProductType = ?";
   if ($stmt = $conn->prepare($sql)) {
       // Bind parameters
       $stmt->bind_param("s", $PrType);
@@ -80,9 +73,8 @@ elseif(isset($_POST['AddNewWattsKVA'])){
 
       if ($result->num_rows > 0) {
           $WattsKVA = [];
-          $ProductTypeID = [];
           while ($row = $result->fetch_assoc()) {
-              $WattsKVA[] = ['value' => $row['ProductTypeID'],'text' => $PrType == 'Solar Panel'? $row['Watts_KVA'].'W': $row['Watts_KVA'].'KVA'];
+              $WattsKVA[] = ['value' => $row['Watts_KVA'],'text' => $PrType == 'Solar Panel'? $row['Watts_KVA'].'W': $row['Watts_KVA'].'KVA'];
           }
           echo json_encode(['success' => true, 'data' => ['WattsKVA' => $WattsKVA]]);
       } else {
@@ -96,6 +88,5 @@ elseif(isset($_POST['AddNewWattsKVA'])){
 
   $conn->close();
 }
-
 
 ?>
