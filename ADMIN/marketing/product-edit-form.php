@@ -5,15 +5,15 @@ include_once '../../Database/database.php';
 global $conn;
   $id="";
   $ProductName="";
-  $ProductTypeID="";
+  $ProductType="";
   $Availability = "";
   $Image = "";
   $error="";
   $success="";
   $Description="";
   $Specification="";
-  $ProductType="";
   $Watts_KVA="";
+  $wattskvaidentifier="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
@@ -21,7 +21,7 @@ global $conn;
       exit;
     }
     $id = $_GET['id'];
-    $sql = "select * from products INNER JOIN product_type on products.ProductTypeID = product_type.ProductTypeID where ProductID=$id";
+    $sql = "select * from products where ProductID=$id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
@@ -30,7 +30,6 @@ global $conn;
     }
 
     $ProductName=$row["ProductName"];
-    $ProductTypeID=$row["ProductTypeID"];
     $Availability = $row["Availability"];
     $Image = $row["Image"];
     $Description = $row["Description"];
@@ -43,9 +42,6 @@ global $conn;
   elseif(isset($_POST['save'])){
 
         $id = $_POST["id"];
-        $ProductName= $_POST['ProductName'];
-        $ProductTypeID=$_POST['ProductTypeID'];
-        $WattsKVA = $_POST['WattsKVA'];
         $Availability = $_POST['Availability'] == true ? 1:0;
         $Description=$_POST['Description'];
         $Specification=$_POST['Specification'];
@@ -64,7 +60,7 @@ global $conn;
                 $upload = '../../assets/images/Product-Images/'.$ImageFileName;
                 move_uploaded_file($ImageTempName,$upload);
 
-                $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , WattsKVA= '$WattsKVA' , Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
+                $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -72,7 +68,7 @@ global $conn;
         }
         //WITHOUT IMAGE SUBMISSION
         else{
-            $sql = "update products set ProductName='$ProductName' , ProductTypeID= '$ProductTypeID' , Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
+            $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
                 $result = mysqli_query($conn , $sql);
                 header("location: marketing-product-control.php");
                 exit();
@@ -155,34 +151,19 @@ global $conn;
                                             <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>">
+                                                aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>" disabled>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select py-2" name="" required>
+                                            <select class="form-select py-2" name="ProductType" disabled>
                                                 <option <?= $ProductType == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
                                                 <option <?= $ProductType == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <select id="WattsKVAList" class="form-select py-2" name="ProductTypeID">
-                                                <?php 
-                                                    require '../../Database/database.php';
-                                                    $select = "Select Watts_KVA, ProductTypeID from product_type where ProductType ='".$ProductType."'";
-                                                    $result = mysqli_query($conn , $select);
-                                                    if(mysqli_num_rows($result) > 0) {
-                                                        foreach($result as $resultItem){
-                                                            $wattskva = $resultItem['Watts_KVA'];
-                                                            $PTypeID = $resultItem['ProductTypeID']; ?> 
-                                                            <option <?= $wattskva == $wattskvaidentifier? 'selected value="'.$PTypeID.'"' : 'value="'.$PTypeID.'"' ;?>><?= $wattskva ?></option>
-                                                            <?php 
-                                                        }
-                                                    }
-                                                    else {
-
-                                                    }
-                                                ?>
+                                            <select class="form-select py-2" name="Watts_KVA" disabled> 
+                                                <option><?= $Watts_KVA ?></option>
                                             </select>
                                         </div>
                                         <div class="col-xl-12  mb-3">
@@ -221,33 +202,7 @@ global $conn;
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#ProdType').change(function() {
-                $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                var ProdType = $(this).val();
-                if (ProdType) {
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data: { PrType: ProdType },
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.success) {
-                                $('#WattsKVAList').empty();
-                                $.each(response.data.WattsKVA, function(index, item) {
-                                    $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                });
-                            } else {
-                                alert('No Watts/KVA');
-                            }
-                        }
-                    });
-                } else {
-                    $('#WattsKVAList').empty();
-                    $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-                }
-            });
-        });
+        //AJAX NEEDED FOR CONFIRMATION
     </script>
 
     

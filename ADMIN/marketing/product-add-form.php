@@ -84,7 +84,7 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
-                                            <select id="ProdType" class="form-select py-2" name="" required>
+                                            <select id="ProdType" class="form-select py-2" name="ProductType" required>
                                                 <option value="">Select Type</option>
                                                 <option value="Generator">Generator</option>
                                                 <option value="Solar Panel">Solar Panel</option>
@@ -92,16 +92,16 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label">Watts/KVA</label>
-                                            <select id="WattsKVAList" class="form-select py-2" name="ProductTypeID">
+                                            <select id="WattsKVAList" class="form-select py-2" name="WattsKVA">
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
-                                            <input id="Custom" type="checkbox" name="" required>
+                                            <input id="Custom" type="checkbox" name="Custom_WK_Check" value="1">
                                             <label for="Custom" class="fw-bold">Custom</label>
                                         </div>
-                                        <div class="col-xl-12 col-12 mb-3 d-none">
+                                        <div class="col-xl-12 col-12 mb-3">
                                             <label class="form-label">Custom Watts/KVA</label>
-                                            <input type="number" class="form-control py-2" id="input-number" placeholder="Watts/KVA">
+                                            <input type="number" class="form-control py-2" id="InputCustomWattsKVA" placeholder="Watts/KVA" name="CustomWattsKVA">
                                             </select>
                                         </div>
                                         <div class="col-xl-12 mb-3">

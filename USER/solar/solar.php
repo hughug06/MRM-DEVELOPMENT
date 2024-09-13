@@ -1,7 +1,24 @@
 <?php
     require_once '../../Database/database.php';
-    $sql = "SELECT * FROM products inner join product_type on products.ProductTypeID = product_type.ProductTypeID Where Availability = 1 and ProductType = 'Solar Panel'";
-    $all_products = $conn->query($sql);
+    $wattsID="";
+    $selectedWatts = "";
+        if(isset($_GET['watts'])){
+            $wattsID = $_GET['watts'];
+            if($wattsID == "All"){
+                header("location: solar.php");
+                exit; 
+            }
+            else{
+                $selectedWatts = $wattsID;
+                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts";
+                $all_products = $conn->query($sql);
+            }
+        }
+        else{
+            $sql = "SELECT * FROM products Where Availability = 1 and ProductType = 'Solar Panel'";
+            $all_products = $conn->query($sql);
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,9 +70,6 @@
 
     
 
-
-    
-
     <div class="page">
          <!-- app-header -->
          <?php include_once(__DIR__. '/../partials/header.php')?>
@@ -68,6 +82,8 @@
             <div class="container-fluid">
 
                 <!-- Page Header -->
+
+                
 
                 <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
                   <div>
@@ -85,8 +101,8 @@
                 <!-- Start::row-1 -->
                 <div class="row row-sm">
                     <div class="col-md-8 col-lg-9">
-                        <div class="row row-sm">
-
+                        <div id="ProductList" class="row row-sm">
+                        
                         <?php
                         while($row = mysqli_fetch_assoc($all_products)){
                             $id=$row['ProductID']
@@ -100,7 +116,6 @@
                                                 <a href="user-solar-details.php?id=<?= $row['ProductID'];  ?>" class="image">
                                                     <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
                                                 </a>
-                                                
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
@@ -121,15 +136,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <?php
-                            }
-                            ?>
 
-                            
+
+                        <?php
+                        }
+                        ?>
+
                         </div>
+
+
+
                         <nav>
-                            <ul class="pagination justify-content-center">
+                            <ul class="pagination justify-content-end">
                                 <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Prev</a></li>
                                 <li class="page-item active"><a class="page-link" href="user-solar-panel.php">1</a></li>
                                 <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Next</a></li>
@@ -155,30 +173,33 @@
                             <div class="col-md-12 col-lg-12">
                                 <div class="card custom-card">
                                     <div class="card-header custom-card-header">
-                                        <h6 class="main-content-label">Categories</h6>
+                                        <h6 class="main-content-label mb-3">Categories</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label class="form-label">Watts</label>
+                                            <label class="form-label">KVA</label>
                                             <select name="beast" id="Category" class="form-control" data-trigger>
-                                            <option selected value="">All</option>
+                                            <option selected value="All">All</option>
                                             <?php 
                                                 require '../../Database/database.php';
-                                                $select = "Select Watts_KVA, ProductTypeID from product_type Where ProductType='Solar Panel'";
+                                                $select = "Select Watts_KVA from products Where ProductType='Solar Panel'";
                                                 $result = mysqli_query($conn , $select);
                                                 if(mysqli_num_rows($result) > 0){
                                                     foreach($result as $resultItem){
-                                            ?> 
-                                                        <option value="<?= $resultItem['ProductTypeID']?>"><?= $resultItem['Watts_KVA'].'W'?></option>
-                                            <?php 
+                                                ?> 
+                                                        <option <?= $resultItem['Watts_KVA'] == $selectedWatts? "selected value=".$resultItem['Watts_KVA']  : "value=".$resultItem['Watts_KVA']  ?>><?= $resultItem['Watts_KVA'].'KVA'?></option>
+                                                <?php 
                                                     }
                                                 }
                                                 else{
-                                                }
-                                            ?>
+                                                    }
+                                                    ?>
                                             </select>
                                         </div>
                                         
+                                        <div class="d-grid">
+                                            <a class="btn ripple btn-primary btn-block" href="javascript:void(0);">Apply Filter</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -186,18 +207,16 @@
                     </div>
                 </div>
                 <!--End::row-1 -->
-
+                
             </div>
         </div>
         <!-- End::app-content -->
+
         
         <!-- Footer Start -->
         <?php  include_once(__DIR__. '/../partials/footer.php')?>
         <!-- Footer End -->
        
-
-
-
     </div>
 
     
@@ -212,8 +231,9 @@
         document.getElementById('Category').addEventListener('change', function() {
             var selectedValue = this.value;
             if (selectedValue) {
+                
                 // Redirect to the same page with the selected value as a query parameter
-                window.location.href = "solar-filter.php?watts=" + selectedValue;
+                window.location.href = "solar.php?watts=" + selectedValue;
             }
         });
     </script>

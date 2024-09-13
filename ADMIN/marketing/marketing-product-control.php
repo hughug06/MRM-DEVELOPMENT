@@ -110,7 +110,7 @@ require_once '../authetincation.php';
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';
-                                           $select = "Select * from products inner join product_type on products.ProductTypeID = product_type.ProductTypeID";
+                                           $select = "Select * from products";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
@@ -119,7 +119,7 @@ require_once '../authetincation.php';
                                                 <td><?= $resultItem['ProductID']?></td>
                                                 <td><?= $resultItem['ProductName']?></td>
                                                 <td><?= $resultItem['ProductType']?></td>
-                                                <td><?= $resultItem['Watts_KVA']?></td>
+                                                <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>
                                                 <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
