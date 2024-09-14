@@ -1,5 +1,3 @@
->
-
 <aside class="app-sidebar sticky" id="sidebar">
 
     <!-- Start::main-sidebar-header -->
@@ -24,6 +22,18 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
             </div>
             <ul class="main-menu pt-4">   
+
+                <li class="slide <?= $page == "user-dashboard.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
+                        <!-- <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i> -->
+                        <i class="fa-solid fa-house side-menu__icon"></i>
+                        <span class="side-menu__label">Dashboard</span>
+                    </a>
+                </li>
+
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Products</span></li>
                 <!-- End::slide__category -->
