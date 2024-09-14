@@ -38,6 +38,49 @@ if(isset($_SESSION['login'])){
     <!-- Icons Css -->
     <link href="assets/css/icons.css" rel="stylesheet">
 
+    <style>
+     /* Loading Overlay */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darker background for better visibility */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Spinner */
+.spinner {
+    border: 16px solid #f3f3f3; /* Light grey background */
+    border-top: 16px solid #3498db; /* Blue spinner */
+    border-radius: 50%;
+    width: 80px; /* Reduced size for a more compact look */
+    height: 80px;
+    animation: spin 1.5s linear infinite; /* Faster spin animation */
+    position: relative; /* Centering text inside the spinner */
+}
+
+/* Spinner Text */
+.spinner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff; /* White text for contrast */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+    </style>
 </head>
 <body>  
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -451,6 +494,9 @@ if(isset($_SESSION['login'])){
           </div>
       </section>
       <!-- team ends -->
+      <div id="loadingOverlay" style="display:none;">
+    <div class="spinner"></div>
+</div>
       <!-- Contact starts -->
       <section id="contact" class="contact section-padding">
         <div class="container mt-5 mb-5">
@@ -534,12 +580,16 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            type: "POST",
-            url: "user/signup/function.php",
-            data: formData,
-            dataType: "json", // Expect JSON response from the server
-            success: function(response) {
-                if (response.success) {
+    type: "POST",
+    url: "user/signup/function.php",
+    data: formData,
+    dataType: "json",
+    beforeSend: function() {
+        $('#loadingOverlay').show(); // Show the loading indicator
+    },
+    success: function(response) {
+        $('#loadingOverlay').hide(); // Hide the loading indicator
+        if (response.success) {
                   Swal.fire({
                 title: "Account Created",
                 text: "Verification has ben send to your email",
@@ -557,12 +607,14 @@ $(document).ready(function() {
                 })
                     
                 }
-            },
-            error: function(xhr, status, error) {
-                alert("Something went wrong. Please try again.");
-                console.log(xhr.responseText);
-            }
-        });
+    },
+    error: function(xhr, status, error) {
+        $('#loadingOverlay').hide(); // Hide the loading indicator
+        alert("Something went wrong. Please try again.");
+        console.log(xhr.responseText);
+    }
+});
+
     });
 });
 
