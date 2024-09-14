@@ -80,7 +80,7 @@ require_once '../authetincation.php';
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" placeholder="Product Name" aria-label="Full Name" name="ProductName">
+                                            <input type="text" id="PName" class="form-control" placeholder="Product Name" aria-label="Full Name" name="ProductName" required>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
@@ -91,12 +91,12 @@ require_once '../authetincation.php';
                                             </select>
                                         </div>
                                         <div id="WattsKVAInputDisplay" class="col-md-6 col-6 mb-3">
-                                            <label class="form-label">Watts/KVA</label>
+                                            <label class="form-label">Power Output (Watts/KVA)</label>
                                             <select id="WattsKVAList" class="form-select py-2" name="WattsKVA">
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3" id="CustomWattsKVAContainer" style="display: none;">
-                                            <label class="form-label">Custom Watts/KVA</label>
+                                            <label class="form-label">Custom Power Output (Watts/KVA)</label>
                                             <input type="number" class="form-control py-2" id="InputCustomWattsKVA" placeholder="Watts/KVA" name="CustomWattsKVA">
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
@@ -112,14 +112,14 @@ require_once '../authetincation.php';
                                             <textarea name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
-                                            <input id="availability" type="checkbox" name="Availability" required>
+                                            <input id="availability" type="checkbox" name="Availability">
                                             <label for="availability" class="fw-bold">Availability</label>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <input type="file" name="image">
                                         </div>    
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary" name="AddProduct">Add</button>
+                                            <button id="ConfirmAdd" type="submit" class="btn btn-primary" name="AddProduct">Add</button>
                                         </div>
                                     </div>
                                 </form>
@@ -180,7 +180,75 @@ require_once '../authetincation.php';
                     $('#WattsKVAList').append('<option value="">Select Product Type</option>');
                 }
             });
+
+            
+            $('#ConfirmAdd').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                var PName = document.getElementById("PName");
+                var PType = document.getElementById("ProdType");
+                var customCheckbox = document.getElementById("Custom");
+                if(customCheckbox.checked){
+                    var PPower = document.getElementById("InputCustomWattsKVA");
+                }else {
+                    var PPower = document.getElementById("WattsKVAList");
+                }
+                // Display SweetAlert confirmation
+                var PName_value = PName.value;
+                var PType_value = PType.value;
+                var PPower_value = PPower.value;
+                if(PName_value == "" || PType_value == "" || PPower_value == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information in Product Name, Product Type, or Power Output",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                } 
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Please Confirm the details of the Product!<br>Product Name: "+PName_value+"<br>Product Type: "+PType_value+"<br>Power Output: "+PPower_value,
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If user confirms, send AJAX request for logout
+                            $.ajax({
+                                url: 'function.php',
+                                success: function(response) {
+                                    // Handle successful logout
+                                    Swal.fire({
+                                        title: 'Product Added!',
+                                        text: 'You have successfully added the product.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'marketing-product-control.php';
+                                    });
+                                },
+                                error: function() {
+                                    // Handle error
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error logging out. Please try again.',
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         });
+        
+        
         function toggleCustomWattsKVA() {
             var customCheckbox = document.getElementById("Custom");
             var customWattsInput = document.getElementById("CustomWattsKVAContainer");
@@ -194,6 +262,7 @@ require_once '../authetincation.php';
                 WattsKVAInputDisplay.style.display = "block";
             }
         }
+        
     </script>
 
     <!-- Popper JS -->

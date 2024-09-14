@@ -1,17 +1,17 @@
+
 <?php 
 require_once '../authetincation.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
 <head>
 
     <!-- Meta Data -->
-
-    <?php include_once('../../partials/head.php') ?>
-
-    <title> Product control</title>
-    
+    <?php include_once(__DIR__.'../../../partials/head.php')?>
+    <title> Inquries </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
@@ -43,84 +43,72 @@ require_once '../authetincation.php';
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    <!-- Prism CSS -->
-    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
+
 
 </head>
 
 <body>
 
-    
-
-
-    
 
     <div class="page">
 
-         <!-- app-header -->
-         <?php include_once('../../partials/header.php') ?>
-        <!-- /app-header -->
+             <!-- app-header -->
+             <?php include_once( __DIR__.'../../../partials/header.php')?>
+            <!-- /app-header -->
+            <!-- Start::app-sidebar -->
+            <?php include_once(__DIR__.'../../../partials/sidebar.php')?>
+            <!-- End::app-sidebar -->
 
-        <!-- Start::app-sidebar -->
-        <?php include_once('../../partials/sidebar.php') ?>
-        <!-- End::app-sidebar -->
+            <!--APP-CONTENT START-->
+            <div class="main-content app-content">
+                <div class="container-fluid">
+        
+                        
+                <!-- MODAL FOR SET AVAILABILITY -->                       
 
-        <!--APP-CONTENT START-->
-        <div class="main-content app-content">
-            <div class="container-fluid">
 
-               
-
-                <!-- Start::row-1 -->
-                 
+                <!--  SHOW ALREADY CREATED TIME -->
                 <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
-                            <div class="card-header border-bottom-0 d-block">
+                            <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label">PRODUCT TABLE</label>
-                                    <a href="product-add-form.php">
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
+                                    <label class="main-content-label mb-0">TIME MANAGEMENT</label>
+                                    
+                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#availability">
+                                        <i class="fe fe-download-cloud pe-2"></i>ADD TIME
                                         </button>
-                                    </a>
+                                   
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
-                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0">
+                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
-                                                <th class="wd-lg-8p"><span>ProductID</span></th>
-                                                <th class="wd-lg-20p"><span>Product Name</span></th>
-                                                <th class="wd-lg-20p"><span>Type</span></th>
-                                                <th class="wd-lg-20p"><span>Watts</span></th>
-                                                <th class="wd-lg-20p"><span>Stock</span></th>
-                                                <th class="wd-lg-20p"><span>Availability</span></th>
-                                                <th class="wd-lg-20p"><span>Image</span></th>
+                                            <th class="wd-lg-20p"><span>admin</span></th>       
+                                                <th class="wd-lg-8p"><span>Date</span></th>
+                                                <th class="wd-lg-20p"><span>Start time</span></th>
+                                                <th class="wd-lg-20p"><span>End Time</span></th>                                                   
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                            <?php 
-                                           require '../../Database/database.php';
-                                           $select = "Select * from products";
+                                           require '../../Database/database.php';                                          
+                                           $select = "Select * from admin_availability";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                <td><?= $resultItem['ProductID']?></td>
-                                                <td><?= $resultItem['ProductName']?></td>
-                                                <td><?= $resultItem['Type']?></td>
-                                                <td><?= $resultItem['Watts']?>w </td>
-                                                <td><?= $resultItem['Stock']?></td>
-                                                <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
-                                                <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
+                                                 <td><?= $resultItem['account_id']?></td>     
+                                                <td><?= $resultItem['date']?></td>                                        
+                                                <td><?= $resultItem['start_time']?></td>                        
+                                                <td><?= $resultItem['end_time']?></td>                                           
                                                 <td>                                                 
-                                                    <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger"><i class="fe fe-trash"></i></a>
-                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
+                                                    <a href=""  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
+                                                    <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 
@@ -136,35 +124,24 @@ require_once '../authetincation.php';
                                         </tbody>
                                     </table>
                                 </div>
-                                <nav aria-label="...">
-                                    <ul class="pagination mt-4 mb-0 float-end">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">Previous</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link">2</span>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0);">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                               
                             </div>
+
+                           
                         </div>
                     </div><!-- COL END -->
                 </div>
-                <!--End::row-1 -->
 
+
+                
+               </div>
             </div>
-        </div>
-        <!--APP-CONTENT CLOSE-->
+            <!--APP-CONTENT CLOSE-->
 
         
         <!-- Footer Start -->
-        <?php include_once('../../partials/footer.php') ?>
-        <!-- Footer End -->
-
+        <?php include_once(__DIR__.'../../../partials/footer.php') ?>
+        <!-- Footer End -->  
     </div>
 
     
@@ -188,7 +165,7 @@ require_once '../authetincation.php';
     <script src="../../assets/libs/node-waves/waves.min.js"></script>
 
     <!-- Sticky JS -->
-    <script src="../../assets/js/sticky.js"></script>
+    <script src="../../../assets/js/sticky.js"></script>
 
     <!-- Simplebar JS -->
     <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
@@ -212,3 +189,17 @@ require_once '../authetincation.php';
 </body>
 
 </html>
+
+<!-- Bootstrap 5 Icons CDN (for icons) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Flatpickr CSS (for custom date picker) -->
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+
+<!-- Flatpickr JS (for custom date picker) -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+ <!-- SWEET ALERT JS -->
+ 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+</script>

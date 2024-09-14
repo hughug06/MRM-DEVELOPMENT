@@ -101,7 +101,7 @@ require_once '../authetincation.php';
                                                 <th class="wd-lg-8p"><span>ProductID</span></th>
                                                 <th class="wd-lg-20p"><span>Product Name</span></th>
                                                 <th class="wd-lg-20p"><span>Product Type</span></th>
-                                                <th class="wd-lg-20p"><span>Watts/KVA</span></th>
+                                                <th class="wd-lg-20p"><span>Power Output</span></th>
                                                 <th class="wd-lg-20p"><span>Availability</span></th>
                                                 <th class="wd-lg-20p"><span>Image</span></th>
                                                 <th class="wd-lg-20p">Action</th>
@@ -118,9 +118,9 @@ require_once '../authetincation.php';
                                                  <tr>
                                                 <td><?= $resultItem['ProductID']?></td>
                                                 <td><?= $resultItem['ProductName']?></td>
-                                                <td><?= $resultItem['ProductType']?></td>
+                                                <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>
                                                 <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>
-                                                <td><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
+                                                <td <?= $resultItem['Availability'] == 1 ? 'class="text-success"':'class="text-danger"'?>><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>

@@ -34,7 +34,7 @@ if(isset($_POST['AddProduct']))
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
-                header('location: marketing-product-control.php');
+                header('Content-Type: application/json');
                 exit();
             }
             else {
@@ -49,7 +49,7 @@ if(isset($_POST['AddProduct']))
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
                 echo "Product Added successfully";
-                header('location: marketing-product-control.php');
+                header('Content-Type: application/json');
                 exit();
               } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);

@@ -108,7 +108,7 @@
                                                 <td><?= $resultItem['first_name']. " " . $resultItem['last_name']?></td>
                                                 <td><?= $resultItem['email']?></td>                        
                                                 <td><?= $resultItem['role']?></td>
-                                                <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
+                                                <td <?= $resultItem['is_ban'] == 1 ? 'class="text-danger"':'class="text-success"'?>><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                                                                   
                                                     <a href="user-edit-form.php?id=<?= $resultItem['user_id']?>"  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <button data-id="<?= $resultItem['user_id'] ?>" class="btn btn-sm btn-danger delete-user">

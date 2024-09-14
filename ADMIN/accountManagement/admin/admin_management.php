@@ -107,7 +107,7 @@
                                                 <td><?= $resultItem['first_name']. " " . $resultItem['last_name']?></td>
                                                 <td><?= $resultItem['email']?></td>                        
                                                 <td><?= $resultItem['role']?></td>
-                                                <td><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
+                                                <td <?= $resultItem['is_ban'] == 1 ? 'class="text-danger"':'class="text-success"'?>><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
                                                   <?php 
 

@@ -169,7 +169,7 @@ require_once '../authetincation.php';
                                                 ?> 
                                                  <tr>
                                                  <td><?= $resultItem['account_id']?></td>     
-                                                <td><?= $resultItem['date']?></td>                                        
+                                                <td class="text-success"><?= $resultItem['date']?></td>                                        
                                                 <td><?= $resultItem['start_time']?></td>                        
                                                 <td><?= $resultItem['end_time']?></td>                                           
                                                 <td>                                                 

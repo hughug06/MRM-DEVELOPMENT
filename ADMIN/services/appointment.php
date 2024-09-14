@@ -147,7 +147,7 @@ require_once '../authetincation.php';
                                                                     <td class="
                                                                         <?php 
                                                                         if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'table-warning';  // Yellow for pending
+                                                                            echo 'text-warning';  // Yellow for pending
                                                                             $delete_appoint = "DELETE FROM appointments WHERE date < CURDATE() AND status = 'Pending'";                                                                           
                                                                             $appoint = mysqli_query($conn , $delete_appoint);                                                                                                   
                                                                             if($appoint)
@@ -155,8 +155,8 @@ require_once '../authetincation.php';
                                                                                 $delete_admin = "DELETE FROM admin_availability WHERE date < CURDATE()";
                                                                                 $admin = mysqli_query($conn , $delete_admin);
                                                                             }
-                                                                        } elseif ($resultItem['status'] === 'confirmed') { 
-                                                                            echo 'table-success';  // Green for approved
+                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
+                                                                            echo 'text-success';  // Green for approved
                                                                         } 
                                                                         ?>">
                                                                         <?= $resultItem['status'] ?>
