@@ -49,6 +49,10 @@ session_start();
                             echo json_encode(['success' => true, 'redirect' => 'USER\solar\solar.php']);
 
                         }
+                        else if($role == 'service_worker'){
+                            $_SESSION['worker_id'] = $id;
+                            echo json_encode(['success' => true, 'redirect' => 'ADMIN\worker\dashboard.php']);
+                        }
                         
                     }
                     
