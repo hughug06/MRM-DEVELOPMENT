@@ -140,8 +140,11 @@
                 <!-- End::slide -->                                           
                 
                 <!-- Start::slide -->  
-                <li class="slide has-sub <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' ? 'active':''?>">
+                <li class="slide has-sub 
+                <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' 
+                || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active open':''?>"
+                >
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-box side-menu__icon"></i>
@@ -150,7 +153,7 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == 'marketing-product-control.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == 'marketing-product-control.php' ? 'active':''?>">Product Control</a>
+                            <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active':''?>">Product Control</a>
                         </li> 
                         <li class="slide <?= $page == 'Category-Control.php' ? 'active':''?>">
                             <a href="/MRM-DEVELOPMENT/ADMIN/marketing/Category-Control.php" class="side-menu__item <?= $page == 'Category-Control.php' ? 'active':''?>">Category Control</a>
