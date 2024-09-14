@@ -1,6 +1,8 @@
 <?php 
 require '../../Database/database.php';
 require_once '../authetincation.php';
+
+
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];
@@ -60,6 +62,9 @@ if(isset($_POST['AddProduct']))
         //ERROR MESSAGE
     }
 }
+
+
+
 elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection

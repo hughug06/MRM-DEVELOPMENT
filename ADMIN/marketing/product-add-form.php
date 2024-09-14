@@ -116,7 +116,7 @@ require_once '../authetincation.php';
                                             <label for="availability" class="fw-bold">Availability</label>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <input type="file" name="image">
+                                            <input id="image" type="file" name="image">
                                         </div>    
                                         <div class="col-md-12">
                                             <button id="ConfirmAdd" type="submit" class="btn btn-primary" name="AddProduct">Add</button>
@@ -190,6 +190,7 @@ require_once '../authetincation.php';
                 var specification_ID = document.getElementById("Specs");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
+                var custom_ID = document.getElementById("Custom");
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomWattsKVA");
                 }else {
@@ -202,6 +203,8 @@ require_once '../authetincation.php';
                 var specification = specification_ID.value;
                 var description = description_ID.value;
                 var availability = availability_ID.value;
+                var custom = custom_ID.value;
+                var image = document.getElementById("image").files[0];
                 if(PName_value == "" || PType_value == "" || PPower_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -223,20 +226,27 @@ require_once '../authetincation.php';
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
+                            var formData = new FormData();
+                            formData.append('AddProduct', true);
+                            formData.append('Custom_WK_Check', custom);
+                            formData.append('ProductName', PName_value);
+                            formData.append('Availability', availability);
+                            formData.append('Description', description);
+                            formData.append('Specification', specification);
+                            formData.append('CustomWattsKVA', PPower_value);
+                            formData.append('WattsKVA', PPower_value);
+                            formData.append('ProductType', PType_value);
+                            if (image) {
+                                formData.append('image', image);
+                            } // Add the file to FormData
+                            
                             $.ajax({
                                 url: 'function.php',
                                 type: 'POST',
                                 dataType: 'json',
-                                data:{
-                                    AddProduct:true,
-                                    ProductName: PName_value,
-                                    Availability:availability,
-                                    Description:description,
-                                    Specification:specification,
-                                    ProductType:PType_value,
-                                    CustomWattsKVA:PType_value,
-                                    WattsKVA:PType_value
-                                },
+                                data:formData,
+                                processData: false,
+                                contentType: false,
                                 success: function(response) {
                                     // Handle successful add
                                     Swal.fire({
