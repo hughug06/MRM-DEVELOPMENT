@@ -190,36 +190,48 @@ require_once '../authetincation.php';
     $(document).ready(function(){
         $(".delete-btn-Product").click(function(event){
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
-
-                var deleteUrl = $(this).attr('href');
-
-                $.ajax({
-                    url: deleteUrl,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        if(response.status === true) {
-                            // Handle the successful response
-                            Swal.fire({
-                                title: "Product Deleted",
-                                icon: "success",
-                                confirmButtonText: 'OK' // Add an OK button
-                            }).then((result) => {
-                                // Reload the page when the user clicks the OK button
-                                    location.reload();
+            var deleteUrl = $(this).attr('href');
+            Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to delete this product?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for logout
+                        $.ajax({
+                            url: deleteUrl,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(response) {
+                                // Handle successful logout
+                                Swal.fire({
+                                    title: 'Product Deleted!',
+                                    text: 'You have successfully deleted the product.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'marketing-product-control.php';
                             });
+                        },
+                        error: function() {
+                                // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the product. Please try again.',
+                                'error'
+                            );
                         }
-                        else{
-                            Swal.fire({
-                            title: 'Error!',
-                            text: response.message,
-                            icon: 'error',
-                            confirmButtonText: 'ok'
-                            })
-                        }
-                    }
-                });
+                    });
+                }
+
         });
+
+
     });
     </script>
 

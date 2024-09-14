@@ -109,7 +109,7 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
+                                            <textarea id="Specs" name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox" name="Availability">
@@ -187,6 +187,9 @@ require_once '../authetincation.php';
                 var PName = document.getElementById("PName");
                 var PType = document.getElementById("ProdType");
                 var customCheckbox = document.getElementById("Custom");
+                var specification_ID = document.getElementById("Specs");
+                var description_ID = document.getElementById("Description");
+                var availability_ID = document.getElementById("availability");
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomWattsKVA");
                 }else {
@@ -196,6 +199,9 @@ require_once '../authetincation.php';
                 var PName_value = PName.value;
                 var PType_value = PType.value;
                 var PPower_value = PPower.value;
+                var specification = specification_ID.value;
+                var description = description_ID.value;
+                var availability = availability_ID.value;
                 if(PName_value == "" || PType_value == "" || PPower_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -216,11 +222,23 @@ require_once '../authetincation.php';
                         showCancelButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // If user confirms, send AJAX request for logout
+                            // If user confirms, send AJAX request for Add product
                             $.ajax({
                                 url: 'function.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data:{
+                                    AddProduct:true,
+                                    ProductName: PName_value,
+                                    Availability:availability,
+                                    Description:description,
+                                    Specification:specification,
+                                    ProductType:PType_value,
+                                    CustomWattsKVA:PType_value,
+                                    WattsKVA:PType_value
+                                },
                                 success: function(response) {
-                                    // Handle successful logout
+                                    // Handle successful add
                                     Swal.fire({
                                         title: 'Product Added!',
                                         text: 'You have successfully added the product.',
@@ -237,7 +255,7 @@ require_once '../authetincation.php';
                                     // Handle error
                                     Swal.fire(
                                         'Error!',
-                                        'There was an error logging out. Please try again.',
+                                        'There was an error Adding product. Please try again.',
                                         'error'
                                     );
                                 }

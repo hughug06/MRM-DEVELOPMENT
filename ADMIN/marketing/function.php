@@ -33,7 +33,7 @@ if(isset($_POST['AddProduct']))
           $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification) 
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
-                echo "Product Added successfully";
+                echo json_encode(['success' => true]);
                 header('Content-Type: application/json');
                 exit();
             }
@@ -48,7 +48,7 @@ if(isset($_POST['AddProduct']))
         $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification) 
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
-                echo "Product Added successfully";
+              echo json_encode(['success' => true]);
                 header('Content-Type: application/json');
                 exit();
               } else {
