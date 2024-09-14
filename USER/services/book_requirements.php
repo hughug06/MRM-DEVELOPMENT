@@ -62,7 +62,9 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
 
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> -->
+     <link rel="stylesheet" href="../../assets/libs/leaflet/leaflet.css">
+    
     <style>
         #map {
             height: 400px;
@@ -289,8 +291,8 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../../assets/libs/leaflet/leaflet.js"></script>
+<script src="../../assets/js/leaflet.js"></script>
     <script>
         // SCRIPT USE TO SHOW MAPS AND GET THE VALUE, AND PASS TO LOCATION INPUT
         let map;
