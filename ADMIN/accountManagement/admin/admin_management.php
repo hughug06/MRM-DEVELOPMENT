@@ -101,12 +101,18 @@
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
+                                                if($resultItem['role'] == "service_worker"){
+                                                    $roles = "service worker";
+                                                }
+                                                else{
+                                                    $roles = $resultItem['role'];
+                                                }
                                                 ?> 
                                                  <tr>
                                                 <td><?= $resultItem['account_id']?></td>
                                                 <td><?= $resultItem['first_name']. " " . $resultItem['last_name']?></td>
                                                 <td><?= $resultItem['email']?></td>                        
-                                                <td><?= $resultItem['role']?></td>
+                                                <td <?= $roles == "admin"? 'class ="text-info"':($roles == "service worker" ? 'class="text-warning"' : 'class="text-secondary"') ?>><?= $roles?></td>
                                                 <td <?= $resultItem['is_ban'] == 1 ? 'class="text-danger"':'class="text-success"'?>><?= $resultItem['is_ban'] == 1 ? "Banned":"Active"?></td>
                                                 <td>                                                 
                                                   <?php 
