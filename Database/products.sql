@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2024 at 08:00 PM
+-- Generation Time: Sep 14, 2024 at 07:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `products` (
   `ProductID` int(11) NOT NULL,
   `ProductName` varchar(100) NOT NULL,
+  `ProductType` varchar(20) NOT NULL,
+  `Watts_KVA` int(11) NOT NULL,
   `Description` text NOT NULL,
-  `ProductTypeID` int(11) DEFAULT NULL,
-  `Stock` int(11) DEFAULT 0,
   `Availability` tinyint(1) DEFAULT 1,
   `Image` varchar(255) DEFAULT NULL,
   `Specification` text DEFAULT NULL,
@@ -44,8 +44,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `ProductTypeID`, `Stock`, `Availability`, `Image`, `Specification`, `created_at`, `updated_at`) VALUES
-(1008, 'MONO 350w', '', 2, 123, 1, NULL, '', '2024-09-04 21:29:22', '2024-09-05 17:35:25');
+INSERT INTO `products` (`ProductID`, `ProductName`, `ProductType`, `Watts_KVA`, `Description`, `Availability`, `Image`, `Specification`, `created_at`, `updated_at`) VALUES
+(1036, 'MONO 605w', 'Generator', 11, '', 0, NULL, '', '2024-09-12 18:07:45', '2024-09-14 17:10:31'),
+(1038, 'asd', 'Solar Panel', 123, '', 1, NULL, '', '2024-09-12 18:43:07', '2024-09-12 18:43:07'),
+(1040, 'Product 2', 'Solar Panel', 3333, '', 1, NULL, '', '2024-09-13 15:43:11', '2024-09-13 15:43:11'),
+(1041, 'Product 2', 'Solar Panel', 3333, '', 1, NULL, '', '2024-09-13 15:59:40', '2024-09-13 15:59:40');
 
 --
 -- Indexes for dumped tables
@@ -55,8 +58,7 @@ INSERT INTO `products` (`ProductID`, `ProductName`, `Description`, `ProductTypeI
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`ProductID`),
-  ADD KEY `ProductTypeID` (`ProductTypeID`);
+  ADD PRIMARY KEY (`ProductID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -66,17 +68,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`ProductTypeID`) REFERENCES `product_type` (`ProductTypeID`);
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1042;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
