@@ -495,7 +495,9 @@ if(isset($_SESSION['login'])){
       </section>
       <!-- team ends -->
       <div id="loadingOverlay" style="display:none;">
-    <div class="spinner"></div>
+    <div class="spinner">
+        <div class="spinner-text">Loading...</div> <!-- Optional text inside the spinner -->
+    </div>
 </div>
       <!-- Contact starts -->
       <section id="contact" class="contact section-padding">
