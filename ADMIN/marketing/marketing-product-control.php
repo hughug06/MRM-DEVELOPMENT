@@ -80,7 +80,7 @@ require_once '../authetincation.php';
                                 <div class="d-flex align-items-center gap-2">
                                     <label class="main-content-label">PRODUCT SPECIFICATION TABLE</label>
                                     <div class="ms-auto">
-                                        <select id="" class="form-select bg-outline-primary py-2 rounded-1" name="" required>
+                                        <select hidden id="" class="form-select bg-outline-primary py-2 rounded-1" name="" required>
                                             <option value="All">All</option>
                                             <option value="Generator">Generator</option>
                                             <option value="Solar Panel">Solar Panel</option>
