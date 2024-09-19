@@ -1,6 +1,8 @@
 <?php 
 require '../../Database/database.php';
 require_once '../authetincation.php';
+
+
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];
@@ -33,7 +35,7 @@ if(isset($_POST['AddProduct']))
           $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification) 
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
-                echo "Product Added successfully";
+                echo json_encode(['success' => true]);
                 header('Content-Type: application/json');
                 exit();
             }
@@ -48,7 +50,7 @@ if(isset($_POST['AddProduct']))
         $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification) 
                             VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification')";
             if (mysqli_query($conn, $sql_insert)) {
-                echo "Product Added successfully";
+              echo json_encode(['success' => true]);
                 header('Content-Type: application/json');
                 exit();
               } else {
@@ -60,6 +62,9 @@ if(isset($_POST['AddProduct']))
         //ERROR MESSAGE
     }
 }
+
+
+
 elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection

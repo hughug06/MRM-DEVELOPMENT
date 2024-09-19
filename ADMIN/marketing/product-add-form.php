@@ -109,14 +109,14 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Specification</label>
-                                            <textarea name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
+                                            <textarea id="Specs" name="Specification" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox" name="Availability">
                                             <label for="availability" class="fw-bold">Availability</label>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <input type="file" name="image">
+                                            <input id="image" type="file" name="image">
                                         </div>    
                                         <div class="col-md-12">
                                             <button id="ConfirmAdd" type="submit" class="btn btn-primary" name="AddProduct">Add</button>
@@ -187,6 +187,10 @@ require_once '../authetincation.php';
                 var PName = document.getElementById("PName");
                 var PType = document.getElementById("ProdType");
                 var customCheckbox = document.getElementById("Custom");
+                var specification_ID = document.getElementById("Specs");
+                var description_ID = document.getElementById("Description");
+                var availability_ID = document.getElementById("availability");
+                var custom_ID = document.getElementById("Custom");
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomWattsKVA");
                 }else {
@@ -196,6 +200,11 @@ require_once '../authetincation.php';
                 var PName_value = PName.value;
                 var PType_value = PType.value;
                 var PPower_value = PPower.value;
+                var specification = specification_ID.value;
+                var description = description_ID.value;
+                var availability = availability_ID.value;
+                var custom = custom_ID.value;
+                var image = document.getElementById("image").files[0];
                 if(PName_value == "" || PType_value == "" || PPower_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -216,11 +225,30 @@ require_once '../authetincation.php';
                         showCancelButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // If user confirms, send AJAX request for logout
+                            // If user confirms, send AJAX request for Add product
+                            var formData = new FormData();
+                            formData.append('AddProduct', true);
+                            formData.append('Custom_WK_Check', custom);
+                            formData.append('ProductName', PName_value);
+                            formData.append('Availability', availability);
+                            formData.append('Description', description);
+                            formData.append('Specification', specification);
+                            formData.append('CustomWattsKVA', PPower_value);
+                            formData.append('WattsKVA', PPower_value);
+                            formData.append('ProductType', PType_value);
+                            if (image) {
+                                formData.append('image', image);
+                            } // Add the file to FormData
+                            
                             $.ajax({
                                 url: 'function.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data:formData,
+                                processData: false,
+                                contentType: false,
                                 success: function(response) {
-                                    // Handle successful logout
+                                    // Handle successful add
                                     Swal.fire({
                                         title: 'Product Added!',
                                         text: 'You have successfully added the product.',
@@ -237,7 +265,7 @@ require_once '../authetincation.php';
                                     // Handle error
                                     Swal.fire(
                                         'Error!',
-                                        'There was an error logging out. Please try again.',
+                                        'There was an error Adding product. Please try again.',
                                         'error'
                                     );
                                 }

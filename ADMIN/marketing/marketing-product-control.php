@@ -187,38 +187,47 @@ require_once '../authetincation.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-    $(document).ready(function(){
-        $(".delete-btn-Product").click(function(event){
+    $(document).ready(function() {
+        $(".delete-btn-Product").click(function(event) {
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
-
-                var deleteUrl = $(this).attr('href');
-
-                $.ajax({
-                    url: deleteUrl,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        if(response.status === true) {
-                            // Handle the successful response
+            var deleteUrl = $(this).attr('href');
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure to delete this product?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for deletion of product
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        success: function(response) {
+                            // Handle successful deletion of product
                             Swal.fire({
-                                title: "Product Deleted",
-                                icon: "success",
-                                confirmButtonText: 'OK' // Add an OK button
-                            }).then((result) => {
-                                // Reload the page when the user clicks the OK button
-                                    location.reload();
+                                title: 'Product Deleted!',
+                                text: 'You have successfully deleted the product.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = 'marketing-product-control.php';
                             });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the product. Please try again.',
+                                'error'
+                            );
                         }
-                        else{
-                            Swal.fire({
-                            title: 'Error!',
-                            text: response.message,
-                            icon: 'error',
-                            confirmButtonText: 'ok'
-                            })
-                        }
-                    }
-                });
+                    });
+                }
+            });
         });
     });
     </script>
