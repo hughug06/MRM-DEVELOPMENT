@@ -91,7 +91,47 @@ elseif (isset($_POST['PrType'])) {
       echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
   }
 
-  $conn->close();
 }
 
+
+
+if(isset($_POST['save'])){
+
+  $id = $_POST["id"];
+  $Availability = $_POST['Availability'] == true ? 1:0;
+  $Description=$_POST['Description'];
+  $Specification=$_POST['Specification'];
+  
+  //WITH IMAGE SUBMISSION
+  if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
+      $Image = $_FILES['image'];
+      $ImageFileName = $Image['name'];
+      $ImageTempName = $Image['tmp_name'];
+      $FilenameSeperate = explode('.',$ImageFileName);
+      $FileExtension = strtolower(end($FilenameSeperate));
+
+      $extension = array('jpeg','jpg','png');
+      if(in_array($FileExtension,$extension)){
+          $uploadedImage = 'Product-Images/'.$ImageFileName;
+          $upload = '../../assets/images/Product-Images/'.$ImageFileName;
+          move_uploaded_file($ImageTempName,$upload);
+
+          $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
+          $result = mysqli_query($conn , $sql);
+          echo json_encode(['success' => true]);
+          header('Content-Type: application/json');
+      }
+  }
+  //WITHOUT IMAGE SUBMISSION
+  else{
+      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
+          $result = mysqli_query($conn , $sql);
+          echo json_encode(['success' => true]);
+          header('Content-Type: application/json');
+  }
+}
+else{
+  echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
+}
+$conn->close();
 ?>
