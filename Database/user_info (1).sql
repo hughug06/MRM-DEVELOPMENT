@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2024 at 10:30 PM
+-- Generation Time: Sep 19, 2024 at 07:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,10 @@ CREATE TABLE `user_info` (
 
 INSERT INTO `user_info` (`user_id`, `email`, `first_name`, `middle_name`, `last_name`, `created_at`, `updated_at`) VALUES
 (30, 'janariesimpuerto13@gmail.com', 'ARRR', 'Solis', 'VILLAPANDO', '2024-09-03 09:26:00', '2024-09-03 19:12:05'),
-(67, 'user@gmail.com', 'User', 'User', 'User', '2024-09-04 20:30:24', '2024-09-04 20:30:24');
+(100, 'user@gmail.com', 'JAN ARIES', 'User', 'IMPUERTO', '2024-09-11 19:07:41', '2024-09-12 19:15:54'),
+(109, 'worker1@gmail.com', 'Jonathan', 'Worker', 'Villapando', '2024-09-14 19:05:59', '2024-09-14 19:05:59'),
+(110, 'asdasdsad@gmail.com', 'Asd', 'Asd', 'Asd', '2024-09-14 20:23:35', '2024-09-14 20:23:35'),
+(111, 'worker2@gmail.com', 'Workertwo', 'Workertwo', 'Workertwo', '2024-09-14 20:37:57', '2024-09-14 20:37:57');
 
 --
 -- Indexes for dumped tables
@@ -64,7 +67,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
