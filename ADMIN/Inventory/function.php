@@ -60,7 +60,7 @@ elseif (isset($_POST['PrType'])) {
 }
 
 
-if(isset($_POST['save'])){
+elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];
   $stocks = $_POST['stocks'];

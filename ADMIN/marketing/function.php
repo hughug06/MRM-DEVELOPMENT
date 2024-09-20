@@ -61,10 +61,7 @@ if(isset($_POST['AddProduct']))
         //ERROR MESSAGE
     }
 }
-
-
-
-  if (isset($_POST['PrType'])) {
+elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
 
@@ -90,12 +87,8 @@ if(isset($_POST['AddProduct']))
       echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
   }
   $stmt->close();
-  $conn->close();
 }
-
-
-
-if(isset($_POST['save'])){
+elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];
   $Availability = $_POST['Availability'] == true ? 1:0;
@@ -133,5 +126,6 @@ if(isset($_POST['save'])){
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
+
 $conn->close();
 ?>
