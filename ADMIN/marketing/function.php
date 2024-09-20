@@ -90,7 +90,7 @@ if(isset($_POST['AddProduct']))
       echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
   }
   $stmt->close();
-
+  $conn->close();
 }
 
 
