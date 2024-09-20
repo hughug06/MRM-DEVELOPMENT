@@ -149,41 +149,37 @@ require_once '../authetincation.php';
 
     <script>
         $(document).ready(function() {
-             $('#ProdType').change(function() {
-        var ProdType = $(this).val();
-        $('#WattsKVAList').empty(); // Clear the list first
-        $('#WattsKVAList').append('<option value="">Select Product Type</option>'); // Add default option
-
-        if (ProdType) {
-            $.ajax({
-                url: 'function.php',
-                type: 'POST',
-                data: { PrType: ProdType },
-                dataType: 'json', // Expect a JSON response
-                success: function(response) {
-                    if (response.success) {
-                        var existingValues = []; // Array to track existing values
-                        
-                        $.each(response.data.WattsKVA, function(index, item) {
-                            // Check if the value is already in the existingValues array
-                            if (!existingValues.includes(item.value)) {
-                                $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                existingValues.push(item.value); // Add value to the array
+            $('#ProdType').change(function() {
+                $('#WattsKVAList').append('<option value="">Select Product Type</option>');
+                var ProdType = $(this).val();
+                if (ProdType) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data: { PrType: ProdType },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                $('#WattsKVAList').empty();
+                                var existingValues = []; // Array to track existing values
+                                
+                                $.each(response.data.WattsKVA, function(index, item) {
+                                    // Check if the value is already in the existingValues array
+                                    if (!existingValues.includes(item.value)) {
+                                        $('#WattsKVAList').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                        existingValues.push(item.value); // Add value to the array
+                                    }
+                                });
+                            } else {
+                                alert('No Watts/KVA');
                             }
-                        });
-                    } else {
-                        alert(response.message || 'No Watts/KVA'); // Alert with a more specific message if available
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert('AJAX error: ' + textStatus + ' : ' + errorThrown); // Handle any AJAX errors
+                        }
+                    });
+                } else {
+                    $('#WattsKVAList').empty();
+                    $('#WattsKVAList').append('<option value="">Select Product Type</option>');
                 }
             });
-        } else {
-            $('#WattsKVAList').empty();
-            $('#WattsKVAList').append('<option value="">Select Product Type</option>');
-        }
-    });
 
             
             $('#ConfirmAdd').on('click', function(e) {
