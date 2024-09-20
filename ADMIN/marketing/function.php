@@ -2,7 +2,6 @@
 require '../../Database/database.php';
 require_once '../authetincation.php';
 
-
 if(isset($_POST['AddProduct']))
 {
     $ProductName = $_POST['ProductName'];
@@ -65,9 +64,10 @@ if(isset($_POST['AddProduct']))
 
 
 
-elseif (isset($_POST['PrType'])) {
+  if (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
+
   $sql = "SELECT Watts_KVA FROM products WHERE ProductType = ?";
   if ($stmt = $conn->prepare($sql)) {
       // Bind parameters
@@ -79,17 +79,17 @@ elseif (isset($_POST['PrType'])) {
       if ($result->num_rows > 0) {
           $WattsKVA = [];
           while ($row = $result->fetch_assoc()) {
-              $WattsKVA[] = ['value' => $row['Watts_KVA'],'text' => $PrType == 'Solar Panel'? $row['Watts_KVA'].'W': $row['Watts_KVA'].'KVA'];
+            $WattsKVA[] = ['value' => $row['Watts_KVA'],'text' => $PrType == 'Solar Panel'? $row['Watts_KVA'].'W': $row['Watts_KVA'].'KVA'];
           }
           echo json_encode(['success' => true, 'data' => ['WattsKVA' => $WattsKVA]]);
       } else {
           echo json_encode(['success' => false, 'message' => 'No Watts/KVA Exists']);
       }
 
-      $stmt->close();
   } else {
       echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
   }
+  $stmt->close();
 
 }
 
