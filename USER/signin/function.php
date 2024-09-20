@@ -45,8 +45,7 @@ session_start();
                         {
                             $_SESSION['user_id'] = $user;
                             $_SESSION['account_id'] = $id;
-                            $_SESSION['auth'] = false;
-                            echo json_encode(['success' => true, 'redirect' => 'USER\solar\solar.php']);
+                            echo json_encode(['success' => true, 'redirect' => 'USER\dashboard\user-dashboard.php']);
 
                         }
                         else if($role == 'service_worker'){

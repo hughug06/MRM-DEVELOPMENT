@@ -1,4 +1,6 @@
 <?php 
+echo "EXIT";
+exit();
 require_once '../../authetincation.php';
 ?>
 

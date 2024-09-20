@@ -21,7 +21,7 @@
             <div class="slide-left" id="slide-left">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
             </div>
-            <ul class="main-menu pt-4">   
+            <ul class="main-menu pt-4 mt-3">   
 
                 <li class="slide <?= $page == "user-dashboard.php" ? 'active':''?>">
                     <a href="/MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
@@ -117,43 +117,31 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
-                    
-                <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
+                     <!-- Start::slide -->  
+                <li class="slide has-sub 
+                <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active open':''?>"              >
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
-                        <!-- <i class="la-edit side-menu__icon"></i> -->
-                        <i class="fa-solid fa-bars-progress side-menu__icon"></i>
-                        <span class="side-menu__label">Projects</span>
+                        <i class="fa-solid fa-box side-menu__icon"></i>
+                        <span class="side-menu__label">Chaintercom</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
-                        <li class="slide ">
-                            <a href="projects-dashboard.php" class="side-menu__item">Dashboard</a>
-                        </li>
-                        <li class="slide">
-                            <a href="projects-forum.php" class="side-menu__item">Forum</a>
-                        </li>                          
+                        <li class="slide <?= $page == 'project-appointment.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/project-appointment.php" class="side-menu__item <?= $page == 'project-appointment.php'  ? 'active':''?>">Appointment</a>
+                        </li> 
+                        <li class="slide <?= $page == 'time-management.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/time-management.php" class="side-menu__item <?= $page == 'time-management.php' ? 'active':''?>">Time management</a>
+                        </li>                                
                     </ul>
                 </li>
-
-                <!-- Start::slide -->
-                <!-- <li class="slide ">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-gears side-menu__icon"></i>
-                        <span class="side-menu__label">Services</span>
-                    </a>
-                </li> -->
-                <!-- End::slide -->                                           
+                <!-- End::slide -->                                       
                 
                 <!-- Start::slide -->  
                 <li class="slide has-sub 
                 <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' 
-                || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active open':''?>"
-                >
+                || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active open':''?>"              >
                     <a href="javascript:void(0);" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
