@@ -111,31 +111,35 @@ session_start();
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                <div class="container mt-5">
-        <h2 class="text-center mb-4">Product and Specs</h2>
-                <div class="grid-container" id="productGrid">
-                    <!-- Initial Grid 2x1 -->
-                    <div class="header">Product</div>
-                    <div class="header">Specs</div>
-                    <div class="input-field">
-                        <select class="form-select" id="product1">
-                            <!-- Products will be populated here dynamically from the database -->
-                            <option selected disabled>Select Product</option>
-                            <?php include 'product-retrieve.php'; ?>
-                        </select>
+                        <div class="container mt-5 card p-3">
+                          <h2 class="text-center mb-4">Product and Specs</h2>
+                          <div class="d-flex justify-content-end m-3">
+                              <button class="btn-sm">VIEW APPOINTMENT</button>
+                         </div>
+                         
+                        <div class="grid-container" id="productGrid">
+                            <!-- Initial Grid 2x1 -->
+                            <div class="header">Product</div>
+                            <div class="header">Specs</div>
+                            <div class="input-field">
+                                <select class="form-select" id="product1">
+                                    <!-- Products will be populated here dynamically from the database -->
+                                    <option selected disabled>Select Product</option>
+                                    <?php include 'product-retrieve.php'; ?>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" class="form-control" value="<?php include 'specs-retrieve.php'; ?>" >
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            
+                            <div class="d-flex justify-content-center">
+                            <button id="addRowBtn" class="btn btn-primary">Add Product</button>
+                            <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        <input type="text" class="form-control" value="<?php include 'specs-retrieve.php'; ?>" >
-                    </div>
-                </div>
-                <div class="text-center">
-                    
-                    <div class="d-flex justify-content-center">
-                    <button id="addRowBtn" class="btn btn-primary">Add Product</button>
-                    <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
-                    </div>
-                </div>
-             </div>
                 </div>
             </div>
             
