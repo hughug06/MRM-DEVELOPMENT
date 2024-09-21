@@ -190,7 +190,7 @@ global $conn;
                 var stocks = document.getElementById("stocks");
                 var min_price = document.getElementById("min_price");
                 var max_price = document.getElementById("max_price");
-                // Display SweetAlert confirmation
+
                 var item_id_value = item_id.value;
                 var stocks_value = stocks.value;
                 var min_price_value = min_price.value;
@@ -199,6 +199,7 @@ global $conn;
                 var description_ID_value = description_ID.value;
                 var availability_ID_value = availability_ID.value;
                 var image = document.getElementById("image").files[0];
+
                 if(stocks_value == "" || min_price_value == "" || max_price_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -209,7 +210,18 @@ global $conn;
                         if (result.isConfirmed) {
                         }
                     });
-                } 
+                }
+                else if(min_price_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
                 else{
                     Swal.fire({
                         title: 'Confirmation',

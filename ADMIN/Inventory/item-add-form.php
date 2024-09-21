@@ -206,12 +206,12 @@ require_once '../authetincation.php';
                 var specification_ID = document.getElementById("Specs");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
+                var power_checker;
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomPower");
                 }else {
                     var PPower = document.getElementById("power_list");
                 }
-                // Display SweetAlert confirmation
                 var IName_value = IName.value;
                 var IType_value = IType.value;
                 var PPower_value = PPower.value;
@@ -223,7 +223,14 @@ require_once '../authetincation.php';
                 var description = description_ID.value;
                 var availability = availability_ID.value;
                 var image = document.getElementById("image").files[0];
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks_value == "" || min_price_value == "" || max_price_value == ""){
+                if(IType_value == 'Solar Panel'){
+                    power_checker = 350;
+                }
+                else{
+                    power_checker = 20;
+                }
+
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks_value == "" || min_price_value == ""  || max_price_value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -233,7 +240,29 @@ require_once '../authetincation.php';
                         if (result.isConfirmed) {
                         }
                     });
+                }
+                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value < 350 && IType_value == 'Solar Panel'){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: IType_value+" Power output cannot be less than "+ power_checker +".",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
                 } 
+                else if(min_price_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
                 else{
                     Swal.fire({
                         title: 'Confirmation',
