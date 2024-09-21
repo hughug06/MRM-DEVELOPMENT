@@ -5,27 +5,58 @@ require_once '../authetincation.php';
 
 if(isset($_POST['AddItem']))
 {
-  $item_name = $_POST['item_name'];
-  $item_type = $_POST['item_type'];
+  $ProductName = $_POST['ProductName'];
+  $ProductType = $_POST['ProductType'];
   $stocks = $_POST['stocks'];
+  $Availability = $_POST['Availability'] == true ? 1:0;
+  $Description = $_POST['Description'];
+  $Specification = $_POST['Specification'];
   $min_price = $_POST['min_price'];
   $max_price = $_POST['max_price'];
-  $power_output = $_POST['power_output'];
+  $WattsKVA = $_POST['WattsKVA'];
 
-  if($item_name != '' || $power_output != '' || $item_type != '' || $min_price != '' || $max_price != '' || $stocks != ''){  
-    $sql_insert = "insert into inventory (item_name,item_type,power_output,stock, min_price, max_price) 
-                    VALUES ('$item_name' , '$item_type' , '$power_output' , $stocks, '$min_price', '$max_price')";
-    if (mysqli_query($conn, $sql_insert)) {
-      echo json_encode(['success' => true]);
-      header('Content-Type: application/json');
-      exit();
-    } 
-    else {
-      echo json_encode(['success' => true, 'message' => mysqli_error($conn)]);
+  if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
+    if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
+      $Image = $_FILES['image'];
+      $ImageFileName = $Image['name'];
+      $ImageTempName = $Image['tmp_name'];
+      $FilenameSeperate = explode('.',$ImageFileName);
+      $FileExtension = strtolower(end($FilenameSeperate));
+
+      $extension = array('jpeg','jpg','png');
+      if(in_array($FileExtension,$extension)){
+        $uploadedImage = 'Product-Images/'.$ImageFileName;
+        $upload = '../../assets/images/Product-Images/'.$ImageFileName;
+        move_uploaded_file($ImageTempName,$upload);
+
+        $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification, stock, min_price, max_price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$min_price', '$max_price')";
+          if (mysqli_query($conn, $sql_insert)) {
+              echo json_encode(['success' => true]);
+              header('Content-Type: application/json');
+              exit();
+          }
+          else {
+              echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          }
+      }
+          
+    }
+    //WITHOUT IMAGE SUBMISSION
+    else{                                                               
+      $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, min_price, max_price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$min_price', '$max_price')";
+          if (mysqli_query($conn, $sql_insert)) {
+            echo json_encode(['success' => true]);
+              header('Content-Type: application/json');
+              exit();
+            } else {
+              echo json_encode(['message' => 'SQL error']);
+            }
     }
   }
   else{
-    //ERROR MESSAGE
+      //ERROR MESSAGE
   }
 }
 
@@ -34,7 +65,7 @@ if(isset($_POST['AddItem']))
 elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
-  $sql = "SELECT power_output FROM inventory WHERE item_type = ?";
+  $sql = "SELECT Watts_KVA FROM products WHERE ProductType = ?";
   if ($stmt = $conn->prepare($sql)) {
       // Bind parameters
       $stmt->bind_param("s", $PrType);
@@ -43,11 +74,11 @@ elseif (isset($_POST['PrType'])) {
       $result = $stmt->get_result();
 
       if ($result->num_rows > 0) {
-          $power_output = [];
+          $Watts_KVA = [];
           while ($row = $result->fetch_assoc()) {
-              $power_output[] = ['value' => $row['power_output'],'text' => $PrType == 'Solar Panel'? $row['power_output'].'W': $row['power_output'].'KVA'];
+              $Watts_KVA[] = ['value' => $row['Watts_KVA'],'text' => $PrType == 'Solar Panel'? $row['Watts_KVA'].'W': $row['Watts_KVA'].'KVA'];
           }
-          echo json_encode(['success' => true, 'data' => ['power_output' => $power_output]]);
+          echo json_encode(['success' => true, 'data' => ['Watts_KVA' => $Watts_KVA]]);
       } else {
           echo json_encode(['success' => false, 'message' => 'No Watts/KVA Exists']);
       }
@@ -63,6 +94,45 @@ elseif (isset($_POST['PrType'])) {
 elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];
+  $Availability = $_POST['Availability'] == true ? 1:0;
+  $Description=$_POST['Description'];
+  $Specification=$_POST['Specification'];
+  $stocks = $_POST['stocks'];
+  $max_price=$_POST['max_price'];
+  $min_price=$_POST['min_price'];
+  
+  //WITH IMAGE SUBMISSION
+  if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
+      $Image = $_FILES['image'];
+      $ImageFileName = $Image['name'];
+      $ImageTempName = $Image['tmp_name'];
+      $FilenameSeperate = explode('.',$ImageFileName);
+      $FileExtension = strtolower(end($FilenameSeperate));
+
+      $extension = array('jpeg','jpg','png');
+      if(in_array($FileExtension,$extension)){
+          $uploadedImage = 'Product-Images/'.$ImageFileName;
+          $upload = '../../assets/images/Product-Images/'.$ImageFileName;
+          move_uploaded_file($ImageTempName,$upload);
+
+          $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
+          $result = mysqli_query($conn , $sql);
+          echo json_encode(['success' => true]);
+          header('Content-Type: application/json');
+      }
+  }
+  //WITHOUT IMAGE SUBMISSION
+  else{
+      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
+          $result = mysqli_query($conn , $sql);
+          echo json_encode(['success' => true]);
+          header('Content-Type: application/json');
+  }
+}
+
+elseif(isset($_POST['save'])){
+
+  $id = $_POST["id"];
   $stocks = $_POST['stocks'];
   $max_price=$_POST['max_price'];
   $min_price=$_POST['min_price'];
@@ -71,8 +141,9 @@ elseif(isset($_POST['save'])){
       $result = mysqli_query($conn , $sql);
       echo json_encode(['success' => true]);
       header('Content-Type: application/json');
-  }
-  else{
+}
+
+else{
     echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
 

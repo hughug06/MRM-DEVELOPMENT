@@ -2,66 +2,7 @@
 require '../../Database/database.php';
 require_once '../authetincation.php';
 
-if(isset($_POST['AddProduct']))
-{
-    $ProductName = $_POST['ProductName'];
-    $Availability = $_POST['Availability'] == true ? 1:0;
-    $Description = $_POST['Description'];
-    $Specification = $_POST['Specification'];
-    $ProductType = $_POST['ProductType'];
-
-    if (isset($_POST['Custom_WK_Check']) && $_POST['Custom_WK_Check'] === '1') {
-      $WattsKVA = $_POST['CustomWattsKVA'];
-    } else {
-      $WattsKVA = $_POST['WattsKVA'];
-    }
-
-    //WITH IMAGE SUBMISSION
-    if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
-      if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
-        $Image = $_FILES['image'];
-        $ImageFileName = $Image['name'];
-        $ImageTempName = $Image['tmp_name'];
-        $FilenameSeperate = explode('.',$ImageFileName);
-        $FileExtension = strtolower(end($FilenameSeperate));
-
-        $extension = array('jpeg','jpg','png');
-        if(in_array($FileExtension,$extension)){
-          $uploadedImage = 'Product-Images/'.$ImageFileName;
-          $upload = '../../assets/images/Product-Images/'.$ImageFileName;
-          move_uploaded_file($ImageTempName,$upload);
-
-          $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification) 
-                            VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification')";
-            if (mysqli_query($conn, $sql_insert)) {
-                echo json_encode(['success' => true]);
-                header('Content-Type: application/json');
-                exit();
-            }
-            else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-        }
-            
-      }
-      //WITHOUT IMAGE SUBMISSION
-      else{                                                               
-        $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification) 
-                            VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification')";
-            if (mysqli_query($conn, $sql_insert)) {
-              echo json_encode(['success' => true]);
-                header('Content-Type: application/json');
-                exit();
-              } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-              }
-      }
-    }
-    else{
-        //ERROR MESSAGE
-    }
-}
-elseif (isset($_POST['PrType'])) {
+if (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
 

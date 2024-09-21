@@ -3,7 +3,7 @@
     include "../../Database/database.php";
     if(isset($_GET['id'])){
         $item_id = $_GET['id'];
-        $sql = "DELETE from `inventory` where itemID=$item_id";
+        $sql = "DELETE from `products` where ProductID=$item_id";
         $result = mysqli_query($conn , $sql);
         echo json_encode(['success' => true]);
     }

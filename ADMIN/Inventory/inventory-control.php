@@ -100,21 +100,21 @@ require_once '../authetincation.php';
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';                                          
-                                           $select = "Select * from inventory";
+                                           $select = "Select * from products";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                 <td><?= $resultItem['item_name']?></td>     
-                                                <td><?= $resultItem['item_type']?></td>                                        
-                                                <td><?= $resultItem['power_output']?></td>                        
+                                                 <td><?= $resultItem['ProductName']?></td>     
+                                                 <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>                                       
+                                                 <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>                       
                                                 <td><?= $resultItem['stock']?></td>   
                                                 <td><?= $resultItem['min_price']?></td> 
                                                 <td><?= $resultItem['max_price']?></td>                                         
                                                 <td>                                                 
-                                                    <a href="item-edit-form.php?id=<?= $resultItem['itemID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="item-delete.php?id=<?= $resultItem['itemID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 

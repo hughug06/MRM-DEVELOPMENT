@@ -19,7 +19,7 @@ global $conn;
       exit;
     }
     $id = $_GET['id'];
-    $sql = "select * from inventory where itemID=$id";
+    $sql = "select * from products where ProductID=$id";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
@@ -27,12 +27,16 @@ global $conn;
       exit;
     }
 
-    $item_name=$row["item_name"];
+    $item_name=$row["ProductName"];
+    $Availability = $row["Availability"];
+    $Image = $row["Image"];
+    $Description = $row["Description"];
+    $Specification = $row["Specification"];
     $stocks = $row["stock"];
     $max_price = $row["max_price"];
     $min_price = $row["min_price"];
-    $power_output = $row["item_type"] == 'Solar Panel'? $row["power_output"].'W':$row["power_output"].'KVA';
-    $item_type = $row["item_type"];
+    $power_output = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
+    $item_type = $row["ProductType"];
 
   }
   else{
@@ -106,7 +110,7 @@ global $conn;
                                 <a href="inventory-control.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
-                                <form  method="POST" action="item-edit-form.php">
+                                <form  method="POST" action="item-edit-form.php" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
                                             <input type="hidden" id="id" value="<?php echo $id; ?>" class="form-control">
@@ -139,6 +143,21 @@ global $conn;
                                             <label class="form-label" required>Maximum Price</label>
                                             <input type="number" value="<?= $max_price ?>" class="form-control py-2" id="max_price">
                                         </div>
+                                        <div class="col-xl-12  mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea id="Description" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Description?></textarea>
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Specification</label>
+                                            <textarea id="Specification" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Specification?></textarea>                            
+                                        </div>
+                                        <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
+                                            <input id="availability" type="checkbox" <?= $Availability == true ? 'checked' : ''?>>
+                                            <label for="availability">Availability</label>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <input type="file" id="image">
+                                        </div>
                                         <div class="col-xl-12 d-flex justify-content-end">
                                             <button id="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
@@ -165,6 +184,9 @@ global $conn;
             $('#save').on('click', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
                 var item_id = document.getElementById("id");
+                var specification_ID = document.getElementById("Specification");
+                var description_ID = document.getElementById("Description");
+                var availability_ID = document.getElementById("availability");
                 var stocks = document.getElementById("stocks");
                 var min_price = document.getElementById("min_price");
                 var max_price = document.getElementById("max_price");
@@ -173,6 +195,10 @@ global $conn;
                 var stocks_value = stocks.value;
                 var min_price_value = min_price.value;
                 var max_price_value = max_price.value;
+                var specification_ID_value = specification_ID.value;
+                var description_ID_value = description_ID.value;
+                var availability_ID_value = availability_ID.value;
+                var image = document.getElementById("image").files[0];
                 if(stocks_value == "" || min_price_value == "" || max_price_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -200,6 +226,12 @@ global $conn;
                             formData.append('stocks', stocks_value);
                             formData.append('min_price', min_price_value);
                             formData.append('max_price', max_price_value);
+                            formData.append('Specification', specification_ID_value);
+                            formData.append('Description', description_ID_value);
+                            formData.append('Availability', availability_ID_value);
+                            if (image) {
+                                formData.append('image', image);
+                            } // Add the file to FormData
                             
                             $.ajax({
                                 url: 'function.php',

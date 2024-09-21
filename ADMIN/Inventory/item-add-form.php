@@ -76,7 +76,7 @@ require_once '../authetincation.php';
                                 <a href="inventory-control.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
-                                <form action="function.php" method="POST">
+                                <form action="function.php" method="POST" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Product Name</label>
@@ -115,6 +115,21 @@ require_once '../authetincation.php';
                                             <label class="form-label" required>Maximum Price</label>
                                             <input type="number" class="form-control py-2"  placeholder="Maximum Price" id="max_price">
                                         </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea id="Description" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Specification</label>
+                                            <textarea id="Specs" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
+                                        </div>
+                                        <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
+                                            <input id="availability" type="checkbox" name="Availability">
+                                            <label for="availability" class="fw-bold">Availability</label>
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <input id="image" type="file">
+                                        </div> 
                                         <div class="col-md-12">
                                             <button id="ConfirmAdd" type="submit" class="btn btn-primary">Add</button>
                                         </div>
@@ -160,7 +175,7 @@ require_once '../authetincation.php';
                                 $('#power_list').empty();
                                 var existingValues = []; // Array to track existing values
                                 
-                                $.each(response.data.power_output, function(index, item) {
+                                $.each(response.data.Watts_KVA, function(index, item) {
                                     // Check if the value is already in the existingValues array
                                     if (!existingValues.includes(item.value)) {
                                         $('#power_list').append('<option value="' + item.value + '">' + item.text + '</option>');
@@ -168,7 +183,7 @@ require_once '../authetincation.php';
                                     }
                                 });
                             } else {
-                                alert('No Watts/KVA');
+                                alert('No Watts/KVA found.');
                             }
                         }
                     });
@@ -188,6 +203,9 @@ require_once '../authetincation.php';
                 var stocks = document.getElementById("stocks");
                 var min_price = document.getElementById("min_price");
                 var max_price = document.getElementById("max_price");
+                var specification_ID = document.getElementById("Specs");
+                var description_ID = document.getElementById("Description");
+                var availability_ID = document.getElementById("availability");
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomPower");
                 }else {
@@ -201,6 +219,10 @@ require_once '../authetincation.php';
                 var stocks_value = stocks.value;
                 var min_price_value = min_price.value;
                 var max_price_value = max_price.value;
+                var specification = specification_ID.value;
+                var description = description_ID.value;
+                var availability = availability_ID.value;
+                var image = document.getElementById("image").files[0];
                 if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks_value == "" || min_price_value == "" || max_price_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -224,13 +246,18 @@ require_once '../authetincation.php';
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('AddItem', true);
-                            formData.append('Custom_WK_Check', custom);
-                            formData.append('item_name', IName_value);
+                            formData.append('ProductName', IName_value);
                             formData.append('stocks', stocks_value);
                             formData.append('min_price', min_price_value);
                             formData.append('max_price', max_price_value);
-                            formData.append('power_output', PPower_value);
-                            formData.append('item_type', IType_value);
+                            formData.append('Availability', availability);
+                            formData.append('Description', description);
+                            formData.append('Specification', specification);
+                            formData.append('WattsKVA', PPower_value);
+                            formData.append('ProductType', IType_value);
+                            if (image) {
+                                formData.append('image', image);
+                            } // Add the file to FormData
                             
                             $.ajax({
                                 url: 'function.php',
@@ -254,7 +281,7 @@ require_once '../authetincation.php';
                                     });
                                 },
                                 error: function(response) {
-                                    // Handle error
+                                    // Handle erro
                                     Swal.fire(
                                         'Error!',
                                         'There was an error Adding product. Please try again.',
