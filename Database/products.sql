@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2024 at 07:24 PM
+-- Generation Time: Sep 21, 2024 at 06:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,9 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `products` (
   `ProductID` int(11) NOT NULL,
-  `ProductName` varchar(100) NOT NULL,
+  `ProductName` varchar(20) NOT NULL,
   `ProductType` varchar(20) NOT NULL,
   `Watts_KVA` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `min_price` int(11) NOT NULL,
+  `max_price` int(11) NOT NULL,
   `Description` text NOT NULL,
   `Availability` tinyint(1) DEFAULT 1,
   `Image` varchar(255) DEFAULT NULL,
@@ -39,16 +42,6 @@ CREATE TABLE `products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`ProductID`, `ProductName`, `ProductType`, `Watts_KVA`, `Description`, `Availability`, `Image`, `Specification`, `created_at`, `updated_at`) VALUES
-(1036, 'MONO 605w', 'Generator', 11, '', 0, NULL, '', '2024-09-12 18:07:45', '2024-09-14 17:10:31'),
-(1038, 'asd', 'Solar Panel', 123, '', 1, NULL, '', '2024-09-12 18:43:07', '2024-09-12 18:43:07'),
-(1040, 'Product 2', 'Solar Panel', 3333, '', 1, NULL, '', '2024-09-13 15:43:11', '2024-09-13 15:43:11'),
-(1041, 'Product 2', 'Solar Panel', 3333, '', 1, NULL, '', '2024-09-13 15:59:40', '2024-09-13 15:59:40');
 
 --
 -- Indexes for dumped tables
@@ -68,7 +61,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1042;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1062;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
