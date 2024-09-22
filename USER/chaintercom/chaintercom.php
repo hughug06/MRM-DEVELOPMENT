@@ -183,7 +183,7 @@
 
             <div class="text-center mt-3">
                 <div class="d-flex justify-content-center">
-                    <button name="product" type="submit" id="availNowBtn" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal" disabled>Avail Now</button>
+                    <button name="product" type="button" id="availNowBtn" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal" disabled>Avail Now</button>
                 </div>
             </div>
         </div>
