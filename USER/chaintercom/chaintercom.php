@@ -183,7 +183,6 @@
 
             <div class="text-center mt-3">
                 <div class="d-flex justify-content-center">
-                    <button id="addRowBtn" class="btn btn-primary">Add Product</button>
                     <button name="product" type="submit" id="availNowBtn" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal" disabled>Avail Now</button>
                 </div>
             </div>
@@ -399,29 +398,6 @@
              availButton.disabled = !checkbox.checked;
     }
 
-        const grid = document.getElementById('productGrid');
-        const addRowBtn = document.getElementById('addRowBtn');
-        let rowCount = 1;
-
-        addRowBtn.addEventListener('click', function() {
-            rowCount++;
-            const productSelect = document.createElement('div');
-            
-
-            productSelect.classList.add('input-field');
-           
-
-            productSelect.innerHTML = `
-                <select class="form-select" id="product${rowCount}">
-                    <option selected disabled>Select Product</option>
-                    <?php include 'product-retrieve.php'; ?>
-                </select>
-            `;
-          
-
-            grid.appendChild(productSelect);
-           
-        });
     </script>
 
    <script>
