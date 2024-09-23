@@ -5,16 +5,11 @@ require_once '../../Database/database.php';
 if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
    
     
-    $start_time =  $_GET['start_time'];
-    $end_time = $_GET['end_time'];
-    $date = $_GET['date'];
-    $id = $_GET['chaintercomavailid'];
-    $meeting_url = "https://meet.jit.si/meeting_".$id;
+    $_SESSION['start_time'] =  $_GET['start_time'];
+    $_SESSION['end_time']= $_GET['end_time'];
+    $_SESSION['date']= $_GET['date'];
+    $_SESSION['chaintercomavailid'] = $_GET['chaintercomavailid'];
    
-    // $sql = "insert into chaintercom_appointment(meeting_url,date)
-    //         VALUES('$meeting_url' , '$date') ";
-    // $result = mysqli_query($conn , $sql);
-    
 } 
 
 ?>
@@ -173,7 +168,7 @@ if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET
                 <div class="container-fluid">
                 <div class="container mt-5 card p-3">
                    
-                   <form action="chaintercom.php" method="POST">
+                   <form action="chaintercom_book.php" method="POST">
 
                    <div class="card" id="productGrid">
                     <!-- Product Header -->
@@ -199,7 +194,7 @@ if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET
 
             <div class="text-center mt-3">
                 <div class="d-flex justify-content-center">
-                    <button name="product" type="button" id="availNowBtn" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal" disabled>Avail Now</button>
+                    <button name="product" type="submit" id="availNowBtn" class="btn btn-primary btn-wave align-self-end"  disabled>Avail Now</button>
                 </div>
             </div>
         </div>
@@ -263,62 +258,6 @@ if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET
             
             <!--APP-CONTENT CLOSE-->
 
-            <!-- MODAL FOR DATE PICKER -->
-            <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
-                    <div class="modal-content">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
-                        <div class="login_form">
-                        <div class="main-container container-fluid">
-                            <div class="card p-5 shadow-lg">
-                                <div class="container calendar-container">
-                                    <!-- Calendar Header -->
-                                    <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
-                                        <h3 id="monthYear"></h3>
-                                        <div>
-                                            <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
-                                            <button class="btn btn-outline-primary" id="nextMonth">Next</button>
-                                        </div>
-                                    </div>
-                                    <!-- Calendar Body -->
-                                    <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
-                                </div>       
-                            </div>
-                            <div class="card">
-                            <?php
-                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-                                        $selectedProducts = $_POST['selected_products'];
-                                        foreach ($selectedProducts as $productId) {
-                                            echo "You selected product ID: " . htmlspecialchars($productId) . "<br>";
-                                            // Further processing can be done here
-                                        }
-                                    
-                                }
-                                ?>                         
-                            </div>
-                            <!-- Modal for Available Time Slots -->
-                            <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="availableTimes" class="list-group">
-                                                <!-- Available times will be dynamically loaded here -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        </div>
-                    </div>
-                </div>
-                </div>
         
         <!-- Footer Start -->
         <?php include_once(__DIR__. '/../../partials/footer.php') ?>
@@ -383,86 +322,4 @@ if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET
 
     </script>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const calendarDays = document.getElementById('calendarDays');
-        const monthYear = document.getElementById('monthYear');
-        const prevMonthBtn = document.getElementById('prevMonth');
-        const nextMonthBtn = document.getElementById('nextMonth');
-        let currentDate = new Date();
-
-        function renderCalendar(date) {
-            calendarDays.innerHTML = ''; // Clear previous days
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
-
-            const today = new Date();
-            const firstDayOfMonth = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-            // Add empty placeholders for days before the first day of the current month
-            for (let i = 0; i < firstDayOfMonth; i++) {
-                calendarDays.innerHTML += '<div class="col"></div>';
-            }
-
-            // Generate days for the current month
-            for (let day = 1; day <= daysInMonth; day++) {
-                const fullDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-                const isPast = new Date(year, month, day) < today.setHours(0, 0, 0, 0);
-
-                // Disable past dates
-                const disabledClass = isPast ? 'disabled text-muted' : 'btn-primary';
-                const button = isPast
-                    ? `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" disabled>${day}</button>`
-                    : `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" onclick="openTimeSlotsModal('${fullDate}')">${day}</button>`;
-
-                calendarDays.innerHTML += `<div class="col text-center">${button}</div>`;
-            }
-        }
-
-        // Move to the previous month
-        prevMonthBtn.addEventListener('click', function () {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar(currentDate);
-        });
-
-        // Move to the next month
-        nextMonthBtn.addEventListener('click', function () {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar(currentDate);
-        });
-
-        // Initialize the calendar with the current date
-        renderCalendar(currentDate);
-    });
-
-    // Function to open the modal and fetch available time slots for a selected date
-    function openTimeSlotsModal(date) {
-        $('#selectedDate').text(date);  // Display the selected date in the modal
-        $('#availableTimes').empty();   // Clear previous time slots
-
-        // AJAX request to fetch available time slots from the PHP script
-        $.post('get_available_slots.php', { appointment_date: date }, function (response) {
-            const slots = JSON.parse(response);
-            if (slots.length > 0) {
-                slots.forEach(function (slot) {
-                    $('#availableTimes').append(`
-                        <li class="list-group-item">
-                            ${slot.start_time} - ${slot.end_time}
-                            <a href="chaintercom_book.php?chaintercomavailid=${slot.chaintercomavailid}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
-                               class="btn btn-success btn-sm float-end">
-                               Book
-                            </a>
-                        </li>
-                    `);
-                });
-            } else {
-                $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
-            }
-        });
-
-        // Show the modal
-        $('#timeSlotsModal').modal('show');
-    }
-</script>
+   

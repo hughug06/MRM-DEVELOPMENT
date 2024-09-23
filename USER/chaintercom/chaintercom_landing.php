@@ -226,7 +226,9 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Product</th>
+                        <th scope="col">product type</th>
                         <th scope="col">Specs</th>
+
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         </tr>

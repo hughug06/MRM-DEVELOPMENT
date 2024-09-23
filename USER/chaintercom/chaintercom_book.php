@@ -2,19 +2,33 @@
 //get the data from service.php after the book trigger
 session_start();
 require_once '../../Database/database.php';
-if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
+if (isset($_POST['product'])) {
    
-    
-    $start_time =  $_GET['start_time'];
-    $end_time = $_GET['end_time'];
-    $date = $_GET['date'];
-    $id = $_GET['chaintercomavailid'];
+    $selectedProducts = $_POST['selected_products'];
+    $start_time =  $_SESSION['start_time'];
+    $end_time = $_SESSION['end_time'];
+    $date =$_SESSION['date'];
+    $id = $_SESSION['chaintercomavailid'];
     $meeting_url = "https://meet.jit.si/meeting_".$id;
-    
+    $products = []; 
+    foreach ($selectedProducts as $productId) {
+        $select = "select * from products where ProductID = '$productId'";
+        $select_result = mysqli_query($conn , $select);
+        $product_result = mysqli_fetch_assoc($select_result);
+        $products[] = $product_result['product']; // Append each product ID to the $products array
+    }
+    print_r($products);
+    exit();
     $sql = "insert into chaintercom_appointment(meeting_url,date)
             VALUES('$meeting_url' , '$date') ";
     $result = mysqli_query($conn , $sql);
     
+
+    //unset all session
+    unset($_SESSION['start_time']);
+    unset($_SESSION['end_time']);
+    unset($_SESSION['date']);
+    unset($_SESSION['chaintercomavailid']);
 } 
 
 ?>
@@ -83,40 +97,50 @@ if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET
             <div class="main-content app-content">
                 
             <div class="container mt-5">
-    <!-- Header Row with Modern Design -->
-    <div class="row">
+    
+    <!-- Success Message Card -->
+    <div class="card p-4 text-center mt-4 shadow-lg border-success">
+        <div class="alert alert-success" role="alert">
+            Your appointment has been approved!
+        </div>
+<!-- Header Row with Modern Design -->
+<div class="row">
         <div class="col text-center">
             <h2 class="display-6 fw-bold text-primary">Chaintercom Inquire Details</h2>
             <p class="lead text-muted">Find the latest product details and specifications below</p>
         </div>
     </div>
-
+    <?php 
+    
+    foreach ($selectedProducts as $productId) {
+        $select = "select * from products where ProductID = '$productId'";
+        $select_result = mysqli_query($conn , $select);
+        $row = mysqli_fetch_assoc($select_result);
+             // Further processing can be done here
+   
+    ?>
     <!-- Product and Specs Row with Modern Card Design -->
     <div class="row mt-4">
         <div class="col">
             <div class="card shadow-sm p-4 mb-4">
                 <h5 class="text-secondary">Products</h5>
-                <p class="fw-light">Solar Generator</p> <!-- Replace with actual product text -->
+                <p class="fw-light"><?= $row['ProductName']; ?></p> <!-- Replace with actual product text -->
             </div>
         </div>
 
         <div class="col">
             <div class="card shadow-sm p-4 mb-4">
                 <h5 class="text-secondary">Specs</h5>
-                <p class="fw-light">500W, 220V, Lithium Battery</p> <!-- Replace with actual specs text -->
+                <p class="fw-light"><?= $row['Specification']; ?></p> <!-- Replace with actual specs text -->
             </div>
         </div>
     </div>
-
-    <!-- Success Message Card -->
-    <div class="card p-4 text-center mt-4 shadow-lg border-success">
-        <div class="alert alert-success" role="alert">
-            Your appointment has been approved!
-        </div>
-
+    <?php 
+     }
+    ?>
         <div class="mt-4">
             <!-- Back to Chaintercom Button -->
-            <a href="chaintercom.php" class="btn btn-primary btn-lg me-2">Back to Chaintercom</a>
+            <a href="chaintercom_landing.php" class="btn btn-primary btn-lg me-2">Back to Chaintercom</a>
 
             <!-- Check Appointment Button -->
             <a href="check-appointment.php" class="btn btn-success btn-lg">Check Appointment</a>
