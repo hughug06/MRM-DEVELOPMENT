@@ -84,8 +84,8 @@
                 <!-- End::slide__category -->
 
                 <!-- Start::slide -->
-                <li class="slide <?= $page == "chaintercom.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom.php" class="side-menu__item <?= $page == "chaintercom.php" ? 'active':''?>">
+                <li class="slide <?= $page == "chaintercom_landing.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_landing.php" class="side-menu__item <?= $page == "chaintercom_landing.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-chalkboard-user side-menu__icon"></i>

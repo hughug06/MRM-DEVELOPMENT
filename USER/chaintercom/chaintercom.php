@@ -1,4 +1,23 @@
+<?php
+//get the data from service.php after the book trigger
+session_start();
+require_once '../../Database/database.php';
+if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
+   
+    
+    $start_time =  $_GET['start_time'];
+    $end_time = $_GET['end_time'];
+    $date = $_GET['date'];
+    $id = $_GET['chaintercomavailid'];
+    $meeting_url = "https://meet.jit.si/meeting_".$id;
+   
+    // $sql = "insert into chaintercom_appointment(meeting_url,date)
+    //         VALUES('$meeting_url' , '$date') ";
+    // $result = mysqli_query($conn , $sql);
+    
+} 
 
+?>
 
 
 
@@ -153,10 +172,7 @@
             <div class="main-content app-content">
                 <div class="container-fluid">
                 <div class="container mt-5 card p-3">
-                    <div class="d-flex justify-content-end m-3">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">VIEW APPOINTMENT</button>
-                    </div>
-
+                   
                    <form action="chaintercom.php" method="POST">
 
                    <div class="card" id="productGrid">
@@ -189,40 +205,7 @@
         </div>
          </form>
 
-<!-- MODAL FOR VIEW APPOINTMENT -->
-<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Data Table (Blank for now) -->
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Product</th>
-              <th scope="col">Specs</th>
-              <th scope="col">Date</th>
-              <th scope="col">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Table body will be populated later -->
-            <tr>
-              <td colspan="5" class="text-center">No appointments available</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
             <!-- Modal for Terms and Conditions -->
