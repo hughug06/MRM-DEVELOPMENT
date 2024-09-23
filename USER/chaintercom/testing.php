@@ -14,7 +14,7 @@
 <script>
     const domain = 'meet.jit.si';
     const options = {
-        roomName: 'YourUniqueRoomName', // Change this to a unique room name
+        roomName: 'test', // Change this to a unique room name
         width: '100%',
         height: '600px',
         parentNode: document.querySelector('#jitsi-meet'),
