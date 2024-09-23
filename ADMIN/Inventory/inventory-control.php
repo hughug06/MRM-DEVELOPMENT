@@ -64,25 +64,93 @@ require_once '../authetincation.php';
                 <div class="container-fluid">
         
                         
-                <!-- MODAL FOR SET AVAILABILITY -->                       
+            <!-- MODAL FOR ADD STOCKS -->                       
+            <div class="modal fade" id="add_stocks" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="add_stocks" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">ADD STOCKS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg">
+                                <div class="mb-4">
+                                    <label for="date" class="form-label fw-semibold">Enter number of stocks to add:</label>
+                                    <div class="input-group">
+                                        <input type="number" name="add_stocks" id="addStocksInput" hidden>
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="bi bi-calendar3"></i>
+                                        </span>
+                                        <input type="number" id="input_add_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                    </div>
+                                </div>
+                        
+                                <div class="d-grid">
+                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm">
+                                        <i class="bi bi-check-circle me-2"></i> Add
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- MODAL FOR DECREASE STOCKS -->                       
+            <div class="modal fade" id="dec_stocks" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="dec_stocks" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">DECREASE STOCKS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg">
+                                <div class="mb-4">
+                                    <label for="date" class="form-label fw-semibold">Enter number of stocks to decrease:</label>
+                                    <div class="input-group">
+                                        <input type="number" name="dec_stocks" id="decStocksInput" hidden>
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="bi bi-calendar3"></i>
+                                        </span>
+                                        <input type="number" id="input_add_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                    </div>
+                                </div>
+                        
+                                <div class="d-grid">
+                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm">
+                                        <i class="bi bi-check-circle me-2"></i> Decrease
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>     
 
 
-                <!--  SHOW ALREADY CREATED TIME -->
+                <!--  SHOW INVENTORY -->
                 <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0">Inventory</label>
-                                    
                                     <a href="item-add-form.php">
                                         <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
+                                            <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
                                         </button>
                                     </a>
-                                   
                                 </div>
                             </div>
+                            
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
@@ -115,6 +183,16 @@ require_once '../authetincation.php';
                                                 <td>                                                 
                                                     <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
                                                     <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    <!-- Add Stocks Button -->
+                                                    <!-- Add Stocks Button -->
+                                                    <a class="btn btn-sm btn-danger add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                        <i class="fe fe-plus"></i>
+                                                    </a>
+
+                                                    <!-- Decrease Stocks Button -->
+                                                    <a class="btn btn-sm btn-danger dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                        <i class="fe fe-minus"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
 
@@ -262,6 +340,31 @@ require_once '../authetincation.php';
                     });
                 }
             });
+        });
+
+        // Event listener for when a modal is shown
+        document.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            
+            // Extract value from data-value attribute
+            var value = button.getAttribute('data-value');
+            
+            // Determine which modal is being opened
+            var modal = event.target;
+            
+            // Check the modal ID to differentiate between modals
+            if (modal.id === 'add_stocks') {
+                // Find the input field inside the Add Stocks modal
+                var input = modal.querySelector('#addStocksInput');
+                // Set the input field's value to the ProductID from the button
+                input.value = value;
+            } else if (modal.id === 'dec_stocks') {
+                // Find the input field inside the Decrease Stocks modal
+                var input = modal.querySelector('#decStocksInput');
+                // Set the input field's value to the ProductID from the button
+                input.value = value;
+            }
         });
     });
     </script>
