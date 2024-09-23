@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2024 at 06:02 PM
+-- Generation Time: Sep 19, 2024 at 11:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,23 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `inventory`
 --
 
-CREATE TABLE `products` (
-  `ProductID` int(11) NOT NULL,
-  `ProductName` varchar(20) NOT NULL,
-  `ProductType` varchar(20) NOT NULL,
-  `Watts_KVA` int(11) NOT NULL,
+CREATE TABLE `inventory` (
+  `itemID` int(11) NOT NULL,
+  `item_name` varchar(20) NOT NULL,
+  `item_type` varchar(20) NOT NULL,
+  `power_output` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `min_price` int(11) NOT NULL,
-  `max_price` int(11) NOT NULL,
-  `Description` text NOT NULL,
-  `Availability` tinyint(1) DEFAULT 1,
-  `Image` varchar(255) DEFAULT NULL,
-  `Specification` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `min_price` int(11) NOT NULL,
+  `max_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -48,20 +44,20 @@ CREATE TABLE `products` (
 --
 
 --
--- Indexes for table `products`
+-- Indexes for table `inventory`
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`ProductID`);
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`itemID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `inventory`
 --
-ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1062;
+ALTER TABLE `inventory`
+  MODIFY `itemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

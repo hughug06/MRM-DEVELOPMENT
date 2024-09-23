@@ -4,19 +4,18 @@ require_once '../authetincation.php';
 include_once '../../Database/database.php';
 global $conn;
   $id="";
-  $ProductName="";
-  $ProductType="";
-  $Availability = "";
-  $Image = "";
+  $item_name="";
+  $item_type="";
+  $stocks = "";
   $error="";
   $success="";
-  $Description="";
-  $Specification="";
-  $Watts_KVA="";
+  $min_price="";
+  $max_price="";
+  $power_output="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
-      header("location: marketing-product-control.php");
+      header("location: inventory-control.php");
       exit;
     }
     $id = $_GET['id'];
@@ -24,21 +23,24 @@ global $conn;
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     while(!$row){
-      header("location: marketing-product-control.php");
+      header("location: inventory-control.php");
       exit;
     }
 
-    $ProductName=$row["ProductName"];
+    $item_name=$row["ProductName"];
     $Availability = $row["Availability"];
     $Image = $row["Image"];
     $Description = $row["Description"];
     $Specification = $row["Specification"];
-    $Watts_KVA = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
-    $ProductType = $row["ProductType"];
+    $stocks = $row["stock"];
+    $max_price = $row["max_price"];
+    $min_price = $row["min_price"];
+    $power_output = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
+    $item_type = $row["ProductType"];
 
   }
   else{
-    header("location: marketing-product-control.php");
+    header("location: inventory-control.php");
     exit();
   }
 ?>
@@ -104,30 +106,42 @@ global $conn;
                     <div class="col-xl-12 p-3">
                         <div class="card custom-card">
                             <div class="card-header justify-content-between">
-                                <div class="card-title">Edit Product</div>
-                                <a href="marketing-product-control.php" class="btn btn-close p-0"></a>
+                                <div class="card-title">Edit Item</div>
+                                <a href="inventory-control.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
-                                <form  method="POST" action="product-edit-form.php" enctype="multipart/form-data">
+                                <form  method="POST" action="item-edit-form.php" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
                                             <input type="hidden" id="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>" disabled>
+                                                aria-label="Full Name" required value="<?= $item_name?>" disabled>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
                                             <select class="form-select py-2" disabled>
-                                                <option <?= $ProductType == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
-                                                <option <?= $ProductType == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
+                                                <option <?= $item_type == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
+                                                <option <?= $item_type == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Power Output (Watts/KVA)</label>
                                             <select class="form-select py-2" disabled> 
-                                                <option><?= $Watts_KVA ?></option>
+                                                <option><?= $power_output ?></option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-6 col-6 mb-3">
+                                            <label class="form-label" required>Stocks</label>
+                                            <input type="number" value="<?= $stocks ?>" class="form-control py-2" id="stocks">
+                                        </div>
+                                        <div class="col-md-6 col-6 mb-3">
+                                            <label class="form-label" required>Minimum Price</label>
+                                            <input type="number" value="<?= $min_price ?>" id="min_price" class="form-control py-2">
+                                        </div>
+                                        <div class="col-md-6 col-6 mb-3">
+                                            <label class="form-label" required>Maximum Price</label>
+                                            <input type="number" value="<?= $max_price ?>" class="form-control py-2" id="max_price">
                                         </div>
                                         <div class="col-xl-12  mb-3">
                                             <label class="form-label">Description</label>
@@ -143,7 +157,7 @@ global $conn;
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <input type="file" id="image">
-                                        </div>  
+                                        </div>
                                         <div class="col-xl-12 d-flex justify-content-end">
                                             <button id="save" type="submit" class="btn btn-primary">Save</button>
                                         </div>
@@ -169,19 +183,49 @@ global $conn;
         $(document).ready(function() {
             $('#save').on('click', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
-                var Product_id = document.getElementById("id");
+                var item_id = document.getElementById("id");
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
-                // Display SweetAlert confirmation
-                var Product_id_value = Product_id.value;
+                var stocks = document.getElementById("stocks");
+                var min_price = document.getElementById("min_price");
+                var max_price = document.getElementById("max_price");
+
+                var item_id_value = item_id.value;
+                var stocks_value = stocks.value;
+                var min_price_value = min_price.value;
+                var max_price_value = max_price.value;
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
                 var availability_ID_value = availability_ID.value;
                 var image = document.getElementById("image").files[0];
+
+                if(stocks_value == "" || min_price_value == "" || max_price_value == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(min_price_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Confirm Changes?",
+                        html: "Please Confirm the details of the Product!<br>Stocks: "+stocks_value+"<br>Minimum Price: "+min_price_value+"<br>Maximum Price: "+max_price_value,
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -190,13 +234,17 @@ global $conn;
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('save', true);
-                            formData.append('id', Product_id_value);
+                            formData.append('id', item_id_value);
+                            formData.append('stocks', stocks_value);
+                            formData.append('min_price', min_price_value);
+                            formData.append('max_price', max_price_value);
                             formData.append('Specification', specification_ID_value);
                             formData.append('Description', description_ID_value);
                             formData.append('Availability', availability_ID_value);
                             if (image) {
                                 formData.append('image', image);
                             } // Add the file to FormData
+                            
                             $.ajax({
                                 url: 'function.php',
                                 type: 'POST',
@@ -215,7 +263,7 @@ global $conn;
                                         showConfirmButton: false // Hide the confirm button
                                     }).then(() => {
                                         // Redirect after the timer ends
-                                        window.location.href = 'marketing-product-control.php';
+                                        window.location.href = 'inventory-control.php';
                                     });
                                 },
                                 error: function(response) {
@@ -229,6 +277,7 @@ global $conn;
                             });
                         }
                     });
+                }
             });
         });
     </script>

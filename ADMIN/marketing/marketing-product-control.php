@@ -80,17 +80,12 @@ require_once '../authetincation.php';
                                 <div class="d-flex align-items-center gap-2">
                                     <label class="main-content-label">PRODUCT SPECIFICATION TABLE</label>
                                     <div class="ms-auto">
-                                        <select id="" class="form-select bg-outline-primary py-2 rounded-1" name="" required>
+                                        <select hidden id="" class="form-select bg-outline-primary py-2 rounded-1" name="" required>
                                             <option value="All">All</option>
                                             <option value="Generator">Generator</option>
                                             <option value="Solar Panel">Solar Panel</option>
                                         </select>
                                     </div>
-                                    <a href="product-add-form.php">
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD PRODUCT
-                                        </button>
-                                    </a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -124,7 +119,6 @@ require_once '../authetincation.php';
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="product-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                     <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
                                                 </td>
                                             </tr>
