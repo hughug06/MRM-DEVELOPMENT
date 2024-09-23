@@ -77,16 +77,16 @@ require_once '../authetincation.php';
                                 <div class="mb-4">
                                     <label for="date" class="form-label fw-semibold">Enter number of stocks to add:</label>
                                     <div class="input-group">
-                                        <input type="number" name="id" id="add_stocks_id" hidden>
+                                        <input type="number" id="add_stocks_id" hidden>
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_add_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" id="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
                                     </div>
                                 </div>
                         
                                 <div class="d-grid">
-                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm btn_submit_add">
+                                    <button type="submit" class="btn btn-primary btn-lg shadow-sm btn_submit_add">
                                         <i class="bi bi-check-circle me-2"></i> Add
                                     </button>
                                 </div>
@@ -113,16 +113,16 @@ require_once '../authetincation.php';
                                 <div class="mb-4">
                                     <label for="date" class="form-label fw-semibold">Enter number of stocks to decrease:</label>
                                     <div class="input-group">
-                                        <input type="number" name="id" id="dec_stocks_id" hidden>
+                                        <input type="number" id="dec_stocks_id" hidden>
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_dec_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" id="input_dec_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
                                     </div>
                                 </div>
                         
                                 <div class="d-grid">
-                                    <button type="submit" name="submit_dec" class="btn btn-primary btn-lg shadow-sm btn_submit_dec">
+                                    <button type="submit"  class="btn btn-primary btn-lg shadow-sm btn_submit_dec">
                                         <i class="bi bi-check-circle me-2"></i> Decrease
                                     </button>
                                 </div>
@@ -159,9 +159,9 @@ require_once '../authetincation.php';
                                             <th class="wd-lg-20p"><span>Item Name</span></th>       
                                                 <th class="wd-lg-8p"><span>Type</span></th>
                                                 <th class="wd-lg-20p"><span>Power output</span></th>
-                                                <th class="wd-lg-20p"><span>Stock</span></th>  
                                                 <th class="wd-lg-20p"><span>Min Price</span></th> 
                                                 <th class="wd-lg-20p"><span>Max Price</span></th>                                                 
+                                                <th class="wd-lg-20p"><span>Stock</span></th>  
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -177,22 +177,22 @@ require_once '../authetincation.php';
                                                  <td><?= $resultItem['ProductName']?></td>     
                                                  <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>                                       
                                                  <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>                       
-                                                <td><?= $resultItem['stock']?></td>   
-                                                <td><?= $resultItem['min_price']?></td> 
-                                                <td><?= $resultItem['max_price']?></td>                                         
+                                                 <td><?= $resultItem['min_price']?></td> 
+                                                 <td><?= $resultItem['max_price']?></td>                                         
+                                                 <td><?= $resultItem['stock']?></td>   
                                                 <td>                                                 
                                                     <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                     <!-- Add Stocks Button -->
                                                     <!-- Add Stocks Button -->
-                                                    <a class="btn btn-sm btn-danger add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                    <a class="btn btn-sm btn-success add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['ProductID']; ?>">
                                                         <i class="fe fe-plus"></i>
                                                     </a>
-
+                                                    
                                                     <!-- Decrease Stocks Button -->
-                                                    <a class="btn btn-sm btn-danger dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                    <a class="btn btn-sm btn-secondary dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
                                                         <i class="fe fe-minus"></i>
                                                     </a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 
@@ -342,6 +342,7 @@ require_once '../authetincation.php';
             });
         });
 
+        //SUBMISSION AJAX FOR ADD STOCKS
         $(".btn_submit_add").click(function(event) {
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
             var id=document.getElementById("add_stocks_id");
@@ -350,21 +351,83 @@ require_once '../authetincation.php';
             var stocks_value = stocks.value;
             Swal.fire({
                 title: 'Confirmation',
-                html: "Are you sure to add stocks on product: "+ stocks_value +" ?",
+                html: "Are you sure to add stocks on product: "+ id_value +" ?",
                 icon: 'warning',
                 confirmButtonText: 'Confirm',
                 showCancelButton: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If user confirms, send AJAX request for deletion of product
+                    var formData = new FormData();
+                    formData.append('submit_add', true);
+                    formData.append('id', id_value);
+                    formData.append('input_add_stocks', stocks_value);
+
+                    // If user confirms, send AJAX request for stock update
                     $.ajax({
-                        url: deleteUrl,
-                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        url: 'function.php',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
                         success: function(response) {
-                            // Handle successful deletion of product
+                            // Handle successful updating of product
                             Swal.fire({
-                                title: 'Product Deleted!',
-                                text: 'You have successfully deleted the product.',
+                                title: 'Product Updated!',
+                                text: 'You have successfully updated the product.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = 'inventory-control.php';
+                            });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the product. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+        //SUBMISSION AJAX FOR DECREASE STOCKS
+        $(".btn_submit_dec").click(function(event) {
+            event.preventDefault(); // Prevent the default action (navigating to the delete URL)
+            var id=document.getElementById("dec_stocks_id");
+            var stocks = document.getElementById("input_dec_stocks");
+            var id_value = id.value;
+            var stocks_value = stocks.value;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure to add stocks on product: "+ id_value +" ?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = new FormData();
+                    formData.append('submit_dec', true);
+                    formData.append('id', id_value);
+                    formData.append('input_dec_stocks', stocks_value);
+
+                    // If user confirms, send AJAX request for stock update
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Handle successful updating of product
+                            Swal.fire({
+                                title: 'Product Updated!',
+                                text: 'You have successfully updated the product.',
                                 icon: 'success',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer
@@ -401,12 +464,12 @@ require_once '../authetincation.php';
             // Check the modal ID to differentiate between modals
             if (modal.id === 'add_stocks') {
                 // Find the input field inside the Add Stocks modal
-                var input = modal.querySelector('#addStocksInput');
+                var input = modal.querySelector('#add_stocks_id');
                 // Set the input field's value to the ProductID from the button
                 input.value = value;
             } else if (modal.id === 'dec_stocks') {
                 // Find the input field inside the Decrease Stocks modal
-                var input = modal.querySelector('#decStocksInput');
+                var input = modal.querySelector('#dec_stocks_id');
                 // Set the input field's value to the ProductID from the button
                 input.value = value;
             }
