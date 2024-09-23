@@ -50,11 +50,6 @@ require_once '../authetincation.php';
 
 <body>
 
-    
-
-
-    
-
     <div class="page">
 
          <!-- app-header -->
@@ -72,14 +67,20 @@ require_once '../authetincation.php';
                
 
                 <!-- Start::row-1 -->
-                 
-                <div class="row row-sm mt-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-
-
-                        
-                    </div><!-- COL END -->
+            
+                <div class="row row-sm">
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Chartjs Bar Chart</div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <!--End::row-1 -->
 
             </div>
@@ -92,14 +93,6 @@ require_once '../authetincation.php';
         <!-- Footer End -->
 
     </div>
-
-    
-    <!-- Scroll To Top -->
-    <div class="scrollToTop">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
-    <!-- Scroll To Top -->
 
     <!-- SWEET ALERT JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -133,9 +126,11 @@ require_once '../authetincation.php';
     <!-- Custom-Switcher JS -->
     <script src="../../assets/js/custom-switcher.min.js"></script>
 
-    <!-- Prism JS -->
-    <script src="../../assets/libs/prismjs/prism.js"></script>
-    <script src="../../assets/js/prism-custom.js"></script>
+    <!-- Chartjs Chart JS -->
+    <script src="../../assets/libs/chart.js/chart.min.js"></script>
+
+    <!-- Imternal Chartjs JS -->
+    <script src="../../assets/js/chartjs-charts.js"></script>
 
     <!-- Custom JS -->
     <script src="../../assets/js/custom.js"></script>
