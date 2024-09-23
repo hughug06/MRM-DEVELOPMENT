@@ -7,23 +7,22 @@ if (isset($_POST['product'])) {
     $selectedProducts = $_POST['selected_products'];
     $start_time =  $_SESSION['start_time'];
     $end_time = $_SESSION['end_time'];
-    $date =$_SESSION['date'];
-    $id = $_SESSION['chaintercomavailid'];
-    $meeting_url = "https://meet.jit.si/meeting_".$id;
+    $date = $_SESSION['date'];
+    $avail_id =  $_SESSION['chainavailability'];
+    $account_id = $_SESSION['account_id'];
+    $meeting_url = "https://meet.jit.si/meeting_".$avail_id;
     $products = []; 
     foreach ($selectedProducts as $productId) {
         $select = "select * from products where ProductID = '$productId'";
         $select_result = mysqli_query($conn , $select);
         $product_result = mysqli_fetch_assoc($select_result);
-        $products[] = $product_result['product']; // Append each product ID to the $products array
+        $products[] = $product_result['ProductName']; // Append each product ID to the $products array
     }
-    print_r($products);
-    exit();
-    $sql = "insert into chaintercom_appointment(meeting_url,date)
-            VALUES('$meeting_url' , '$date') ";
+    $productString = implode(', ', $products);
+    $sql = "insert into chaintercom_appointment(product,meeting_url,date,start_time,end_time,account_id,chainavailability)
+            VALUES('$productString' , '$meeting_url' , '$date' , '$start_time' , '$end_time ' , '$account_id' , '$avail_id') ";
     $result = mysqli_query($conn , $sql);
     
-
     //unset all session
     unset($_SESSION['start_time']);
     unset($_SESSION['end_time']);

@@ -174,7 +174,7 @@ require_once '../authetincation.php';
                                                 <td><?= $resultItem['end_time']?></td>                                           
                                                 <td>                                                 
                                                     <a href=""  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
-                                                    <a href="time_delete.php?id=<?= $resultItem['chaintercomavailid']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a href="time_delete.php?id=<?= $resultItem['chainavailability']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 

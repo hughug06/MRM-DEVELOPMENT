@@ -2,15 +2,16 @@
 //get the data from service.php after the book trigger
 session_start();
 require_once '../../Database/database.php';
-if (isset($_GET['chaintercomavailid'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
+if (isset($_GET['chainavailability'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
    
     
     $_SESSION['start_time'] =  $_GET['start_time'];
     $_SESSION['end_time']= $_GET['end_time'];
     $_SESSION['date']= $_GET['date'];
-    $_SESSION['chaintercomavailid'] = $_GET['chaintercomavailid'];
-   
-} 
+    $_SESSION['chainavailability'] = $_GET['chainavailability'];
+    
+    
+}
 
 ?>
 

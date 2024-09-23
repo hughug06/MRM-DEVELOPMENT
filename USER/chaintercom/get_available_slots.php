@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $appointment_date = $_POST['appointment_date'];
 
     // Query to fetch available time slots for the selected date
-    $sql = "SELECT 	chaintercomavailid , date , start_time, end_time 
+    $sql = "SELECT 	chainavailability , date , start_time, end_time 
             FROM chaintercom_availability 
             WHERE date = '$appointment_date'";
     $result = mysqli_query($conn, $sql);

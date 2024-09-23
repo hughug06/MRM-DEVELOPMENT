@@ -1,7 +1,6 @@
-
-
-
-
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -222,24 +221,45 @@
                 <div class="modal-body">
                     <!-- Data Table (Blank for now) -->
                     <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">product type</th>
-                        <th scope="col">Specs</th>
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Meeting link</th>
+            <th scope="col">date</th>
+            <th scope="col">time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table body will be populated later -->
+        <tr>
+            <?php 
+            require_once "../../Database/database.php";
 
-                        <th scope="col">Date</th>
-                        <th scope="col">Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Table body will be populated later -->
-                        <tr>
-                        <td colspan="5" class="text-center">No appointments available</td>
-                        </tr>
-                    </tbody>
-                    </table>
+            $account_id = $_SESSION['account_id'];
+            $sql = "select * from chaintercom_appointment where account_id = '$account_id'";
+            $result = mysqli_query($conn , $sql);
+            if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_assoc($result)){
+                    
+                
+            ?>
+        <td class="text-center"><?= $row['product']?></td>
+            <td class="text-center">
+                <a target="_blank" href="<?=$row['meeting_url'] ?>">link</a>
+                 
+            </td>
+            <td class="text-center"><?= $row['date']?></td>
+            <td class="text-center"><?= $row['start_time'] . " - " . $row['end_time']?></td>
+        </tr>
+    
+            <?php 
+            }
+                    
+            }
+            ?>
+    </tbody>
+</table>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -370,7 +390,7 @@
                  $('#availableTimes').append(`
                      <li class="list-group-item">
                          ${slot.start_time} - ${slot.end_time}
-                         <a href="chaintercom.php?chaintercomavailid=${slot.chaintercomavailid}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
+                         <a href="chaintercom.php?chainavailability=${slot.chainavailability}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
                             class="btn btn-success btn-sm float-end">
                             Book
                          </a>

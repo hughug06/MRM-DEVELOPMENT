@@ -67,58 +67,42 @@ require_once '../authetincation.php';
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                <div class="row row-sm mt-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                        <div class="card custom-card">
-                            <div class="card-header border-bottom-0 d-block">                            
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0"></label>               
-                                    <div class="card-body">
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover text-center mb-0">
-            <thead class="table-light">
-                <tr>
-                    <th class="col-lg-2"><span>Name</span></th>
-                    <th class="col-lg-2"><span>Service Type</span></th>
-                    <th class="col-lg-3"><span>Brand/Product/Power/Running Hours</span></th>
-                    <th class="col-lg-2"><span>Schedule</span></th>
-                    <th class="col-lg-2"><span>Status</span></th>
-                    <th class="col-lg-1">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php 
-            require '../../Database/database.php';             
-                                                                                                                     
-            $select = "SELECT * FROM chaintercom_appointment";
-            $result = mysqli_query($conn, $select);
-            if(mysqli_num_rows($result) > 0) {
-                foreach($result as $resultItem) {
-                    ?> 
-                    <tr>
-                        <td><?= $resultItem['product'] ?></td>    
-                        <td><a href="meeting_room.php">Meeting link</a></td>     
-                        <td><?= $resultItem['date'] ?></td>                                        
-                        <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
-                        <td><?= $resultItem['status'] ?></td>                          
-                        <td>
-                            <button class="btn btn-danger "><i class="fe fe-trash">DECLINE</i></button>
-                        </td>
-                    </tr>   
-                    <?php 
-                }
-            }
-            ?>
-            </tbody>    
-        </table>
-    </div>
-</div>
+                    <div id="jitsi-meet"></div>
 
-                                           </div>
-                                      </div>
-                                 </div>
-                          </div>
-                     </div>
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script>
+    const domain = 'meet.jit.si';
+    const options = {
+        roomName: 'room1', // Change this to a unique room name
+        width: '100%',
+        height: '600px',
+        parentNode: document.querySelector('#jitsi-meet'),
+        interfaceConfigOverwrite: {
+            DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+            // Optionally hide the "Invite" button or other controls
+        },
+        configOverwrite: {
+            startWithVideoMuted: true,
+            startWithAudioMuted: true,
+            prejoinPageEnabled: false, // Disable the pre-join page
+            requireDisplayName: false // Allow joining without display name
+        }
+    };
+
+    const api = new JitsiMeetExternalAPI(domain, options);
+
+    // Automatically promote yourself to a moderator
+    api.addEventListener('participantJoined', (participant) => {
+        const yourUserId = '1'; // Replace with your actual user ID or email
+
+        if (participant.id === yourUserId) {
+            api.executeCommand('setModerator', participant.id);
+        }
+    });
+</script>
+
+
+
                                                 
                </div>
             </div>
