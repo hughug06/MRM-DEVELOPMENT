@@ -113,7 +113,7 @@ require_once '../authetincation.php';
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label" required>Maximum Price</label>
-                                            <input type="number" class="form-control py-2"  placeholder="Maximum Price" id="max_price">
+                                            <input type="number" id="max_price" class="form-control py-2"  placeholder="Maximum Price">
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
@@ -217,8 +217,8 @@ require_once '../authetincation.php';
                 var PPower_value = PPower.value;
                 var custom = custom_ID.value;
                 var stocks_value = stocks.value;
-                var min_price_value = min_price.value;
-                var max_price_value = max_price.value;
+                var min_price_value = parseInt(min_price.value);
+                var max_price_value = parseInt(max_price.value);
                 var specification = specification_ID.value;
                 var description = description_ID.value;
                 var availability = availability_ID.value;
@@ -229,7 +229,6 @@ require_once '../authetincation.php';
                 else{
                     power_checker = 20;
                 }
-
                 if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks_value == "" || min_price_value == ""  || max_price_value == ""){
                     Swal.fire({
                         title: 'ERROR',
@@ -256,6 +255,17 @@ require_once '../authetincation.php';
                     Swal.fire({
                         title: 'ERROR',
                         html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(max_price_value < min_price_value){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Maximum Price cannot be less than minimum price.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
