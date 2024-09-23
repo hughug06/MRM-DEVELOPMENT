@@ -77,7 +77,7 @@ require_once '../authetincation.php';
                                 <div class="mb-4">
                                     <label for="date" class="form-label fw-semibold">Enter number of stocks to add:</label>
                                     <div class="input-group">
-                                        <input type="number" name="add_stocks" id="addStocksInput" hidden>
+                                        <input type="number" name="id" id="add_stocks_id" hidden>
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
@@ -86,7 +86,7 @@ require_once '../authetincation.php';
                                 </div>
                         
                                 <div class="d-grid">
-                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm">
+                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm btn_submit_add">
                                         <i class="bi bi-check-circle me-2"></i> Add
                                     </button>
                                 </div>
@@ -113,16 +113,16 @@ require_once '../authetincation.php';
                                 <div class="mb-4">
                                     <label for="date" class="form-label fw-semibold">Enter number of stocks to decrease:</label>
                                     <div class="input-group">
-                                        <input type="number" name="dec_stocks" id="decStocksInput" hidden>
+                                        <input type="number" name="id" id="dec_stocks_id" hidden>
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_add_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" id="input_dec_stocks" name="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
                                     </div>
                                 </div>
                         
                                 <div class="d-grid">
-                                    <button type="submit" name="submit_add" class="btn btn-primary btn-lg shadow-sm">
+                                    <button type="submit" name="submit_dec" class="btn btn-primary btn-lg shadow-sm btn_submit_dec">
                                         <i class="bi bi-check-circle me-2"></i> Decrease
                                     </button>
                                 </div>
@@ -306,6 +306,51 @@ require_once '../authetincation.php';
             Swal.fire({
                 title: 'Confirmation',
                 html: "Are you sure to delete this product?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for deletion of product
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        success: function(response) {
+                            // Handle successful deletion of product
+                            Swal.fire({
+                                title: 'Product Deleted!',
+                                text: 'You have successfully deleted the product.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = 'inventory-control.php';
+                            });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error deleting the product. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+        $(".btn_submit_add").click(function(event) {
+            event.preventDefault(); // Prevent the default action (navigating to the delete URL)
+            var id=document.getElementById("add_stocks_id");
+            var stocks = document.getElementById("input_add_stocks");
+            var id_value = id.value;
+            var stocks_value = stocks.value;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure to add stocks on product: "+ stocks_value +" ?",
                 icon: 'warning',
                 confirmButtonText: 'Confirm',
                 showCancelButton: true
