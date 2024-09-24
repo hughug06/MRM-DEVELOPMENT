@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 ?>
 
 <aside class="app-sidebar sticky" id="sidebar">
