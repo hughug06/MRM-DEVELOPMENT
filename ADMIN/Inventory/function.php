@@ -143,9 +143,71 @@ elseif(isset($_POST['save'])){
       header('Content-Type: application/json');
 }
 
+//ADD STOCKS FUNCTION
+elseif(isset($_POST['submit_add'])){
+
+  $id = $_POST["id"];
+  $stocks = $_POST['input_add_stocks'];
+  $sql = "select stock from products where ProductID='$id'";
+      $result = mysqli_query($conn , $sql);
+
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $current_value = $row['stock'];
+    
+        // Modify the value (for example, increment by 1)
+        $new_value = $current_value + $stocks;
+    
+        // Update the value back in the database
+        $update_sql = "UPDATE products set stock = ? WHERE ProductID = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("ii", $new_value, $id);
+    
+        if ($update_stmt->execute()) {
+          echo json_encode(['success' => true]);
+        } else {
+          echo json_encode(['success' => false, 'message' => 'Error updating record: ' . $conn->error]);
+        }
+    } else {
+      echo json_encode(['success' => false, 'message' => 'No record found']);
+    }
+}
+
+//DECREASE STOCKS FUNCTION
+elseif(isset($_POST['submit_dec'])){
+
+  $id = $_POST["id"];
+  $stocks = $_POST['input_dec_stocks'];
+  $sql = "select stock from products where ProductID='$id'";
+      $result = mysqli_query($conn , $sql);
+
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $current_value = $row['stock'];
+    
+        // Modify the value (for example, increment by 1)
+        $new_value = $current_value - $stocks;
+    
+        // Update the value back in the database
+        $update_sql = "UPDATE products set stock = ? WHERE ProductID = ?";
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("ii", $new_value, $id);
+    
+        if ($update_stmt->execute()) {
+          echo json_encode(['success' => true]);
+        } else {
+          echo json_encode(['success' => false, 'message' => 'Error updating record: ' . $conn->error]);
+        }
+    } else {
+      echo json_encode(['success' => false, 'message' => 'No record found']);
+    }
+}
+
 else{
     echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
+
+
 
 
 
