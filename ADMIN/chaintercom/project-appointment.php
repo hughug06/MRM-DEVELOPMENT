@@ -79,10 +79,11 @@ require_once '../authetincation.php';
             <thead class="table-light">
                 <tr>
                     <th class="col-lg-2"><span>Name</span></th>
-                    <th class="col-lg-2"><span>Service Type</span></th>
-                    <th class="col-lg-3"><span>Brand/Product/Power/Running Hours</span></th>
-                    <th class="col-lg-2"><span>Schedule</span></th>
-                    <th class="col-lg-2"><span>Status</span></th>
+                    <th class="col-lg-2"><span>product</span></th>
+                    <th class="col-lg-3"><span>Meeting</span></th>
+                    <th class="col-lg-2"><span>date</span></th>
+                    <th class="col-lg-2"><span>time</span></th>
+                    <th class="col-lg-2"><span>status</span></th>
                     <th class="col-lg-1">Action</th>
                 </tr>
             </thead>
@@ -96,8 +97,9 @@ require_once '../authetincation.php';
                 foreach($result as $resultItem) {
                     ?> 
                     <tr>
+                        <td>USER NAME USE JOIN</td>    
                         <td><?= $resultItem['product'] ?></td>    
-                        <td><a href="meeting_room.php">Meeting link</a></td>     
+                        <td><button class="button-success"><a href="meeting_room.php">Meeting link</a></button></td>     
                         <td><?= $resultItem['date'] ?></td>                                        
                         <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
                         <td><?= $resultItem['status'] ?></td>                          
