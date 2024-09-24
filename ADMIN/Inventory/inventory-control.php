@@ -156,6 +156,7 @@ require_once '../authetincation.php';
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
+                                            <th class="wd-lg-8p"><span>ID</span></th>
                                             <th class="wd-lg-20p"><span>Item Name</span></th>       
                                                 <th class="wd-lg-8p"><span>Type</span></th>
                                                 <th class="wd-lg-20p"><span>Power output</span></th>
@@ -174,6 +175,7 @@ require_once '../authetincation.php';
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
+                                                 <td><?= $resultItem['ProductID']?></td>  
                                                  <td><?= $resultItem['ProductName']?></td>     
                                                  <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>                                       
                                                  <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>                       

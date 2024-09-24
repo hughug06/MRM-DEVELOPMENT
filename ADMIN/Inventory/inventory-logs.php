@@ -67,122 +67,75 @@ require_once '../authetincation.php';
                
                 <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
                     <div>
-                        <h2 class="main-content-title fs-24 mb-1">Inventory Reports</h2>
+                        <h2 class="main-content-title fs-24 mb-1">Inventory Logs</h2>
                         <ol class="breadcrumb mb-0" hidden>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Products</li>
                         </ol>
                     </div>
-
                 </div>
 
                 <!-- Start::row-1 -->
             
-                <div class="row row-sm">
-                    <!-- Bar chart for Solar -->
-                    <div class="col-xl-6">
+                <!--  SHOW INVENTORY -->
+                <div class="row row-sm mt-3">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Solar Panel Stock Levels</div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Reports for Solar -->
-                    <div class="col-xl-6">
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Solar Panel Reports</div>
-                            </div>
                             <div class="card-body">
                                 <div class="table-responsive userlist-table">
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                        <thead>
+                                            <th>ID</th>
+                                            <th>Actions</th>
+                                        </thead>
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';                                          
-                                           $select = "Select * from products where ProductType = 'Solar Panel' and stock <= 50";
+                                           $select = "Select * from inventory_logs 
+                                           left join user_info on inventory_logs.user_id = user_info.user_id";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                 <td class="text-danger">Product: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>     
+                                                 <td><?= $resultItem['log_id']?></td>   
+                                                 <td><?= $resultItem['first_name'].$resultItem['first_name'].": "
+                                                 .$resultItem['log_action']." at ".$resultItem['time']." ".$resultItem['date'] ?></td>     
                                             </tr>
-
-                                                <?php 
-                                            }
-                                            
-                                            }
-                                            else{
-                                            ?>
-                                                <tr>
-                                                    <td>No low stocks</td>   
-                                                </tr>
-                                            <?php 
-                                            }
-                                            ?>
-                                                    
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-sm">
-                    <!-- Bar chart for Generator -->
-                    <div class="col-xl-6">
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Generator Stock Levels</div>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Reports for Generator -->
-                    <div class="col-xl-6">
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Generator Reports</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive userlist-table">
-                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                        <tbody>
-                                           <?php 
-                                           require '../../Database/database.php';                                          
-                                           $select = "Select * from products where ProductType = 'Generator' and stock <= 5";
-                                           $result = mysqli_query($conn , $select);
-                                           if(mysqli_num_rows($result) > 0){
-                                            foreach($result as $resultItem){
-                                                ?> 
-                                                 <tr>
-                                                    <td class="text-danger">Product: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>   
-                                                </tr>
 
                                                 <?php 
                                             }
                                             
                                            }
                                            else{
-                                            ?>
-                                                 <tr>
-                                                    <td>No low stocks</td>   
-                                                </tr>
-                                            <?php 
+
                                            }
                                            ?>
                                                     
                                         </tbody>
                                     </table>
                                 </div>
+                                
+                                <nav aria-label="...">
+                                    <ul class="pagination mt-4 mb-0 float-end">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link">2</span>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0);">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                               
                             </div>
+
+                           
                         </div>
-                    </div>
+                    </div><!-- COL END -->
                 </div>
 
                 <!--End::row-1 -->
