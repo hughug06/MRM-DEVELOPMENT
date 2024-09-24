@@ -65,29 +65,63 @@ require_once '../authetincation.php';
             <div class="container-fluid">
 
                
+                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                    <div>
+                        <h2 class="main-content-title fs-24 mb-1">Inventory Reports</h2>
+                        <ol class="breadcrumb mb-0" hidden>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                    </div>
+
+                </div>
 
                 <!-- Start::row-1 -->
             
                 <div class="row row-sm">
+                    <!-- Bar chart for Solar -->
                     <div class="col-xl-6">
                         <div class="card custom-card">
                             <div class="card-header">
-                                <div class="card-title">Solar Panel</div>
+                                <div class="card-title">Solar Panel Stock Levels</div>
                             </div>
                             <div class="card-body">
                                 <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row row-sm">
+                    <!-- Reports for Solar -->
                     <div class="col-xl-6">
                         <div class="card custom-card">
                             <div class="card-header">
-                                <div class="card-title">Generator</div>
+                                <div class="card-title">Solar Panel Reports</div>
+                            </div>
+                            <div class="card-body">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm">
+                    <!-- Bar chart for Generator -->
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Generator Stock Levels</div>
                             </div>
                             <div class="card-body">
                                 <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reports for Generator -->
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Generator Reports</div>
+                            </div>
+                            <div class="card-body">
+                                
                             </div>
                         </div>
                     </div>
