@@ -37,12 +37,13 @@ session_start();
                         
                         if($role == 'admin')
                         {
-                            $_SESSION['auth'] = true;
+                            $_SESSION['auth'] = "admin";
                             $_SESSION['admin_id'] =  $id;                          
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
                         }
                         else if($role == 'user')
                         {
+                            $_SESSION['auth'] = "user";
                             $_SESSION['user_id'] = $user;
                             $_SESSION['account_id'] = $id;
                             echo json_encode(['success' => true, 'redirect' => 'USER\dashboard\user-dashboard.php']);

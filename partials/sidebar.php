@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <aside class="app-sidebar sticky" id="sidebar">
 
     <!-- Start::main-sidebar-header -->
@@ -22,7 +26,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
             </div>
             <ul class="main-menu pt-4 mt-3">   
-
+            <?php 
+                
+                if($_SESSION['auth'] == "user")
+                {
+            
+                ?>
                 <li class="slide <?= $page == "user-dashboard.php" ? 'active':''?>">
                     <a href="/MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
                         <span class="shape1"></span>
@@ -110,7 +119,8 @@
                     </a>
                 </li>
                 <?php 
-                if($_SESSION['auth'] == true)
+                }
+               else if($_SESSION['auth'] == "admin")
                 {
             
                 ?>
