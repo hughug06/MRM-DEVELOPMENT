@@ -125,6 +125,33 @@
             
                 ?>
                 <!-- Start::slide__category -->
+                <li class="slide__category"><span class="category-name">Products</span></li>
+                <!-- End::slide__category -->
+            
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-solar-panel side-menu__icon"></i>
+                        <!-- <i class="las la-car-battery "></i> -->
+                        <span class="side-menu__label">Solar Panel</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <!-- <i class="bi-bag side-menu__icon"></i> -->
+                        <i class="fa-solid fa-car-battery side-menu__icon"></i>
+                        <span class="side-menu__label">Generator</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+                <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
                      <!-- Start::slide -->  
