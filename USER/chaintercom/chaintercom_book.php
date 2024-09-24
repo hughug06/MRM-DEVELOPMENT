@@ -3,7 +3,16 @@
 session_start();
 require_once '../../Database/database.php';
 if (isset($_POST['product'])) {
-   
+     //RETRIEVE FULL NAME
+     $user = $_SESSION['user_id'];
+     $retrieve = "select * from user_info where user_id = '$user'";
+     $retrieve_name = mysqli_query($conn , $retrieve);
+     if(mysqli_num_rows($retrieve_name) > 0)
+     {
+    $row = mysqli_fetch_assoc($retrieve_name);
+    $first_name = $row['first_name'];
+    $last_name = $row['last_name'];
+    $fullname = $first_name . " " .$last_name;   
     $selectedProducts = $_POST['selected_products'];
     $start_time =  $_SESSION['start_time'];
     $end_time = $_SESSION['end_time'];
@@ -19,8 +28,8 @@ if (isset($_POST['product'])) {
         $products[] = $product_result['ProductName']; // Append each product ID to the $products array
     }
     $productString = implode(', ', $products);
-    $sql = "insert into chaintercom_appointment(product,meeting_url,date,start_time,end_time,account_id,chainavailability)
-            VALUES('$productString' , '$meeting_url' , '$date' , '$start_time' , '$end_time ' , '$account_id' , '$avail_id') ";
+    $sql = "insert into chaintercom_appointment(name,product,meeting_url,date,start_time,end_time,account_id,chainavailability)
+            VALUES('$fullname','$productString' , '$meeting_url' , '$date' , '$start_time' , '$end_time ' , '$account_id' , '$avail_id') ";
     $result = mysqli_query($conn , $sql);
     
     //unset all session
@@ -28,6 +37,7 @@ if (isset($_POST['product'])) {
     unset($_SESSION['end_time']);
     unset($_SESSION['date']);
     unset($_SESSION['chaintercomavailid']);
+}
 } 
 
 ?>
@@ -141,15 +151,11 @@ if (isset($_POST['product'])) {
             <!-- Back to Chaintercom Button -->
             <a href="chaintercom_landing.php" class="btn btn-primary btn-lg me-2">Back to Chaintercom</a>
 
-            <!-- Check Appointment Button -->
-            <a href="check-appointment.php" class="btn btn-success btn-lg">Check Appointment</a>
+      
         </div>
     </div>
 </div>
-
-
-
-   
+<
                 </div>
             </div>
             <!--APP-CONTENT CLOSE-->

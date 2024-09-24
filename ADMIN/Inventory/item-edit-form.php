@@ -115,7 +115,7 @@ global $conn;
                                         <div class="col-xl-12 mb-3">
                                             <input type="hidden" id="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" placeholder="Full Name"
+                                            <input type="text" id="Pname" class="form-control" placeholder="Full Name"
                                                 aria-label="Full Name" required value="<?= $item_name?>" disabled>
                                         </div>
                                         <div class="col-xl-12 mb-3">
@@ -190,6 +190,7 @@ global $conn;
                 var stocks = document.getElementById("stocks");
                 var min_price = document.getElementById("min_price");
                 var max_price = document.getElementById("max_price");
+                var Pname = document.getElementById("Pname");
 
                 var item_id_value = item_id.value;
                 var stocks_value = stocks.value;
@@ -199,6 +200,7 @@ global $conn;
                 var description_ID_value = description_ID.value;
                 var availability_ID_value = availability_ID.value;
                 var image = document.getElementById("image").files[0];
+                var Pname_value = Pname.value;
 
                 if(stocks_value == "" || min_price_value == "" || max_price_value == ""){
                     Swal.fire({
@@ -234,6 +236,7 @@ global $conn;
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('save', true);
+                            formData.append('editType', 'item');
                             formData.append('id', item_id_value);
                             formData.append('stocks', stocks_value);
                             formData.append('min_price', min_price_value);
@@ -241,6 +244,7 @@ global $conn;
                             formData.append('Specification', specification_ID_value);
                             formData.append('Description', description_ID_value);
                             formData.append('Availability', availability_ID_value);
+                            formData.append('ProductName', Pname_value);
                             if (image) {
                                 formData.append('image', image);
                             } // Add the file to FormData

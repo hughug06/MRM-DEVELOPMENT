@@ -114,7 +114,7 @@ global $conn;
                                             <input type="hidden" id="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
                                             <input type="text" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" name="ProductName" required value="<?= $ProductName?>" disabled>
+                                                aria-label="Full Name" id="Pname" name="ProductName" required value="<?= $ProductName?>" disabled>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
@@ -173,11 +173,13 @@ global $conn;
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
+                var Pname = document.getElementById("Pname");
                 // Display SweetAlert confirmation
                 var Product_id_value = Product_id.value;
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
                 var availability_ID_value = availability_ID.value;
+                var Pname_value = Pname.value;
                 var image = document.getElementById("image").files[0];
                     Swal.fire({
                         title: 'Confirmation',
@@ -190,10 +192,12 @@ global $conn;
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('save', true);
+                            formData.append('editType', 'product');
                             formData.append('id', Product_id_value);
                             formData.append('Specification', specification_ID_value);
                             formData.append('Description', description_ID_value);
                             formData.append('Availability', availability_ID_value);
+                            formData.append('ProductName', Pname_value);
                             if (image) {
                                 formData.append('image', image);
                             } // Add the file to FormData
