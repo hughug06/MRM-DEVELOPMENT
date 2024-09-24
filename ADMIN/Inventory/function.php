@@ -5,6 +5,7 @@ require_once '../authetincation.php';
 
 if(isset($_POST['AddItem']))
 {
+  header('Content-Type: application/json');
   $ProductName = $_POST['ProductName'];
   $ProductType = $_POST['ProductType'];
   $stocks = $_POST['stocks'];
@@ -32,9 +33,23 @@ if(isset($_POST['AddItem']))
         $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification, stock, min_price, max_price) 
                           VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$min_price', '$max_price')";
           if (mysqli_query($conn, $sql_insert)) {
+            $user_id = $_SESSION['user_id'];
+            $sql_get_userinfo = "select * from user_info where user_id = $user_id";
+            $result = mysqli_query($conn , $sql_get_userinfo);
+            if($result->num_rows > 0){
+              $row = mysqli_fetch_assoc($result);
+              $first_name = $row['first_name'];
+              $last_name = $row['last_name'];
+
+              $log_action = "$first_name $last_name: Has added new item: $ProductName";
+              $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
+                VALUES ($user_id, '$ProductName', '$log_action')";
+              mysqli_query($conn, $sql_log);
               echo json_encode(['success' => true]);
-              header('Content-Type: application/json');
-              exit();
+            }
+            else{
+              echo json_encode(['message' => 'SQL error on getting user info']);
+            }
           }
           else {
               echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -44,15 +59,30 @@ if(isset($_POST['AddItem']))
     }
     //WITHOUT IMAGE SUBMISSION
     else{                                                               
-      $sql_insert = "insert into products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, min_price, max_price) 
+      $sql_insert = "INSERT INTO products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, min_price, max_price) 
                           VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$min_price', '$max_price')";
           if (mysqli_query($conn, $sql_insert)) {
-            echo json_encode(['success' => true]);
-              header('Content-Type: application/json');
-              exit();
-            } else {
-              echo json_encode(['message' => 'SQL error']);
-            }
+              $user_id = $_SESSION['user_id'];
+              $sql_get_userinfo = "select * from user_info where user_id = $user_id";
+              $result = mysqli_query($conn , $sql_get_userinfo);
+              if($result->num_rows > 0){
+                $row = mysqli_fetch_assoc($result);
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+
+                $log_action = "$first_name $last_name: Has added new item: $ProductName";
+                $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
+                  VALUES ($user_id, '$ProductName', '$log_action')";
+                mysqli_query($conn, $sql_log);
+                echo json_encode(['success' => true]);
+              }
+              else{
+                echo json_encode(['message' => 'SQL error on getting user info']);
+              }
+          } 
+          else {
+            echo json_encode(['message' => 'SQL error on adding product']);
+          }
     }
   }
   else{
@@ -94,12 +124,14 @@ elseif (isset($_POST['PrType'])) {
 elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];
+  $ProductName = $_POST["ProductName"];
   $Availability = $_POST['Availability'] == true ? 1:0;
   $Description=$_POST['Description'];
   $Specification=$_POST['Specification'];
   $stocks = $_POST['stocks'];
   $max_price=$_POST['max_price'];
   $min_price=$_POST['min_price'];
+  $edit_type = $_POST['editType'];
   
   //WITH IMAGE SUBMISSION
   if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
@@ -117,31 +149,61 @@ elseif(isset($_POST['save'])){
 
           $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
-          echo json_encode(['success' => true]);
-          header('Content-Type: application/json');
+          
+            //LOG FOR EDIT PRODUCT
+            $user_id = $_SESSION['user_id'];
+            $sql_get_userinfo = "select * from user_info where user_id = $user_id";
+            $result = mysqli_query($conn , $sql_get_userinfo);
+            if($result->num_rows > 0){
+              $row = mysqli_fetch_assoc($result);
+              $first_name = $row['first_name'];
+              $last_name = $row['last_name'];
+              if($edit_type == 'product'){
+                $log_action = "$first_name $last_name: Has edited the item: $ProductName";
+              }
+              else{
+                $log_action = "$first_name $last_name: Has edited the item: $ProductName";
+              }
+              $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
+                VALUES ($user_id, '$ProductName', '$log_action')";
+              mysqli_query($conn, $sql_log);
+              echo json_encode(['success' => true]);
+            }
+            else{
+              echo json_encode(['message' => 'SQL error on getting user info']);
+            }
       }
   }
   //WITHOUT IMAGE SUBMISSION
   else{
       $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
-          echo json_encode(['success' => true]);
-          header('Content-Type: application/json');
+          
+          //LOG FOR EDIT PRODUCT
+          $user_id = $_SESSION['user_id'];
+            $sql_get_userinfo = "select * from user_info where user_id = $user_id";
+            $result = mysqli_query($conn , $sql_get_userinfo);
+            if($result->num_rows > 0){
+              $row = mysqli_fetch_assoc($result);
+              $first_name = $row['first_name'];
+              $last_name = $row['last_name'];
+              if($edit_type == 'product'){
+                $log_action = "$first_name $last_name: Has edited the item: $ProductName";
+              }
+              else{
+                $log_action = "$first_name $last_name: Has edited the item: $ProductName";
+              }
+              $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
+                VALUES ($user_id, '$ProductName', '$log_action')";
+              mysqli_query($conn, $sql_log);
+              echo json_encode(['success' => true]);
+            }
+            else{
+              echo json_encode(['message' => 'SQL error on getting user info']);
+            }
   }
 }
 
-elseif(isset($_POST['save'])){
-
-  $id = $_POST["id"];
-  $stocks = $_POST['stocks'];
-  $max_price=$_POST['max_price'];
-  $min_price=$_POST['min_price'];
-  
-  $sql = "update inventory set stock= '$stocks', max_price='$max_price', min_price='$min_price' where itemID='$id'";
-      $result = mysqli_query($conn , $sql);
-      echo json_encode(['success' => true]);
-      header('Content-Type: application/json');
-}
 
 //ADD STOCKS FUNCTION
 elseif(isset($_POST['submit_add'])){
