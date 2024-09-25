@@ -26,9 +26,9 @@ if(isset($_SESSION['login'])){
     <title>MRM LANDING PAGE</title>
     
     <!-- All CSS -->
-    <link href="assets/landing_css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/landing_css_old/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/landing_css/style.css">
+    <link rel="stylesheet" href="assets/landing_css_old/style.css">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/images/brand-logos/favicon.ico" type="image/x-icon">
@@ -492,10 +492,10 @@ if(isset($_SESSION['login'])){
       </section>
       <!-- team ends -->
       <div id="loadingOverlay" style="display:none;">
-    <div class="spinner">
-        <div class="spinner-text">Loading...</div> <!-- Optional text inside the spinner -->
-    </div>
-</div>
+        <div class="spinner">
+            <div class="spinner-text">Loading...</div> <!-- Optional text inside the spinner -->
+        </div>
+      </div>
       <!-- Contact starts -->
       <section id="contact" class="contact section-padding">
         <div class="container mt-5 mb-5">

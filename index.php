@@ -981,7 +981,6 @@
       </div>
     </div>
 
-
      <!-- Sign up Modal  -->
     <div
       class="modal fade"
@@ -1122,6 +1121,12 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div id="loadingOverlay" style="display:none;">
+        <div class="spinner">
+            <div class="spinner-text">Loading...</div> <!-- Optional text inside the spinner -->
         </div>
       </div>
       
