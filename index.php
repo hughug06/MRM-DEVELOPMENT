@@ -355,7 +355,7 @@
       </div>
     </section> -->
 
-    <section class="bg-light py-6 text-center" id="faq">
+    <section class="faq bg-light py-6 text-center">
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-6 px-4">
@@ -370,7 +370,7 @@
               minus omnis, alias commodi officia nemo dolores similique?
             </p>
             <div class="accordion" id="accordionFAQ2">
-              <div class="accordion-item">
+              <div class="accordion-item border-0 border-bottom">
                 <h2 class="accordion-header">
                   <button
                     class="accordion-button collapsed"
@@ -404,7 +404,7 @@
                   </div>
                 </div>
               </div>
-              <div class="accordion-item">
+              <div class="accordion-item border-0 border-bottom">
                 <h2 class="accordion-header">
                   <button
                     class="accordion-button collapsed"
@@ -438,7 +438,7 @@
                   </div>
                 </div>
               </div>
-              <div class="accordion-item">
+              <div class="accordion-item border-0 border-bottom">
                 <h2 class="accordion-header">
                   <button
                     class="accordion-button collapsed"
@@ -472,7 +472,7 @@
                   </div>
                 </div>
               </div>
-              <div class="accordion-item">
+              <div class="accordion-item border-0 border-bottom">
                 <h2 class="accordion-header">
                   <button
                     class="accordion-button collapsed"
@@ -506,7 +506,7 @@
                   </div>
                 </div>
               </div>
-              <div class="accordion-item">
+              <div class="accordion-item border-0 border-bottom">
                 <h2 class="accordion-header">
                   <button
                     class="accordion-button collapsed"

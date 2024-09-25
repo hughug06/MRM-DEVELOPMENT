@@ -77,6 +77,10 @@
   .details-2 {
     margin-top: 30px !important;
   }
+
+  .faq .accordion {
+    margin-bottom: 30px;
+  }
 }
 /* Login Section */
 
