@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2024 at 07:59 PM
+-- Generation Time: Sep 26, 2024 at 11:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `service_worker` (
   `service_id` int(11) NOT NULL,
+  `worker_name` varchar(50) NOT NULL,
   `account_id` int(11) DEFAULT NULL,
   `user_id` int(10) NOT NULL,
   `admin_id` int(11) DEFAULT NULL,
@@ -39,10 +40,11 @@ CREATE TABLE `service_worker` (
 -- Dumping data for table `service_worker`
 --
 
-INSERT INTO `service_worker` (`service_id`, `account_id`, `user_id`, `admin_id`, `appointment_id`) VALUES
-(11, 78, 69, 18, 13),
-(14, 78, 69, 18, 14),
-(15, 80, 69, 18, 14);
+INSERT INTO `service_worker` (`service_id`, `worker_name`, `account_id`, `user_id`, `admin_id`, `appointment_id`) VALUES
+(17, 'Jonathan Villapando', 78, 69, 18, 49),
+(18, 'Jonathan Villapando', 78, 69, 18, 50),
+(19, 'Jonathan Villapando', 78, 69, 18, 48),
+(20, 'Jonathan Villapando', 78, 69, 18, 51);
 
 --
 -- Indexes for dumped tables
@@ -65,7 +67,7 @@ ALTER TABLE `service_worker`
 -- AUTO_INCREMENT for table `service_worker`
 --
 ALTER TABLE `service_worker`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables

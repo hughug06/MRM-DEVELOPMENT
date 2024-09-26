@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2024 at 08:05 PM
+-- Generation Time: Sep 26, 2024 at 11:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin_availability` (
 --
 
 INSERT INTO `admin_availability` (`availability_id`, `account_id`, `date`, `start_time`, `end_time`) VALUES
-(10, 40, '2024-09-16', '07:30:00', '10:00:00');
+(37, 18, '2024-09-30', '07:00:00', '09:00:00');
 
 --
 -- Indexes for dumped tables
@@ -51,6 +51,7 @@ INSERT INTO `admin_availability` (`availability_id`, `account_id`, `date`, `star
 --
 ALTER TABLE `admin_availability`
   ADD PRIMARY KEY (`availability_id`),
+  ADD UNIQUE KEY `date` (`date`,`start_time`,`end_time`),
   ADD KEY `account_id` (`account_id`);
 
 --
@@ -61,7 +62,7 @@ ALTER TABLE `admin_availability`
 -- AUTO_INCREMENT for table `admin_availability`
 --
 ALTER TABLE `admin_availability`
-  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables
