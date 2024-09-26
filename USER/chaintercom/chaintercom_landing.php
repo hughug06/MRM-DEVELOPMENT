@@ -131,33 +131,32 @@ session_start();
                     <div class="d-flex flex-sm-row flex-md-column flex-column justify-content-center mt-4 gap-4">
                         
                     <div class="card custom-card">
-        <div class="d-flex justify-content-end m-3">
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
-        </div>
+                    <div class="d-flex justify-content-end m-3">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
+                    </div>
         
 
 
-        <form action="service.php" method="POST">
-            <div class="card-body">
-                <h5 class="card-title">Chaintercom System</h5>
-                <p class="card-text">
-                    The Chaintercom system, integrated within the SunSparkPower platform, serves as a seamless communication and meeting tool for clients and company representatives. Clients can log into the system, browse available products or services, and initiate inquiries through the Chaintercom chat box, allowing them to communicate directly with the company. 
-                </p>
-                <p class="card-text">
-                    Through real-time chat, clients submit project requirements, negotiate terms, and receive automatically generated quotations. When a client needs further discussion, they can schedule a virtual meeting using the calendar integration, which shows available time slots. Once confirmed, both the client and the company receive automated SMS alerts as reminders for the meeting.
-                </p>
-                <p class="card-text">
-                    At the scheduled time, the Zoom API integration allows both parties to join a video conference through the system, facilitating in-depth discussions and project negotiations. After the meeting, project details and notes are logged within the system, and clients can monitor the project's progress through Chaintercom, receiving regular SMS updates.
-                </p>
-                <p class="card-text">
-                    This streamlined process ensures efficient communication, timely updates, and an organized flow from project inquiry to completion, making the platform highly user-friendly and effective for both clients and company representatives.
-                </p>
-            </div>
-            <div class="d-flex justify-content-center">
-                <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end m-3" data-bs-toggle="modal" data-bs-target="#services-modal">Book Appointment Now</button>
-            </div>
-        </form>
-    </div>
+                    
+                        <div class="card-body">
+                            <h5 class="card-title">Chaintercom System</h5>
+                            <p class="card-text">
+                                The Chaintercom system, integrated within the SunSparkPower platform, serves as a seamless communication and meeting tool for clients and company representatives. Clients can log into the system, browse available products or services, and initiate inquiries through the Chaintercom chat box, allowing them to communicate directly with the company. 
+                            </p>
+                            <p class="card-text">
+                                Through real-time chat, clients submit project requirements, negotiate terms, and receive automatically generated quotations. When a client needs further discussion, they can schedule a virtual meeting using the calendar integration, which shows available time slots. Once confirmed, both the client and the company receive automated SMS alerts as reminders for the meeting.
+                            </p>
+                            <p class="card-text">
+                                At the scheduled time, the Zoom API integration allows both parties to join a video conference through the system, facilitating in-depth discussions and project negotiations. After the meeting, project details and notes are logged within the system, and clients can monitor the project's progress through Chaintercom, receiving regular SMS updates.
+                            </p>
+                            <p class="card-text">
+                                This streamlined process ensures efficient communication, timely updates, and an organized flow from project inquiry to completion, making the platform highly user-friendly and effective for both clients and company representatives.
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end m-3" data-bs-toggle="modal" data-bs-target="#services-modal">Book Appointment Now</button>
+                        </div>
+                </div>
                       
                     </div>
                    

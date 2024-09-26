@@ -74,6 +74,7 @@ require_once '../authetincation.php';
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0"></label>               
                                     <div class="card-body">
+<<<<<<< HEAD
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered table-hover text-center mb-0">
                                                 <thead class="table-light">
@@ -115,6 +116,49 @@ require_once '../authetincation.php';
                                             </table>
                                         </div>
                                     </div>
+=======
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover text-center mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="col-lg-2"><span>Name</span></th>
+                    <th class="col-lg-2"><span>product</span></th>
+                    <th class="col-lg-3"><span>Meeting</span></th>
+                    <th class="col-lg-2"><span>date</span></th>
+                    <th class="col-lg-2"><span>time</span></th>
+                    <th class="col-lg-2"><span>status</span></th>
+                    <th class="col-lg-1">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+            require '../../Database/database.php';             
+                                                                                                                     
+            $select = "SELECT * FROM chaintercom_appointment";
+            $result = mysqli_query($conn, $select);
+            if(mysqli_num_rows($result) > 0) {
+                foreach($result as $resultItem) {
+                    ?> 
+                    <tr>
+                        <td>USER NAME USE JOIN</td>    
+                        <td><?= $resultItem['product'] ?></td>    
+                        <td><button class="button-success"><a href="meeting_room.php">Meeting link</a></button></td>     
+                        <td><?= $resultItem['date'] ?></td>                                        
+                        <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
+                        <td><?= $resultItem['status'] ?></td>                          
+                        <td>
+                            <button class="btn btn-danger "><i class="fe fe-trash">DECLINE</i></button>
+                        </td>
+                    </tr>   
+                    <?php 
+                }
+            }
+            ?>
+            </tbody>    
+        </table>
+    </div>
+</div>
+>>>>>>> project-functions
 
                                            </div>
                                       </div>
