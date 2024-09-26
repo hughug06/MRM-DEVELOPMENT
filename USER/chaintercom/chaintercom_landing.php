@@ -119,7 +119,7 @@ session_start();
 
             <div class="container">
 
-            <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+            <!-- <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
                 <div>
                     <h2 class="main-content-title fs-24 mb-1">Products</h2>
                     <ol class="breadcrumb mb-0">
@@ -128,7 +128,7 @@ session_start();
                     </ol>
                 </div>
                 <button class="btn btn-sm btn-primary btn-regular" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
-            </div>
+            </div> -->
 
 
                 <div class="card">
