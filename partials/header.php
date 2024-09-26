@@ -499,12 +499,19 @@
 
     <!-- Start::header-content-right -->
     <div class="header-content-right">
+        <div class="header-element d-xl-flex align-items-center">
+            <!-- Start::header-link -->
+            <a href="#" id="view-projects" class="header-link" name="projects">
+                <i class="fa-regular fa-rectangle-list header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Projects"></i>
+            </a>
+            <!-- End::header-link -->
+        </div>
 
         <!-- Appointment Button  -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
             <a href="#" id="view-appointment" class="header-link" name="appointment">
-                <i class="si icon-book-open header-link-icon"></i>
+                <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
             </a>
             <!-- End::header-link -->
         </div>
@@ -516,12 +523,12 @@
             <a href="javascript:void(0);" class="header-link layout-setting">
                 <span class="light-layout">
                     <!-- Start::header-link-icon -->
-                <i class="fe fe-moon header-link-icon lh-2"></i>
+                <i class="fe fe-moon header-link-icon lh-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dark Mode"></i>
                     <!-- End::header-link-icon -->
                 </span>
                 <span class="dark-layout">
                     <!-- Start::header-link-icon -->
-                <i class="fe fe-sun header-link-icon lh-2"></i>
+                <i class="fe fe-sun header-link-icon lh-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Light Mode"></i>
                     <!-- End::header-link-icon -->
                 </span>
             </a>
@@ -542,8 +549,8 @@
         <div class="header-element header-fullscreen  d-xl-flex d-none">
             <!-- Start::header-link -->
             <a onclick="openFullscreen();" href="javascript:void(0);" class="header-link" id="typehead">
-                <i class="fe fe-maximize full-screen-open header-link-icon"></i>
-                <i class="fe fe-minimize full-screen-close header-link-icon d-none"></i>
+                <i class="fe fe-maximize full-screen-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Enter Full Screen"></i>
+                <i class="fe fe-minimize full-screen-close header-link-icon d-none" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Exit Full Screen"></i>
             </a>
             <!-- End::header-link -->
         </div>
@@ -559,7 +566,7 @@
         <div class="header-element notifications-dropdown">
             <!-- Start::header-link|dropdown-toggle -->
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                <i class="fe fe-bell header-link-icon"></i>
+                <i class="fe fe-bell header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications"></i>
                 <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span>
             </a>
             <!-- End::header-link|dropdown-toggle -->
@@ -674,16 +681,14 @@
         <!-- End::header-element -->
 
         <!-- Start::header-element -->
-         
         <div class="header-element d-xl-flex d-none">
-                <div class="main-header-shortcuts" id="header-shortcut-scroll">
-                </div>
+            <div class="main-header-shortcuts" id="header-shortcut-scroll"></div>
         </div>
         <!-- End::header-element -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
             <a href="#" id="logout-link" class="header-link" name="logout">
-                <i class="si si-logout header-link-icon"></i>
+                <i class="si si-logout header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout"></i>
             </a>
             <!-- End::header-link -->
         </div>
