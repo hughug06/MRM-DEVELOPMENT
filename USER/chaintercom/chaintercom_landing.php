@@ -47,7 +47,7 @@ session_start();
     <link rel="stylesheet" href="../../assets/libs/swiper/swiper-bundle.min.css">
 
     <style>
-         .calendar-container {
+        .calendar-container {
             margin: 20px auto;
         }
         .calendar-header {
@@ -113,34 +113,46 @@ session_start();
         <!-- Start::app-sidebar -->
         <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
 
-
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
-            <div class="container-fluid mt-5">
+
+
+            <div class="container">
+
+            <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                <div>
+                    <h2 class="main-content-title fs-24 mb-1">Products</h2>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Products</li>
+                    </ol>
+                </div>
+                <button class="btn btn-sm btn-primary btn-regular" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
+            </div>
+
 
                 <div class="card">
                     <div class="d-flex justify-content-between align-items-center m-3 mb-0">
-                        <h5 class="card-title my-auto">Chaintercom System</h5>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
+                        <h3 class="card-title my-auto">Chaintercom System</h3>
+                        
                     </div>
                     <form action="service.php" method="POST">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row row-sm">
                                 <div class="col-lg-6">
-                                    <p class="text-center">
+                                    <p class="card-text" style="text-align: justify;">
                                         The Chaintercom system, integrated within the SunSparkPower platform, serves as a seamless communication and meeting tool for clients and company representatives. Clients can log into the system, browse available products or services, and initiate inquiries through the Chaintercom chat box, allowing them to communicate directly with the company. 
                                     </p>
-                                    <p class="text-justify">
+                                    <p class="card-text" style="text-align: justify;">
                                         Through real-time chat, clients submit project requirements, negotiate terms, and receive automatically generated quotations. When a client needs further discussion, they can schedule a virtual meeting using the calendar integration, which shows available time slots. Once confirmed, both the client and the company receive automated SMS alerts as reminders for the meeting.
                                     </p>
-                                    <p class="text-justify">
+                                    <p class="card-text" style="text-align: justify;">
                                         At the scheduled time, the Zoom API integration allows both parties to join a video conference through the system, facilitating in-depth discussions and project negotiations. After the meeting, project details and notes are logged within the system, and clients can monitor the project's progress through Chaintercom, receiving regular SMS updates.
                                     </p>
-                                    <p class="text-justify">
+                                    <p class="card-text" style="text-align: justify;">
                                         This streamlined process ensures efficient communication, timely updates, and an organized flow from project inquiry to completion, making the platform highly user-friendly and effective for both clients and company representatives.
                                     </p>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <div class="card-body">
                                         <div class="swiper vertical vertical-mouse-control">
@@ -158,7 +170,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center mb-4">
                             <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end m-3" data-bs-toggle="modal" data-bs-target="#services-modal">Book Appointment Now</button>
                         </div>
                     </form>
@@ -171,7 +183,7 @@ session_start();
                             <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
                             <div class="login_form">
                                 <div class="main-container container-fluid">
-                                    <div class="card p-5 shadow-lg">
+                                    
                                         <div class="container calendar-container">
                                             <!-- Calendar Header -->
                                             <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
@@ -182,9 +194,9 @@ session_start();
                                                 </div>
                                             </div>
                                             <!-- Calendar Body -->
-                                            <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
+                                            <div class="calendar-body row row-cols-7 g-3 justify-content-center" id="calendarDays"></div>
                                         </div>       
-                                    </div>
+
                                     <!-- Modal for Available Time Slots -->
                                     <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">

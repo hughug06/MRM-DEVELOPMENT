@@ -475,15 +475,15 @@
         <div class="header-element">
             <div class="horizontal-logo">
                 <a href="index.html" class="header-logo">
-                    <img src="../assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-                    <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
-                    <img src="../assets/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark">
-                    <img src="../assets/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
-                    <img src="../assets/images/brand-logos/desktop-white.png" alt="logo" class="desktop-white">
-                    <img src="../assets/images/brand-logos/toggle-white.png" alt="logo" class="toggle-white">
+                    <h2 class="my-auto">
+                        <span class="text-primary">MRM</span
+                        ><span class="text-info">-EG</span>
+                    </h2>
                 </a>
             </div>
         </div>
+
+
         <!-- End::header-element -->
 
         <!-- Start::header-element -->

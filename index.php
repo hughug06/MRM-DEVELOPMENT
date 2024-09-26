@@ -944,11 +944,11 @@
                             id="invalidCheck"
                           />
                           <label class="form-check-label" for="invalidCheck">
-                            <small class="text-warning">Remember me</small>
+                            <small class="text-secondary">Remember me</small>
                           </label>
                           <a
                             href="forgot.html"
-                            class="text-warning ms-auto text-decoration-none"
+                            class="text-secondary ms-auto text-decoration-none"
                             ><small>Forgot password?</small></a
                           >
                         </div>
@@ -956,7 +956,7 @@
                           <button
                             name="login"
                             type="submit"
-                            class="btn btn-warning text-white py-2 fw-normal"
+                            class="btn btn-secondary text-white py-2 fw-normal"
                           >
                             Login
                           </button>
@@ -964,7 +964,7 @@
                       </form>
                       <div class="d-flex justify-content-center mt-3 gap-1">
                         Don't have an account?<a
-                          class="text-warning"
+                          class="text-secondary"
                           href="signup.php"
                           data-bs-toggle="modal"
                           data-bs-target="#signupmodal"
@@ -1008,7 +1008,7 @@
           <div class="card mb-0 border-0">
             <div class="row row-sm gx-0">
               <div
-                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start"
+                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-secondary details rounded-start"
               >
                 <div class="d-flex align-items-center">
                   <h3 class="text-white px-4">
@@ -1026,7 +1026,7 @@
                         action="user/signup/function.php"
                       >
                         <h1
-                          class="text-start pb-4 d-flex justify-content-center text-warning fw-bold"
+                          class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
                         >
                           SIGN UP
                         </h1>
@@ -1098,7 +1098,7 @@
                           <button
                             type="submit"
                             name="signup"
-                            class="btn btn-warning text-white py-2"
+                            class="btn btn-secondary text-white py-2"
                           >
                             Register
                           </button>
@@ -1108,7 +1108,7 @@
                         class="d-flex justify-content-center mt-3 gap-1 text-muted"
                       >
                         Already have an account?<a
-                          class="text-warning"
+                          class="text-secondary"
                           href="signin.php"
                           data-bs-toggle="modal"
                           data-bs-target="#signinmodal"

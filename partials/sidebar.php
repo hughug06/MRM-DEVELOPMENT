@@ -5,14 +5,14 @@
 <aside class="app-sidebar sticky" id="sidebar">
 
     <!-- Start::main-sidebar-header -->
-    <div class="main-sidebar-header">
-        <a href="index.html" class="header-logo">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-logo py-2" width="120px">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-logo py-2" width="120px">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-dark py-2" width="120px">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-dark py-2" width="120px">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-white py-2" width="120px">
-            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-white py-2" width="120px">
+    <div class="main-sidebar-header border-0">
+        <a href="index.html" class="header-logo d-flex">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="desktop-logo py-2" width="90px">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="toggle-logo py-2" width="90px">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="desktop-dark py-2" width="90px">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="toggle-dark py-2" width="90px">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="desktop-white py-2" width="90px">
+            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/mrm-logo-2.png" alt="logo" class="toggle-white py-2" width="90px">
         </a>
     </div>
     <!-- End::main-sidebar-header -->
@@ -25,7 +25,7 @@
             <div class="slide-left" id="slide-left">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg>
             </div>
-            <ul class="main-menu pt-4 mt-3">   
+            <ul class="main-menu pt-4">   
             <?php 
                 
                 if($_SESSION['auth'] == "user")
