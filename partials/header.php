@@ -516,7 +516,7 @@
             <!-- End::header-link -->
         </div>
 
-
+        <!--  -->
         <!-- Start::header-element -->
         <div class="header-element header-theme-mode">
             <!-- Start::header-link|layout-setting -->

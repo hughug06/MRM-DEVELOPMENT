@@ -515,6 +515,9 @@ $result = mysqli_query($conn , $select);
        
     </div>
 
+    <!-- Don't Remove This! -->
+    <div class="scrollToTop d-none"></div>
+
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
