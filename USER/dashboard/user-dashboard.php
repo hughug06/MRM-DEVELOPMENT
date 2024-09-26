@@ -351,7 +351,7 @@ session_start();
         </div>
         <!-- End::app-content -->
 
-        
+        <div class="scrollToTop d-none"></div>
         <!-- Footer Start -->
         <?php  include_once(__DIR__. '/../../partials/footer.php')?>
         <!-- Footer End -->
