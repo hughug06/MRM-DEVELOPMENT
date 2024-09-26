@@ -194,7 +194,7 @@ require_once '../authetincation.php';
                                                     <a class="btn btn-sm btn-secondary dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
                                                         <i class="fe fe-minus"></i>
                                                     </a>
-                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" data-id="<?= $resultItem['ProductID']; ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                 </td>
                                             </tr>
 
@@ -304,7 +304,7 @@ require_once '../authetincation.php';
     $(document).ready(function() {
         $(".delete-btn-Product").click(function(event) {
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
-            var deleteUrl = $(this).attr('href');
+            var itemId = $(this).data('id');
             Swal.fire({
                 title: 'Confirmation',
                 html: "Are you sure to delete this product?",
@@ -315,29 +315,43 @@ require_once '../authetincation.php';
                 if (result.isConfirmed) {
                     // If user confirms, send AJAX request for deletion of product
                     $.ajax({
-                        url: deleteUrl,
-                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        url: 'item-delete.php',
+                        type: 'POST', // Ensure you're using the correct method if the backend expects GET
+                        data: { id: itemId },
                         success: function(response) {
-                            // Handle successful deletion of product
-                            Swal.fire({
-                                title: 'Product Deleted!',
-                                text: 'You have successfully deleted the product.',
-                                icon: 'success',
+                            if(response.success){
+                                // Handle successful deletion of product
+                                Swal.fire({
+                                    title: 'Product Deleted!',
+                                    text: 'You have successfully deleted the product.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'inventory-control.php';
+                                });
+                            }
+                            else{
+                                Swal.fire({
+                                title: 'Product not deleted!',
+                                text: response.message || 'An error occurred while deleting the product.',
+                                icon: 'error',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer
                                 showConfirmButton: false // Hide the confirm button
-                            }).then(() => {
-                                // Redirect after the timer ends
-                                window.location.href = 'inventory-control.php';
-                            });
+                                });
+                            }
                         },
-                        error: function() {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error deleting the product. Please try again.',
-                                'error'
-                            );
+                        error: function(response) {
+                            Swal.fire({
+                                title: 'An error occured!' + response.message,
+                                icon: 'error',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            });
                         }
                     });
                 }
