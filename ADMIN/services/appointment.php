@@ -92,8 +92,7 @@ require_once '../authetincation.php';
                                 <h5 class="card-title">NAME:<?= $resultitem['first_name']. " " . $resultitem['last_name'] ?></h5>
                                 <p class="card-text">ROLE: <?= $resultitem['role']?></p>
                                 <button name="pick">PICK</button>
-                            
-                            
+                                                       
                             
                         </div>
                         <?php
