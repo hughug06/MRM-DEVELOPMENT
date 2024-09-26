@@ -44,8 +44,7 @@ session_start();
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    <!-- Prism CSS -->
-    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
+    <link rel="stylesheet" href="../../assets/libs/swiper/swiper-bundle.min.css">
 
     <style>
          .calendar-container {
@@ -108,179 +107,171 @@ session_start();
 
 <body>
 
-
-
-
-
     <div class="page">
+        <!-- app-header -->
+        <?php include_once(__DIR__. '/../../partials/header.php')?>
+        <!-- Start::app-sidebar -->
+        <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
 
-             <!-- app-header -->
-             <?php include_once(__DIR__. '/../../partials/header.php')?>
-            <!-- /app-header -->
-            <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
-            <!-- End::app-sidebar -->
 
-            <!--APP-CONTENT START-->
-            <div class="main-content app-content">
-                <div class="container-fluid">
-                
-                    
-                <div class="container-fluid">
-                <!--  <div class="div-text-start mt-3 justify-self-center"><h1>SERVICES</h1></div> -->
-                    <div class="d-flex flex-sm-row flex-md-column flex-column justify-content-center mt-4 gap-4">
-                        
-                    <div class="card custom-card">
-                    <div class="d-flex justify-content-end m-3">
+        <!--APP-CONTENT START-->
+        <div class="main-content app-content">
+            <div class="container-fluid mt-5">
+
+                <div class="card">
+                    <div class="d-flex justify-content-between align-items-center m-3 mb-0">
+                        <h5 class="card-title my-auto">Chaintercom System</h5>
                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
                     </div>
-        
-
-
-                    
+                    <form action="service.php" method="POST">
                         <div class="card-body">
-                            <h5 class="card-title">Chaintercom System</h5>
-                            <p class="card-text">
-                                The Chaintercom system, integrated within the SunSparkPower platform, serves as a seamless communication and meeting tool for clients and company representatives. Clients can log into the system, browse available products or services, and initiate inquiries through the Chaintercom chat box, allowing them to communicate directly with the company. 
-                            </p>
-                            <p class="card-text">
-                                Through real-time chat, clients submit project requirements, negotiate terms, and receive automatically generated quotations. When a client needs further discussion, they can schedule a virtual meeting using the calendar integration, which shows available time slots. Once confirmed, both the client and the company receive automated SMS alerts as reminders for the meeting.
-                            </p>
-                            <p class="card-text">
-                                At the scheduled time, the Zoom API integration allows both parties to join a video conference through the system, facilitating in-depth discussions and project negotiations. After the meeting, project details and notes are logged within the system, and clients can monitor the project's progress through Chaintercom, receiving regular SMS updates.
-                            </p>
-                            <p class="card-text">
-                                This streamlined process ensures efficient communication, timely updates, and an organized flow from project inquiry to completion, making the platform highly user-friendly and effective for both clients and company representatives.
-                            </p>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end m-3" data-bs-toggle="modal" data-bs-target="#services-modal">Book Appointment Now</button>
-                        </div>
-                </div>
-                      
-                    </div>
-                   
-                    <!-- MODAL FOR DATE PICKER -->
-            <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
-                    <div class="modal-content">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
-                        <div class="login_form">
-                        <div class="main-container container-fluid">
-                            <div class="card p-5 shadow-lg">
-                                <div class="container calendar-container">
-                                    <!-- Calendar Header -->
-                                    <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
-                                        <h3 id="monthYear"></h3>
-                                        <div>
-                                            <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
-                                            <button class="btn btn-outline-primary" id="nextMonth">Next</button>
-                                        </div>
-                                    </div>
-                                    <!-- Calendar Body -->
-                                    <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
-                                </div>       
-                            </div>
-                            <!-- Modal for Available Time Slots -->
-                            <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="availableTimes" class="list-group">
-                                                <!-- Available times will be dynamically loaded here -->
-                                            </ul>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p class="text-center">
+                                        The Chaintercom system, integrated within the SunSparkPower platform, serves as a seamless communication and meeting tool for clients and company representatives. Clients can log into the system, browse available products or services, and initiate inquiries through the Chaintercom chat box, allowing them to communicate directly with the company. 
+                                    </p>
+                                    <p class="text-justify">
+                                        Through real-time chat, clients submit project requirements, negotiate terms, and receive automatically generated quotations. When a client needs further discussion, they can schedule a virtual meeting using the calendar integration, which shows available time slots. Once confirmed, both the client and the company receive automated SMS alerts as reminders for the meeting.
+                                    </p>
+                                    <p class="text-justify">
+                                        At the scheduled time, the Zoom API integration allows both parties to join a video conference through the system, facilitating in-depth discussions and project negotiations. After the meeting, project details and notes are logged within the system, and clients can monitor the project's progress through Chaintercom, receiving regular SMS updates.
+                                    </p>
+                                    <p class="text-justify">
+                                        This streamlined process ensures efficient communication, timely updates, and an organized flow from project inquiry to completion, making the platform highly user-friendly and effective for both clients and company representatives.
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="card-body">
+                                        <div class="swiper vertical vertical-mouse-control">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-1.jpg" alt=""></div>
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-2.jpg" alt=""></div>
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-3.jpg" alt=""></div>
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-4.jpg" alt=""></div>
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-5.jpg" alt=""></div>
+                                                <div class="swiper-slide"><img src="../../assets/landing_assets/images/mrm_images/project-6.jpg" alt=""></div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end m-3" data-bs-toggle="modal" data-bs-target="#services-modal">Book Appointment Now</button>
+                        </div>
+                    </form>
+                </div>  
 
+                <!-- MODAL FOR DATE PICKER -->
+                <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered w-50">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                            <div class="login_form">
+                                <div class="main-container container-fluid">
+                                    <div class="card p-5 shadow-lg">
+                                        <div class="container calendar-container">
+                                            <!-- Calendar Header -->
+                                            <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+                                                <h3 id="monthYear"></h3>
+                                                <div>
+                                                    <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
+                                                    <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                                </div>
+                                            </div>
+                                            <!-- Calendar Body -->
+                                            <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
+                                        </div>       
+                                    </div>
+                                    <!-- Modal for Available Time Slots -->
+                                    <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul id="availableTimes" class="list-group">
+                                                        <!-- Available times will be dynamically loaded here -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-
-                </div>
-
-                </div>
             </div>
-        
             <!-- MODAL FOR VIEW APPOINTMENT -->
             <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Data Table (Blank for now) -->
-                    <table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Meeting link</th>
-            <th scope="col">date</th>
-            <th scope="col">time</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Table body will be populated later -->
-        <tr>
-            <?php 
-            require_once "../../Database/database.php";
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Data Table (Blank for now) -->
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Meeting link</th>
+                                        <th scope="col">date</th>
+                                        <th scope="col">time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table body will be populated later -->
+                                    <tr>
+                                        <?php 
+                                        require_once "../../Database/database.php";
 
-            $account_id = $_SESSION['account_id'];
-            $sql = "select * from chaintercom_appointment where account_id = '$account_id'";
-            $result = mysqli_query($conn , $sql);
-            if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_assoc($result)){
-                    
-                
-            ?>
-        <td class="text-center"><?= $row['product']?></td>
-            <td class="text-center">
-                <a target="_blank" href="<?=$row['meeting_url'] ?>">link</a>
-                 
-            </td>
-            <td class="text-center"><?= $row['date']?></td>
-            <td class="text-center"><?= $row['start_time'] . " - " . $row['end_time']?></td>
-        </tr>
-    
-            <?php 
-            }
-                    
-            }
-            ?>
-    </tbody>
-</table>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                                        $account_id = $_SESSION['account_id'];
+                                        $sql = "select * from chaintercom_appointment where account_id = '$account_id'";
+                                        $result = mysqli_query($conn , $sql);
+                                        if(mysqli_num_rows($result) > 0){
+                                            while($row = mysqli_fetch_assoc($result)){
+                                                
+                                            
+                                        ?>
+                                    <td class="text-center"><?= $row['product']?></td>
+                                        <td class="text-center">
+                                            <a target="_blank" href="<?=$row['meeting_url'] ?>">link</a>
+                                            
+                                        </td>
+                                        <td class="text-center"><?= $row['date']?></td>
+                                        <td class="text-center"><?= $row['start_time'] . " - " . $row['end_time']?></td>
+                                    </tr>
+                                
+                                        <?php 
+                                        }
+                                                
+                                        }
+                                        ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-          
-            
-        
+        </div>
         <!-- Footer Start -->
         <?php include_once(__DIR__. '/../../partials/footer.php') ?>
         <!-- Footer End -->  
     </div>
 
-    
-    <!-- Scroll To Top -->
-    <div class="scrollToTop">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
-    <!-- Scroll To Top -->
+    <!-- Don't Remove This! -->
+    <div class="scrollToTop d-none"></div>
+
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
@@ -304,7 +295,11 @@ session_start();
     <!-- Color Picker JS -->
     <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
 
+    <!-- Swiper JS -->
+    <script src="../../assets/libs/swiper/swiper-bundle.min.js"></script>
 
+    <!-- Internal Swiper JS -->
+    <script src="../../assets/js/swiper.js"></script>
     
     <!-- Custom-Switcher JS -->
     <script src="../../assets/js/custom-switcher.min.js"></script>

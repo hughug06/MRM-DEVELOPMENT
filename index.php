@@ -804,7 +804,7 @@
                   />
                 </div>
                 <div class="mt-5 d-grid gap-2">
-                  <input type="submit" class="btn btn-primary btn-block" />
+                  <input type="submit" class="btn btn-secondary btn-block" />
                 </div>
               </form>
             </div>
@@ -892,7 +892,7 @@
           <div class="card mb-0 border-0">
             <div class="row row-sm gx-0">
               <div
-                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-warning details rounded-start"
+                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-secondary details rounded-start"
               >
                 <div class="d-flex align-items-center">
                   <h1 class="text-white px-4">WELCOME BACK</h1>
@@ -910,7 +910,7 @@
                         method="POST"
                       >
                         <h1
-                          class="text-start pb-4 d-flex justify-content-center text-warning"
+                          class="text-start pb-4 d-flex justify-content-center text-secondary"
                         >
                           LOGIN
                         </h1>
