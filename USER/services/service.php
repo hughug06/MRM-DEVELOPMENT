@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +78,33 @@ session_start();
             left: 50%;
             transform: translateX(-50%);
         }
+        .custom-card {
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .card-title {
+            font-size: 1.5rem;
+        }
+        .card-text {
+            font-size: 1rem;
+        }
+        .btn-wave {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .view-appointments {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
     </style>
 
 </head>
@@ -98,34 +126,60 @@ session_start();
 
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
-                <div class="container-fluid">
-                <!--  <div class="div-text-start mt-3 justify-self-center"><h1>SERVICES</h1></div> -->
-                    <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
-                        <div class="card custom-card">
-                            <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
-                            <form action="service.php" method="POST">
-                            <div class="card-body d-flex flex-column">
-                                <h6 class="card-title fw-semibold">Generator</h6>
-                                <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                               
-                            </div>
-                            </form>
-                        </div>
-                        <div class="card custom-card">
-                            <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
-                            <form action="service.php" method="POST">
-                            <div class="card-body d-flex flex-column">
-                                <h6 class="card-title fw-semibold">Solar Panel</h6>
-                                <p class="card-text"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                
-                            </div>
-                            </form>
+            <div class="container-fluid mt-5 position-relative">
+                <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#view-appointment">View Appointments</button>
+                <div class="text-center mb-4">
+                    <h1>SERVICES</h1>
+                </div>
+                <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
+                    <!-- Generator Card -->
+                    <div class="card custom-card">
+                        <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title fw-semibold">Generator</h6>
+                            <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                    <button name="generator" type="button" class="btn btn-primary btn-wave align-self-end" data-bs-toggle="modal" data-bs-target="#services-modal">Avail Now</button>
+                    <!-- Solar Panel Card -->
+                    <div class="card custom-card">
+                        <img src="../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title fw-semibold">Solar Panel</h6>
+                            <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                        </div>
                     </div>
                 </div>
+                <!-- Single Avail Now Button -->
+                <div class="d-flex justify-content-center mt-4">
+                    <?php 
+                    $service_count = $_SESSION['account_id'];
+                    $check_count = "select * from accounts where account_id = '$service_count'";
+                    $count_result = mysqli_query($conn , $check_count);
+                    $row_count = mysqli_fetch_assoc($count_result);
+                    $count = $row_count['service_count'];
+                    if($count < 5){
+                                               
+                    ?>
+                    <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
+                    <?php 
+                    }
+                    else{
+                        
+                    ?>
+                    <!-- Button trigger modal -->
+                     <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
+                     Avail Now
+                     </button>
+                    <?php
+
+                    }
+                    ?>
+                </div>
+            </div>
+                <!-- MODAL FOR ERROR MESSAGE WHEN THE SERVICE IS MAX -->
+               <!-- Modal -->       
+
+            <!-- MODAL FOR CALENDAR PICKER -->
                 <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered w-50">
                     <div class="modal-content">
@@ -171,6 +225,70 @@ session_start();
                 </div>
                 
             </div>
+
+            <!-- Modal for Viewing Appointments -->
+            <div class="modal fade" id="view-appointment" tabindex="-1" aria-labelledby="view-appointment-label" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="services-modal-label">Appointments</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Data Table -->
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">My Address</th>
+                                        <th scope="col">Set Date</th>
+                                        <th scope="col">Set Time</th>
+                                        <th scope="col">Contact</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">check update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    
+                                    $userid = $_SESSION['account_id'];
+                                    $sql = "SELECT * FROM appointments WHERE account_id = '$userid'";
+                                    $result = mysqli_query($conn, $sql);
+                                    
+                                    if ($result) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($row['appointment_id']) ?></td>
+                                                <td><?= htmlspecialchars($row['location']) ?></td>
+                                                <td><?= htmlspecialchars($row['date']) ?></td>
+                                                <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
+                                                <td>N/A yet</td>
+                                                <td <?= $row['status'] == "Pending" ? 'class="text-warning"' : 'class="text-success"' ?>>
+                                                    <?= $row['status'] == "Pending" ? "Pending" : "Approved" ?>
+                                                </td>
+                                                <td>
+                                                    <a href="service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                                </td>
+                                            </tr>
+                                                <?php
+                                            }
+                                        } else {
+                                            // Display a message if no appointments are found
+                                            echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
+                                        }
+                                    
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!--APP-CONTENT CLOSE-->
 
         
@@ -307,6 +425,22 @@ session_start();
         // Show the modal
         $('#timeSlotsModal').modal('show');
     }
+</script>
+
+<script>
+    // Function to show modal and auto-close after 2 seconds
+    function showMaxServiceModal() {
+                    Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Error, max service",
+            showConfirmButton: false,
+            timer: 1500
+            });
+                }
+
+    // Example: Call this function to show the modal when needed
+    // showMaxServiceModal(); // Uncomment to test automatically
 </script>
 
 

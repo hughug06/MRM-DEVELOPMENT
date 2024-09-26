@@ -69,64 +69,28 @@ session_start();
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
             <div class="container-fluid">
-            <div class="row">
-            <div class="col-lg-2 col-md-4 col-sm-6">
-                <div class="card">
-                    <?php 
-                    //service_id	account_id	user_id	admin_id	appointment_id	
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User Information</h5>
+                <p class="card-text">Name: <span class="text-success">John Doe</span></p>
+                <p class="card-text">Address: <span class="text-success">123 Main St, City</span></p>
+                <p class="card-text">Contact: <span class="text-success">(123) 456-7890</span></p>
+                <p class="card-text">Date/Time: <span class="text-success">2024-09-27 14:00 - 15:00</span></p>
+                
+                <hr>
 
-                    require_once '../../Database/database.php';
-                    $workerid =  $_SESSION['worker_id'];
-
-                    $sql = "select * from accounts where role = 'service_worker' and account_id = '$workerid'";
-                    $result = mysqli_query($conn , $sql);
-                    if(mysqli_num_rows($result) > 0){
-                        $service = "Select * from service_worker 
-                        INNER JOIN accounts ON accounts.account_id = service_worker.account_id                      
-                        INNER JOIN appointments ON appointments.appointment_id = service_worker.appointment_id
-                        where service_worker.account_id = '$workerid'";
-                        $service_result = mysqli_query($conn , $service);
-                        foreach ($service_result as $serviceitem){
-                                ?> 
-                                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 1">
-                                        <div class="card-body">
-                                            
-                                        <p class="card-text">Name: 
-                                            <span class="text-success">
-                                                <?= $serviceitem['name'] ?>
-                                            </span>
-                                        </p>
-                                        <p class="card-text">Contact: 
-                                            <span class="text-success">
-                                                (NO FUNCTION YET)
-                                            </span>
-                                        </p>
-                                        <p class="card-text">Service: 
-                                            <span class="text-success">
-                                                <?= $serviceitem['service_type'] ?>
-                                            </span>
-                                        </p>
-                                            <a href="user_details.php?user_id=<?= $serviceitem['account_id'] ?>" class="btn btn-primary">Check</a>
-                                            <a href="" class="btn btn-primary">Notify user</a>     <!-- if this button is click user will notify that that the worker is on the way. -->
-                                          
-                                        </div>
-
-                                <?php
-                        }
-                                              
-                    }
-                    ?>
-                    
-                </div>
-            </div>
-
+                <form method="POST" action="upload.php" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="imageUpload" class="form-label">Upload proof of service</label>
+                        <input type="file" class="form-control" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" required>
+                        <div class="form-text">Only PNG or JPG images are allowed.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Image</button>
+                </form>
             </div>
         </div>
+        </div>
         <!--APP-CONTENT CLOSE-->
-
-        
-     
-
     </div>
 
        <!-- Footer Start -->
