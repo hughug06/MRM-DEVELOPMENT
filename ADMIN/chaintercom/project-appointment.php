@@ -123,7 +123,7 @@ require_once '../authetincation.php';
                                  </div>
                           </div>
                      </div>
-                                                
+                                                 
                </div>
             </div>
             <!--APP-CONTENT CLOSE-->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2024 at 07:58 PM
+-- Generation Time: Sep 26, 2024 at 11:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,6 +39,7 @@ CREATE TABLE `appointments` (
   `running_hours` int(20) NOT NULL,
   `service_type` varchar(20) NOT NULL,
   `status` enum('Pending','Confirmed','Canceled') DEFAULT 'Pending',
+  `worker_update` varchar(50) NOT NULL DEFAULT 'No update' COMMENT 'no update, on the way, worker is on the site',
   `date` date NOT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL
@@ -48,9 +49,12 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`appointment_id`, `account_id`, `availability_id`, `name`, `location`, `brand`, `product`, `power`, `running_hours`, `service_type`, `status`, `date`, `start_time`, `end_time`) VALUES
-(13, 69, 36, 'JAN ARIES IMPUERTO', 'Mad Cafe, Congressio', 'honda', '12', 12, 12, 'maintenance', 'Confirmed', '2024-09-16', '07:30:00', '09:00:00'),
-(14, 69, 36, 'JAN ARIES IMPUERTO', 'Eagle Street, Purok ', 'honda', '12', 12, 12, 'installation', 'Confirmed', '2024-09-16', '07:30:00', '09:00:00');
+INSERT INTO `appointments` (`appointment_id`, `account_id`, `availability_id`, `name`, `location`, `brand`, `product`, `power`, `running_hours`, `service_type`, `status`, `worker_update`, `date`, `start_time`, `end_time`) VALUES
+(48, 69, 37, 'JAN ARIES IMPUERTO', '', 'honda', '', 0, 0, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
+(49, 69, 37, 'JAN ARIES IMPUERTO', 'Mauban - Tignoan Roa', 'honda', 'solar', 20, 20, 'installation', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
+(50, 69, 37, 'JAN ARIES IMPUERTO', '', 'honda', '', 0, 0, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
+(51, 69, 37, 'JAN ARIES IMPUERTO', 'Villa San Isidro, Ca', 'honda', 'solar', 23, 23, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
+(52, 69, 37, 'JAN ARIES IMPUERTO', 'Chateau Verde, Atis ', 'honda', 'solar', 23, 23, 'installation', 'Pending', 'No update', '2024-09-30', '07:00:00', '09:00:00');
 
 --
 -- Indexes for dumped tables
@@ -72,7 +76,7 @@ ALTER TABLE `appointments`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
