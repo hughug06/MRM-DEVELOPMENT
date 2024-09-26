@@ -500,6 +500,16 @@
     <!-- Start::header-content-right -->
     <div class="header-content-right">
 
+        <!-- Appointment Button  -->
+        <div class="header-element d-xl-flex align-items-center">
+            <!-- Start::header-link -->
+            <a href="#" id="view-appointment" class="header-link" name="appointment">
+                <i class="si icon-book-open header-link-icon"></i>
+            </a>
+            <!-- End::header-link -->
+        </div>
+
+
         <!-- Start::header-element -->
         <div class="header-element header-theme-mode">
             <!-- Start::header-link|layout-setting -->
