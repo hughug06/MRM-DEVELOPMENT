@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2024 at 08:38 PM
+-- Generation Time: Sep 26, 2024 at 06:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `chaintercom_appointment` (
   `chaintercomappointid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `product` varchar(255) DEFAULT NULL,
   `meeting_url` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
@@ -43,8 +44,8 @@ CREATE TABLE `chaintercom_appointment` (
 -- Dumping data for table `chaintercom_appointment`
 --
 
-INSERT INTO `chaintercom_appointment` (`chaintercomappointid`, `product`, `meeting_url`, `date`, `start_time`, `end_time`, `status`, `account_id`, `chainavailability`) VALUES
-(12, 'PRODUCT 1, PRODUCT 2', 'https://meet.jit.si/meeting_1', '2024-09-30', '07:00:00', '09:00:00', 'confirm', 69, 1);
+INSERT INTO `chaintercom_appointment` (`chaintercomappointid`, `name`, `product`, `meeting_url`, `date`, `start_time`, `end_time`, `status`, `account_id`, `chainavailability`) VALUES
+(16, 'JAN ARIES IMPUERTO', 'Product 2, Product 2', 'https://meet.jit.si/meeting_1', '2024-09-30', '07:00:00', '09:00:00', 'confirm', 69, 1);
 
 --
 -- Indexes for dumped tables
@@ -66,7 +67,7 @@ ALTER TABLE `chaintercom_appointment`
 -- AUTO_INCREMENT for table `chaintercom_appointment`
 --
 ALTER TABLE `chaintercom_appointment`
-  MODIFY `chaintercomappointid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `chaintercomappointid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
