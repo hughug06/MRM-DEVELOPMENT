@@ -74,7 +74,6 @@ require_once '../authetincation.php';
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0"></label>               
                                     <div class="card-body">
-<<<<<<< HEAD
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered table-hover text-center mb-0">
                                                 <thead class="table-light">
