@@ -510,13 +510,12 @@
         <!-- Appointment Button  -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
-            <a href="#" id="view-appointment" class="header-link" name="appointment">
+            <a href="#" id="view-view-appointment" class="header-link" name="appointment" onclick="openModal(event)">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
-            </a>
-            <!-- End::header-link -->
+            </a>                
         </div>
 
-        <!--  -->
+      
         <!-- Start::header-element -->
         <div class="header-element header-theme-mode">
             <!-- Start::header-link|layout-setting -->
@@ -699,11 +698,77 @@
 <!-- End::main-header-container -->
 
 </header>
-
+ <!-- modal for view appointment-->
+ <div class="modal fade" id="appointmentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="appointmentModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Your table or other content goes here -->
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">My Address</th>
+                            <th scope="col">Set Date</th>
+                            <th scope="col">Set Time</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Check Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $userid = $_SESSION['account_id'];
+                        $sql = "SELECT * FROM appointments WHERE account_id = '$userid'";
+                        $result = mysqli_query($conn, $sql);
+                        
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['appointment_id']) ?></td>
+                                    <td><?= htmlspecialchars($row['location']) ?></td>
+                                    <td><?= htmlspecialchars($row['date']) ?></td>
+                                    <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
+                                    <td>N/A yet</td>
+                                    <td <?= $row['status'] == "Pending" ? 'class="text-warning"' : 'class="text-success"' ?>>
+                                        <?= $row['status'] == "Pending" ? "Pending" : "Approved" ?>
+                                    </td>
+                                    <td>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+ // Function to open the modal when the link is clicked
+ function openModal(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        var myModal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+        myModal.show();
+    }
+
     $(document).ready(function() {
         $('#logout-link').on('click', function(e) {
             e.preventDefault(); // Prevent the default link behavior

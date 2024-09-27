@@ -181,68 +181,7 @@ require_once '../../Database/database.php';
                 </div>
                 
 
-                 <!-- Modal for Viewing Appointments -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">My Address</th>
-                                        <th scope="col">Set Date</th>
-                                        <th scope="col">Set Time</th>
-                                        <th scope="col">Contact</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">check update</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    
-                                    $userid = $_SESSION['account_id'];
-                                    $sql = "SELECT * FROM appointments WHERE account_id = '$userid'";
-                                    $result = mysqli_query($conn, $sql);
-                                    
-                                    if ($result) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($row['appointment_id']) ?></td>
-                                                <td><?= htmlspecialchars($row['location']) ?></td>
-                                                <td><?= htmlspecialchars($row['date']) ?></td>
-                                                <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
-                                                <td>N/A yet</td>
-                                                <td <?= $row['status'] == "Pending" ? 'class="text-warning"' : 'class="text-success"' ?>>
-                                                    <?= $row['status'] == "Pending" ? "Pending" : "Approved" ?>
-                                                </td>
-                                                <td>
-                                                    <a href="service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
-                                                </td>
-                                            </tr>
-                                                <?php
-                                            }
-                                        } else {
-                                            // Display a message if no appointments are found
-                                            echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
-                                        }
-                                    
-                                    ?>
-                                </tbody>
-                            </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
+                
 
             <!--APP-CONTENT CLOSE-->
             </div>   
