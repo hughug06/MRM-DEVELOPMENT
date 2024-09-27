@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +41,9 @@ session_start();
 
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
+    <!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.js"></script>
+
 
 </head>
 

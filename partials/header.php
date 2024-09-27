@@ -499,7 +499,11 @@
 
     <!-- Start::header-content-right -->
     <div class="header-content-right">
-        <div class="header-element d-xl-flex align-items-center">
+        <?php 
+        if($_SESSION['auth'] == "user")
+        {
+        ?>
+<div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
             <a href="#" id="view-projects" class="header-link" name="projects">
                 <i class="fa-regular fa-rectangle-list header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Projects"></i>
@@ -510,12 +514,14 @@
         <!-- Appointment Button  -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
-            <a href="#" id="view-appointment" class="header-link" name="appointment">
+            <a href="#"  class="header-link" name="appointment" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
             </a>
             <!-- End::header-link -->
         </div>
-
+        <?php 
+        }
+        ?>
         <!--  -->
         <!-- Start::header-element -->
         <div class="header-element header-theme-mode">
@@ -699,6 +705,71 @@
 <!-- End::main-header-container -->
 
 </header>
+
+<!-- Modal for Viewing Appointments -->
+<div class="container">
+<div class="modal fade" id="appointmentmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">View Appointments</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">My Address</th>
+                            <th scope="col">Set Date</th>
+                            <th scope="col">Set Time</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Check Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                       
+                        $userid = $_SESSION['account_id'];
+                        $sql = "SELECT * FROM appointments WHERE account_id = '$userid'";
+                        $result = mysqli_query($conn, $sql);
+
+                        if ($result) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['appointment_id']) ?></td>
+                                    <td><?= htmlspecialchars($row['location']) ?></td>
+                                    <td><?= htmlspecialchars($row['date']) ?></td>
+                                    <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
+                                    <td>N/A yet</td>
+                                    <td <?= $row['status'] == "Pending" ? 'class="text-warning"' : 'class="text-success"' ?>>
+                                        <?= $row['status'] == "Pending" ? "Pending" : "Approved" ?>
+                                    </td>
+                                    <td>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            // Display a message if no appointments are found
+                            echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

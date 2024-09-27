@@ -129,9 +129,7 @@ require_once '../../Database/database.php';
             <div class="container-fluid mt-5 position-relative">
            
                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
+
                 <div class="text-center mb-4">
                     <h1>SERVICES</h1>
                 </div>

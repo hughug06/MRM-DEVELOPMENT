@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../../Database/database.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
@@ -118,20 +119,7 @@ session_start();
 
 
             <div class="container">
-
-            <!-- <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                <div>
-                    <h2 class="main-content-title fs-24 mb-1">Products</h2>
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Products</li>
-                    </ol>
-                </div>
-                <button class="btn btn-sm btn-primary btn-regular" data-bs-toggle="modal" data-bs-target="#appointmentModal">View Appointment</button>
-            </div> -->
-
-
-                <div class="card mt-5">
+             <div class="card mt-5">
                     <div class="d-flex justify-content-between align-items-center m-3 mb-0">
                         <h3 class="card-title my-auto">Chaintercom System</h3>
                         
@@ -182,7 +170,7 @@ session_start();
                         <div class="modal-content">
                             <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
                             <div class="login_form">
-                                <div class="main-container container-fluid">
+                                <div class="main-container container-fluid p-5">
                                     
                                         <div class="container calendar-container">
                                             <!-- Calendar Header -->
@@ -219,62 +207,7 @@ session_start();
                     </div>
                 </div>
             </div>
-            <!-- MODAL FOR VIEW APPOINTMENT -->
-            <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Data Table (Blank for now) -->
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Meeting link</th>
-                                        <th scope="col">date</th>
-                                        <th scope="col">time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Table body will be populated later -->
-                                    <tr>
-                                        <?php 
-                                        require_once "../../Database/database.php";
-
-                                        $account_id = $_SESSION['account_id'];
-                                        $sql = "select * from chaintercom_appointment where account_id = '$account_id'";
-                                        $result = mysqli_query($conn , $sql);
-                                        if(mysqli_num_rows($result) > 0){
-                                            while($row = mysqli_fetch_assoc($result)){
-                                                
-                                            
-                                        ?>
-                                    <td class="text-center"><?= $row['product']?></td>
-                                        <td class="text-center">
-                                            <a target="_blank" href="<?=$row['meeting_url'] ?>">link</a>
-                                            
-                                        </td>
-                                        <td class="text-center"><?= $row['date']?></td>
-                                        <td class="text-center"><?= $row['start_time'] . " - " . $row['end_time']?></td>
-                                    </tr>
-                                
-                                        <?php 
-                                        }
-                                                
-                                        }
-                                        ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <!-- Footer Start -->
         <?php include_once(__DIR__. '/../../partials/footer.php') ?>
