@@ -50,6 +50,7 @@ session_start();
 
                         }
                         else if($role == 'service_worker'){
+                            $_SESSION['auth'] = "service_worker";
                             $_SESSION['worker_id'] = $id;
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\worker\dashboard.php']);
                         }
