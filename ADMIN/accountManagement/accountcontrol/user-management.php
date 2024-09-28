@@ -1,6 +1,6 @@
 <?php 
   require_once '../../authetincation.php';
- 
+  require_once '../../../Database/database.php';
 ?>
 
 <!DOCTYPE html>

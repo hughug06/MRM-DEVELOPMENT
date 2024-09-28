@@ -737,18 +737,20 @@
 
                         if ($result) {
                             while ($row = mysqli_fetch_assoc($result)) {
+                                if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
+                                    continue; // Skip this iteration
+                                }
                                 ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($row['appointment_id']) ?></td>
+                                    <td><?= htmlspecialchars($row['name']) ?></td>
                                     <td><?= htmlspecialchars($row['location']) ?></td>
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                     <td>N/A yet</td>
-                                    <td <?= $row['status'] == "Pending" ? 'class="text-warning"' : 'class="text-success"' ?>>
-                                        <?= $row['status'] == "Pending" ? "Pending" : "Approved" ?>
-                                    </td>
+                                    <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
                                         <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
                                     </td>
                                 </tr>
                                 <?php
@@ -760,10 +762,6 @@
                         ?>
                     </tbody>
                 </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
             </div>
         </div>
     </div>

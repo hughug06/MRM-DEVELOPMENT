@@ -42,8 +42,48 @@ require_once '../../Database/database.php';
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
     <!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.js"></script>
+    <link rel="stylesheet" href="../../assets/libs/fullcalendar/main.min.css">
 
+    <style>
+        .custom-card {
+            margin: 30px auto;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .fc-toolbar h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .fc-daygrid-event {
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .fc-daygrid-event:hover {
+            background-color: #0056b3;
+        }
+        .modal-content {
+            border-radius: 10px;
+        }
+        .modal-header {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .modal-body p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+    </style>
 
 </head>
 
@@ -201,133 +241,8 @@ require_once '../../Database/database.php';
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-12 col-xl-4 banner-img">
-                        <div class="card custom-card card-dashboard-calendar">
-                            <label class="main-content-label mb-2 pt-1">Recent transactions</label>
-                            <span class="d-block fs-12 mb-2 text-muted">Projects where development work is on completion</span>
-                            <table class="table m-b-0 transcations mt-2">
-                                <tbody>
-                                    <tr>
-                                        <td class="wd-5p">
-                                            <div class="main-img-user avatar-md">
-                                                <img alt="avatar" class="rounded-circle me-3"
-                                                    src="../../assets/images/faces/5.jpg">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-middle ms-3">
-                                                <div class="d-inline-block">
-                                                    <h6 class="mb-1">Flicker</h6>
-                                                    <p class="mb-0 fs-13 text-muted">App improvement</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="d-inline-block">
-                                                <h6 class="mb-2 fs-15 fw-semibold">$45.234<i
-                                                        class="fas fa-level-up-alt ms-2 text-success m-l-10"></i>
-                                                </h6>
-                                                <p class="mb-0 tx-11 text-muted">12 Jan 2020</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="wd-5p">
-                                            <div class="main-img-user avatar-md">
-                                                <img alt="avatar" class="rounded-circle me-3"
-                                                    src="../../assets/images/faces/6.jpg">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-middle ms-3">
-                                                <div class="d-inline-block">
-                                                    <h6 class="mb-1">Intoxica</h6>
-                                                    <p class="mb-0 fs-13 text-muted">Milestone</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="d-inline-block">
-                                                <h6 class="mb-2 fs-15 fw-semibold">$23.452<i
-                                                        class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i>
-                                                </h6>
-                                                <p class="mb-0 tx-11 text-muted">23 Jan 2020</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="wd-5p">
-                                            <div class="main-img-user avatar-md">
-                                                <img alt="avatar" class="rounded-circle me-3"
-                                                    src="../../assets/images/faces/7.jpg">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-middle ms-3">
-                                                <div class="d-inline-block">
-                                                    <h6 class="mb-1">Digiwatt</h6>
-                                                    <p class="mb-0 fs-13 text-muted">Sales executive</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="d-inline-block">
-                                                <h6 class="mb-2 fs-15 fw-semibold">$78.001<i
-                                                        class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i>
-                                                </h6>
-                                                <p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="wd-5p">
-                                            <div class="main-img-user avatar-md">
-                                                <img alt="avatar" class="rounded-circle me-3"
-                                                    src="../../assets/images/faces/8.jpg">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-middle ms-3">
-                                                <div class="d-inline-block">
-                                                    <h6 class="mb-1">Flicker</h6>
-                                                    <p class="mb-0 fs-13 text-muted">Milestone2</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="d-inline-block">
-                                                <h6 class="mb-2 fs-15 fw-semibold">$37.285<i
-                                                        class="fas fa-level-up-alt ms-2 text-success m-l-10"></i>
-                                                </h6>
-                                                <p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="wd-5p pb-0">
-                                            <div class="main-img-user avatar-md">
-                                                <img alt="avatar" class="rounded-circle me-3"
-                                                    src="../../assets/images/faces/4.jpg">
-                                            </div>
-                                        </td>
-                                        <td class="pb-0">
-                                            <div class="d-flex align-middle ms-3">
-                                                <div class="d-inline-block">
-                                                    <h6 class="mb-1">Flicker</h6>
-                                                    <p class="mb-0 fs-13 text-muted">App improvement</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end pb-0">
-                                            <div class="d-inline-block">
-                                                <h6 class="mb-2 fs-15 fw-semibold">$25.341<i
-                                                        class="fas fa-level-down-alt ms-2 text-danger m-l-10"></i>
-                                                </h6>
-                                                <p class="mb-0 tx-11 text-muted">4 Apr 2020</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="border">
+                    <div id='calendar'></div> 
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
@@ -360,6 +275,24 @@ require_once '../../Database/database.php';
         <?php  include_once(__DIR__. '/../../partials/footer.php')?>
         <!-- Footer End -->
        
+        <!--  MODAL FOR INFORMATION OF USER -->
+        <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventDetailsModalLabel">Appointment Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Appointment details will be shown here -->
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Popper JS -->
@@ -389,8 +322,53 @@ require_once '../../Database/database.php';
 
     <!-- Custom JS -->
     <script src="../../assets/js/custom.js"></script>
-    
 
 </body>
 
 </html>
+
+
+
+
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+<!-- FullCalendar Script Integration -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
+            },
+            initialView: 'dayGridMonth',
+            events: 'fetch_appointments.php', // Fetch events from this PHP file
+            eventClick: function(info) {
+                // Show details in a modal on event click
+                $('#eventDetailsModal .modal-title').text(info.event.title);
+                $('#eventDetailsModal .modal-body').html(`
+                    <p><strong>Location:</strong> ${info.event.extendedProps.location}</p>
+                    <p><strong>Brand:</strong> ${info.event.extendedProps.brand}</p>
+                    <p><strong>Product:</strong> ${info.event.extendedProps.product}</p>
+                    <p><strong>Power:</strong> ${info.event.extendedProps.power}</p>
+                    <p><strong>Running Hours:</strong> ${info.event.extendedProps.running_hours}</p>
+                    <p><strong>Status:</strong> ${info.event.extendedProps.status}</p>
+                    <p><strong>Worker Update:</strong> ${info.event.extendedProps.worker_update}</p>
+                    <p><strong>Date:</strong> ${info.event.extendedProps.date}</p>
+                    <p><strong>Start Time:</strong> ${info.event.extendedProps.start_time}</p>
+                    <p><strong>End Time:</strong> ${info.event.extendedProps.end_time}</p>
+                `);
+                $('#eventDetailsModal').modal('show');
+            },
+            eventColor: '#007bff', // Default color for events
+            eventTextColor: '#ffffff', // Text color for events
+            eventRender: function(info) {
+                // Render event title as only the service type
+                return info.event.title; // This ensures only the service type is shown
+            }
+        });
+
+        calendar.render();
+    });
+</script>
