@@ -88,7 +88,7 @@
       </div>
     </nav>
 
-    <header class="header position-relative mt-3 overflow-hidden">
+    <header class="header position-relative mt-3 mb-6 overflow-hidden">
       <img
         src="assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
@@ -134,7 +134,7 @@
       </div>
     </header>
 
-    <section id="stats" class="stats container">
+    <section id="stats" class="stats container d-none">
       <div class="row my-6">
         <div class="col-md-3 col-sm-6 text-center">
           <h2 class="counter xl-text" data-target="328">328</h2>
@@ -187,7 +187,7 @@
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="assets/landing_assets/images/details-1.png"
+                src="assets/landing_assets/images/mrm_images/details-2.png"
                 alt=""
                 class="img-fluit"
               />
