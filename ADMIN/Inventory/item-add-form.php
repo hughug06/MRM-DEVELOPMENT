@@ -1,5 +1,6 @@
 <?php 
 require_once '../authetincation.php';
+include_once '../../Database/database.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
@@ -49,9 +50,6 @@ require_once '../authetincation.php';
 </head>
 
 <body>
-
-    
-
 
     
 

@@ -59,47 +59,50 @@
             <div class="main-content app-content">
                 <div class="container-fluid">
                     <!--MODAL FOR SELECTING WORKER -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
+                    <!--MODAL FOR SELECTING WORKER -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
                             <div class="modal-body">
-                                <div class="card" style="width: 18rem;">
-                                    <?php 
-                                        $sql = "Select * from user_info INNER JOIN accounts on user_info.user_id = accounts.user_id where role = 'service_worker'";
-                                        $result = mysqli_query($conn , $sql);
-                                        if(mysqli_num_rows($result) > 0)
+                            <div class="card" style="width: 18rem;">
+                            <?php 
+
+                                $sql = "Select * from user_info INNER JOIN accounts on user_info.user_id = accounts.user_id where role = 'service_worker'";
+                                $result = mysqli_query($conn , $sql);
+
+                                if(mysqli_num_rows($result) > 0)
+                                {                
+                                        foreach($result as $resultitem)
                                         {                
-                                            foreach($result as $resultitem)
-                                            {                
-                                        ?>
-                                        <div class="card-body">
-                                            <form action="assign_worker.php" method="POST">
-                                                <input type="hidden" name="account_id" value="<?= $resultitem['account_id']?>">
-                                                <h5 class="card-title">NAME:<?= $resultitem['first_name']. " " . $resultitem['last_name'] ?></h5>
-                                                <p class="card-text">ROLE: <?= $resultitem['role']?></p>
-                                                <button name="pick">PICK</button>
-                                        
-                                                    <?php
-                                                            }
-                                                    }
-                                                ?>
-                                                <input type="hidden" name="user_id" id="user_id">
-                                                <input type="hidden" name="appointment_id" id="appointment_id">
-                                            </form>
-                                        </div>
-                                    </div>
+                                ?>
+                                <div class="card-body">
+                                    <form action="assign_worker.php" method="POST">
+                                        <input type="hidden" name="account_id" value="<?= $resultitem['account_id']?>">
+                                        <h5 class="card-title">NAME:<?= $resultitem['first_name']. " " . $resultitem['last_name'] ?></h5>
+                                        <p class="card-text">ROLE: <?= $resultitem['role']?></p>
+                                        <button name="pick">PICK</button>
+                                                                                                       
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
+                                <?php
+                                        }
+                                }
+                                ?>
+                                <input type="hidden" name="user_id" id="user_id">
+                                <input type="hidden" name="appointment_id" id="appointment_id">
+                                    </form>
                                 </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
+                            </div>
                     </div>
+                </div>
 
                     <div class="row row-sm mt-3">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
