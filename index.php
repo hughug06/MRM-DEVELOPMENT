@@ -766,86 +766,45 @@
           </div>
           <div class="col-lg-6">
             <div class="text-container">
-              <h2 class="mb-5 text-secondary">Sign Up</h2>
-              <form
-                id="signupForm"
-                method="POST"
-                action="user/signup/function.php">
-                <div class="form-floating text-start mb-3">
+              <h2>Register Now</h2>
+              <form>
+                <div class="mb-3">
                   <input
-                    class="form-control rounded-2"
-                    placeholder=""
                     type="text"
-                    name="firstname"
-                    id="su_firstname"
-                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                    class="form-control"
+                    placeholder="Enter Name"
                   />
-                  <label for="su_FirstName" class="text-muted"
-                    >First Name</label
-                  >
                 </div>
-                <div class="form-floating text-start mb-3">
+                <div class="mb-3">
                   <input
-                    class="form-control rounded-2"
-                    placeholder=""
                     type="text"
-                    name="lastname"
-                    id="su_lastname"
-                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                    class="form-control"
+                    placeholder="Enter Name"
                   />
-                  <label for="su_LastName" class="text-muted"
-                    >Last Name</label
-                  >
                 </div>
-                <div class="form-floating text-start mb-3">
+                <div class="mb-3">
                   <input
-                    class="form-control rounded-2"
-                    placeholder=""
                     type="text"
-                    name="middlename"
-                    id="su_middlename"
-                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                    class="form-control"
+                    placeholder="Enter Name"
                   />
-                  <label for="su_MiddleInitial" class="text-muted"
-                    >Middle Name</label
-                  >
                 </div>
-                <div class="form-floating text-start mb-3">
+                <div class="mb-3">
                   <input
-                    class="form-control rounded-2"
-                    placeholder=""
-                    type="email"
-                    name="email"
-                    id="su_email"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Name"
                   />
-                  <label for="su_Email" class="text-muted"
-                    >Email Address</label
-                  >
                 </div>
-                <div class="form-floating text-start mb-3">
-                  <i
-                    class="ri-eye-fill icon icon-c"
-                    id="toggle_Pass"
-                  ></i>
+                <div class="mb-3">
                   <input
-                    class="form-control rounded-2"
-                    placeholder=""
-                    type="password"
-                    name="password"
-                    id="su_password"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Name"
                   />
-                  <label for="su_Password" class="text-muted"
-                    >Password</label
-                  >
                 </div>
-                <div class="d-grid pb-2 mt-4">
-                  <button
-                    type="submit"
-                    name="signup"
-                    class="btn btn-secondary text-white py-2 fw-bold"
-                  >
-                    Register
-                  </button>
+                <div class="mt-5 d-grid gap-2">
+                  <input type="submit" class="btn btn-secondary btn-block" />
                 </div>
               </form>
             </div>
@@ -997,7 +956,7 @@
                           <button
                             name="login"
                             type="submit"
-                            class="btn btn-secondary text-white py-2 fw-bold"
+                            class="btn btn-secondary text-white py-2 fw-normal"
                           >
                             Login
                           </button>
@@ -1064,8 +1023,11 @@
                       <form
                         id="signupForm"
                         method="POST"
-                        action="user/signup/function.php">
-                        <h1 class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold">
+                        action="user/signup/function.php"
+                      >
+                        <h1
+                          class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
+                        >
                           SIGN UP
                         </h1>
                         <div class="form-floating text-start mb-3">
@@ -1075,7 +1037,6 @@
                             type="text"
                             name="firstname"
                             id="su_firstname"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_FirstName" class="text-muted"
                             >First Name</label
@@ -1088,7 +1049,6 @@
                             type="text"
                             name="lastname"
                             id="su_lastname"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_LastName" class="text-muted"
                             >Last Name</label
@@ -1101,7 +1061,6 @@
                             type="text"
                             name="middlename"
                             id="su_middlename"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_MiddleInitial" class="text-muted"
                             >Middle Name</label
@@ -1139,7 +1098,7 @@
                           <button
                             type="submit"
                             name="signup"
-                            class="btn btn-secondary text-white py-2 fw-bold"
+                            class="btn btn-secondary text-white py-2"
                           >
                             Register
                           </button>
