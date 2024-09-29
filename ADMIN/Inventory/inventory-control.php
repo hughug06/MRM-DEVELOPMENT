@@ -1,7 +1,7 @@
 
 <?php 
 require_once '../authetincation.php';
-require_once '../../Database/database.php';
+include_once '../../Database/database.php';
 ?>
 
 

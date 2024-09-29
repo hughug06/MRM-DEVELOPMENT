@@ -1,6 +1,6 @@
 <?php
-require_once '../authetincation.php';
 include "../../Database/database.php";
+session_start();
 if(isset($_GET['id'])){
   $id = $_GET['id'];
   $sql = "select * from products where ProductID=$id";
