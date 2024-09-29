@@ -1,6 +1,6 @@
 <?php 
 require '../../Database/database.php';
-require_once '../authetincation.php';
+session_start();
 
 if (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
@@ -53,7 +53,6 @@ elseif(isset($_POST['save'])){
           $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           echo json_encode(['success' => true]);
-          header('Content-Type: application/json');
       }
   }
   //WITHOUT IMAGE SUBMISSION
@@ -61,7 +60,6 @@ elseif(isset($_POST['save'])){
       $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           echo json_encode(['success' => true]);
-          header('Content-Type: application/json');
   }
 }
 else{

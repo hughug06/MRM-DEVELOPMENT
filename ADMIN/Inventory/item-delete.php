@@ -1,7 +1,6 @@
 <?php
-    require_once '../authetincation.php'; 
     include "../../Database/database.php";
-    header('Content-Type: application/json');
+    session_start();
     if(isset($_POST['id'])){
         $item_id = $_POST['id'];
 

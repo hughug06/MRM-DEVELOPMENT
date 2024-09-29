@@ -1,11 +1,10 @@
 <?php 
 require '../../Database/database.php';
-require_once '../authetincation.php';
+session_start();
 
 
 if(isset($_POST['AddItem']))
 {
-  header('Content-Type: application/json');
   $ProductName = $_POST['ProductName'];
   $ProductType = $_POST['ProductType'];
   $stocks = $_POST['stocks'];
