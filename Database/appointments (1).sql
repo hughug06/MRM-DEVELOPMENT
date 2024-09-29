@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 11:28 PM
+-- Generation Time: Sep 29, 2024 at 08:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,13 +32,14 @@ CREATE TABLE `appointments` (
   `account_id` int(11) DEFAULT NULL,
   `availability_id` int(11) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
+  `payment_status` varchar(50) NOT NULL DEFAULT 'Unpaid' COMMENT 'Unpaid ,Confirmed , Declined',
   `location` varchar(20) NOT NULL,
   `brand` varchar(50) NOT NULL,
   `product` varchar(20) NOT NULL,
   `power` int(20) NOT NULL,
   `running_hours` int(20) NOT NULL,
   `service_type` varchar(20) NOT NULL,
-  `status` enum('Pending','Confirmed','Canceled') DEFAULT 'Pending',
+  `status` enum('Pending','Approved','Canceled') DEFAULT 'Pending',
   `worker_update` varchar(50) NOT NULL DEFAULT 'No update' COMMENT 'no update, on the way, worker is on the site',
   `date` date NOT NULL,
   `start_time` time DEFAULT NULL,
@@ -49,12 +50,8 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`appointment_id`, `account_id`, `availability_id`, `name`, `location`, `brand`, `product`, `power`, `running_hours`, `service_type`, `status`, `worker_update`, `date`, `start_time`, `end_time`) VALUES
-(48, 69, 37, 'JAN ARIES IMPUERTO', '', 'honda', '', 0, 0, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
-(49, 69, 37, 'JAN ARIES IMPUERTO', 'Mauban - Tignoan Roa', 'honda', 'solar', 20, 20, 'installation', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
-(50, 69, 37, 'JAN ARIES IMPUERTO', '', 'honda', '', 0, 0, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
-(51, 69, 37, 'JAN ARIES IMPUERTO', 'Villa San Isidro, Ca', 'honda', 'solar', 23, 23, 'maintenance', 'Confirmed', 'No update', '2024-09-30', '07:00:00', '09:00:00'),
-(52, 69, 37, 'JAN ARIES IMPUERTO', 'Chateau Verde, Atis ', 'honda', 'solar', 23, 23, 'installation', 'Pending', 'No update', '2024-09-30', '07:00:00', '09:00:00');
+INSERT INTO `appointments` (`appointment_id`, `account_id`, `availability_id`, `name`, `payment_status`, `location`, `brand`, `product`, `power`, `running_hours`, `service_type`, `status`, `worker_update`, `date`, `start_time`, `end_time`) VALUES
+(73, 69, 37, 'JAN ARIES IMPUERTO', 'Confirmed', 'Famy - Real Road, Ba', 'honda', 'solar', 23, 23, 'maintenance', 'Approved', 'No update', '2024-09-30', '07:00:00', '09:00:00');
 
 --
 -- Indexes for dumped tables
@@ -76,7 +73,7 @@ ALTER TABLE `appointments`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- Constraints for dumped tables

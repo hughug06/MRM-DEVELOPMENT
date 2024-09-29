@@ -115,7 +115,8 @@
                                                                 <th class="wd-lg-20p"><span>Name</span></th>      
                                                                 <th class="wd-lg-8p"><span>Service type</span></th> 
                                                                 <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                <th class="wd-lg-20p"><span>Schedule</span></th>      
+                                                                <th class="wd-lg-20p"><span>Schedule</span></th>     
+                                                                <th class="wd-lg-20p"><span>Payment Status</span></th>     
                                                                 <th class="wd-lg-20p"><span>Status</span></th>                                                                                       
                                                                 <th class="wd-lg-20p">Action</th>
                                                             </tr>
@@ -132,7 +133,8 @@
                                                                 <td><?= $resultItem['name']?></td>    
                                                                 <td><?= $resultItem['service_type']?></td>     
                                                                 <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                        
+                                                                <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
+                                                                <td><?= $resultItem['payment_status']?></td>                         
                                                                 <td class="
                                                                     <?php 
                                                                     if ($resultItem['status'] === 'Pending') { 
@@ -150,15 +152,39 @@
                                                                     ?>">
                                                                     <?= $resultItem['status'] ?>
                                                                 </td>                               
-                                                                <td>                                                 
-                                                                <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                data-bs-toggle="modal" 
-                                                                data-bs-target="#staticBackdrop">
-                                                                    <i class="fe fe-edit-2">ASSIGN</i>
-                                                                </a>
+                                                                <td>    
+                                                                    <?php 
+                                                                    if($resultItem['status'] === "Canceled"){
+
+                                                                     
+                                                                
+                                                                    ?> 
+                                                                    <p?> NO AVAILABLE ACTION </p>
+                                                                    <?php 
+                                                                    }
+                                                                    else if($resultItem['status'] === "Approved"){
+
+                                                                    
+                                                                    ?>       
+                                                                    <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
+                                                                                                               
+                                                                    <?php 
+                                                                                      
+                                                                    }
+                                                                    else if($resultItem['status'] === "Pending"){
+                                                                    ?> 
+                                                                    <a href="#" class="btn btn-sm btn-info assign-btn" 
+                                                                    data-account-id="<?= $resultItem['account_id'] ?>" 
+                                                                    data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#staticBackdrop">
+                                                                        <i class="fe fe-edit-2">ASSIGN</i>
+                                                                    </a>
                                                                     <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
+                                                                    <?php 
+                                                                                      
+                                                                }
+                                                                    ?> 
                                                                 </td>
                                                             </tr>
                                                                 <?php 
