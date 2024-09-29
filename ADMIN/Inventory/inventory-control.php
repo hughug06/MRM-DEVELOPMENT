@@ -318,7 +318,7 @@ include_once '../../Database/database.php';
                     $.ajax({
                         url: 'item-delete.php',
                         type: 'POST', // Ensure you're using the correct method if the backend expects GET
-                        data: { id: itemId },
+                        data: { id: itemId},
                         success: function(response) {
                             if(response.success){
                                 // Handle successful deletion of product
@@ -347,7 +347,7 @@ include_once '../../Database/database.php';
                         },
                         error: function(response) {
                             Swal.fire({
-                                title: 'An error occured!' || response.message,
+                                title: 'An error occured!',
                                 icon: 'error',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer

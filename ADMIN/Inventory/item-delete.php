@@ -1,6 +1,8 @@
 <?php
     include "../../Database/database.php";
     session_start();
+    header('Content-Type: application/json');
+    
     if(isset($_POST['id'])){
         $item_id = $_POST['id'];
 
