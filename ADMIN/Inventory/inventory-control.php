@@ -53,8 +53,8 @@ require_once '../../Database/database.php';
 
     <div class="page">
 
-             <!-- app-header -->
-             <?php include_once( __DIR__.'../../../partials/header.php')?>
+            <!-- app-header -->
+            <?php include_once( __DIR__.'../../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
             <?php include_once(__DIR__.'../../../partials/sidebar.php')?>
