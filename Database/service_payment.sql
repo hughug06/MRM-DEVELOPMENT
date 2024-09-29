@@ -37,8 +37,7 @@ CREATE TABLE `service_payment` (
 -- Dumping data for table `service_payment`
 --
 
-INSERT INTO `service_payment` (`paymentid`, `account_id`, `payment`) VALUES
-(32, 69, 0x2e2e2f2e2e2f6173736574732f696d616765732f736572766963652d7061796d656e742f66696e616c5f67616d656465762e504e47);
+
 
 --
 -- Indexes for dumped tables

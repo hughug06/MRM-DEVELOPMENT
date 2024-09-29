@@ -39,9 +39,7 @@ CREATE TABLE `chaintercom_availability` (
 -- Dumping data for table `chaintercom_availability`
 --
 
-INSERT INTO `chaintercom_availability` (`chainavailability`, `account_id`, `date`, `start_time`, `end_time`) VALUES
-(1, 18, '2024-09-30', '07:00:00', '09:00:00'),
-(2, 18, '2024-09-29', '11:00:00', '11:30:00');
+
 
 --
 -- Indexes for dumped tables

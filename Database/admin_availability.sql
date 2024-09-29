@@ -39,8 +39,6 @@ CREATE TABLE `admin_availability` (
 -- Dumping data for table `admin_availability`
 --
 
-INSERT INTO `admin_availability` (`availability_id`, `account_id`, `date`, `start_time`, `end_time`) VALUES
-(37, 18, '2024-09-30', '07:00:00', '09:00:00');
 
 --
 -- Indexes for dumped tables

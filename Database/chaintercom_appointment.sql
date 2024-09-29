@@ -44,8 +44,7 @@ CREATE TABLE `chaintercom_appointment` (
 -- Dumping data for table `chaintercom_appointment`
 --
 
-INSERT INTO `chaintercom_appointment` (`chaintercomappointid`, `name`, `product`, `meeting_url`, `date`, `start_time`, `end_time`, `status`, `account_id`, `chainavailability`) VALUES
-(16, 'JAN ARIES IMPUERTO', 'Product 2, Product 2', 'https://meet.jit.si/meeting_1', '2024-09-30', '07:00:00', '09:00:00', 'confirm', 69, 1);
+
 
 --
 -- Indexes for dumped tables

@@ -40,11 +40,7 @@ CREATE TABLE `service_worker` (
 -- Dumping data for table `service_worker`
 --
 
-INSERT INTO `service_worker` (`service_id`, `worker_name`, `account_id`, `user_id`, `admin_id`, `appointment_id`) VALUES
-(17, 'Jonathan Villapando', 78, 69, 18, 49),
-(18, 'Jonathan Villapando', 78, 69, 18, 50),
-(19, 'Jonathan Villapando', 78, 69, 18, 48),
-(20, 'Jonathan Villapando', 78, 69, 18, 51);
+
 
 --
 -- Indexes for dumped tables
