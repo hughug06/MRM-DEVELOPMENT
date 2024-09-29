@@ -38,7 +38,8 @@ session_start();
                         if($role == 'admin')
                         {
                             $_SESSION['auth'] = "admin";
-                            $_SESSION['admin_id'] =  $id;                          
+                            $_SESSION['admin_id'] =  $id;
+                            $_SESSION['user_id'] = $user;                     
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
                         }
                         else if($role == 'user')

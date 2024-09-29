@@ -347,7 +347,7 @@ include_once '../../Database/database.php';
                         },
                         error: function(response) {
                             Swal.fire({
-                                title: 'An error occured!' + response.message,
+                                title: 'An error occured!' || response.message,
                                 icon: 'error',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer
@@ -366,51 +366,61 @@ include_once '../../Database/database.php';
             var stocks = document.getElementById("input_add_stocks");
             var id_value = id.value;
             var stocks_value = stocks.value;
-            Swal.fire({
-                title: 'Confirmation',
-                html: "Are you sure to add stocks on product: "+ id_value +" ?",
-                icon: 'warning',
-                confirmButtonText: 'Confirm',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var formData = new FormData();
-                    formData.append('submit_add', true);
-                    formData.append('id', id_value);
-                    formData.append('input_add_stocks', stocks_value);
+            if(stocks.value == 0){
+                Swal.fire({
+                    title: 'Error',
+                    text:'Please enter the amount of stocks to add',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                })
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to add stocks on product: "+ id_value +" ?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append('submit_add', true);
+                        formData.append('id', id_value);
+                        formData.append('input_add_stocks', stocks_value);
 
-                    // If user confirms, send AJAX request for stock update
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(response) {
-                            // Handle successful updating of product
-                            Swal.fire({
-                                title: 'Product Updated!',
-                                text: 'You have successfully updated the product.',
-                                icon: 'success',
-                                allowOutsideClick: false,
-                                timer: 2000, // 2 seconds timer
-                                showConfirmButton: false // Hide the confirm button
-                            }).then(() => {
-                                // Redirect after the timer ends
-                                window.location.href = 'inventory-control.php';
-                            });
-                        },
-                        error: function() {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error deleting the product. Please try again.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
+                        // If user confirms, send AJAX request for stock update
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful updating of product
+                                Swal.fire({
+                                    title: 'Product Updated!',
+                                    text: 'You have successfully updated the product.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'inventory-control.php';
+                                });
+                            },
+                            error: function() {
+                                // Handle error
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error deleting the product. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
         });
 
         //SUBMISSION AJAX FOR DECREASE STOCKS
@@ -420,51 +430,61 @@ include_once '../../Database/database.php';
             var stocks = document.getElementById("input_dec_stocks");
             var id_value = id.value;
             var stocks_value = stocks.value;
-            Swal.fire({
-                title: 'Confirmation',
-                html: "Are you sure to add stocks on product: "+ id_value +" ?",
-                icon: 'warning',
-                confirmButtonText: 'Confirm',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var formData = new FormData();
-                    formData.append('submit_dec', true);
-                    formData.append('id', id_value);
-                    formData.append('input_dec_stocks', stocks_value);
+            if(stocks.value == 0){
+                Swal.fire({
+                    title: 'Error',
+                    text:'Please enter the amount of stocks to decrease',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                })
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to add stocks on product: "+ id_value +" ?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append('submit_dec', true);
+                        formData.append('id', id_value);
+                        formData.append('input_dec_stocks', stocks_value);
 
-                    // If user confirms, send AJAX request for stock update
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(response) {
-                            // Handle successful updating of product
-                            Swal.fire({
-                                title: 'Product Updated!',
-                                text: 'You have successfully updated the product.',
-                                icon: 'success',
-                                allowOutsideClick: false,
-                                timer: 2000, // 2 seconds timer
-                                showConfirmButton: false // Hide the confirm button
-                            }).then(() => {
-                                // Redirect after the timer ends
-                                window.location.href = 'inventory-control.php';
-                            });
-                        },
-                        error: function() {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error deleting the product. Please try again.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
+                        // If user confirms, send AJAX request for stock update
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful updating of product
+                                Swal.fire({
+                                    title: 'Product Updated!',
+                                    text: 'You have successfully updated the product.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'inventory-control.php';
+                                });
+                            },
+                            error: function() {
+                                // Handle error
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error deleting the product. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
         });
 
         // Event listener for when a modal is shown
