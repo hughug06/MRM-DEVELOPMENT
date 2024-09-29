@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 05:57 PM
+-- Generation Time: Sep 29, 2024 at 10:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,25 +37,6 @@ CREATE TABLE `inventory_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `inventory_logs`
---
-
-INSERT INTO `inventory_logs` (`log_id`, `user_id`, `product_name`, `log_action`, `date`, `time`) VALUES
-(26, 67, '2sad', 'User User: Has added new Item: 2sad', '2024-09-25', '05:35:38'),
-(27, 67, '2sad', 'User User: Has added new Item: 2sad', '2024-09-25', '05:37:19'),
-(28, 67, '2sad', 'User User: Has added new Item: 2sad', '2024-09-25', '05:38:17'),
-(29, 67, 'dsadsa', 'User User: Has added new Item: dsadsa', '2024-09-25', '05:40:47'),
-(30, 67, 'dsadsa', 'User User: Has added new Item: dsadsa', '2024-09-25', '05:43:32'),
-(31, 67, 'TEST', 'User User: Has added new Item: TEST', '2024-09-25', '05:43:59'),
-(32, 67, 'test222', 'User User: Has edited the product: test222', '2024-09-25', '05:56:57'),
-(33, 67, 'test222', 'User User: Has edited the product: test222', '2024-09-25', '05:58:13'),
-(34, 67, 'test222', 'User User: Has edited the product: test222', '2024-09-25', '05:58:15'),
-(35, 67, 'test222', 'User User: Has edited the product: test222', '2024-09-25', '06:04:03'),
-(36, 67, 'test2', 'User User: Has edited the product: test2', '2024-09-25', '06:12:45'),
-(37, 67, 'test2', 'User User: Has edited the item: test2', '2024-09-25', '06:14:27'),
-(38, 67, 'MONO 350W', 'User User: Has added new item: MONO 350W', '2024-09-25', '15:09:38');
-
---
 -- Indexes for dumped tables
 --
 
@@ -74,7 +55,7 @@ ALTER TABLE `inventory_logs`
 -- AUTO_INCREMENT for table `inventory_logs`
 --
 ALTER TABLE `inventory_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
