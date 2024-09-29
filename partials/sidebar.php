@@ -263,7 +263,7 @@
                             <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item">Inventory Control</a>
                         </li> 
                         <li class="slide">
-                            <a href="inventory-logs.php" class="side-menu__item">Inventory Logs</a>
+                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item">Inventory Logs</a>
                         </li>                                
                     </ul>
                 </li>
