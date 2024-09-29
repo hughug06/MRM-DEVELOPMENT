@@ -41,12 +41,6 @@ CREATE TABLE `user_info` (
 -- Dumping data for table `user_info`
 --
 
-INSERT INTO `user_info` (`user_id`, `email`, `first_name`, `middle_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(30, 'janariesimpuerto13@gmail.com', 'ARRR', 'Solis', 'VILLAPANDO', '2024-09-03 09:26:00', '2024-09-03 19:12:05'),
-(100, 'user@gmail.com', 'JAN ARIES', 'User', 'IMPUERTO', '2024-09-11 19:07:41', '2024-09-12 19:15:54'),
-(109, 'worker1@gmail.com', 'Jonathan', 'Worker', 'Villapando', '2024-09-14 19:05:59', '2024-09-14 19:05:59'),
-(110, 'asdasdsad@gmail.com', 'Asd', 'Asd', 'Asd', '2024-09-14 20:23:35', '2024-09-14 20:23:35'),
-(111, 'worker2@gmail.com', 'Workertwo', 'Workertwo', 'Workertwo', '2024-09-14 20:37:57', '2024-09-14 20:37:57');
 
 --
 -- Indexes for dumped tables

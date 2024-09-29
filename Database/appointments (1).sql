@@ -50,8 +50,6 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`appointment_id`, `account_id`, `availability_id`, `name`, `payment_status`, `location`, `brand`, `product`, `power`, `running_hours`, `service_type`, `status`, `worker_update`, `date`, `start_time`, `end_time`) VALUES
-(73, 69, 37, 'JAN ARIES IMPUERTO', 'Confirmed', 'Famy - Real Road, Ba', 'honda', 'solar', 23, 23, 'maintenance', 'Approved', 'No update', '2024-09-30', '07:00:00', '09:00:00');
 
 --
 -- Indexes for dumped tables
