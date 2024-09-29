@@ -1037,6 +1037,7 @@
                             type="text"
                             name="firstname"
                             id="su_firstname"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_FirstName" class="text-muted"
                             >First Name</label
@@ -1049,6 +1050,7 @@
                             type="text"
                             name="lastname"
                             id="su_lastname"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_LastName" class="text-muted"
                             >Last Name</label
@@ -1061,6 +1063,7 @@
                             type="text"
                             name="middlename"
                             id="su_middlename"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_MiddleInitial" class="text-muted"
                             >Middle Name</label
