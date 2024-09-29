@@ -29,30 +29,7 @@ global $conn;
     $is_ban = $row["is_ban"];
     
   }
-  else{
-
-   
-        if(isset($_POST['save']))
-        {
-            $id = $_POST["id"];
-            $firstname= $_POST['firstname'];
-            $lastname=$_POST['lastname'];
-            $email = $_POST['email'];
-            $role = $_POST['role'];
-            $is_ban = $_POST['is_ban'] == true ? 1:0;
-            $sql = "update user_info INNER JOIN accounts on user_info.user_id = accounts.user_id set user_info.first_name='$firstname' , user_info.last_name= '$lastname' ,
-             user_info.email= '$email' , accounts.is_ban= '$is_ban', role='$role' where accounts.user_id='$id'";
-            $result = mysqli_query($conn , $sql);
-            header("location: admin_management.php");
-            exit();
-
-        }
-        
-
-        header("location: admin_management.php");
-        exit();
-    
-  }
+  
   
 ?>
 
@@ -123,30 +100,30 @@ global $conn;
                         <div class="card custom-card">
                             <div class="card-header justify-content-between">
                                 <div class="card-title">Edit User</div>
-                                <a href="user-management.php" class="btn btn-close p-0"></a>
+                                <a href="admin_management.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
                                 <form  method="POST" action="admin-edit-form.php">
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
-                                        <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control">
+                                        <input type="hidden" id="id" name="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">First Name</label>
                                             <input type="text" class="form-control" placeholder="First name"
-                                                aria-label="Full Name" name="firstname" required value="<?= $firstname?>">
+                                                aria-label="Full Name" id="firstname" name="firstname" required value="<?= $firstname?>">
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Last Name</label>
                                             <input type="text" class="form-control" placeholder="Last name"
-                                                aria-label="Username" name="lastname" required value="<?= $lastname?>">
+                                                aria-label="Username" id="lastname" name="lastname" required value="<?= $lastname?>">
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                         <label class="form-label">Email</label>
                                             <input type="text" class="form-control" placeholder="Email"
-                                            aria-label="email" name="email" required value="<?= $email?>">
+                                            aria-label="email" id="email" name="email" required value="<?= $email?>">
                                         </div>                        
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Role</label>
-                                            <select id="inputState1" class="form-select" name="role" required>
+                                            <select id="role" class="form-select" name="role" required>
                                                 <option selected>Select Role</option>
                                                 <option value="user" <?= $role == 'user' ? 'selected' : ''?>>User</option>
                                                 <option value="admin" <?= $role == 'admin'? 'selected' : ''?>>Admin</option>
@@ -154,11 +131,11 @@ global $conn;
                                             </select>
                                         </div>                                                                
                                         <div class="col-xl-12 mb-3 d-flex align-items-center gap-1">
-                                            <input type="checkbox"  name="is_ban" id="banning" <?= $is_ban == 1 ? 'checked' : ''?>>
+                                            <input type="checkbox" id="ban"  name="is_ban" id="banning" <?= $is_ban == 1 ? 'checked' : ''?>>
                                             <label for="banning">Ban</label>
                                         </div>                                                                      
                                         <div class="col-md-12 d-flex justify-content-end">
-                                            <button name="save" type="submit" class="btn btn-primary">Save</button>
+                                            <button name="save" id="submit" type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -183,6 +160,108 @@ global $conn;
     </div>
     <div id="responsive-overlay"></div>
     <!-- Scroll To Top -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#submit').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            var id = document.getElementById("id");
+            var firstname = document.getElementById("firstname");
+            var lastname = document.getElementById("lastname");
+            var ban = document.getElementById("ban");
+            if(ban.checked){
+                banval = 1;
+            }
+            else{
+                banval = 0;
+            }
+            var email = document.getElementById("email");
+            var role = document.getElementById("role");
+            if(firstname.value == "" || lastname.value == "" || email.value == ""){
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please complete the missing information',
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                })
+            }
+            else if(!email.value.includes("@")){
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Email should contain "@"',
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                })
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    icon: 'warning',
+                    text: 'Are you sure of the information entered?',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('save', true);
+                        formData.append('firstname', firstname.value);
+                        formData.append('id', id.value);
+                        formData.append('is_ban', banval);
+                        formData.append('lastname', lastname.value);
+                        formData.append('email', email.value);
+                        formData.append('role', role.value);
+                        
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                if(response.success){
+                                    Swal.fire({
+                                    title: 'User account Updated!',
+                                    text: 'You have successfully updated the account.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'admin_management.php';
+                                    }); 
+                                }
+                                else{
+                                    Swal.fire({
+                                    title: "Error!",
+                                    text: response.message,
+                                    icon: "error",
+                                    confirmButtonText: "ok",
+                                    });
+                                }
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire({
+                                title: "Error!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "ok",
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+</script>
 
     <!-- Popper JS -->
     <script src="../../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
