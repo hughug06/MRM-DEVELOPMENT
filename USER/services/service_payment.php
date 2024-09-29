@@ -1,23 +1,60 @@
-<?php
-//get the data from service.php after the book trigger
-require_once '../../Database/database.php';
+<?php 
 session_start();
-if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
-    $_SESSION['availability_id'] = $_GET['availability_id'];
-    $_SESSION['date'] = $_GET['date'];
-    $_SESSION['start_time'] = $_GET['start_time'];
-    $_SESSION['end_time'] = $_GET['end_time'];
+require_once '../../Database/database.php';
 
-    // Now you have the availability_id, date, start_time, and end_time to process further
-   // echo "Booking confirmed for availability ID: $availability_id on $date from $start_time to $end_time.";
+// Check if account ID is set in the URL
+if (isset($_GET['id'])) {
     
+    $_SESSION['service_account_id'] = $_GET['id'];
 } 
 
+// Handle the form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Check if the image is uploaded
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        // Handle the image upload
+        $image = $_FILES['image'];
+        $account_id = $_SESSION['service_account_id'];
+        // Define the directory where the image will be uploaded
+        $targetDir = "../../assets/images/service-payment/";
+        $targetFile = $targetDir . basename($image['name']);
+        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
+        // Check if image file is a valid image type
+        $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if (in_array($imageFileType, $validExtensions)) {
+            // Ensure the directory exists
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
 
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($image['tmp_name'], $targetFile)) {
+                // Insert the image path into the database
+                $sql = "INSERT INTO service_payment (account_id, payment) VALUES ('$account_id', '$targetFile')";
 
+                if ($conn->query($sql) === TRUE) {
+                  // SUCCESS
+                    unset($_SESSION['service_account_id']);
+                    header("Location: /MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php");
+                } else {
+                    echo "Error inserting record: " . $conn->error;
+                    unset($_SESSION['service_account_id']);
+                }
+            } else {
+                echo "Error uploading the file.";
+                unset($_SESSION['service_account_id']);
+            }
+        } else {
+            echo "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+            unset($_SESSION['service_account_id']);
+        }
+    } else {
+        echo "No image uploaded or file upload error.";
+        unset($_SESSION['service_account_id']);
+    }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
@@ -25,9 +62,9 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
 <head>
 
     <!-- Meta Data -->
-    <?php 
+    <?php
+    include_once(__DIR__.'/../../partials/head.php');
     
-    include_once(__DIR__. '/../../partials/head.php');
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
@@ -61,15 +98,13 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -81,27 +116,56 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
     <div class="page">
 
              <!-- app-header -->
-             <?php include_once(__DIR__. '/../../partials/header.php')?>
+             <?php include_once(__DIR__.'/../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
             <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
-            <div class="main-content app-content">
-                <div class="container-fluid">
-                
-                
-
-                   
-  
-                </div>
+            <div class="main-content app-content">         
+            <div class="container mt-5">
+        <!-- Display a blank image placeholder -->
+        <div class="card p-5 ">
+        <div class="mb-3 text-center">
+            <div class="card">
+            <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid" style="max-height: 300px; display: none;">
             </div>
+            
+        </div>
+        
+        <!-- Image Upload Form -->
+        <form action="service_payment.php" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input class="form-control" type="file" id="image" name="image" accept=".jpg, .jpeg, .png, .gif" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to display image preview
+        document.getElementById('image').onchange = function (event) {
+            const [file] = event.target.files;
+            if (file) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreview.style.display = 'block';
+            }
+        };
+    </script>
+
+            </div>
+
+            
+
             <!--APP-CONTENT CLOSE-->
 
         
         <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../../partials/footer.php') ?>
+        <?php include_once(__DIR__.'/../../partials/footer.php') ?>
         <!-- Footer End -->  
     </div>
 
@@ -145,11 +209,15 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
     <script src="../../assets/js/prism-custom.js"></script>
 
     <!-- Custom JS -->
-    <!-- <script src="../../assets/js/custom.js"></script> -->
+    <script src="../../assets/js/custom.js"></script>
 
 </body>
 
 </html>
+
+
+
+
 
 
 
