@@ -1,4 +1,6 @@
 <?php
+session_start();
+$userid = $_SESSION['account_id'];
 // fetch_appointments.php
 
 // Database connection
@@ -9,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch appointments from the database
-$sql = "SELECT * FROM appointments";
+$sql = "SELECT * FROM appointments where account_id = '$userid'";
 $result = $conn->query($sql);
 $appointments = [];
 
