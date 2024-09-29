@@ -1,5 +1,6 @@
 <?php 
 require_once '../../authetincation.php';
+require_once '../../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +70,7 @@ require_once '../../authetincation.php';
                         <div class="card custom-card">
                             <div class="card-header justify-content-between">
                                 <div class="card-title">Add user</div>
-                                <a href="user-management.php" class="btn btn-close p-0"></a>
+                                <a href="admin_management.php" class="btn btn-close p-0"></a>
                             </div>
                             <div class="card-body">
                                 <form action="function.php" method="POST">
@@ -77,41 +78,41 @@ require_once '../../authetincation.php';
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">First Name</label>
                                             <input type="text" class="form-control" placeholder="First name"
-                                                aria-label="First name" name="firstname">
+                                                aria-label="First name" id="firstname" name="firstname">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Last Name</label>
                                             <input type="text" class="form-control" placeholder="Last name"
-                                                aria-label="Last name" name="lastname">
+                                                aria-label="Last name" id="lastname" name="lastname">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Middle Name</label>
                                             <input type="text" class="form-control" placeholder="Middle name"
-                                                aria-label="middle name" name="middlename">
+                                                aria-label="middle name" id="middlename" name="middlename">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Email</label>
                                             <input type="text" class="form-control" placeholder="Email"
-                                                aria-label="email" name="email">
+                                                aria-label="email" id="email" name="email">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="col-xl-12 mb-3">
                                                 <label class="form-label">Password</label>
                                                 <input type="password" class="form-control" placeholder="Password"
-                                                aria-label="Password" name="password">
+                                                aria-label="Password" id="password" name="password">
                                             </div>
                                                                              
                                         </div>         
                                         <div class="col-md-6 mb-3">
                                                 <label class="form-label">Role</label>
-                                                <select id="inputState1" class="form-select" name="role">
+                                                <select id="role" class="form-select" name="role">
                                                     <option value="admin">admin</option>
                                                     <option value="agent">agent</option>
                                                     <option value="service_worker">service worker</option>
                                                 </select>
                                             </div>                                                       
                                         <div class="col-md-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary" name="saveuser">Save</button>
+                                            <button type="submit" id="submit" class="btn btn-primary" name="saveuser">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -136,6 +137,102 @@ require_once '../../authetincation.php';
     </div>
     <div id="responsive-overlay"></div>
     <!-- Scroll To Top -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                var firstname = document.getElementById("firstname");
+                var lastname = document.getElementById("lastname");
+                var middlename = document.getElementById("middlename");
+                var email = document.getElementById("email");
+                var password = document.getElementById("password");
+                var role = document.getElementById("role");
+                if(firstname.value == "" || lastname.value == "" || email.value == "" || password.value == ""){
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Please complete the missing information',
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                    })
+                }
+                else if(!email.value.includes("@")){
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Email should contain "@"',
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                    })
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        icon: 'warning',
+                        text: 'Are you sure of the information entered?',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If user confirms, send AJAX request for Add product
+                            var formData = new FormData();
+                            formData.append('saveuser', true);
+                            formData.append('firstname', firstname.value);
+                            formData.append('middlename', middlename.value);
+                            formData.append('lastname', lastname.value);
+                            formData.append('email', email.value);
+                            formData.append('password', password.value);
+                            formData.append('role', role.value);
+                            
+                            $.ajax({
+                                url: 'function.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data:formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    // Handle successful add
+                                    if(response.success){
+                                        Swal.fire({
+                                        title: 'User account Added!',
+                                        text: 'You have successfully added the account.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'admin_management.php';
+                                        }); 
+                                    }
+                                    else{
+                                        Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error",
+                                        confirmButtonText: "ok",
+                                        });
+                                    }
+                                },
+                                error: function(response) {
+                                    // Handle erro
+                                    Swal.fire({
+                                    title: "Error!",
+                                    text: response.message,
+                                    icon: "error",
+                                    confirmButtonText: "ok",
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
 
     <!-- Popper JS -->
     <script src="../../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
