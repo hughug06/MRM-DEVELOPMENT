@@ -749,11 +749,39 @@
                                     <td>N/A yet</td>
                                     <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                        <?php 
+                                        if ($row['status'] === "Pending")
+                                        { 
+
+                                        ?>
                                         <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
+                                        <?php 
+                                        }
+                                       else{
+                                            $checker = "select * from service_payment where account_id = '$userid'";
+                                            $check_result = mysqli_query($conn , $checker);
+                                            if(mysqli_num_rows($check_result) > 0)
+                                            {
+
+                                            
+                                            ?>
+                                            <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+
+                                            <?php
+                                            }
+                                            else if(!mysqli_num_rows($check_result)){
+
+                                            
+                                            ?>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                            <?php 
+                                            }
+                                            }
+                                            
+                                            ?>
                                     </td>
                                 </tr>
-                                <?php
+                                <?php 
                             }
                         } else {
                             // Display a message if no appointments are found
