@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
-<head>
+  <head>
 
     <!-- Meta Data -->
     <?php include_once('../../../partials/head.php') ?>
@@ -20,8 +20,8 @@
     <!-- Bootstrap Css -->
     <link id="style" href="../../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
 
-     <!-- Main Theme Js -->
-     <script src="../../../assets/js/main.js"></script>
+      <!-- Main Theme Js -->
+      <script src="../../../assets/js/main.js"></script>
 
     <!-- Style Css -->
     <link href="../../../assets/css/styles.min.css" rel="stylesheet" >
@@ -42,19 +42,14 @@
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-
-
-</head>
+  </head>
 
 <body>
 
-   
-
-
-
     <div class="page">
-         <!-- app-header -->
-         <?php include_once('../../../partials/header.php') ?>
+
+        <!-- app-header -->
+        <?php include_once('../../../partials/header.php') ?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
         <?php include_once('../../../partials/sidebar.php') ?>
@@ -63,11 +58,7 @@
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
-
-               
-
                 <!-- Start::row-1 -->
-                 
                 <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
@@ -131,18 +122,12 @@
                                 </div>
                                
                             </div>
-
-                           
                         </div>
                     </div><!-- COL END -->
                 </div>
                 <!--End::row-1 -->
-
             </div>
         </div>
-        <!-- End::app-content -->
-
-        
         <!-- Footer Start -->
         <?php include_once('../../../partials/footer.php') ?>
         <!-- Footer End -->
