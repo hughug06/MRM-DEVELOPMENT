@@ -1,62 +1,56 @@
 
 <?php 
 require_once '../authetincation.php';
+include_once '../../Database/database.php';
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
-<head>
+    <head>
+        <!-- Meta Data -->
+        <?php include_once(__DIR__.'../../../partials/head.php')?>
+        <title> Inquries </title>
+        <!-- Favicon -->
+        <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
+        
+        <!-- Choices JS -->
+        <script src="../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+        
+        <!-- Bootstrap Css -->
+        <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
 
-    <!-- Meta Data -->
-    <?php include_once(__DIR__.'../../../partials/head.php')?>
-    <title> Inquries </title>
-    <!-- Favicon -->
-    <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
-    
-    <!-- Choices JS -->
-    <script src="../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-    
-    <!-- Bootstrap Css -->
-    <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+        <!-- Main Theme Js -->
+        <script src="../../assets/js/main.js"></script>
 
-     <!-- Main Theme Js -->
-     <script src="../../assets/js/main.js"></script>
+        <!-- Style Css -->
+        <link href="../../assets/css/styles.min.css" rel="stylesheet" >
 
-    <!-- Style Css -->
-    <link href="../../assets/css/styles.min.css" rel="stylesheet" >
+        <!-- Icons Css -->
+        <link href="../../assets/css/icons.css" rel="stylesheet" >
 
-    <!-- Icons Css -->
-    <link href="../../assets/css/icons.css" rel="stylesheet" >
+        <!-- Node Waves Css -->
+        <link href="../../assets/libs/node-waves/waves.min.css" rel="stylesheet" > 
 
-    <!-- Node Waves Css -->
-    <link href="../../assets/libs/node-waves/waves.min.css" rel="stylesheet" > 
+        <!-- Simplebar Css -->
+        <link href="../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet" >
+        
+        <!-- Color Picker Css -->
+        <link rel="stylesheet" href="../../assets/libs/flatpickr/flatpickr.min.css">
+        <link rel="stylesheet" href="../../assets/libs/@simonwep/pickr/themes/nano.min.css">
 
-    <!-- Simplebar Css -->
-    <link href="../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet" >
-    
-    <!-- Color Picker Css -->
-    <link rel="stylesheet" href="../../assets/libs/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="../../assets/libs/@simonwep/pickr/themes/nano.min.css">
+        <!-- Choices Css -->
+        <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    <!-- Choices Css -->
-    <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
-
-
-
-</head>
+    </head>
 
 <body>
 
-
-
-
-
     <div class="page">
 
-             <!-- app-header -->
-             <?php include_once( __DIR__.'../../../partials/header.php')?>
+            <!-- app-header -->
+            <?php include_once( __DIR__.'../../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
             <?php include_once(__DIR__.'../../../partials/sidebar.php')?>
@@ -65,86 +59,79 @@ require_once '../authetincation.php';
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-        
-
-    
-                        
+            
                 <!-- MODAL FOR SET AVAILABILITY -->                       
-            <div class="modal fade" id="availability" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="availability" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">ADD TIME FOR BOOKING</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg" id="availabilityForm">
-                    <h3 class="text-center mb-4 fw-bold text-primary">Set Your Availability</h3>
-
-                    <div class="mb-4">
-                        <label for="date" class="form-label fw-semibold">Select Date:</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-primary text-white">
-                                <i class="bi bi-calendar3"></i>
-                            </span>
-                            <input type="text" id="date" name="date" class="form-control flatpickr-date" placeholder="Choose a date" required>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <label for="start_time" class="form-label fw-semibold">Start Time:</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-success text-white">
-                                    <i class="bi bi-clock"></i>
-                                </span>
-                                <select id="start_time" name="start_time" class="form-select" required>
-                                    <option value="" disabled selected>Select start time</option>
-                                </select>
+                <div class="modal fade" id="availability" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="availability" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">ADD TIME FOR BOOKING</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="function.php" class="p-5 bg-white rounded-3 shadow-lg" id="availabilityForm">
+                                <h3 class="text-center mb-4 fw-bold text-primary">Set Your Availability</h3>
 
-                        <div class="col-md-6">
-                            <label for="end_time" class="form-label fw-semibold">End Time:</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-danger text-white">
-                                    <i class="bi bi-clock-fill"></i>
-                                </span>
-                                <select id="end_time" name="end_time" class="form-select" required>
-                                    <option value="" disabled selected>Select end time</option>
-                                </select>
+                                <div class="mb-4">
+                                    <label for="date" class="form-label fw-semibold">Select Date:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="bi bi-calendar3"></i>
+                                        </span>
+                                        <input type="text" id="date" name="date" class="form-control flatpickr-date" placeholder="Choose a date" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label for="start_time" class="form-label fw-semibold">Start Time:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-success text-white">
+                                                <i class="bi bi-clock"></i>
+                                            </span>
+                                            <select id="start_time" name="start_time" class="form-select" required>
+                                                <option value="" disabled selected>Select start time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="end_time" class="form-label fw-semibold">End Time:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-danger text-white">
+                                                <i class="bi bi-clock-fill"></i>
+                                            </span>
+                                            <select id="end_time" name="end_time" class="form-select" required>
+                                                <option value="" disabled selected>Select end time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" name="confirm" class="btn btn-primary btn-lg shadow-sm">
+                                            <i class="bi bi-check-circle me-2"></i> Confirm Availability
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
                         </div>
                     </div>
-
-                    <div class="d-grid">
-                        <button type="submit" name="confirm" class="btn btn-primary btn-lg shadow-sm">
-                            <i class="bi bi-check-circle me-2"></i> Confirm Availability
-                        </button>
-                    </div>
-                </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-                </div>
-            </div>
-            </div>
 
-
-                <!--  SHOW ALREADY CREATED TIME -->
                 <div class="row row-sm mt-3">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                         <div class="card custom-card">
                             <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0">TIME MANAGEMENT</label>
-                                    
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#availability">
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD TIME
-                                        </button>
-                                   
+                                    <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#availability">
+                                    <i class="fe fe-download-cloud pe-2"></i>ADD TIME
+                                    </button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -152,7 +139,7 @@ require_once '../authetincation.php';
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
-                                            <th class="wd-lg-20p"><span>admin</span></th>       
+                                                <th class="wd-lg-20p"><span>admin</span></th>       
                                                 <th class="wd-lg-8p"><span>Date</span></th>
                                                 <th class="wd-lg-20p"><span>Start time</span></th>
                                                 <th class="wd-lg-20p"><span>End Time</span></th>                                                   
@@ -167,8 +154,8 @@ require_once '../authetincation.php';
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
                                                 ?> 
-                                                 <tr>
-                                                 <td><?= $resultItem['account_id']?></td>     
+                                                <tr>
+                                                <td><?= $resultItem['account_id']?></td>     
                                                 <td class="text-success"><?= $resultItem['date']?></td>                                        
                                                 <td><?= $resultItem['start_time']?></td>                        
                                                 <td><?= $resultItem['end_time']?></td>                                           
@@ -190,21 +177,12 @@ require_once '../authetincation.php';
                                         </tbody>
                                     </table>
                                 </div>
-                               
                             </div>
-
-                           
                         </div>
                     </div><!-- COL END -->
                 </div>
-
-
-                
-               </div>
             </div>
-            <!--APP-CONTENT CLOSE-->
-
-        
+        </div>
         <!-- Footer Start -->
         <?php include_once(__DIR__.'../../../partials/footer.php') ?>
         <!-- Footer End -->  
