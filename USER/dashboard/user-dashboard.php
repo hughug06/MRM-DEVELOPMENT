@@ -241,8 +241,11 @@ require_once '../../Database/database.php';
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-12 col-xl-4 banner-img">
-                    <div class="border">
-                    <div id='calendar'></div> 
+                        <div class="card custom-card">
+                            
+                        <div class="border">
+                                <div id='calendar'></div> 
+                            </div>
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
