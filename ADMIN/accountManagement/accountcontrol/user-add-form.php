@@ -78,17 +78,17 @@ include_once '../../../Database/database.php';
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">First Name</label>
                                             <input type="text" class="form-control" placeholder="First name"
-                                                aria-label="First name" name="firstname">
+                                                aria-label="First name" name="firstname" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Last Name</label>
                                             <input type="text" class="form-control" placeholder="Last name"
-                                                aria-label="Last name" name="lastname">
+                                                aria-label="Last name" name="lastname" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Middle Name</label>
                                             <input type="text" class="form-control" placeholder="Middle name"
-                                                aria-label="middle name" name="middlename">
+                                                aria-label="middle name" name="middlename" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Email</label>
