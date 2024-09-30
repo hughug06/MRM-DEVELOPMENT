@@ -456,7 +456,7 @@
 
                                                                                             
                                                                                             ?>       
-                                                                                            <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
+                                                                                            <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
                                                                                                                                     
                                                                                             <?php 
                                                                                                             

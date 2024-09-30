@@ -102,9 +102,10 @@ if (isset($_POST['account_id']) && isset($_POST['action'])) {
             <div class="container-fluid">
                     <div class="card">
                         <?php 
-                            if (isset($_GET['id'])) {
+                            if (isset($_GET['id']) && isset($_GET['appoint_id'])) {
                                 $account_id = $_GET['id']; 
-                                $sql = "SELECT * FROM service_payment WHERE account_id = '$account_id'";
+                                $appoint_id = $_GET['appoint_id']; 
+                                $sql = "SELECT * FROM service_payment WHERE account_id = '$account_id' AND appointment_id = '$appoint_id'";
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
