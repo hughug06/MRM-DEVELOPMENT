@@ -724,7 +724,8 @@
                             <th scope="col">Set Date</th>
                             <th scope="col">Set Time</th>
                             <th scope="col">Contact</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Payment Status</th>
+                            <th scope="col">Appointment Status</th>
                             <th scope="col">Check Update</th>
                         </tr>
                     </thead>
@@ -747,6 +748,31 @@
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                     <td>N/A yet</td>
+                                    <td>
+                                        <?php 
+                                        $appoint_id = $row['appointment_id'];
+                                        $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
+                                        $payment_check_result = mysqli_query($conn , $payment_check);
+                                        $payment_status = mysqli_fetch_assoc($payment_check_result);
+                                        if(mysqli_num_rows($payment_check_result) > 0){
+                                            
+                                          
+                                            if($payment_status['payment_status'] === "pending"){
+                                                echo $payment_status['payment_status'];
+                                            }
+                                            else if($payment_status['payment_status'] === "confirmed"){
+                                                echo "To review";
+                                            }
+                                            else if($payment_status['payment_status'] === "canceled"){
+                                                echo $payment_status['payment_status'];
+                                            }
+                                                                                    
+                                        }
+                                        else{
+                                            echo "Waiting for approval";
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
                                         <?php 
@@ -758,7 +784,8 @@
                                         <?php 
                                         }
                                        else{
-                                            $checker = "select * from service_payment where account_id = '$userid'";
+                                           
+                                            $checker = "select * from service_payment where account_id = '$userid' AND appointment_id ='$appoint_id' ";
                                             $check_result = mysqli_query($conn , $checker);
                                             if(mysqli_num_rows($check_result) > 0)
                                             {
@@ -773,7 +800,7 @@
 
                                             
                                             ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id'])  ?>&appointment=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
                                             <?php 
                                             }
                                             }

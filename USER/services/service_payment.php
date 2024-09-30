@@ -6,6 +6,7 @@ require_once '../../Database/database.php';
 if (isset($_GET['id'])) {
     
     $_SESSION['service_account_id'] = $_GET['id'];
+    $_SESSION['appointment_id'] = $_GET['appointment'];
 } 
 
 // Handle the form submission
@@ -15,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Handle the image upload
         $image = $_FILES['image'];
         $account_id = $_SESSION['service_account_id'];
+        $appoint_id = $_SESSION['appointment_id'];
         // Define the directory where the image will be uploaded
         $targetDir = "../../assets/images/service-payment/";
         $targetFile = $targetDir . basename($image['name']);
@@ -31,26 +33,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($image['tmp_name'], $targetFile)) {
                 // Insert the image path into the database
-                $sql = "INSERT INTO service_payment (account_id, payment) VALUES ('$account_id', '$targetFile')";
+                $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile')";
 
                 if ($conn->query($sql) === TRUE) {
                   // SUCCESS
+                    unset($_SESSION['appointment_id']);
                     unset($_SESSION['service_account_id']);
                     header("Location: /MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php");
                 } else {
                     echo "Error inserting record: " . $conn->error;
+                    unset($_SESSION['appointment_id']);
                     unset($_SESSION['service_account_id']);
                 }
             } else {
                 echo "Error uploading the file.";
+                unset($_SESSION['appointment_id']);
                 unset($_SESSION['service_account_id']);
             }
         } else {
             echo "Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.";
+            unset($_SESSION['appointment_id']);
             unset($_SESSION['service_account_id']);
         }
     } else {
         echo "No image uploaded or file upload error.";
+        unset($_SESSION['appointment_id']);
         unset($_SESSION['service_account_id']);
     }
 }

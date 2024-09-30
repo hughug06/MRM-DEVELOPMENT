@@ -11,14 +11,14 @@ if (isset($_POST['account_id']) && isset($_POST['action'])) {
     // Confirm or Reject based on the action value
     if ($action == 'confirm') {
         // Update query for confirming payment
-        $sql = "UPDATE appointments SET payment_status = 'Confirmed' WHERE account_id = '$account_id'";    
+        $sql = "UPDATE service_payment SET payment_status = 'approved' WHERE account_id = '$account_id'";    
         if(mysqli_query($conn , $sql)){
             header("Location: /MRM-DEVELOPMENT/ADMIN/services/appointment.php");
         }
     } elseif ($action == 'reject') {
         // Update queries for rejecting payment
         $sql = "UPDATE appointments SET status = 'Canceled' WHERE account_id = '$account_id'";
-        $sql2 = "UPDATE appointments SET payment_status = 'Declined' WHERE account_id = '$account_id'";
+        $sql2 = "UPDATE service_payment SET payment_status = 'rejected' WHERE account_id = '$account_id'";
         $sql3 = "UPDATE accounts SET service_count = service_count - 1 WHERE account_id = '$account_id'";
     }
 
