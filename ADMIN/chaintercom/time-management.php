@@ -119,7 +119,7 @@ require_once '../../Database/database.php';
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" name="confirm" class="btn btn-primary btn-lg shadow-sm">
+                        <button type="submit" id="confirm" name="confirm" class="btn btn-primary btn-lg shadow-sm">
                             <i class="bi bi-check-circle me-2"></i> Confirm Availability
                         </button>
                     </div>
@@ -127,7 +127,6 @@ require_once '../../Database/database.php';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
                 </div>
                 </div>
             </div>
@@ -268,6 +267,82 @@ require_once '../../Database/database.php';
  <!-- SWEET ALERT JS -->
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+
+    $(document).ready(function() {
+        $('#confirm').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            var start_time = document.getElementById("start_time");
+            var end_time = document.getElementById("end_time");
+            var date = document.getElementById("date");
+            if(start_time.value == "" || end_time.value == "" || date.value == ""){
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please select date and time',
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                })
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    icon: 'warning',
+                    text: 'Are you sure of the information entered?',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('confirm', true);
+                        formData.append('date', date.value);
+                        formData.append('start_time', start_time.value);
+                        formData.append('end_time', end_time.value);
+                            
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                if(response.success){
+                                    Swal.fire({
+                                    title: 'Time Availability Set!',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'time-management.php';
+                                    });
+                                }
+                                else{
+                                    Swal.fire({
+                                    title: "Error!",
+                                    text: response.message,
+                                    icon: "error",
+                                    confirmButtonText: "ok",
+                                    });
+                                }
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire({
+                                title: "Error!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "ok",
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
 
     // Initialize Flatpickr for the date input with restriction to disable past dates
     flatpickr(".flatpickr-date", {
