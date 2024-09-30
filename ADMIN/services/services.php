@@ -159,7 +159,7 @@ include_once '../../Database/database.php';
                                                 <td><?= $resultItem['start_time']?></td>                        
                                                 <td><?= $resultItem['end_time']?></td>                                           
                                                 <td>                                                 
-                                                    <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
+                                                    <a data-href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger delete-btn-time"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
 
@@ -318,6 +318,66 @@ include_once '../../Database/database.php';
                 });
             }
         });
+
+        $(".delete-btn-time").click(function(event) {
+            event.preventDefault(); // Prevent the default action (navigating to the delete URL)
+            var href = $(this).data('href');
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Confirm Deletion?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for deletion of product
+                    $.ajax({
+                        url: href,
+                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        dataType: 'json',
+                        success: function(response) {
+                            if(response.success){
+                                // Handle successful deletion of product
+                                Swal.fire({
+                                    title: 'Deleted Successfully!',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'services.php';
+                                });
+                            }
+                            else{
+                                Swal.fire({
+                                title: 'Product not deleted!',
+                                text: response.message || 'An error occurred while deleting the product.',
+                                icon: 'error',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                                });
+                            }
+                        },
+                        error: function(response) {
+                            Swal.fire({
+                                title: 'An error occured!',
+                                icon: 'error',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+
+
+
+
     });
 
     // Initialize Flatpickr for the date input with restriction to disable past dates
