@@ -117,7 +117,6 @@ include_once '../../Database/database.php';
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Understood</button>
                         </div>
                         </div>
                     </div>
@@ -160,7 +159,6 @@ include_once '../../Database/database.php';
                                                 <td><?= $resultItem['start_time']?></td>                        
                                                 <td><?= $resultItem['end_time']?></td>                                           
                                                 <td>                                                 
-                                                    <a href=""  class="btn btn-sm btn-info">  <i class="fe fe-edit-2"></i> </a>
                                                     <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash"></i>  </a>
                                                 </td>
                                             </tr>
