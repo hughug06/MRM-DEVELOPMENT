@@ -948,7 +948,7 @@
                           <button
                             name="login"
                             type="submit"
-                            class="btn btn-secondary text-white py-2 fw-normal"
+                            class="btn btn-secondary text-white py-2 fw-bold"
                           >
                             Login
                           </button>
@@ -1093,7 +1093,7 @@
                           <button
                             type="submit"
                             name="signup"
-                            class="btn btn-secondary text-white py-2"
+                            class="btn btn-secondary text-white py-2 fw-bold"
                           >
                             Register
                           </button>
