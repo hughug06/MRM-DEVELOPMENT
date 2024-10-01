@@ -198,7 +198,12 @@ global $conn;
                 var max_price_value = max_price.value;
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
-                var availability_ID_value = availability_ID.value;
+                if(availability_ID.checked){
+                    var availability_ID_value = 1;
+                }
+                else{
+                    var availability_ID_value = 0;
+                }
                 var image = document.getElementById("image").files[0];
                 var Pname_value = Pname.value;
 

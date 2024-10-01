@@ -219,7 +219,12 @@ include_once '../../Database/database.php';
                 var max_price_value = parseInt(max_price.value);
                 var specification = specification_ID.value;
                 var description = description_ID.value;
-                var availability = availability_ID.value;
+                if(availability_ID.checked){
+                    var availability = 1;
+                }
+                else{
+                    var availability = 0;
+                }
                 var image = document.getElementById("image").files[0];
                 if(IType_value == 'Solar Panel'){
                     power_checker = 350;

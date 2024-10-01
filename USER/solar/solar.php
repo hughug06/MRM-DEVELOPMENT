@@ -11,19 +11,15 @@ session_start();
             }
             else{
                 $selectedWatts = $wattsID;
-                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Generator' and Availability = 1";
+                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Solar Panel'";
                 $all_products_available = $conn->query($sql);
 
-                $sqlnon = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Solar Panel' and Availability = 0";
-                $all_products_non_available = $conn->query($sqlnon);
             }
         }
         else{
-            $sql = "SELECT * FROM products Where Availability = 1 and ProductType = 'Solar Panel'";
+            $sql = "SELECT * FROM products Where ProductType = 'Solar Panel'";
             $all_products_available = $conn->query($sql);
 
-            $sqlnon = "SELECT * FROM products Where Availability = 0 and ProductType = 'Solar Panel'";
-            $all_products_non_available = $conn->query($sqlnon);
         }
 ?>
 
@@ -108,46 +104,7 @@ session_start();
                 <div class="row row-sm">
                     <div class="col-md-8 col-lg-9">
                         <div id="ProductList" class="row row-sm">
-                        
-                        <?php
-                        while($row = mysqli_fetch_assoc($all_products_non_available)){
-                            $id=$row['ProductID']
-                        ?>
-
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
-                                <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div class="product-image">
-                                                <a href="user-solar-details.php?id=<?= $row['ProductID'];  ?>" class="image">
-                                                    <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
-                                                </a>
-                                                <div class="product-link">
-                                                    <a href="user-product-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
-                                                    <a href="user-solar-details.php?id=<?= $row['ProductID'];  ?>">
-                                                        <i class="fas fa-eye"></i>
-                                                        <span>Quick View</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3 class="title"><a href="user-solar-details.php?id=<?= $row['ProductID'];  ?>"><?php echo $row["ProductName"] ?></a></h3>
-                                                
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        <?php
-                        }
-                        ?>
-
+                        <!-- Show Available products -->
                         <?php
                         while($row = mysqli_fetch_assoc($all_products_available)){
                             $id=$row['ProductID']
@@ -161,6 +118,11 @@ session_start();
                                                 <a href="user-solar-details.php?id=<?= $row['ProductID'];  ?>" class="image">
                                                     <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
                                                 </a>
+                                                <?php if ($row['Availability'] == 0) { ?>
+                                                    <div class="product-unavailable-overlay">
+                                                        <span>Product Unavailable</span>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
