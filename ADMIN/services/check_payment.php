@@ -9,15 +9,7 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
     $appoint_id = $_POST['appoint_id'];
     $action = $_POST['action'];
     // Confirm or Reject based on the action value
-    if ($action == 'confirm') {
-        
-        // Update query for confirming payment
-        $sql = "UPDATE service_payment SET payment_status = 'approved' WHERE account_id = '$account_id' AND appointment_id = '$appoint_id'";    
-        $sql2 = "UPDATE appointments SET status = 'Approved' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
-        if(mysqli_query($conn , $sql) && mysqli_query($conn , $sql2)){
-            header("Location: /MRM-DEVELOPMENT/ADMIN/services/appointment.php");
-        }
-    } elseif ($action == 'reject') {
+   if ($action == 'reject') {
         // Update queries for rejecting payment
         $sql = "UPDATE appointments SET status = 'Canceled' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
         $sql2 = "UPDATE service_payment SET payment_status = 'rejected' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
@@ -100,7 +92,47 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
+
+            <!-- MODAL -->
             <div class="main-content app-content">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <div class="card" style="width: 18rem;">
+                            <?php 
+                                $sql = "SELECT * FROM user_info 
+                                        INNER JOIN accounts ON user_info.user_id = accounts.user_id 
+                                        WHERE role = 'service_worker'";
+                                $result = mysqli_query($conn , $sql);
+
+                                if(mysqli_num_rows($result) > 0) {                
+                                    foreach($result as $resultitem) {                
+                                ?>
+                                    <div class="card-body">
+                                        <form action="assign_worker.php" method="POST">
+                                            <input type="hidden" name="worker_id" value="<?= $resultitem['account_id'] ?>">
+                                            <h5 class="card-title">NAME: <?= $resultitem['first_name'] . " " . $resultitem['last_name'] ?></h5>
+                                            <p class="card-text">ROLE: <?= $resultitem['role'] ?></p>
+                                            <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
+                                            <input type="hidden" name="user_id" id="user_id">
+                                            <input type="hidden" name="appointment_id" id="appointment_id">
+                                        </form>
+                                    </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                </div>
             <div class="container-fluid">
                     <div class="card">
                         <?php 
@@ -124,15 +156,20 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                             }
                         ?>
                         <!-- Confirm Payment Link -->
-                        <a href="javascript:void(0);" onclick="confirmPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-primary mt-3">Confirm payment?</a>
+                        <<!-- Button trigger modal -->
+                        <a href="#" class="btn btn-sm btn-info assign-btn" 
+                             data-account-id="<?= $_GET['id'] ?>" 
+                             data-appointment-id="<?= $_GET['appoint_id'] ?>" 
+                             data-bs-toggle="modal" 
+                             data-bs-target="#staticBackdrop">
+                        <i class="fe fe-edit-2">ASSIGN</i>
+                        </a>
+
                           <!-- Reject Payment Button -->
                           <a href="javascript:void(0);" onclick="rejectPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
                         <!-- Hidden form that will be submitted when the user confirms -->
-                        <form id="confirmPaymentForm" action="check_payment.php" method="POST" style="display:none;">
-                            <input type="hidden" name="account_id" id="account_id" value="">
-                            <input type="hidden" name="appoint_id" id="appointment_id" value="">
-                            <input type="hidden" name="action" value="confirm">
-                        </form>
+                        
+                       
 
                         <!-- Hidden form for rejecting the payment -->
                     <form id="rejectPaymentForm" action="check_payment.php" method="POST" style="display:none;">
@@ -147,25 +184,22 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                 <script>
-                // SweetAlert confirmation function
-                function confirmPayment(account_id , appointment_id) {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "Do you want to confirm the payment?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, confirm it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // If the user confirms, set the account ID in the form and submit it
-                            document.getElementById('account_id').value = account_id;
-                            document.getElementById('appointment_id').value = appointment_id;
-                            document.getElementById('confirmPaymentForm').submit();
-                        }
-                    });
-                }
+                $(document).ready(function() {
+                                // When the assign button is clicked
+                                $('.assign-btn').on('click', function() {
+                                
+                                    // Get the account_id and appointment_id from data attributes
+                                    var userId = $(this).data('account-id');
+                                    var appointmentId = $(this).data('appointment-id');
+
+                                    // Set the values in the modal's hidden fields or display them as needed
+                                    $('#user_id').val(userId);
+                                    $('#appointment_id').val(appointmentId);
+                                    
+                                });
+                            });
+
+               
 
                     function rejectPayment(account_id , appointment_id) {
                         Swal.fire({

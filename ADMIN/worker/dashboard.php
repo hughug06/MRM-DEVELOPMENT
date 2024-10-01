@@ -67,6 +67,7 @@ require_once '../../Database/database.php';
                         $workerid = $_SESSION['worker_id'];
 
                         $sql = "SELECT * FROM accounts WHERE role = 'service_worker' AND account_id = '$workerid'";
+                       
                         $result = mysqli_query($conn, $sql);
                         if(mysqli_num_rows($result) > 0){
                             $service = "SELECT * FROM service_worker 
@@ -75,10 +76,11 @@ require_once '../../Database/database.php';
                                         WHERE service_worker.account_id = '$workerid'";
                             $service_result = mysqli_query($conn, $service);
                             foreach ($service_result as $serviceitem) {
+                               
                         ?>
                             <div class="col-lg-3 col-md-4 col-sm-6"> 
                                 <div class="card">
-                                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 1">
+                                    <img src="../../assets/images/mrm-images/mrm-banner.png" class="card-img-top" alt="Image 1">
                                     <div class="card-body">
                                         <p class="card-text">Name: 
                                             <span class="text-success">
@@ -95,9 +97,18 @@ require_once '../../Database/database.php';
                                                 <?= $serviceitem['service_type'] ?>
                                             </span>
                                         </p>
-                                        <a href="user_details.php?user_id=<?= $serviceitem['account_id'] ?>" class="btn btn-primary">Check</a>
-                                        <a href="" class="btn btn-primary">Notify user</a>
-                                    </div>
+                                        <?php 
+                                        $currentDate = date('Y-m-d');
+                                            if($serviceitem['date'] == $currentDate){                                                                                        
+                                        ?>
+                                         
+                                         <a href="<?= $serviceitem['account_id']?>" class="btn btn-primary">Done</a>  
+                                        <?php 
+                                        }
+                                        ?>     
+                                        <a href="user_details.php?user_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>" class="btn btn-primary">Details</a>                                                                                                            
+                                    </div>  
+                                    
                                 </div>
                             </div> 
                         <?php
@@ -109,6 +120,7 @@ require_once '../../Database/database.php';
             </div>
 
         </div>
+      
 
         <!-- Footer Start -->
         <?php include_once('../../partials/footer.php') ?>

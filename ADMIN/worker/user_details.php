@@ -67,11 +67,26 @@ require_once '../../Database/database.php';
                 <div class="container">
                     <div class="card">
                         <div class="card-body">
+                            <?php 
+                                    $account_id = $_GET['user_id'];
+                                    $appointment_id = $_GET['appointment_id'];
+                                    $sql = "select * from appointments where account_id = '$account_id' and appointment_id = '$appointment_id'";
+                                    $result = mysqli_query($conn , $sql);                                   
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_assoc($result)){
+
+                                     
+                            ?>
                             <h5 class="card-title">User Information</h5>
-                            <p class="card-text">Name: <span class="text-success">John Doe</span></p>
-                            <p class="card-text">Address: <span class="text-success">123 Main St, City</span></p>
-                            <p class="card-text">Contact: <span class="text-success">(123) 456-7890</span></p>
-                            <p class="card-text">Date/Time: <span class="text-success">2024-09-27 14:00 - 15:00</span></p>
+                            <p class="card-text">Name: <span class="text-success"><?= $row['name'] ?></span></p>
+                            <p class="card-text">Address: <span class="text-success"><?= $row['location'] ?></span></p>
+                            <p class="card-text">Brand: <span class="text-success"><?= $row['brand'] ?></span></p>
+                            <p class="card-text">Product: <span class="text-success"><?= $row['product'] ?></span></p>
+                            <p class="card-text">Power: <span class="text-success"><?= $row['power'] ?></span></p>
+                            <p class="card-text">Running hours: <span class="text-success"><?= $row['running_hours'] ?></span></p>
+                            <p class="card-text">Service_type: <span class="text-success"><?= $row['service_type'] ?></span></p>
+                            <p class="card-text">date/time: <span class="text-success"><?= $row['date'] ." | " . $row['start_time'] . " - " . $row['end_time']?></span></p>
+                         
                             <hr>
                             <form method="POST" action="upload.php" enctype="multipart/form-data">
                                 <div class="mb-3">
@@ -80,7 +95,19 @@ require_once '../../Database/database.php';
                                     <div class="form-text">Only PNG or JPG images are allowed.</div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Upload Image</button>
+                                <div class="mb-3 text-center">
+                                <div class="card">
+                                <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid" style="max-height: 300px; display: none;">
+                                </div>
+                                
+                            </div>
                             </form>
+
+                            <?php 
+                               }
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </div>
@@ -129,3 +156,15 @@ require_once '../../Database/database.php';
     </body>
 
 </html>
+
+<script>
+        // JavaScript to display image preview
+        document.getElementById('imageUpload').onchange = function (event) {
+            const [file] = event.target.files;
+            if (file) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreview.style.display = 'block';
+            }
+        };
+    </script>
