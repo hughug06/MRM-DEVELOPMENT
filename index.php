@@ -108,10 +108,7 @@
                 Reliable <span class="text-primary">Energy</span>
               </h1>
               <p class="lead mb-4">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellendus repudiandae rem ea adipisci. Numquam perferendis
-                molestiae vero optio aut. Nisi rem cum tenetur laborum
-                reprehenderit aut architecto consequatur aliquid asperiores.
+                At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
@@ -160,13 +157,10 @@
         <div class="row">
           <div class="col-md-8 offset-md-2 text-center">
             <h2 class="mb-4">
-              The <span class="text-secondary">Brightest</span> Day in Life
+              What is <span class="text-secondary">Clean</span> Energy?
             </h2>
             <p class="fs-5">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
-              dolorum maiores cumque quasi labore animi explicabo quibusdam
-              illum, esse magni dolore ipsum dolor rem error. Cumque illum rerum
-              eligendi magni!
+              At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
             </p>
           </div>
         </div>
@@ -196,43 +190,31 @@
           <div class="col-lg-6">
             <div class="mt-4">
               <h2 class="mb-5">
-                The <span class="text-secondary">Brightest</span> Day in Life
+                The <span class="text-secondary">Goal</span> of Solar Energy
               </h2>
               <ul class="list-unstyled">
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatum enim itaque delectus fuga labore optio
-                    perferendis excepturi laboriosam officia! Deserunt sit nisi
-                    quia laboriosam, harum nemo cum odit mollitia ipsum?
+                    To enhance livelihoods across various sectors within communities in the Philippines.
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatum enim itaque delectus fuga labore optio
-                    perferendis excepturi laboriosam officia! Deserunt sit nisi
-                    quia laboriosam, harum nemo cum odit mollitia ipsum?
+                    To foster new connections by providing sustainable energy opportunities for local communities.
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatum enim itaque delectus fuga labore optio
-                    perferendis excepturi laboriosam officia! Deserunt sit nisi
-                    quia laboriosam, harum nemo cum odit mollitia ipsum?
+                    To cultivate a culture of clean energy consumption that benefits both individuals and their communities.
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatum enim itaque delectus fuga labore optio
-                    perferendis excepturi laboriosam officia! Deserunt sit nisi
-                    quia laboriosam, harum nemo cum odit mollitia ipsum?
+                    To raise awareness about the advantages of using clean and solar-based energy products and generators within the community.
                   </p>
                 </li>
               </ul>
@@ -251,50 +233,35 @@
                 <span class="text-secondary">Services</span> that we offer
               </h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                consequatur ducimus omnis, labore nam cupiditate nulla officia
-                quaerat harum ut quae adipisci. Placeat ut accusamus adipisci
-                atque, consectetur repellat veritatis?
+                The services offered are varied and vast to help accommodate costumers with their needs within the comforts of their own homes or businesses. The main function of our services is to cater towards a goal of helping organizations and businesses to have a smooth and stable product that works and can be used at a moment’s notice.
               </p>
             </div>
           </div>
           <div class="col-lg-7">
             <div class="row mb-4">
               <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
+                class="col-md-6 d-flex flex-column align-items-center text-center"
               >
                 <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 1</p>
+                <p class="fs-5 fw-bold">Tune-up</p>
               </div>
               <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
+                class="col-md-6 d-flex flex-column align-items-center text-center"
               >
                 <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 2</p>
+                <p class="fs-5 fw-bold">Repair</p>
               </div>
               <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
+                class="col-md-6 d-flex flex-column align-items-center text-center"
               >
                 <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 3</p>
+                <p class="fs-5 fw-bold">Maintenance</p>
               </div>
               <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
+                class="col-md-6 d-flex flex-column align-items-center text-center"
               >
                 <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 4</p>
-              </div>
-              <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
-              >
-                <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 5</p>
-              </div>
-              <div
-                class="col-md-4 d-flex flex-column align-items-center text-center"
-              >
-                <i class="fas fa-rocket fa-4x text-secondary mb-2"></i>
-                <p class="fs-5 fw-bold">Services 6</p>
+                <p class="fs-5 fw-bold">Installation</p>
               </div>
             </div>
           </div>
@@ -313,8 +280,12 @@
           <div class="col-lg-6">
             <div class="text-container text-lg-start text-center mb-4">
               <h2 class="mb-4">
-                Take the first step toward energy
-                <span class="text-secondary">independence and savings.</span>
+                Unlock Your 
+                <span class="text-primary">Independence</span>
+                with
+                <span class="text-secondary">
+                  SunSparkPower!
+                </span>
               </h2>
               <p>
                 We’re here to help you make the switch to solar energy and
@@ -766,45 +737,66 @@
           </div>
           <div class="col-lg-6">
             <div class="text-container">
-              <h2>Register Now</h2>
+              <h2 class="mb-5 text-secondary">Register Now</h2>
               <form>
                 <div class="mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Name"
+                    placeholder="First Name"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    readonly
                   />
                 </div>
                 <div class="mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Name"
+                    placeholder="Last Name"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    readonly
                   />
                 </div>
                 <div class="mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Name"
+                    placeholder="Middle Name"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    readonly
                   />
                 </div>
                 <div class="mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Name"
+                    placeholder="Email Address"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    readonly
                   />
                 </div>
                 <div class="mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter Name"
+                    placeholder="Password"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    readonly
                   />
                 </div>
                 <div class="mt-5 d-grid gap-2">
-                  <input type="submit" class="btn btn-secondary btn-block" />
+                  <a
+                    class="btn btn-secondary text-white fw-bold"
+                    href="signup.php"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupmodal"
+                    >Register Here</a
+                  >
                 </div>
               </form>
             </div>
@@ -956,7 +948,7 @@
                           <button
                             name="login"
                             type="submit"
-                            class="btn btn-secondary text-white py-2 fw-normal"
+                            class="btn btn-secondary text-white py-2 fw-bold"
                           >
                             Login
                           </button>
@@ -1037,6 +1029,7 @@
                             type="text"
                             name="firstname"
                             id="su_firstname"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_FirstName" class="text-muted"
                             >First Name</label
@@ -1049,6 +1042,7 @@
                             type="text"
                             name="lastname"
                             id="su_lastname"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_LastName" class="text-muted"
                             >Last Name</label
@@ -1061,6 +1055,7 @@
                             type="text"
                             name="middlename"
                             id="su_middlename"
+                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
                           />
                           <label for="su_MiddleInitial" class="text-muted"
                             >Middle Name</label
@@ -1098,7 +1093,7 @@
                           <button
                             type="submit"
                             name="signup"
-                            class="btn btn-secondary text-white py-2"
+                            class="btn btn-secondary text-white py-2 fw-bold"
                           >
                             Register
                           </button>
