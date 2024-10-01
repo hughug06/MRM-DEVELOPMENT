@@ -11,13 +11,19 @@
             }
             else{
                 $selectedWatts = $wattsID;
-                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts";
-                $all_products = $conn->query($sql);
+                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Generator' and Availability = 1";
+                $all_products_available = $conn->query($sql);
+
+                $sqlnon = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Generator' and Availability = 0";
+                $all_products_non_available = $conn->query($sqlnon);
             }
         }
         else{
             $sql = "SELECT * FROM products Where Availability = 1 and ProductType = 'Generator'";
-            $all_products = $conn->query($sql);
+            $all_products_available = $conn->query($sql);
+
+            $sqlnon = "SELECT * FROM products Where Availability = 0 and ProductType = 'Generator'";
+            $all_products_non_available = $conn->query($sqlnon);
         }
         session_start();
 ?>
@@ -105,7 +111,7 @@
                         <div class="row row-sm">
                         
                         <?php
-                        while($row = mysqli_fetch_assoc($all_products)){
+                        while($row = mysqli_fetch_assoc($all_products_available)){
                             $id=$row['ProductID']
                         ?>
 
@@ -139,9 +145,48 @@
                             </div>
 
 
-                            <?php
-                            }
-                            ?>
+                        <?php
+                        }
+                        ?>
+
+                        <?php
+                        while($row = mysqli_fetch_assoc($all_products_non_available)){
+                            $id=$row['ProductID']
+                        ?>
+
+                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                                <div class="card custom-card">
+                                    <div class="p-0 ht-100p">
+                                        <div class="product-grid">
+                                            <div class="product-image">
+                                                <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>" class="image">
+                                                    <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
+                                                </a>
+                                                <div class="product-link">
+                                                    <a href="user-product-cart.php">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        <span>Add to cart</span>
+                                                    </a>
+                                                    <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>">
+                                                        <i class="fas fa-eye"></i>
+                                                        <span>Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <h3 class="title"><a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>"><?php echo $row["ProductName"] ?></a></h3>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <?php
+                        }
+                        ?>
 
                         </div>
 
