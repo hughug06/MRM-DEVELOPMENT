@@ -761,7 +761,7 @@
                                                 echo $payment_status['payment_status'];
                                             }
                                             else if($payment_status['payment_status'] === "confirmed"){
-                                                echo "To review";
+                                                echo "Under review";
                                             }
                                             else if($payment_status['payment_status'] === "canceled"){
                                                 echo $payment_status['payment_status'];
@@ -769,7 +769,7 @@
                                                                                     
                                         }
                                         else{
-                                            echo "Waiting for approval";
+                                            echo "unpaid";
                                         }
                                         ?>
                                     </td>

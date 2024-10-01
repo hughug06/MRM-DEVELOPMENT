@@ -15,7 +15,7 @@ if(isset($_POST['pick']))
             values('$name','$workerid' , '$admin_id' , '$userid' , '$appointmentid')";
     $result = mysqli_query($conn , $sql);
     if($result){
-        $upd = "UPDATE appointments SET status='Approved' WHERE appointment_id='$appointmentid'";
+        $upd = "UPDATE appointments SET status='Waiting' WHERE appointment_id='$appointmentid'";
         $upd_result = mysqli_query($conn , $upd);
         header("Location: appointment.php");
         exit();

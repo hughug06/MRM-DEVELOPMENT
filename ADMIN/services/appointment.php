@@ -16,7 +16,7 @@
     $count_pending = $row_count_pending['total_pending'];
 
     // waiting for payment
-    $waiting_count = "SELECT COUNT(*) AS total_waiting FROM appointments WHERE status = 'Approved'";
+    $waiting_count = "SELECT COUNT(*) AS total_waiting FROM appointments WHERE status = 'Waiting'";
     $waiting_result = mysqli_query($conn, $waiting_count);  
     $row_count_waiting = mysqli_fetch_assoc($waiting_result);  // Fetch the result as an associative array
     $count_waiting = $row_count_waiting['total_waiting']; 
@@ -346,7 +346,7 @@
                                                                                     <tbody>
                                                                                     <?php 
                                                                                     require '../../Database/database.php';                                                                                                                      
-                                                                                    $select = "Select * from appointments where status ='Approved'";
+                                                                                    $select = "Select * from appointments where status ='Waiting'";
                                                                                     $result = mysqli_query($conn , $select);
                                                                                     if(mysqli_num_rows($result) > 0){
                                                                                         foreach($result as $resultItem){

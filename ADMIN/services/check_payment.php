@@ -4,21 +4,23 @@
 
     // Process payment if account_id is set
     // Process payment confirmation or rejection if account_id and action are provided
-if (isset($_POST['account_id']) && isset($_POST['action'])) {
+if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST['action'])) {
     $account_id = $_POST['account_id'];
+    $appoint_id = $_POST['appoint_id'];
     $action = $_POST['action'];
-    
     // Confirm or Reject based on the action value
     if ($action == 'confirm') {
+        
         // Update query for confirming payment
-        $sql = "UPDATE service_payment SET payment_status = 'approved' WHERE account_id = '$account_id'";    
-        if(mysqli_query($conn , $sql)){
+        $sql = "UPDATE service_payment SET payment_status = 'approved' WHERE account_id = '$account_id' AND appointment_id = '$appoint_id'";    
+        $sql2 = "UPDATE appointments SET status = 'Approved' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
+        if(mysqli_query($conn , $sql) && mysqli_query($conn , $sql2)){
             header("Location: /MRM-DEVELOPMENT/ADMIN/services/appointment.php");
         }
     } elseif ($action == 'reject') {
         // Update queries for rejecting payment
-        $sql = "UPDATE appointments SET status = 'Canceled' WHERE account_id = '$account_id'";
-        $sql2 = "UPDATE service_payment SET payment_status = 'rejected' WHERE account_id = '$account_id'";
+        $sql = "UPDATE appointments SET status = 'Canceled' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
+        $sql2 = "UPDATE service_payment SET payment_status = 'rejected' WHERE account_id = '$account_id' AND  appointment_id = '$appoint_id'";
         $sql3 = "UPDATE accounts SET service_count = service_count - 1 WHERE account_id = '$account_id'";
     }
 
@@ -122,18 +124,20 @@ if (isset($_POST['account_id']) && isset($_POST['action'])) {
                             }
                         ?>
                         <!-- Confirm Payment Link -->
-                        <a href="javascript:void(0);" onclick="confirmPayment(<?= $account_id ?>)" class="btn btn-primary mt-3">Confirm payment?</a>
+                        <a href="javascript:void(0);" onclick="confirmPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-primary mt-3">Confirm payment?</a>
                           <!-- Reject Payment Button -->
-                          <a href="javascript:void(0);" onclick="rejectPayment(<?= $account_id ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
+                          <a href="javascript:void(0);" onclick="rejectPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
                         <!-- Hidden form that will be submitted when the user confirms -->
                         <form id="confirmPaymentForm" action="check_payment.php" method="POST" style="display:none;">
                             <input type="hidden" name="account_id" id="account_id" value="">
+                            <input type="hidden" name="appoint_id" id="appointment_id" value="">
                             <input type="hidden" name="action" value="confirm">
                         </form>
 
                         <!-- Hidden form for rejecting the payment -->
                     <form id="rejectPaymentForm" action="check_payment.php" method="POST" style="display:none;">
                         <input type="hidden" name="account_id" id="reject_account_id" value="">
+                        <input type="hidden" name="appoint_id" id="reject_appoint_id" value="">
                         <input type="hidden" name="action" value="reject">
                     </form>
                     </div>                       
@@ -144,7 +148,7 @@ if (isset($_POST['account_id']) && isset($_POST['action'])) {
 
                 <script>
                 // SweetAlert confirmation function
-                function confirmPayment(account_id) {
+                function confirmPayment(account_id , appointment_id) {
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to confirm the payment?",
@@ -157,28 +161,30 @@ if (isset($_POST['account_id']) && isset($_POST['action'])) {
                         if (result.isConfirmed) {
                             // If the user confirms, set the account ID in the form and submit it
                             document.getElementById('account_id').value = account_id;
+                            document.getElementById('appointment_id').value = appointment_id;
                             document.getElementById('confirmPaymentForm').submit();
                         }
                     });
                 }
 
-                        function rejectPayment(account_id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to reject the payment?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, reject it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If the user confirms, set the account ID and submit the form for rejection
-                    document.getElementById('reject_account_id').value = account_id;
-                    document.getElementById('rejectPaymentForm').submit();
-                }
-            });
-        }
+                    function rejectPayment(account_id , appointment_id) {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Do you want to reject the payment?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes, reject it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If the user confirms, set the account ID and submit the form for rejection
+                                document.getElementById('reject_account_id').value = account_id;
+                                document.getElementById('reject_appoint_id').value = appointment_id;
+                                document.getElementById('rejectPaymentForm').submit();
+                            }
+                        });
+                    }
                 </script>
 
             </div>

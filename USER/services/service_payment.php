@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (move_uploaded_file($image['tmp_name'], $targetFile)) {
                 // Insert the image path into the database
                 $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile')";
-
+                $upd = "UPDATE appointments SET status='Checking' WHERE appointment_id='$appoint_id'";
+                $upd_result = mysqli_query($conn , $upd);
                 if ($conn->query($sql) === TRUE) {
                   // SUCCESS
                     unset($_SESSION['appointment_id']);
