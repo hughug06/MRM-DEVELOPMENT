@@ -514,9 +514,14 @@
         <!-- Appointment Button  -->
         <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
-            <a href="#"  class="header-link" name="appointment" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
+             
+            <a href="#"  class="header-link" name="appointment" data-bs-toggle="modal" data-bs-target="#appointmentmodal">   
+                
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
-            </a>
+               <!-- <span class="badge bg-secondary header-icon-badge rounded-pill pulse-secondary" id="notifiation-data">5</span> -->
+                <!-- <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span> -->
+          </a>
+                
             <!-- End::header-link -->
         </div>
         <?php 
@@ -695,6 +700,7 @@
             <!-- Start::header-link -->
             <a href="#" id="logout-link" class="header-link" name="logout">
                 <i class="si si-logout header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout"></i>
+                
             </a>
             <!-- End::header-link -->
         </div>
@@ -763,7 +769,10 @@
                                             else if($payment_status['payment_status'] === "confirmed"){
                                                 echo "Under review";
                                             }
-                                            else if($payment_status['payment_status'] === "canceled"){
+                                            else if($payment_status['payment_status'] === "approved"){
+                                                echo $payment_status['payment_status'];
+                                            }
+                                            else if($payment_status['payment_status'] === "rejected"){
                                                 echo $payment_status['payment_status'];
                                             }
                                                                                     
