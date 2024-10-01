@@ -232,7 +232,7 @@ global $conn;
                 else if(max_price_value <= min_price_value){
                     Swal.fire({
                         title: 'ERROR',
-                        html: "Maximum Price cannot be less than minimum price.",
+                        html: "Maximum Price cannot be less than or equal to minimum price.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
