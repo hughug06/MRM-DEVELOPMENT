@@ -214,7 +214,7 @@ include_once '../../Database/database.php';
                 var IType_value = IType.value;
                 var PPower_value = PPower.value;
                 var custom = custom_ID.value;
-                var stocks_value = stocks.value;
+                var stocks_value = parseInt(stocks.value);
                 var min_price_value = parseInt(min_price.value);
                 var max_price_value = parseInt(max_price.value);
                 var specification = specification_ID.value;

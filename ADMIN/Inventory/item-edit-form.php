@@ -193,7 +193,7 @@ global $conn;
                 var Pname = document.getElementById("Pname");
 
                 var item_id_value = item_id.value;
-                var stocks_value = stocks.value;
+                var stocks_value = parseInt(stocks.value);
                 var min_price_value = parseInt(min_price.value);
                 var max_price_value = parseInt(max_price.value);
                 var specification_ID_value = specification_ID.value;
