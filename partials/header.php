@@ -510,18 +510,19 @@
             </a>
             <!-- End::header-link -->
         </div>
+<!-- 
+        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
+            <i class="fe fe-bell header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications"></i>
+            <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span>
+        </a> -->
 
         <!-- Appointment Button  -->
-        <div class="header-element d-xl-flex align-items-center">
+        <div class="header-element">
             <!-- Start::header-link -->
-             
-            <a href="#"  class="header-link" name="appointment" data-bs-toggle="modal" data-bs-target="#appointmentmodal">   
-                
+            <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
-               <!-- <span class="badge bg-secondary header-icon-badge rounded-pill pulse-secondary" id="notifiation-data">5</span> -->
-                <!-- <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span> -->
-          </a>
-                
+                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount">6</span>
+            </a>
             <!-- End::header-link -->
         </div>
         <?php 
@@ -700,7 +701,6 @@
             <!-- Start::header-link -->
             <a href="#" id="logout-link" class="header-link" name="logout">
                 <i class="si si-logout header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout"></i>
-                
             </a>
             <!-- End::header-link -->
         </div>
@@ -730,8 +730,7 @@
                             <th scope="col">Set Date</th>
                             <th scope="col">Set Time</th>
                             <th scope="col">Contact</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">Appointment Status</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Check Update</th>
                         </tr>
                     </thead>
@@ -754,34 +753,6 @@
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                     <td>N/A yet</td>
-                                    <td>
-                                        <?php 
-                                        $appoint_id = $row['appointment_id'];
-                                        $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
-                                        $payment_check_result = mysqli_query($conn , $payment_check);
-                                        $payment_status = mysqli_fetch_assoc($payment_check_result);
-                                        if(mysqli_num_rows($payment_check_result) > 0){
-                                            
-                                          
-                                            if($payment_status['payment_status'] === "pending"){
-                                                echo $payment_status['payment_status'];
-                                            }
-                                            else if($payment_status['payment_status'] === "confirmed"){
-                                                echo "Under review";
-                                            }
-                                            else if($payment_status['payment_status'] === "approved"){
-                                                echo $payment_status['payment_status'];
-                                            }
-                                            else if($payment_status['payment_status'] === "rejected"){
-                                                echo $payment_status['payment_status'];
-                                            }
-                                                                                    
-                                        }
-                                        else{
-                                            echo "unpaid";
-                                        }
-                                        ?>
-                                    </td>
                                     <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
                                         <?php 
@@ -793,8 +764,7 @@
                                         <?php 
                                         }
                                        else{
-                                           
-                                            $checker = "select * from service_payment where account_id = '$userid' AND appointment_id ='$appoint_id' ";
+                                            $checker = "select * from service_payment where account_id = '$userid'";
                                             $check_result = mysqli_query($conn , $checker);
                                             if(mysqli_num_rows($check_result) > 0)
                                             {
@@ -809,7 +779,7 @@
 
                                             
                                             ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id'])  ?>&appointment=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
                                             <?php 
                                             }
                                             }
