@@ -265,7 +265,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(max_price_value < min_price_value){
+                else if(max_price_value <= min_price_value){
                     Swal.fire({
                         title: 'ERROR',
                         html: "Maximum Price cannot be less than minimum price.",
