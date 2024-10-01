@@ -11,13 +11,13 @@
             }
             else{
                 $selectedWatts = $wattsID;
-                $sql = "SELECT * FROM products Where Watts_KVA = $selectedWatts and ProductType = 'Generator'";
+                $sql = "SELECT * FROM products Where Availability=1 and Watts_KVA = $selectedWatts and ProductType = 'Generator'";
                 $all_products_available = $conn->query($sql);
 
             }
         }
         else{
-            $sql = "SELECT * FROM products Where ProductType = 'Generator'";
+            $sql = "SELECT * FROM products Where Availability=1 and ProductType = 'Generator'";
             $all_products_available = $conn->query($sql);
         }
         session_start();
@@ -118,11 +118,6 @@
                                                 <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>" class="image">
                                                     <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
                                                 </a>
-                                                <?php if ($row['Availability'] == 0) { ?>
-                                                    <div class="product-unavailable-overlay">
-                                                        <span>Product Unavailable</span>
-                                                    </div>
-                                                <?php } ?>
                                                 <div class="product-link">
                                                     <a href="user-product-cart.php">
                                                         <i class="fa fa-shopping-cart"></i>
