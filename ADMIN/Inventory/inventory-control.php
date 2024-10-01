@@ -377,7 +377,7 @@ include_once '../../Database/database.php';
             else{
                 Swal.fire({
                     title: 'Confirmation',
-                    html: "Are you sure to add stocks on product: "+ id_value +" ?",
+                    html: "Are you sure to add stocks on product ID: "+ id_value +" ?",
                     icon: 'warning',
                     confirmButtonText: 'Confirm',
                     showCancelButton: true
@@ -441,7 +441,7 @@ include_once '../../Database/database.php';
             else{
                 Swal.fire({
                     title: 'Confirmation',
-                    html: "Are you sure to add stocks on product: "+ id_value +" ?",
+                    html: "Are you sure to decrease stocks on product ID: "+ id_value +" ?",
                     icon: 'warning',
                     confirmButtonText: 'Confirm',
                     showCancelButton: true
