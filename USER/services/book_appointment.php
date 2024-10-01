@@ -34,7 +34,9 @@ if(isset($_POST['book']))
             WHERE account_id  = $account_id;";
             $upd_insert = mysqli_query($conn , $upd);
 
-            
+          
+
+
             // UNSET ALL SESSION
             unset($_SESSION['availability_id']);
             unset($_SESSION['date']);

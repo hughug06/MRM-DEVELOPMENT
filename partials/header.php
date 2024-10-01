@@ -729,7 +729,7 @@
                             <th scope="col">My Address</th>
                             <th scope="col">Set Date</th>
                             <th scope="col">Set Time</th>
-                            <th scope="col">Contact</th>
+                            <th scope="col">Amount</th>
                             <th scope="col">Payment Status</th>
                             <th scope="col">Appointment Status</th>
                             <th scope="col">Check Update</th>
@@ -739,10 +739,12 @@
                         <?php
                        
                         $userid = $_SESSION['account_id'];
-                        $sql = "SELECT * FROM appointments WHERE account_id = '$userid'";
+                        $sql = "select * from appointments 
+                        inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
+                        where appointments.account_id = '$userid'";
                         $result = mysqli_query($conn, $sql);
 
-                        if ($result) {
+                        if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
                                     continue; // Skip this iteration
@@ -753,7 +755,7 @@
                                     <td><?= htmlspecialchars($row['location']) ?></td>
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
-                                    <td>N/A yet</td>
+                                    <td><?= htmlspecialchars($row['amount']) ?></td>
                                     <td>
                                         <?php 
                                         $appoint_id = $row['appointment_id'];
@@ -821,7 +823,7 @@
                             }
                         } else {
                             // Display a message if no appointments are found
-                            echo "<tr><td colspan='7' class='text-center'>No appointments found</td></tr>";
+                            echo "<tr><td colspan='8' class='text-center'>Waiting for approval</td></tr>";
                         }
                         ?>
                     </tbody>

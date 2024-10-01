@@ -145,37 +145,19 @@
                             </div>
                             <div class="modal-body">
                             <div class="card" style="width: 18rem;">
-                            <?php 
-
-                                $sql = "Select * from user_info INNER JOIN accounts on user_info.user_id = accounts.user_id where role = 'service_worker'";
-                                $result = mysqli_query($conn , $sql);
-
-                                if(mysqli_num_rows($result) > 0)
-                                {                
-                                        foreach($result as $resultitem)
-                                        {                
-                                ?>
+                            
                                 <div class="card-body">
-                                    <form action="assign_worker.php" method="POST">
-                                        <input type="hidden" name="account_id" value="<?= $resultitem['account_id']?>">
-                                        <h5 class="card-title">NAME:<?= $resultitem['first_name']. " " . $resultitem['last_name'] ?></h5>
-                                        <p class="card-text">ROLE: <?= $resultitem['role']?></p>
-                                        <button name="pick">PICK</button>
-                                                                                                       
+                                    <form action="set_amount.php" method="POST">
+                                        <label for="">ENTER AMOUNT:</label>
+                                        <input type="text" name="amount" required>
+                                        <button name="pick">SET</button>                                                                   
                                 </div>
-                                <?php
-                                        }
-                                }
-                                ?>
+                                
                                 <input type="hidden" name="user_id" id="user_id">
                                 <input type="hidden" name="appointment_id" id="appointment_id">
                                     </form>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div>
+                            </div>                        
                             </div>
                     </div>
                 </div>
@@ -294,9 +276,9 @@
                                                                                                 data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
                                                                                                 data-bs-toggle="modal" 
                                                                                                 data-bs-target="#staticBackdrop">
-                                                                                                    <i class="fe fe-edit-2">ASSIGN</i>
+                                                                                                    <i class="fe fe-edit-2">SET AMOUNT</i>
                                                                                                 </a>
-                                                                                                <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
+                                                                                                <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">REJECT</i>  </a>
                                                                                                 <?php                                                               
                                                                                             }
                                                                                             

@@ -1,6 +1,8 @@
 <?php 
 require_once '../authetincation.php';
 require_once '../../Database/database.php';
+$TEST = $_SESSION['auth'];
+echo $TEST;
 ?>
 
 <!DOCTYPE html>
@@ -97,26 +99,7 @@ require_once '../../Database/database.php';
                                     <div class="card-title">To Do</div>
                                 </div>
                                 <div class="card-body" id="todo">
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
+                                    
                                 </div>
                             </div>    
                         </div>
@@ -126,26 +109,7 @@ require_once '../../Database/database.php';
                                     <div class="card-title">In Progress</div>
                                 </div>
                                 <div class="card-body" id="in-progress">
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
+                                   
                                 </div>
                             </div>    
                         </div>
@@ -155,26 +119,7 @@ require_once '../../Database/database.php';
                                     <div class="card-title">Done</div>
                                 </div>
                                 <div class="card-body" id="done">
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
-                                    <div class="task p-3 d-flex justify-content-between align-items-center">
-                                        task 1
-                                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                                    </div>
+                                   
                                 </div>
                             </div>    
                         </div>
@@ -189,7 +134,11 @@ require_once '../../Database/database.php';
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+                            <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+                            <input type="text" class="form-control" id="taskProduct" placeholder="Products">
+                            <input type="text" class="form-control" id="taskContact" placeholder="Contacts">
+                            <input type="text" class="form-control" id="taskAddress" placeholder="Address">
+                               
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -248,39 +197,55 @@ require_once '../../Database/database.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
 
         <script>
-            // Drag and drop functionality
-            const drake = dragula([document.getElementById('todo'), document.getElementById('in-progress'), document.getElementById('done')]);
-            let id = 1;
+    // Drag and drop functionality
+    const drake = dragula([document.getElementById('todo'), document.getElementById('in-progress'), document.getElementById('done')]);
+    let id = 1;
 
-            // Add Task button functionality
-            document.getElementById('saveTaskBtn').addEventListener('click', function () {
-                const taskName = document.getElementById('taskName').value;
-                if (taskName) {
-                    const newTask = document.createElement('div');
-                    newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
-                    newTask.innerHTML = `
-                        ${id}. ${taskName}
-                        <button class="btn-close remove-btn" aria-label="Remove"></button>
-                    `;
-                    id++;
-                    
-                    // Append task to the "To Do" section
-                    document.getElementById('todo').appendChild(newTask);
+    // Add Task button functionality
+    document.getElementById('saveTaskBtn').addEventListener('click', function () {
+        const taskName = document.getElementById('taskName').value;
+        const taskProduct = document.getElementById('taskProduct').value;
+        const taskContact = document.getElementById('taskContact').value;
+        const taskAddress = document.getElementById('taskAddress').value;
 
-                    // Clear input field and close modal
-                    document.getElementById('taskName').value = '';
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
-                    modal.hide();
-                }
-            });
+        if (taskName || taskProduct || taskContact || taskAddress) {
+            // Create a new task element
+            const newTask = document.createElement('div');
+            newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
 
-            // Delegate event listener to handle task removal
-            document.addEventListener('click', function(e) {
-                if (e.target && e.target.classList.contains('remove-btn')) {
-                    e.target.parentElement.remove();
-                }
-            });
-        </script>
+            // Add the task details
+            newTask.innerHTML = `
+                ${id}. ${taskName || 'Unnamed Task'}<br>
+                <strong>Product:</strong> ${taskProduct || 'No Product'}<br>
+                <strong>Contact:</strong> ${taskContact || 'No Contact'}<br>
+                <strong>Address:</strong> ${taskAddress || 'No Address'}
+                <button class="btn-close remove-btn" aria-label="Remove"></button>
+            `;
+
+            id++;
+
+            // Append task to the "To Do" section
+            document.getElementById('todo').appendChild(newTask);
+
+            // Clear input fields
+            document.getElementById('taskName').value = '';
+            document.getElementById('taskProduct').value = '';
+            document.getElementById('taskContact').value = '';
+            document.getElementById('taskAddress').value = '';
+
+            // Close modal if needed (assuming you have a modal)
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+            if (modal) modal.hide();
+        }
+    });
+
+    // Delegate event listener to handle task removal
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove-btn')) {
+            e.target.parentElement.remove();
+        }
+    });
+</script>
         
     </body>
 
