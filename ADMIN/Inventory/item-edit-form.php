@@ -194,8 +194,8 @@ global $conn;
 
                 var item_id_value = item_id.value;
                 var stocks_value = stocks.value;
-                var min_price_value = min_price.value;
-                var max_price_value = max_price.value;
+                var min_price_value = parseInt(min_price.value);
+                var max_price_value = parseInt(max_price.value);
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
                 if(availability_ID.checked){
