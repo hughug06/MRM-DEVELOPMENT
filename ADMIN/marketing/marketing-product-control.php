@@ -120,7 +120,7 @@ require_once '../../Database/database.php';
                                                 <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>
                                                 <td>                                                 
                                                     <a href="product-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success"><i class="fe fe-plus-square"></i></a>
+                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success avail-btn-Product"><i class="fe fe-plus-square"></i></a>
                                                 </td>
                                             </tr>
 
@@ -183,12 +183,12 @@ require_once '../../Database/database.php';
 
     <script>
     $(document).ready(function() {
-        $(".delete-btn-Product").click(function(event) {
+        $(".avail-btn-Product").click(function(event) {
             event.preventDefault(); // Prevent the default action (navigating to the delete URL)
-            var deleteUrl = $(this).attr('href');
+            var availUrl = $(this).attr('href');
             Swal.fire({
                 title: 'Confirmation',
-                html: "Are you sure to delete this product?",
+                html: "Are you sure?",
                 icon: 'warning',
                 confirmButtonText: 'Confirm',
                 showCancelButton: true
@@ -196,13 +196,13 @@ require_once '../../Database/database.php';
                 if (result.isConfirmed) {
                     // If user confirms, send AJAX request for deletion of product
                     $.ajax({
-                        url: deleteUrl,
+                        url: availUrl,
                         type: 'GET', // Ensure you're using the correct method if the backend expects GET
                         success: function(response) {
                             // Handle successful deletion of product
                             Swal.fire({
-                                title: 'Product Deleted!',
-                                text: 'You have successfully deleted the product.',
+                                title: 'Product updated!',
+                                text: 'You have successfully updated the product.',
                                 icon: 'success',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer
@@ -216,7 +216,7 @@ require_once '../../Database/database.php';
                             // Handle error
                             Swal.fire(
                                 'Error!',
-                                'There was an error deleting the product. Please try again.',
+                                'There was an error updating the product. Please try again.',
                                 'error'
                             );
                         }
@@ -224,6 +224,7 @@ require_once '../../Database/database.php';
                 }
             });
         });
+
     });
     </script>
 
