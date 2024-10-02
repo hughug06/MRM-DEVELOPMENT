@@ -6,7 +6,7 @@ require_once '../../Database/database.php';
 if (isset($_GET['id'])) {
     
     $_SESSION['service_account_id'] = $_GET['id'];
-    $_SESSION['appointment_id'] = $_GET['appointment'];
+    $_SESSION['appointment_id'] = $_GET['appointment_id'];
 } 
 
 // Handle the form submission

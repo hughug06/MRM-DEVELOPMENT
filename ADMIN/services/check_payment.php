@@ -121,6 +121,7 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                                             <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                             <input type="hidden" name="user_id" id="user_id">
                                             <input type="hidden" name="appointment_id" id="appointment_id">
+                                            <input type="hidden" name="payment_id" id="payment_id">
                                         </form>
                                     </div>
                                 <?php
