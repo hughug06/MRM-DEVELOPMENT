@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 03:20 PM
+-- Generation Time: Oct 03, 2024 at 12:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,7 +33,8 @@ CREATE TABLE `service_payment` (
   `appointment_id` int(11) DEFAULT NULL,
   `payment_status` enum('pending','confirmed','rejected','approved') DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `payment` longblob DEFAULT NULL
+  `payment` longblob DEFAULT NULL,
+  `pricing_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,7 +42,6 @@ CREATE TABLE `service_payment` (
 --
 
 
---
 -- Indexes for dumped tables
 --
 
@@ -51,7 +51,8 @@ CREATE TABLE `service_payment` (
 ALTER TABLE `service_payment`
   ADD PRIMARY KEY (`payment_id`),
   ADD KEY `fk_service_payment_account` (`account_id`),
-  ADD KEY `fk_service_payment_appointment` (`appointment_id`);
+  ADD KEY `fk_service_payment_appointment` (`appointment_id`),
+  ADD KEY `fk_price_service` (`pricing_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -61,7 +62,7 @@ ALTER TABLE `service_payment`
 -- AUTO_INCREMENT for table `service_payment`
 --
 ALTER TABLE `service_payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- Constraints for dumped tables
@@ -71,6 +72,7 @@ ALTER TABLE `service_payment`
 -- Constraints for table `service_payment`
 --
 ALTER TABLE `service_payment`
+  ADD CONSTRAINT `fk_price_service` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
   ADD CONSTRAINT `fk_service_payment_account` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_service_payment_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
