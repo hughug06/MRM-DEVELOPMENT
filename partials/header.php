@@ -521,7 +521,17 @@
             <!-- Start::header-link -->
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
-                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount">6</span>
+                <?php 
+                $count_appointment = 0;
+                 $userid = $_SESSION['account_id'];
+                 $sql_select = "select COUNT(*) AS total_appointments from appointments 
+                 inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
+                 where appointments.account_id = '$userid'";
+                 $sql_result = mysqli_query($conn, $sql_select);
+                 $row_count_appointments = mysqli_fetch_assoc($sql_result);
+                 $count_appointment = $row_count_appointments['total_appointments'];    
+                ?>
+                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount"><?= $count_appointment ?></span>
             </a>
             <!-- End::header-link -->
         </div>
