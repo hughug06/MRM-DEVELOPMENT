@@ -20,7 +20,7 @@
             $sql = "SELECT * FROM products Where Availability=1 and ProductType = 'Generator'";
             $all_products_available = $conn->query($sql);
         }
-        session_start();
+      
 ?>
 
 <!DOCTYPE html>
