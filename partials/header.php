@@ -522,11 +522,11 @@
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
                 <?php 
-                $count_appointment = 0;
+                 $count_appointment = 0;
                  $userid = $_SESSION['account_id'];
                  $sql_select = "select COUNT(*) AS total_appointments from appointments 
                  inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
-                 where appointments.account_id = '$userid'";
+                 where appointments.account_id = '$userid' and appointments.status = 'Waiting' OR appointments.status = 'Approved' OR appointments.status = 'Checking' ";
                  $sql_result = mysqli_query($conn, $sql_select);
                  $row_count_appointments = mysqli_fetch_assoc($sql_result);
                  $count_appointment = $row_count_appointments['total_appointments'];    
@@ -722,8 +722,121 @@
 
 </header>
 
-<!-- Modal for Viewing Appointments -->
+
 <div class="container">
+
+<!-- MODAL FOR RECEIPT -->
+<div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="receiptModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="receiptModalLabel">Receipt</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="receiptContent" style="padding: 20px; font-family: Arial, sans-serif;">
+            <div style="border: 2px solid #000; padding: 20px;">
+                <div class="text-center mb-4">
+                    <h2 style="margin-bottom: 5px;">MRM Electric Power Generation Services</h2>
+                    <p style="margin: 0;">Official Service Receipt</p>
+                    <p style="margin: 0;">1234 Business Ave, City, Country</p>
+                    <p style="margin: 0;">Phone: (123) 456-7890</p>
+                    <hr style="border-top: 1px solid #000; margin-top: 10px;">
+                </div>
+
+                <?php 
+                    $receipt = "
+                    SELECT * 
+                    FROM service_or
+                    INNER JOIN accounts AS client_account ON client_account.account_id = service_or.client_id
+                    INNER JOIN appointments ON appointments.appointment_id = service_or.appointment_id
+                    INNER JOIN service_payment ON service_payment.payment_id = service_or.payment_id
+                    INNER JOIN accounts AS worker_account ON worker_account.account_id = service_or.worker_id
+                    
+                    ";
+                    $receipt_result = mysqli_query($conn , $receipt);
+                    $row = mysqli_fetch_assoc($receipt_result);
+                    $workername = $row['worker_id'];
+                    $username = $row['client_id'];
+                    $appointment_id = $row['appointment_id'];
+
+                    $worker = "select * from accounts inner join user_info on user_info.user_id = accounts.user_id where account_id = '$workername'";
+                    $user = "select * from accounts inner join user_info on user_info.user_id = accounts.user_id where account_id = '$username'";
+
+                    $worker_result = mysqli_query($conn , $worker);
+                    $user_result = mysqli_query($conn , $user);
+
+                    $row_worker = mysqli_fetch_assoc($worker_result);
+                    $row_user = mysqli_fetch_assoc($user_result);
+                ?>
+
+                <table class="table table-borderless" style="width: 100%;">
+                    <tr>
+                        <td><strong>Receipt No:</strong></td>
+                        <td><?= $row['receiptid'] ?></td>
+                        <td><strong>Date:</strong></td>
+                        <td><?= $row['date'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Name:</strong></td>
+                        <td><?= $row_user['first_name'] . " " . $row_user['last_name'] ?></td>
+                        <td><strong>Worker Name:</strong></td>
+                        <td><?= $row_worker['first_name'] . " " . $row_worker['last_name'] ?></td>
+                    </tr>
+                </table>
+                <hr>
+
+                <h5 class="mt-3">Service Details</h5>
+                <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                        <td><strong>Brand</strong></td>
+                        <td><?= $row['brand'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Product</strong></td>
+                        <td><?= $row['product'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Power</strong></td>
+                        <td><?= $row['power'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Running Hours</strong></td>
+                        <td><?= $row['running_hours'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Service Type</strong></td>
+                        <td><?= $row['service_type'] ?></td>
+                    </tr>
+                </table>
+
+                <div class="text-right mt-4">
+                    <!-- Content where account_id and appointment_id will be displayed -->
+                   
+                    <?php 
+                    // $account_id = $['']
+                    $price_id = $row['pricing_id'];
+                    $price = "select * from service_pricing where pricingid = '$price_id' and account_id = '$username' AND appointment_id = '$appointment_id'";
+                    $price_result = mysqli_query($conn , $price);
+                    $row_price = mysqli_fetch_assoc($price_result);
+                    ?>
+                     <p><strong>Total Amount Paid: </strong> $<?= number_format($row_price['amount'], 2) ?></p>
+                </div>
+                <div class="text-center mt-5">
+                    <p>Thank you for your business!</p>
+                    <p><em>Please retain this receipt for your records.</em></p>
+                </div>
+            </div>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="downloadReceipt">Download Receipt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Viewing Appointments -->
 <div class="modal fade" id="appointmentmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -766,34 +879,37 @@
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                     <td><?= htmlspecialchars($row['amount']) ?></td>
-                                    <td>
+                                    
                                         <?php 
-                                        $appoint_id = $row['appointment_id'];
-                                        $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
+                                        $appoint_id = $row['appointment_id'];                                   
+                                        $payment_check = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
                                         $payment_check_result = mysqli_query($conn , $payment_check);
                                         $payment_status = mysqli_fetch_assoc($payment_check_result);
                                         if(mysqli_num_rows($payment_check_result) > 0){
                                             
                                           
                                             if($payment_status['payment_status'] === "pending"){
-                                                echo $payment_status['payment_status'];
+                                                echo "<td class='text-primary " . $payment_status['payment_status'] . "'>" . $payment_status['payment_status'] . "</td>";
+
                                             }
                                             else if($payment_status['payment_status'] === "confirmed"){
-                                                echo "Under review";
+                                                echo "<td class='text-primary " . "'>Under review " ."</td>";
+
                                             }
                                             else if($payment_status['payment_status'] === "approved"){
-                                                echo $payment_status['payment_status'];
+                                                echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
+
                                             }
                                             else if($payment_status['payment_status'] === "rejected"){
-                                                echo $payment_status['payment_status'];
+                                                echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
                                             }
                                                                                     
                                         }
                                         else{
-                                            echo "unpaid";
+                                            echo "<td class='text-danger " . "'>Unpaid " ."</td>";
                                         }
                                         ?>
-                                    </td>
+                                    
                                     <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
                                         <?php 
@@ -804,8 +920,22 @@
                                         <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
                                         <?php 
                                         }
+                                        else if($row['status'] === "Completed"){
+
+                                            ?> 
+                                             <!-- Link modal for receipt -->
+                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#receiptModal"
+                                                data-account-id="<?= $row['account_id'] ?>" 
+                                                data-appointment-id="<?= $row['appointment_id'] ?>">
+                                                    Show Receipt
+                                                </a>
+
+                                          
+                                            
+                                            <?php
+                                        }
                                        else{
-                                            $checker = "select * from service_payment where account_id = '$userid'";
+                                            $checker = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
                                             $check_result = mysqli_query($conn , $checker);
                                             if(mysqli_num_rows($check_result) > 0)
                                             {
@@ -816,11 +946,12 @@
 
                                             <?php
                                             }
-                                            else if(!mysqli_num_rows($check_result)){
-
+                                            else if($row['status'] == "Waiting"){
+                                                
                                             
                                             ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?account_id=<?= htmlspecialchars($row['account_id']) ?>&appointment_id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>  
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>                                 
                                             <?php 
                                             }
                                             }
@@ -843,11 +974,48 @@
 </div>
 </div>
 
-
+ <!-- Include jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- <script>
+    var receiptModal = document.getElementById('receiptModal');
+    receiptModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;  // Button that triggered the modal
+        var accountId = button.getAttribute('data-account-id');  // Extract account_id
+        var appointmentId = button.getAttribute('data-appointment-id');  // Extract appointment_id
+
+        // Now you can use accountId and appointmentId to modify the modal content
+        var modalBody = receiptModal.querySelector('.modal-body');
+
+        // For example, you could display them inside the modal dynamically
+        modalBody.innerHTML += '<p><strong>Account ID:</strong> ' + accountId + '</p>';
+        modalBody.innerHTML += '<p><strong>Appointment ID:</strong> ' + appointmentId + '</p>';
+    });
+</script> -->
+
+
 <script>
+
+  
+
+    document.getElementById('downloadReceipt').addEventListener('click', function() {
+        var { jsPDF } = window.jspdf;
+        var doc = new jsPDF();
+
+        // Grab the content of the modal (text only, no HTML tags)
+        var content = document.getElementById('receiptContent').innerText;
+
+        // Split the content by new lines and add each line to the PDF
+        var lines = content.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            doc.text(10, 10 + (10 * i), lines[i]);
+        }
+
+        // Save the PDF
+        doc.save('receipt.pdf');
+    });
     $(document).ready(function() {
         $('#logout-link').on('click', function(e) {
             e.preventDefault(); // Prevent the default link behavior
@@ -894,3 +1062,4 @@
         });
     });
 </script>
+<!-- Script to download modal content as PDF -->
