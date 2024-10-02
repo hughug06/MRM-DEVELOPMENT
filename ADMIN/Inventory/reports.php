@@ -44,9 +44,6 @@ require_once '../../Database/database.php';
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    <!-- Prism CSS -->
-    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
-
 </head>
 
 <body>
@@ -69,12 +66,7 @@ require_once '../../Database/database.php';
                 <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
                     <div>
                         <h2 class="main-content-title fs-24 mb-1">Inventory Reports</h2>
-                        <ol class="breadcrumb mb-0" hidden>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Products</li>
-                        </ol>
                     </div>
-
                 </div>
 
                 <!-- Start::row-1 -->
