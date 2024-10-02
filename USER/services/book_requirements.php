@@ -368,7 +368,7 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
                             // Handle erro
                             Swal.fire(
                                 'Error!',
-                                'There was an error Adding product. Please try again.',
+                                'There was an error while trying to book. Please try again.',
                                 'error'
                             );
                         }
