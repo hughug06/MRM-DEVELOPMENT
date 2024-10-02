@@ -74,7 +74,7 @@ require_once '../../Database/database.php';
                                         INNER JOIN accounts ON accounts.account_id = service_worker.account_id                      
                                         INNER JOIN appointments ON appointments.appointment_id = service_worker.appointment_id
                                         INNER JOIN service_payment ON service_payment.payment_id = service_worker.payment_id
-                                        WHERE service_worker.account_id = '$workerid'";
+                                        WHERE service_worker.account_id = '$workerid' AND appointments.status != 'Completed'";
                             $service_result = mysqli_query($conn, $service);
                             foreach ($service_result as $serviceitem) {
                                
@@ -100,10 +100,10 @@ require_once '../../Database/database.php';
                                         </p>
                                         <?php 
                                         $currentDate = date('Y-m-d');
-                                            if($serviceitem['date'] == $currentDate){                                                                                        
+                                            if($serviceitem['date'] != $currentDate){                                                                                        
                                         ?>
                                          
-                                         <a href="service_complete.php?account_id=<?= $serviceitem['account_id']?>&&<?= $serviceitem['appointment_id']?>&&<?= $serviceitem['payment_id']?>" class="btn btn-primary">Done</a>  
+                                         <a href="service_complete.php?account_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>&&payment_id=<?= $serviceitem['payment_id']?>&&pricing_id=<?= $serviceitem['pricing_id']?>" class="btn btn-primary">Done</a>  
                                         <?php 
                                         }
                                         ?>     
