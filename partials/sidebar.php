@@ -260,9 +260,8 @@
                 <!-- End::slide -->       
                 <?php 
                 }
-               else if($_SESSION['auth'] = "service_worker")
+               else if($_SESSION['auth'] == "service_worker")
                 {
-            
                 ?>
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN - WORKER</span></li>
@@ -298,7 +297,8 @@
                 
                 <?php 
                      }
-                                         
+                     else if($_SESSION['auth'] == "agent")
+                     {                  
                     ?>
 
                 <!-- Start::slide__category -->
@@ -315,7 +315,7 @@
                     </a>
                 </li>
                     <?php 
-                      
+                     }
                     ?>
             </ul>
                 <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"> <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path> </svg></div>

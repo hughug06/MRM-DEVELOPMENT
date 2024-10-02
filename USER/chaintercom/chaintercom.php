@@ -1,6 +1,6 @@
 <?php
 //get the data from service.php after the book trigger
-session_start();
+require_once '../../ADMIN/authetincation.php';
 require_once '../../Database/database.php';
 if (isset($_GET['chainavailability'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
    

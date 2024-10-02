@@ -1,8 +1,6 @@
 <?php 
 require_once '../authetincation.php';
 require_once '../../Database/database.php';
-$TEST = $_SESSION['auth'];
-echo $TEST;
 ?>
 
 <!DOCTYPE html>

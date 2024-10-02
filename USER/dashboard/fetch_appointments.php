@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../../ADMIN/authetincation.php';
 $userid = $_SESSION['account_id'];
 // fetch_appointments.php
 

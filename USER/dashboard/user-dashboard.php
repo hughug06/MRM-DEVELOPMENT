@@ -1,6 +1,6 @@
 <?php 
-session_start();
 require_once '../../Database/database.php';
+require_once '../../ADMIN/authetincation.php';
 ?>
 
 <!DOCTYPE html>

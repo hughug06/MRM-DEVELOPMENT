@@ -1,6 +1,6 @@
 <?php
 //get the data from service.php after the book trigger
-session_start();
+require_once '../../ADMIN/authetincation.php';
 require_once '../../Database/database.php';
 if (isset($_POST['product'])) {
      //RETRIEVE FULL NAME
