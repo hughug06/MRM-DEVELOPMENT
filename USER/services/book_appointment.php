@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../../ADMIN/authetincation.php';
 include '../../Database/database.php';
 if(isset($_POST['book']))
     {

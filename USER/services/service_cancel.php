@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    require_once '../../ADMIN/authetincation.php';
     require_once '../../Database/database.php';
     $account_id = $_SESSION['account_id'];
     

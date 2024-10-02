@@ -1,5 +1,5 @@
 <?php 
-session_start();
+require_once '../../ADMIN/authetincation.php';
 require_once '../../Database/database.php';
 
 // Check if account ID is set in the URL

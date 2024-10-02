@@ -1,7 +1,8 @@
 <?php
 //get the data from service.php after the book trigger
+
 require_once '../../Database/database.php';
-session_start();
+require_once '../../ADMIN/authetincation.php';
 if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
     $_SESSION['availability_id'] = $_GET['availability_id'];
     $_SESSION['date'] = $_GET['date'];
