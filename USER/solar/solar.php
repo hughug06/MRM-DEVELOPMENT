@@ -1,5 +1,4 @@
 <?php
-session_start();
     require_once '../../ADMIN/authetincation.php';
     require_once '../../Database/database.php';
     $wattsID="";
