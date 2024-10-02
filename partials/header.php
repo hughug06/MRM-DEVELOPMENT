@@ -698,7 +698,6 @@
                 </div>
             </div>
             <!-- End::main-header-dropdown -->
-             
         </div>
         <!-- End::header-element -->
 
@@ -716,132 +715,132 @@
         </div>
     </div>
     <!-- End::header-content-right -->
-
 </div>
 <!-- End::main-header-container -->
 
 </header>
 
 <!-- Modal for Viewing Appointments -->
-<div class="container">
 <div class="modal fade" id="appointmentmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title" id="staticBackdropLabel">View Appointments</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">My Address</th>
-                            <th scope="col">Set Date</th>
-                            <th scope="col">Set Time</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">Appointment Status</th>
-                            <th scope="col">Check Update</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                       
-                        $userid = $_SESSION['account_id'];
-                        $sql = "select * from appointments 
-                        inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
-                        where appointments.account_id = '$userid'";
-                        $result = mysqli_query($conn, $sql);
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">My Address</th>
+                                <th scope="col">Set Date</th>
+                                <th scope="col">Set Time</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Payment Status</th>
+                                <th scope="col">Appointment Status</th>
+                                <th scope="col">Check Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                        
+                            $userid = $_SESSION['account_id'];
+                            $sql = "select * from appointments 
+                            inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
+                            where appointments.account_id = '$userid'";
+                            $result = mysqli_query($conn, $sql);
 
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
-                                    continue; // Skip this iteration
-                                }
-                                ?>
-                                <tr>
-                                    <td><?= htmlspecialchars($row['name']) ?></td>
-                                    <td><?= htmlspecialchars($row['location']) ?></td>
-                                    <td><?= htmlspecialchars($row['date']) ?></td>
-                                    <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
-                                    <td><?= htmlspecialchars($row['amount']) ?></td>
-                                    <td>
-                                        <?php 
-                                        $appoint_id = $row['appointment_id'];
-                                        $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
-                                        $payment_check_result = mysqli_query($conn , $payment_check);
-                                        $payment_status = mysqli_fetch_assoc($payment_check_result);
-                                        if(mysqli_num_rows($payment_check_result) > 0){
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
+                                        continue; // Skip this iteration
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($row['name']) ?></td>
+                                        <td><?= htmlspecialchars($row['location']) ?></td>
+                                        <td><?= htmlspecialchars($row['date']) ?></td>
+                                        <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
+                                        <td><?= htmlspecialchars($row['amount']) ?></td>
+                                        <td>
+                                            <?php 
+                                            $appoint_id = $row['appointment_id'];
+                                            $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
+                                            $payment_check_result = mysqli_query($conn , $payment_check);
+                                            $payment_status = mysqli_fetch_assoc($payment_check_result);
+                                            if(mysqli_num_rows($payment_check_result) > 0){
+                                                
                                             
-                                          
-                                            if($payment_status['payment_status'] === "pending"){
-                                                echo $payment_status['payment_status'];
+                                                if($payment_status['payment_status'] === "pending"){
+                                                    echo $payment_status['payment_status'];
+                                                }
+                                                else if($payment_status['payment_status'] === "confirmed"){
+                                                    echo "Under review";
+                                                }
+                                                else if($payment_status['payment_status'] === "approved"){
+                                                    echo $payment_status['payment_status'];
+                                                }
+                                                else if($payment_status['payment_status'] === "rejected"){
+                                                    echo $payment_status['payment_status'];
+                                                }
+                                                                                        
                                             }
-                                            else if($payment_status['payment_status'] === "confirmed"){
-                                                echo "Under review";
+                                            else{
+                                                echo "unpaid";
                                             }
-                                            else if($payment_status['payment_status'] === "approved"){
-                                                echo $payment_status['payment_status'];
-                                            }
-                                            else if($payment_status['payment_status'] === "rejected"){
-                                                echo $payment_status['payment_status'];
-                                            }
-                                                                                    
-                                        }
-                                        else{
-                                            echo "unpaid";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td><?= htmlspecialchars($row['status']) ?></td>
-                                    <td>
-                                        <?php 
-                                        if ($row['status'] === "Pending")
-                                        { 
-
-                                        ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
-                                        <?php 
-                                        }
-                                       else{
-                                            $checker = "select * from service_payment where account_id = '$userid'";
-                                            $check_result = mysqli_query($conn , $checker);
-                                            if(mysqli_num_rows($check_result) > 0)
-                                            {
-
-                                            
                                             ?>
-                                            <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                        </td>
+                                        <td><?= htmlspecialchars($row['status']) ?></td>
+                                        <td>
+                                            <?php 
+                                            if ($row['status'] === "Pending")
+                                            { 
 
-                                            <?php
-                                            }
-                                            else if(!mysqli_num_rows($check_result)){
-
-                                            
                                             ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                            <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
                                             <?php 
                                             }
-                                            }
-                                            
-                                            ?>
-                                    </td>
-                                </tr>
-                                <?php 
+                                        else{
+                                                $checker = "select * from service_payment where account_id = '$userid'";
+                                                $check_result = mysqli_query($conn , $checker);
+                                                if(mysqli_num_rows($check_result) > 0)
+                                                {
+
+                                                
+                                                ?>
+                                                <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+
+                                                <?php
+                                                }
+                                                else if(!mysqli_num_rows($check_result)){
+
+                                                
+                                                ?>
+                                            <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
+                                                <?php 
+                                                }
+                                                }
+                                                
+                                                ?>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                }
+                            } else {
+                                // Display a message if no appointments are found
+                                echo "<tr><td colspan='8' class='text-center'>Waiting for approval</td></tr>";
                             }
-                        } else {
-                            // Display a message if no appointments are found
-                            echo "<tr><td colspan='8' class='text-center'>Waiting for approval</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
