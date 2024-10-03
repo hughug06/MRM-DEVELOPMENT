@@ -878,37 +878,34 @@
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                     <td><?= htmlspecialchars($row['amount']) ?></td>
-                                    
+                                    <td>
                                         <?php 
-                                        $appoint_id = $row['appointment_id'];                                   
-                                        $payment_check = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
+                                        $appoint_id = $row['appointment_id'];
+                                        $payment_check = "select * from service_payment where account_id = '$userid' AND appointment_id = '$appoint_id'";
                                         $payment_check_result = mysqli_query($conn , $payment_check);
                                         $payment_status = mysqli_fetch_assoc($payment_check_result);
                                         if(mysqli_num_rows($payment_check_result) > 0){
                                             
                                           
                                             if($payment_status['payment_status'] === "pending"){
-                                                echo "<td class='text-primary " . $payment_status['payment_status'] . "'>" . $payment_status['payment_status'] . "</td>";
-
+                                                echo $payment_status['payment_status'];
                                             }
                                             else if($payment_status['payment_status'] === "confirmed"){
-                                                echo "<td class='text-primary " . "'>Under review " ."</td>";
-
+                                                echo "Under review";
                                             }
                                             else if($payment_status['payment_status'] === "approved"){
-                                                echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
-
+                                                echo $payment_status['payment_status'];
                                             }
                                             else if($payment_status['payment_status'] === "rejected"){
-                                                echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
+                                                echo $payment_status['payment_status'];
                                             }
                                                                                     
                                         }
                                         else{
-                                            echo "<td class='text-danger " . "'>Unpaid " ."</td>";
+                                            echo "unpaid";
                                         }
                                         ?>
-                                    
+                                    </td>
                                     <td><?= htmlspecialchars($row['status']) ?></td>
                                     <td>
                                         <?php 
@@ -919,22 +916,8 @@
                                         <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
                                         <?php 
                                         }
-                                        else if($row['status'] === "Completed"){
-
-                                            ?> 
-                                             <!-- Link modal for receipt -->
-                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#receiptModal"
-                                                data-account-id="<?= $row['account_id'] ?>" 
-                                                data-appointment-id="<?= $row['appointment_id'] ?>">
-                                                    Show Receipt
-                                                </a>
-
-                                          
-                                            
-                                            <?php
-                                        }
                                        else{
-                                            $checker = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
+                                            $checker = "select * from service_payment where account_id = '$userid'";
                                             $check_result = mysqli_query($conn , $checker);
                                             if(mysqli_num_rows($check_result) > 0)
                                             {
@@ -945,12 +928,11 @@
 
                                             <?php
                                             }
-                                            else if($row['status'] == "Waiting"){
-                                                
+                                            else if(!mysqli_num_rows($check_result)){
+
                                             
                                             ?>
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?account_id=<?= htmlspecialchars($row['account_id']) ?>&appointment_id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>  
-                                        <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>                                 
+                                        <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?id=<?= htmlspecialchars($row['account_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>                                    
                                             <?php 
                                             }
                                             }
@@ -972,6 +954,8 @@
     </div>
 </div>
 </div>
+</div>
+
 
  <!-- Include jsPDF for PDF generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
