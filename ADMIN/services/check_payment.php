@@ -114,14 +114,16 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                                     foreach($result as $resultitem) {                
                                 ?>
                                     <div class="card-body">
-                                        <form action="assign_worker.php" method="POST">
+                                    <form action="assign_worker.php" method="POST">
                                             <input type="hidden" name="worker_id" value="<?= $resultitem['account_id'] ?>">
                                             <h5 class="card-title">NAME: <?= $resultitem['first_name'] . " " . $resultitem['last_name'] ?></h5>
                                             <p class="card-text">ROLE: <?= $resultitem['role'] ?></p>
                                             <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
-                                            <input type="hidden" name="user_id" id="user_id">
-                                            <input type="hidden" name="appointment_id" id="appointment_id">
+                                            <input type="hidden" name="user_id"  value="<?= $_GET['id'] ?>">
+                                            <input type="hidden" name="appointment_id" value="<?= $_GET['appoint_id'] ?>">
+                                            <input type="hidden" name="payment_id" value="<?= $_GET['payment_id'] ?>">
                                         </form>
+
                                     </div>
                                 <?php
                                     }
@@ -150,20 +152,17 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                                         <img src="<?= $imagePath ?>" alt="Payment Image" style="max-width: 100%; height: auto;">
                         <?php
                                     }
-                                } else {
-                                    echo "No images found for this account.";
-                                }
+                                } 
                             }
                         ?>
-                        <!-- Confirm Payment Link -->
-                        <<!-- Button trigger modal -->
-                        <a href="#" class="btn btn-sm btn-info assign-btn" 
-                             data-account-id="<?= $_GET['id'] ?>" 
-                             data-appointment-id="<?= $_GET['appoint_id'] ?>" 
-                             data-bs-toggle="modal" 
-                             data-bs-target="#staticBackdrop">
-                        <i class="fe fe-edit-2">ASSIGN</i>
-                        </a>
+                     
+                        <<!-- assign trigger modal -->
+                        <a href="#" class="btn btn-sm btn-info assign-btn"        
+                                data-bs-toggle="modal" 
+                                data-bs-target="#staticBackdrop">
+                                <i class="fe fe-edit-2">ASSIGN</i>
+                            </a>
+
 
                           <!-- Reject Payment Button -->
                           <a href="javascript:void(0);" onclick="rejectPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
@@ -184,23 +183,7 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                 <script>
-                $(document).ready(function() {
-                                // When the assign button is clicked
-                                $('.assign-btn').on('click', function() {
-                                
-                                    // Get the account_id and appointment_id from data attributes
-                                    var userId = $(this).data('account-id');
-                                    var appointmentId = $(this).data('appointment-id');
-
-                                    // Set the values in the modal's hidden fields or display them as needed
-                                    $('#user_id').val(userId);
-                                    $('#appointment_id').val(appointmentId);
-                                    
-                                });
-                            });
-
-               
-
+           
                     function rejectPayment(account_id , appointment_id) {
                         Swal.fire({
                             title: 'Are you sure?',

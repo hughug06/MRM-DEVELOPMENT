@@ -3,24 +3,34 @@ require_once '../../ADMIN/authetincation.php';
 require_once '../../Database/database.php';
 
 // Check if account ID is set in the URL
-if (isset($_GET['id'])) {
+if (isset($_GET['account_id'])) {
     
-    $_SESSION['service_account_id'] = $_GET['id'];
-    $_SESSION['appointment_id'] = $_GET['appointment'];
+    $_SESSION['service_account_id'] = $_GET['account_id'];
+    $_SESSION['appointment'] = $_GET['appointment_id'];
+    
 } 
 
 // Handle the form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the image is uploaded
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        
         // Handle the image upload
         $image = $_FILES['image'];
         $account_id = $_SESSION['service_account_id'];
-        $appoint_id = $_SESSION['appointment_id'];
+        $appoint_id = $_SESSION['appointment'];
+
         // Define the directory where the image will be uploaded
         $targetDir = "../../assets/images/service-payment/";
         $targetFile = $targetDir . basename($image['name']);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+
+        // GET THE VALUE OF PRICING_ID
+        $get_priceid = "select * from service_pricing where account_id = '$account_id' AND appointment_id = '$appoint_id'";
+        $result_get = mysqli_query($conn , $get_priceid);
+        $row = mysqli_fetch_assoc($result_get);
+        $pricing_id = $row['pricingid'];
 
         // Check if image file is a valid image type
         $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
@@ -33,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($image['tmp_name'], $targetFile)) {
                 // Insert the image path into the database
-                $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile')";
-                $upd = "UPDATE appointments SET status='Checking' WHERE appointment_id='$appoint_id'";
+                $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment , pricing_id) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile' , '$pricing_id')";
+                $upd = "UPDATE appointments SET status='Checking' WHERE appointment_id='$appoint_id' AND account_id = '$account_id'"; 
                 $upd_result = mysqli_query($conn , $upd);
                 if ($conn->query($sql) === TRUE) {
                   // SUCCESS

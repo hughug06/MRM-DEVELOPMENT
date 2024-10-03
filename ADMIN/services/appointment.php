@@ -278,7 +278,7 @@
                                                                                                 data-bs-target="#staticBackdrop">
                                                                                                     <i class="fe fe-edit-2">SET AMOUNT</i>
                                                                                                 </a>
-                                                                                                <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">REJECT</i>  </a>
+                                                                                                <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger d-none"> <i class="fe fe-trash">REJECT</i>  </a>
                                                                                                 <?php                                                               
                                                                                             }
                                                                                             
@@ -400,7 +400,7 @@
                                                                                 <?php 
                                                                                 require '../../Database/database.php';                                                                                                                      
                                                                                 $select = "Select * from appointments 
-                                                                            INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'confirmed'";
+                                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'confirmed'";
                                                                                 $result = mysqli_query($conn , $select);
                                                                                 if(mysqli_num_rows($result) > 0){
                                                                                     foreach($result as $resultItem){
@@ -438,7 +438,7 @@
 
                                                                                             
                                                                                             ?>       
-                                                                                            <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
+                                                                                            <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>&&payment_id=<?= $resultItem['payment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
                                                                                                                                     
                                                                                             <?php 
                                                                                                             
