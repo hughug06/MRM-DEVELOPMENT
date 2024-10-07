@@ -75,17 +75,23 @@
                 <li class="slide__category"><span class="category-name">Services</span></li>
                 <!-- End::slide__category -->
 
-                <!-- Start::slide -->
-                <li class="slide <?= $page == "service.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/services/service.php" class="side-menu__item <?= $page == "service.php" ? 'active':''?>">
+                <li class="slide has-sub <?= $page == 'service.php' || $page == 'myappointments.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'service.php' || $page == 'myappointments.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
-                        <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
                         <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
                         <span class="side-menu__label">Services</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
+                    <ul class="slide-menu child1">
+                        <li class="slide <?= $page == "service.php" ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="side-menu__item <?= $page == 'service.php' ? 'active':''?>">Services</a>
+                        </li> 
+                        <li class="slide <?= $page == 'myappointments.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/USER/services/myappointments/myappointments.php" class="side-menu__item <?= $page == 'myappointments.php' ? 'active':''?>">Appointments</a>
+                        </li>                                
+                    </ul>
                 </li>
-                <!-- End::slide -->
 
             
                 <!-- Start::slide__category -->
@@ -120,7 +126,7 @@
                 </li>
                 <?php 
                 }
-               else if($_SESSION['auth'] == "admin")
+                else if($_SESSION['auth'] == "admin")
                 {
             
                 ?>

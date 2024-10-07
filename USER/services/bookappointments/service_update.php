@@ -1,6 +1,6 @@
 <?php 
-require_once '../../ADMIN/authetincation.php';
-require_once '../../Database/database.php';
+require_once '../../../ADMIN/authetincation.php';
+require_once '../../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,43 +10,43 @@ require_once '../../Database/database.php';
 
     <!-- Meta Data -->
     <?php
-    include_once(__DIR__.'/../../partials/head.php');
+    include_once(__DIR__.'/../../../partials/head.php');
     
     ?>
     <title> Inquries </title>
     <!-- Favicon -->
-    <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
     <!-- Choices JS -->
-    <script src="../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="../../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
     
     <!-- Bootstrap Css -->
-    <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <link id="style" href="../../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
 
      <!-- Main Theme Js -->
-     <script src="../../assets/js/main.js"></script>
+     <script src="../../../assets/js/main.js"></script>
 
     <!-- Style Css -->
-    <link href="../../assets/css/styles.min.css" rel="stylesheet" >
+    <link href="../../../assets/css/styles.min.css" rel="stylesheet" >
 
     <!-- Icons Css -->
-    <link href="../../assets/css/icons.css" rel="stylesheet" >
+    <link href="../../../assets/css/icons.css" rel="stylesheet" >
 
     <!-- Node Waves Css -->
-    <link href="../../assets/libs/node-waves/waves.min.css" rel="stylesheet" > 
+    <link href="../../../assets/libs/node-waves/waves.min.css" rel="stylesheet" > 
 
     <!-- Simplebar Css -->
-    <link href="../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet" >
+    <link href="../../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet" >
     
     <!-- Color Picker Css -->
-    <link rel="stylesheet" href="../../assets/libs/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="../../assets/libs/@simonwep/pickr/themes/nano.min.css">
+    <link rel="stylesheet" href="../../../assets/libs/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="../../../assets/libs/@simonwep/pickr/themes/nano.min.css">
 
     <!-- Choices Css -->
-    <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
+    <link rel="stylesheet" href="../../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
     <!-- Prism CSS -->
-    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
+    <link rel="stylesheet" href="../../../assets/libs/prismjs/themes/prism-coy.min.css">
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -91,10 +91,10 @@ require_once '../../Database/database.php';
     <div class="page">
 
              <!-- app-header -->
-             <?php include_once(__DIR__.'/../../partials/header.php')?>
+             <?php include_once(__DIR__.'/../../../partials/header.php')?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
+            <?php include_once(__DIR__. '/../../../partials/sidebar.php')?>
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
@@ -186,7 +186,7 @@ require_once '../../Database/database.php';
 
         
         <!-- Footer Start -->
-        <?php include_once(__DIR__.'/../../partials/footer.php') ?>
+        <?php include_once(__DIR__.'/../../../partials/footer.php') ?>
         <!-- Footer End -->  
     </div>
 
@@ -199,38 +199,38 @@ require_once '../../Database/database.php';
     <!-- Scroll To Top -->
 
     <!-- Popper JS -->
-    <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
+    <script src="../../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Defaultmenu JS -->
-    <script src="../../assets/js/defaultmenu.min.js"></script>
+    <script src="../../../assets/js/defaultmenu.min.js"></script>
 
     <!-- Node Waves JS-->
     <script src="../../assets/libs/node-waves/waves.min.js"></script>
 
     <!-- Sticky JS -->
-    <script src="../../assets/js/sticky.js"></script>
+    <script src="../../../assets/js/sticky.js"></script>
 
     <!-- Simplebar JS -->
-    <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="../../assets/js/simplebar.js"></script>
+    <script src="../../../assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="../../../assets/js/simplebar.js"></script>
 
     <!-- Color Picker JS -->
-    <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+    <script src="../../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
 
 
     
     <!-- Custom-Switcher JS -->
-    <script src="../../assets/js/custom-switcher.min.js"></script>
+    <script src="../../../assets/js/custom-switcher.min.js"></script>
 
     <!-- Prism JS -->
-    <script src="../../assets/libs/prismjs/prism.js"></script>
-    <script src="../../assets/js/prism-custom.js"></script>
+    <script src="../../../assets/libs/prismjs/prism.js"></script>
+    <script src="../../../assets/js/prism-custom.js"></script>
 
     <!-- Custom JS -->
-    <script src="../../assets/js/custom.js"></script>
+    <script src="../../../assets/js/custom.js"></script>
 
 </body>
 

@@ -1,6 +1,6 @@
 <?php
-require_once '../../ADMIN/authetincation.php';
-include '../../Database/database.php';
+require_once '../../../ADMIN/authetincation.php';
+include '../../../Database/database.php';
 if(isset($_POST['book']))
     {
         //RETRIEVE FULL NAME
