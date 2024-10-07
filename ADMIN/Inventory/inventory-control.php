@@ -460,18 +460,27 @@ include_once '../../Database/database.php';
                             processData: false,
                             contentType: false,
                             success: function(response) {
-                                // Handle successful updating of product
-                                Swal.fire({
-                                    title: 'Product Updated!',
-                                    text: 'You have successfully updated the product.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'inventory-control.php';
-                                });
+                                if(response.success){
+                                    // Handle successful updating of product
+                                    Swal.fire({
+                                        title: 'Product Updated!',
+                                        text: 'You have successfully updated the product.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'inventory-control.php';
+                                    });
+                                }
+                                else{
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error deleting the product. Please try again.',
+                                        response.message
+                                    );
+                                }
                             },
                             error: function() {
                                 // Handle error

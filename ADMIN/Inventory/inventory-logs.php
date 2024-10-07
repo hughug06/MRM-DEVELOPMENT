@@ -93,7 +93,7 @@ require_once '../../Database/database.php';
                                            <?php 
                                            require '../../Database/database.php';                                          
                                            $select = "Select * from inventory_logs 
-                                           left join user_info on inventory_logs.user_id = user_info.user_id";
+                                           left join user_info on inventory_logs.user_id = user_info.user_id ORDER BY inventory_logs.log_id DESC";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){
