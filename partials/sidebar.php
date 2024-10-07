@@ -93,7 +93,6 @@
                     </ul>
                 </li>
 
-            
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Inquire/Schedule</span></li>
                 <!-- End::slide__category -->
