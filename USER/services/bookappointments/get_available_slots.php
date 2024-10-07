@@ -1,7 +1,7 @@
 <?php
 // get_available_slots.php
-require_once '../../ADMIN/authetincation.php';
-include '../../Database/database.php'; // Include your database connection
+require_once '../../../ADMIN/authetincation.php';
+include '../../../Database/database.php'; // Include your database connection
 
 
 
