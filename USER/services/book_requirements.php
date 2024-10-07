@@ -174,12 +174,12 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
                             
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" name="power" id="powerInput" placeholder="">
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="power" id="powerInput" placeholder="">
                             </div>
                             
                             <div class="form-group text-start mb-3">
-                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" type="text" id="RHU" name="running_hours" id="su_Email" placeholder="">
+                                <label for="su_Email" class="text-muted">Running Hours Unit (Hours)</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" id="su_Email" placeholder="">
                             </div>
                             
                             <div class="form-group text-start mb-3">
@@ -317,6 +317,39 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
           Swal.fire({
                 title: 'ERROR',
                 html: "There seems to be missing information. Please complete the form",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(product.value == "generator" || power.value < 20 || power.value > 1000){
+            Swal.fire({
+                title: 'ERROR',
+                html: "Power output for generator should not be less than 20 KVA or cannot be greater than 1000 KVA",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(product.value == "solar" && power.value < 350 || power.value > 1000){
+            Swal.fire({
+                title: 'ERROR',
+                html: "Power output for generator should not be less than 350 watts or cannot be greater than 1000 watts",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(running.value <= 0){
+          Swal.fire({
+                title: 'ERROR',
+                html: "Running Hours cannot be less than 0",
                 icon: 'warning',
                 confirmButtonText: 'Confirm'
             }).then((result) => {
