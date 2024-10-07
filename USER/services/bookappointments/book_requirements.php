@@ -168,12 +168,12 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
                         
                         <div class="form-group text-start mb-3">
                             <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                            <input class="form-control" type="text" name="power" id="powerInput" placeholder="">
+                            <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="power" id="powerInput" placeholder="">
                         </div>
                         
                         <div class="form-group text-start mb-3">
                             <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                            <input class="form-control" type="text" name="running_hours" id="su_Email" placeholder="">
+                            <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" id="su_Email" placeholder="">
                         </div>
                         
                         <div class="form-group text-start mb-3">
@@ -187,7 +187,7 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
                         </div>
 
                         <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                            <button type="submit" name="book" class="btn btn-warning text-white py-2">Book</button>
+                            <button type="submit" id="ConfirmBook" class="btn btn-warning text-white py-2">Book</button>
                         </div>
                     </form>
                 </div>
@@ -271,6 +271,129 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
         } else if (product === 'solar') {
             $('#powerLabel').text('Watts');  // Change label to Watts for Solar
             $('#s_Type option[value="tune_up"]').prop('disabled', true);  // Disable Tune-up
+        }
+    });
+
+    $('#ConfirmBook').on('click', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        var location = document.getElementById("location");
+        var product = document.getElementById("s_Product");
+        var power = document.getElementById("powerInput");
+        var running = document.getElementById("RHU");
+        var service_type = document.getElementById("s_Type");
+        if(product.value == "solar"){
+            var brand = document.getElementById("s_Brand");
+        }
+        else if(product.value == "generator"){
+            var brand = document.getElementById("g_Brand");
+        }else{
+            Swal.fire({
+                title: 'ERROR!',
+                html: "Please select a product",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+
+        if(brand.value == "" || power.value == "" || running.value == "" || service_type.value == ""  || location.value == ""){
+          Swal.fire({
+                title: 'ERROR',
+                html: "There seems to be missing information. Please complete the form",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(product.value == "generator" || power.value < 20 || power.value > 1000){
+            Swal.fire({
+                title: 'ERROR',
+                html: "Power output for generator should not be less than 20 KVA or cannot be greater than 1000 KVA",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(product.value == "solar" && power.value < 350 || power.value > 1000){
+            Swal.fire({
+                title: 'ERROR',
+                html: "Power output for generator should not be less than 350 watts or cannot be greater than 1000 watts",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else if(running.value <= 0){
+          Swal.fire({
+                title: 'ERROR',
+                html: "Running Hours cannot be less than 0",
+                icon: 'warning',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                }
+            });
+        }
+        else{
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Submit the book?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for Add product
+                    var formData = new FormData();
+                    formData.append('book', true);
+                    formData.append('location', location.value);
+                    formData.append('brand', brand.value);
+                    formData.append('product', product.value);
+                    formData.append('power', power.value);
+                    formData.append('running_hours', running.value);
+                    formData.append('service_type', service_type.value);
+
+
+                    $.ajax({
+                        url: 'book_appointment.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Handle successful add
+                            Swal.fire({
+                                title: 'Booked Successfully!',
+                                text: 'You have successfully booked.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = 'service.php';
+                            });
+                        },
+                        error: function(response) {
+                            // Handle erro
+                            Swal.fire(
+                                'Error!',
+                                'There was an error while trying to book. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
         }
     });
 });
