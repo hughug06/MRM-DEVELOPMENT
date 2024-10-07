@@ -3,6 +3,7 @@ require_once '../../../ADMIN/authetincation.php';
 include '../../../Database/database.php';
 if(isset($_POST['book']))
     {
+        header('Content-Type: application/json');
         //RETRIEVE FULL NAME
         $user = $_SESSION['user_id'];
         $retrieve = "select * from accounts inner join user_info on user_info.user_id = accounts.user_id where accounts.user_id = '$user'";
@@ -33,6 +34,12 @@ if(isset($_POST['book']))
             SET service_count = $service_count + 1
             WHERE account_id  = $account_id;";
             $upd_insert = mysqli_query($conn , $upd);
+            if($upd_insert){
+                echo json_encode(['success' => true]);
+            }
+            else{
+                echo json_encode(['message' => 'Deletion Failed']);
+            }
 
           
 
@@ -42,7 +49,6 @@ if(isset($_POST['book']))
             unset($_SESSION['date']);
             unset($_SESSION['start_time']);
             unset($_SESSION['end_time']);
-            header("Location: service.php");
         }       
     }
 ?>
