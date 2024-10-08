@@ -175,7 +175,7 @@
                         </li> 
                         <li class="slide <?= $page == 'time-management.php' ? 'active':''?>">
                             <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/time-management.php" class="side-menu__item <?= $page == 'time-management.php' ? 'active':''?>">Time management</a>
-                        </li>                                
+                        </li>                   
                     </ul>
                 </li>
                 <!-- End::slide -->                                       
@@ -193,7 +193,7 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->  
-                <li class="slide has-sub <?= $page == 'services.php' || $page == 'appointment.php' ? 'active open':''?>">
+                <li class="slide has-sub <?= $page == 'services.php' || $page == 'appointment.php' ||  $page == 'manageitems.php' ?'active open':''?>">
                     <a href="javascript:void(0);" class="side-menu__item <?= $page == 'services.php' || $page == 'appointment.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
@@ -207,7 +207,10 @@
                         </li> 
                         <li class="slide <?= $page == 'appointment.php' ? 'active':''?>">
                             <a href="/MRM-DEVELOPMENT/ADMIN/services/appointment.php" class="side-menu__item <?= $page == 'appointment.php' ? 'active':''?>">Appointment</a>
-                        </li>                                
+                        </li>          
+                        <li class="slide <?= $page == 'manageitems.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/services/myitems/manageitems.php" class="side-menu__item <?= $page == 'manageitems.php' ? 'active':''?>">Items Management</a>
+                        </li>                                              
                     </ul>
                 </li>
                 <!-- End::slide -->
