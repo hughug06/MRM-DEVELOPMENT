@@ -81,12 +81,84 @@ require_once '../../../Database/database.php';
                                         <div class="tab-content">
                                             <div class="main-content-body tab-pane p-4 border-top-0 active" id="pending">
                                                 <div class="mb-4 main-content-label">Pending</div>
-                                                <div class="card-body border">
-                                                    <!-- Content Here -->
-                                                    <div class="row">
-                                                        
+                                                <div class="card-body border">  
+                                                            <!-- Content Here -->
+                                                             <?php 
+                                                             $userid = $_SESSION['account_id'];
+                                                             $sql = "select * from appointments 
+                                                             inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
+                                                             where appointments.account_id = '$userid'";
+                                                             $result = mysqli_query($conn, $sql);
+                                     
+                                                             if (mysqli_num_rows($result) > 0) {
+                                                                 while ($row = mysqli_fetch_assoc($result)) {
+                                                                     if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
+                                                                         continue; // Skip this iteration
+                                                                     }
+                                                              
+                                                             ?>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="card shadow-sm mb-4">
+                                                                        <div class="card-header bg-primary text-white text-center">
+                                                                            <h4 class="card-title mb-0">Appointment Summary</h4>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Name</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['name']) ?> </p> 
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Address</h6>
+                                                                                    <p class="text-muted">123 Main St, Springfield</p>
+                                                                                </div>
+                                                                            </div>
 
-                                                    </div>
+                                                                            <hr>
+
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Appointment Date</h6>
+                                                                                    <p class="text-muted">October 15, 2024</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Appointment Time</h6>
+                                                                                    <p class="text-muted">3:00 PM - 4:00 PM</p>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <hr>
+
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Amount</h6>
+                                                                                    <p class="text-muted">$150.00</p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Payment Status</h6>
+                                                                                    <span class="badge bg-success">Paid</span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <hr>
+
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <h6 class="fw-bold">Appointment Status</h6>
+                                                                                    <span class="badge bg-warning">Pending</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-footer text-center">
+                                                                            <button type="button" class="btn btn-primary">Check Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="payment">
@@ -131,6 +203,11 @@ require_once '../../../Database/database.php';
                             </div>
                         </div>
                     </div>
+
+                    <?php
+                      }
+                    }
+                    ?>
                 </div>
             </div>
             <!-- Footer Start -->
