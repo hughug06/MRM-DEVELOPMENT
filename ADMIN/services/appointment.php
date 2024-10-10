@@ -133,9 +133,7 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                
-                    
-<!-- MODAL FOR SELECTING WORKER -->
-<!-- MODAL FOR SELECTING WORKER -->
+       <!-- MODAL FOR SELECTING WORKER -->
 <div class="container-fluid card">
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
@@ -143,7 +141,7 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
-                            <form action="set_amount.php" method="POST">
+                            <form action="process_items.php" method="POST"> <!-- Updated to process_items.php -->
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -161,6 +159,9 @@
                                 </table>
 
                                 <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                                
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-success mt-3">Submit</button>
                             </form>
 
                             <input type="hidden" name="user_id" id="user_id">
@@ -190,10 +191,7 @@
                     <option value="">Select Item</option>
                     <!-- Dynamically load options from the database using PHP -->
                     <?php
-                    // Include your database connection file
-                 
-
-                    // Query to fetch item descriptions and amounts
+        
                     $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
                     $result = mysqli_query($conn, $query);
 
@@ -211,37 +209,137 @@
             <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
         `;
 
-        // Add the new row to the table
         document.getElementById('itemTableBody').appendChild(newRow);
 
-        // Event listener for item selection
         newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
             const amountField = newRow.querySelector('input[name="amount[]"]');
-            const quantityField = newRow.querySelector('input[name="quantity[]"]');
-            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
             const unitField = newRow.querySelector('input[name="unit[]"]');
 
-            // Get the amount and unit from the selected option's data attributes
             const amount = selectedOption.dataset.amount;
             const unit = selectedOption.dataset.unit;
             amountField.value = amount;
-            unitField.value = unit; // Set unit value
-
-            // Calculate total cost
-            const quantity = quantityField.value;
-            totalCostField.value = (quantity * amount) || 0;
+            unitField.value = unit;
         });
 
-        // Event listener for quantity change
         newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
             const quantity = this.value;
             const amount = newRow.querySelector('input[name="amount[]"]').value;
             const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
 
-            totalCostField.value = (quantity * amount) || 0; // Calculate total cost
+            totalCostField.value = (quantity * amount) || 0;
         });
     });
+</script>
+             
+
+<!-- MODAL FOR CREATING QUOTATION -->
+<!-- <div class="container-fluid card">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> 
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="set_amount.php" method="POST">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item No.</th>
+                                            <th>Unit</th> 
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>Total Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemTableBody">
+                                       
+                                    </tbody>
+                                </table>
+
+                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                            </form>
+
+                            <input type="hidden" name="user_id" id="user_id">
+                            <input type="hidden" name="appointment_id" id="appointment_id">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script>
+    // let itemCount = 0;
+
+    // document.getElementById('addItemButton').addEventListener('click', function() {
+    //     itemCount++;
+
+    //     // Create a new row
+    //     const newRow = document.createElement('tr');
+
+    //     newRow.innerHTML = `
+    //         <td>${itemCount}</td>
+    //         <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column next to Item No. -->
+    //         <td>
+    //             <select name="item_description[]" class="form-select" required>
+    //                 <option value="">Select Item</option>
+    //                 <!-- Dynamically load options from the database using PHP -->
+    //                 <?php
+    //                 // Include your database connection file
+                 
+
+    //                 // Query to fetch item descriptions and amounts
+    //                 $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+    //                 $result = mysqli_query($conn, $query);
+
+    //                 // Check if there are results and populate the options
+    //                 if ($result) {
+    //                     while ($row = mysqli_fetch_assoc($result)) {
+    //                         echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+    //                     }
+    //                 }
+    //                 ?>
+    //             </select>
+    //         </td>
+    //         <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
+    //         <td><input type="text" name="amount[]" class="form-control" readonly></td>
+    //         <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+    //     `;
+
+    //     // Add the new row to the table
+    //     document.getElementById('itemTableBody').appendChild(newRow);
+
+    //     // Event listener for item selection
+    //     newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
+    //         const selectedOption = this.options[this.selectedIndex];
+    //         const amountField = newRow.querySelector('input[name="amount[]"]');
+    //         const quantityField = newRow.querySelector('input[name="quantity[]"]');
+    //         const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+    //         const unitField = newRow.querySelector('input[name="unit[]"]');
+
+    //         // Get the amount and unit from the selected option's data attributes
+    //         const amount = selectedOption.dataset.amount;
+    //         const unit = selectedOption.dataset.unit;
+    //         amountField.value = amount;
+    //         unitField.value = unit; // Set unit value
+
+    //         // Calculate total cost
+    //         const quantity = quantityField.value;
+    //         totalCostField.value = (quantity * amount) || 0;
+    //     });
+
+    //     // Event listener for quantity change
+    //     newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
+    //         const quantity = this.value;
+    //         const amount = newRow.querySelector('input[name="amount[]"]').value;
+    //         const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+
+    //         totalCostField.value = (quantity * amount) || 0; // Calculate total cost
+    //     });
+    // });
 </script>
 
 
