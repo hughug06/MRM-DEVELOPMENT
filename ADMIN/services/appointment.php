@@ -133,7 +133,7 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                
-       <!-- MODAL FOR SELECTING WORKER -->
+<!-- MODAL FOR SELECTING WORKER -->
 <div class="container-fluid card">
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
@@ -141,7 +141,9 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
-                            <form action="process_items.php" method="POST"> <!-- Updated to process_items.php -->
+                            <form action="set_quotation.php" method="POST">        
+                            <input type="hidden" name="user_id" id="user_id">
+                            <input type="hidden" name="appointment_id" id="appointment_id">               
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -151,6 +153,7 @@
                                             <th>Quantity</th>
                                             <th>Amount</th>
                                             <th>Total Cost</th>
+                                            <th>Action</th> <!-- Action Column for the close button -->
                                         </tr>
                                     </thead>
                                     <tbody id="itemTableBody">
@@ -159,13 +162,11 @@
                                 </table>
 
                                 <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
-                                
                                 <!-- Submit Button -->
-                                <button type="submit" class="btn btn-success mt-3">Submit</button>
+                                <button type="add" class="btn btn-success mt-3">Submit</button>
                             </form>
 
-                            <input type="hidden" name="user_id" id="user_id">
-                            <input type="hidden" name="appointment_id" id="appointment_id">
+                           
                         </div>
                     </div>
                 </div>
@@ -177,6 +178,15 @@
 <script>
     let itemCount = 0;
 
+    // Function to update item numbers dynamically
+    function updateItemNumbers() {
+        const rows = document.querySelectorAll('#itemTableBody tr');
+        rows.forEach((row, index) => {
+            row.querySelector('td:first-child').innerText = index + 1; // Update the item number
+        });
+        itemCount = rows.length; // Adjust itemCount to the current number of rows
+    }
+
     document.getElementById('addItemButton').addEventListener('click', function() {
         itemCount++;
 
@@ -185,52 +195,59 @@
 
         newRow.innerHTML = `
             <td>${itemCount}</td>
-            <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column next to Item No. -->
+            <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
             <td>
                 <select name="item_description[]" class="form-select" required>
                     <option value="">Select Item</option>
                     <!-- Dynamically load options from the database using PHP -->
                     <?php
-        
-                    $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
-                    $result = mysqli_query($conn, $query);
-
-                    // Check if there are results and populate the options
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
-                        }
-                    }
+                     $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+                                     $result = mysqli_query($conn, $query);
+                 
+                                     // Check if there are results and populate the options
+                                     if ($result) {
+                                         while ($row = mysqli_fetch_assoc($result)) {
+                                             echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+                                         }
+                                     }
                     ?>
                 </select>
             </td>
             <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
             <td><input type="text" name="amount[]" class="form-control" readonly></td>
             <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+            <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
         `;
 
         document.getElementById('itemTableBody').appendChild(newRow);
 
+        // Add event listener to update amount and unit when an item is selected
         newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
             const amountField = newRow.querySelector('input[name="amount[]"]');
             const unitField = newRow.querySelector('input[name="unit[]"]');
-
             const amount = selectedOption.dataset.amount;
             const unit = selectedOption.dataset.unit;
             amountField.value = amount;
             unitField.value = unit;
         });
 
+        // Add event listener to update total cost when quantity changes
         newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
             const quantity = this.value;
             const amount = newRow.querySelector('input[name="amount[]"]').value;
             const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
-
             totalCostField.value = (quantity * amount) || 0;
+        });
+
+        // Add event listener to the remove button to delete the row
+        newRow.querySelector('.remove-row').addEventListener('click', function() {
+            newRow.remove(); // Removes the row from the table
+            updateItemNumbers(); // Update item numbers after removing a row
         });
     });
 </script>
+
              
 
 <!-- MODAL FOR CREATING QUOTATION -->
@@ -288,7 +305,7 @@
     //                 <option value="">Select Item</option>
     //                 <!-- Dynamically load options from the database using PHP -->
     //                 <?php
-    //                 // Include your database connection file
+    //             
                  
 
     //                 // Query to fetch item descriptions and amounts
@@ -453,6 +470,7 @@
                                                                                                                 
                                                                                                 }
                                                                                                 else if($resultItem['status'] === "Pending"){
+                                                                                                   
                                                                                                 ?> 
                                                                                                 <a href="#" class="btn btn-sm btn-info assign-btn" 
                                                                                                 data-account-id="<?= $resultItem['account_id'] ?>" 
