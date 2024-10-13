@@ -69,20 +69,52 @@
                                         <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                             <thead>
                                                 <tr>
-                                                    <th class="wd-lg-8p"><span>Column 1</span></th>
-                                                    <th class="wd-lg-20p"><span>Column 2</span></th>
-                                                    <th class="wd-lg-20p"><span>Column 3</span></th>
-                                                    <th class="wd-lg-20p"><span>Column 4</span></th>
+                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                    <th class="wd-lg-20p"><span>Action</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>                        
-                                                    <td></td>
-                                                    <td></td>
+                                                <?php 
+                                                require '../../Database/database.php';                                          
+                                                $select = "Select * from ?";
+                                                $result = mysqli_query($conn , $select);
+                                                if(mysqli_num_rows($result) > 0){
+                                                    foreach($result as $resultItem){
+                                                ?> 
+                                                 <tr>
+                                                    <td><?= $resultItem['ID']?></td>  
+                                                    <td><?= $resultItem['unit']?></td>     
+                                                    <td><?= $resultItem['Description']?></td>                                       
+                                                    <td><?= $resultItem['quantity']?></td>                       
+                                                    <td><?= $resultItem['amount']?></td> 
+                                                    <td>                                                 
+                                                    <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <!-- Add Stocks Button -->
+                                                    <!-- Add Stocks Button -->
+                                                    <a class="btn btn-sm btn-success add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                        <i class="fe fe-plus"></i>
+                                                    </a>
+                                                    
+                                                    <!-- Decrease Stocks Button -->
+                                                    <a class="btn btn-sm btn-secondary dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                        <i class="fe fe-minus"></i>
+                                                    </a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" data-id="<?= $resultItem['ProductID']; ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    </td>
                                                 </tr>
+
+                                                <?php 
+                                                    }
+                                            
+                                                }
+                                                else{
+
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
