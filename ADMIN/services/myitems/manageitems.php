@@ -126,6 +126,73 @@
         <div id="responsive-overlay"></div>
         <!-- Scroll To Top -->
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+            $(".delete-btn-Product").click(function(event) {
+                event.preventDefault(); // Prevent the default action (navigating to the delete URL)
+                var itemId = $(this).data('id');
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to delete this item?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for deletion of product
+                        $.ajax({
+                            url: 'item-delete.php',
+                            type: 'POST', // Ensure you're using the correct method if the backend expects GET
+                            data: { id: itemId},
+                            success: function(response) {
+                                if(response.success){
+                                    // Handle successful deletion of product
+                                    Swal.fire({
+                                        title: 'item Deleted!',
+                                        text: 'You have successfully deleted the item.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                    });
+                                }
+                                else{
+                                    Swal.fire({
+                                    title: 'Item not deleted!',
+                                    text: response.message || 'An error occurred while deleting the product.',
+                                    icon: 'error',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                    });
+                                }
+                            },
+                            error: function(response) {
+                                Swal.fire({
+                                    title: 'An error occured!',
+                                    icon: 'error',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        </script>
+
+
         <!-- Popper JS -->
         <script src="../../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
