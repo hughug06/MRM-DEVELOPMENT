@@ -136,8 +136,13 @@
 <!-- MODAL FOR SELECTING WORKER -->
 <div class="container-fluid card">
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        
         <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
             <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">SET QUOTATION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
@@ -477,7 +482,7 @@
                                                                                                 data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
                                                                                                 data-bs-toggle="modal" 
                                                                                                 data-bs-target="#staticBackdrop">
-                                                                                                    <i class="fe fe-edit-2">SET AMOUNT</i>
+                                                                                                    <i class="fe fe-edit-2">SET QUOTATION</i>
                                                                                                 </a>
                                                                                                 <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger d-none"> <i class="fe fe-trash">REJECT</i>  </a>
                                                                                                 <?php                                                               
