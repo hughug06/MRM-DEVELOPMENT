@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2024 at 12:16 AM
+-- Generation Time: Oct 16, 2024 at 08:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,12 +31,16 @@ CREATE TABLE `service_pricing` (
   `pricingid` int(11) NOT NULL,
   `account_id` int(11) DEFAULT NULL,
   `appointment_id` int(11) DEFAULT NULL,
+  `unit` enum('items','set','job','lot') NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `quantity` int(50) NOT NULL,
   `amount` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service_pricing`
 --
+
 
 
 --
@@ -59,7 +63,7 @@ ALTER TABLE `service_pricing`
 -- AUTO_INCREMENT for table `service_pricing`
 --
 ALTER TABLE `service_pricing`
-  MODIFY `pricingid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `pricingid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables
