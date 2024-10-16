@@ -79,31 +79,31 @@
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                require '../../Database/database.php';                                          
-                                                $select = "Select * from ?";
+                                                require '../../../Database/database.php';                                          
+                                                $select = "Select * from service_pricing";
                                                 $result = mysqli_query($conn , $select);
                                                 if(mysqli_num_rows($result) > 0){
                                                     foreach($result as $resultItem){
                                                 ?> 
                                                  <tr>
-                                                    <td><?= $resultItem['ID']?></td>  
+                                                    <td><?= $resultItem['pricingid']?></td>  
                                                     <td><?= $resultItem['unit']?></td>     
-                                                    <td><?= $resultItem['Description']?></td>                                       
+                                                    <td><?= $resultItem['description']?></td>                                       
                                                     <td><?= $resultItem['quantity']?></td>                       
                                                     <td><?= $resultItem['amount']?></td> 
                                                     <td>                                                 
-                                                    <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="item-edit-form.php?id=<?= $resultItem['pricingid']?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
                                                     <!-- Add Stocks Button -->
                                                     <!-- Add Stocks Button -->
-                                                    <a class="btn btn-sm btn-success add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                    <a class="btn btn-sm btn-success add-stocks" data-bs-toggle="modal" data-bs-target="#add_stocks" data-value="<?= $resultItem['pricingid']?>">
                                                         <i class="fe fe-plus"></i>
                                                     </a>
                                                     
                                                     <!-- Decrease Stocks Button -->
-                                                    <a class="btn btn-sm btn-secondary dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['ProductID']; ?>">
+                                                    <a class="btn btn-sm btn-secondary dec-stocks" data-bs-toggle="modal" data-bs-target="#dec_stocks" data-value="<?= $resultItem['pricingid']?>">
                                                         <i class="fe fe-minus"></i>
                                                     </a>
-                                                    <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" data-id="<?= $resultItem['ProductID']; ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
                                                     </td>
                                                 </tr>
 
