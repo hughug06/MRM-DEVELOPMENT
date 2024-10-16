@@ -142,7 +142,7 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="set_quotation.php" method="POST">        
-                            <input type="hidden" name="user_id" id="user_id">
+                            <input type="hidden" name="account_id" id="user_id">
                             <input type="hidden" name="appointment_id" id="appointment_id">               
                                 <table class="table table-bordered">
                                     <thead>

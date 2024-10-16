@@ -525,7 +525,6 @@
                  $count_appointment = 0;
                  $userid = $_SESSION['account_id'];
                  $sql_select = "select COUNT(*) AS total_appointments from appointments 
-                 inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
                  where appointments.account_id = '$userid' and appointments.status = 'Waiting' OR appointments.status = 'Approved' OR appointments.status = 'Checking' ";
                  $sql_result = mysqli_query($conn, $sql_select);
                  $row_count_appointments = mysqli_fetch_assoc($sql_result);
@@ -814,10 +813,10 @@
                    
                     <?php 
                     // $account_id = $['']
-                    $price_id = $row['pricing_id'];
-                    $price = "select * from service_pricing where pricingid = '$price_id' and account_id = '$username' AND appointment_id = '$appointment_id'";
-                    $price_result = mysqli_query($conn , $price);
-                    $row_price = mysqli_fetch_assoc($price_result);
+                    // $price_id = $row['pricing_id'];
+                    // $price = "select * from service_pricing where pricingid = '$price_id' and account_id = '$username' AND appointment_id = '$appointment_id'";
+                    // $price_result = mysqli_query($conn , $price);
+                    // $row_price = mysqli_fetch_assoc($price_result);
                     ?>
                      <p><strong>Total Amount Paid: </strong> $<?= number_format($row_price['amount'], 2) ?></p>
                 </div>
@@ -863,7 +862,7 @@
                        
                         $userid = $_SESSION['account_id'];
                         $sql = "select * from appointments 
-                        inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id 
+                       
                         where appointments.account_id = '$userid'";
                         $result = mysqli_query($conn, $sql);
 
@@ -878,7 +877,7 @@
                                     <td><?= htmlspecialchars($row['location']) ?></td>
                                     <td><?= htmlspecialchars($row['date']) ?></td>
                                     <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
-                                    <td><?= htmlspecialchars($row['amount']) ?></td>
+                                    <td> N/A</td>
                                     
                                         <?php 
                                         $appoint_id = $row['appointment_id'];                                   
