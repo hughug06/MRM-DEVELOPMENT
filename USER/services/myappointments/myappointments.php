@@ -168,90 +168,110 @@ require_once '../../../Database/database.php';
                                                 
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="payment">
-                                                <div class="mb-4 main-content-label">Payment</div>
+                                                <div class="mb-4 main-content-label">Quotation</div>
                                                 <div class="card-body border">
-                                                    <!-- Content Here -->
-                                                    <?php 
-                                                                $userid = $_SESSION['account_id'];
-                                                                $sql = "SELECT * FROM appointments WHERE account_id = '$userid' AND status = 'Waiting'";
-                                                                $result = mysqli_query($conn, $sql);
+                                                <?php 
+    $userid = $_SESSION['account_id'];
+    $sql = "SELECT * FROM service_quotation 
+            INNER JOIN appointments 
+            ON service_quotation.appointment_id = appointments.appointment_id 
+            WHERE service_quotation.account_id = appointments.account_id 
+            AND appointments.status = 'Waiting'";
 
-                                                                if (mysqli_num_rows($result) > 0) {
-                                                                    $count = 0; // Counter to track the number of cards per row
-                                                                    echo '<div class="row">'; // Open the row before starting the loop
+    $result = mysqli_query($conn, $sql);
 
-                                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                                        if ($row['status'] === "Canceled") { 
-                                                                            continue; 
-                                                                        }
+    if (mysqli_num_rows($result) > 0) {
+        $current_appointment_id = null; // Track the current appointment ID
+        $item_no = 1; // Counter for item numbers
+        $numbering = 1;
+        $last_row = null; // To hold the last row for final card footer details
+        $total_amount = 0; // To sum up the total cost for the final amount
 
-                                                                        // Check if a new row needs to be opened for every two cards
-                                                                        if ($count % 2 == 0 && $count != 0) {
-                                                                            echo '</div><div class="row">'; // Close the previous row and open a new row after two cards
-                                                                        }
-                                                                    ?>
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Check if appointment_id has changed
+            if ($current_appointment_id !== $row['appointment_id']) {
+                // Close the previous card (if not the first iteration)
+                if ($current_appointment_id !== null) {
+                    echo '</tbody>';
+                    echo '</table>';
+                   
+                    echo '<div class="card-footer text-center">';
+                    echo '<a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php?account_id=' . htmlspecialchars($last_row['account_id']) . '&appointment_id=' . htmlspecialchars($last_row['appointment_id']) . '" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Proceed to payment</a>';
+                    echo '</div>';
+                    echo '</div>'; // End of previous card
 
-                                                                    <div class="col-md-6">
-                                                                        <div class="card shadow-sm mb-4">
-                                                                            <div class="card-header bg-primary text-white text-center">
-                                                                                <h4 class="card-title mb-0">Appointment Summary</h4>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Name</h6>
-                                                                                        <p class="text-muted"><?= htmlspecialchars($row['name']) ?></p>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Address</h6>
-                                                                                        <p class="text-muted"><?= htmlspecialchars($row['location']) ?></p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <hr>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Appointment Date</h6>
-                                                                                        <p class="text-muted"><?= htmlspecialchars($row['date']) ?></p>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Appointment Time</h6>
-                                                                                        <p class="text-muted"><?= htmlspecialchars($row['start_time']) . "-" . htmlspecialchars($row['end_time']) ?></p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <hr>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Amount</h6>
-                                                                                        <p class="text-muted">Unpaid</p>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <h6 class="fw-bold">Payment Status</h6>
-                                                                                        <span class="badge bg-success"><?= htmlspecialchars($row['status']) ?></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <hr>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-md-12 text-center">
-                                                                                        <h6 class="fw-bold">Appointment Status</h6>
-                                                                                        <span class="badge bg-warning"><?= htmlspecialchars($row['status']) ?></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="card-footer text-center">
-                                                                                <button type="button" class="btn btn-primary">Proceed to payment</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                    // Display the final amount for the previous appointment
+                    echo '<div class="alert alert-info text-center"><strong>Total Amount: $' . number_format($total_amount, 2) . '</strong></div>';
 
-                                                                    <?php 
-                                                                        $count++; // Increment counter
+                    // Reset the total amount for the next appointment
+                    $total_amount = 0;
+                }
 
-                                                                    } // End of while loop
+                // Start a new card for the new appointment_id
+                
+                echo '<div class="card shadow-sm mb-4">';
+                echo $numbering;
+                echo '<div class="card-header bg-primary text-white text-center">';
+                echo '<h4 class="card-title mb-0">Quotation Summary (Appointment ID: ' . htmlspecialchars($row['appointment_id']) . ')</h4>';
+                echo '</div>';
+                echo '<table class="table table-bordered table-hover mt-4">';
+                echo '<thead class="table-dark">';
+                echo '<tr>';
+                echo '<th>Item No.</th>';
+                echo '<th>Description</th>';
+                echo '<th>Unit</th>';
+                echo '<th>Quantity</th>';
+                echo '<th>Amount</th>';
+                echo '<th>Total Cost</th>';  // Calculated amount * quantity
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
 
-                                                                    echo '</div>'; // Close the final row
-                                                                }
-                                                            ?>
-                                                </div>
+                // Reset item number and update the current appointment ID
+                $item_no = 1;
+                $numbering++;
+                $current_appointment_id = $row['appointment_id'];
+            }
+
+            // Calculate total cost for this item (amount * quantity)
+            $item_total_cost = $row['amount'] * $row['quantity'];
+
+            // Add this item's total cost to the running total for the appointment
+            $total_amount += $item_total_cost;
+
+            // Output each item within the same appointment
+            echo '<tr>';
+            echo '<td>' . $item_no++ . '</td>';  // Increment item number
+            echo '<td>' . htmlspecialchars($row['item_description']) . '</td>';
+            echo '<td>' . htmlspecialchars($row['unit']) . '</td>';
+            echo '<td>' . htmlspecialchars($row['quantity']) . '</td>';
+            echo '<td>$' . htmlspecialchars($row['amount']) . '</td>';
+            echo '<td>$' . number_format($item_total_cost, 2) . '</td>';  // Display calculated total cost
+            echo '</tr>';
+
+            // Store the last row for proper footer link generation
+            $last_row = $row;
+        }
+
+        // Close the last card after the loop ends
+        echo '</tbody>';
+        echo '</table>';
+        echo '<div class="card-footer text-center">';
+        echo '<a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php?account_id=' . htmlspecialchars($last_row['account_id']) . '&appointment_id=' . htmlspecialchars($last_row['appointment_id']) . '" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Proceed to payment</a>';
+        echo '</div>';
+        echo '</div>'; // End of last card
+
+        // Display the final amount for the last appointment
+        echo '<div class="alert alert-info text-center"><strong>Total Amount: $' . number_format($total_amount, 2) . '</strong></div>';
+    } else {
+        echo 'No data found.';
+    }
+?>
+
+
+                                                        </div>
+
+
                                             </div>
                                             <div class="main-content-body  tab-pane p-4 border-top-0 p-0" id="approved">
                                                 <div class="mb-4 main-content-label">Approved</div>
@@ -346,7 +366,6 @@ require_once '../../../Database/database.php';
                                                      <?php 
                                                                 $userid = $_SESSION['account_id'];
                                                                 $sql = "select * from appointments 
-                                                                inner join service_pricing on appointments.appointment_id = service_pricing.appointment_id
                                                                 inner join service_payment on appointments.appointment_id = service_payment.appointment_id
                                                                 where appointments.account_id = '$userid' and appointments.status = 'Completed'";
                                                                 $result = mysqli_query($conn, $sql);

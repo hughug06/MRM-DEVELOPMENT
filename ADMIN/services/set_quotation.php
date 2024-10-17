@@ -35,7 +35,7 @@ if (!empty($item_descriptions) && !empty($quantities) && !empty($amounts)) {
 
     // Execute the query
     if (mysqli_query($conn, $sql)) {
-        $upd = "UPDATE appointments SET status='Waiting' WHERE appointment_id='$appointmentid'";
+        $upd = "UPDATE appointments SET status='Waiting' WHERE appointment_id='$appointment_id' and account_id= '$account_id'";
         $upd_result = mysqli_query($conn , $upd);
         header("Location: appointment.php");
         exit();
