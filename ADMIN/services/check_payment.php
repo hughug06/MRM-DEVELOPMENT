@@ -135,49 +135,55 @@ if (isset($_POST['account_id']) && isset($_POST['appoint_id'])  && isset($_POST[
                             </div>
                     </div>
                 </div>
-            <div class="container-fluid">
-                    <div class="card">
-                        <?php 
-                            if (isset($_GET['id']) && isset($_GET['appoint_id'])) {
-                                $account_id = $_GET['id']; 
-                                $appoint_id = $_GET['appoint_id']; 
-                                $sql = "SELECT * FROM service_payment WHERE account_id = '$account_id' AND appointment_id = '$appoint_id'";
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        // Assuming the 'payment' column contains the image file path
-                                        $imagePath = $row['payment'];
-                         ?>
-                                        <!-- Display the image -->
-                                        <img src="<?= $imagePath ?>" alt="Payment Image" style="max-width: 100%; height: auto;">
-                        <?php
-                                    }
-                                } 
-                            }
-                        ?>
-                     
-                        <<!-- assign trigger modal -->
-                        <a href="#" class="btn btn-sm btn-info assign-btn"        
-                                data-bs-toggle="modal" 
-                                data-bs-target="#staticBackdrop">
-                                <i class="fe fe-edit-2">ASSIGN</i>
-                            </a>
+                <div class="container-fluid">
+    <div class="card">
+        <?php 
+            if (isset($_GET['id']) && isset($_GET['appoint_id'])) {
+                $account_id = $_GET['id']; 
+                $appoint_id = $_GET['appoint_id']; 
+                $sql = "SELECT * FROM service_payment WHERE account_id = '$account_id' AND appointment_id = '$appoint_id'";
+                $result = mysqli_query($conn, $sql);
+                
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        // Assuming the 'payment' column contains the image file path
+                        $imagePath = $row['payment'];
 
+                        // Check if the file exists to avoid broken image
+                        if (file_exists($imagePath)) {
+        ?>
+                            <!-- Display the image -->
+                            <img src="<?php echo $imagePath; ?>" alt="Payment Image" style="max-width: 100%; height: auto;">
+        <?php 
+                        } else {
+                            echo '<p>Image not found.</p>'; // Error message if image not found
+                        }
+                    }
+                } else {
+                    echo '<p>No payment data found.</p>'; // Error message if no data
+                }
+            }
+        ?>
 
-                          <!-- Reject Payment Button -->
-                          <a href="javascript:void(0);" onclick="rejectPayment(<?= $account_id ?> , <?= $appoint_id ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
-                        <!-- Hidden form that will be submitted when the user confirms -->
-                        
-                       
+        <!-- Assign Trigger Modal Button -->
+        <a href="#" class="btn btn-sm btn-info assign-btn"        
+                data-bs-toggle="modal" 
+                data-bs-target="#staticBackdrop">
+                <i class="fe fe-edit-2">ASSIGN</i>
+        </a>
 
-                        <!-- Hidden form for rejecting the payment -->
-                    <form id="rejectPaymentForm" action="check_payment.php" method="POST" style="display:none;">
-                        <input type="hidden" name="account_id" id="reject_account_id" value="">
-                        <input type="hidden" name="appoint_id" id="reject_appoint_id" value="">
-                        <input type="hidden" name="action" value="reject">
-                    </form>
-                    </div>                       
-                </div>
+        <!-- Reject Payment Button -->
+        <a href="javascript:void(0);" onclick="rejectPayment(<?php echo $account_id; ?>, <?php echo $appoint_id; ?>)" class="btn btn-danger mt-3 ml-2">Reject Payment</a>
+
+        <!-- Hidden form for rejecting the payment -->
+        <form id="rejectPaymentForm" action="check_payment.php" method="POST" style="display:none;">
+            <input type="hidden" name="account_id" id="reject_account_id" value="">
+            <input type="hidden" name="appoint_id" id="reject_appoint_id" value="">
+            <input type="hidden" name="action" value="reject">
+        </form>
+    </div>                       
+</div>
+
 
                 <!-- Include SweetAlert2 from CDN -->
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
