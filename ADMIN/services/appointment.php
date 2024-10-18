@@ -28,7 +28,9 @@
     $count_checking = $row_count_checking['total_checking']; 
 
     //approved payment
-    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment where payment_status = 'approved'";
+    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment 
+                       inner join appointments on appointments.appointment_id = service_payment.appointment_id
+                       where payment_status = 'approved' AND status = 'Approved'";
     $approved_result = mysqli_query($conn, $approved_count);  
     $row_count_approved = mysqli_fetch_assoc($approved_result);  // Fetch the result as an associative array
     $count_approved = $row_count_approved['total_approved']; 
@@ -594,7 +596,7 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                                        <th class="wd-lg-8p"><span>Service type</span></th> 
+                                                                                        <th class="wd-lg-8p"><span>Amount to pay</span></th> 
                                                                                         <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
                                                                                         <th class="wd-lg-20p"><span>Schedule</span></th>     
                                                                                         <th class="wd-lg-20p"><span>Payment Status</span></th>     
@@ -606,7 +608,8 @@
                                                                                 <?php 
                                                                                 require '../../Database/database.php';                                                                                                                      
                                                                                 $select = "Select * from appointments 
-                                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'confirmed'";
+                                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
+                                                                                         where payment_status = 'confirmed'";
                                                                                 $result = mysqli_query($conn , $select);
                                                                                 if(mysqli_num_rows($result) > 0){
                                                                                     foreach($result as $resultItem){
@@ -617,59 +620,19 @@
                                                                                         <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
                                                                                         <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
                                                                                         <td> <?= $resultItem['payment_status']?></td>                         
-                                                                                        <td class="
-                                                                                            <?php 
-                                                                                            if ($resultItem['status'] === 'Pending') { 
-                                                                                                echo 'text-warning';  // Yellow for pending
-                                                                                                                                                                        
-                                                                                                $appoint = mysqli_query($conn , $delete_appoint);                                                                                                   
-                                                                                            
-                                                                                            } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                                                echo 'text-success';  // Green for approved
-                                                                                            } 
-                                                                                            ?>">
-                                                                                            <?= $resultItem['status'] ?>
-                                                                                        </td>                               
+                                                                                                                      
                                                                                         <td>    
-                                                                                            <?php 
-                                                                                            if($resultItem['status'] === "approved"){
-
-                                                                                            echo "TEST APPROVED";
-                                                                                        
-                                                                                            ?> 
-                                                                                            <p?> NO AVAILABLE ACTION </p>
-                                                                                            <?php 
-                                                                                            }
-                                                                                            else if($resultItem['payment_status'] === "confirmed" ){
-
+                                                                                           
                                                                                             
-                                                                                            ?>       
+                                                                                                 
                                                                                             <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>&&payment_id=<?= $resultItem['payment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
                                                                                                                                     
-                                                                                            <?php 
-                                                                                                            
-                                                                                            }
-                                                                                            else if($resultItem['payment_status'] === "pending"){
-                                                                                            ?> 
-                                                                                            <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                                            data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                                            data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                                            data-bs-toggle="modal" 
-                                                                                            data-bs-target="#staticBackdrop">
-                                                                                                <i class="fe fe-edit-2">ASSIGN</i>
-                                                                                            </a>
-                                                                                            <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
-                                                                                            <?php                                                               
-                                                                                        }
-                                                                                        
-                                                                                            ?> 
+                                                                                           
+                                                                                          
                                                                                         </td>
                                                                                     </tr>
                                                                                         <?php 
                                                                                     }
-                                                                                }
-                                                                                else{
-
                                                                                 }
                                                                                 ?> 
                                                                                 </tbody>
@@ -709,7 +672,7 @@
                                                                                 <?php 
                                                                                 require '../../Database/database.php';                                                                                                                      
                                                                                 $select = "Select * from appointments 
-                                                                            INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'approved'";
+                                                                                 INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where status = 'Approved' AND payment_status = 'approved'";
                                                                                 $result = mysqli_query($conn , $select);
                                                                                 if(mysqli_num_rows($result) > 0){
                                                                                     foreach($result as $resultItem){

@@ -103,7 +103,7 @@ require_once '../../Database/database.php';
                                             if($serviceitem['date'] != $currentDate){                                                                                        
                                         ?>
                                          
-                                         <a href="service_complete.php?account_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>&&payment_id=<?= $serviceitem['payment_id']?>&&pricing_id=<?= $serviceitem['pricing_id']?>" class="btn btn-primary">Done</a>  
+                                         <a href="service_complete.php?account_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>&&payment_id=<?= $serviceitem['payment_id']?>" class="btn btn-primary">Done</a>  
                                         <?php 
                                         }
                                         ?>     
