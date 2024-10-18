@@ -867,21 +867,53 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- <script>
-    var receiptModal = document.getElementById('receiptModal');
-    receiptModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;  // Button that triggered the modal
-        var accountId = button.getAttribute('data-account-id');  // Extract account_id
-        var appointmentId = button.getAttribute('data-appointment-id');  // Extract appointment_id
+<script>
+    $(document).ready(function() {
+        $('#logout-link').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
 
-        // Now you can use accountId and appointmentId to modify the modal content
-        var modalBody = receiptModal.querySelector('.modal-body');
-
-        // For example, you could display them inside the modal dynamically
-        modalBody.innerHTML += '<p><strong>Account ID:</strong> ' + accountId + '</p>';
-        modalBody.innerHTML += '<p><strong>Appointment ID:</strong> ' + appointmentId + '</p>';
+            // Display SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for logout
+                    $.ajax({
+                        url: '/MRM-DEVELOPMENT/ADMIN/logout/function.php',
+                        success: function(response) {
+                            // Handle successful logout
+                            Swal.fire({
+                                title: 'Logged Out!',
+                                text: 'You have been successfully logged out.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = '/MRM-DEVELOPMENT/index.php';
+                            });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error logging out. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
     });
-</script> -->
+</script>
 
 
 

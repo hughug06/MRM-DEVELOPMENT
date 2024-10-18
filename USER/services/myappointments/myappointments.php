@@ -748,8 +748,6 @@ require_once '../../../Database/database.php';
 
 <script>
 
-  
-
     document.getElementById('downloadReceipt').addEventListener('click', function() {
         var { jsPDF } = window.jspdf;
         var doc = new jsPDF();
@@ -766,51 +764,7 @@ require_once '../../../Database/database.php';
         // Save the PDF
         doc.save('receipt.pdf');
     });
-    $(document).ready(function() {
-        $('#logout-link').on('click', function(e) {
-            e.preventDefault(); // Prevent the default link behavior
-
-            // Display SweetAlert confirmation
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, log out!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If user confirms, send AJAX request for logout
-                    $.ajax({
-                        url: '/MRM-DEVELOPMENT/ADMIN/logout/function.php',
-                        success: function(response) {
-                            // Handle successful logout
-                            Swal.fire({
-                                title: 'Logged Out!',
-                                text: 'You have been successfully logged out.',
-                                icon: 'success',
-                                allowOutsideClick: false,
-                                timer: 2000, // 2 seconds timer
-                                showConfirmButton: false // Hide the confirm button
-                            }).then(() => {
-                                // Redirect after the timer ends
-                                window.location.href = '/MRM-DEVELOPMENT/index.php';
-                            });
-                        },
-                        error: function() {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error logging out. Please try again.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        });
-    });
+    
 </script> 
 
 
