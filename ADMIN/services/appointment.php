@@ -28,7 +28,9 @@
     $count_checking = $row_count_checking['total_checking']; 
 
     //approved payment
-    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment where payment_status = 'approved'";
+    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment 
+                       inner join appointments on appointments.appointment_id = service_payment.appointment_id
+                       where payment_status = 'approved' AND status = 'Approved'";
     $approved_result = mysqli_query($conn, $approved_count);  
     $row_count_approved = mysqli_fetch_assoc($approved_result);  // Fetch the result as an associative array
     $count_approved = $row_count_approved['total_approved']; 
@@ -133,34 +135,239 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                
-                    <!--MODAL FOR SELECTING WORKER -->
-                    <!--MODAL FOR SELECTING WORKER -->
-                <div class="container-fluid card">
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <div class="card" style="width: 18rem;">
-                            
-                                <div class="card-body">
-                                    <form action="set_amount.php" method="POST">
-                                        <label for="">ENTER AMOUNT:</label>
-                                        <input type="text" name="amount" required>
-                                        <button name="pick">SET</button>                                                                   
-                                </div>
-                                
-                                <input type="hidden" name="user_id" id="user_id">
-                                <input type="hidden" name="appointment_id" id="appointment_id">
-                                    </form>
-                                </div>
-                            </div>                        
-                            </div>
+<!-- MODAL FOR SELECTING WORKER -->
+<div class="container-fluid card">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        
+        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+            <div class="modal-content">
+            <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">SET QUOTATION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="set_quotation.php" method="POST">        
+                            <input type="hidden" name="account_id" id="user_id">
+                            <input type="hidden" name="appointment_id" id="appointment_id">               
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item No.</th>
+                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>Total Cost</th>
+                                            <th>Action</th> <!-- Action Column for the close button -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemTableBody">
+                                        <!-- Rows will be added here dynamically -->
+                                    </tbody>
+                                </table>
+
+                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                                <!-- Submit Button -->
+                                <button type="add" class="btn btn-success mt-3">Submit</button>
+                            </form>
+
+                           
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let itemCount = 0;
+
+    // Function to update item numbers dynamically
+    function updateItemNumbers() {
+        const rows = document.querySelectorAll('#itemTableBody tr');
+        rows.forEach((row, index) => {
+            row.querySelector('td:first-child').innerText = index + 1; // Update the item number
+        });
+        itemCount = rows.length; // Adjust itemCount to the current number of rows
+    }
+
+    document.getElementById('addItemButton').addEventListener('click', function() {
+        itemCount++;
+
+        // Create a new row
+        const newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td>${itemCount}</td>
+            <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
+            <td>
+                <select name="item_description[]" class="form-select" required>
+                    <option value="">Select Item</option>
+                    <!-- Dynamically load options from the database using PHP -->
+                    <?php
+                     $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+                                     $result = mysqli_query($conn, $query);
+                 
+                                     // Check if there are results and populate the options
+                                     if ($result) {
+                                         while ($row = mysqli_fetch_assoc($result)) {
+                                             echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+                                         }
+                                     }
+                    ?>
+                </select>
+            </td>
+            <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
+            <td><input type="text" name="amount[]" class="form-control" readonly></td>
+            <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+            <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
+        `;
+
+        document.getElementById('itemTableBody').appendChild(newRow);
+
+        // Add event listener to update amount and unit when an item is selected
+        newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const amountField = newRow.querySelector('input[name="amount[]"]');
+            const unitField = newRow.querySelector('input[name="unit[]"]');
+            const amount = selectedOption.dataset.amount;
+            const unit = selectedOption.dataset.unit;
+            amountField.value = amount;
+            unitField.value = unit;
+        });
+
+        // Add event listener to update total cost when quantity changes
+        newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
+            const quantity = this.value;
+            const amount = newRow.querySelector('input[name="amount[]"]').value;
+            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+            totalCostField.value = (quantity * amount) || 0;
+        });
+
+        // Add event listener to the remove button to delete the row
+        newRow.querySelector('.remove-row').addEventListener('click', function() {
+            newRow.remove(); // Removes the row from the table
+            updateItemNumbers(); // Update item numbers after removing a row
+        });
+    });
+</script>
+
+             
+
+<!-- MODAL FOR CREATING QUOTATION -->
+<!-- <div class="container-fluid card">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> 
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="set_amount.php" method="POST">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item No.</th>
+                                            <th>Unit</th> 
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>Total Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="itemTableBody">
+                                       
+                                    </tbody>
+                                </table>
+
+                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                            </form>
+
+                            <input type="hidden" name="user_id" id="user_id">
+                            <input type="hidden" name="appointment_id" id="appointment_id">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script>
+    // let itemCount = 0;
+
+    // document.getElementById('addItemButton').addEventListener('click', function() {
+    //     itemCount++;
+
+    //     // Create a new row
+    //     const newRow = document.createElement('tr');
+
+    //     newRow.innerHTML = `
+    //         <td>${itemCount}</td>
+    //         <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column next to Item No. -->
+    //         <td>
+    //             <select name="item_description[]" class="form-select" required>
+    //                 <option value="">Select Item</option>
+    //                 <!-- Dynamically load options from the database using PHP -->
+    //                 <?php
+    //             
+                 
+
+    //                 // Query to fetch item descriptions and amounts
+    //                 $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+    //                 $result = mysqli_query($conn, $query);
+
+    //                 // Check if there are results and populate the options
+    //                 if ($result) {
+    //                     while ($row = mysqli_fetch_assoc($result)) {
+    //                         echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+    //                     }
+    //                 }
+    //                 ?>
+    //             </select>
+    //         </td>
+    //         <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
+    //         <td><input type="text" name="amount[]" class="form-control" readonly></td>
+    //         <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+    //     `;
+
+    //     // Add the new row to the table
+    //     document.getElementById('itemTableBody').appendChild(newRow);
+
+    //     // Event listener for item selection
+    //     newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
+    //         const selectedOption = this.options[this.selectedIndex];
+    //         const amountField = newRow.querySelector('input[name="amount[]"]');
+    //         const quantityField = newRow.querySelector('input[name="quantity[]"]');
+    //         const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+    //         const unitField = newRow.querySelector('input[name="unit[]"]');
+
+    //         // Get the amount and unit from the selected option's data attributes
+    //         const amount = selectedOption.dataset.amount;
+    //         const unit = selectedOption.dataset.unit;
+    //         amountField.value = amount;
+    //         unitField.value = unit; // Set unit value
+
+    //         // Calculate total cost
+    //         const quantity = quantityField.value;
+    //         totalCostField.value = (quantity * amount) || 0;
+    //     });
+
+    //     // Event listener for quantity change
+    //     newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
+    //         const quantity = this.value;
+    //         const amount = newRow.querySelector('input[name="amount[]"]').value;
+    //         const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+
+    //         totalCostField.value = (quantity * amount) || 0; // Calculate total cost
+    //     });
+    // });
+</script>
+
+
+
 
                 <div class="container mt-5">
   <!-- Nav tabs -->
@@ -270,13 +477,14 @@
                                                                                                                 
                                                                                                 }
                                                                                                 else if($resultItem['status'] === "Pending"){
+                                                                                                   
                                                                                                 ?> 
                                                                                                 <a href="#" class="btn btn-sm btn-info assign-btn" 
                                                                                                 data-account-id="<?= $resultItem['account_id'] ?>" 
                                                                                                 data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
                                                                                                 data-bs-toggle="modal" 
                                                                                                 data-bs-target="#staticBackdrop">
-                                                                                                    <i class="fe fe-edit-2">SET AMOUNT</i>
+                                                                                                    <i class="fe fe-edit-2">SET QUOTATION</i>
                                                                                                 </a>
                                                                                                 <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger d-none"> <i class="fe fe-trash">REJECT</i>  </a>
                                                                                                 <?php                                                               
@@ -388,7 +596,7 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                                        <th class="wd-lg-8p"><span>Service type</span></th> 
+                                                                                        <th class="wd-lg-8p"><span>Amount to pay</span></th> 
                                                                                         <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
                                                                                         <th class="wd-lg-20p"><span>Schedule</span></th>     
                                                                                         <th class="wd-lg-20p"><span>Payment Status</span></th>     
@@ -400,7 +608,8 @@
                                                                                 <?php 
                                                                                 require '../../Database/database.php';                                                                                                                      
                                                                                 $select = "Select * from appointments 
-                                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'confirmed'";
+                                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
+                                                                                         where payment_status = 'confirmed'";
                                                                                 $result = mysqli_query($conn , $select);
                                                                                 if(mysqli_num_rows($result) > 0){
                                                                                     foreach($result as $resultItem){
@@ -411,59 +620,19 @@
                                                                                         <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
                                                                                         <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
                                                                                         <td> <?= $resultItem['payment_status']?></td>                         
-                                                                                        <td class="
-                                                                                            <?php 
-                                                                                            if ($resultItem['status'] === 'Pending') { 
-                                                                                                echo 'text-warning';  // Yellow for pending
-                                                                                                                                                                        
-                                                                                                $appoint = mysqli_query($conn , $delete_appoint);                                                                                                   
-                                                                                            
-                                                                                            } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                                                echo 'text-success';  // Green for approved
-                                                                                            } 
-                                                                                            ?>">
-                                                                                            <?= $resultItem['status'] ?>
-                                                                                        </td>                               
+                                                                                                                      
                                                                                         <td>    
-                                                                                            <?php 
-                                                                                            if($resultItem['status'] === "approved"){
-
-                                                                                            echo "TEST APPROVED";
-                                                                                        
-                                                                                            ?> 
-                                                                                            <p?> NO AVAILABLE ACTION </p>
-                                                                                            <?php 
-                                                                                            }
-                                                                                            else if($resultItem['payment_status'] === "confirmed" ){
-
+                                                                                           
                                                                                             
-                                                                                            ?>       
+                                                                                                 
                                                                                             <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>&&payment_id=<?= $resultItem['payment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
                                                                                                                                     
-                                                                                            <?php 
-                                                                                                            
-                                                                                            }
-                                                                                            else if($resultItem['payment_status'] === "pending"){
-                                                                                            ?> 
-                                                                                            <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                                            data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                                            data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                                            data-bs-toggle="modal" 
-                                                                                            data-bs-target="#staticBackdrop">
-                                                                                                <i class="fe fe-edit-2">ASSIGN</i>
-                                                                                            </a>
-                                                                                            <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
-                                                                                            <?php                                                               
-                                                                                        }
-                                                                                        
-                                                                                            ?> 
+                                                                                           
+                                                                                          
                                                                                         </td>
                                                                                     </tr>
                                                                                         <?php 
                                                                                     }
-                                                                                }
-                                                                                else{
-
                                                                                 }
                                                                                 ?> 
                                                                                 </tbody>
@@ -503,7 +672,7 @@
                                                                                 <?php 
                                                                                 require '../../Database/database.php';                                                                                                                      
                                                                                 $select = "Select * from appointments 
-                                                                            INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where payment_status = 'approved'";
+                                                                                 INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id where status = 'Approved' AND payment_status = 'approved'";
                                                                                 $result = mysqli_query($conn , $select);
                                                                                 if(mysqli_num_rows($result) > 0){
                                                                                     foreach($result as $resultItem){

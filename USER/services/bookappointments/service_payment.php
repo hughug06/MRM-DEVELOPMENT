@@ -26,12 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
 
-        // GET THE VALUE OF PRICING_ID
-        $get_priceid = "select * from service_pricing where account_id = '$account_id' AND appointment_id = '$appoint_id'";
-        $result_get = mysqli_query($conn , $get_priceid);
-        $row = mysqli_fetch_assoc($result_get);
-        $pricing_id = $row['pricingid'];
-
+     
         // Check if image file is a valid image type
         $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
         if (in_array($imageFileType, $validExtensions)) {
@@ -43,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Move the uploaded file to the target directory
             if (move_uploaded_file($image['tmp_name'], $targetFile)) {
                 // Insert the image path into the database
-                $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment , pricing_id) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile' , '$pricing_id')";
+                $sql = "INSERT INTO service_payment (account_id,appointment_id,payment_status, payment ) VALUES ('$account_id','$appoint_id', 'Confirmed' ,'$targetFile' )";
                 $upd = "UPDATE appointments SET status='Checking' WHERE appointment_id='$appoint_id' AND account_id = '$account_id'"; 
                 $upd_result = mysqli_query($conn , $upd);
                 if ($conn->query($sql) === TRUE) {
