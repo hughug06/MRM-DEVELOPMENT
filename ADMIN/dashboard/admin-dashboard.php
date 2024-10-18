@@ -62,11 +62,13 @@ include_once '../../Database/database.php';
                             <h2 class="main-content-title fs-24 mb-1">Dashboard</h2>
                         </div>
                     </div>
+
+                    <!-- SOLAR STOCKS -->
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Solar Panel Stock Levels</div>
+                                    <div class="card-title">Solar Panel Stocks</div>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
@@ -77,7 +79,7 @@ include_once '../../Database/database.php';
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Solar Panel Reports</div>
+                                    <div class="card-title">Solar Panel low stock list</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive userlist-table">
@@ -101,7 +103,7 @@ include_once '../../Database/database.php';
                                                 else{
                                                 ?>
                                                     <tr>
-                                                        <td>No low stocks</td>   
+                                                        <td>No low stocks for Solar Panels</td>   
                                                     </tr>
                                                 <?php 
                                                 }
@@ -114,12 +116,14 @@ include_once '../../Database/database.php';
                             </div>
                         </div>
                     </div>
+
+                    <!-- STOCK GENERATOR -->
                     <div class="row">
                         <!-- Bar chart for Generator -->
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Generator Stock Levels</div>
+                                    <div class="card-title">Generator Stocks</div>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
@@ -130,7 +134,7 @@ include_once '../../Database/database.php';
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Generator Reports</div>
+                                    <div class="card-title">Generator low stock list</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive userlist-table">
@@ -154,7 +158,7 @@ include_once '../../Database/database.php';
                                             else{
                                                 ?>
                                                     <tr>
-                                                        <td>No low stocks</td>   
+                                                        <td>No low stocks for Generators</td>   
                                                     </tr>
                                                 <?php 
                                             }
@@ -284,6 +288,7 @@ include_once '../../Database/database.php';
                 ]
             };
 
+
             // Define the data for solar
             const data1 = {
                 labels: solar.products,
@@ -327,7 +332,7 @@ include_once '../../Database/database.php';
                     borderWidth: 1
                 }]
             };
-
+            
             // Define the chart configuration for solar
             const config1 = {
                 type: 'bar',
@@ -354,12 +359,14 @@ include_once '../../Database/database.php';
                 }
             };
 
-            // Create the chart
+            
+            // Create the chart for solar
             const myChart1 = new Chart(
                 document.getElementById('chartjs-bar'),
                 config1
             );
 
+            // Create the chart for generator
             const myChart2 = new Chart(
                 document.getElementById('chartjs-bar2'),
                 config2
