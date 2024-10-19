@@ -138,8 +138,8 @@ include_once '../../../Database/database.php';
                 var unit_value = unit.value;
                 var quantity_value = parseInt(quantity.value);
                 var amount_value = parseInt(amount.value);
-                var description = description_ID.value;
-                if(unit_value == "" || description == ""  || quantity_value == "" || amount_value == ""){
+                var description_value = description_ID.value;
+                if(unit_value == "" || description_value == ""  || quantity.value == "" || amount.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -154,6 +154,17 @@ include_once '../../../Database/database.php';
                     Swal.fire({
                         title: 'ERROR',
                         html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(quantity_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
@@ -176,7 +187,7 @@ include_once '../../../Database/database.php';
                             formData.append('unit_name', unit_value);
                             formData.append('quantity', quantity_value);
                             formData.append('amount', amount_value);
-                            formData.append('Description', description);
+                            formData.append('Description', description_value);
                             
                             $.ajax({
                                 url: 'function.php',
