@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2024 at 12:16 AM
+-- Generation Time: Oct 19, 2024 at 05:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,6 +42,7 @@ CREATE TABLE `service_worker` (
 --
 
 
+
 --
 -- Indexes for dumped tables
 --
@@ -64,7 +65,7 @@ ALTER TABLE `service_worker`
 -- AUTO_INCREMENT for table `service_worker`
 --
 ALTER TABLE `service_worker`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- Constraints for dumped tables
@@ -75,7 +76,9 @@ ALTER TABLE `service_worker`
 --
 ALTER TABLE `service_worker`
   ADD CONSTRAINT `fk_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `service_payment` (`payment_id`);
+  ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `service_payment` (`payment_id`),
+  ADD CONSTRAINT `fk_price` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
+  ADD CONSTRAINT `service_worker_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

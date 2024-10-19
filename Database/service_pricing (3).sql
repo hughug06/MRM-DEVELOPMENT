@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2024 at 08:37 PM
+-- Generation Time: Oct 19, 2024 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `service_pricing` (
   `pricingid` int(11) NOT NULL,
-  `account_id` int(11) DEFAULT NULL,
-  `appointment_id` int(11) DEFAULT NULL,
   `unit` enum('items','set','job','lot') NOT NULL,
   `description` varchar(100) NOT NULL,
   `quantity` int(50) NOT NULL,
@@ -51,9 +49,7 @@ CREATE TABLE `service_pricing` (
 -- Indexes for table `service_pricing`
 --
 ALTER TABLE `service_pricing`
-  ADD PRIMARY KEY (`pricingid`),
-  ADD KEY `fk_service_pricing_account` (`account_id`),
-  ADD KEY `fk_service_pricing_appointment` (`appointment_id`);
+  ADD PRIMARY KEY (`pricingid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -63,7 +59,7 @@ ALTER TABLE `service_pricing`
 -- AUTO_INCREMENT for table `service_pricing`
 --
 ALTER TABLE `service_pricing`
-  MODIFY `pricingid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `pricingid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables

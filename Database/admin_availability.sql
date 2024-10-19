@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 11:28 PM
+-- Generation Time: Oct 19, 2024 at 05:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,6 +40,7 @@ CREATE TABLE `admin_availability` (
 --
 
 
+
 --
 -- Indexes for dumped tables
 --
@@ -60,7 +61,7 @@ ALTER TABLE `admin_availability`
 -- AUTO_INCREMENT for table `admin_availability`
 --
 ALTER TABLE `admin_availability`
-  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2024 at 12:16 AM
+-- Generation Time: Oct 19, 2024 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,13 +32,13 @@ CREATE TABLE `service_or` (
   `client_id` int(11) DEFAULT NULL,
   `appointment_id` int(11) DEFAULT NULL,
   `payment_id` int(11) DEFAULT NULL,
-  `worker_id` int(11) DEFAULT NULL,
-  `pricing_id` int(11) DEFAULT NULL
+  `worker_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service_or`
 --
+
 
 
 --
@@ -53,8 +53,7 @@ ALTER TABLE `service_or`
   ADD KEY `account_id` (`client_id`),
   ADD KEY `appointment_id` (`appointment_id`),
   ADD KEY `payment_id` (`payment_id`),
-  ADD KEY `fk_worker_id` (`worker_id`),
-  ADD KEY `fk_price_money` (`pricing_id`);
+  ADD KEY `fk_worker_id` (`worker_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -64,7 +63,7 @@ ALTER TABLE `service_or`
 -- AUTO_INCREMENT for table `service_or`
 --
 ALTER TABLE `service_or`
-  MODIFY `receiptid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `receiptid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
