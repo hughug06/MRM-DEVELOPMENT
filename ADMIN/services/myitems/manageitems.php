@@ -62,7 +62,14 @@
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                             <div class="card custom-card">
                                 <div class="card-header border-bottom-0 d-block">                            
-                                    <label class="main-content-label mb-0 pt-2">Items</label>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0">Items</label>
+                                    <a href="item-add-form.php">
+                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
+                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                        </button>
+                                    </a>
+                                </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive userlist-table">
