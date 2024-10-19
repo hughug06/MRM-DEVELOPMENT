@@ -164,7 +164,7 @@ global $conn;
                 var description_value = description.value;
                 var unit_value = unit.value;
 
-                if(unit_value == "" || description_value == ""  || quantity_value == "" || amount_value == ""){
+                if(unit_value == "" || description_value == ""  || quantity.value == "" || amount.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -179,6 +179,17 @@ global $conn;
                     Swal.fire({
                         title: 'ERROR',
                         html: "Minimum Price cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(quantity_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {

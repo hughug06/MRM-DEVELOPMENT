@@ -161,6 +161,17 @@ include_once '../../../Database/database.php';
                         }
                     });
                 }
+                else if(quantity_value <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
                 else{
                     Swal.fire({
                         title: 'Confirmation',
