@@ -77,7 +77,6 @@ ALTER TABLE `service_worker`
 ALTER TABLE `service_worker`
   ADD CONSTRAINT `fk_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `service_payment` (`payment_id`),
-  ADD CONSTRAINT `fk_price` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
   ADD CONSTRAINT `service_worker_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
 COMMIT;
 

@@ -73,8 +73,6 @@ ALTER TABLE `service_or`
 -- Constraints for table `service_or`
 --
 ALTER TABLE `service_or`
-  ADD CONSTRAINT `fk_price_money` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
-  ADD CONSTRAINT `fk_pricing` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
   ADD CONSTRAINT `fk_worker_id` FOREIGN KEY (`worker_id`) REFERENCES `accounts` (`account_id`),
   ADD CONSTRAINT `service_or_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `accounts` (`account_id`),
   ADD CONSTRAINT `service_or_ibfk_2` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`),

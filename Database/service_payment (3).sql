@@ -72,7 +72,6 @@ ALTER TABLE `service_payment`
 -- Constraints for table `service_payment`
 --
 ALTER TABLE `service_payment`
-  ADD CONSTRAINT `fk_price_service` FOREIGN KEY (`pricing_id`) REFERENCES `service_pricing` (`pricingid`),
   ADD CONSTRAINT `fk_service_payment_account` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_service_payment_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
