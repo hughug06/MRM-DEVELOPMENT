@@ -69,7 +69,8 @@ require_once '../../../Database/database.php';
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
                                     <a class="nav-link  active" data-bs-toggle="tab" href="#pending">Pending</a>
-                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment</a>                                   
+                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment</a>         
+                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment Checking</a>                
                                     <a class="nav-link" data-bs-toggle="tab" href="#approved">Approved</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#completed">Completed</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#cancelled">Cancelled</a>
@@ -81,7 +82,7 @@ require_once '../../../Database/database.php';
                                         <div class="tab-content">
                                             <div class="main-content-body tab-pane p-4 border-top-0 active" id="pending">
                                                 <div class="mb-4 main-content-label">Pending</div>
-                                                <div class="card-body border">  
+                                                    <div class="card-body border">  
                                                             <!-- Content Here -->
                                                             <?php 
                                                                 $userid = $_SESSION['account_id'];
@@ -273,6 +274,12 @@ require_once '../../../Database/database.php';
 
 
                                             </div>
+                                            <div class="main-content-body p-4 border tab-pane border-top-0" id="paymentchecking">
+                                                <div class="mb-4 main-content-label">Payment Checking</div>
+                                                <div class="card-body border">
+                                                   <!-- Content Here -->
+                                                </div>
+                                            </div>           
                                             <div class="main-content-body  tab-pane p-4 border-top-0 p-0" id="approved">
                                                 <div class="mb-4 main-content-label">Approved</div>
                                                 <div class="card-body border">
@@ -557,15 +564,14 @@ require_once '../../../Database/database.php';
                                                                 }
                                                             ?>
                                                 </div>
-                                            </div>                                                  
+                                            </div>            
+                                                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
 
@@ -672,13 +678,13 @@ require_once '../../../Database/database.php';
             </div>
         </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="downloadReceipt">Download Receipt</button>
-      </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="downloadReceipt">Download Receipt</button>
+        </div>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
             
 
             <!-- Footer Start -->
