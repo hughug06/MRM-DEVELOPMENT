@@ -193,9 +193,9 @@ global $conn;
                 var Pname = document.getElementById("Pname");
 
                 var item_id_value = item_id.value;
-                var stocks_value = parseInt(stocks.value);
-                var min_price_value = parseInt(min_price.value);
-                var max_price_value = parseInt(max_price.value);
+                var stocks_value = parseFloat(stocks.value);
+                var min_price_value = parseFloat(min_price.value);
+                var max_price_value = parseFloat(max_price.value);
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
                 if(availability_ID.checked){
@@ -207,7 +207,7 @@ global $conn;
                 var image = document.getElementById("image").files[0];
                 var Pname_value = Pname.value;
 
-                if(stocks_value == "" || min_price_value == "" || max_price_value == ""){
+                if(stocks.value == "" || min_price.value == "" || max_price.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -233,6 +233,17 @@ global $conn;
                     Swal.fire({
                         title: 'ERROR',
                         html: "Maximum Price cannot be less than or equal to minimum price.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(stocks_value < 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Stocks cannot be less than 0.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {

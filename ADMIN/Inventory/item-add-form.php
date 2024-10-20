@@ -214,9 +214,9 @@ include_once '../../Database/database.php';
                 var IType_value = IType.value;
                 var PPower_value = PPower.value;
                 var custom = custom_ID.value;
-                var stocks_value = parseInt(stocks.value);
-                var min_price_value = parseInt(min_price.value);
-                var max_price_value = parseInt(max_price.value);
+                var stocks_value = parseFloat(stocks.value);
+                var min_price_value = parseFloat(min_price.value);
+                var max_price_value = parseFloat(max_price.value);
                 var specification = specification_ID.value;
                 var description = description_ID.value;
                 if(availability_ID.checked){
@@ -232,7 +232,7 @@ include_once '../../Database/database.php';
                 else{
                     power_checker = 20;
                 }
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks_value == "" || min_price_value == ""  || max_price_value == ""){
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || min_price.value == ""  || max_price.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -269,6 +269,17 @@ include_once '../../Database/database.php';
                     Swal.fire({
                         title: 'ERROR',
                         html: "Maximum Price cannot be less than  or equal to minimum price.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(stocks_value < 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Stocks cannot be less than 0.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {

@@ -2,6 +2,9 @@
 <?php 
 require_once '../authetincation.php';
 include_once '../../Database/database.php';
+function formatMoney($number) {
+    return number_format($number, 2, '.', ',');
+}
 ?>
 
 
@@ -180,9 +183,12 @@ include_once '../../Database/database.php';
                                                  <td><?= $resultItem['ProductName']?></td>     
                                                  <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>                                       
                                                  <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>                       
-                                                 <td><?= $resultItem['min_price']?></td> 
-                                                 <td><?= $resultItem['max_price']?></td>                                         
-                                                 <td><?= $resultItem['stock']?></td>   
+                                                 <td>₱<?= number_format($resultItem['min_price'])?></td> 
+                                                 <td>₱<?= number_format($resultItem['max_price'])?></td>                                         
+                                                <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
+                                                ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
+                                                    <?= $resultItem['stock']?>
+                                                </td>   
                                                 <td>                                                 
                                                     <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
                                                     <!-- Add Stocks Button -->
