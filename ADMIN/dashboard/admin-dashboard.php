@@ -1,6 +1,9 @@
 <?php
 require_once '../authetincation.php';
 include_once '../../Database/database.php';
+function formatMoney($number) {
+    return number_format($number, 2, '.', ',');
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +65,374 @@ include_once '../../Database/database.php';
                             <h2 class="main-content-title fs-24 mb-1">Dashboard</h2>
                         </div>
                     </div>
+
+                    <div class="row">
+
+
+                        <!-- Stocks -->
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Stocks</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive userlist-table">
+                                        <div class="row">
+                                            <div class="col-xl-12 mb-3">
+                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                    <thead>Total Solar Panel in Stocks</thead>
+                                                    <tbody>
+                                                        <?php 
+                                                        require '../../Database/database.php';                                          
+                                                        $select = "Select * from products Where ProductType = 'Solar Panel'";
+                                                        $result = mysqli_query($conn , $select);
+                                                        $total = 0.00;
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                                $total = $total + $resultItem['stock'];
+                                                            }      
+                                                        ?>
+                                                            <tr>
+                                                                <td><?php echo $total ?></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        else{
+                                                        ?>
+                                                            <tr>
+                                                                <td>Empty</td>   
+                                                            </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-xl-12 mb-3">
+                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                    <thead>Total Generator in Stocks</thead>
+                                                    <tbody>
+                                                        <?php 
+                                                        require '../../Database/database.php';                                          
+                                                        $select = "Select * from products Where ProductType = 'Generator'";
+                                                        $result = mysqli_query($conn , $select);
+                                                        $total = 0.00;
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                                $total = $total + $resultItem['stock'];
+                                                            }      
+                                                        ?>
+                                                            <tr>
+                                                                <td><?php echo $total ?></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        else{
+                                                        ?>
+                                                            <tr>
+                                                                <td>Empty</td>   
+                                                            </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Out of Stock Items -->
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Out of Stocks</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive userlist-table">
+                                        <div class="row">
+                                            <div class="col-xl-12 mb-3">
+                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                    <thead>Solar Panel</thead>
+                                                    <tbody>
+                                                    <?php 
+                                                        require '../../Database/database.php';                                          
+                                                        $select = "Select * from products Where ProductType = 'Solar Panel' and stock =0";
+                                                        $result = mysqli_query($conn , $select);
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                                ?>
+                                                                    <tr>
+                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
+                                                                    </tr>
+                                                                <?php
+                                                            }      
+                                                        }
+                                                        else{
+                                                        ?>
+                                                            <tr>
+                                                                <td>All items on Solar Panel have stocks</td>   
+                                                            </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-xl-12 mb-3">
+                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                    <thead>Generator</thead>
+                                                    <tbody>
+                                                        <?php 
+                                                        require '../../Database/database.php';                                          
+                                                        $select = "Select * from products Where ProductType = 'Generator' and stock =0";
+                                                        $result = mysqli_query($conn , $select);
+                                                        if(mysqli_num_rows($result) > 0){
+                                                            foreach($result as $resultItem){
+                                                                ?>
+                                                                    <tr>
+                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
+                                                                    </tr>
+                                                                <?php
+                                                            }      
+                                                        }
+                                                        else{
+                                                        ?>
+                                                            <tr>
+                                                            <td>All items on Generator have stocks</td>    
+                                                            </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                        <!-- Stock value -->
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Stock Value</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- Total Minimum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Total Minimum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['min_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Total Maximum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Total Maximum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Solar Total Minimum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Solar Panel Total Minimum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products Where ProductType = 'Solar Panel'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Solar Total Maximum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Solar Panel Total Maximum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products Where ProductType = 'Solar Panel'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Gen Total Maximum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Generator Total Maximum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products Where ProductType = 'Generator'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- Gen Total Maximum Stock value -->
+                                        <div class="col-xl-12 mb-3">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                <thead>Generator Total Maximum Stock Value</thead>
+                                                <tbody>
+                                                    <?php 
+                                                    require '../../Database/database.php';                                          
+                                                    $select = "Select * from products Where ProductType = 'Generator'";
+                                                    $result = mysqli_query($conn , $select);
+                                                    $total = 0.00;
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $total = $total + $product_total;
+                                                        }      
+                                                    ?>
+                                                        <tr>
+                                                            <td>₱<?php echo formatMoney($total) ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                    ?>
+                                                        <tr>
+                                                            <td>Empty</td>   
+                                                        </tr>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REPORTS TABLE -->
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Solar Panel Stock Levels</div>
+                                    <div class="card-title">Solar Panel Stocks</div>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
@@ -77,7 +443,7 @@ include_once '../../Database/database.php';
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Solar Panel Reports</div>
+                                    <div class="card-title">Solar Panel low stock list</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive userlist-table">
@@ -91,7 +457,7 @@ include_once '../../Database/database.php';
                                                 foreach($result as $resultItem){
                                                     ?> 
                                                     <tr>
-                                                    <td class="text-danger">Product: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>     
+                                                    <td class="text-warning">Item: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>     
                                                 </tr>
 
                                                     <?php 
@@ -101,7 +467,7 @@ include_once '../../Database/database.php';
                                                 else{
                                                 ?>
                                                     <tr>
-                                                        <td>No low stocks</td>   
+                                                        <td>No low stocks for Solar Panels</td>   
                                                     </tr>
                                                 <?php 
                                                 }
@@ -114,12 +480,14 @@ include_once '../../Database/database.php';
                             </div>
                         </div>
                     </div>
+
+                    <!-- STOCK GENERATOR -->
                     <div class="row">
                         <!-- Bar chart for Generator -->
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Generator Stock Levels</div>
+                                    <div class="card-title">Generator Stocks</div>
                                 </div>
                                 <div class="card-body">
                                     <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
@@ -130,7 +498,7 @@ include_once '../../Database/database.php';
                         <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Generator Reports</div>
+                                    <div class="card-title">Generator low stock list</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive userlist-table">
@@ -144,7 +512,7 @@ include_once '../../Database/database.php';
                                                 foreach($result as $resultItem){
                                                     ?> 
                                                     <tr>
-                                                        <td class="text-danger">Product: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>   
+                                                        <td class="text-warning">Item: "<?= $resultItem['ProductName']?>" is low on stocks! stocks left: <?= $resultItem['stock']?></td>   
                                                     </tr>
 
                                                     <?php 
@@ -154,7 +522,7 @@ include_once '../../Database/database.php';
                                             else{
                                                 ?>
                                                     <tr>
-                                                        <td>No low stocks</td>   
+                                                        <td>No low stocks for Generators</td>   
                                                     </tr>
                                                 <?php 
                                             }
@@ -284,6 +652,7 @@ include_once '../../Database/database.php';
                 ]
             };
 
+
             // Define the data for solar
             const data1 = {
                 labels: solar.products,
@@ -327,7 +696,7 @@ include_once '../../Database/database.php';
                     borderWidth: 1
                 }]
             };
-
+            
             // Define the chart configuration for solar
             const config1 = {
                 type: 'bar',
@@ -354,12 +723,14 @@ include_once '../../Database/database.php';
                 }
             };
 
-            // Create the chart
+            
+            // Create the chart for solar
             const myChart1 = new Chart(
                 document.getElementById('chartjs-bar'),
                 config1
             );
 
+            // Create the chart for generator
             const myChart2 = new Chart(
                 document.getElementById('chartjs-bar2'),
                 config2
