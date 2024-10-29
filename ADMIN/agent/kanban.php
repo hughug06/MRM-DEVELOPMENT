@@ -1,6 +1,6 @@
 <?php 
 require_once '../authetincation.php';
-require_once '../../Database/database.php';
+include_once '../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +85,7 @@ require_once '../../Database/database.php';
 
             <!-- Start::app-content -->
             <div class="main-content app-content">
-                <div class="container-fluid">
+            <div class="container-fluid">
                     <div class="row">
                         <div class="d-flex mt-4 mb-4">
                             <h1 class="my-auto">Kanban</h1>
@@ -94,7 +94,7 @@ require_once '../../Database/database.php';
                         <div class="col-lg 4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">To Do</div>
+                                    <div class="card-title">For Email Verification</div>
                                 </div>
                                 <div class="card-body" id="todo">
                                     
@@ -104,7 +104,7 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">In Progress</div>
+                                    <div class="card-title">Waiting for Meeting</div>
                                 </div>
                                 <div class="card-body" id="in-progress">
                                    
@@ -114,7 +114,37 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Done</div>
+                                    <div class="card-title">Ongoing Meeting</div>
+                                </div>
+                                <div class="card-body" id="done">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Approved</div>
+                                </div>
+                                <div class="card-body" id="done">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Completed</div>
+                                </div>
+                                <div class="card-body" id="done">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">Cancelled</div>
                                 </div>
                                 <div class="card-body" id="done">
                                    
@@ -128,19 +158,25 @@ require_once '../../Database/database.php';
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h3 class="modal-title" id="addTaskModalLabel">Add Task</h3>
+                                <button type="button" class="btn-close" onclick="closemodal()" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
-                            <input type="text" class="form-control" id="taskProduct" placeholder="Products">
-                            <input type="text" class="form-control" id="taskContact" placeholder="Contacts">
-                            <input type="text" class="form-control" id="taskAddress" placeholder="Address">
+                            <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                            <input type="text" class="form-control" id="name" placeholder="Full Name">
+                            <input type="number" class="form-control" id="age" placeholder="Age">
+                            <input type="text" class="form-control" id="location" placeholder="location">
+                            <div id="productContainer">
+                                <select class="form-control" id="product" placeholder="Product">
+                                </select>
+                            </div>
+                            <button class="btn btn-primary ms-auto" onclick="addMore()">Add more product</button>
                                
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+                                <button type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="saveTaskBtn">Add and Set Appointment</button>
                             </div>
                         </div>
                     </div>
@@ -195,47 +231,146 @@ require_once '../../Database/database.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
 
         <script>
+            $(document).ready(function(){
+                $('#product').append('<option value ="">Select Product</option>');
+                $.ajax({
+                    url: 'function.php',
+                    type: 'GET', // Change to GET
+                    data: { PrType: true },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#products').empty();
+                            var existingValues = []; // Array to track existing values
+                            
+                            $.each(response.data.products, function(index, item) {
+                                // Check if the value is already in the existingValues array
+                                if (!existingValues.includes(item.value)) {
+                                    $('#products').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                    existingValues.push(item.value); // Add value to the array
+                                }
+                            });
+                        } else {
+                            alert('No Watts/KVA found.');
+                        }
+                    }
+                });
+            });
+
     // Drag and drop functionality
-    const drake = dragula([document.getElementById('todo'), document.getElementById('in-progress'), document.getElementById('done')]);
     let id = 1;
+
+    //function for adding another product input
+    function addMore() {
+        // Create a new input element
+        const newProductInput = document.createElement("input");
+        newProductInput.type = "text";
+        newProductInput.className = "form-control";
+        newProductInput.placeholder = "Product";
+
+        // Append the new input to the product container
+        const productContainer = document.getElementById("productContainer");
+        productContainer.appendChild(newProductInput);
+    }
+    function closemodal() {
+        // Get the product container and reset it
+        const productContainer = document.getElementById("productContainer");
+        
+        // Clear all child nodes (inputs) within the productContainer
+        while (productContainer.firstChild) {
+            productContainer.removeChild(productContainer.firstChild);
+        }
+
+        // Re-add the initial product input field
+        const initialProductInput = document.createElement("input");
+        initialProductInput.type = "text";
+        initialProductInput.className = "form-control";
+        initialProductInput.placeholder = "Product";
+        initialProductInput.id = "product";
+        productContainer.appendChild(initialProductInput);
+    }
 
     // Add Task button functionality
     document.getElementById('saveTaskBtn').addEventListener('click', function () {
-        const taskName = document.getElementById('taskName').value;
-        const taskProduct = document.getElementById('taskProduct').value;
-        const taskContact = document.getElementById('taskContact').value;
-        const taskAddress = document.getElementById('taskAddress').value;
-
-        if (taskName || taskProduct || taskContact || taskAddress) {
-            // Create a new task element
-            const newTask = document.createElement('div');
-            newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
-
-            // Add the task details
-            newTask.innerHTML = `
-                ${id}. ${taskName || 'Unnamed Task'}<br>
-                <strong>Product:</strong> ${taskProduct || 'No Product'}<br>
-                <strong>Contact:</strong> ${taskContact || 'No Contact'}<br>
-                <strong>Address:</strong> ${taskAddress || 'No Address'}
-                <button class="btn-close remove-btn" aria-label="Remove"></button>
-            `;
-
-            id++;
-
-            // Append task to the "To Do" section
-            document.getElementById('todo').appendChild(newTask);
-
-            // Clear input fields
-            document.getElementById('taskName').value = '';
-            document.getElementById('taskProduct').value = '';
-            document.getElementById('taskContact').value = '';
-            document.getElementById('taskAddress').value = '';
-
-            // Close modal if needed (assuming you have a modal)
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
-            if (modal) modal.hide();
+        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const location = document.getElementById('location').value;
+        const product = document.getElementById('product').value;
+        const productContainer = document.getElementById("productContainer");
+        const productInputs = productContainer.getElementsByTagName("input");
+        
+        const productValues = [];
+        for (let i = 0; i < productInputs.length; i++) {
+            productValues.push(productInputs[i].value); // Get the value of each input
         }
+
+        // Log the product values to the console or handle them as needed
+        console.log(productValues);
+        
+        // Example: Alerting the values (you can remove this in production)
+        alert("Product Values: " + productValues.join(", "));
+
     });
+
+    // function Display(){
+    //     const email = document.getElementById('email').value;
+    //     const name = document.getElementById('name').value;
+    //     const age = document.getElementById('age').value;
+    //     const location = document.getElementById('location').value;
+    //     const product = document.getElementById('product').value;
+    //     const productContainer = document.getElementById("productContainer");
+    //     const productInputs = productContainer.getElementsByTagName("input");
+        
+    //     const productValues = [];
+    //     for (let i = 0; i < productInputs.length; i++) {
+    //         productValues.push(productInputs[i].value); // Get the value of each input
+    //     }
+
+    //     // Log the product values to the console or handle them as needed
+    //     console.log(productValues);
+        
+    //     // Example: Alerting the values (you can remove this in production)
+    //     alert("Product Values: " + productValues.join(", "));
+
+    //     if (email || name || age || location) {
+    //         // Create a new task element
+    //         const newTask = document.createElement('div');
+    //         newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
+
+    //         // Add the task details
+    //         newTask.innerHTML = `
+    //             ${id}. ${email || 'Unnamed Task'}<br>
+    //             <strong>Name:</strong> ${name || 'No name'}<br>
+    //             <strong>Location:</strong> ${location || 'No location'}
+    //             <button class="btn-close remove-btn" aria-label="Remove"></button>
+    //         `;
+
+    //         id++;
+
+    //         // Append task to the "To Do" section
+    //         document.getElementById('todo').appendChild(newTask);
+
+    //         // Clear input fields
+    //         document.getElementById('email').value = '';
+    //         document.getElementById('name').value = '';
+    //         document.getElementById('age').value = '';
+    //         document.getElementById('location').value = '';
+    //         document.getElementById('product').value = '';
+    //         while (productContainer.firstChild) {
+    //             productContainer.removeChild(productContainer.firstChild);
+    //         }
+    //         const initialProductInput = document.createElement("input");
+    //         initialProductInput.type = "text";
+    //         initialProductInput.className = "form-control";
+    //         initialProductInput.placeholder = "Product";
+    //         initialProductInput.id = "product";
+    //         productContainer.appendChild(initialProductInput);
+
+    //         // Close modal if needed (assuming you have a modal)
+    //         const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+    //         if (modal) modal.hide();
+    //     }
+    // }
 
     // Delegate event listener to handle task removal
     document.addEventListener('click', function(e) {
