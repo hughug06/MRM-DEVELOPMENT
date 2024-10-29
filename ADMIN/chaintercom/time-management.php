@@ -152,7 +152,7 @@ require_once '../../Database/database.php';
                                     <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
                                         <thead>
                                             <tr>
-                                            <th class="wd-lg-20p"><span>admin</span></th>       
+                                                <th class="wd-lg-20p"><span>admin</span></th>       
                                                 <th class="wd-lg-8p"><span>Date</span></th>
                                                 <th class="wd-lg-20p"><span>Start time</span></th>
                                                 <th class="wd-lg-20p"><span>End Time</span></th>                                                   

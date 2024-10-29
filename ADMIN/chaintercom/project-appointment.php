@@ -1,8 +1,6 @@
-
 <?php 
 require_once '../../Database/database.php';
 require_once '../authetincation.php';
-
 ?>
 
 
@@ -51,10 +49,6 @@ require_once '../authetincation.php';
 
 <body>
 
-
-
-
-
     <div class="page">
 
              <!-- app-header -->
@@ -67,30 +61,31 @@ require_once '../authetincation.php';
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                <div class="row row-sm mt-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                        <div class="card custom-card">
-                            <div class="card-header border-bottom-0 d-block">                            
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0"></label>               
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th class="col-lg-2"><span>name</span></th>
-                                                        <th class="col-lg-2"><span>product</span></th>
-                                                        <th class="col-lg-3"><span>meeting link</span></th>
-                                                        <th class="col-lg-2"><span>date</span></th>
-                                                        <th class="col-lg-2"><span>time</span></th>
-                                                        <th class="col-lg-1">status</th>
-                                                        <th class="col-lg-1">action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                    <div class="row row-sm mt-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                            <div class="card custom-card">
+                                <div class="card-header border-bottom-0 d-block">                            
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0 pt-2">Project Appointment</label>           
+                                    </div>   
+                                </div> 
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-lg-2"><span>name</span></th>
+                                                    <th class="col-lg-2"><span>product</span></th>
+                                                    <th class="col-lg-3"><span>meeting link</span></th>
+                                                    <th class="col-lg-2"><span>date</span></th>
+                                                    <th class="col-lg-2"><span>time</span></th>
+                                                    <th class="col-lg-1">status</th>
+                                                    <th class="col-lg-1">action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                 <?php 
-                                                require '../../Database/database.php';             
-                                                                                                                                                        
+                                                require '../../Database/database.php';
                                                 $select = "SELECT * FROM chaintercom_appointment";
                                                 $result = mysqli_query($conn, $select);
                                                 if(mysqli_num_rows($result) > 0) {
@@ -100,30 +95,25 @@ require_once '../authetincation.php';
                                                             <td><?= $resultItem['name'] ?></td>    
                                                             <td><?= $resultItem['product'] ?></td>    
                                                             <td><a href="meeting_room.php">Meeting link</a></td>     
-                                                            <td><?= $resultItem['date'] ?></td>                                        
+                                                            <td><?= $resultItem['date'] ?></td>
                                                             <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
                                                             <td><?= $resultItem['status'] ?></td>                          
                                                             <td>
-                                                                <button class="btn btn-danger "><i class="fe fe-trash">DECLINE</i></button>
+                                                                <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>DECLINE</button>
                                                             </td>
                                                         </tr>   
                                                         <?php 
                                                     }
                                                 }
                                                 ?>
-                                                </tbody>    
-                                            </table>
-                                        </div>
+                                            </tbody>    
+                                        </table>
                                     </div>
-
-
-                                           </div>
-                                      </div>
-                                 </div>
-                          </div>
-                     </div>
-                                                 
-               </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                         
+                </div>
             </div>
             <!--APP-CONTENT CLOSE-->
 
