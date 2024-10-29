@@ -62,34 +62,52 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
         <?php include_once('../../partials/sidebar.php') ?>
 
         <!-- App Content Start -->
-        <script src='https://8x8.vc/vpaas-magic-cookie-96f0941768964ab380ed0fbada7a502f/external_api.js'></script>
 
-            <script type="text/javascript">
-            let api;
+        <div class="main-content app-content">
+            <div class="container-fluid"> 
+                <div class="row row-sm">
+                    <div class="col-sm-12 col-lg-12 col-xl-8 banner-img">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div id="meet" class="ratio ratio-4x3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 col-xl-4 banner-img">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Calculations
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="text" class="form-label fs-14 text-dark">Input</label>
+                                    <input type="text" class="form-control" id="text" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text1" class="form-label fs-14 text-dark">Input2</label>
+                                    <input type="password" class="form-control" id="text1" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text2" class="form-label fs-14 text-dark">Input3</label>
+                                    <input type="password" class="form-control" id="text2" placeholder="">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="text3" class="form-label fs-14 text-dark">Input4</label>
+                                    <input type="password" class="form-control" id="text3" placeholder="">
+                                </div>
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button class="btn btn-primary" type="submit">Btn1</button>
+                                    <button class="btn btn-primary" type="submit">Btn2</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            const initIframeAPI = () => {
-                const domain = '8x8.vc';
-                const options = {
-                roomName: 'vpaas-magic-cookie-bb4f35f2fe1345019a3c975ef52ae613/ExampleRoom',
-                jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtYmI0ZjM1ZjJmZTEzNDUwMTlhM2M5NzVlZjUyYWU2MTMvYmI3YjUwLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MjkzNjE3NzAsImV4cCI6MTcyOTM2ODk3MCwibmJmIjoxNzI5MzYxNzY1LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtYmI0ZjM1ZjJmZTEzNDUwMTlhM2M5NzVlZjUyYWU2MTMiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiZ29vZ2xlLW9hdXRoMnwxMTI2MzQwNTIyNzU3ODU1OTUwNjYiLCJhdmF0YXIiOiIiLCJlbWFpbCI6ImphbmFyaWVzaW1wdWVydG8xM0BnbWFpbC5jb20ifX0sInJvb20iOiIqIn0.F5fFPP0p0WU43SiZhu1AmS5j-694PXLXK-7yt8i-EHSy3kRWpFnwZq_qYJDSyKcfAOCEUPSx0_mRgmLIyWmxVPzJ-OUeIYc8N4vhpuS-3pSjFswhKlCJeHj6J5SoNXSojmGZ20EULQAEo1b_mwVMgWTWn8qlkPhYow0b-PoS0Raik6Nng_XsneH3h7cz2Tiur_FgvGK46KExgbuc7mDh9TPJCpxlM_hEgWiXlLyvdwly2a5v5x7iErGT1Yhh_TD3Vtyubt4HvMU9rwW6JRoBz_bLGzLtvqVn15LKx2zH718kiA-1g2XKFX19NT3oh2o44-OF7IFcgeceNwt7aRV_sg',
-                width: 700,
-                height: 700,
-                parentNode: document.querySelector('#meet')
-                };
-                api = new JitsiMeetExternalAPI(domain, options);
-            }
-
-            window.onload = () => {
-                initIframeAPI();
-            }
-            </script>
-
-<body>
-    
-    
-    <div class="container mt-5"> <div id="meet"> </div></div>
-   
-</body>
         <!-- App Content End -->
 
         <!-- Footer -->
@@ -118,6 +136,30 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
     <script src="../../assets/js/custom.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src='https://8x8.vc/vpaas-magic-cookie-96f0941768964ab380ed0fbada7a502f/external_api.js'></script>
+
+    <script type="text/javascript">
+        let api;
+
+        const initIframeAPI = () => {
+            const domain = '8x8.vc';
+            const meetElement = document.querySelector('#meet');
+
+            const options = {
+                roomName: 'vpaas-magic-cookie-bb4f35f2fe1345019a3c975ef52ae613/ExampleRoom',
+                jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtYmI0ZjM1ZjJmZTEzNDUwMTlhM2M5NzVlZjUyYWU2MTMvYmI3YjUwLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MjkzNjE3NzAsImV4cCI6MTcyOTM2ODk3MCwibmJmIjoxNzI5MzYxNzY1LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtYmI0ZjM1ZjJmZTEzNDUwMTlhM2M5NzVlZjUyYWU2MTMiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiZ29vZ2xlLW9hdXRoMnwxMTI2MzQwNTIyNzU3ODU1OTUwNjYiLCJhdmF0YXIiOiIiLCJlbWFpbCI6ImphbmFyaWVzaW1wdWVydG8xM0BnbWFpbC5jb20ifX0sInJvb20iOiIqIn0.F5fFPP0p0WU43SiZhu1AmS5j-694PXLXK-7yt8i-EHSy3kRWpFnwZq_qYJDSyKcfAOCEUPSx0_mRgmLIyWmxVPzJ-OUeIYc8N4vhpuS-3pSjFswhKlCJeHj6J5SoNXSojmGZ20EULQAEo1b_mwVMgWTWn8qlkPhYow0b-PoS0Raik6Nng_XsneH3h7cz2Tiur_FgvGK46KExgbuc7mDh9TPJCpxlM_hEgWiXlLyvdwly2a5v5x7iErGT1Yhh_TD3Vtyubt4HvMU9rwW6JRoBz_bLGzLtvqVn15LKx2zH718kiA-1g2XKFX19NT3oh2o44-OF7IFcgeceNwt7aRV_sg',
+                parentNode: meetElement,
+            };
+
+            api = new JitsiMeetExternalAPI(domain, options);
+        };
+
+        window.onload = () => {
+            initIframeAPI();
+        };
+
+    </script>
     
 </body>
 
