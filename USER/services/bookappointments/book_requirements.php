@@ -309,7 +309,7 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
                 }
             });
         }
-        else if(product.value == "generator" || power.value < 20 || power.value > 1000){
+        else if(product.value == "generator" && power.value < 20 || power.value > 1000){
             Swal.fire({
                 title: 'ERROR',
                 html: "Power output for generator should not be less than 20 KVA or cannot be greater than 1000 KVA",
