@@ -10,6 +10,7 @@ if(isset($_POST['AddItem']))
   $Description = $_POST['Description'];
   $amount = $_POST['amount'];
 
+  
   if($unit_name != '' || $quantity != '' || $Description != '' || $amount != ''){                                                    
       $sql_insert = "INSERT INTO service_pricing (unit,description,quantity,amount) 
                           VALUES ('$unit_name' , '$Description' , '$quantity' , '$amount')";

@@ -94,7 +94,7 @@ require_once '../authetincation.php';
                                                         <tr>
                                                             <td><?= $resultItem['name'] ?></td>    
                                                             <td><?= $resultItem['product'] ?></td>    
-                                                            <td><a href="meeting_room.php">Meeting link</a></td>     
+                                                            <td><a href="meeting_room.php?app_id=<?= $resultItem['chaintercomappointid'] ?>&account_id=<?= $resultItem['account_id'] ?>">Meeting link</a></td> 
                                                             <td><?= $resultItem['date'] ?></td>
                                                             <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
                                                             <td><?= $resultItem['status'] ?></td>                          

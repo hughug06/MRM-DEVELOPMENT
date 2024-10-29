@@ -1,3 +1,11 @@
+<?php 
+require_once '../../Database/database.php';
+require_once '../../ADMIN/authetincation.php';
+
+// Define a dynamic room name (can be based on the appointment or user)
+$appointment_id = $_GET['appointment_id'] ?? 'default'; // Use a default or dynamic appointment ID
+$room_name = "appointment_" . "another"; // Room name dynamically based on appointment
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
@@ -5,101 +13,82 @@
 <head>
 
     <!-- Meta Data -->
-    <?php 
+    <?php include_once('../../partials/head.php') ?>
+    <title>Inquiries</title>
     
-    include_once(__DIR__. '/../../partials/head.php');
-    ?>
-    <title> Inquries </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
     <!-- Choices JS -->
     <script src="../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
     
-    <!-- Bootstrap Css -->
-    <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- Bootstrap CSS -->
+    <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-     <!-- Main Theme Js -->
-     <script src="../../assets/js/main.js"></script>
+    <!-- Main Theme JS -->
+    <script src="../../assets/js/main.js"></script>
 
-    <!-- Style Css -->
-    <link href="../../assets/css/styles.min.css" rel="stylesheet" >
+    <!-- Style CSS -->
+    <link href="../../assets/css/styles.min.css" rel="stylesheet">
 
-    <!-- Icons Css -->
-    <link href="../../assets/css/icons.css" rel="stylesheet" >
+    <!-- Icons CSS -->
+    <link href="../../assets/css/icons.css" rel="stylesheet">
 
-    <!-- Node Waves Css -->
-    <link href="../../assets/libs/node-waves/waves.min.css" rel="stylesheet" > 
+    <!-- Node Waves CSS -->
+    <link href="../../assets/libs/node-waves/waves.min.css" rel="stylesheet"> 
 
-    <!-- Simplebar Css -->
-    <link href="../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet" >
+    <!-- Simplebar CSS -->
+    <link href="../../assets/libs/simplebar/simplebar.min.css" rel="stylesheet">
     
-    <!-- Color Picker Css -->
+    <!-- Color Picker CSS -->
     <link rel="stylesheet" href="../../assets/libs/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" href="../../assets/libs/@simonwep/pickr/themes/nano.min.css">
 
-    <!-- Choices Css -->
+    <!-- Choices CSS -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        iframe {
-            width: 100%; /* Full width of the container */
-            height: 800px; /* Fixed height */
-            border: 1px solid #ccc;
-        }
-    </style>
+    <!-- Jitsi API -->
+    <script src='https://8x8.vc/<AppID>/external_api.js'></script>
+
 </head>
 
 <body>
 
-
-
-
-
     <div class="page">
+        <!-- App Header -->
+        <?php include_once('../../partials/header.php') ?>
+        
+        <!-- App Sidebar -->
+        <?php include_once('../../partials/sidebar.php') ?>
 
-             <!-- app-header -->
-             <?php include_once(__DIR__. '/../../partials/header.php')?>
-            <!-- /app-header -->
-            <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
-            <!-- End::app-sidebar -->
+        <!-- App Content Start -->
 
-            <!--APP-CONTENT START-->
-            <div class="main-content app-content">
-                <div class="container-fluid">
-                
-                <div class="container text-center">
-        <h1 class="mt-4">Join a Jitsi Meet Conference</h1>
-        <button class="btn btn-primary mb-3" onclick="loadMeeting('your-meeting-room')">Join Meeting</button>
-        <iframe id="jitsiFrame" src="" frameborder="0"></iframe>
-    </div>
-
-    <script>
-        function loadMeeting(meetingRoom) {
-            const baseUrl = 'https://meet.jit.si/';
-            document.getElementById('jitsiFrame').src = baseUrl + meetingRoom;
-        }
-    </script>
+        <div class="main-content app-content">
+            <div class="container-fluid"> 
+                <div class="row row-sm">
+                    <div class="col-sm-12 col-lg-12 col-xl-8 banner-img">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div id="meet" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+                 
                 </div>
             </div>
-            <!--APP-CONTENT CLOSE-->
+        </div>
 
-        
-        <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../../partials/footer.php') ?>
-        <!-- Footer End -->  
+        <!-- App Content End -->
+
+        <!-- Footer -->
+        <?php include_once('../../partials/footer.php') ?>
     </div>
 
-    
     <!-- Scroll To Top -->
     <div class="scrollToTop">
         <span class="arrow"><i class="fe fe-arrow-up"></i></span>
     </div>
     <div id="responsive-overlay"></div>
-    <!-- Scroll To Top -->
 
     <!-- Popper JS -->
     <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
@@ -107,39 +96,39 @@
     <!-- Bootstrap JS -->
     <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Defaultmenu JS -->
-    <script src="../../assets/js/defaultmenu.min.js"></script>
-
-    <!-- Node Waves JS-->
+    <!-- Node Waves JS -->
     <script src="../../assets/libs/node-waves/waves.min.js"></script>
-
-    <!-- Sticky JS -->
-    <script src="../../assets/js/sticky.js"></script>
 
     <!-- Simplebar JS -->
     <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="../../assets/js/simplebar.js"></script>
-
-    <!-- Color Picker JS -->
-    <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
-
-
-    
-    <!-- Custom-Switcher JS -->
-    <script src="../../assets/js/custom-switcher.min.js"></script>
-
-    <!-- Prism JS -->
-    <script src="../../assets/libs/prismjs/prism.js"></script>
-    <script src="../../assets/js/prism-custom.js"></script>
 
     <!-- Custom JS -->
-    <!-- <script src="../../assets/js/custom.js"></script> -->
+    <script src="../../assets/js/custom.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src='https://8x8.vc/vpaas-magic-cookie-96f0941768964ab380ed0fbada7a502f/external_api.js'></script>
+
+    <script type="text/javascript">
+  let api;
+
+  const initIframeAPI = () => {
+    const domain = '8x8.vc';
+    const options = {
+      roomName: 'vpaas-magic-cookie-1e1d307526af4b29bad5f071cdd7f1c6/ExampleRoom',
+      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzAyMjQwNDMsImV4cCI6MTczMDIzMTI0MywibmJmIjoxNzMwMjI0MDM4LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.pKl5-Sn1OhGpgtEJNGjf2s8e6Bbq7Ken7npeUj-7WggMH3I_f0onlQu3Jm5tdYhn5ZwmvXFSKXrXjtwWhxb-gXpQ5bTNzGfDMVO_xuTZKkIStY_vabB74T_UVzMpH_xfL7zd0mu6fU2flXAc1AuNHQwF_u6vrYKOvC3sBpgeLaCQmRz9yGhQuicVkJrKGa7iTdS1hTP2lkna_cjP9HnA9mPry7ZZ6BFUit-iqEDID5IKQMBAofMrCWS4kdxN1fZhVD9ap1M1ZzV9jEqaTrJkXU9K6uw5UvoY6Quyf7TYGfjzS7WRc7rf943a-Ns_OwrG1SBQO2EB1U2HIBB1KSc0FA',
+      width: 1500,
+      height: 700,
+      parentNode: document.querySelector('#meet')
+    };
+    api = new JitsiMeetExternalAPI(domain, options);
+  }
+
+  window.onload = () => {
+    initIframeAPI();
+  }
+</script>
+    
 </body>
 
 </html>
-<script>
-        function loadSite(url) {
-            document.getElementById('siteFrame').src = url;
-        }
- </script>
