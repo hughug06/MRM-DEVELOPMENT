@@ -52,68 +52,77 @@ require_once '../../../Database/database.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <style>
+    .calendar-container {
+        margin: 20px auto;
+    }
+    .calendar-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .calendar-body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Adjusts based on screen size */
+        gap: 10px;
+    }
+    .calendar-day {
+        padding: 10px; /* Reduced padding for smaller screens */
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+        background-color: #f8f9fa;
+        position: relative;
+        min-width: 50px; /* Ensure minimum width for buttons */
+    }
+    .calendar-day button { 
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .custom-card {
+        border: none;
+        transition: transform 0.3s ease;
+    }
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .card-title {
+        font-size: 1.5rem;
+    }
+    .card-text {
+        font-size: 1rem;
+    }
+    .btn-wave {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .view-appointments {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .modal-content {
+        max-height: 90vh; /* Prevents overflowing vertically */
+        overflow-y: auto; /* Allows scrolling if content overflows */
+    }
+    @media (max-width: 576px) {
         .calendar-container {
-            margin: 20px auto;
+            padding: 10px; /* Reduce padding on small screens */
         }
-        .calendar-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .calendar-body {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-        .calendar-day {
-            padding: 20px;
-            border: 1px solid #ddd;
-            text-align: center;
-            cursor: pointer;
-            background-color: #f8f9fa;
-            position: relative;
-        }
-        .calendar-day button { 
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .custom-card {
-            border: none;
-            transition: transform 0.3s ease;
-        }
-        .custom-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .card-title {
-            font-size: 1.5rem;
-        }
-        .card-text {
-            font-size: 1rem;
-        }
-        .btn-wave {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .view-appointments {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-    </style>
+    }
+
+</style>
+
 
 </head>
 
 <body>
-
-
-
-
 
     <div class="page">
 
@@ -126,114 +135,98 @@ require_once '../../../Database/database.php';
 
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
-            <div class="container-fluid mt-5 position-relative">
-           
-                <!-- Button trigger modal -->
-
-                <div class="text-center mb-4">
-                    <h1>SERVICES</h1>
-                </div>
-                <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
-                    <!-- Generator Card -->
-                    <div class="card custom-card">
-                        <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <h6 class="card-title fw-semibold">Generator</h6>
-                            <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                        </div>
-                    </div>
-                    <!-- Solar Panel Card -->
-                    <div class="card custom-card">
-                        <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
-                        <div class="card-body d-flex flex-column">
-                            <h6 class="card-title fw-semibold">Solar Panel</h6>
-                            <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Avail Now Button -->
-                <div class="d-flex justify-content-center mt-4">
-                    <?php 
-                    $service_count = $_SESSION['account_id'];
-                    $check_count = "select * from accounts where account_id = '$service_count'";
-                    $count_result = mysqli_query($conn , $check_count);
-                    $row_count = mysqli_fetch_assoc($count_result);
-                    $count = $row_count['service_count'];
-                    if($count < 5){
-                                               
-                    ?>
-                    <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
-                    <?php 
-                    }
-                    else{
-                        
-                    ?>
+                <div class="container-fluid mt-5 position-relative">
                     <!-- Button trigger modal -->
-                     <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
-                     Avail Now
-                     </button>
-                    <?php
-
-                    }
-                    ?>
-                </div>
-                
-
-                
-
-            <!--APP-CONTENT CLOSE-->
-            </div>   
-
-            <!-- MODAL FOR CALENDAR PICKER -->
-                <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered w-50">
-                    <div class="modal-content">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
-                        <div class="login_form">
-                        <div class="main-container container-fluid">
-                            <div class="card p-5 shadow-lg">
-                                <div class="container calendar-container">
-                                    <!-- Calendar Header -->
-                                    <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
-                                        <h3 id="monthYear"></h3>
-                                        <div>
-                                            <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
-                                            <button class="btn btn-outline-primary" id="nextMonth">Next</button>
-                                        </div>
-                                    </div>
-                                    <!-- Calendar Body -->
-                                    <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
-                                </div>
-                            </div>
-
-                            <!-- Modal for Available Time Slots -->
-                            <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul id="availableTimes" class="list-group">
-                                                <!-- Available times will be dynamically loaded here -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="text-center mb-4">
+                        <h1>SERVICES</h1>
+                    </div>
+                    <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
+                        <!-- Generator Card -->
+                        <div class="card custom-card">
+                            <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title fw-semibold">Generator</h6>
+                                <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
                             </div>
                         </div>
+                        <!-- Solar Panel Card -->
+                        <div class="card custom-card">
+                            <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title fw-semibold">Solar Panel</h6>
+                                <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Avail Now Button -->
+                    <div class="d-flex justify-content-center mt-4">
+                        <?php 
+                        $service_count = $_SESSION['account_id'];
+                        $check_count = "select * from accounts where account_id = '$service_count'";
+                        $count_result = mysqli_query($conn , $check_count);
+                        $row_count = mysqli_fetch_assoc($count_result);
+                        $count = $row_count['service_count'];
+                        if($count < 5){
+                                                
+                        ?>
+                        <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
+                        <?php 
+                        }
+                        else{
+                            
+                        ?>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
+                        Avail Now
+                        </button>
+                        <?php
 
+                        }
+                        ?>
+                    </div>
+                <!--APP-CONTENT CLOSE-->
+                </div>   
+
+                <!-- MODAL FOR CALENDAR PICKER -->
+                <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down"> <!-- Fullscreen on small screens -->
+                        <div class="modal-content">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                            <div class="container calendar-container p-5">
+                                <!-- Calendar Header -->
+                                <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+                                    <h3 id="monthYear"></h3>
+                                    <div>
+                                        <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
+                                        <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                    </div>
+                                </div>
+                                <!-- Calendar Body -->
+                                <div class="calendar-body row row-cols-7 g-3" id="calendarDays"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Modal for Available Time Slots -->
+                <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul id="availableTimes" class="list-group">
+                                    <!-- Available times will be dynamically loaded here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
             </div>
-
-            
-
-        
         <!-- Footer Start -->
         <?php include_once(__DIR__.'/../../../partials/footer.php') ?>
         <!-- Footer End -->  
@@ -268,15 +261,9 @@ require_once '../../../Database/database.php';
 
     <!-- Color Picker JS -->
     <script src="../../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
-
-
     
     <!-- Custom-Switcher JS -->
     <script src="../../../assets/js/custom-switcher.min.js"></script>
-
-    <!-- Prism JS -->
-    <script src="../../../assets/libs/prismjs/prism.js"></script>
-    <script src="../../../assets/js/prism-custom.js"></script>
 
     <!-- Custom JS -->
     <script src="../../../assets/js/custom.js"></script>
