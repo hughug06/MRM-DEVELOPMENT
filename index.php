@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="assets/landing_assets/css/font-awesome.css" />
     <link rel="stylesheet" href="assets/landing_assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/landing_assets/css/styles.css" />
-    <link rel="icon" href="assets/landing_assets/images/mrm-logo-2.png" />
+    <link rel="icon" href="assets/landing_assets/images/logo-mrm.png" />
     <title>MRM-EG Company</title>
   </head>
   <body>
@@ -39,14 +39,14 @@
       <div class="container">
         <a href="#" class="navbar-brand d-flex">
           <img
-            src="assets/landing_assets/images/mrm-logo-2.png"
+            src="assets/landing_assets/images/logo-mrm.png"
             alt=""
-            width="110"
+            width="65"
           />
-          <h2 class="my-auto">
+          <h1 class="my-auto">
             <span class="text-secondary">MRM</span
             ><span class="text-primary">-EG</span>
-          </h2>
+          </h1>
         </a>
 
         <button

@@ -475,10 +475,7 @@
         <div class="header-element">
             <div class="horizontal-logo">
                 <a href="index.html" class="header-logo">
-                    <h2 class="my-auto">
-                        <span class="text-primary">MRM</span
-                        ><span class="text-info">-EG</span>
-                    </h2>
+                    <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo">
                 </a>
             </div>
         </div>
@@ -503,7 +500,7 @@
         if($_SESSION['auth'] == "user")
         {
         ?>
-<div class="header-element d-xl-flex align-items-center">
+    <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
             <a href="#" id="view-projects" class="header-link" name="projects">
                 <i class="fa-regular fa-rectangle-list header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Projects"></i>
