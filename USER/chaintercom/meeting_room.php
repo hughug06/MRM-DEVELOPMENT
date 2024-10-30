@@ -64,16 +64,59 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
         <!-- App Content Start -->
 
         <div class="main-content app-content">
-            <div class="container-fluid"> 
+        <div class="container-fluid"> 
                 <div class="row row-sm">
                     <div class="col-sm-12 col-lg-12 col-xl-8 banner-img">
                         <div class="card custom-card">
                             <div class="card-body">
-                                <div id="meet" class=""></div>
+                                <div id="meet" class="ratio ratio-4x3"></div>
                             </div>
                         </div>
                     </div>
-                 
+                    <div class="col-sm-12 col-lg-12 col-xl-4 banner-img">
+                    <form id="appointmentForm" action="update_appointment.php" method="POST">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">
+                                    Calculations
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <?php 
+                                        $account_id = $_SESSION['account_id'];
+                                        require_once '../../Database/database.php';
+                                        $select = "SELECT * FROM chaintercom_appointment WHERE account_id = $account_id AND status = 'confirm'";
+                                        $result = mysqli_query($conn, $select);
+                                        if($result && mysqli_num_rows($result) > 0) {
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <label for="text" class="form-label fs-14 text-dark">Your Name</label>
+                                    <input type="text" class="form-control" id="text" placeholder="" value="<?= $row['name'] ?>" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text1" class="form-label fs-14 text-dark">Inquire products</label>
+                                    <input type="text" class="form-control" id="text1" placeholder="" value="<?= $row['product'] ?>" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="text2" class="form-label fs-14 text-dark">Status</label>
+                                    <input type="text" class="form-control" id="text2" placeholder="" value="<?= $row['status'] ?>" disabled>
+                                </div>
+                                <input type="hidden" id="actionType" name="actionType">
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button class="btn btn-primary" type="button" name="end" id="endButton">Restart Call</button>
+                                    <button class="btn btn-primary" type="button" name="back" id="backButton">Back</button>
+                                </div>
+                                <?php
+                                            }
+                                        } else {
+                                            echo "No confirmed appointment found or error accessing database";
+                                        }
+                                ?>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,8 +159,8 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
     const domain = '8x8.vc';
     const options = {
       roomName: 'vpaas-magic-cookie-1e1d307526af4b29bad5f071cdd7f1c6/ExampleRoom',
-      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzAyMjQwNDMsImV4cCI6MTczMDIzMTI0MywibmJmIjoxNzMwMjI0MDM4LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.pKl5-Sn1OhGpgtEJNGjf2s8e6Bbq7Ken7npeUj-7WggMH3I_f0onlQu3Jm5tdYhn5ZwmvXFSKXrXjtwWhxb-gXpQ5bTNzGfDMVO_xuTZKkIStY_vabB74T_UVzMpH_xfL7zd0mu6fU2flXAc1AuNHQwF_u6vrYKOvC3sBpgeLaCQmRz9yGhQuicVkJrKGa7iTdS1hTP2lkna_cjP9HnA9mPry7ZZ6BFUit-iqEDID5IKQMBAofMrCWS4kdxN1fZhVD9ap1M1ZzV9jEqaTrJkXU9K6uw5UvoY6Quyf7TYGfjzS7WRc7rf943a-Ns_OwrG1SBQO2EB1U2HIBB1KSc0FA',
-      width: 1500,
+      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzAzMTUzODIsImV4cCI6MTczMDMyMjU4MiwibmJmIjoxNzMwMzE1Mzc3LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.rxq7KuEHFQKbTChEs6WYz9M_4S8jEtZeuxeUbQE4kowbrXbcS5IMejX9iIi4BrhjoO6ux0Jz-jrVjkA9ojz7335DvJ1ns8VSTYQuFNP1nmA6ek2ITmDnj5BedVKZAHlQ7FcwM5HhOxXVJ2ASDij6CD7FT3iNOefUL3uFziS9IGi7QPNvTp62z_1SgxS29p_EHs76ZiSubT7mXmw8zL0czNQYXiFMpPlsXQSWKnc0Fwmv5Die7qoOlUFEdNhXg6rmHJv7spAwv7gdI6t4Qb3a8olYpxSUT_EEKEtnkOH6HLsop_YUUPoKBReQFzw93UkLKQ49aIhkH7TdQOuArKkjtA',
+      width: 700,
       height: 700,
       parentNode: document.querySelector('#meet')
     };
@@ -129,6 +172,36 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
   }
 </script>
     
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('appointmentForm');
+    const endButton = document.getElementById('endButton');
+    const backButton = document.getElementById('backButton');
+
+    const submitForm = (action) => {
+        document.getElementById('actionType').value = action;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `Do you want to proceed with ${action === 'confirm' ? 'Restart' : 'Back'} `,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            } 
+
+        });
+    };
+
+    endButton.addEventListener('click', () => submitForm('confirm'));
+    backButton.addEventListener('click', () => submitForm('decline'));
+});
+</script>
 </body>
 
 </html>

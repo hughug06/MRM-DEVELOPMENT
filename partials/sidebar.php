@@ -107,6 +107,17 @@
                     </a>
                 </li>
                 <!-- End::slide -->
+
+                 <!-- Start::slide -->
+                 <li class="slide <?= $page == "chaintercom_appointments.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_appointments.php" class="side-menu__item <?= $page == "chaintercom_appointments.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-chalkboard-user side-menu__icon"></i>
+                        <span class="side-menu__label">chaintercom appointments</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
             
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Account</span></li>
