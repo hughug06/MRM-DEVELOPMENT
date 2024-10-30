@@ -1,6 +1,6 @@
 <?php 
 require_once '../authetincation.php';
-include_once '../../Database/database.php';
+require_once '../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +70,61 @@ include_once '../../Database/database.php';
                 visibility: visible;
             }
             
+            .calendar-container {
+            margin: 20px auto;
+        }
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .calendar-day {
+            padding: 20px;
+            border: 1px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        .calendar-day button { 
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .custom-card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            color: #007bff; /* Bootstrap primary color */
+        }
+        .btn-wave {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-wave:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s, opacity 0.6s;
+            opacity: 0;
+        }
+        .btn-wave:hover:after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
         </style>
     </head>
 
@@ -154,6 +209,49 @@ include_once '../../Database/database.php';
                     </div>
                 </div>
 
+                <!-- MODAL FOR DATE PICKER -->
+                <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered w-50">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                            <div class="login_form">
+                                <div class="main-container container-fluid p-5">
+                                    
+                                        <div class="container calendar-container">
+                                            <!-- Calendar Header -->
+                                            <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+                                                <h3 id="monthYear"></h3>
+                                                <div>
+                                                    <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
+                                                    <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                                </div>
+                                            </div>
+                                            <!-- Calendar Body -->
+                                            <div class="calendar-body row row-cols-7 g-3 justify-content-center" id="calendarDays"></div>
+                                        </div>       
+
+                                    <!-- Modal for Available Time Slots -->
+                                    <div class="modal fade" id="timeSlotsModal" tabindex="-1" aria-labelledby="timeSlotsModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul id="availableTimes" class="list-group">
+                                                        <!-- Available times will be dynamically loaded here -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -168,7 +266,7 @@ include_once '../../Database/database.php';
                             <input type="number" class="form-control" id="age" placeholder="Age">
                             <input type="text" class="form-control" id="location" placeholder="location">
                             <div id="productContainer">
-                                <select class="form-control" id="product" placeholder="Product">
+                                <select class="form-control product" id="product" placeholder="Product">
                                 </select>
                             </div>
                             <button class="btn btn-primary ms-auto" onclick="addMore()">Add more product</button>
@@ -176,7 +274,7 @@ include_once '../../Database/database.php';
                             </div>
                             <div class="modal-footer">
                                 <button type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="saveTaskBtn">Add and Set Appointment</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#services-modal">Add and Set Appointment</button>
                             </div>
                         </div>
                     </div>
@@ -195,63 +293,79 @@ include_once '../../Database/database.php';
         <div class="scrollToTop d-none">
             <span class="arrow"><i class="fe fe-arrow-up"></i></span>
         </div>
-        <div id="responsive-overlay"></div>
-        <!-- Scroll To Top -->
+            <!-- Popper JS -->
+    <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
-        <!-- Popper JS -->
-        <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Bootstrap JS -->
-        <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Defaultmenu JS -->
+    <script src="../../assets/js/defaultmenu.min.js"></script>
 
-        <!-- Defaultmenu JS -->
-        <script src="../../assets/js/defaultmenu.min.js"></script>
+    <!-- Node Waves JS-->
+    <script src="../../assets/libs/node-waves/waves.min.js"></script>
 
-        <!-- Node Waves JS-->
-        <script src="../../assets/libs/node-waves/waves.min.js"></script>
+    <!-- Sticky JS -->
+    <script src="../../assets/js/sticky.js"></script>
 
-        <!-- Sticky JS -->
-        <script src="../../../assets/js/sticky.js"></script>
+    <!-- Simplebar JS -->
+    <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/simplebar.js"></script>
 
-        <!-- Simplebar JS -->
-        <script src="../../assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="../../assets/js/simplebar.js"></script>
+    <!-- Color Picker JS -->
+    <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
 
-        <!-- Color Picker JS -->
-        <script src="../../assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="../../assets/libs/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Custom-Switcher JS -->
-        <script src="../../assets/js/custom-switcher.min.js"></script>
+    <!-- Internal Swiper JS -->
+    <script src="../../assets/js/swiper.js"></script>
+    
+    <!-- Custom-Switcher JS -->
+    <script src="../../assets/js/custom-switcher.min.js"></script>
 
-        <!-- Custom JS -->
-        <script src="../../assets/js/custom.js"></script>
+    <!-- Prism JS -->
+    <script src="../../assets/libs/prismjs/prism.js"></script>
+    <script src="../../assets/js/prism-custom.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../../assets/js/custom.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
 
         <script>
-            $(document).ready(function(){
-                $('#product').append('<option value ="">Select Product</option>');
+            //Load Functions
+            $(document).ready(function() {
+                $('#product').append('<option value="">Select Product</option>'); // Add default option
+                
                 $.ajax({
                     url: 'function.php',
-                    type: 'GET', // Change to GET
-                    data: { PrType: true },
+                    type: 'GET',
+                    data: { PrType: true }, // Pass data to the backend
                     success: function(response) {
+                        response = JSON.parse(response); // Parse JSON response
+                        
                         if (response.success) {
-                            $('#products').empty();
+                            $('#product').empty(); // Clear existing options
+                            $('#product').append('<option value="">Select Product</option>'); // Add default option
+
                             var existingValues = []; // Array to track existing values
-                            
+
                             $.each(response.data.products, function(index, item) {
                                 // Check if the value is already in the existingValues array
                                 if (!existingValues.includes(item.value)) {
-                                    $('#products').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                    $('#product').append('<option value="' + item.value + '">' + item.text + '</option>');
                                     existingValues.push(item.value); // Add value to the array
                                 }
                             });
                         } else {
                             alert('No Watts/KVA found.');
                         }
+                    },
+                    error: function() {
+                        alert('An error occurred while fetching products.');
                     }
                 });
             });
@@ -261,16 +375,50 @@ include_once '../../Database/database.php';
 
     //function for adding another product input
     function addMore() {
-        // Create a new input element
-        const newProductInput = document.createElement("input");
-        newProductInput.type = "text";
-        newProductInput.className = "form-control";
-        newProductInput.placeholder = "Product";
+        // Get the product container
+    const productContainer = document.getElementById("productContainer");
 
-        // Append the new input to the product container
-        const productContainer = document.getElementById("productContainer");
-        productContainer.appendChild(newProductInput);
-    }
+        // Create a new `<select>` element
+    const newProductInput = document.createElement("select");
+    newProductInput.className = "form-control product"; // Set class for styling
+    newProductInput.id = "product-" + Date.now(); // Set a unique ID based on the current timestamp
+
+        // Append the new `<select>` to the product container
+    productContainer.appendChild(newProductInput);
+
+        // Fetch product options via AJAX
+    $.ajax({
+        url: 'function.php',
+        type: 'GET',
+        data: { PrType: true }, // Pass data to the backend
+        success: function(response) {
+            response = JSON.parse(response); // Parse JSON response
+
+            if (response.success) {
+                // Clear existing options in the newly created select element
+                $(newProductInput).empty();
+                $(newProductInput).append('<option value="">Select Product</option>'); // Add default option
+
+                var existingValues = []; // Array to track existing values
+
+                // Loop through the response products and add options
+                $.each(response.data.products, function(index, item) {
+                    // Check if the value is already in the existingValues array
+                    if (!existingValues.includes(item.value)) {
+                        $(newProductInput).append('<option value="' + item.value + '">' + item.text + '</option>');
+                        existingValues.push(item.value); // Add value to the array
+                    }
+                });
+            } else {
+                alert('No Watts/KVA found.');
+            }
+        },
+        error: function() {
+            alert('An error occurred while fetching products.');
+        }
+    });
+}
+    //Function when modal closes
     function closemodal() {
         // Get the product container and reset it
         const productContainer = document.getElementById("productContainer");
@@ -280,13 +428,51 @@ include_once '../../Database/database.php';
             productContainer.removeChild(productContainer.firstChild);
         }
 
-        // Re-add the initial product input field
-        const initialProductInput = document.createElement("input");
-        initialProductInput.type = "text";
-        initialProductInput.className = "form-control";
-        initialProductInput.placeholder = "Product";
-        initialProductInput.id = "product";
-        productContainer.appendChild(initialProductInput);
+        // Create a new `<option>` element
+        const newProductInput = document.createElement("select");
+        newProductInput.id = "product"; // Set id
+        newProductInput.className ="form-control product";
+        newProductInput.placeholder="Product";
+
+        // Append the new `<option>` to the product container (assuming it's a `<select>` element)
+        productContainer.appendChild(newProductInput);
+        document.getElementById('email').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('location').value = '';
+            $.ajax({
+                url: 'function.php',
+                type: 'GET',
+                data: { PrType: true }, // Pass data to the backend
+                success: function(response) {
+                    response = JSON.parse(response); // Parse JSON response
+                        
+                    if (response.success) {
+                        // Select all elements with the class "product" and iterate over them
+                        $('.product').each(function() {
+                            // Clear existing options in each product dropdown
+                            $(this).empty();
+                            $(this).append('<option value="">Select Product</option>'); // Add default option
+
+                            var existingValues = []; // Array to track existing values
+
+                            // Loop through the response products and add options
+                            $.each(response.data.products, function(index, item) {
+                                // Check if the value is already in the existingValues array
+                                if (!existingValues.includes(item.value)) {
+                                    $(this).append('<option value="' + item.value + '">' + item.text + '</option>');
+                                    existingValues.push(item.value); // Add value to the array
+                                }
+                            }.bind(this)); // Bind the current "this" to the function context
+                        });
+                    } else {
+                        alert('No Watts/KVA found.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while fetching products.');
+                }
+            });
     }
 
     // Add Task button functionality
@@ -347,25 +533,6 @@ include_once '../../Database/database.php';
 
     //         id++;
 
-    //         // Append task to the "To Do" section
-    //         document.getElementById('todo').appendChild(newTask);
-
-    //         // Clear input fields
-    //         document.getElementById('email').value = '';
-    //         document.getElementById('name').value = '';
-    //         document.getElementById('age').value = '';
-    //         document.getElementById('location').value = '';
-    //         document.getElementById('product').value = '';
-    //         while (productContainer.firstChild) {
-    //             productContainer.removeChild(productContainer.firstChild);
-    //         }
-    //         const initialProductInput = document.createElement("input");
-    //         initialProductInput.type = "text";
-    //         initialProductInput.className = "form-control";
-    //         initialProductInput.placeholder = "Product";
-    //         initialProductInput.id = "product";
-    //         productContainer.appendChild(initialProductInput);
-
     //         // Close modal if needed (assuming you have a modal)
     //         const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
     //         if (modal) modal.hide();
@@ -378,6 +545,90 @@ include_once '../../Database/database.php';
             e.target.parentElement.remove();
         }
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+     const calendarDays = document.getElementById('calendarDays');
+     const monthYear = document.getElementById('monthYear');
+     const prevMonthBtn = document.getElementById('prevMonth');
+     const nextMonthBtn = document.getElementById('nextMonth');
+     let currentDate = new Date();
+
+     function renderCalendar(date) {
+         calendarDays.innerHTML = ''; // Clear previous days
+         const year = date.getFullYear();
+         const month = date.getMonth();
+         monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+
+         const today = new Date();
+         const firstDayOfMonth = new Date(year, month, 1).getDay();
+         const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+         // Add empty placeholders for days before the first day of the current month
+         for (let i = 0; i < firstDayOfMonth; i++) {
+             calendarDays.innerHTML += '<div class="col"></div>';
+         }
+
+         // Generate days for the current month
+         for (let day = 1; day <= daysInMonth; day++) {
+             const fullDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+             const isPast = new Date(year, month, day) < today.setHours(0, 0, 0, 0);
+
+             // Disable past dates
+             const disabledClass = isPast ? 'disabled text-muted' : 'btn-primary';
+             const button = isPast
+                 ? `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" disabled>${day}</button>`
+                 : `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" onclick="openTimeSlotsModal('${fullDate}')">${day}</button>`;
+
+             calendarDays.innerHTML += `<div class="col text-center">${button}</div>`;
+         }
+     }
+
+     // Move to the previous month
+     prevMonthBtn.addEventListener('click', function () {
+         currentDate.setMonth(currentDate.getMonth() - 1);
+         renderCalendar(currentDate);
+     });
+
+     // Move to the next month
+     nextMonthBtn.addEventListener('click', function () {
+         currentDate.setMonth(currentDate.getMonth() + 1);
+         renderCalendar(currentDate);
+     });
+
+     // Initialize the calendar with the current date
+     renderCalendar(currentDate);
+ });
+
+ // Function to open the modal and fetch available time slots for a selected date
+ function openTimeSlotsModal(date) {
+     $('#selectedDate').text(date);  // Display the selected date in the modal
+     $('#availableTimes').empty();   // Clear previous time slots
+
+     // AJAX request to fetch available time slots from the PHP script
+     $.post('get_available_slots.php', { appointment_date: date }, function (response) {
+         const slots = JSON.parse(response);
+         if (slots.length > 0) {
+             slots.forEach(function (slot) {
+                 $('#availableTimes').append(`
+                     <li class="list-group-item">
+                         ${slot.start_time} - ${slot.end_time}
+                         <a href="" 
+                            class="btn btn-success btn-sm float-end">
+                            Book
+                         </a>
+                     </li>
+                 `);
+             });
+         } else {
+             $('#availableTimes').append('<li class="list-group-item">No available slots</li>');
+         }
+     });
+
+     // Show the modal
+     $('#timeSlotsModal').modal('show');
+ }
 </script>
         
     </body>

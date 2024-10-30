@@ -13,30 +13,27 @@ if(isset($_POST['save'])){
           echo json_encode(['success' => true]);
   
 }
-elseif (isset($_POST['PrType'])) {
-  $PrType = $_POST['PrType'];
-  // Use a prepared statement to prevent SQL injection
-  $sql = "SELECT ProductID, ProductName FROM products";
-  if ($stmt = $conn->prepare($sql)) {
-      // Execute the statement
-      $stmt->execute();
-      $result = $stmt->get_result();
+elseif (isset($_GET['PrType'])) {
+    // Use a prepared statement to prevent SQL injection
+    $sql = "SELECT ProductID, ProductName FROM products Where Availability = 1";
+    if ($stmt = $conn->prepare($sql)) {
+        // Execute the statement
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-      if ($result->num_rows > 0) {
-          $products = [];
-          while ($row = $result->fetch_assoc()) {
-              $products[] = ['value' => $row['ProductID'],'text' => $row['ProductName']];
-          }
-          echo json_encode(['success' => true, 'data' => ['products' => $products]]);
-      } else {
-          echo json_encode(['success' => false, 'message' => 'No products Exists']);
-      }
+        if ($result->num_rows > 0) {
+            $products = [];
+            while ($row = $result->fetch_assoc()) {
+                $products[] = ['value' => $row['ProductID'], 'text' => $row['ProductName']];
+            }
+            echo json_encode(['success' => true, 'data' => ['products' => $products]]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No products exist']);
+        }
 
-      $stmt->close();
-  } else {
-      echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
-  }
-
+        // Close the statement
+        $stmt->close();
+    }
 }
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
