@@ -1074,6 +1074,19 @@
                           >
                         </div>
                         <div class="form-floating text-start mb-3">
+                          <input
+                            class="form-control rounded-2"
+                            placeholder=""
+                            type="text"
+                            name="contactnum"
+                            id="su_contactnum"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                          />
+                          <label for="su_contactNum" class="text-muted"
+                            >Contact No.</label
+                          >
+                        </div>
+                        <div class="form-floating text-start mb-3">
                           <i
                             class="ri-eye-fill icon icon-c"
                             id="toggle_Pass"
