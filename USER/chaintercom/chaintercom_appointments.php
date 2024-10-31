@@ -63,13 +63,7 @@ require_once '../../Database/database.php';
     <div class="container-fluid mt-5">
         <div class="card shadow-lg mx-auto" style="width: 80%;">
             <div class="card-body">
-                <table class="table table-borderless text-center">
-                    <thead>
-                        <tr>
-                            <th colspan="2" class="h4 fw-bold">chaintercom appointment</th>
-                        </tr>
-                    </thead>
-                    <?php 
+            <?php 
                         $user_id = $_SESSION['account_id'];
                         $select = "select * from chaintercom_appointment where account_id = $user_id";
                         $result = mysqli_query($conn , $select);
@@ -77,6 +71,14 @@ require_once '../../Database/database.php';
                             while ($row = mysqli_fetch_assoc($result)) {
                                 if ($row['status'] == 'confirm') {
                     ?>
+                <table class="table table-borderless text-center">
+                    
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="h4 fw-bold">chaintercom appointment</th>
+                        </tr>
+                    </thead>
+                    
                     <tbody>
                         <tr>
                             <td class="fw-bold">Name:</td>
@@ -103,7 +105,7 @@ require_once '../../Database/database.php';
                             <td><?= $row['status']; ?></td>
                         </tr>
                     </tbody>
-                </table>
+                    </table>
                 <!-- Meeting Link Button -->
                 <div class="text-center mt-3">
                     <?php if ($row['status'] === 'confirm' && $row['date'] === date('Y-m-d') && $row['start_time'] <= date('H:i:s') && $row['end_time'] >= date('H:i:s')) { ?>
@@ -113,12 +115,83 @@ require_once '../../Database/database.php';
                     <?php } ?>
                 </div>
                 <?php 
-                                  }
-                                }
-                            }
+                      }
+                      else if($row['status'] === 'payment'){
+                        $select2 = "select * from chaintercom_quotation 
+                        inner join chaintercom_appointment on chaintercom_appointment.chaintercomappointid = chaintercom_quotation.chaintercomappointid
+                        where chaintercom_quotation.account_id = $user_id";
+                        $result2 = mysqli_query($conn , $select2); 
+                        $data = mysqli_fetch_assoc($result2);
                 ?>
-               
-                        
+                    <table class="table table-borderless text-center">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="h4 fw-bold">Payment</th>
+                        </tr>
+                    </thead>
+                             <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name:</td>
+                                        <td><?= $data['name']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Product:</td>
+                                        <td><?= $data['product']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Amount:</td>
+                                        <td><?= $data['amount']; ?></td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td class="fw-bold">Status:</td>
+                                        <td><?= $data['status']; ?></td>
+                                    </tr>
+                                                <!-- payment Link Button -->
+                                    
+                                </tbody>
+                    </table>
+                    <div class="text-center mt-3">               
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">Proceed to payment</a>                 
+                     </div>
+
+
+                    <!-- Modal Structure -->
+                        <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="paymentModalLabel">Payment Confirmation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Centered Blank Image Placeholder -->
+                                        <div class="text-center mb-3">
+                                            <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                        </div>
+                                        
+                                        <!-- Image Upload Form -->
+                                        <form action="chaintercom_payment.php" method="POST" enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label">Upload Image</label>
+                                                <input class="form-control" type="file" id="image" name="image" accept=".jpg, .jpeg, .png, .gif" required>
+                                                <input class="form-control" type="text"  name="quotation_id" value="<?=$data['quotation_id']?>" hidden>
+                                                <input class="form-control" type="text"  name="chaintercomappointid" value="<?=$data['chaintercomappointid']?>" hidden>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    
+
+
+                     <?php 
+                        }
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>

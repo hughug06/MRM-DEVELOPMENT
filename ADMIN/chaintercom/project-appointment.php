@@ -65,19 +65,19 @@ require_once '../authetincation.php';
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
-                                    <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#pending">Tab 1
+                                    <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#pending">Meetings
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#profile">Tab 2
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#profile">Waiting for payment
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#chain">Tab 3
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#chain">Payment checking
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Tab 4
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Delivery status
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#contact">Tab 5
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#contact">Completed
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
                                 </nav>
@@ -105,7 +105,7 @@ require_once '../authetincation.php';
                                                             <tbody>
                                                                 <?php 
                                                                 require '../../Database/database.php';
-                                                                $select = "SELECT * FROM chaintercom_appointment";
+                                                                $select = "SELECT * FROM chaintercom_appointment where status = 'meeting'";
                                                                 $result = mysqli_query($conn, $select);
                                                                 if(mysqli_num_rows($result) > 0) {
                                                                     foreach($result as $resultItem) {
@@ -145,26 +145,203 @@ require_once '../authetincation.php';
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="profile">
                                                 <div class="mb-4 main-content-label">Waiting for Payment</div>
-                                                <div class="card-body border">
-                                                    <!-- Content Here -->
+                                                <div class="card-body border"> 
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="col-lg-2"><span>name</span></th>
+                                                                    <th class="col-lg-2"><span>product</span></th>
+                                                                    <th class="col-lg-3"><span>meeting link</span></th>
+                                                                    <th class="col-lg-2"><span>date</span></th>
+                                                                    <th class="col-lg-2"><span>time</span></th>
+                                                                    <th class="col-lg-1">status</th>
+                                                                    <th class="col-lg-1">action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php 
+                                                              
+                                                                $select = "SELECT * FROM chaintercom_appointment where status = 'payment'";
+                                                                $result = mysqli_query($conn, $select);
+                                                                if(mysqli_num_rows($result) > 0) {
+                                                                    foreach($result as $resultItem) {
+                                                                        ?> 
+                                                                        <tr>
+                                                                            <td><?= $resultItem['name'] ?></td>    
+                                                                            <td><?= $resultItem['product'] ?></td>    
+                                                                            <?php
+                                                                        
+                                                                            if( $resultItem['date'] == date('Y-m-d') ) {?>
+                                                                            <td><a href="meeting_room.php?app_id=<?= $resultItem['chaintercomappointid'] ?>&account_id=<?= $resultItem['account_id'] ?>">Meeting link</a></td> 
+                                                                            <?php 
+                                                                            }
+                                                                            else{
+
+                                                                            
+                                                                            ?>
+                                                                            <td>Not yet available</td> 
+                                                                            <?php 
+                                                                            }
+                                                                            ?>
+                                                                            <td><?= $resultItem['date'] ?></td>
+                                                                            <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
+                                                                            <td><?= $resultItem['status'] ?></td>                          
+                                                                            <td>
+                                                                                <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>DECLINE</button>
+                                                                            </td>
+                                                                        </tr>   
+                                                                        <?php 
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>    
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="chain">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
-                                                <div class="card-body border">
-                                                    <!-- Content Here -->
+                                                <div class="card-body border"> 
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="col-lg-2"><span>name</span></th>
+                                                                    <th class="col-lg-2"><span>product</span></th>
+                                                                    <th class="col-lg-3"><span>amount</span></th>  
+                                                                    <th class="col-lg-3"><span>Payment</span></th>                                                                
+                                                                    <th class="col-lg-1">action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php 
+                                                              
+                                                                $select = "SELECT * FROM chaintercom_appointment 
+                                                                          inner join chaintercom_payment on chaintercom_payment.appointment_id = chaintercom_appointment.chaintercomappointid 
+                                                                          inner join chaintercom_quotation on chaintercom_quotation.chaintercomappointid = chaintercom_appointment.chaintercomappointid 
+                                                                          where chaintercom_appointment.status = 'waiting'";
+                                                                $result = mysqli_query($conn, $select);
+                                                                if(mysqli_num_rows($result) > 0) {
+                                                                    foreach($result as $resultItem) {
+                                                                        ?> 
+                                                                        <tr>
+                                                                            <td><?= $resultItem['name'] ?></td>    
+                                                                            <td><?= $resultItem['product'] ?></td>   
+                                                                            <td><?= $resultItem['amount'] ?></td>                          
+                                                                            <td><?= $resultItem['payment'] ?></td>
+                                               
+                                                                            <td>
+                                                                            <button class="btn btn-success d-flex gap-2"><i class="fe fe-trash"></i>approved payment</button>
+                                                                                <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>DECLINE</button>
+                                                                            </td>
+                                                                        </tr>   
+                                                                        <?php 
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>    
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
-                                                <div class="card-body border">
-                                                    <!-- Content Here -->
+                                                <div class="card-body border"> 
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="col-lg-2"><span>name</span></th>
+                                                                    <th class="col-lg-2"><span>product</span></th>
+                                                                    <th class="col-lg-3"><span>meeting link</span></th>
+                                                                    <th class="col-lg-2"><span>date</span></th>
+                                                                    <th class="col-lg-2"><span>time</span></th>
+                                                                    <th class="col-lg-1">status</th>
+                                                                    <th class="col-lg-1">action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php 
+                                                                
+                                                                $select = "SELECT * FROM chaintercom_appointment where status = 'delivery'";
+                                                                $result = mysqli_query($conn, $select);
+                                                                if(mysqli_num_rows($result) > 0) {
+                                                                    foreach($result as $resultItem) {
+                                                                        ?> 
+                                                                        <tr>
+                                                                            <td><?= $resultItem['name'] ?></td>    
+                                                                            <td><?= $resultItem['product'] ?></td>    
+                                                                            <?php
+                                                                        
+                                                                            if( $resultItem['date'] == date('Y-m-d') ) {?>
+                                                                            <td><a href="meeting_room.php?app_id=<?= $resultItem['chaintercomappointid'] ?>&account_id=<?= $resultItem['account_id'] ?>">Meeting link</a></td> 
+                                                                            <?php 
+                                                                            }
+                                                                            else{
+
+                                                                            
+                                                                            ?>
+                                                                            <td>Not yet available</td> 
+                                                                            <?php 
+                                                                            }
+                                                                            ?>
+                                                                            <td><?= $resultItem['date'] ?></td>
+                                                                            <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
+                                                                            <td><?= $resultItem['status'] ?></td>                          
+                                                                            <td>
+                                                                                <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>DECLINE</button>
+                                                                            </td>
+                                                                        </tr>   
+                                                                        <?php 
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>    
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="contact">
                                                 <div class="mb-4 main-content-label">Cancelled Appointment</div>
-                                                <div class="card-body border">
-                                                    <!-- Content Here -->
+                                                <div class="card-body border"> 
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="col-lg-2"><span>name</span></th>
+                                                                    <th class="col-lg-2"><span>product</span></th>
+                                                                    <th class="col-lg-3"><span>Payment</span></th>                                                                
+                                                                    <th class="col-lg-1">action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php 
+                                                              
+                                                                $select = "SELECT * FROM chaintercom_appointment 
+                                                                          inner join chaintercom_payment on chaintercom_payment.appointment_id = chaintercom_appointment.chaintercomappointid 
+                                                                          where chaintercom_appointment.status = 'completed'";
+                                                                $result = mysqli_query($conn, $select);
+                                                                if(mysqli_num_rows($result) > 0) {
+                                                                    foreach($result as $resultItem) {
+                                                                        ?> 
+                                                                        <tr>
+                                                                            <td><?= $resultItem['name'] ?></td>    
+                                                                            <td><?= $resultItem['product'] ?></td>                             
+                                                                            <td><?= $resultItem['payment'] ?></td>
+                                               
+                                                                            <td>
+                                                                            <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>approved payment</button>
+                                                                                <button class="btn btn-danger d-flex gap-2"><i class="fe fe-trash"></i>DECLINE</button>
+                                                                            </td>
+                                                                        </tr>   
+                                                                        <?php 
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>    
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
