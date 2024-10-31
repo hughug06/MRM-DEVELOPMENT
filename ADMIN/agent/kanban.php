@@ -209,11 +209,12 @@ require_once '../../Database/database.php';
                     </div>
                 </div>
 
+                <form>
                 <!-- MODAL FOR DATE PICKER -->
                 <div class="modal fade" id="services-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generator-services-modal" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered w-50">
                         <div class="modal-content">
-                            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></button>
+                            <a type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="openAddTaskModal()"  data-bs-dismiss="modal" aria-label="Close" style="z-index: 1050; background-color: white; border-radius: 50%; padding: 0.5rem;"></a>
                             <div class="login_form">
                                 <div class="main-container container-fluid p-5">
                                     
@@ -222,8 +223,8 @@ require_once '../../Database/database.php';
                                             <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
                                                 <h3 id="monthYear"></h3>
                                                 <div>
-                                                    <button class="btn btn-outline-primary me-2" id="prevMonth">Previous</button>
-                                                    <button class="btn btn-outline-primary" id="nextMonth">Next</button>
+                                                    <a class="btn btn-outline-primary me-2" id="prevMonth">Previous</a>
+                                                    <a class="btn btn-outline-primary" id="nextMonth">Next</a>
                                                 </div>
                                             </div>
                                             <!-- Calendar Body -->
@@ -236,7 +237,7 @@ require_once '../../Database/database.php';
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="timeSlotsModalLabel">Available Time Slots for <span id="selectedDate"></span></h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" id="Confirm" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <ul id="availableTimes" class="list-group">
@@ -257,28 +258,29 @@ require_once '../../Database/database.php';
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h3 class="modal-title" id="addTaskModalLabel">Add Task</h3>
-                                <button type="button" class="btn-close" onclick="closemodal()" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <a type="button" class="btn-close" onclick="closemodal()" data-bs-dismiss="modal" aria-label="Close"></a>
                             </div>
                             <div class="modal-body">
-                            <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email">
-                            <input type="text" class="form-control" id="name" placeholder="Full Name">
-                            <input type="number" class="form-control" id="age" placeholder="Age">
-                            <input type="text" class="form-control" id="location" placeholder="location">
+                                <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                <input type="text" class="form-control" id="name" placeholder="Full Name">
+                                <input type="number" class="form-control" id="age" placeholder="Age">
+                                <input type="text" class="form-control" id="location" placeholder="location">
                             <div id="productContainer">
                                 <select class="form-control product" id="product" placeholder="Product">
                                 </select>
                             </div>
-                            <button class="btn btn-primary ms-auto" onclick="addMore()">Add more product</button>
+                                <a class="btn btn-primary ms-auto" onclick="addMore()">Add more product</a>
                                
                             </div>
                             <div class="modal-footer">
-                                <button type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#services-modal">Add and Set Appointment</button>
+                                <a type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#services-modal">Add and Set Appointment</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                </form>
                 
             </div>
 
@@ -475,29 +477,6 @@ require_once '../../Database/database.php';
             });
     }
 
-    // Add Task button functionality
-    document.getElementById('saveTaskBtn').addEventListener('click', function () {
-        const email = document.getElementById('email').value;
-        const name = document.getElementById('name').value;
-        const age = document.getElementById('age').value;
-        const location = document.getElementById('location').value;
-        const product = document.getElementById('product').value;
-        const productContainer = document.getElementById("productContainer");
-        const productInputs = productContainer.getElementsByTagName("input");
-        
-        const productValues = [];
-        for (let i = 0; i < productInputs.length; i++) {
-            productValues.push(productInputs[i].value); // Get the value of each input
-        }
-
-        // Log the product values to the console or handle them as needed
-        console.log(productValues);
-        
-        // Example: Alerting the values (you can remove this in production)
-        alert("Product Values: " + productValues.join(", "));
-
-    });
-
     // function Display(){
     //     const email = document.getElementById('email').value;
     //     const name = document.getElementById('name').value;
@@ -547,7 +526,9 @@ require_once '../../Database/database.php';
     });
 
 
+</script>
 
+<script>
     document.addEventListener('DOMContentLoaded', function () {
      const calendarDays = document.getElementById('calendarDays');
      const monthYear = document.getElementById('monthYear');
@@ -578,8 +559,8 @@ require_once '../../Database/database.php';
              // Disable past dates
              const disabledClass = isPast ? 'disabled text-muted' : 'btn-primary';
              const button = isPast
-                 ? `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" disabled>${day}</button>`
-                 : `<button class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" onclick="openTimeSlotsModal('${fullDate}')">${day}</button>`;
+                 ? `<a class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" disabled>${day}</a>`
+                 : `<a class="btn btn-sm ${disabledClass} rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;" onclick="openTimeSlotsModal('${fullDate}')">${day}</a>`;
 
              calendarDays.innerHTML += `<div class="col text-center">${button}</div>`;
          }
@@ -601,6 +582,36 @@ require_once '../../Database/database.php';
      renderCalendar(currentDate);
  });
 
+ function openAddTaskModal() {
+    // Hide the current modal first
+    let currentModal = document.querySelector('.modal.show');
+    if (currentModal) {
+        let modalInstance = bootstrap.Modal.getInstance(currentModal);
+        modalInstance.hide();
+    }
+
+    // Show the #addTaskModal
+    let addTaskModal = new bootstrap.Modal(document.getElementById('addTaskModal'), {});
+    addTaskModal.show();
+}
+
+function test(){
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const age = document.getElementById('age').value;
+    const location = document.getElementById('location').value;
+    const product = document.getElementById('product').value;
+    const productContainer = document.getElementById("productContainer");
+    const productInputs = productContainer.getElementsByTagName("select");
+        
+    const productValues = [];
+    for (let i = 0; i < productInputs.length; i++) {
+        productValues.push(productInputs[i].value); // Get the value of each sinput
+    }
+    alert(email+ name+ age+ location);
+    alert("Product Values: " + productValues.join(", "));
+}
+
  // Function to open the modal and fetch available time slots for a selected date
  function openTimeSlotsModal(date) {
      $('#selectedDate').text(date);  // Display the selected date in the modal
@@ -614,10 +625,10 @@ require_once '../../Database/database.php';
                  $('#availableTimes').append(`
                      <li class="list-group-item">
                          ${slot.start_time} - ${slot.end_time}
-                         <a href="" 
-                            class="btn btn-success btn-sm float-end">
+                         <button value='{"date":"${slot.date}", "start_time": "${slot.start_time}", "end_time": "${slot.end_time}"}'
+                            class="btn btn-success btn-sm float-end date_time_btn">
                             Book
-                         </a>
+                         </button>
                      </li>
                  `);
              });
@@ -629,7 +640,137 @@ require_once '../../Database/database.php';
      // Show the modal
      $('#timeSlotsModal').modal('show');
  }
+
+ 
 </script>
+
+<script>
+        $(document).ready(function() {
+            $(document).on('click', '.date_time_btn', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const email = document.getElementById('email').value;
+                const name = document.getElementById('name').value;
+                const ageid = document.getElementById('age');
+                const age = parseInt(ageid.value);
+                const location = document.getElementById('location').value;
+                const product = document.getElementById('product').value;
+                const productContainer = document.getElementById("productContainer");
+                const productInputs = productContainer.getElementsByTagName("select");
+                const date_time_btn = document.querySelector(".date_time_btn");
+                const date_time = JSON.parse(date_time_btn.value);
+                const date = date_time.date;
+                const start_time = date_time.start_time;
+                const end_time = date_time.end_time;
+                    
+                const productValues = [];
+                for (let i = 0; i < productInputs.length; i++) {
+                    productValues.push(productInputs[i].value); // Get the value of each sinput
+                }
+
+
+                if(email == "" || name == "" || age == "" || location == "" || productValues.length === 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(!email.includes("@gmail.com")){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Email should contain '@gmail.com'",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                } 
+                else if(age < 18){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Age is supposed to be 18+",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to submit the task?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If user confirms, send AJAX request for Add product
+                            var formData = new FormData();
+                            formData.append('addtask', true);
+                            formData.append('email', email);
+                            formData.append('name', name);
+                            formData.append('age', age);
+                            formData.append('location', location);
+                            formData.append('products', JSON.stringify(productValues));
+                            formData.append('date', date);
+                            formData.append('start_time', start_time);
+                            formData.append('end_time', end_time);
+
+                            
+                            $.ajax({
+                                url: 'function.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data:formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    // Handle successful add
+                                    if(response.success){
+                                        Swal.fire({
+                                            title: 'Task Added!',
+                                            text: 'You have successfully added the task.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'kanban.php';
+                                        });
+                                    }
+                                    else{
+                                        Swal.fire({
+                                            title: 'Task not Added!',
+                                            text: response.message || 'An error occurred while adding the task.',
+                                            icon: 'error',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        });
+                                    }
+                                },
+                                error: function(response) {
+                                    // Handle erro
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error Adding the task. Please try again.',
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
         
     </body>
 

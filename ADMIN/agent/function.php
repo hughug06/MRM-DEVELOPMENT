@@ -35,6 +35,22 @@ elseif (isset($_GET['PrType'])) {
         $stmt->close();
     }
 }
+elseif(isset($_POST['addtask'])){
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $location = $_POST['location'];
+    $products = $_POST['products'];
+    $date = $_POST['date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+
+    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status)
+                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'verification')";
+    if (mysqli_query($conn, $sql_insert)) {
+        echo json_encode(['success' => true]);
+    }
+}
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
