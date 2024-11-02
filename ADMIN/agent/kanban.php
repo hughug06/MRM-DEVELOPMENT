@@ -372,8 +372,6 @@ require_once '../../Database/database.php';
                 });
             });
 
-    // Drag and drop functionality
-    let id = 1;
 
     //function for adding another product input
     function addMore() {
@@ -477,6 +475,7 @@ require_once '../../Database/database.php';
             });
     }
 
+    //display on load function of tasks
     function Display(){
         $.ajax({
             url: 'function.php?gettasks=true',
@@ -506,7 +505,7 @@ require_once '../../Database/database.php';
                                 <strong>Name:</strong> ${name || 'No name'}<br>
                                 <strong>Location:</strong> ${location || 'No location'}
                                 <strong>Product:</strong> ${productValues || 'No Products'}
-                                <button class="btn-close remove-btn" aria-label="Remove"></button>
+                                <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                             `;
 
                             if(status == 'verification'){
@@ -557,9 +556,44 @@ require_once '../../Database/database.php';
     //NEEDS TO BE CONNECTED TO DB
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('remove-btn')) {
-
-            //AJAX HERE
-            e.target.parentElement.remove();
+            const id = e.target.dataset.id;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure on cancelling this task?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data:{ delete : id },
+                        success: function(response) {
+                                // Handle successful cancel
+                                Swal.fire({
+                                    title: 'Task Deleted!',
+                                    text: 'You have successfully cancelled the task.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'kanban.php';
+                                });
+                        },
+                        error: function(response) {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error cancelling task. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
         }
     });
 

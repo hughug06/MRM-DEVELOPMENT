@@ -57,33 +57,69 @@ elseif(isset($_POST['addtask'])){
 
 //for getting tasks
 elseif (isset($_GET['gettasks'])) {
-    // Use a prepared statement to prevent SQL injection
     $user_id = $_SESSION['user_id'];
     $sql = "SELECT * FROM kanban WHERE user_id = ?";
     if ($stmt = $conn->prepare($sql)) {
-    // Bind parameters
-    $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+        // Bind parameters
+        $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
 
         // Execute the statement
         $stmt->execute();
         $result = $stmt->get_result();
-  
+
         if ($result->num_rows > 0) {
             $info = [];
             while ($row = $result->fetch_assoc()) {
-                $info[] = ['kanban_id' => $row['kanban_id'] ,'status' => $row['status'],'email' => $row['email'],'name' => $row['name'], 'location'=> $row['location'], 'products' => $row['products']];
+                $productsid = json_decode($row['products'], true);
+                $productnamearray = [];
+                foreach ($productsid as $product) {
+                    $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                    if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                        $stmt2->bind_param("i", $product);
+
+                        // Execute the statement
+                        $stmt2->execute();
+                        $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                        if ($result2->num_rows > 0) {
+                            while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                $productnamearray[] = $row2['ProductName'];
+                            }
+                        }
+                        $stmt2->close(); // Close the inner statement here
+                    }
+                }
+
+                $info[] = [
+                    'kanban_id' => $row['kanban_id'],
+                    'status' => $row['status'],
+                    'email' => $row['email'],
+                    'name' => $row['name'],
+                    'location' => $row['location'],
+                    'products' => $productnamearray
+                ];
             }
             echo json_encode(['success' => true, 'data' => ['info' => $info]]);
         } else {
             echo json_encode(['success' => true, 'message' => 'No tasks']);
         }
-  
-        $stmt->close();
-    } else {
-        echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
+
+        $stmt->close(); // Close the main statement
     }
-  
-  }
+}
+
+//for deleting tasks
+elseif (isset($_POST['delete'])) {
+    $deleteid = $_POST['delete'];
+    $sql = "DELETE from kanban where kanban_id=$deleteid";
+    $result = mysqli_query($conn , $sql);
+    if($result)
+    {
+        echo json_encode(['success' => true]);
+    }
+    
+}
+
+
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
