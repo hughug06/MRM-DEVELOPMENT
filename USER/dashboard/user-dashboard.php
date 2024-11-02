@@ -90,8 +90,8 @@ require_once '../../ADMIN/authetincation.php';
 <body>
 
     <div class="page">
-         <!-- app-header -->
-         <?php include_once(__DIR__. '/../../partials/header.php')?>
+        <!-- app-header -->
+        <?php include_once(__DIR__. '/../../partials/header.php')?>
         <!-- /app-header -->
         <!-- Start::app-sidebar -->
         <?php include_once(__DIR__. '/../../partials/sidebar.php')?>
@@ -157,7 +157,30 @@ require_once '../../ADMIN/authetincation.php';
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row row-sm">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">Services</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">MRM EG Electric Power Generation Services offers comprehensive solutions for solar panels and generators, including expert tuning, repair, regular maintenance, and installation. Our experienced technicians ensure your power systems run efficiently and reliably. Click inquire to know more about our availability and specialized services tailored to meet your energy needs.</p>
+                                        <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="card custom-card">
+                                    <div class="card-header">
+                                        <div class="card-title">Projects</div>
+                                    </div>
+                                    <div class="card-body">                                    
+                                        <p class="card-text">MRM EG Electric Power Generation Services has a proven track record in delivering high-quality projects, from the seamless installation of solar panels and generators to reliable repair and maintenance solutions. Each project reflects our commitment to sustainability, efficiency, and customer satisfaction, tailored to meet diverse energy needs. Inquire now to see how our expertise can power your next project.</p>
+                                        <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row row-sm">
                             <div class="col-md-12 col-xl-12">
                                 <div class="card custom-card overflow-hidden">
@@ -251,19 +274,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <div class="card-title">Services</div>
                             </div>
                             <div class="card-body">
-                                <h6 class="card-title fw-semibold">Special title treatment</h6>
-                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi mollitia alias nesciunt optio totam facere voluptatibus unde deserunt? Architecto, fugiat minus molestias soluta sint officiis.</p>
-                                <a href="javascript:void(0);" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                        <div class="card custom-card">
-                            <div class="card-header">
-                                <div class="card-title">Projects</div>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title fw-semibold">Special title treatment</h6>
-                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi mollitia alias nesciunt optio totam facere voluptatibus unde deserunt? Architecto, fugiat minus molestias soluta sint officiis.</p>
-                                <a href="javascript:void(0);" class="btn btn-primary">Read More</a>
+                                <p class="card-text">MRM EG Electric Power Generation Services offers comprehensive solutions for solar panels and generators, including expert tuning, repair, regular maintenance, and installation. Our experienced technicians ensure your power systems run efficiently and reliably. Click inquire to know more about our availability and specialized services tailored to meet your energy needs.</p>
+                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
                     </div>
@@ -294,7 +306,6 @@ require_once '../../ADMIN/authetincation.php';
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Popper JS -->
