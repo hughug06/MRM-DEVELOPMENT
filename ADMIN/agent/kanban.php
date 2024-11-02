@@ -10,7 +10,7 @@ require_once '../../Database/database.php';
 
         <!-- Meta Data -->
         <?php include_once(__DIR__.'../../../partials/head.php')?>
-        <title> Inquries </title>
+        <title> Kanban </title>
         <!-- Favicon -->
         <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
         
@@ -151,7 +151,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">For Email Verification</div>
                                 </div>
-                                <div class="card-body" id="todo">
+                                <div class="card-body" id="emailverify">
                                     
                                 </div>
                             </div>    
@@ -161,7 +161,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">Waiting for Meeting</div>
                                 </div>
-                                <div class="card-body" id="in-progress">
+                                <div class="card-body" id="waiting">
                                    
                                 </div>
                             </div>    
@@ -171,7 +171,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">Ongoing Meeting</div>
                                 </div>
-                                <div class="card-body" id="done">
+                                <div class="card-body" id="ongoing">
                                    
                                 </div>
                             </div>    
@@ -181,7 +181,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">Approved</div>
                                 </div>
-                                <div class="card-body" id="done">
+                                <div class="card-body" id="approved">
                                    
                                 </div>
                             </div>    
@@ -191,7 +191,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">Completed</div>
                                 </div>
-                                <div class="card-body" id="done">
+                                <div class="card-body" id="completed">
                                    
                                 </div>
                             </div>    
@@ -201,7 +201,7 @@ require_once '../../Database/database.php';
                                 <div class="card-header">
                                     <div class="card-title">Cancelled</div>
                                 </div>
-                                <div class="card-body" id="done">
+                                <div class="card-body" id="cancelled">
                                    
                                 </div>
                             </div>    
@@ -477,50 +477,88 @@ require_once '../../Database/database.php';
             });
     }
 
-    // function Display(){
-    //     const email = document.getElementById('email').value;
-    //     const name = document.getElementById('name').value;
-    //     const age = document.getElementById('age').value;
-    //     const location = document.getElementById('location').value;
-    //     const product = document.getElementById('product').value;
-    //     const productContainer = document.getElementById("productContainer");
-    //     const productInputs = productContainer.getElementsByTagName("input");
-        
-    //     const productValues = [];
-    //     for (let i = 0; i < productInputs.length; i++) {
-    //         productValues.push(productInputs[i].value); // Get the value of each input
-    //     }
+    function Display(){
+        $.ajax({
+            url: 'function.php?gettasks=true',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    var existingValues = []; // Array to track existing values
+                    $.each(response.data.info, function(index, item) {
+                        // Check if the value is already in the existingValues array
+                        if (!existingValues.includes(item.kanban_id)) {
+                            const id = item.kanban_id;
+                            const email = item.email;
+                            const name = item.name;
+                            const location = item.location;
+                            const productValues = item.products;   
+                            const status = item.status;  
 
-    //     // Log the product values to the console or handle them as needed
-    //     console.log(productValues);
-        
-    //     // Example: Alerting the values (you can remove this in production)
-    //     alert("Product Values: " + productValues.join(", "));
+                            // Create a new task element
+                            const newTask = document.createElement('div');
+                            newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
+                            newTask.id = item.kanban_id;
 
-    //     if (email || name || age || location) {
-    //         // Create a new task element
-    //         const newTask = document.createElement('div');
-    //         newTask.className = 'task p-3 d-flex justify-content-between align-items-center';
+                            // Add the task details
+                            newTask.innerHTML = `
+                                ${id}. ${email || 'No email'}<br>
+                                <strong>Name:</strong> ${name || 'No name'}<br>
+                                <strong>Location:</strong> ${location || 'No location'}
+                                <strong>Product:</strong> ${productValues || 'No Products'}
+                                <button class="btn-close remove-btn" aria-label="Remove"></button>
+                            `;
 
-    //         // Add the task details
-    //         newTask.innerHTML = `
-    //             ${id}. ${email || 'Unnamed Task'}<br>
-    //             <strong>Name:</strong> ${name || 'No name'}<br>
-    //             <strong>Location:</strong> ${location || 'No location'}
-    //             <button class="btn-close remove-btn" aria-label="Remove"></button>
-    //         `;
+                            if(status == 'verification'){
+                                document.getElementById('emailverify').appendChild(newTask);
+                            }
+                            else if(status == 'waiting'){
+                                document.getElementById('waiting').appendChild(newTask);
+                            }
+                            else if(status == 'ongoing'){
+                                document.getElementById('ongoing').appendChild(newTask);
+                            }
+                            else if(status == 'approved'){
+                                document.getElementById('approved').appendChild(newTask);
+                            }
+                            else if(status == 'completed'){
+                                document.getElementById('completed').appendChild(newTask);
+                            }
+                            else if(status == 'cancelled'){
+                                document.getElementById('cancelled').appendChild(newTask);
+                            }
+                            else{
+                                alert("DOES NOT DISPLAY");
+                            }
+                        
+                            existingValues.push(item.kanban_id); // Add value to the array
+                        }else{
 
-    //         id++;
+                        }
+                            
+                    });
+                } else {
+                    alert('Error displaying Tasks.');
+                }
+            },
+            error: function(response) {
+                // Handle error
+                Swal.fire(
+                    'Error!',
+                    'There was an error loading tasks. Please try again.',
+                    'error'
+                );
+            }
+        });
 
-    //         // Close modal if needed (assuming you have a modal)
-    //         const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
-    //         if (modal) modal.hide();
-    //     }
-    // }
+    }
 
     // Delegate event listener to handle task removal
+    //NEEDS TO BE CONNECTED TO DB
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('remove-btn')) {
+
+            //AJAX HERE
             e.target.parentElement.remove();
         }
     });
@@ -535,6 +573,8 @@ require_once '../../Database/database.php';
      const prevMonthBtn = document.getElementById('prevMonth');
      const nextMonthBtn = document.getElementById('nextMonth');
      let currentDate = new Date();
+
+     Display();
 
      function renderCalendar(date) {
          calendarDays.innerHTML = ''; // Clear previous days
@@ -595,22 +635,22 @@ require_once '../../Database/database.php';
     addTaskModal.show();
 }
 
-function test(){
-    const email = document.getElementById('email').value;
-    const name = document.getElementById('name').value;
-    const age = document.getElementById('age').value;
-    const location = document.getElementById('location').value;
-    const product = document.getElementById('product').value;
-    const productContainer = document.getElementById("productContainer");
-    const productInputs = productContainer.getElementsByTagName("select");
+// function test(){
+//     const email = document.getElementById('email').value;
+//     const name = document.getElementById('name').value;
+//     const age = document.getElementById('age').value;
+//     const location = document.getElementById('location').value;
+//     const product = document.getElementById('product').value;
+//     const productContainer = document.getElementById("productContainer");
+//     const productInputs = productContainer.getElementsByTagName("select");
         
-    const productValues = [];
-    for (let i = 0; i < productInputs.length; i++) {
-        productValues.push(productInputs[i].value); // Get the value of each sinput
-    }
-    alert(email+ name+ age+ location);
-    alert("Product Values: " + productValues.join(", "));
-}
+//     const productValues = [];
+//     for (let i = 0; i < productInputs.length; i++) {
+//         productValues.push(productInputs[i].value); // Get the value of each sinput
+//     }
+//     alert(email+ name+ age+ location);
+//     alert("Product Values: " + productValues.join(", "));
+// }
 
  // Function to open the modal and fetch available time slots for a selected date
  function openTimeSlotsModal(date) {

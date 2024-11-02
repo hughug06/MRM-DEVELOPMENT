@@ -35,6 +35,8 @@ elseif (isset($_GET['PrType'])) {
         $stmt->close();
     }
 }
+
+
 elseif(isset($_POST['addtask'])){
     $email = $_POST['email'];
     $name = $_POST['name'];
@@ -44,13 +46,44 @@ elseif(isset($_POST['addtask'])){
     $date = $_POST['date'];
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
+    $user_id = $_SESSION['user_id'];
 
-    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status)
-                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'verification')";
+    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status, user_id)
+                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'verification', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
         echo json_encode(['success' => true]);
     }
 }
+
+//for getting tasks
+elseif (isset($_GET['gettasks'])) {
+    // Use a prepared statement to prevent SQL injection
+    $user_id = $_SESSION['user_id'];
+    $sql = "SELECT * FROM kanban WHERE user_id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+    // Bind parameters
+    $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+
+        // Execute the statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+  
+        if ($result->num_rows > 0) {
+            $info = [];
+            while ($row = $result->fetch_assoc()) {
+                $info[] = ['kanban_id' => $row['kanban_id'] ,'status' => $row['status'],'email' => $row['email'],'name' => $row['name'], 'location'=> $row['location'], 'products' => $row['products']];
+            }
+            echo json_encode(['success' => true, 'data' => ['info' => $info]]);
+        } else {
+            echo json_encode(['success' => true, 'message' => 'No tasks']);
+        }
+  
+        $stmt->close();
+    } else {
+        echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
+    }
+  
+  }
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
