@@ -437,7 +437,69 @@ require_once '../authetincation.php';
                                                                 <div class="main-content-body tab-pane p-4 border-top-0 active" id="checking">
                                                                     <div class="mb-4 main-content-label">For Checking</div>
                                                                     <div class="card-body border"> 
-                                                                        <!-- content here -->
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="col-lg-2"><span>client name</span></th>
+                                                                                    <th class="col-lg-2"><span>agent</span></th>
+                                                                                    <th class="col-lg-2"><span>products</span></th>
+                                                                                    <th class="col-lg-3"><span>location</span></th>
+                                                                                    <th class="col-lg-2"><span>date</span></th>
+                                                                                    <th class="col-lg-2"><span>time</span></th>
+                                                                                    <th class="col-lg-1">status</th>
+                                                                                    <th class="col-lg-1">action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php 
+                                                                                require '../../Database/database.php';
+                                                                                $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'checking'";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if(mysqli_num_rows($result) > 0) {
+                                                                                    foreach($result as $resultItem) {
+                                                                                        $productsid = json_decode($resultItem['products'], true);
+                                                                                        $productnamearray = [];
+                                                                                        foreach ($productsid as $product) {
+                                                                                            $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                            if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                $stmt2->bind_param("i", $product);
+
+                                                                                                // Execute the statement
+                                                                                                $stmt2->execute();
+                                                                                                $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                if ($result2->num_rows > 0) {
+                                                                                                    while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                        $productnamearray[] = $row2['ProductName'];
+                                                                                                    }
+                                                                                                }
+                                                                                                $stmt2->close(); // Close the inner statement here
+                                                                                            }
+                                                                                        }
+                                                                                        $productString = implode(", ", $productnamearray);
+
+                                                                                        ?> 
+                                                                                        <tr>
+                                                                                            <td><?= $resultItem['name'] ?></td>    
+                                                                                            <td><?= $resultItem['first_name'] ?></td>    
+                                                                                            <td><?php echo $productString ?></a></td>     
+                                                                                            <td><?= $resultItem['location'] ?></td>
+                                                                                            <td><?= $resultItem['date'] ?></td>
+                                                                                            <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
+                                                                                            <td><?= $resultItem['status'] ?></td>                          
+                                                                                            <td>
+                                                                                                <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                            </td>
+                                                                                        </tr>   
+                                                                                        <?php 
+
+
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </tbody>    
+                                                                        </table>
+                                                                    </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="waiting-meeting">
