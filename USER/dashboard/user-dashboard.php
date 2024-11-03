@@ -119,12 +119,12 @@ require_once '../../ADMIN/authetincation.php';
                                         <div class="row align-items-center">
                                             <div class="offset-xl-3 offset-sm-6 col-xl-8 col-sm-6 col-12">
                                                 <h4 class="d-flex mb-3">
-                                                    <span class="fw-bold text-fixed-white ">Hello Marvie Cutiepie!</span>
+                                                    <span class="fw-bold text-fixed-white ">Hello Marvie Placido!</span>
                                                 </h4>
                                                 <p class="text-fixed-white mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto molestias pariatur laboriosam adipisci ab, velit expedita libero voluptatum sunt nihil nisi voluptates. Dignissimos aperiam harum praesentium distinctio necessitatibus recusandae corrupti!
                                                 </p>
                                             </div>
-                                            <img src="../../assets/images/mrm-images/mrm-banner2.png" alt="user-img">
+                                            <img src="../../assets/images/mrm-images/dashboard-banner.png" alt="user-img" style="width: 23rem;">
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Mountains<span class="badge bg-primary float-end fs-10">New</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -143,7 +143,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -152,7 +152,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -161,7 +161,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -170,7 +170,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -179,7 +179,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
-                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
@@ -303,7 +303,7 @@ require_once '../../ADMIN/authetincation.php';
                                 <div class="card-title">Project 1</div>
                             </div>
                             <div class="card-body">
-                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                <img src="../../assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img mb-3" alt="...">
                                 <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
@@ -312,7 +312,7 @@ require_once '../../ADMIN/authetincation.php';
                                 <div class="card-title">Project 1</div>
                             </div>
                             <div class="card-body">
-                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                <img src="../../assets/images/mrm-images/dashboard-images/project-solar2.jpg" class="card-img mb-3" alt="...">
                                 <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
@@ -321,7 +321,7 @@ require_once '../../ADMIN/authetincation.php';
                                 <div class="card-title">Project 1</div>
                             </div>
                             <div class="card-body">
-                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                <img src="../../assets/images/mrm-images/dashboard-images/project-solar3.jpg" class="card-img mb-3" alt="...">
                                 <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>

@@ -169,25 +169,29 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
 
     <script src='https://8x8.vc/vpaas-magic-cookie-96f0941768964ab380ed0fbada7a502f/external_api.js'></script>
 
+
     <script type="text/javascript">
-  let api;
+        let api;
 
-  const initIframeAPI = () => {
-    const domain = '8x8.vc';
-    const options = {
-      roomName: 'vpaas-magic-cookie-1e1d307526af4b29bad5f071cdd7f1c6/ExampleRoom',
-      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzA2NDY1NzUsImV4cCI6MTczMDY1Mzc3NSwibmJmIjoxNzMwNjQ2NTcwLCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.l1pwR5hIdGet8L5x7ArdZY8ejUFdqFEi5NOeEPHQ1yjVYUf8j4Zfj1eTttFWo9g-HXgfd7e2Bqa2mE16ZzYOFy2CeOHLkwi0K8ygK3KAXMzhS3NYppUp7UeIHIREsdS24QfIxeHQAP1oNosI0b8pfn0UeJ6wpuv0vN9_x_Tn5X5He0qqmp5Kn5Ms1cVGeIHBP70KWlSL0n40TFmESRFz1oYze7biV62bsmoB1ERk7AL1LRT8Dvg020MwmT-MznuFa22G-YU-fwNF_tr1ilCdoyfK5TNKvO2sBsc6v8JaRzt0332t7uRfulN0NCImdNWlM4Vf1pcU1hDFySwTjsrLfA',
-      width: 1000,
-      height: 700,
-      parentNode: document.querySelector('#meet')
-    };
-    api = new JitsiMeetExternalAPI(domain, options);
-  }
+        const initIframeAPI = () => {
+            const domain = '8x8.vc';
+            const meetElement = document.querySelector('#meet');
 
-  window.onload = () => {
-    initIframeAPI();
-  }
-</script>
+            const options = {
+                roomName: 'vpaas-magic-cookie-bb4f35f2fe1345019a3c975ef52ae613/ExampleRoom',
+                jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzA2NDY1NzUsImV4cCI6MTczMDY1Mzc3NSwibmJmIjoxNzMwNjQ2NTcwLCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.l1pwR5hIdGet8L5x7ArdZY8ejUFdqFEi5NOeEPHQ1yjVYUf8j4Zfj1eTttFWo9g-HXgfd7e2Bqa2mE16ZzYOFy2CeOHLkwi0K8ygK3KAXMzhS3NYppUp7UeIHIREsdS24QfIxeHQAP1oNosI0b8pfn0UeJ6wpuv0vN9_x_Tn5X5He0qqmp5Kn5Ms1cVGeIHBP70KWlSL0n40TFmESRFz1oYze7biV62bsmoB1ERk7AL1LRT8Dvg020MwmT-MznuFa22G-YU-fwNF_tr1ilCdoyfK5TNKvO2sBsc6v8JaRzt0332t7uRfulN0NCImdNWlM4Vf1pcU1hDFySwTjsrLfA',
+                parentNode: meetElement,
+            };
+
+            api = new JitsiMeetExternalAPI(domain, options);
+        };
+
+        window.onload = () => {
+            initIframeAPI();
+        };
+
+    </script>
+
     
 </body>
 
