@@ -149,9 +149,9 @@ require_once '../../Database/database.php';
                         <div class="col-lg 4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">For Email Verification</div>
+                                    <div class="card-title">For checking</div>
                                 </div>
-                                <div class="card-body" id="emailverify">
+                                <div class="card-body" id="checking">
                                     
                                 </div>
                             </div>    
@@ -509,8 +509,8 @@ require_once '../../Database/database.php';
                                 <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                             `;
 
-                            if(status == 'verification'){
-                                document.getElementById('emailverify').appendChild(newTask);
+                            if(status == 'checking'){
+                                document.getElementById('checking').appendChild(newTask);
                             }
                             else if(status == 'waiting'){
                                 document.getElementById('waiting').appendChild(newTask);
@@ -761,7 +761,7 @@ require_once '../../Database/database.php';
                                     if(response.success){
                                         Swal.fire({
                                             title: 'Task Added!',
-                                            text: 'A verification has been sent on email.',
+                                            text: 'Task has been added successfully.',
                                             icon: 'success',
                                             allowOutsideClick: false,
                                             timer: 2000, // 2 seconds timer

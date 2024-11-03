@@ -55,14 +55,11 @@ elseif(isset($_POST['addtask'])){
     $end_time = $_POST['end_time'];
     $user_id = $_SESSION['user_id'];
 
-    //for php mailer
-    $verify_token = md5(rand());
 
-    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status, user_id, verify_token)
-                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'verification', '$user_id', '$verify_token')";
+    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status, user_id)
+                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
-        echo json_encode(['success' => true]);
-        email_veritication($name ,$email,$verify_token);   
+        echo json_encode(['success' => true]); 
     }
 
 }
@@ -136,44 +133,6 @@ elseif (isset($_POST['delete'])) {
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
 }
-
-function email_veritication($name,$email,$verify_token){
-    $mail = new PHPMailer(true);
-  
-    try {
-        // Server settings
-        $mail->isSMTP();                                            // Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'janariesimpuerto13@gmail.com';          // SMTP username
-        $mail->Password   = 'vmmthgbqsaobqlsk';                    // Use your app-specific password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption
-        $mail->Port       = 587;                                    // TCP port to connect to
-    
-        // Recipients
-        $mail->setFrom('janariesimpuerto13@gmail.com', $name); // Use a valid name
-        $mail->addAddress($email);                                  // Add recipient
-    
-        // Content
-        $mail->isHTML(true);                                        // Set email format to HTML
-        $mail->Subject = 'Email Verification from ARIES TESTING';
-        
-        // Email template
-        $email_template = "
-        <h1>MRM E-G  ELECTRIC POWER GENERATION </h1>
-        <p>Click here to verify your account<a href='http://localhost/MRM-DEVELOPMENT/ADMIN/agent/verify_email.php?token=$verify_token'>Verify Email</a></p>
-        
-        ";
-    
-        $mail->Body = $email_template;
-    
-        // Send the email
-        $mail->send();
-    
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
-  }
 
 $conn->close();
 ?>
