@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 06:27 PM
+-- Generation Time: Nov 03, 2024 at 05:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,6 @@ CREATE TABLE `chaintercom_availability` (
 --
 
 
-
 --
 -- Indexes for dumped tables
 --
@@ -60,7 +59,7 @@ ALTER TABLE `chaintercom_availability`
 -- AUTO_INCREMENT for table `chaintercom_availability`
 --
 ALTER TABLE `chaintercom_availability`
-  MODIFY `chainavailability` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `chainavailability` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

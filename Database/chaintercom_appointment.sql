@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2024 at 06:27 PM
+-- Generation Time: Nov 03, 2024 at 05:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,7 +35,7 @@ CREATE TABLE `chaintercom_appointment` (
   `date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  `status` varchar(50) NOT NULL DEFAULT 'confirm' COMMENT 'confirm, completed, rejected',
+  `status` enum('confirm','payment','approval','delivery','completed','rejected') NOT NULL DEFAULT 'confirm',
   `account_id` int(11) DEFAULT NULL,
   `chainavailability` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -43,7 +43,6 @@ CREATE TABLE `chaintercom_appointment` (
 --
 -- Dumping data for table `chaintercom_appointment`
 --
-
 
 
 --
@@ -66,7 +65,7 @@ ALTER TABLE `chaintercom_appointment`
 -- AUTO_INCREMENT for table `chaintercom_appointment`
 --
 ALTER TABLE `chaintercom_appointment`
-  MODIFY `chaintercomappointid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `chaintercomappointid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
