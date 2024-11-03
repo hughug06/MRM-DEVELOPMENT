@@ -363,7 +363,7 @@ require_once '../../Database/database.php';
                                 }
                             });
                         } else {
-                            alert('No Watts/KVA found.');
+                            alert('no products found.');
                         }
                     },
                     error: function() {
@@ -410,7 +410,7 @@ require_once '../../Database/database.php';
                         }
                     });
                 } else {
-                    alert('No Watts/KVA found.');
+                    alert('no products found.');
                 }
             },
             error: function() {
@@ -467,7 +467,7 @@ require_once '../../Database/database.php';
                             }.bind(this)); // Bind the current "this" to the function context
                         });
                     } else {
-                        alert('No Watts/KVA found.');
+                        alert('no products found.');
                     }
                 },
                 error: function() {
@@ -761,7 +761,7 @@ require_once '../../Database/database.php';
                                     if(response.success){
                                         Swal.fire({
                                             title: 'Task Added!',
-                                            text: 'You have successfully added the task.',
+                                            text: 'A verification has been sent on email.',
                                             icon: 'success',
                                             allowOutsideClick: false,
                                             timer: 2000, // 2 seconds timer
