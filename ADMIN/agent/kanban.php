@@ -253,7 +253,7 @@ require_once '../../Database/database.php';
                     </div>
                 </div>
 
-                <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+                <div class="modal fade" id="addTaskModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addTaskModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -275,7 +275,7 @@ require_once '../../Database/database.php';
                             </div>
                             <div class="modal-footer">
                                 <a type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
-                                <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#services-modal">Add and Set Appointment</a>
+                                <a type="button" class="btn btn-primary" id="checkadd">Add and Set Appointment</a>
                             </div>
                         </div>
                     </div>
@@ -376,48 +376,49 @@ require_once '../../Database/database.php';
     //function for adding another product input
     function addMore() {
         // Get the product container
-    const productContainer = document.getElementById("productContainer");
+        const productContainer = document.getElementById("productContainer");
 
-        // Create a new `<select>` element
-    const newProductInput = document.createElement("select");
-    newProductInput.className = "form-control product"; // Set class for styling
-    newProductInput.id = "product-" + Date.now(); // Set a unique ID based on the current timestamp
+            // Create a new `<select>` element
+        const newProductInput = document.createElement("select");
+        newProductInput.className = "form-control product"; // Set class for styling
+        newProductInput.id = "product-" + Date.now(); // Set a unique ID based on the current timestamp
 
-        // Append the new `<select>` to the product container
-    productContainer.appendChild(newProductInput);
+            // Append the new `<select>` to the product container
+        productContainer.appendChild(newProductInput);
 
-        // Fetch product options via AJAX
-    $.ajax({
-        url: 'function.php',
-        type: 'GET',
-        data: { PrType: true }, // Pass data to the backend
-        success: function(response) {
-            response = JSON.parse(response); // Parse JSON response
+            // Fetch product options via AJAX
+        $.ajax({
+            url: 'function.php',
+            type: 'GET',
+            data: { PrType: true }, // Pass data to the backend
+            success: function(response) {
+                response = JSON.parse(response); // Parse JSON response
 
-            if (response.success) {
-                // Clear existing options in the newly created select element
-                $(newProductInput).empty();
-                $(newProductInput).append('<option value="">Select Product</option>'); // Add default option
+                if (response.success) {
+                    // Clear existing options in the newly created select element
+                    $(newProductInput).empty();
+                    $(newProductInput).append('<option value="">Select Product</option>'); // Add default option
 
-                var existingValues = []; // Array to track existing values
+                    var existingValues = []; // Array to track existing values
 
-                // Loop through the response products and add options
-                $.each(response.data.products, function(index, item) {
-                    // Check if the value is already in the existingValues array
-                    if (!existingValues.includes(item.value)) {
-                        $(newProductInput).append('<option value="' + item.value + '">' + item.text + '</option>');
-                        existingValues.push(item.value); // Add value to the array
-                    }
-                });
-            } else {
-                alert('No Watts/KVA found.');
+                    // Loop through the response products and add options
+                    $.each(response.data.products, function(index, item) {
+                        // Check if the value is already in the existingValues array
+                        if (!existingValues.includes(item.value)) {
+                            $(newProductInput).append('<option value="' + item.value + '">' + item.text + '</option>');
+                            existingValues.push(item.value); // Add value to the array
+                        }
+                    });
+                } else {
+                    alert('No Watts/KVA found.');
+                }
+            },
+            error: function() {
+                alert('An error occurred while fetching products.');
             }
-        },
-        error: function() {
-            alert('An error occurred while fetching products.');
-        }
-    });
-}
+        });
+    }
+
     //Function when modal closes
     function closemodal() {
         // Get the product container and reset it
@@ -601,6 +602,7 @@ require_once '../../Database/database.php';
 </script>
 
 <script>
+    //when the page loads
     document.addEventListener('DOMContentLoaded', function () {
      const calendarDays = document.getElementById('calendarDays');
      const monthYear = document.getElementById('monthYear');
@@ -609,7 +611,8 @@ require_once '../../Database/database.php';
      let currentDate = new Date();
 
      Display();
-
+    
+     //prepare date picker
      function renderCalendar(date) {
          calendarDays.innerHTML = ''; // Clear previous days
          const year = date.getFullYear();
@@ -669,22 +672,6 @@ require_once '../../Database/database.php';
     addTaskModal.show();
 }
 
-// function test(){
-//     const email = document.getElementById('email').value;
-//     const name = document.getElementById('name').value;
-//     const age = document.getElementById('age').value;
-//     const location = document.getElementById('location').value;
-//     const product = document.getElementById('product').value;
-//     const productContainer = document.getElementById("productContainer");
-//     const productInputs = productContainer.getElementsByTagName("select");
-        
-//     const productValues = [];
-//     for (let i = 0; i < productInputs.length; i++) {
-//         productValues.push(productInputs[i].value); // Get the value of each sinput
-//     }
-//     alert(email+ name+ age+ location);
-//     alert("Product Values: " + productValues.join(", "));
-// }
 
  // Function to open the modal and fetch available time slots for a selected date
  function openTimeSlotsModal(date) {
@@ -741,41 +728,6 @@ require_once '../../Database/database.php';
                     productValues.push(productInputs[i].value); // Get the value of each sinput
                 }
 
-
-                if(email == "" || name == "" || age == "" || location == "" || productValues.length === 0){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "There seems to be missing information. Please complete the form",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                }
-                else if(!email.includes("@gmail.com")){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "Email should contain '@gmail.com'",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                } 
-                else if(age < 18){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "Age is supposed to be 18+",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                }
-                else{
                     Swal.fire({
                         title: 'Confirmation',
                         html: "Are you sure to submit the task?",
@@ -841,6 +793,104 @@ require_once '../../Database/database.php';
                             });
                         }
                     });
+            }),
+
+
+
+            //For checking the data before going to appointment
+            $(document).on('click', '#checkadd', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const email = document.getElementById('email').value;
+                const name = document.getElementById('name').value;
+                const ageid = document.getElementById('age');
+                const age = parseInt(ageid.value);
+                const location = document.getElementById('location').value;
+                const product = document.getElementById('product').value;
+                const productContainer = document.getElementById("productContainer");
+                const productInputs = productContainer.getElementsByTagName("select");
+                    
+                const productValues = [];
+                for (let i = 0; i < productInputs.length; i++) {
+                    productValues.push(productInputs[i].value); // Get the value of each sinput
+                }
+
+                let haserror = false;
+
+                for(let product of productValues){
+                    if(product == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "There seems to be missing information. Please complete the form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                        haserror = true;
+                    }
+                    else{
+
+                    }
+                }
+
+                if(email == "" || name == "" || age == "" || location == "" || productValues.length === 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                    haserror = true;
+                }
+                else if(!email.includes("@gmail.com")){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Email should contain '@gmail.com'",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                    haserror = true;
+                } 
+                else if(age < 18){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Age is supposed to be 18+",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                    haserror = true;
+                }
+                else{
+            
+                }
+
+                if(haserror == false){
+                    // Get the modal element
+                    var modalappoint = document.getElementById('services-modal');
+                    var modalElement = document.getElementById('addTaskModal');
+                    
+                    // Initialize a Bootstrap modal instance
+                    var modalappointment = new bootstrap.Modal(modalappoint);
+                    var modal = bootstrap.Modal.getInstance(modalElement);
+                    
+                    // Show the modal
+                    modalappointment.show();
+                    if (modal) {
+                        modal.hide();
+                    }
+                }
+                else{
+
                 }
             });
         });
