@@ -14,7 +14,7 @@ if(isset($_POST['pick']))
     $select_exec = mysqli_query($conn , $select);
     $row = mysqli_fetch_assoc($select_exec);
     $name = $row['first_name'] . " " . $row['last_name'];
-    $sql = "INSERT INTO service_worker(worker_name ) VALUES ('aries')";
+    $sql = "INSERT INTO service_worker(worker_name , account_id , user_id , admin_id , appointment_id , payment_id ) VALUES ('$name' , '$workerid' , '$userid' , '$admin_id' , '$appointmentid' , '$payment_id' )";
 
     $result = mysqli_query($conn , $sql);
     if($result){
