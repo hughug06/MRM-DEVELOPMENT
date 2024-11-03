@@ -155,7 +155,7 @@ require_once '../../Database/database.php';
                      </div>
 
 
-                    <!-- Modal Structure -->
+                    <!-- Modal payment -->
                         <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -206,6 +206,7 @@ require_once '../../Database/database.php';
 
                                             <!-- Submit Button -->
                                             <div class="text-center mt-3">
+                                                
                                                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                             </div>
                                         </form>

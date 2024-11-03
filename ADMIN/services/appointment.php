@@ -154,6 +154,9 @@
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#chain">Payment Checking
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_checking ?></span>
                                     </a>
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved">Approved
+                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                    </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Completed
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
@@ -326,11 +329,12 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Amount to pay</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Appointment Status</span></th>                                                                                       
+                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
+                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
+                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
+                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
+                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
+                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
                                                                     <th class="wd-lg-20p">Action</th>
                                                                 </tr>
                                                             </thead>
@@ -339,27 +343,32 @@
                                                             require '../../Database/database.php';                                                                                                                      
                                                             $select = "Select * from appointments 
                                                                         INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
-                                                                        where payment_status = 'confirmed'";
+                                                                        where payment_status = 'checking' and status = 'Checking'";
                                                             $result = mysqli_query($conn , $select);
                                                             if(mysqli_num_rows($result) > 0){
                                                                 foreach($result as $resultItem){
                                                                     ?> 
                                                                     <tr>
                                                                     <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?= $resultItem['payment_status']?></td>                         
+                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
+                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
+                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
+                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
+                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
+                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
                                                                                                     
-                                                                    <td>    
-                                                                        
-                                                                        
-                                                                                
-                                                                        <a href="check_payment.php?id=<?= $resultItem['account_id']?>&&appoint_id=<?= $resultItem['appointment_id']?>&&payment_id=<?= $resultItem['payment_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
-                                                                                                                
-                                                                        
-                                                                        
-                                                                    </td>
+                                                                    <td>
+                                                                    <a href="#" 
+                                                                    class="btn btn-sm btn-success payment-check-button" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#paymentCheckModal"
+                                                                    data-account-id="<?= $resultItem['account_id'] ?>" 
+                                                                    data-appointment-id="<?= $resultItem['appointment_id'] ?>"
+                                                                    data-payment-id="<?= $resultItem['payment_id'] ?>">
+                                                                        Check Payment <i class="fa fa-check-circle"></i>
+                                                                    </a>
+                                                                    
+                                                                </td>
                                                                 </tr>
                                                                     <?php 
                                                                 }
@@ -370,6 +379,97 @@
                                                     </div>             
                                                 </div>
                                             </div>
+                                            <div class="modal fade" id="paymentCheckModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paymentCheckModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            <div class="card" style="width: 18rem;">
+                                                            <?php 
+                                                                $sql = "SELECT * FROM user_info 
+                                                                        INNER JOIN accounts ON user_info.user_id = accounts.user_id 
+                                                                        WHERE role = 'service_worker'";
+                                                                $result = mysqli_query($conn , $sql);
+
+                                                                if(mysqli_num_rows($result) > 0) {                
+                                                                    foreach($result as $resultitem) {                
+                                                                ?>
+                                                                    <div class="card-body">
+                                                                    <form action="assign_worker.php" method="POST">
+                                                                            <input type="text" name="worker_id" value="<?= $resultitem['account_id'] ?>">
+                                                                            <h5 class="card-title">NAME: <?= $resultitem['first_name'] . " " . $resultitem['last_name'] ?></h5>
+                                                                            <p class="card-text">ROLE: <?= $resultitem['role'] ?></p>
+                                                                            
+                                                                            
+                                                                            <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
+                                                                        
+
+                                                                    </div>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                                            <input type="text" id="accountId" name="account_id">
+                                                                            <input type="text" id="appointmentId" name="appointment_id">
+                                                                            <input type="text" id="paymentId" name="payment_id">
+                                                            </form>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="approved">
+                                                <div class="mb-4 main-content-label">Payment Checking</div>
+                                                <div class="card-body border">
+                                                    <div class="table-responsive userlist-table">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
+                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
+                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
+                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
+                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
+                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
+                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
+                                                                    <th class="wd-lg-20p">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php 
+                                                            require '../../Database/database.php';                                                                                                                      
+                                                            $select = "Select * from appointments 
+                                                                        INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
+                                                                        where payment_status = 'approved' and status = 'Approved'";
+                                                            $result = mysqli_query($conn , $select);
+                                                            if(mysqli_num_rows($result) > 0){
+                                                                foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                    <td><?= $resultItem['name']?></td>    
+                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
+                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
+                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
+                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
+                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
+                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
+                                                                                                    
+                                                                    
+
+                                                                </tr>
+                                                                    <?php 
+                                                                }
+                                                            }
+                                                            ?> 
+                                                            </tbody>
+                                                        </table>
+                                                    </div>             
+                                                </div>
+                                            </div>
+                                           
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
                                                 <div class="card-body border">
@@ -440,20 +540,7 @@
                                                                         <?php 
                                                                                         
                                                                         }
-                                                                        else if($resultItem['status'] === "Pending"){
-                                                                        ?> 
-                                                                        <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                        data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                        data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                        data-bs-toggle="modal" 
-                                                                        data-bs-target="#staticBackdrop">
-                                                                            <i class="fe fe-edit-2">ASSIGN</i>
-                                                                        </a>
-                                                                        <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger"> <i class="fe fe-trash">DECLINE</i>  </a>
-                                                                        <?php                                                               
-                                                                    }
-                                                                    
-                                                                        ?> 
+                                                                        ?>
                                                                     </td>
                                                                 </tr>
                                                                     <?php 
@@ -617,3 +704,23 @@
 
 </html>
 
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    const paymentButtons = document.querySelectorAll('.payment-check-button');
+
+    paymentButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const accountId = this.getAttribute('data-account-id');
+            const appointmentId = this.getAttribute('data-appointment-id');
+            const paymentId = this.getAttribute('data-payment-id');
+
+            // Populate the modal inputs with data
+            document.getElementById('accountId').value = accountId;
+            document.getElementById('appointmentId').value = appointmentId;
+            document.getElementById('paymentId').value = paymentId;
+        });
+    });
+});
+
+
+</script>

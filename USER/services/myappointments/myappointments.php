@@ -70,7 +70,7 @@ require_once '../../../Database/database.php';
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
                                     <a class="nav-link  active" data-bs-toggle="tab" href="#pending">Pending</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment</a>         
-                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment Checking</a>                
+                                    <a class="nav-link" data-bs-toggle="tab" href="#paymentchecking">Payment Checking</a>              
                                     <a class="nav-link" data-bs-toggle="tab" href="#approved">Approved</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#completed">Completed</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#cancelled">Cancelled</a>
@@ -195,21 +195,20 @@ require_once '../../../Database/database.php';
                                                                     if ($current_appointment_id !== null) {
                                                                         echo '</tbody>';
                                                                         echo '</table>';
-                                                                    
+                                                            
                                                                         echo '<div class="card-footer text-center">';
-                                                                        echo '<a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php?account_id=' . htmlspecialchars($last_row['account_id']) . '&appointment_id=' . htmlspecialchars($last_row['appointment_id']) . '" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Proceed to payment</a>';
+                                                                        echo '<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal" data-account-id="' . htmlspecialchars($last_row['account_id']) . '" data-appointment-id="' . htmlspecialchars($last_row['appointment_id']) . '" data-total-amount="' . number_format($total_amount, 2) . '">Proceed to payment</a>';
                                                                         echo '</div>';
                                                                         echo '</div>'; // End of previous card
-
+                                                            
                                                                         // Display the final amount for the previous appointment
                                                                         echo '<div class="alert alert-info text-center"><strong>Total Amount: $' . number_format($total_amount, 2) . '</strong></div>';
-
+                                                            
                                                                         // Reset the total amount for the next appointment
                                                                         $total_amount = 0;
                                                                     }
-
+                                                            
                                                                     // Start a new card for the new appointment_id
-                                                                    
                                                                     echo '<div class="card shadow-sm mb-4">';
                                                                     echo $numbering;
                                                                     echo '<div class="card-header bg-primary text-white text-center">';
@@ -227,19 +226,19 @@ require_once '../../../Database/database.php';
                                                                     echo '</tr>';
                                                                     echo '</thead>';
                                                                     echo '<tbody>';
-
+                                                            
                                                                     // Reset item number and update the current appointment ID
                                                                     $item_no = 1;
                                                                     $numbering++;
                                                                     $current_appointment_id = $row['appointment_id'];
                                                                 }
-
+                                                            
                                                                 // Calculate total cost for this item (amount * quantity)
                                                                 $item_total_cost = $row['amount'] * $row['quantity'];
-
+                                                            
                                                                 // Add this item's total cost to the running total for the appointment
                                                                 $total_amount += $item_total_cost;
-
+                                                            
                                                                 // Output each item within the same appointment
                                                                 echo '<tr>';
                                                                 echo '<td>' . $item_no++ . '</td>';  // Increment item number
@@ -249,35 +248,202 @@ require_once '../../../Database/database.php';
                                                                 echo '<td>$' . htmlspecialchars($row['amount']) . '</td>';
                                                                 echo '<td>$' . number_format($item_total_cost, 2) . '</td>';  // Display calculated total cost
                                                                 echo '</tr>';
-
+                                                            
                                                                 // Store the last row for proper footer link generation
                                                                 $last_row = $row;
                                                             }
-
+                                                            
                                                             // Close the last card after the loop ends
                                                             echo '</tbody>';
                                                             echo '</table>';
                                                             echo '<div class="card-footer text-center">';
-                                                            echo '<a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php?account_id=' . htmlspecialchars($last_row['account_id']) . '&appointment_id=' . htmlspecialchars($last_row['appointment_id']) . '" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Proceed to payment</a>';
+                                                            echo '<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal" data-account-id="' . htmlspecialchars($last_row['account_id']) . '" data-appointment-id="' . htmlspecialchars($last_row['appointment_id']) . '" data-total-amount="' . number_format($total_amount, 2) . '">Proceed to payment</a>';
                                                             echo '</div>';
                                                             echo '</div>'; // End of last card
-
+                                                            
                                                             // Display the final amount for the last appointment
                                                             echo '<div class="alert alert-info text-center"><strong>Total Amount: $' . number_format($total_amount, 2) . '</strong></div>';
-                                                        } else {
-                                                            echo 'No data found.';
-                                                        }
-                                                    ?>
+                                                            } else {
+                                                                echo 'No data found.';
+                                                            }
+                                                            ?>
+                                                            
+                                                   
 
 
                                                         </div>
+                                                 <!-- Modal payment -->
+                                                <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="paymentModalLabel">Payment Confirmation</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Centered Blank Image Placeholder -->
+                                                                <div class="text-center mb-3">
+                                                                    <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                                                </div>
+                                                                
+                                                            
+                                                                <form action="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php" method="POST" enctype="multipart/form-data">
+                                                                    <div class="row mb-3">
+                                                                        <!-- First Row -->
+                                                                        <div class="col">
+                                                                            <label for="firstField" class="form-label">Reference Number</label>
+                                                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="secondField" class="form-label">Bank Name</label>
+                                                                            <input class="form-control" type="text" id="secondField" name="bank_name" required>
+                                                                        </div>
+                                                                    </div>                                         
+                                                                    <div class="row mb-3">
+                                                                        <!-- Second Row -->
+                                                                        <div class="col">
+                                                                            <label for="thirdField" class="form-label">Payment method</label>
+                                                                            <select class="form-control" id="thirdField" name="payment_method" required>
+                                                                                <option value="" disabled selected>Select Payment Method</option>                        
+                                                                                <option value="cheque">Cheque</option>
+                                                                                <option value="bank_to_bank">Bank to bank</option>
+                                                                            
+                                                                            </select>
+                                                                        </div>
 
+                                                                        <div class="col">
+                                                                            <label for="fourthField" class="form-label">Date</label>
+                                                                            <input class="form-control" type="date" id="fourthField" name="date" required>
+                                                                        </div>
+                                                                    </div>
+
+                                                                     <!-- Hidden fields for account_id and appointment_id -->
+                                                                        <input type="hidden" id="modalAccountId" name="account_id">
+                                                                        <input type="hidden" id="modalAppointmentId" name="appointment_id">
+                                                                        <input type="hidden" name="total_cost" id="modalTotalCost">
+
+                                                                    <!-- Submit Button -->
+                                                                    <div class="text-center mt-3">
+                                                                    <p><strong>Total Cost: </strong><span class="text-success" id="modalTotalAmount"></span></p>
+                                                                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="paymentchecking">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
                                                 <div class="card-body border">
-                                                   <!-- Content Here -->
+                                                    <!-- Content Here -->
+                                                     <?php 
+                                                                $userid = $_SESSION['account_id'];
+                                                                $sql = "SELECT * FROM appointments
+                                                                inner join service_payment on service_payment.appointment_id = appointments.appointment_id
+                                                                 where appointments.account_id = $userid and appointments.status = 'Checking'";
+                                                                $result = mysqli_query($conn, $sql);
+
+                                                                if (mysqli_num_rows($result) > 0) {
+                                                                    $count = 0; // Counter to track the number of cards per row
+                                                                    echo '<div class="row">'; // Open the row before starting the loop
+
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                       
+                                                                        // Check if a new row needs to be opened for every two cards
+                                                                        if ($count % 2 == 0 && $count != 0) {
+                                                                            echo '</div><div class="row">'; // Close the previous row and open a new row after two cards
+                                                                        }
+                                                                    ?>
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="card shadow-sm mb-4" style="border: 2px solid orange;">
+                                                                        <div class="card-header bg-primary text-white text-center">
+                                                                            <h4 class="card-title mb-0">Appointment Summary</h4>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Your Name</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['name']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">service type</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['service_type']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Reference Number</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['reference_number']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Bank Name</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['bank_name']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Payment Method</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['payment_method']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">date(bank)</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['bank_date']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">total cost</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['total_cost'])?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">location</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['location']) ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Appointment Date</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['date']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Appointment Time</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['start_time']) . "-" . htmlspecialchars($row['end_time']) ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Amount</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['total_cost']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Payment Status</h6>
+                                                                                    <span class="badge bg-success"><?= htmlspecialchars($row['payment_status']) ?></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">created</h6>
+                                                                                    <p class="text-muted"><?= htmlspecialchars($row['created_at']) ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <h6 class="fw-bold">Appointment Status</h6>
+                                                                                    <span class="badge bg-success"><?= htmlspecialchars($row['status']) ?></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    </div>
+
+                                                                    <?php 
+                                                                        $count++; // Increment counter
+
+                                                                    } // End of while loop
+
+                                                                    echo '</div>'; // Close the final row
+                                                                }
+                                                            ?>
                                                 </div>
                                             </div>           
                                             <div class="main-content-body  tab-pane p-4 border-top-0 p-0" id="approved">
@@ -774,5 +940,21 @@ require_once '../../../Database/database.php';
 </script> 
 
 
+<script>
+    const paymentModal = document.getElementById('paymentModal');
+    paymentModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const accountId = button.getAttribute('data-account-id');
+        const appointmentId = button.getAttribute('data-appointment-id');
+        const totalAmount = parseInt(button.getAttribute('data-total-amount').replace(/,/g, ''), 10);
+        
+        document.getElementById('modalTotalAmount').textContent = `$${totalAmount}`;
+        
+        // Here, you can use accountId and appointmentId in your form or display it in the modal
+        document.getElementById('modalAccountId').value = accountId;
+        document.getElementById('modalAppointmentId').value = appointmentId;
+        document.getElementById('modalTotalCost').value = totalAmount;
+    });
+</script>
 
 

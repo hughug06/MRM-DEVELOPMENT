@@ -465,21 +465,3 @@ require_once '../authetincation.php';
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    // When the assign button is clicked
-    $('.assign-btn').on('click', function() {
-    
-         // Get the account_id and appointment_id from data attributes
-         var userId = $(this).data('account-id');
-        var appointmentId = $(this).data('appointment-id');
-
-        // Set the values in the modal's hidden fields or display them as needed
-        $('#user_id').val(userId);
-        $('#appointment_id').val(appointmentId);
-        
-
-        
-    });
-  });
-</script>
