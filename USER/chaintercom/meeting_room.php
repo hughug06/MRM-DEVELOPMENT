@@ -110,7 +110,13 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
                                 <?php
                                             }
                                         } else {
-                                            echo "No confirmed appointment found or error accessing database";
+                                            echo "Please proceed to payment";
+                                            ?> 
+                                            <form action="update_appointment.php" method="POST">
+                                            <button type="submit" name="payment">Payment</button>
+                                            </form>
+                                            <?php
+                                           
                                         }
                                 ?>
                             </div>
@@ -159,7 +165,7 @@ $room_name = "appointment_" . "another"; // Room name dynamically based on appoi
     const domain = '8x8.vc';
     const options = {
       roomName: 'vpaas-magic-cookie-1e1d307526af4b29bad5f071cdd7f1c6/ExampleRoom',
-      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzAzMTUzODIsImV4cCI6MTczMDMyMjU4MiwibmJmIjoxNzMwMzE1Mzc3LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.rxq7KuEHFQKbTChEs6WYz9M_4S8jEtZeuxeUbQE4kowbrXbcS5IMejX9iIi4BrhjoO6ux0Jz-jrVjkA9ojz7335DvJ1ns8VSTYQuFNP1nmA6ek2ITmDnj5BedVKZAHlQ7FcwM5HhOxXVJ2ASDij6CD7FT3iNOefUL3uFziS9IGi7QPNvTp62z_1SgxS29p_EHs76ZiSubT7mXmw8zL0czNQYXiFMpPlsXQSWKnc0Fwmv5Die7qoOlUFEdNhXg6rmHJv7spAwv7gdI6t4Qb3a8olYpxSUT_EEKEtnkOH6HLsop_YUUPoKBReQFzw93UkLKQ49aIhkH7TdQOuArKkjtA',
+      jwt: 'eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYvY2ViYmMyLVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3MzA2NDY1NzUsImV4cCI6MTczMDY1Mzc3NSwibmJmIjoxNzMwNjQ2NTcwLCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWUxZDMwNzUyNmFmNGIyOWJhZDVmMDcxY2RkN2YxYzYiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImphbmFyaWVzaW1wdWVydG8xMyIsImlkIjoiYXV0aDB8NjcxM2ZhYzI5MGM1Y2UxMmUyYzM1OTc4IiwiYXZhdGFyIjoiIiwiZW1haWwiOiJqYW5hcmllc2ltcHVlcnRvMTNAZ21haWwuY29tIn19LCJyb29tIjoiKiJ9.l1pwR5hIdGet8L5x7ArdZY8ejUFdqFEi5NOeEPHQ1yjVYUf8j4Zfj1eTttFWo9g-HXgfd7e2Bqa2mE16ZzYOFy2CeOHLkwi0K8ygK3KAXMzhS3NYppUp7UeIHIREsdS24QfIxeHQAP1oNosI0b8pfn0UeJ6wpuv0vN9_x_Tn5X5He0qqmp5Kn5Ms1cVGeIHBP70KWlSL0n40TFmESRFz1oYze7biV62bsmoB1ERk7AL1LRT8Dvg020MwmT-MznuFa22G-YU-fwNF_tr1ilCdoyfK5TNKvO2sBsc6v8JaRzt0332t7uRfulN0NCImdNWlM4Vf1pcU1hDFySwTjsrLfA',
       width: 700,
       height: 700,
       parentNode: document.querySelector('#meet')

@@ -11,12 +11,13 @@ $status = $_POST['status'];
 
 
 if(isset($_POST['confirm'])){
-    $insert = "INSERT INTO chaintercom_quotation(chaintercomappointid  , account_id  , 	product , amount) 
+    $insert = "INSERT INTO chaintercom_quotation(chaintercomappointid  , user_id  , 	product , amount) 
                 VALUES('$appointment_id','$account_id','$products','$amount')";
     $result = mysqli_query($conn , $insert);
     if($result){
-        $upd = "UPDATE chaintercom_appointment SET status='waiting' WHERE chaintercomappointid=$appointment_id AND account_id= $account_id";
+        $upd = "UPDATE chaintercom_appointment SET status='payment' WHERE chaintercomappointid=$appointment_id AND account_id= $account_id";
         $exec = mysqli_query($conn , $upd);
+        header("Location: project-appointment.php");
     }
 
 }

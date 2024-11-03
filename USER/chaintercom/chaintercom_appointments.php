@@ -119,7 +119,7 @@ require_once '../../Database/database.php';
                       else if($row['status'] === 'payment'){
                         $select2 = "select * from chaintercom_quotation 
                         inner join chaintercom_appointment on chaintercom_appointment.chaintercomappointid = chaintercom_quotation.chaintercomappointid
-                        where chaintercom_quotation.account_id = $user_id";
+                        where account_id = $user_id AND  status = 'payment'";
                         $result2 = mysqli_query($conn , $select2); 
                         $data = mysqli_fetch_assoc($result2);
                 ?>
@@ -169,16 +169,47 @@ require_once '../../Database/database.php';
                                             <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
                                         </div>
                                         
-                                        <!-- Image Upload Form -->
+                                    
                                         <form action="chaintercom_payment.php" method="POST" enctype="multipart/form-data">
-                                            <div class="mb-3">
-                                                <label for="image" class="form-label">Upload Image</label>
-                                                <input class="form-control" type="file" id="image" name="image" accept=".jpg, .jpeg, .png, .gif" required>
-                                                <input class="form-control" type="text"  name="quotation_id" value="<?=$data['quotation_id']?>" hidden>
-                                                <input class="form-control" type="text"  name="chaintercomappointid" value="<?=$data['chaintercomappointid']?>" hidden>
+                                            <div class="row mb-3">
+                                                <!-- First Row -->
+                                                <div class="col">
+                                                    <label for="firstField" class="form-label">Reference Number</label>
+                                                    <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="secondField" class="form-label">Bank Name</label>
+                                                    <input class="form-control" type="text" id="secondField" name="bank_name" required>
+                                                </div>
+                                            </div>                                         
+                                            <div class="row mb-3">
+                                                <!-- Second Row -->
+                                                <div class="col">
+                                                    <label for="thirdField" class="form-label">Payment method</label>
+                                                    <select class="form-control" id="thirdField" name="payment_method" required>
+                                                        <option value="" disabled selected>Select Payment Method</option>                        
+                                                        <option value="cheque">Cheque</option>
+                                                        <option value="bank_to_bank">Bank to bank</option>
+                                                      
+                                                    </select>
+                                                </div>
+
+                                                <div class="col">
+                                                    <label for="fourthField" class="form-label">Date</label>
+                                                    <input class="form-control" type="date" id="fourthField" name="date" required>
+                                                </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Upload</button>
+
+                                            <!-- Hidden Inputs -->
+                                            <input class="form-control" type="text" name="quotation_id" value="<?= $data['quotation_id'] ?>" hidden>
+                                            <input class="form-control" type="text" name="chaintercomappointid" value="<?= $data['chaintercomappointid'] ?>" hidden>
+
+                                            <!-- Submit Button -->
+                                            <div class="text-center mt-3">
+                                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                            </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -187,8 +218,116 @@ require_once '../../Database/database.php';
                     
 
 
+
                      <?php 
                         }
+                        else if($row['status'] === 'approval'){
+                        $select2 = "select * from chaintercom_appointment        
+                        inner join chaintercom_payment on chaintercom_payment.appointment_id = chaintercom_appointment.chaintercomappointid               
+                        where chaintercom_appointment.account_id = $user_id and chaintercom_appointment.status = 'approval'";
+                        $result2 = mysqli_query($conn , $select2); 
+                        $data = mysqli_fetch_assoc($result2);
+                        
+                        ?>
+                <table class="table table-borderless text-center">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="h4 fw-bold">Payment</th>
+                        </tr>
+                    </thead>
+                             <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name:</td>
+                                        <td><?= $data['name']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Product:</td>
+                                        <td><?= $data['product']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Reference Number:</td>
+                                        <td><?= $data['reference_number']; ?></td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td class="fw-bold">bank Name:</td>
+                                        <td><?= $data['bank_name']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment method:</td>
+                                        <td><?= $data['payment_method']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">bank date:</td>
+                                        <td><?= $data['date']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment:</td>
+                                        <td><?= $data['payment_status']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment status:</td>
+                                        <td>For checking </td>
+                                    </tr>
+                                
+                                                 
+                                </tbody>
+                    </table>
+                        <?php
+                            }
+                            else if($row['status'] === 'delivery')
+                            {
+                                $select2 = "select * from chaintercom_appointment        
+                                inner join chaintercom_payment on chaintercom_payment.appointment_id = chaintercom_appointment.chaintercomappointid               
+                                where chaintercom_appointment.account_id = $user_id and chaintercom_appointment.status = 'delivery'";
+                                $result2 = mysqli_query($conn , $select2); 
+                                $data = mysqli_fetch_assoc($result2);
+     
+                            ?>
+                <table class="table table-borderless text-center">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="h4 fw-bold">Payment</th>
+                        </tr>
+                    </thead>
+                             <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name:</td>
+                                        <td><?= $data['name']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Product:</td>
+                                        <td><?= $data['product']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Reference Number:</td>
+                                        <td><?= $data['reference_number']; ?></td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td class="fw-bold">bank Name:</td>
+                                        <td><?= $data['bank_name']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment method:</td>
+                                        <td><?= $data['payment_method']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">bank date:</td>
+                                        <td><?= $data['date']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment:</td>
+                                        <td><?= $data['payment_status']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">payment status:</td>
+                                        <td> delivery on progress </td>
+                                    </tr>
+                                
+                                                 
+                                </tbody>
+                </table>
+                            <?php
+                            }
                         }
                     }
                 ?>

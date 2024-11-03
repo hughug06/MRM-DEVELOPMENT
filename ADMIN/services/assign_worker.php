@@ -1,5 +1,5 @@
 <?php
-require_once '../../Database/database.php';
+require '../../Database/database.php';
 session_start();
 if(isset($_POST['pick']))
 {
@@ -9,13 +9,12 @@ if(isset($_POST['pick']))
     $payment_id = $_POST['payment_id'];
     $admin_id = $_SESSION['admin_id'];  
     
+
     $select = "select * from accounts inner join user_info on user_info.user_id = accounts.user_id where account_id = '$workerid'";
     $select_exec = mysqli_query($conn , $select);
     $row = mysqli_fetch_assoc($select_exec);
     $name = $row['first_name'] . " " . $row['last_name'];
-    $sql = "insert into service_worker(worker_name ,account_id , user_id , admin_id , appointment_id , payment_id)
-            VALUES('$name', '$workerid' , '$userid' , '$admin_id' , '$appointmentid' , '$payment_id')";
-    
+    $sql = "INSERT INTO service_worker(worker_name ) VALUES ('aries')";
 
     $result = mysqli_query($conn , $sql);
     if($result){
