@@ -99,9 +99,20 @@ require_once '../../ADMIN/authetincation.php';
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
+
+                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                    <div>
+                        <h2 class="main-content-title fs-24 mb-1">Welcome To Dashboard</h2>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+
                 <div class="row row-sm">
                     <div class="col-sm-12 col-lg-12 col-xl-8">
-                        <div class="row row-sm banner-img">
+                        <div class="row row-sm">
                             <div class="col-sm-12 col-lg-12 col-xl-12">
                                 <div class="card bg-primary custom-card card-box">
                                     <div class="card-body p-4">
@@ -120,7 +131,7 @@ require_once '../../ADMIN/authetincation.php';
                             </div>
                         </div>
                         <div class="row row-sm">
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
@@ -129,7 +140,7 @@ require_once '../../ADMIN/authetincation.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
@@ -138,7 +149,7 @@ require_once '../../ADMIN/authetincation.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
@@ -147,7 +158,25 @@ require_once '../../ADMIN/authetincation.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
+                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <img src="../../assets/images/media/media-9.jpg" class="card-img mb-3" alt="...">
@@ -263,7 +292,7 @@ require_once '../../ADMIN/authetincation.php';
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-12 col-xl-4 banner-img">
+                    <div class="col-sm-12 col-lg-12 col-xl-4">
                         <div class="card custom-card">
                             <div class="border">
                                 <div id='calendar'></div> 
@@ -271,10 +300,28 @@ require_once '../../ADMIN/authetincation.php';
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
-                                <div class="card-title">Services</div>
+                                <div class="card-title">Project 1</div>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">MRM EG Electric Power Generation Services offers comprehensive solutions for solar panels and generators, including expert tuning, repair, regular maintenance, and installation. Our experienced technicians ensure your power systems run efficiently and reliably. Click inquire to know more about our availability and specialized services tailored to meet your energy needs.</p>
+                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Project 1</div>
+                            </div>
+                            <div class="card-body">
+                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
+                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                            </div>
+                        </div>
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Project 1</div>
+                            </div>
+                            <div class="card-body">
+                                <img src="../../assets/images/media/media-4.jpg" class="card-img mb-3" alt="...">
                                 <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
