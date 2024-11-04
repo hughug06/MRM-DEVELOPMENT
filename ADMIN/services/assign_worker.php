@@ -2,7 +2,7 @@
 require '../../Database/database.php';
 session_start();
 
-if (isset($_POST['pick'])) {
+
     $userid = $_POST['account_id']; 
     $workerid = $_POST['worker_id'];
     $appointmentid = $_POST['appointment_id'];
@@ -49,9 +49,7 @@ if (isset($_POST['pick'])) {
 
     // Close statement
     $stmt->close();
-} else {
-    echo "No data received.";
-}
+ 
 
 // Close connection
 $conn->close();
