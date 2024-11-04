@@ -179,7 +179,7 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Approved</div>
+                                    <div class="card-title">Approved - Ongoing Project</div>
                                 </div>
                                 <div class="card-body" id="approved">
                                    
@@ -501,13 +501,24 @@ require_once '../../Database/database.php';
                             newTask.id = item.kanban_id;
 
                             // Add the task details
-                            newTask.innerHTML = `
+                            if(status == 'approved' || status == 'completed' || status == 'cancelled'){
+                                newTask.innerHTML = `
+                                ${id}. ${email || 'No email'}<br>
+                                <strong>Name:</strong> ${name || 'No name'}<br>
+                                <strong>Location:</strong> ${location || 'No location'}
+                                <strong>Product:</strong> ${productValues || 'No Products'}
+                            `;
+                            }
+                            else{
+                                newTask.innerHTML = `
                                 ${id}. ${email || 'No email'}<br>
                                 <strong>Name:</strong> ${name || 'No name'}<br>
                                 <strong>Location:</strong> ${location || 'No location'}
                                 <strong>Product:</strong> ${productValues || 'No Products'}
                                 <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                             `;
+                            }
+
 
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);

@@ -27,4 +27,16 @@ if (isset($_POST['confirm'])) {
 
    
 }
+
+//for deleting tasks
+elseif (isset($_POST['delete'])) {
+    $deleteid = $_POST['delete'];
+    $sql = "DELETE from kanban where kanban_id=$deleteid";
+    $result = mysqli_query($conn , $sql);
+    if($result)
+    {
+        echo json_encode(['success' => true]);
+    }
+    
+}
 ?>
