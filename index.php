@@ -113,10 +113,14 @@
                 require 'database/database.php';
                 $sql = "select * from accounts";
                 $result = mysqli_query($conn,$sql);
-                $row = mysqli_fetch_assoc($result);
+                while($row = mysqli_fetch_assoc($result)){
+                  ?>
 
-                ?>
-               <?= $row['email'] ?>
+                  <p><?= $row['email']?></p>
+
+               <?php 
+                }
+               ?>
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
