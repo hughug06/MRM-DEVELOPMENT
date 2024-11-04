@@ -7,5 +7,9 @@ if ($conn->connect_error) {
     die();
 } else {
     echo "Connection successful!";
+    $sql = "select * from accounts";
+    $result = mysqli_query($conn , $sql);
+    $row = mysqli_fetch_assoc($result);
+    echo $row['email'];
 }
 ?>
