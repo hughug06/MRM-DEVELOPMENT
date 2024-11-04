@@ -109,29 +109,9 @@
                 Reliable <span class="text-primary">Energy</span>
               </h1>
               <p class="lead mb-4">
-    <?php 
-    require 'database/database.php';
-
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("SELECT email FROM accounts");
-    
-    // Execute the statement
-    $stmt->execute();
-    
-    // Bind the result to a variable
-    $stmt->bind_result($email);
-    
-    // Fetch and display each result
-    while ($stmt->fetch()) {
-        echo htmlspecialchars($email) . "<br>"; // Escape output for security
-    }
-    
-    // Close the statement and the connection
-    $stmt->close();
-    $conn->close();
-    ?>
-</p>
-
+                
+                At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
+              </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
               </a>
