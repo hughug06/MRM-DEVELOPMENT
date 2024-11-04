@@ -984,7 +984,7 @@ require_once '../authetincation.php';
     });
 
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('remove_btn')) {
+        if (e.target && e.target.classList.contains('accept_btn')) {
             const id = e.target.value;
             Swal.fire({
                 title: 'Confirmation',
@@ -1055,7 +1055,7 @@ require_once '../authetincation.php';
                             document.querySelector('#checkmodal .modal-footer').innerHTML = `
                             <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                             <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
-                            <a type="button" class="btn btn-primary" id="checkadd">Accept</a>
+                            <button class="btn btn-primary accept_btn">Accept</button>
                             `;
                         }
                         else if(data.status == "waiting"){
@@ -1068,7 +1068,7 @@ require_once '../authetincation.php';
                             document.querySelector('#checkmodal .modal-footer').innerHTML = `
                             <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                             <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
-                            <a type="button" class="btn btn-primary" id="Approve">Approve</a>
+                            <button class="btn btn-primary aprove-btn">Approve</button>
                             `;
                         }
                         else{
