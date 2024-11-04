@@ -1,6 +1,6 @@
 <?php 
 // Replace these with your Hostinger database credentials
-$db_host = 'your_hostinger_database_host'; // e.g., mysql-123.hostinger.com
+$db_host = 'mrm-eg.online'; // e.g., mysql-123.hostinger.com
 $db_user = 'mrm';
 $db_pass = 'ZO&aSqn^uS/b';
 $db_name = 'mrm';
