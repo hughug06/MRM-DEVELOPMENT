@@ -13,5 +13,8 @@
         ECHO "error";
         die("Something went wrong");
         }
+        else{
+            echo "correct";
+        }
 
 ?>
