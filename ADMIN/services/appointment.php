@@ -723,10 +723,14 @@
             const appointmentId = this.getAttribute('data-appointment-id');
             const paymentId = this.getAttribute('data-payment-id');
 
-            // Populate the modal input fields with the retrieved data
-            document.querySelector('.accountId').value = accountId;
-            document.querySelector('.appointmentId').value = appointmentId;
-            document.querySelector('.paymentId').value = paymentId;
+            // Find the parent container or form and populate input fields within that scope
+            const parentContainer = this.closest('.card-body'); // Adjust the class to match the parent container
+
+            if (parentContainer) {
+                parentContainer.querySelector('.accountId').value = accountId;
+                parentContainer.querySelector('.appointmentId').value = appointmentId;
+                parentContainer.querySelector('.paymentId').value = paymentId;
+            }
         });
     });
 });
