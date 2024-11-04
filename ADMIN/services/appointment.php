@@ -402,8 +402,7 @@
                                                                                 <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
                                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
                                                                                 <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
-                                                                                <button type="submit"  class="btn btn-primary">Pick Worker</button>
-                                                                            </form>
+                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>                                                                          
                                                                         </div>
                                                                 <?php
                                                                     }
