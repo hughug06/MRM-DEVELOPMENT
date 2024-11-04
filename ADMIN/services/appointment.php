@@ -712,15 +712,18 @@
 
 <script>
  document.addEventListener('DOMContentLoaded', function() {
+    // Select all buttons with the class 'payment-check-button'
     const paymentButtons = document.querySelectorAll('.payment-check-button');
 
+    // Add a click event listener to each button
     paymentButtons.forEach(button => {
         button.addEventListener('click', function() {
+            // Retrieve data attributes from the clicked button
             const accountId = this.getAttribute('data-account-id');
             const appointmentId = this.getAttribute('data-appointment-id');
             const paymentId = this.getAttribute('data-payment-id');
 
-            // Populate the modal inputs with data by class
+            // Populate the modal input fields with the retrieved data
             document.querySelector('.accountId').value = accountId;
             document.querySelector('.appointmentId').value = appointmentId;
             document.querySelector('.paymentId').value = paymentId;
