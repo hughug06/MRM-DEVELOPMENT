@@ -399,19 +399,27 @@
                                                                 ?>
                                                                         <div class="card-body">
                                                                             <form action="assign_worker.php" method="POST">
-                                                                                <input type="text" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                <!-- Worker ID -->
+                                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                
+                                                                                <!-- Display Worker Name and Role -->
                                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
                                                                                 <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
-                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>  
-                                                                                <input type="text" id="accountId" name="account_id">
-                                                                                <input type="text" id="appointmentId" name="appointment_id">
-                                                                                <input type="text" id="paymentId" name="payment_id">
-                                                            </form>                                                                        
+                                                                                
+                                                                                <!-- Submit Button -->
+                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
+                                                                                
+                                                                                <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
+                                                                                <input type="hidden" name="account_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                <input type="hidden" name="appointment_id" value="<?= htmlspecialchars($resultitem['appointment_id'] ?? '') ?>">
+                                                                                <input type="hidden" name="payment_id" value="<?= htmlspecialchars($resultitem['payment_id'] ?? '') ?>">
+                                                                            </form>                                                                        
                                                                         </div>
                                                                 <?php
                                                                     }
                                                                 }
                                                                 ?>
+
 
                                                                             
                                                                 </div>
