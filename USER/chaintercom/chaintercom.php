@@ -177,7 +177,7 @@ if (isset($_GET['chainavailability'], $_GET['date'], $_GET['start_time'], $_GET[
 
                     
                     <div class="input-field">
-                        <?php include '/USER/chaintercom/product-retrieve.php'; ?>
+                        <?php include '/chaintercom/product-retrieve.php'; ?>
                     </div>
                 </div>
                   
