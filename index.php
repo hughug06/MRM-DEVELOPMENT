@@ -109,7 +109,14 @@
                 Reliable <span class="text-primary">Energy</span>
               </h1>
               <p class="lead mb-4">
-                At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
+                <?php 
+                require 'database/database.php';
+                $sql = "select * from accounts";
+                $result = mysqli_query($conn,$sql);
+                $row = mysqli_fetch_assoc($result);
+
+                ?>
+               <?= $row['email'] ?>
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
