@@ -410,9 +410,9 @@
                                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                                 
                                                                                 <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="text" name="account_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
-                                                                                <input type="text" name="appointment_id" value="<?= htmlspecialchars($resultitem['appointment_id'] ?? '') ?>">
-                                                                                <input type="text" name="payment_id" value="<?= htmlspecialchars($resultitem['payment_id'] ?? '') ?>">
+                                                                                <input type="text" id="accountId" name="account_id">
+                                                                                <input type="text" id="appointmentId" name="appointment_id">
+                                                                                <input type="text" id="paymentId" name="payment_id">
                                                                             </form>                                                                        
                                                                         </div>
                                                                 <?php
