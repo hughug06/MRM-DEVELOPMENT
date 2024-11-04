@@ -1164,7 +1164,7 @@
 
           $.ajax({
             type: "POST",
-            url: "/USER/signup/function.php",
+            url: "USER/signup/function.php",
             data: formData,
             dataType: "json",
             beforeSend: function () {
@@ -1192,8 +1192,8 @@
             },
             error: function (xhr, status, error) {
               $("#loadingOverlay").hide(); // Hide the loading indicator
-              alert("Something went wrong. Please try again.");
-              console.log(xhr.responseText);
+              alert(xhr.responseText);
+              
             },
           });
         });
