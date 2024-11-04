@@ -1,85 +1,76 @@
 <?php
 require '../../Database/database.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 require '../../vendor/autoload.php';
 
-if(isset($_POST['signup']))
-{
-  
-  $firstname = $_POST['firstname'];
-  $lastname = $_POST['lastname'];
-  $middlename= $_POST['middlename'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $verify_token = md5(rand());
-  $name_pattern = "/^[a-zA-Z\s]+$/"; // For names
-  $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/"; 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  //update details ( start with upper case and the rest is lower case)
-  $firstname = ucfirst(strtolower($firstname));
-  $lastname = ucfirst(strtolower($lastname));
-  $middlename = ucfirst(strtolower($middlename));
-//VALIDATE FIRSTNAME
-    if(empty($firstname) || empty($lastname) || empty($middlename) || empty($email) || empty($password)){
-      echo json_encode(['success' => false, 'message' => 'Please fill up required information']);
-      exit();
+if (isset($_POST['signup'])) {
+    $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
+    $lastname = ucfirst(strtolower(trim($_POST['lastname'])));
+    $middlename = ucfirst(strtolower(trim($_POST['middlename'])));
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $verify_token = md5(rand());
+
+    $name_pattern = "/^[a-zA-Z\s]+$/"; 
+    $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/";
+
+    // Validate inputs
+    if (empty($firstname) || empty($lastname) || empty($middlename) || empty($email) || empty($password)) {
+        echo json_encode(['success' => false, 'message' => 'Please fill up required information']);
+        exit();
     }
 
-    if (!preg_match($name_pattern, $firstname)) {
-      echo json_encode(['success' => false, 'message' => 'First name can only contain letters and spaces']);
-      exit();
+    if (!preg_match($name_pattern, $firstname) || !preg_match($name_pattern, $lastname) || (!empty($middlename) && !preg_match($name_pattern, $middlename))) {
+        echo json_encode(['success' => false, 'message' => 'Names can only contain letters and spaces']);
+        exit();
     }
-//VALIDATE LASTNAME
-  if (!preg_match($name_pattern, $lastname)) {
-      echo json_encode(['success' => false, 'message' => 'Last name can only contain letters and spaces']);
-      exit();
-  }
-//VALIDATE MIDDLENAME
-  if (!empty($middlename) && !preg_match($name_pattern, $middlename)) {
-      echo json_encode(['success' => false, 'message' => 'Middle name can only contain letters and spaces']);
-      exit();
-  }
 
-  // Validate password
-  if (!preg_match($password_pattern, $password)) {
-    echo json_encode(['success' => false, 'message' => 'Password must be 6-10 characters long, contain at least one lowercase letter, one uppercase letter, and one number']);
-    exit();
-  }
-//HASH PASSWORD, REGEX PURPOSES THATS WHY ITS POSITION HERE
-$password_hash = password_hash($password, PASSWORD_DEFAULT);
-
-
-    $sql_select = "select * from user_info where email = '$email'";
-    $select_result = mysqli_query($conn , $sql_select);
-    if(mysqli_num_rows($select_result) > 0)  //check if email is already existed
-    {
-      echo json_encode(['success' => false, 'message' => 'Email already exists']);     
+    if (!preg_match($password_pattern, $password)) {
+        echo json_encode(['success' => false, 'message' => 'Password must be 6-10 characters long, contain at least one lowercase letter, one uppercase letter, and one number']);
+        exit();
     }
-    else
-    {
-      
-      $insert_userinfo = "insert into user_info(email,first_name,middle_name,last_name) values('$email','$firstname','$middlename','$lastname')";
-      $userinfo_result = mysqli_query($conn , $insert_userinfo);
-      if($userinfo_result)
-      {
-          $user_id = $conn->insert_id;
-          $insert_accounts = "insert into accounts(user_id,email,password,verify_token) values('$user_id' , '$email' , '$password_hash' , '$verify_token')";
-          $accounts_result = mysqli_query($conn , $insert_accounts);
 
-      }
-      echo json_encode(['success' => true, 'message' => 'SUCCESS']);
-      email_veritication($firstname . " " . $lastname ,$email,$verify_token);   
-      
-    }   
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    // Check if email exists using prepared statements
+    $stmt = $conn->prepare("SELECT * FROM user_info WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode(['success' => false, 'message' => 'Email already exists']);
+        exit();
+    }
+
+    // Insert user info
+    $stmt = $conn->prepare("INSERT INTO user_info (email, first_name, middle_name, last_name) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $email, $firstname, $middlename, $lastname);
+    $userinfo_result = $stmt->execute();
+
+    if ($userinfo_result) {
+        $user_id = $conn->insert_id;
+        
+        // Insert into accounts table
+        $stmt = $conn->prepare("INSERT INTO accounts (user_id, email, password, verify_token) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $user_id, $email, $password_hash, $verify_token);
+        $stmt->execute();
+        
+        echo json_encode(['success' => true, 'message' => 'SUCCESS']);
+        email_verification($firstname . " " . $lastname, $email, $verify_token);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to insert data']);
+    }
+
+    $stmt->close();
+    $conn->close();
 }
 
 
 
-function email_veritication($name,$email,$verify_token){
+function email_verification($name,$email,$verify_token){
   $mail = new PHPMailer(true);
 
   try {
