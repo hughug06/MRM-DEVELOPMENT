@@ -400,7 +400,7 @@
                                                                         <div class="card-body">
                                                                             <form action="assign_worker.php" method="POST">
                                                                                 <!-- Worker ID -->
-                                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                <input type="text" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
                                                                                 
                                                                                 <!-- Display Worker Name and Role -->
                                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
@@ -410,9 +410,9 @@
                                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                                 
                                                                                 <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="hidden" name="account_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
-                                                                                <input type="hidden" name="appointment_id" value="<?= htmlspecialchars($resultitem['appointment_id'] ?? '') ?>">
-                                                                                <input type="hidden" name="payment_id" value="<?= htmlspecialchars($resultitem['payment_id'] ?? '') ?>">
+                                                                                <input type="text" name="account_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                <input type="text" name="appointment_id" value="<?= htmlspecialchars($resultitem['appointment_id'] ?? '') ?>">
+                                                                                <input type="text" name="payment_id" value="<?= htmlspecialchars($resultitem['payment_id'] ?? '') ?>">
                                                                             </form>                                                                        
                                                                         </div>
                                                                 <?php
