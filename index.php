@@ -109,19 +109,29 @@
                 Reliable <span class="text-primary">Energy</span>
               </h1>
               <p class="lead mb-4">
-                <?php 
-                require 'database/database.php';
-                $sql = "select * from accounts";
-                $result = mysqli_query($conn,$sql);
-                while($row = mysqli_fetch_assoc($result)){
-                  ?>
+    <?php 
+    require 'database/database.php';
 
-                  <p><?= $row['email']?></p>
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT email FROM accounts");
+    
+    // Execute the statement
+    $stmt->execute();
+    
+    // Bind the result to a variable
+    $stmt->bind_result($email);
+    
+    // Fetch and display each result
+    while ($stmt->fetch()) {
+        echo htmlspecialchars($email) . "<br>"; // Escape output for security
+    }
+    
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+    ?>
+</p>
 
-               <?php 
-                }
-               ?>
-              </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
               </a>
