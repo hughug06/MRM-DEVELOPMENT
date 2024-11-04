@@ -11,7 +11,7 @@ require_once '../authetincation.php';
 
     <!-- Meta Data -->
     <?php include_once(__DIR__.'../../../partials/head.php')?>
-    <title> Inquries </title>
+    <title> Chaintercom Appointments </title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
@@ -80,6 +80,8 @@ require_once '../authetincation.php';
                                     <div class="col-lg-12 col-md-12">
                                         <div class="card custom-card main-content-body-profile">
                                             <div class="tab-content">
+                                                
+                                                <!-- FOR CLIENTS TAB -->
                                                 <div class="main-content-body tab-pane p-4 border-top-0 active" id="client">
                                                     <div class="row row-sm">
                                                         <div class="col-lg-12 col-md-12">
@@ -410,126 +412,432 @@ require_once '../authetincation.php';
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+                                                
+                                                <!-- AGENT TAB -->
                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="agent">
                                                     <div class="row row-sm">
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="tab-content">
                                                                 <nav class="nav main-nav-line p-3 tabs-menu ">
                                                                     <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#checking">For Checking
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-checking">0</span>
                                                                     </a>
                                                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#waiting-meeting">Waiting for Meeting
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
                                                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#ongoing-meeting">Ongoing Meeting
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
-                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved-task">Approved
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved-task">Approved - Ongoing Project
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
                                                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed-task">Completed
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span> 
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span> 
                                                                     </a>
                                                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancelled-task">Cancelled
-                                                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span> 
+                                                                        <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span> 
                                                                     </a>
                                                                 </nav>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0 active" id="checking">
                                                                     <div class="mb-4 main-content-label">For Checking</div>
                                                                     <div class="card-body border"> 
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-striped table-bordered table-hover text-center mb-0">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th class="col-lg-2"><span>client name</span></th>
-                                                                                    <th class="col-lg-2"><span>agent</span></th>
-                                                                                    <th class="col-lg-2"><span>products</span></th>
-                                                                                    <th class="col-lg-3"><span>location</span></th>
-                                                                                    <th class="col-lg-2"><span>date</span></th>
-                                                                                    <th class="col-lg-2"><span>time</span></th>
-                                                                                    <th class="col-lg-1">status</th>
-                                                                                    <th class="col-lg-1">action</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <?php 
-                                                                                require '../../Database/database.php';
-                                                                                $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'checking'";
-                                                                                $result = mysqli_query($conn, $select);
-                                                                                if(mysqli_num_rows($result) > 0) {
-                                                                                    foreach($result as $resultItem) {
-                                                                                        $productsid = json_decode($resultItem['products'], true);
-                                                                                        $productnamearray = [];
-                                                                                        foreach ($productsid as $product) {
-                                                                                            $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
-                                                                                            if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
-                                                                                                $stmt2->bind_param("i", $product);
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'checking'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
 
-                                                                                                // Execute the statement
-                                                                                                $stmt2->execute();
-                                                                                                $result2 = $stmt2->get_result(); // Use a different variable for the inner result
-                                                                                                if ($result2->num_rows > 0) {
-                                                                                                    while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
-                                                                                                        $productnamearray[] = $row2['ProductName'];
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
                                                                                                     }
+                                                                                                    $stmt2->close(); // Close the inner statement here
                                                                                                 }
-                                                                                                $stmt2->close(); // Close the inner statement here
                                                                                             }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
                                                                                         }
-                                                                                        $productString = implode(", ", $productnamearray);
-
-                                                                                        ?> 
-                                                                                        <tr>
-                                                                                            <td><?= $resultItem['name'] ?></td>    
-                                                                                            <td><?= $resultItem['first_name'] ?></td>    
-                                                                                            <td><?php echo $productString ?></a></td>     
-                                                                                            <td><?= $resultItem['location'] ?></td>
-                                                                                            <td><?= $resultItem['date'] ?></td>
-                                                                                            <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                        
-                                                                                            <td><?= $resultItem['status'] ?></td>                          
-                                                                                            <td>
-                                                                                                <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
-                                                                                            </td>
-                                                                                        </tr>   
-                                                                                        <?php 
-
-
                                                                                     }
-                                                                                }
-                                                                                ?>
-                                                                            </tbody>    
-                                                                        </table>
-                                                                    </div>
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="waiting-meeting">
                                                                     <div class="mb-4 main-content-label">Waiting for Meeting</div>
                                                                     <div class="card-body border"> 
                                                                         <!-- content here -->
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'waiting'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
+
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
+                                                                                                    }
+                                                                                                    $stmt2->close(); // Close the inner statement here
+                                                                                                }
+                                                                                            }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="ongoing-meeting">
                                                                     <div class="mb-4 main-content-label">Ongoing Meeting</div>
                                                                     <div class="card-body border"> 
                                                                         <!-- content here -->
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'ongoing'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
+
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
+                                                                                                    }
+                                                                                                    $stmt2->close(); // Close the inner statement here
+                                                                                                }
+                                                                                            }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="approved-task">
-                                                                    <div class="mb-4 main-content-label">Approved</div>
+                                                                    <div class="mb-4 main-content-label">Approved - Ongoing Project</div>
                                                                     <div class="card-body border"> 
                                                                         <!-- content here -->
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'approved'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
+
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
+                                                                                                    }
+                                                                                                    $stmt2->close(); // Close the inner statement here
+                                                                                                }
+                                                                                            }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="completed-task">
                                                                     <div class="mb-4 main-content-label">Completed</div>
                                                                     <div class="card-body border"> 
                                                                         <!-- content here -->
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'completed'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
+
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
+                                                                                                    }
+                                                                                                    $stmt2->close(); // Close the inner statement here
+                                                                                                }
+                                                                                            }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="main-content-body tab-pane p-4 border-top-0" id="cancelled-task">
                                                                     <div class="mb-4 main-content-label">Cancelled</div>
                                                                     <div class="card-body border"> 
                                                                        <!-- content here -->
+                                                                       <div class="table-responsive">
+                                                                            <table class="table table-striped table-bordered table-hover text-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="col-lg-2"><span>client name</span></th>
+                                                                                        <th class="col-lg-2"><span>agent</span></th>
+                                                                                        <th class="col-lg-2"><span>products</span></th>
+                                                                                        <th class="col-lg-3"><span>location</span></th>
+                                                                                        <th class="col-lg-2"><span>date</span></th>
+                                                                                        <th class="col-lg-2"><span>time</span></th>
+                                                                                        <th class="col-lg-1">action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <?php 
+                                                                                    require '../../Database/database.php';
+                                                                                    $select = "SELECT * FROM kanban inner join user_info on kanban.user_id = user_info.user_id where status = 'cancelled'";
+                                                                                    $result = mysqli_query($conn, $select);
+                                                                                    if(mysqli_num_rows($result) > 0) {
+                                                                                        foreach($result as $resultItem) {
+                                                                                            $productsid = json_decode($resultItem['products'], true);
+                                                                                            $productnamearray = [];
+                                                                                            foreach ($productsid as $product) {
+                                                                                                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                                                                                                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                                                                                                    $stmt2->bind_param("i", $product);
+
+                                                                                                    // Execute the statement
+                                                                                                    $stmt2->execute();
+                                                                                                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                                                                                                    if ($result2->num_rows > 0) {
+                                                                                                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                                                                                                            $productnamearray[] = $row2['ProductName'];
+                                                                                                        }
+                                                                                                    }
+                                                                                                    $stmt2->close(); // Close the inner statement here
+                                                                                                }
+                                                                                            }
+                                                                                            $productString = implode(", ", $productnamearray);
+
+                                                                                            ?> 
+                                                                                            <tr>
+                                                                                                <td><?= $resultItem['name'] ?></td>    
+                                                                                                <td><?= $resultItem['first_name'] ?></td>    
+                                                                                                <td><?php echo $productString ?></a></td>     
+                                                                                                <td><?= $resultItem['location'] ?></td>
+                                                                                                <td><?= $resultItem['date'] ?></td>
+                                                                                                <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
+                                                                                                <td>
+                                                                                                    <button class="btn btn-success d-flex gap-2 check_btn" onclick="getdata()" value="<?= $resultItem['kanban_id'] ?>" data-bs-toggle="modal" data-bs-target="#checkmodal"><i class="fe fe-trash"></i>Check</button>
+                                                                                                </td>
+                                                                                            </tr>   
+                                                                                            <?php 
+
+
+                                                                                        }
+                                                                                    }
+                                                                                    ?>
+                                                                                </tbody>    
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -540,6 +848,21 @@ require_once '../authetincation.php';
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="checkmodal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="checkmodalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="addTaskModalLabel">Task Details</h3>
+                                <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                            <div class="modal-footer">
                             </div>
                         </div>
                     </div>
@@ -611,3 +934,157 @@ require_once '../authetincation.php';
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <script>
+  $(document).ready(function() {
+
+  });
+    //AGENT TAB - DECLINE BUTTON FUNCTION
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove_btn')) {
+            const id = e.target.value;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure on cancelling this task?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data:{ delete : id },
+                        success: function(response) {
+                                // Handle successful cancel
+                                Swal.fire({
+                                    title: 'Task Deleted!',
+                                    text: 'You have successfully cancelled the task.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'project-appointment.php';
+                                });
+                        },
+                        error: function(response) {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error cancelling task. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove_btn')) {
+            const id = e.target.value;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure on cancelling this task?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data:{ delete : id },
+                        success: function(response) {
+                                // Handle successful cancel
+                                Swal.fire({
+                                    title: 'Task Deleted!',
+                                    text: 'You have successfully cancelled the task.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'project-appointment.php';
+                                });
+                        },
+                        error: function(response) {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error cancelling task. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+
+    function getdata() {
+    // Get the kanban ID from the clicked button
+    const buttons = document.querySelectorAll('.check_btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            const kanbanId = this.value;
+
+            // Use AJAX to get data from the server using the kanban ID
+            fetch(`get_task_data.php?kanban_id=${kanbanId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        // Populate the modal with the data received
+                        document.querySelector('#checkmodal .modal-body').innerHTML = `
+                            <p class="form-control">Client Name: ${data.name}</p>
+                            <p class="form-control">Agent: ${data.first_name}</p>
+                            <p class="form-control">Client email: ${data.email}</p>
+                            <p class="form-control">Client Age: ${data.age}</p>
+                            <p class="form-control">Products: ${data.products}</p>
+                            <p class="form-control">Location: ${data.location}</p>
+                            <p class="form-control">Date: ${data.date}</p>
+                            <p class="form-control">Start time - End time: ${data.start_time} - ${data.end_time}</p>
+                            <p class="form-control">Status: ${data.status}</p>
+                        `;
+                        if(data.status == "checking"){
+                            document.querySelector('#checkmodal .modal-footer').innerHTML = `
+                            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                            <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
+                            <a type="button" class="btn btn-primary" id="checkadd">Accept</a>
+                            `;
+                        }
+                        else if(data.status == "waiting"){
+                            document.querySelector('#checkmodal .modal-footer').innerHTML = `
+                            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                            <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
+                            `;
+                        }
+                        else if(data.status == "ongoing"){
+                            document.querySelector('#checkmodal .modal-footer').innerHTML = `
+                            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                            <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
+                            <a type="button" class="btn btn-primary" id="Approve">Approve</a>
+                            `;
+                        }
+                        else{
+                            document.querySelector('#checkmodal .modal-footer').innerHTML = `
+                            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                            `;
+                        }
+                    } else {
+                        console.error('No data found');
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    });
+}
+
+    // Run the function when the page loads to set up the event listeners
+    document.addEventListener('DOMContentLoaded', getdata);
+</script>
