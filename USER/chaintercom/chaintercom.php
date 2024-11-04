@@ -177,7 +177,7 @@ if (isset($_GET['chainavailability'], $_GET['date'], $_GET['start_time'], $_GET[
 
                     
                     <div class="input-field">
-                        <?php include 'product-retrieve.php'; ?>
+                        <?php include '/product-retrieve.php'; ?>
                     </div>
                 </div>
                   
