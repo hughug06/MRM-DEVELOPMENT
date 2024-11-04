@@ -74,7 +74,7 @@ require_once '../../Database/database.php';
                                         INNER JOIN accounts ON accounts.account_id = service_worker.account_id                      
                                         INNER JOIN appointments ON appointments.appointment_id = service_worker.appointment_id
                                         INNER JOIN service_payment ON service_payment.payment_id = service_worker.payment_id
-                                        WHERE service_worker.account_id = '$workerid' AND appointments.status != 'Completed'";
+                                        WHERE service_worker.account_id = '$workerid' AND appointments.status = 'Approved'";
                             $service_result = mysqli_query($conn, $service);
                             foreach ($service_result as $serviceitem) {
                                
