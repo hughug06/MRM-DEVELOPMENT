@@ -410,9 +410,9 @@
                                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                                 
                                                                                 <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="text" class="accountId" name="account_id">
-                                                                                <input type="text" class="appointmentId" name="appointment_id">
-                                                                                <input type="text" class="paymentId" name="payment_id">
+                                                                                <input type="hidden" class="accountId" name="account_id">
+                                                                                <input type="hidden" class="appointmentId" name="appointment_id">
+                                                                                <input type="hidden" class="paymentId" name="payment_id">
                                                                             </form>                                                                        
                                                                         </div>
                                                                 <?php
@@ -712,25 +712,18 @@
 
 <script>
  document.addEventListener('DOMContentLoaded', function() {
-    // Select all buttons with the class 'payment-check-button'
     const paymentButtons = document.querySelectorAll('.payment-check-button');
 
-    // Add a click event listener to each button
     paymentButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Retrieve data attributes from the clicked button
             const accountId = this.getAttribute('data-account-id');
             const appointmentId = this.getAttribute('data-appointment-id');
             const paymentId = this.getAttribute('data-payment-id');
 
-            // Find the parent container or form and populate input fields within that scope
-            const parentContainer = this.closest('.card-body'); // Adjust the class to match the parent container
-
-            if (parentContainer) {
-                parentContainer.querySelector('.accountId').value = accountId;
-                parentContainer.querySelector('.appointmentId').value = appointmentId;
-                parentContainer.querySelector('.paymentId').value = paymentId;
-            }
+            // Populate the modal inputs with data by class
+            document.querySelector('.accountId').value = accountId;
+            document.querySelector('.appointmentId').value = appointmentId;
+            document.querySelector('.paymentId').value = paymentId;
         });
     });
 });
