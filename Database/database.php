@@ -8,8 +8,9 @@
 
 
 
-    $conn = new mysqli('mrm-eg.online' , 'mrm' , 'ZO&aSqn^uS/b' , 'u103590962_mrm');
+    $conn = new mysqli('mrm-eg.online', 'mrm', 'ZO&aSqn^uS/b', 'u103590962_mrm');
     IF($conn->connect_error){
         die("Something went wrong");
         }
+
 ?>
