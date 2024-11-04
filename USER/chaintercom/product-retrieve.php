@@ -1,7 +1,7 @@
 <?php 
 require_once '../../ADMIN/authetincation.php';
 require_once '../../Database/database.php';
-$sql = "SELECT * FROM PRODUCTS WHERE Availability = 1";
+$sql = "SELECT * FROM Products WHERE Availability = 1";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
