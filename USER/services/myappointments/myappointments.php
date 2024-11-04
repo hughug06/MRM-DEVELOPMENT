@@ -287,7 +287,7 @@ require_once '../../../Database/database.php';
                                                                 </div>
                                                                 
                                                             
-                                                                <form action="/MRM-DEVELOPMENT/USER/services/bookappointments/service_payment.php" method="POST" enctype="multipart/form-data">
+                                                                <form action="/USER/services/bookappointments/service_payment.php" method="POST" enctype="multipart/form-data">
                                                                     <div class="row mb-3">
                                                                         <!-- First Row -->
                                                                         <div class="col">
