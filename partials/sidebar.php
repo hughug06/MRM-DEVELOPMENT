@@ -33,7 +33,7 @@
             
                 ?>
                 <li class="slide <?= $page == "user-dashboard.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
+                    <a href="/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
