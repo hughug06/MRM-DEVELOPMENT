@@ -410,9 +410,9 @@
                                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                                 
                                                                                 <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="text" id="accountId" name="account_id">
-                                                                                <input type="text" id="appointmentId" name="appointment_id">
-                                                                                <input type="text" id="paymentId" name="payment_id">
+                                                                                <input type="hidden" class="accountId" name="account_id">
+                                                                                <input type="hidden" class="appointmentId" name="appointment_id">
+                                                                                <input type="hidden" class="paymentId" name="payment_id">
                                                                             </form>                                                                        
                                                                         </div>
                                                                 <?php
@@ -720,10 +720,10 @@
             const appointmentId = this.getAttribute('data-appointment-id');
             const paymentId = this.getAttribute('data-payment-id');
 
-            // Populate the modal inputs with data
-            document.getElementById('accountId').value = accountId;
-            document.getElementById('appointmentId').value = appointmentId;
-            document.getElementById('paymentId').value = paymentId;
+            // Populate the modal inputs with data by class
+            document.querySelector('.accountId').value = accountId;
+            document.querySelector('.appointmentId').value = appointmentId;
+            document.querySelector('.paymentId').value = paymentId;
         });
     });
 });
