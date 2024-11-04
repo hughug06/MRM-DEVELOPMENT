@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'u103590962_mrm', 'Mrmeg123', 'u103590962_mrmeg');
+$conn = new mysqli('', '', '', '');
 
 // Check the connection
 if ($conn->connect_error) {
