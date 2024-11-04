@@ -63,7 +63,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a href="#" aria-current="page" class="nav-link">Home</a>
+              <a href="#" aria-current="page" class="nav-link">HOMEEEEEE</a>
             </li>
             <li class="nav-item">
               <a href="#Details" class="nav-link">Details</a>
