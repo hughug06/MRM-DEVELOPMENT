@@ -720,10 +720,20 @@
             const appointmentId = this.getAttribute('data-appointment-id');
             const paymentId = this.getAttribute('data-payment-id');
 
-            // Populate the modal inputs with data by class
-            document.querySelector('.accountId').value = accountId;
-            document.querySelector('.appointmentId').value = appointmentId;
-            document.querySelector('.paymentId').value = paymentId;
+            // Populate all elements with the class 'accountId'
+            document.querySelectorAll('.accountId').forEach(el => {
+                el.value = accountId;
+            });
+
+            // Populate all elements with the class 'appointmentId'
+            document.querySelectorAll('.appointmentId').forEach(el => {
+                el.value = appointmentId;
+            });
+
+            // Populate all elements with the class 'paymentId'
+            document.querySelectorAll('.paymentId').forEach(el => {
+                el.value = paymentId;
+            });
         });
     });
 });
