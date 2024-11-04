@@ -33,13 +33,7 @@
     <link rel="stylesheet" href="assets/landing_assets/css/styles.css" />
     <link rel="icon" href="assets/landing_assets/images/logo-mrm.png" />
     <title>
-    <?php 
-    require_once 'database/database.php';
-    $sql = "select * from accounts";
-    $result = mysqli_query($conn , $sql);
-    $row = mysqli_fetch_assoc($result);
-    ?>
-    <?= $row['email']?></title>
+    MRM-EG Company</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
