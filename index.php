@@ -1163,7 +1163,7 @@
 
           $.ajax({
             type: "POST",
-            url: "USER/signup/function.php",
+            url: "/USER/signup/function.php",
             data: formData,
             dataType: "json",
             beforeSend: function () {
