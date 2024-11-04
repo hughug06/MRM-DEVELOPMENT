@@ -399,20 +399,21 @@
                                                                 ?>
                                                                         <div class="card-body">
                                                                             <form action="assign_worker.php" method="POST">
-                                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                                <input type="text" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
                                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
                                                                                 <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
-                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>                                                                          
+                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>  
+                                                                                <input type="text" id="accountId" name="account_id">
+                                                                                <input type="text" id="appointmentId" name="appointment_id">
+                                                                                <input type="text" id="paymentId" name="payment_id">
+                                                            </form>                                                                        
                                                                         </div>
                                                                 <?php
                                                                     }
                                                                 }
                                                                 ?>
 
-                                                                            <input type="text" id="accountId" name="account_id">
-                                                                            <input type="text" id="appointmentId" name="appointment_id">
-                                                                            <input type="text" id="paymentId" name="payment_id">
-                                                            </form>
+                                                                            
                                                                 </div>
                                                             </div>
                                                             </div>

@@ -9,6 +9,8 @@ if (isset($_POST['pick'])) {
     $payment_id = $_POST['payment_id'];
     $admin_id = $_SESSION['admin_id'];  
 
+    echo $workerid;
+    exit();
     // Use prepared statements to prevent SQL injection
     $select = "SELECT * FROM accounts INNER JOIN user_info ON user_info.user_id = accounts.user_id WHERE account_id = ?";
     $stmt = $conn->prepare($select);
