@@ -1206,7 +1206,7 @@
           var formData = $(this).serialize(); // Serialize form data
 
           $.ajax({
-            url: "user/signin/function.php", // URL to your PHP script
+            url: "USER/signin/function.php", // URL to your PHP script
             type: "POST",
             data: formData,
             dataType: "json",
