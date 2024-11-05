@@ -143,7 +143,7 @@ require_once '../../../Database/database.php';
                     <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
                         <!-- Generator Card -->
                         <div class="card custom-card">
-                            <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <img src="/assets/images/mrm-images/dashboard-images/gen1" class="card-img-top" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Generator</h6>
                                 <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
@@ -151,7 +151,7 @@ require_once '../../../Database/database.php';
                         </div>
                         <!-- Solar Panel Card -->
                         <div class="card custom-card">
-                            <img src="../../../assets/images/media/media-44.jpg" class="card-img-top" alt="...">
+                            <img src="/assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img-top" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Solar Panel</h6>
                                 <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
