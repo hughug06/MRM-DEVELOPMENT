@@ -3,7 +3,7 @@
                 <span class="text-muted"> Copyright © <span id="year"></span> <a
                         href="javascript:void(0);" class="text-dark fw-semibold">MRM</a>.
                     Designed with <span class="bi bi-heart-fill text-danger"></span> by <a href="javascript:void(0);">
-                        <span class="fw-semibold text-primary text-decoration-underline">MARVIE CUTIE PIE</span>
+                        <span class="fw-semibold text-primary text-decoration-underline">MRM-EG Developers</span>
                     </a> All
                     rights
                     reserved
