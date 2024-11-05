@@ -4,11 +4,11 @@
       if($_SESSION['login'] == true)  {
         $role = $_SESSION['role'];
         if($role == 'user'){
-          header("location: /MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php");
+          header("location: /USER/dashboard/user-dashboard.php");
           exit();
       }
       else{
-          header("location: /MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php");
+          header("location: /ADMIN/accountManagement/accountcontrol/user-management.php");
           exit();
       }
     }
