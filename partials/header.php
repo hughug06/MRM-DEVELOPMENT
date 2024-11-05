@@ -476,7 +476,7 @@
         <!-- Start::header-element -->
         <div class="header-element">
             <div class="horizontal-logo">
-                <a disabled class="header-logo">
+                <a class="header-logo disabled">
                     <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo">
                 </a>
             </div>
