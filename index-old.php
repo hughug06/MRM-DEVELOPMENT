@@ -98,7 +98,7 @@ if(isset($_SESSION['login'])){
                 <a class="nav-link" href="#services">Services</a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="#portfoli o">Portfolio</a>
+                <a class="nav-link" href="#portfolio">Portfolio</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#team">Team</a>

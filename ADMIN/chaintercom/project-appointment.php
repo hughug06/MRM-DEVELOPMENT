@@ -988,7 +988,7 @@ require_once '../authetincation.php';
             const id = e.target.value;
             Swal.fire({
                 title: 'Confirmation',
-                html: "Are you sure on cancelling this task?",
+                html: "Are you sure on accepting this task?",
                 icon: 'warning',
                 confirmButtonText: 'Confirm',
                 showCancelButton: true
@@ -997,11 +997,11 @@ require_once '../authetincation.php';
                     $.ajax({
                         url: 'function.php',
                         type: 'POST',
-                        data:{ delete : id },
+                        data:{ confirmtask : id },
                         success: function(response) {
                                 // Handle successful cancel
                                 Swal.fire({
-                                    title: 'Task Deleted!',
+                                    title: 'Task Accepted!',
                                     text: 'You have successfully cancelled the task.',
                                     icon: 'success',
                                     allowOutsideClick: false,
@@ -1016,7 +1016,7 @@ require_once '../authetincation.php';
                             // Handle error
                             Swal.fire(
                                 'Error!',
-                                'There was an error cancelling task. Please try again.',
+                                'There was an error accepting task. Please try again.',
                                 'error'
                             );
                         }
@@ -1055,7 +1055,7 @@ require_once '../authetincation.php';
                             document.querySelector('#checkmodal .modal-footer').innerHTML = `
                             <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                             <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
-                            <button class="btn btn-primary accept_btn">Accept</button>
+                            <button class="btn btn-primary accept_btn" value="${data.kanban_id}>Accept</button>
                             `;
                         }
                         else if(data.status == "waiting"){
