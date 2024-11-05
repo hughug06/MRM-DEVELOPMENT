@@ -988,7 +988,7 @@ require_once '../authetincation.php';
             const id = e.target.value;
             Swal.fire({
                 title: 'Confirmation',
-                html: "Are you sure on cancelling this task?",
+                html: "Are you sure on accepting this task?",
                 icon: 'warning',
                 confirmButtonText: 'Confirm',
                 showCancelButton: true
@@ -997,7 +997,7 @@ require_once '../authetincation.php';
                     $.ajax({
                         url: 'function.php',
                         type: 'POST',
-                        data:{ delete : id },
+                        data:{ confirmtask : id },
                         success: function(response) {
                                 // Handle successful cancel
                                 Swal.fire({
