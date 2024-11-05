@@ -64,21 +64,20 @@ if(isset($_POST['AddItem']))
               $user_id = $_SESSION['user_id'];
               $sql_get_userinfo = "select * from user_info where user_id = $user_id";
               $result = mysqli_query($conn , $sql_get_userinfo);
-              echo json_encode(['success' => true]);
-              // if($result->num_rows > 0){
-              //   $row = mysqli_fetch_assoc($result);
-              //   $first_name = $row['first_name'];
-              //   $last_name = $row['last_name'];
+              if($result->num_rows > 0){
+                // $row = mysqli_fetch_assoc($result);
+                // $first_name = $row['first_name'];
+                // $last_name = $row['last_name'];
 
-              //   $log_action = "$first_name $last_name: Has added new item: $ProductName";
-              //   $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
-              //     VALUES ($user_id, '$ProductName', '$log_action')";
-              //   mysqli_query($conn, $sql_log);
-              //   echo json_encode(['success' => true]);
-              // }
-              // else{
-              //   echo json_encode(['message' => 'SQL error on getting user info']);
-              // }
+                // $log_action = "$first_name $last_name: Has added new item: $ProductName";
+                // $sql_log = "INSERT INTO inventory_logs (user_id, product_name, log_action) 
+                //   VALUES ($user_id, '$ProductName', '$log_action')";
+                // mysqli_query($conn, $sql_log);
+                echo json_encode(['success' => true]);
+              }
+              else{
+                echo json_encode(['message' => 'SQL error on getting user info']);
+              }
           } 
           else {
             echo json_encode(['message' => 'SQL error on adding product']);
