@@ -61,10 +61,10 @@ if(isset($_POST['AddItem']))
       $sql_insert = "INSERT INTO products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, min_price, max_price) 
                           VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$min_price', '$max_price')";
           if (mysqli_query($conn, $sql_insert)) {
-            echo json_encode(['success' => true]);
-              // $user_id = $_SESSION['user_id'];
-              // $sql_get_userinfo = "select * from user_info where user_id = $user_id";
-              // $result = mysqli_query($conn , $sql_get_userinfo);
+              $user_id = $_SESSION['user_id'];
+              $sql_get_userinfo = "select * from user_info where user_id = $user_id";
+              $result = mysqli_query($conn , $sql_get_userinfo);
+              echo json_encode(['success' => true]);
               // if($result->num_rows > 0){
               //   $row = mysqli_fetch_assoc($result);
               //   $first_name = $row['first_name'];
