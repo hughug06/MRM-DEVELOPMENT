@@ -6,13 +6,13 @@
 
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header border-0">
-        <a href="index.html" class="header-logo d-flex">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-dark py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-white py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-white py-2" width="55px">
+        <a href="#" class="header-logo d-flex" style="pointer-events: none">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-dark py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-white py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-white py-2" width="55px">
         </a>
     </div>
     <!-- End::main-sidebar-header -->
@@ -141,6 +141,19 @@
                 {
             
                 ?>
+
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "admin-dashboard.php" ? 'active':''?>">
+                    <a href="/ADMIN/dashboard/admin-dashboard.php" class="side-menu__item <?= $page == "admin-dashboard.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-house side-menu__icon"></i>
+                        <span class="side-menu__label">Dashboard</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+
+
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Products</span></li>
                 <!-- End::slide__category -->
