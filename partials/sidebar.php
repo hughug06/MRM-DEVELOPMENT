@@ -141,6 +141,19 @@
                 {
             
                 ?>
+
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "admin-dashboard.php" ? 'active':''?>">
+                    <a href="/ADMIN/dashboard/admin-dashboard.php" class="side-menu__item <?= $page == "admin-dashboard.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-house side-menu__icon"></i>
+                        <span class="side-menu__label">Dashboard</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+
+
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Products</span></li>
                 <!-- End::slide__category -->
