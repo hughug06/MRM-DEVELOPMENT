@@ -1001,7 +1001,7 @@ require_once '../authetincation.php';
                         success: function(response) {
                                 // Handle successful cancel
                                 Swal.fire({
-                                    title: 'Task Deleted!',
+                                    title: 'Task Accepted!',
                                     text: 'You have successfully cancelled the task.',
                                     icon: 'success',
                                     allowOutsideClick: false,
@@ -1016,7 +1016,7 @@ require_once '../authetincation.php';
                             // Handle error
                             Swal.fire(
                                 'Error!',
-                                'There was an error cancelling task. Please try again.',
+                                'There was an error accepting task. Please try again.',
                                 'error'
                             );
                         }
