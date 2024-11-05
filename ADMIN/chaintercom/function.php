@@ -33,8 +33,9 @@ if (isset($_POST['confirm'])) {
 elseif (isset($_POST['confirmtask'])) {
     $kanban_id = $_SESSION['id']; 
     // check if the choose date, start time and end time is available
-    $sql_check = "update status='approved' from kanban where kanban_id = $kanban_id ";
+    $sql_check = "update status='ongoing' from kanban where kanban_id = $kanban_id ";
     $result_check = mysqli_query($conn , $sql_check);
+    echo json_encode(['success' => true]);
     if($result_check)
     {
         echo json_encode(['success' => true]);
