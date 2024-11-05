@@ -1113,7 +1113,7 @@ require_once '../authetincation.php';
                             document.querySelector('#checkmodal .modal-footer').innerHTML = `
                             <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                             <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
-                            <button class="btn btn-primary aprove-btn" value="${data.kanban_id}>Approve</button>
+                            <button class="btn btn-primary aprove-btn" value="${data.kanban_id}">Approve</button>
                             `;
                         }
                         else{
