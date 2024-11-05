@@ -6,7 +6,7 @@
 
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header border-0">
-        <a href="index.html" class="header-logo d-flex disabled">
+        <a href="#" class="header-logo d-flex" style="pointer-events: none">
             <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
             <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
             <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
