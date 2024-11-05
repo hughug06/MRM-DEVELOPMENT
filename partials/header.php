@@ -751,9 +751,8 @@
                             <?php
                         
                             $userid = $_SESSION['account_id'];
-                            $sql = "select * from appointments 
-                        
-                            where appointments.account_id = '$userid'";
+                            $sql = "select * from appointments                
+                            where account_id = '$userid'";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -806,18 +805,13 @@
                                             { 
 
                                             ?>
-                                            <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>
+                                             <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
                                             <?php 
                                             }
                                             else if($row['status'] === "Completed"){
 
                                                 ?> 
-                                                <!-- Link modal for receipt -->
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#receiptModal"
-                                                    data-account-id="<?= $row['account_id'] ?>" 
-                                                    data-appointment-id="<?= $row['appointment_id'] ?>">
-                                                        Show Receipt
-                                                    </a>
+                                               
 
                                             
                                                 
@@ -831,7 +825,7 @@
 
                                                 
                                                 ?>
-                                                <a href="/MRM-DEVELOPMENT/USER/services/service_update.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>
+                                                <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
 
                                                 <?php
                                                 }
@@ -839,8 +833,8 @@
                                                     
                                                 
                                                 ?>
-                                            <a href="/MRM-DEVELOPMENT/USER/services/service_payment.php?account_id=<?= htmlspecialchars($row['account_id']) ?>&appointment_id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Pay</a>  
-                                            <a href="/MRM-DEVELOPMENT/USER/services/service_cancel.php?id=<?= htmlspecialchars($row['appointment_id']) ?>" style="color: white; text-decoration: none;" class="btn btn-sm btn-danger">Cancel appointment</a>                                 
+                                            <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
+                                                                    
                                                 <?php 
                                                 }
                                                 }
