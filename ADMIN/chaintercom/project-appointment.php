@@ -983,6 +983,7 @@ require_once '../authetincation.php';
         }
     });
 
+    //FOR ACCEPTING TASKS INTO MEETING
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('accept_btn')) {
             const id = e.target.value;
@@ -1002,7 +1003,7 @@ require_once '../authetincation.php';
                                 // Handle successful cancel
                                 Swal.fire({
                                     title: 'Task Accepted!',
-                                    text: 'You have successfully cancelled the task.',
+                                    text: 'You have successfully accepted the task.',
                                     icon: 'success',
                                     allowOutsideClick: false,
                                     timer: 2000, // 2 seconds timer
@@ -1017,6 +1018,50 @@ require_once '../authetincation.php';
                             Swal.fire(
                                 'Error!',
                                 'There was an error accepting task. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    //FOR APPROVING TASKS INTO PROJECT
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('aprove-btn')) {
+            const id = e.target.value;
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure on approving this task?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data:{ approvetask : id },
+                        success: function(response) {
+                                // Handle successful cancel
+                                Swal.fire({
+                                    title: 'Task Approved!',
+                                    text: 'You have successfully approved the task.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'project-appointment.php';
+                                });
+                        },
+                        error: function(response) {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error approving task. Please try again.',
                                 'error'
                             );
                         }
@@ -1068,7 +1113,7 @@ require_once '../authetincation.php';
                             document.querySelector('#checkmodal .modal-footer').innerHTML = `
                             <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
                             <button class="btn btn-danger d-flex gap-2 remove_btn" value="${data.kanban_id}"><i class="fe fe-trash"></i>DECLINE</button>
-                            <button class="btn btn-primary aprove-btn">Approve</button>
+                            <button class="btn btn-primary aprove-btn" value="${data.kanban_id}>Approve</button>
                             `;
                         }
                         else{
