@@ -497,7 +497,7 @@ require_once '../../Database/database.php';
 
                             // Create a new task element
                             const newTask = document.createElement('div');
-                            newTask.className = 'task p-3 d-flex flex-direction-column justify-content-between align-items-center';
+                            newTask.className = 'task p-3 d-flex flex-column justify-content-between align-items-center';
                             newTask.id = item.kanban_id;
 
                             // Add the task details
