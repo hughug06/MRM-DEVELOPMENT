@@ -1,5 +1,6 @@
 <?php
 require_once 'Database/database.php';
+session_start();
 
 if(isset($_GET['token']))
 {
@@ -17,7 +18,7 @@ if(isset($_GET['token']))
             $update_result = mysqli_query($conn , $sql_update);
             if($update_result)  //IF TRUE
             {
-                
+                $_SESSION['success_message'] = "You are now verified";
                 header("Location: index.php");            //RETURN SUCCESS MESSAGE 
                 exit();
             }
