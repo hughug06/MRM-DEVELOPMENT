@@ -42,6 +42,19 @@ if (isset($_SESSION['success_message'])) {
     <link rel="icon" href="assets/landing_assets/images/logo-mrm.png" />
     <title>
     MRM-EG Company</title>
+    <style>
+      .reveal {
+        opacity: 0;
+        transform: translateY(100px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .reveal.scroll-up, .reveal.scroll-down {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
@@ -141,7 +154,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </header>
 
-    <section id="stats" class="stats container d-none">
+    <section id="stats" class="stats container reveal d-none">
       <div class="row my-6">
         <div class="col-md-3 col-sm-6 text-center">
           <h2 class="counter xl-text" data-target="328">328</h2>
@@ -162,7 +175,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="intro" class="intro bg-light py-6">
+    <section id="intro" class="intro bg-light reveal py-6">
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 text-center">
@@ -179,14 +192,14 @@ if (isset($_SESSION['success_message'])) {
 
     <section
       id="Details"
-      class="details position-relative my-6 overflow-hidden"
+      class="details position-relative my-6 overflow-hidden reveal"
     >
       <img
         src="assets/landing_assets/images/decoration-leaves.svg"
         class="decoration-star position-absolute"
         alt=""
       />
-      <div class="container position-relative z-3">
+      <div class="container position-relative z-3 reveal">
         <div class="row">
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
@@ -234,7 +247,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="Services" class="services bg-light py-6">
+    <section id="Services" class="services bg-light py-6 reveal">
       <div class="container">
         <div class="row">
           <div class="col-lg-5">
@@ -279,7 +292,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section class="details-2 position-relative my-6 overflow-hidden">
+    <section class="details-2 position-relative my-6 overflow-hidden reveal">
       <img
         src="assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
@@ -336,7 +349,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section> -->
 
-    <section class="faq bg-light py-6 text-center">
+    <section class="faq bg-light py-6 text-center reveal">
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-6 px-4">
@@ -345,10 +358,9 @@ if (isset($_SESSION['success_message'])) {
               We are here to <span class="text-secondary">help</span> you
             </h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Asperiores praesentium voluptatibus laudantium eum tempora iste
-              temporibus. Molestias voluptatibus tempore maiores eius nulla
-              minus omnis, alias commodi officia nemo dolores similique?
+              Find answers to common questions about our generators, 
+              solar panels, and services. For further inquiries, 
+              please reach out through our contact page!
             </p>
             <div class="accordion" id="accordionFAQ2">
               <div class="accordion-item border-0 border-bottom">
@@ -361,8 +373,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="firstcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">01.</span>Can i get a free
-                    trial before purchase ?
+                    <span class="me-3 fs-18 fw-bold">01.</span>What types of generators do you offer?
                   </button>
                 </h2>
                 <div
@@ -373,14 +384,7 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Fuga cumque esse dolor, facilis dolorem, sint eum quas
-                      autem ipsum incidunt, vel repellendus impedit temporibus!
-                      Sequi praesentium quisquam soluta veritatis consectetur.
-                    </p>
-                    <p class="mt-2 mb-3">
-                      <span class="fw-bold">Note: </span>Please Refer support
-                      section for more information.
+                      MRM E-G Electric Power Generation Services offers a range of generators to meet diverse power needs, from residential units to heavy-duty commercial and industrial generators. Our options include diesel, gas, and portable models to fit various applications and preferences.
                     </p>
                   </div>
                 </div>
@@ -395,8 +399,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="secondcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">02.</span>Can i get a free
-                    trial before purchase ?
+                    <span class="me-3 fs-18 fw-bold">02.</span>What types of solar panels do you provide?
                   </button>
                 </h2>
                 <div
@@ -407,14 +410,7 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Fuga cumque esse dolor, facilis dolorem, sint eum quas
-                      autem ipsum incidunt, vel repellendus impedit temporibus!
-                      Sequi praesentium quisquam soluta veritatis consectetur.
-                    </p>
-                    <p class="mt-2 mb-3">
-                      <span class="fw-bold">Note: </span>Please Refer support
-                      section for more information.
+                      We offer high-efficiency solar panels suitable for residential, commercial, and industrial installations. Our solar panels are chosen for their durability, performance, and cost-effectiveness, helping you achieve sustainable energy solutions.
                     </p>
                   </div>
                 </div>
@@ -429,8 +425,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="thirdcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">03.</span>Can i get a free
-                    trial before purchase ?
+                    <span class="me-3 fs-18 fw-bold">03.</span>Do you provide installation services?
                   </button>
                 </h2>
                 <div
@@ -441,14 +436,7 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Fuga cumque esse dolor, facilis dolorem, sint eum quas
-                      autem ipsum incidunt, vel repellendus impedit temporibus!
-                      Sequi praesentium quisquam soluta veritatis consectetur.
-                    </p>
-                    <p class="mt-2 mb-3">
-                      <span class="fw-bold">Note: </span>Please Refer support
-                      section for more information.
+                      Yes, we offer comprehensive installation services for both generators and solar panels. Our skilled technicians ensure safe, efficient, and compliant installation, helping you get your system up and running smoothly.
                     </p>
                   </div>
                 </div>
@@ -463,8 +451,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="fourthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">04.</span>Can i get a free
-                    trial before purchase ?
+                    <span class="me-3 fs-18 fw-bold">04.</span>Can you help with generator or solar panel maintenance?
                   </button>
                 </h2>
                 <div
@@ -475,14 +462,7 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Fuga cumque esse dolor, facilis dolorem, sint eum quas
-                      autem ipsum incidunt, vel repellendus impedit temporibus!
-                      Sequi praesentium quisquam soluta veritatis consectetur.
-                    </p>
-                    <p class="mt-2 mb-3">
-                      <span class="fw-bold">Note: </span>Please Refer support
-                      section for more information.
+                      Absolutely! We provide maintenance services for both generators and solar panel systems. Regular maintenance extends the lifespan of your equipment and ensures it operates at peak efficiency.
                     </p>
                   </div>
                 </div>
@@ -497,8 +477,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="fifthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">05.</span>Can i get a free
-                    trial before purchase ?
+                    <span class="me-3 fs-18 fw-bold">05.</span>What repair services do you offer?
                   </button>
                 </h2>
                 <div
@@ -509,14 +488,137 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Fuga cumque esse dolor, facilis dolorem, sint eum quas
-                      autem ipsum incidunt, vel repellendus impedit temporibus!
-                      Sequi praesentium quisquam soluta veritatis consectetur.
+                      MRM E-G Electric Power Generation Services offers complete repair services for generators and solar panel systems. Whether it's a minor issue or a major repair, our team can diagnose and resolve problems efficiently to get your system back to optimal performance.
                     </p>
-                    <p class="mt-2 mb-3">
-                      <span class="fw-bold">Note: </span>Please Refer support
-                      section for more information.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 border-bottom">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sixthcard"
+                    aria-expanded="false"
+                    aria-controls="sixthcard"
+                  >
+                    <span class="me-3 fs-18 fw-bold">06.</span>How often should I schedule maintenance for my generator?
+                  </button>
+                </h2>
+                <div
+                  id="sixthcard"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="sixthcard"
+                  data-bs-parent="#accordionFAQ2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      For optimal performance, we recommend generator maintenance at least once a year, though heavy-use generators may need more frequent checks. Regular maintenance reduces the risk of breakdowns and extends the lifespan of your equipment.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 border-bottom">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#seventhcard"
+                    aria-expanded="false"
+                    aria-controls="seventhcard"
+                  >
+                    <span class="me-3 fs-18 fw-bold">07.</span>Can you help with system tuning for better performance?
+                  </button>
+                </h2>
+                <div
+                  id="seventhcard"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="seventhcard"
+                  data-bs-parent="#accordionFAQ2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      Yes, we offer tuning services for generators to ensure they perform at their best. Our technicians adjust settings and calibrate components for maximum efficiency and reliability.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 border-bottom">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#eighthcard"
+                    aria-expanded="false"
+                    aria-controls="eighthcard"
+                  >
+                    <span class="me-3 fs-18 fw-bold">08.</span>Are there financing options available for generator and solar panel installations?
+                  </button>
+                </h2>
+                <div
+                  id="eighthcard"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="eighthcard"
+                  data-bs-parent="#accordionFAQ2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      We understand that investing in a power generation system is significant. We offer flexible financing options to help you achieve energy independence affordably. Please reach out to discuss available plans.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 border-bottom">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#ninthcard"
+                    aria-expanded="false"
+                    aria-controls="ninthcard"
+                  >
+                    <span class="me-3 fs-18 fw-bold">09.</span>Do you offer warranties on your products and services?
+                  </button>
+                </h2>
+                <div
+                  id="ninthcard"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="ninthcard"
+                  data-bs-parent="#accordionFAQ2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                    Yes, all our products come with a manufacturer’s warranty, and we also provide warranties on our installation and repair services. Our goal is to give you peace of mind and confidence in your purchase.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 border-bottom">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#tenthcard"
+                    aria-expanded="false"
+                    aria-controls="tenthcard"
+                  >
+                    <span class="me-3 fs-18 fw-bold">10.</span>How can I request a quote or consultation?
+                  </button>
+                </h2>
+                <div
+                  id="tenthcard"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="tenthcard"
+                  data-bs-parent="#accordionFAQ2"
+                >
+                  <div class="accordion-body">
+                    <p>
+                      You can easily request a quote or consultation by contacting us via phone or email, or by visiting our website. We’ll assess your power needs and provide a detailed proposal tailored to your specific requirements.
                     </p>
                   </div>
                 </div>
@@ -536,7 +638,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="Projects" class="py-6">
+    <section id="Projects" class="py-6 reveal">
       <div class="container">
         <h2 class="text-center pb-4">
           Some of our <span class="text-secondary">Projects</span>
@@ -550,10 +652,11 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Cagayan Solar Farm Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Develop a large-scale solar farm in Cagayan to provide renewable energy
+                  for local communities and reduce reliance on 
+                  fossil fuels.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -566,10 +669,11 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Ilocos Solar Farm Irrigation Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Utilize solar energy to power irrigation systems in Ilocos,
+                  enhancing agricultural productivity in areas with limited 
+                  access to consistent water resources.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -582,10 +686,11 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Boracay Clean Water Irrigation Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Establish an eco-friendly irrigation system in Boracay to support 
+                  sustainable landscaping, local agriculture, 
+                  and clean water access.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -600,10 +705,11 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Cebu Solar Farm Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Construct a solar farm in Cebu to supply renewable energy 
+                  to industrial areas and reduce electricity 
+                  costs for local businesses.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -616,10 +722,12 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Isabela Farm Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Establish a sustainable farming project in Isabela 
+                  that combines renewable energy and modern 
+                  agricultural practices to improve crop yields 
+                  and farmer income.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -632,10 +740,11 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Title here</h5>
+                <h5 class="card-title">Samar Potato Farm Project</h5>
                 <p class="card-text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione, sed!<a href="" class="article.html">...Read More</a>
+                  Launch a solar-powered potato farm in Samar, aimed at 
+                  bolstering local food production and creating 
+                  a sustainable agricultural model for root crops.<a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -644,7 +753,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials bg-light py-6">
+    <section id="testimonials" class="testimonials bg-light py-6 reveal">
       <div id="testimonialCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -658,13 +767,13 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Sapiente eaque odit saepe facilis sint earum magni ex amet error
-                ipsam beatae quas molestias id laboriosam soluta, ipsum expedita
-                commodi asperiores.
+                "MRM E-G Electric Power Generation Services offers 
+                exceptional service and knowledgeable staff. The website is user-friendly, 
+                making it easy to find what I need among their quality generators and solar solutions. 
+                Their commitment to sustainability and prompt support truly sets them apart!"
               </p>
-              <div class="fw-bold fs-5 mt-4">John Marvie Placido</div>
-              <div>General Manager - Marvie</div>
+              <div class="fw-bold fs-5 mt-4">James Velasco</div>
+              <!-- <div>General Manager - Marvie</div> -->
             </div>
           </div>
           <div class="carousel-item">
@@ -678,13 +787,13 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Sapiente eaque odit saepe facilis sint earum magni ex amet error
-                ipsam beatae quas molestias id laboriosam soluta, ipsum expedita
-                commodi asperiores.
+                "MRM E-G provides reliable and professional power solutions with a 
+                full range of services from solar installations to generator maintenance. 
+                The website is clear and concise, offering all the details needed. 
+                Their team is always available and helpful—I highly recommend them!"
               </p>
-              <div class="fw-bold fs-5 mt-4">John Marvie Placido</div>
-              <div>Team Leader - Marvie</div>
+              <div class="fw-bold fs-5 mt-4">Alyssa Rivera</div>
+              <!-- <div>Team Leader - Marvie</div> -->
             </div>
           </div>
           <div class="carousel-item">
@@ -698,13 +807,14 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Sapiente eaque odit saepe facilis sint earum magni ex amet error
-                ipsam beatae quas molestias id laboriosam soluta, ipsum expedita
-                commodi asperiores.
+                "MRM E-G Electric Power Generation Services is a one-stop 
+                shop for green energy needs. The website offers extensive 
+                information on eco-friendly products, making it easy to make 
+                informed decisions. They truly prioritize customer satisfaction 
+                in every interaction."
               </p>
-              <div class="fw-bold fs-5 mt-4">John Marvie Placido</div>
-              <div>Product Manager - Marvie</div>
+              <div class="fw-bold fs-5 mt-4">Carlos Mendoza</div>
+              <!-- <div>Product Manager - Marvie</div> -->
             </div>
           </div>
         </div>
@@ -727,7 +837,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="register" class="register my-6">
+    <section id="register" class="register my-6 reveal">
       <img
         src="assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
@@ -1246,6 +1356,37 @@ if (isset($_SESSION['success_message'])) {
             },
           });
         });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let lastScrollTop = window.pageYOffset;
+        const sections = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            const currentScrollTop = window.pageYOffset;
+
+            if (entry.isIntersecting) {
+              if (currentScrollTop > lastScrollTop && !entry.target.classList.contains('scroll-up')) {
+                entry.target.classList.add('scroll-up');
+                entry.target.classList.remove('scroll-down');
+              } else if (currentScrollTop < lastScrollTop && !entry.target.classList.contains('scroll-down')) {
+                entry.target.classList.add('scroll-down');
+                entry.target.classList.remove('scroll-up');
+              }
+            } else {
+              // This line should be adjusted based on behavior:
+              // Remove this line if you don't want elements to disappear once they leave the viewport.
+              entry.target.classList.remove('scroll-up', 'scroll-down');
+            }
+          });
+
+          lastScrollTop = currentScrollTop;
+        }, { threshold: 0.1 }); // Adjust threshold if needed
+
+        sections.forEach(section => observer.observe(section));
       });
     </script>
   </body>
