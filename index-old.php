@@ -88,24 +88,25 @@ if(isset($_SESSION['login'])){
           </button>
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="#services">Services</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="#portfoli o">Portfolio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#team">Team</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact</a>
-              </li> 
+            <li class="nav-item">
+    <a class="nav-link" href="#">首页</a> <!-- Home -->
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="#about">关于</a> <!-- About -->
+</li> 
+<li class="nav-item">
+    <a class="nav-link" href="#services">服务</a> <!-- Services -->
+</li> 
+<li class="nav-item">
+    <a class="nav-link" href="#portfolio">作品集</a> <!-- Portfolio -->
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="#team">团队</a> <!-- Team -->
+</li> 
+<li class="nav-item">
+    <a class="nav-link" href="#contact">联系</a> <!-- Contact -->
+</li> 
+
               <li class="nav-item"> <!-- TRIGGER MODAL SIGN IN -->
                 <a class="nav-link ms-4" href="" data-bs-toggle="modal" data-bs-target="#signinmodal"><span class="text-success">Sign in</span></a>
               </li> 
