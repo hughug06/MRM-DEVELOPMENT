@@ -503,16 +503,16 @@ require_once '../../Database/database.php';
                             // Add the task details
                             if(status == 'approved' || status == 'completed' || status == 'cancelled'){
                                 newTask.innerHTML = `
-                                ${id}. ${email || 'No email'}<br>
-                                <strong>Name:</strong> ${name || 'No name'}<br>
+                                ${id}. ${email || 'No email'}
+                                <strong>Name:</strong> ${name || 'No name'}
                                 <strong>Location:</strong> ${location || 'No location'}
                                 <strong>Product:</strong> ${productValues || 'No Products'}
                             `;
                             }
                             else{
                                 newTask.innerHTML = `
-                                ${id}. ${email || 'No email'}<br>
-                                <strong>Name:</strong> ${name || 'No name'}<br>
+                                ${id}. ${email || 'No email'}
+                                <strong>Name:</strong> ${name || 'No name'}
                                 <strong>Location:</strong> ${location || 'No location'}
                                 <strong>Product:</strong> ${productValues || 'No Products'}
                                 <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
