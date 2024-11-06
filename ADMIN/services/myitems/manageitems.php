@@ -64,11 +64,11 @@
                                 <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
                                     <label class="main-content-label mb-0">Items</label>
-                                    <a href="item-add-form.php">
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </a>
+                                   
+                                    <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                </button>
+                                   
                                 </div>
                                 </div>
                                 <div class="card-body">
@@ -119,8 +119,98 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row row-sm mt-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                            <div class="card custom-card">
+                                <div class="card-header border-bottom-0 d-block">                            
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0">Items</label>
+                                   <!-- Add Item Button -->
+                                   <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                </button>
+                                     
+                                    
+                                </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive userlist-table">
+                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                    <th class="wd-lg-20p"><span>name</span></th>
+                                                    <th class="wd-lg-20p"><span>amount</span></th>
+                                                    <th class="wd-lg-20p"><span>created_at</span></th>
+                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                require '../../../Database/database.php';                                          
+                                                $select = "Select * from watts";
+                                                $result = mysqli_query($conn , $select);
+                                                if(mysqli_num_rows($result) > 0){
+                                                    foreach($result as $resultItem){
+                                                ?> 
+                                                 <tr>
+                                                    <td><?= $resultItem['watts_id']?></td>  
+                                                    <td><?= $resultItem['name']?></td>     
+                                                    <td><?= $resultItem['amount']?></td>                                       
+                                                    <td><?= $resultItem['created_at']?></td>                       
+                                                    <td>                                                 
+                                                    <a href="item-edit-form.php?id=<?= $resultItem['watts_id']?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
+                                                    <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <?php 
+                                                    }
+                                            
+                                                }
+                                                else{
+
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+                             <!-- Modal -->
+            <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addItemModalLabel">Add Watts</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addItemForm" method="POST" action="function.php">
+                                <div class="mb-3">
+                                    <label for="wattsName" class="form-label">Watts Name</label>
+                                    <input type="text" class="form-control" id="wattsName" name="watts_name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="brand" class="form-label">Type</label>
+                                    <input type="text" class="form-control" id="brand" name="type" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="wattsAmount" class="form-label">Amount</label>
+                                    <input type="number" class="form-control" id="wattsAmount" name="watts_amount" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="watts_save">Save Item</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Footer Start -->
             <?php include_once('../../../partials/footer.php') ?>
             <!-- Footer End -->

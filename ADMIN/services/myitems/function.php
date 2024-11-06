@@ -25,6 +25,14 @@ if(isset($_POST['AddItem']))
       //ERROR MESSAGE
   }
 }
+else if(isset($_POST['watts_save'])){
+  $watts_name = $_POST['wattsName'];
+  $amount = $_POST['wattsAmount'];
+  $sql_insert = "INSERT INTO watts (name,amount) 
+                          VALUES ('$watts_name' , '$amount' )";
+  $result = mysqli_query($conn , $sql_insert);
+}
+  
 
 elseif(isset($_POST['save'])){
 
