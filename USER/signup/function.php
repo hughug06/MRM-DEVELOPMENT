@@ -4,59 +4,77 @@ require '../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+//first name , lastname, middle name , email address , password , address , city, province , zip code, user typea
 if (isset($_POST['signup'])) {
-    $firstname = ucfirst(strtolower(trim($_POST['firstname'])));
-    $lastname = ucfirst(strtolower(trim($_POST['lastname'])));
-    $middlename = ucfirst(strtolower(trim($_POST['middlename'])));
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $verify_token = md5(rand());
+    // Retrieve and sanitize all input values from the form
+$firstname = ucfirst(strtolower(trim($_POST['firstname'])));
+$lastname = ucfirst(strtolower(trim($_POST['lastname'])));
+$middlename = ucfirst(strtolower(trim($_POST['middlename'])));
+$email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+$password = $_POST['password'];  // Consider hashing the password for security
+$address = ucfirst(trim($_POST['address']));
+$city = ucfirst(strtolower(trim($_POST['city'])));
+$province = ucfirst(strtolower(trim($_POST['province'])));
+$zip_code = trim($_POST['zip_code']);
+$user_type = ucfirst(strtolower(trim($_POST['user_type'])));
+$verify_token = md5(rand());
+$password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/";
 
-    $name_pattern = "/^[a-zA-Z\s]+$/"; 
-    $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,10}$/";
+// Validate inputs
+if (empty($firstname) || empty($lastname) || empty($middlename) || empty($email) || empty($password)) {
+    echo json_encode(['success' => false, 'message' => 'Please fill up required information']);
+    exit();
+}
 
-    // Validate inputs
-    if (empty($firstname) || empty($lastname) || empty($middlename) || empty($email) || empty($password)) {
-        echo json_encode(['success' => false, 'message' => 'Please fill up required information']);
-        exit();
-    }
+// Validate password format
+if (!preg_match($password_pattern, $password)) {
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Password must be 6-10 characters long, contain at least one lowercase letter, one uppercase letter, and one number'
+    ]);
+    exit();
+}
 
-    if (!preg_match($name_pattern, $firstname) || !preg_match($name_pattern, $lastname) || (!empty($middlename) && !preg_match($name_pattern, $middlename))) {
-        echo json_encode(['success' => false, 'message' => 'Names can only contain letters and spaces']);
-        exit();
-    }
+// Hash the password
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    if (!preg_match($password_pattern, $password)) {
-        echo json_encode(['success' => false, 'message' => 'Password must be 6-10 characters long, contain at least one lowercase letter, one uppercase letter, and one number']);
-        exit();
-    }
+// Check if email exists using prepared statements
+$stmt = $conn->prepare("SELECT * FROM user_info WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+if ($result->num_rows > 0) {
+    echo json_encode(['success' => false, 'message' => 'Email already exists']);
+    exit();
+}
 
-    // Check if email exists using prepared statements
-    $stmt = $conn->prepare("SELECT * FROM user_info WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        echo json_encode(['success' => false, 'message' => 'Email already exists']);
-        exit();
-    }
+// Insert user info
+$stmt_insert = $conn->prepare("
+    INSERT INTO user_info (email, first_name, middle_name, last_name, address, city, province, zip_code, user_type)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
+$stmt_insert->bind_param(
+    "sssssssss",
+    $email, 
+    $firstname, 
+    $middlename, 
+    $lastname, 
+    $address, 
+    $city, 
+    $province, 
+    $zip_code, 
+    $user_type
+);
 
-    // Insert user info
-    $stmt = $conn->prepare("INSERT INTO user_info (email, first_name, middle_name, last_name) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $email, $firstname, $middlename, $lastname);
-    $userinfo_result = $stmt->execute();
 
-    if ($userinfo_result) {
+if ($stmt_insert->execute()) {
         $user_id = $conn->insert_id;
-        
+    
         // Insert into accounts table
-        $stmt = $conn->prepare("INSERT INTO accounts (user_id, email, password, verify_token) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("isss", $user_id, $email, $password_hash, $verify_token);
-        $stmt->execute();
+        $stmt_ins = $conn->prepare("INSERT INTO accounts (user_id, email, password, verify_token) VALUES (?, ?, ?, ?)");
+        $stmt_ins->bind_param("isss", $user_id, $email, $password_hash, $verify_token);
+        $stmt_ins->execute();
         
         echo json_encode(['success' => true, 'message' => 'SUCCESS']);
         email_verification($firstname . " " . $lastname, $email, $verify_token);
@@ -64,7 +82,9 @@ if (isset($_POST['signup'])) {
         echo json_encode(['success' => false, 'message' => 'Failed to insert data']);
     }
 
+    $stmt_insert->close();
     $stmt->close();
+    $stmt_ins->close();
     $conn->close();
 }
 
@@ -94,7 +114,7 @@ function email_verification($name,$email,$verify_token){
       // Email template
       $email_template = "
       <h1>MRM E-G  ELECTRIC POWER GENERATION </h1>
-      <p>Click here to verify your account<a href='mrm-eg.online/verify_email.php?token=$verify_token'>Verify Email</a></p>
+      <p>Click here to verify your account<a href='/MRM-development/verify_email.php?token=$verify_token'>Verify Email</a></p>
       
       ";
   
