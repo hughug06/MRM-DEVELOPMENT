@@ -496,6 +496,38 @@
                     </div>
                 </div>
 
+                <!-- Add Brand Modal -->
+                <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="function.php" method="post">
+                                    <!-- Name field -->
+                                    <div class="mb-3">
+                                        <label for="brandName" class="form-label">Brand Name</label>
+                                        <input type="text" class="form-control" id="brandName" name="name" required>
+                                    </div>
+
+                                    <!-- Amount field -->
+                                    <div class="mb-3">
+                                        <label for="brandAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" name="brand_save">Add Brand</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
             <!-- Footer Start -->
             <?php include_once('../../../partials/footer.php') ?>

@@ -70,6 +70,15 @@ else if(isset($_POST['running_edit'])){
   header("Location: manageitems.php");
   exit();
 }
+else if(isset($_POST['brand_save'])){
+  $name = $_POST['name'];
+  $amount = $_POST['amount'];
+  $sql_insert = "INSERT INTO brand (name, amount) 
+               VALUES ('$name', '$amount')";
+  $result = mysqli_query($conn, $sql_insert);
+  header("Location: manageitems.php");
+  exit; 
+}
 elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];
