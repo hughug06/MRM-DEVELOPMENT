@@ -117,6 +117,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="row row-sm mt-3">
@@ -124,7 +125,7 @@
                             <div class="card custom-card">
                                 <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">Items</label>
+                                    <label class="main-content-label mb-0">WATTS </label>
                                    <!-- Add Item Button -->
                                    <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addItemModal">
                                                     <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
@@ -140,6 +141,7 @@
                                                 <tr>
                                                     <th class="wd-lg-8p"><span>ID</span></th>
                                                     <th class="wd-lg-20p"><span>name</span></th>
+                                                    <th class="wd-lg-20p"><span>type</span></th>
                                                     <th class="wd-lg-20p"><span>amount</span></th>
                                                     <th class="wd-lg-20p"><span>created_at</span></th>
                                                     <th class="wd-lg-20p"><span>Action</span></th>
@@ -156,11 +158,27 @@
                                                  <tr>
                                                     <td><?= $resultItem['watts_id']?></td>  
                                                     <td><?= $resultItem['name']?></td>     
+                                                    <td class="<?= $resultItem['type'] === 'solar' ? 'text-warning' : ($resultItem['type'] === 'generator' ? 'text-info' : '') ?>">
+                                                        <?= $resultItem['type'] ?>
+                                                    </td>
+
                                                     <td><?= $resultItem['amount']?></td>                                       
                                                     <td><?= $resultItem['created_at']?></td>                       
                                                     <td>                                                 
-                                                    <a href="item-edit-form.php?id=<?= $resultItem['watts_id']?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
-                                                    <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                   <!-- Edit Item Button for watts -->
+                                                   <button 
+                                                   type="button" 
+                                                   class="btn btn-sm btn-info" 
+                                                   data-bs-toggle="modal" 
+                                                   data-bs-target="#editWattsModal"
+                                                   data-account-id="<?= $resultItem['watts_id'] ?>" 
+                                                   data-name="<?= $resultItem['name'] ?>" 
+                                                   data-type="<?= $resultItem['type'] ?>" 
+                                                   data-amount="<?= $resultItem['amount'] ?>" 
+                                                   >
+                                                    <i class="fe fe-edit-2"></i>
+                                                </button>
+                                                    
                                                     </td>
                                                 </tr>
                                                 
@@ -179,10 +197,185 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Running_hours Section -->
+                        <div class="row row-sm mt-3">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                <div class="card custom-card">
+                                    <div class="card-header border-bottom-0 d-block">                            
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <label class="main-content-label mb-0">Running Hours</label>
+                                            <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addRunningHoursModal">
+                                                <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive userlist-table">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="wd-lg-8p"><span>id</span></th>
+                                                        <th class="wd-lg-20p"><span>name</span></th>
+                                                        <th class="wd-lg-20p"><span>amount</span></th>
+                                                        <th class="wd-lg-20p"><span>created_at</span></th>
+                                                        <th class="wd-lg-20p"><span>Action</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $select = "Select * from running_hours";
+                                                    $result = mysqli_query($conn , $select);
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                    ?> 
+                                                    <tr>
+                                                        <td><?= $resultItem['running_id']?></td>  
+                                                        <td><?= $resultItem['name']?></td>     
+                                                        <td><?= $resultItem['amount']?></td>                                       
+                                                        <td><?= $resultItem['created_at']?></td>                       
+                                                        <td>
+                                                            <button
+                                                             type="button" 
+                                                             lass="btn btn-sm btn-info" 
+                                                             data-bs-toggle="modal" 
+                                                             data-bs-target="#editRunningHoursModal" 
+                                                             data-running-id="<?= $resultItem['running_id'] ?>"
+                                                             data-name="<?= $resultItem['name'] ?>"          
+                                                             data-amount="<?= $resultItem['amount'] ?>">
+                                                                <i class="fe fe-edit-2"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <?php 
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brands Section -->
+                        <div class="row row-sm mt-3">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                <div class="card custom-card">
+                                    <div class="card-header border-bottom-0 d-block">                            
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <label class="main-content-label mb-0">BRANDS</label>
+                                            <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                                                <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive userlist-table">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="wd-lg-8p"><span>id</span></th>
+                                                        <th class="wd-lg-20p"><span>name</span></th>
+                                                        <th class="wd-lg-20p"><span>amount</span></th>
+                                                        <th class="wd-lg-20p"><span>created_at</span></th>
+                                                        <th class="wd-lg-20p"><span>Action</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $select = "Select * from brand";
+                                                    $result = mysqli_query($conn , $select);
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                    ?> 
+                                                    <tr>
+                                                        <td><?= $resultItem['brand_id']?></td>  
+                                                        <td><?= $resultItem['name']?></td>     
+                                                        <td class="<?= $resultItem['type'] === 'solar' ? 'text-warning' : ($resultItem['type'] === 'generator' ? 'text-info' : '') ?>">
+                                                            <?= $resultItem['type'] ?>
+                                                        </td>
+                                                        <td><?= $resultItem['amount']?></td>                                       
+                                                        <td><?= $resultItem['created_at']?></td>                       
+                                                        <td>
+                                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editBrandModal" data-account-id="<?= $resultItem['brand_id'] ?>" data-name="<?= $resultItem['name'] ?>" data-type="<?= $resultItem['type'] ?>" data-amount="<?= $resultItem['amount'] ?>">
+                                                                <i class="fe fe-edit-2"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <?php 
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Section -->
+                        <div class="row row-sm mt-3">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                <div class="card custom-card">
+                                    <div class="card-header border-bottom-0 d-block">                            
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <label class="main-content-label mb-0">LOCATION</label>
+                                            <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addLocationModal">
+                                                <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive userlist-table">
+                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="wd-lg-8p"><span>id</span></th>
+                                                        <th class="wd-lg-20p"><span>name</span></th>
+                                                        <th class="wd-lg-20p"><span>amount</span></th>
+                                                        <th class="wd-lg-20p"><span>created_at</span></th>
+                                                        <th class="wd-lg-20p"><span>Action</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php 
+                                                    $select = "Select * from location";
+                                                    $result = mysqli_query($conn , $select);
+                                                    if(mysqli_num_rows($result) > 0){
+                                                        foreach($result as $resultItem){
+                                                    ?> 
+                                                    <tr>
+                                                        <td><?= $resultItem['location_id']?></td>  
+                                                        <td><?= $resultItem['name']?></td>     
+                                                        <td class="<?= $resultItem['type'] === 'solar' ? 'text-warning' : ($resultItem['type'] === 'generator' ? 'text-info' : '') ?>">
+                                                            <?= $resultItem['type'] ?>
+                                                        </td>
+                                                        <td><?= $resultItem['amount']?></td>                                       
+                                                        <td><?= $resultItem['created_at']?></td>                       
+                                                        <td>
+                                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editLocationModal" data-account-id="<?= $resultItem['location_id'] ?>" data-name="<?= $resultItem['name'] ?>" data-type="<?= $resultItem['type'] ?>" data-amount="<?= $resultItem['amount'] ?>">
+                                                                <i class="fe fe-edit-2"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <?php 
+                                                        }
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
             </div>
 
-                             <!-- Modal -->
+                             <!-- Modal FOR ADD ITEM WATTS -->
             <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -210,6 +403,99 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal FOR EDIT WATTS -->
+            <div class="modal fade" id="editWattsModal" tabindex="-1" aria-labelledby="editWattsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editWattsModalLabel">Edit Watts</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="function.php" method="POST">
+                                <input type="hiddent" id="wattsIdInput" name="watts_id">
+                                <div class="mb-3">
+                                    <label for="wattsInput" class="form-label">Enter Name</label>
+                                    <input type="text" class="form-control" id="nameInput" placeholder="Enter new watt value" name="name">
+                                    <label for="wattsInput" class="form-label">Amount</label>
+                                    <input type="text" class="form-control" id="amountInput" placeholder="Enter amount value" name="amount">
+                                    <label for="wattsInput" class="form-label">Type</label>
+                                    <input type="text" class="form-control" id="typeInput" placeholder="Enter type value" name="type">
+                                    <button type="submit" class="btn btn-primary" name="watts_edit">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add running_hours Modal -->
+                <div class="modal fade" id="addRunningHoursModal" tabindex="-1" aria-labelledby="addRunningHoursModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="function.php" method="post">
+                                 
+                                    <!-- Name field -->
+                                    <div class="mb-3">
+                                        <label for="productName" class="form-label">Product Name</label>
+                                        <input type="text" class="form-control"  name="name" required>
+                                    </div>
+
+                                    <!-- Amount field -->
+                                    <div class="mb-3">
+                                        <label for="productAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control"  name="amount" required>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" name="running_save">Add Product</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit running_hours Modal -->
+                <div class="modal fade" id="editRunningHoursModal" tabindex="-1" aria-labelledby="editRunningHoursModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editProductModalLabel">Edit running hours</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="function.php" method="post">
+                                    <!-- Hidden ID field -->
+                                    <input type="hidden" id="running_id" name="id">
+
+                                    <!-- Name field -->
+                                    <div class="mb-3">
+                                        <label for="productName" class="form-label">Hours(ex. 0 - 100 hrs )</label>
+                                        <input type="text" class="form-control" id="Name" name="name" required>
+                                    </div>
+
+                                    <!-- Amount field -->
+                                    <div class="mb-3">  
+                                        <label for="productAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="Amount" name="amount" required>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" name="running_edit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             <!-- Footer Start -->
             <?php include_once('../../../partials/footer.php') ?>
@@ -325,3 +611,56 @@
     </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var editWattsModal = document.getElementById('editWattsModal');
+
+        editWattsModal.addEventListener('show.bs.modal', function(event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            // Extract info from data-account-id attribute
+            var wattsId = button.getAttribute('data-account-id');
+            var name = button.getAttribute('data-name');
+            var type = button.getAttribute('data-type');
+            var amount = button.getAttribute('data-amount');
+
+
+            // Update the modal's hidden input with the wattsId
+            var wattsIdInput = document.getElementById('wattsIdInput');
+            var nameInput = document.getElementById('nameInput');
+            var typeInput = document.getElementById('typeInput');
+            var amountInput = document.getElementById('amountInput');
+            wattsIdInput.value = wattsId;
+            nameInput.value = name;
+            typeInput.value = type;
+            amountInput.value = amount;
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Select the modal element
+    var editProductModal = document.getElementById('editRunningHoursModal');
+
+    // Add event listener for when the modal is about to be shown
+    editProductModal.addEventListener('show.bs.modal', function (event) {
+        // Get the button that triggered the modal
+        var button = event.relatedTarget;
+
+        // Extract data attributes from the button
+        var running_id = button.getAttribute('data-running-id');
+        var Name = button.getAttribute('data-name');
+        var Amount = button.getAttribute('data-amount');
+
+        // Populate the modal's form fields with the extracted data
+        var modalIdInput = editProductModal.querySelector('#running_id');
+        var modalNameInput = editProductModal.querySelector('#Name');
+        var modalAmountInput = editProductModal.querySelector('#Amount');
+
+        modalIdInput.value = running_id;
+        modalNameInput.value = Name;
+        modalAmountInput.value = Amount;
+    });
+});
+
+</script>
