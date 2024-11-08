@@ -21,7 +21,19 @@ $service_type = $_POST['serviceType'];
     
 } 
 
+if (isset($_POST['installation_submit'])) {
+    // Check for custom input or select value
+    if (!empty($_POST['customInput'])) {
+        $selectedService = $_POST['customInput']; // Get custom input value if present
+    } elseif (!empty($_POST['serviceSelect'])) {
+        $selectedService = $_POST['serviceSelect']; // Get selected service value
+    } else {
+        $selectedService = 'No service selected';
+    }
 
+    echo "Selected Service: " . htmlspecialchars($selectedService);
+    exit();
+}
 
 
 ?>
@@ -97,7 +109,7 @@ $service_type = $_POST['serviceType'];
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Tune-Up</button>
                 </form>
-                
+
                  <!-- Form for Repair -->
             <?php elseif($service_type == 'repair') : ?>
                 <form method="post" action="">
@@ -122,13 +134,32 @@ $service_type = $_POST['serviceType'];
             
             <!-- Form for Installation -->
             <?php elseif ($service_type == 'installation') : ?>
-                <form method="post" action="">
-                    <h3>Installation Form</h3>
+                <form method="post" action="book_appointment.php">
                     <div class="mb-3">
-                        <label for="installationDetails" class="form-label">Details</label>
-                        <input type="text" id="installationDetails" class="form-control" name="installationDetails" placeholder="Enter installation details">
+                        <label for="serviceSelect" class="form-label">Select Service</label>
+                        <div class="input-group">
+                            <select name="serviceSelect" id="serviceSelect" class="form-select">
+                                <option value="">-- Select a Service --</option>
+                                <?php 
+                                $query = "SELECT * FROM products WHERE availability = 1";
+                                $result = mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_assoc($result)) : ?>
+                                    <option value="<?= $row['ProductName'] ?>"><?= $row['ProductName'] ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                            <div class="input-group-text">
+                                <input type="checkbox" id="customCheck" class="form-check-input" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Installation</button>
+
+                    <!-- Custom input field, initially hidden -->
+                    <div class="mb-3 d-none" id="customInputContainer">
+                        <label for="customInput" class="form-label">Custom Input</label>
+                        <input type="text" id="customInput" name="customInput" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" name="installation_submit">Submit</button>
                 </form>
             <?php endif; ?>
 
@@ -184,7 +215,20 @@ $service_type = $_POST['serviceType'];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-
+<script>
+        // jQuery to handle checkbox behavior
+        $(document).ready(function() {
+            $('#customCheck').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#serviceSelect').prop('disabled', true);
+                    $('#customInputContainer').removeClass('d-none');
+                } else {
+                    $('#serviceSelect').prop('disabled', false);
+                    $('#customInputContainer').addClass('d-none');
+                }
+            });
+        });
+    </script>
 
 
 
