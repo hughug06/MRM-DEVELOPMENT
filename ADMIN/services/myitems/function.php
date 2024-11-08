@@ -3,38 +3,60 @@ require '../../../Database/database.php';
 session_start();
 
 
-if(isset($_POST['AddItem']))
+if(isset($_POST['serviceItem_save']))
 {
-  $unit_name = $_POST['unit_name'];
-  $quantity = $_POST['quantity'];
-  $Description = $_POST['Description'];
-  $amount = $_POST['amount'];
-
-  
-  if($unit_name != '' || $quantity != '' || $Description != '' || $amount != ''){                                                    
+  $unit_name = $_POST['service_unit'];
+  $quantity = $_POST['service_quantity'];
+  $Description = $_POST['service_description'];
+  $amount = $_POST['service_amount'];
+                    
       $sql_insert = "INSERT INTO service_pricing (unit,description,quantity,amount) 
                           VALUES ('$unit_name' , '$Description' , '$quantity' , '$amount')";
-          if (mysqli_query($conn, $sql_insert)) {
-                echo json_encode(['success' => true]);
-          } 
-          else {
-            echo json_encode(['message' => 'SQL error on adding item']);
-          }
-  }
-  else{
-      //ERROR MESSAGE
-  }
+      $result = mysqli_query($conn , $sql_insert);    
+          
+      header("Location: manageitems.php");
+      exit; 
+      
 }
-else if(isset($_POST['watts_save'])){
-$watts_name = $_POST['watts_name'];
-$type = $_POST['type'];
-$amount = $_POST['watts_amount'];
+else if(isset($_POST['serviceItem_edit']))
+{
 
-$sql_insert = "INSERT INTO watts (name, type, amount) 
-               VALUES ('$watts_name', '$type', $amount)";
-$result = mysqli_query($conn, $sql_insert);
+  $id = $_POST['item_id'];
+  $unit = $_POST['item_unit'];
+  $description = $_POST['item_description'];
+  $quantity = $_POST['item_quantity'];
+  $amount = $_POST['item_amount'];
 
+  $sql = "UPDATE service_pricing SET unit='$unit' , description = '$description' , amount = '$amount' , quantity = '$quantity' WHERE pricingid=$id";
+  $result = mysqli_query($conn , $sql);
+  
+  header("Location: manageitems.php");
+  exit; 
 
+}
+else if(isset($_POST['installation_save'])){
+  $delete = "DELETE FROM package_installation;";
+  $result_del = mysqli_query($conn , $delete);
+  $item_descriptions = $_POST['item_description'];
+  $units = $_POST['unit'];
+  $quantities = $_POST['quantity'];
+  $amounts = $_POST['amount'];
+  $total_costs = $_POST['total_cost'];
+
+  $sql = "INSERT INTO package_installation (description, unit, quantity, amount, total_cost) VALUES ";
+ // Loop through all the items and build the query for multiple rows
+ $valuesArr = [];
+ for ($i = 0; $i < count($item_descriptions); $i++) {
+     $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+     $unit = mysqli_real_escape_string($conn, $units[$i]);
+     $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+     $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+     $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
+
+     $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
+ }
+ $sql .= implode(',', $valuesArr);
+ $result = mysqli_query($conn , $sql);
 header("Location: manageitems.php");
 exit; 
 

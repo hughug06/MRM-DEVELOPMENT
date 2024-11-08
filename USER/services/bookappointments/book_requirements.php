@@ -106,7 +106,7 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
                         </div>
 
                         <div class="form-group text-start mb-3">
-                            <label for="location" class="text-muted">Address</label>
+                            <label for="location" class="text-muted">PIN YOUR Address</label>
                             <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
                         </div>
 
@@ -484,3 +484,5 @@ document.getElementById('s_Product').addEventListener('change', function() {
     }
 });
 </script>
+
+
