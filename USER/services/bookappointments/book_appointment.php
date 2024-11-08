@@ -136,10 +136,10 @@ if (isset($_POST['installation_submit'])) {
             <?php elseif ($service_type == 'installation') : ?>
                 <form method="post" action="book_appointment.php">
                     <div class="mb-3">
-                        <label for="serviceSelect" class="form-label">Select Service</label>
+                        <label for="serviceSelect" class="form-label">Select Product</label>
                         <div class="input-group">
                             <select name="serviceSelect" id="serviceSelect" class="form-select">
-                                <option value="">-- Select a Service --</option>
+                                <option value="">-- Select a Product --</option>
                                 <?php 
                                 $query = "SELECT * FROM products WHERE availability = 1";
                                 $result = mysqli_query($conn, $query);
@@ -148,6 +148,7 @@ if (isset($_POST['installation_submit'])) {
                                 <?php endwhile; ?>
                             </select>
                             <div class="input-group-text">
+                                <label for="">Custom Item</label>
                                 <input type="checkbox" id="customCheck" class="form-check-input" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
                             </div>
                         </div>
