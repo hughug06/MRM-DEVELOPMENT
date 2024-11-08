@@ -1,5 +1,6 @@
 <?php 
   session_start();
+
   if(isset($_SESSION['login'])){
       if($_SESSION['login'] == true)  {
         $role = $_SESSION['role'];
@@ -20,6 +21,8 @@ if (isset($_SESSION['success_message'])) {
     echo "<div class='alert alert-success'>" . $_SESSION['success_message'] . "</div>";
     unset($_SESSION['success_message']); // Clear the message after displaying it
 }
+
+
 
 ?>
 
@@ -57,6 +60,28 @@ if (isset($_SESSION['success_message'])) {
     </style>
   </head>
   <body>
+
+      <?php 
+        require 'Database/database.php'; 
+        $sql = "SELECT * FROM landing_page_info WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $id = 1;
+        $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+
+            $titles = json_decode($row["title"], true);
+            $descs = json_decode($row["description"], true);
+            $goals = json_decode($row["goals"], true);
+            $faqs = json_decode($row["faq"], true);
+            $projects = json_decode($row["projects"], true);
+            $user_experience = json_decode($row["user_experience"], true);
+
+      ?>
+  
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
       <div class="container">
         <a href="#" class="navbar-brand d-flex">
@@ -121,17 +146,19 @@ if (isset($_SESSION['success_message'])) {
         alt=""
         class="decoration-star-2 position-absolute"
       />
+
       <div class="container position-relative z-3">
         <div class="row">
           <div class="col-lg-6">
             <div class="mt-6">
               <h1 class="xl-text">
-                <span class="text-secondary">Power</span> Your Home with Clean,
-                Reliable <span class="text-primary">Energy</span>
+                <span class="text-secondary"><?php echo $titles["title1_f"] ?></span> 
+                <span><?php echo $titles["title1_d"] ?></span> 
+                <span class="text-primary"><?php echo $titles["title1_l"] ?></span>
               </h1>
               <p class="lead mb-4">
+              <?php echo $descs["desc1"] ?>
                 
-                At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
@@ -179,11 +206,12 @@ if (isset($_SESSION['success_message'])) {
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 text-center">
-            <h2 class="mb-4">
-              What is <span class="text-secondary">Clean</span> Energy?
+            <h2 class="mb-4"><?php echo $titles["title2"] ?>
+               <span class="text-secondary"></span> 
             </h2>
             <p class="fs-5">
-              At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.
+            <?php echo $descs["desc2"] ?>
+              
             </p>
           </div>
         </div>
@@ -219,25 +247,29 @@ if (isset($_SESSION['success_message'])) {
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    To enhance livelihoods across various sectors within communities in the Philippines.
+                  <?php echo $goals["goal1"] ?>
+                    
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    To foster new connections by providing sustainable energy opportunities for local communities.
+                  <?php echo $goals["goal2"] ?>
+                    
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    To cultivate a culture of clean energy consumption that benefits both individuals and their communities.
+                  <?php echo $goals["goal3"] ?>
+                    
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                    To raise awareness about the advantages of using clean and solar-based energy products and generators within the community.
+                  <?php echo $goals["goal4"] ?>
+                    
                   </p>
                 </li>
               </ul>
@@ -256,7 +288,8 @@ if (isset($_SESSION['success_message'])) {
                 <span class="text-secondary">Services</span> that we offer
               </h2>
               <p>
-                The services offered are varied and vast to help accommodate costumers with their needs within the comforts of their own homes or businesses. The main function of our services is to cater towards a goal of helping organizations and businesses to have a smooth and stable product that works and can be used at a moment’s notice.
+              <?php echo $descs["desc3"] ?>
+                
               </p>
             </div>
           </div>
@@ -311,12 +344,8 @@ if (isset($_SESSION['success_message'])) {
                 </span>
               </h2>
               <p>
-                We’re here to help you make the switch to solar energy and
-                backup power as easy and seamless as possible. Our team
-                understands that every home is unique, with different energy
-                requirements and concerns. That’s why we’re dedicated to
-                providing you with a personalized energy solution that fits your
-                specific needs, lifestyle, and budget.
+              <?php echo $descs["desc4"] ?>
+                
               </p>
               <a href="article.html" class="mt-5 btn btn-secondary text-white"
                 >Get Started</a
@@ -358,9 +387,8 @@ if (isset($_SESSION['success_message'])) {
               We are here to <span class="text-secondary">help</span> you
             </h2>
             <p>
-              Find answers to common questions about our generators, 
-              solar panels, and services. For further inquiries, 
-              please reach out through our contact page!
+            <?php echo $faqs["faqdesc"] ?>
+              
             </p>
             <div class="accordion" id="accordionFAQ2">
               <div class="accordion-item border-0 border-bottom">
@@ -373,7 +401,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="firstcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">01.</span>What types of generators do you offer?
+                    <span class="me-3 fs-18 fw-bold">01.</span><?php echo $faqs["faq_q1"] ?>
                   </button>
                 </h2>
                 <div
@@ -384,7 +412,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      MRM E-G Electric Power Generation Services offers a range of generators to meet diverse power needs, from residential units to heavy-duty commercial and industrial generators. Our options include diesel, gas, and portable models to fit various applications and preferences.
+                    <?php echo $faqs["faq_a1"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -399,7 +428,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="secondcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">02.</span>What types of solar panels do you provide?
+                    <span class="me-3 fs-18 fw-bold">02.</span><?php echo $faqs["faq_q2"] ?>
                   </button>
                 </h2>
                 <div
@@ -410,7 +439,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      We offer high-efficiency solar panels suitable for residential, commercial, and industrial installations. Our solar panels are chosen for their durability, performance, and cost-effectiveness, helping you achieve sustainable energy solutions.
+                    <?php echo $faqs["faq_a2"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -425,7 +455,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="thirdcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">03.</span>Do you provide installation services?
+                    <span class="me-3 fs-18 fw-bold">03.</span><?php echo $faqs["faq_q3"] ?>
                   </button>
                 </h2>
                 <div
@@ -436,7 +466,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Yes, we offer comprehensive installation services for both generators and solar panels. Our skilled technicians ensure safe, efficient, and compliant installation, helping you get your system up and running smoothly.
+                    <?php echo $faqs["faq_a3"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -451,7 +482,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="fourthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">04.</span>Can you help with generator or solar panel maintenance?
+                    <span class="me-3 fs-18 fw-bold">04.</span><?php echo $faqs["faq_q4"] ?>
                   </button>
                 </h2>
                 <div
@@ -462,7 +493,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Absolutely! We provide maintenance services for both generators and solar panel systems. Regular maintenance extends the lifespan of your equipment and ensures it operates at peak efficiency.
+                    <?php echo $faqs["faq_a4"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -477,7 +509,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="fifthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">05.</span>What repair services do you offer?
+                    <span class="me-3 fs-18 fw-bold">05.</span><?php echo $faqs["faq_q5"] ?>
                   </button>
                 </h2>
                 <div
@@ -488,7 +520,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      MRM E-G Electric Power Generation Services offers complete repair services for generators and solar panel systems. Whether it's a minor issue or a major repair, our team can diagnose and resolve problems efficiently to get your system back to optimal performance.
+                    <?php echo $faqs["faq_a5"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -503,7 +536,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="sixthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">06.</span>How often should I schedule maintenance for my generator?
+                    <span class="me-3 fs-18 fw-bold">06.</span><?php echo $faqs["faq_q6"] ?>
                   </button>
                 </h2>
                 <div
@@ -514,7 +547,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      For optimal performance, we recommend generator maintenance at least once a year, though heavy-use generators may need more frequent checks. Regular maintenance reduces the risk of breakdowns and extends the lifespan of your equipment.
+                    <?php echo $faqs["faq_a6"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -529,7 +563,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="seventhcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">07.</span>Can you help with system tuning for better performance?
+                    <span class="me-3 fs-18 fw-bold">07.</span><?php echo $faqs["faq_q7"] ?>
                   </button>
                 </h2>
                 <div
@@ -540,7 +574,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      Yes, we offer tuning services for generators to ensure they perform at their best. Our technicians adjust settings and calibrate components for maximum efficiency and reliability.
+                    <?php echo $faqs["faq_a7"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -555,7 +590,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="eighthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">08.</span>Are there financing options available for generator and solar panel installations?
+                    <span class="me-3 fs-18 fw-bold">08.</span><?php echo $faqs["faq_q8"] ?>
                   </button>
                 </h2>
                 <div
@@ -566,7 +601,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      We understand that investing in a power generation system is significant. We offer flexible financing options to help you achieve energy independence affordably. Please reach out to discuss available plans.
+                    <?php echo $faqs["faq_a8"] ?>
+                      
                     </p>
                   </div>
                 </div>
@@ -581,7 +617,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="ninthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">09.</span>Do you offer warranties on your products and services?
+                    <span class="me-3 fs-18 fw-bold">09.</span><?php echo $faqs["faq_q9"] ?>
                   </button>
                 </h2>
                 <div
@@ -592,7 +628,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                    Yes, all our products come with a manufacturer’s warranty, and we also provide warranties on our installation and repair services. Our goal is to give you peace of mind and confidence in your purchase.
+                    <?php echo $faqs["faq_a9"] ?>
+                    
                     </p>
                   </div>
                 </div>
@@ -607,7 +644,7 @@ if (isset($_SESSION['success_message'])) {
                     aria-expanded="false"
                     aria-controls="tenthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">10.</span>How can I request a quote or consultation?
+                    <span class="me-3 fs-18 fw-bold">10.</span><?php echo $faqs["faq_q10"] ?>
                   </button>
                 </h2>
                 <div
@@ -618,7 +655,8 @@ if (isset($_SESSION['success_message'])) {
                 >
                   <div class="accordion-body">
                     <p>
-                      You can easily request a quote or consultation by contacting us via phone or email, or by visiting our website. We’ll assess your power needs and provide a detailed proposal tailored to your specific requirements.
+                    <?php echo $faqs["faq_a10"] ?>
+                     
                     </p>
                   </div>
                 </div>
@@ -652,11 +690,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Cagayan Solar Farm Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj1_title"] ?></h5>
                 <p class="card-text">
-                  Develop a large-scale solar farm in Cagayan to provide renewable energy
-                  for local communities and reduce reliance on 
-                  fossil fuels.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj1_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -669,11 +706,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Ilocos Solar Farm Irrigation Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj2_title"] ?></h5>
                 <p class="card-text">
-                  Utilize solar energy to power irrigation systems in Ilocos,
-                  enhancing agricultural productivity in areas with limited 
-                  access to consistent water resources.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj2_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -686,11 +722,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Boracay Clean Water Irrigation Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj3_title"] ?></h5>
                 <p class="card-text">
-                  Establish an eco-friendly irrigation system in Boracay to support 
-                  sustainable landscaping, local agriculture, 
-                  and clean water access.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj3_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -705,11 +740,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Cebu Solar Farm Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj4_title"] ?></h5>
                 <p class="card-text">
-                  Construct a solar farm in Cebu to supply renewable energy 
-                  to industrial areas and reduce electricity 
-                  costs for local businesses.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj4_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -722,12 +756,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Isabela Farm Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj5_title"] ?></h5>
                 <p class="card-text">
-                  Establish a sustainable farming project in Isabela 
-                  that combines renewable energy and modern 
-                  agricultural practices to improve crop yields 
-                  and farmer income.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj5_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -740,11 +772,10 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title">Samar Potato Farm Project</h5>
+                <h5 class="card-title"><?php echo $projects["pj6_title"] ?></h5>
                 <p class="card-text">
-                  Launch a solar-powered potato farm in Samar, aimed at 
-                  bolstering local food production and creating 
-                  a sustainable agricultural model for root crops.<a href="" class="article.html">...Read More</a>
+                <?php echo $projects["pj6_desc"] ?>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
@@ -767,12 +798,10 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                "MRM E-G Electric Power Generation Services offers 
-                exceptional service and knowledgeable staff. The website is user-friendly, 
-                making it easy to find what I need among their quality generators and solar solutions. 
-                Their commitment to sustainability and prompt support truly sets them apart!"
+              <?php echo $user_experience["xp1_comment"] ?>
+                
               </p>
-              <div class="fw-bold fs-5 mt-4">James Velasco</div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp1_name"] ?></div>
               <!-- <div>General Manager - Marvie</div> -->
             </div>
           </div>
@@ -787,12 +816,10 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                "MRM E-G provides reliable and professional power solutions with a 
-                full range of services from solar installations to generator maintenance. 
-                The website is clear and concise, offering all the details needed. 
-                Their team is always available and helpful—I highly recommend them!"
+              <?php echo $user_experience["xp2_comment"] ?>
+                
               </p>
-              <div class="fw-bold fs-5 mt-4">Alyssa Rivera</div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp2_name"] ?>Alyssa Rivera</div>
               <!-- <div>Team Leader - Marvie</div> -->
             </div>
           </div>
@@ -807,13 +834,10 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-                "MRM E-G Electric Power Generation Services is a one-stop 
-                shop for green energy needs. The website offers extensive 
-                information on eco-friendly products, making it easy to make 
-                informed decisions. They truly prioritize customer satisfaction 
-                in every interaction."
+              <?php echo $user_experience["xp3_comment"] ?>
+                
               </p>
-              <div class="fw-bold fs-5 mt-4">Carlos Mendoza</div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp3_name"] ?></div>
               <!-- <div>Product Manager - Marvie</div> -->
             </div>
           </div>
@@ -931,8 +955,8 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4 my-3">
             <h6>About MRM-EG</h6>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              laboriosam sint, pariatur eos ullam laudantium!
+            <?php echo $descs["about"] ?>
+              
             </p>
           </div>
           <div class="col-md-4 my-3">
@@ -976,6 +1000,9 @@ if (isset($_SESSION['success_message'])) {
         </div>
       </div>
     </footer>
+
+    <?php
+    ?>
 
     <!-- Login Modal -->
     <div
