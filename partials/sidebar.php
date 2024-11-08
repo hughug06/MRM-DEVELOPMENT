@@ -261,17 +261,6 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->
-                <!-- <li class="slide ">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-user-pen side-menu__icon"></i>
-                        <span class="side-menu__label">Accounts</span>
-                    </a>
-                </li> -->
-                <!-- End::slide -->
-
-                <!-- Start::slide -->
                 <li class="slide has-sub">
                     <a href="javascript:void(0);" class="side-menu__item">
                         <span class="shape1"></span>
@@ -291,6 +280,18 @@
                     </ul>
                 </li>
                 <!-- End::slide -->       
+
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "landing-customization.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/landingPageManagement/landing-customization.php" class="side-menu__item <?= $page == "landing-customization.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-house side-menu__icon"></i>
+                        <span class="side-menu__label">Landing Page</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
+
                 <?php 
                 }
                else if($_SESSION['auth'] == "service_worker")
@@ -326,6 +327,8 @@
                         </li>                                
                     </ul>
                 </li>
+
+                
 
                 
                 <?php 
