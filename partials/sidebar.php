@@ -282,8 +282,8 @@
                 <!-- End::slide -->       
 
                 <!-- Start::slide -->
-                <li class="slide <?= $page == "landing-customization.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/landingPageManagement/landing-customization.php" class="side-menu__item <?= $page == "landing-customization.php" ? 'active':''?>">
+                <li class="slide <?= $page == "landing-customize.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/landingPage/landing-customize.php" class="side-menu__item <?= $page == "landing-customize.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-house side-menu__icon"></i>

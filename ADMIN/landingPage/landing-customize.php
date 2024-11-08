@@ -1,3 +1,8 @@
+<?php
+require_once '../authetincation.php';
+include_once '../../Database/database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -55,6 +60,33 @@
                 <!-- content here -->
             </div>
             <!--APP-CONTENT CLOSE-->
+
+            <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Page Header -->
+
+                
+
+                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                  <div>
+                      <h2 class="main-content-title fs-24 mb-1">Products</h2>
+                      <ol class="breadcrumb mb-0">
+                          <li class="breadcrumb-item"><a href="javascript:void(0)">overview</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Products</li>
+                      </ol>
+                  </div>
+
+                </div>
+
+                <!-- Page Header Close -->
+
+                
+                
+            </div>
+        </div>
+        <!-- End::app-content -->
 
         
         <!-- Footer Start -->
