@@ -3,15 +3,7 @@
 
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
-if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
-    $_SESSION['availability_id'] = $_GET['availability_id'];
-    $_SESSION['date'] = $_GET['date'];
-    $_SESSION['start_time'] = $_GET['start_time'];
-    $_SESSION['end_time'] = $_GET['end_time'];
 
-
-    
-} 
 
 
 
@@ -154,6 +146,22 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="serviceType" id="repair" value="repair" required>
                                     <label class="form-check-label" for="repair">Repair</label>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Row 5: type radio button Buttons -->
+                         <div class="row mb-3">
+                            <label class="form-label">Product type</label>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="productType" value="solar" required>
+                                    <label class="form-check-label" for="solar">Solar</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="productType"  value="generator" required>
+                                    <label class="form-check-label" for="generator">Generator</label>
                                 </div>
                             </div>
                         </div>

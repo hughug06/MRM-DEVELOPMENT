@@ -18,22 +18,10 @@ $city = $_POST['city'];
 $province = $_POST['province'];
 $pin_location = $_POST['location'];
 $service_type = $_POST['serviceType']; 
-    
+$product_type = $_POST['productType'];   
+
 } 
 
-if (isset($_POST['installation_submit'])) {
-    // Check for custom input or select value
-    if (!empty($_POST['customInput'])) {
-        $selectedService = $_POST['customInput']; // Get custom input value if present
-    } elseif (!empty($_POST['serviceSelect'])) {
-        $selectedService = $_POST['serviceSelect']; // Get selected service value
-    } else {
-        $selectedService = 'No service selected';
-    }
-
-    echo "Selected Service: " . htmlspecialchars($selectedService);
-    exit();
-}
 
 
 ?>
@@ -133,34 +121,73 @@ if (isset($_POST['installation_submit'])) {
                 </form>
             
             <!-- Form for Installation -->
-            <?php elseif ($service_type == 'installation') : ?>
-                <form method="post" action="book_appointment.php">
-                    <div class="mb-3">
-                        <label for="serviceSelect" class="form-label">Select Product</label>
-                        <div class="input-group">
-                            <select name="serviceSelect" id="serviceSelect" class="form-select">
-                                <option value="">-- Select a Product --</option>
-                                <?php 
-                                $query = "SELECT * FROM products WHERE availability = 1";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_assoc($result)) : ?>
-                                    <option value="<?= $row['ProductName'] ?>"><?= $row['ProductName'] ?></option>
-                                <?php endwhile; ?>
-                            </select>
-                            <div class="input-group-text">
+            <?php elseif ($service_type == 'installation' && $product_type == 'solar') : ?>
+                <div class="card shadow-lg border-0">
+                    
+                    <div class="card-body">
+                        <form method="post" action="service_payment.php">
+                            <div class="mb-3">
+                                <label for="serviceSelect" class="form-label">Select Product</label>
+                                <div class="input-group">
+                                    <select name="serviceSelect1" id="serviceSelect" class="form-select">
+                                        <option value="">-- Select a Product --</option>
+                                        <?php 
+                                        $query = "SELECT * FROM products WHERE availability = 1";
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_assoc($result)) : ?>
+                                            <option value="<?= htmlspecialchars($row['ProductName']) ?>"> <?="Product name:". htmlspecialchars($row['ProductName']) . "| STOCKS:". htmlspecialchars($row['stock'])  ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                    <div class="input-group-text">
                                 <label for="">Custom Item</label>
                                 <input type="checkbox" id="customCheck" class="form-check-input" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
                             </div>
-                        </div>
-                    </div>
+                                </div>
+                            </div>
 
-                    <!-- Custom input field, initially hidden -->
-                    <div class="mb-3 d-none" id="customInputContainer">
-                        <label for="customInput" class="form-label">Custom Input</label>
-                        <input type="text" id="customInput" name="customInput" class="form-control">
+                            <!-- Custom input field, initially hidden -->
+                            <div class="mb-3 d-none" id="customInputContainer">
+                                <h1>AVAILABLE PRODUCTS</h1>
+                                <select name="serviceSelect2" id="serviceSelect" class="form-select">
+                                        <option value="">-- Select a Product --</option>
+                                        <?php 
+                                        $query = "SELECT * FROM brand";
+                                        $result = mysqli_query($conn, $query);
+                                        while ($row = mysqli_fetch_assoc($result)) : ?>
+                                            <option value="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                            </div>
+                            <label for="">QUANTITY</label>
+                            <input type="number" name="quantity">
+                            <button type="submit" class="btn btn-primary" name="installation_submit">Proceed to payment</button>
+                            <!-- Hidden Inputs for Data -->
+                            <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
+                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
+                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
+                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
+                            
+                            <!-- User Input Fields -->
+                            <input type="hidden" name="name" value="<?= htmlspecialchars($full_name) ?>">
+                            <input type="hidden" name="address" value="<?= htmlspecialchars($address) ?>">
+                            <input type="hidden" name="city" value="<?= htmlspecialchars($city) ?>">
+                            <input type="hidden" name="province" value="<?= htmlspecialchars($province) ?>">
+                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
+                            <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
+                            <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
+                        </form>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" name="installation_submit">Submit</button>
+                </div>
+                
+                 <!-- Form for Maintenance -->
+            <?php elseif ($service_type == 'installation' && $product_type == 'generator') : ?>
+                <form method="post" action="">
+                    <h3>Installation Form for generator</h3>
+                    <div class="mb-3">
+                        <label for="maintenanceDetails" class="form-label">Details</label>
+                        <input type="text" id="maintenanceDetails" class="form-control" name="maintenanceDetails" placeholder="Enter maintenance details">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Maintenance</button>
                 </form>
             <?php endif; ?>
 

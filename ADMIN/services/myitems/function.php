@@ -35,7 +35,7 @@ else if(isset($_POST['serviceItem_edit']))
 
 }
 else if(isset($_POST['installation_save'])){
-  $delete = "DELETE FROM package_installation;";
+  $delete = "DELETE FROM package_installation_solar;";
   $result_del = mysqli_query($conn , $delete);
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
@@ -43,7 +43,7 @@ else if(isset($_POST['installation_save'])){
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
 
-  $sql = "INSERT INTO package_installation (description, unit, quantity, amount, total_cost) VALUES ";
+  $sql = "INSERT INTO package_installation_solar (description, unit, quantity, amount, total_cost) VALUES ";
  // Loop through all the items and build the query for multiple rows
  $valuesArr = [];
  for ($i = 0; $i < count($item_descriptions); $i++) {
@@ -60,6 +60,32 @@ else if(isset($_POST['installation_save'])){
 header("Location: manageitems.php");
 exit; 
 
+}
+else if(isset($_POST['generator_save'])){
+    $delete = "DELETE FROM package_installation_generator;";
+    $result_del = mysqli_query($conn , $delete);
+    $item_descriptions = $_POST['item_description'];
+    $units = $_POST['unit'];
+    $quantities = $_POST['quantity'];
+    $amounts = $_POST['amount'];
+    $total_costs = $_POST['total_cost'];
+
+    $sql = "INSERT INTO package_installation_generator (description, unit, quantity, amount, total_cost) VALUES ";
+  // Loop through all the items and build the query for multiple rows
+  $valuesArr = [];
+  for ($i = 0; $i < count($item_descriptions); $i++) {
+      $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+      $unit = mysqli_real_escape_string($conn, $units[$i]);
+      $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+      $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+      $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
+
+      $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
+  }
+  $sql .= implode(',', $valuesArr);
+  $result = mysqli_query($conn , $sql);
+  header("Location: manageitems.php");
+  exit; 
 }
 else if(isset($_POST['watts_edit'])){
   $watts_id = $_POST['watts_id'];
@@ -95,8 +121,9 @@ else if(isset($_POST['running_edit'])){
 else if(isset($_POST['brand_save'])){
   $name = $_POST['name'];
   $amount = $_POST['amount'];
-  $sql_insert = "INSERT INTO brand (name, amount) 
-               VALUES ('$name', '$amount')";
+  $type = $_POST['type'];
+  $sql_insert = "INSERT INTO brand (name, type , amount) 
+               VALUES ('$name', '$type' , $amount)";
   $result = mysqli_query($conn, $sql_insert);
   header("Location: manageitems.php");
   exit; 

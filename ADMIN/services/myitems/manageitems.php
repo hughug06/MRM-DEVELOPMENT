@@ -108,8 +108,7 @@
                                                         data-item-unit="<?= $resultItem['unit'] ?>"
                                                         data-item-description="<?= $resultItem['description'] ?>"
                                                         data-item-quantity="<?= $resultItem['quantity'] ?>"
-                                                        data-item-amount="<?= $resultItem['amount'] ?>"
-                                                        
+                                                        data-item-amount="<?= $resultItem['amount'] ?>"              
                                                         >
                                                         <i class="fe fe-edit-2"></i>
                                                     </button>
@@ -133,12 +132,13 @@
                             
                         </div>
                     </div>
+                    <!-- PACKAGE FOR INSTALLATION SOLAR -->
                     <div class="row row-sm mt-3">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
                             <div class="card custom-card">
                                 <div class="card-header border-bottom-0 d-block">                            
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION </label>
+                                    <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION(SOLAR) </label>
                                    <!-- Add Item Button -->
                                    <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#installationPackageModal">
                                                     <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
@@ -165,7 +165,7 @@
                                             <tbody>
                                                 <?php        
                                                   $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "Select * from package_installation";
+                                                $select = "Select * from package_installation_solar";
                                                 $result = mysqli_query($conn , $select);
                                                 if(mysqli_num_rows($result) > 0){
                                                     foreach($result as $resultItem){
@@ -203,6 +203,78 @@
                             </div>
                         </div>
                     </div>
+                    <!-- PACKAGE INSTALLATION FOR GENERATOR -->
+                    <div class="row row-sm mt-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                            <div class="card custom-card">
+                                <div class="card-header border-bottom-0 d-block">                            
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION (GENERATOR)</label>
+                                   <!-- Add Item Button -->
+                                   <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorPackageModal">
+                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                        </button>
+                                     
+                                    
+                                </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive userlist-table">
+                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                    <th class="wd-lg-20p"><span>unit</span></th>
+                                                    <th class="wd-lg-20p"><span>quantity</span></th>
+                                                    <th class="wd-lg-20p"><span>amount</span></th>
+                                                    <th class="wd-lg-20p"><span>total cost</span></th>
+                                                    <th class="wd-lg-20p"><span>created</span></th>
+                                                    <th class="wd-lg-20p"><span>action</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php        
+                                                  $totalCost = 0; // Variable to store the total cost sum                                  
+                                                $select = "Select * from package_installation_generator";
+                                                $result = mysqli_query($conn , $select);
+                                                if(mysqli_num_rows($result) > 0){
+                                                    foreach($result as $resultItem){
+                                                        $totalCost += $resultItem['total_cost'];
+                                                ?> 
+                                                 <tr>
+                                                    <td><?= $resultItem['installation_id']?></td>  
+                                                    <td><?= $resultItem['description']?></td>                                          
+                                                    <td><?= $resultItem['unit']?></td>         
+                                                    <td><?= $resultItem['quantity']?></td>            
+                                                    <td><?= $resultItem['amount']?></td>       
+                                                    <td><?= $resultItem['total_cost']?></td>                                            
+                                                    <td><?= $resultItem['created_at']?></td>                       
+                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                    
+                                                    
+                                                </tr>
+                                                
+                                                <?php 
+                                                    }                                          
+                                                }                                              
+                                                ?>
+                                            </tbody>
+                                            <!-- Outside the loop: Display the total sum of all total costs -->
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                            <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td> <!-- Display the sum of all total costs -->
+                                                            <td colspan="2"></td>
+                                                        </tr>
+                                                    </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Running_hours Section -->
                         <div class="row row-sm mt-3">
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
@@ -284,6 +356,7 @@
                                                         <th class="wd-lg-8p"><span>id</span></th>
                                                         <th class="wd-lg-20p"><span>name</span></th>
                                                         <th class="wd-lg-20p"><span>amount</span></th>
+                                                        <th class="wd-lg-20p"><span>Type</span></th>
                                                         <th class="wd-lg-20p"><span>created_at</span></th>
                                                         <th class="wd-lg-20p"><span>Action</span></th>
                                                     </tr>
@@ -298,13 +371,20 @@
                                                     <tr>
                                                         <td><?= $resultItem['brand_id']?></td>  
                                                         <td><?= $resultItem['name']?></td>     
-                                                        <td class="<?= $resultItem['type'] === 'solar' ? 'text-warning' : ($resultItem['type'] === 'generator' ? 'text-info' : '') ?>">
-                                                            <?= $resultItem['type'] ?>
-                                                        </td>
+                                                        <td><?= $resultItem['type']?></td>     
                                                         <td><?= $resultItem['amount']?></td>                                       
                                                         <td><?= $resultItem['created_at']?></td>                       
                                                         <td>
-                                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editBrandModal" data-account-id="<?= $resultItem['brand_id'] ?>" data-name="<?= $resultItem['name'] ?>" data-type="<?= $resultItem['type'] ?>" data-amount="<?= $resultItem['amount'] ?>">
+                                                            <button 
+                                                            type="button" 
+                                                            class="btn btn-sm btn-info" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#editBrandModal" 
+                                                            data-brand-id="<?= $resultItem['brand_id'] ?>"
+                                                            data-name="<?= $resultItem['name'] ?>"
+                                                            data-type="<?= $resultItem['type'] ?>"
+                                                            data-amount="<?= $resultItem['amount'] ?>"
+                                                            >
                                                                 <i class="fe fe-edit-2"></i>
                                                             </button>
                                                         </td>
@@ -430,7 +510,7 @@
                     </div>
                 </div>
 
-                   <!-- Edit Item Modal -->
+                   <!-- Edit SOLAR Modal -->
                         <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -484,13 +564,13 @@
 
 
 
-                             <!-- Modal FOR ADD ITEM WATTS -->
+                             <!-- Modal FOR ADD ITEM SOLAR -->
                              <div class="container-fluid">
                                 <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">SET QUOTATION</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR SOLAR</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -519,6 +599,49 @@
                                                             <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
                                                             <!-- Submit Button -->
                                                             <button type="add" class="btn btn-success mt-3" name="installation_save">Submit</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal FOR ADD GENERATOR -->
+                             <div class="container-fluid">
+                                <div class="modal fade" id="GeneratorPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorPackageModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR GENERATOR</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <form action="function.php" method="POST">        
+                                                            <input type="hidden" name="account_id" id="user_id">
+                                                            <input type="hidden" name="appointment_id" id="appointment_id">               
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Item No.</th>
+                                                                        <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                                        <th>Description</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Total Cost</th>
+                                                                        <th>Action</th> <!-- Action Column for the close button -->
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="itemTableBodyGenerator">
+                                                                    <!-- Rows will be added here dynamically -->
+                                                                </tbody>
+                                                            </table>
+
+                                                            <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
+                                                            <!-- Submit Button -->
+                                                            <button type="add" class="btn btn-success mt-3" name="generator_save">Submit</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -610,6 +733,16 @@
                                         <label for="brandName" class="form-label">Brand Name</label>
                                         <input type="text" class="form-control" id="brandName" name="name" required>
                                     </div>
+                                   <!-- Type field -->
+                                    <div class="mb-3">
+                                        <label for="typeSelect" class="form-label">Type</label>
+                                        <select class="form-select" id="typeSelect" name="type" required>
+                                            <option value="">-- Select Type --</option>
+                                            <option value="Solar">Solar</option>
+                                            <option value="Generator">Generator</option>
+                                        </select>
+                                    </div>
+
 
                                     <!-- Amount field -->
                                     <div class="mb-3">
@@ -625,6 +758,48 @@
                         </div>
                     </div>
                 </div>
+
+              
+              <!-- Edit Brand Modal -->
+                <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editBrandForm" method="post" action="edit_brand.php">
+                                    <input type="hidden" id="brandId" name="brand_id">
+                                    
+                                    <div class="mb-3">
+                                        <label for="brandName" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="brandName" name="name" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="brandType" class="form-label">Type</label>
+                                        <select class="form-select" id="brandType" name="type" required>
+                                            <option value="Solar">Solar</option>
+                                            <option value="Generator">Generator</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="brandAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
 
 
 
@@ -799,6 +974,38 @@
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the modal element by ID
+    var editBrandModal = document.getElementById('editBrandModal');
+
+    // Select all buttons that open the modal
+    var editButtons = document.querySelectorAll('[data-bs-toggle="modal"][data-bs-target="#editBrandModal"]');
+
+    editButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Extract data attributes from the button
+            var brand_id = button.getAttribute('data-brand-id');
+            var name = button.getAttribute('data-name');
+            var type = button.getAttribute('data-type');
+            var amount = button.getAttribute('data-amount');
+
+            // Populate the modal's form fields with the extracted data
+            var modalIdInput = editBrandModal.querySelector('#brandId');
+            var modalNameInput = editBrandModal.querySelector('#brandName');
+            var modalTypeInput = editBrandModal.querySelector('#brandType');
+            var modalAmountInput = editBrandModal.querySelector('#brandAmount');
+
+            modalIdInput.value = brand_id;
+            modalNameInput.value = name;
+            modalTypeInput.value = type;
+            modalAmountInput.value = amount;
+        });
+    });
+});
+
+
+
 </script>
 
 
@@ -880,3 +1087,82 @@
         });
     });
 </script>
+
+<script>
+    let itemCountGenerator = 0;
+
+    // Function to update item numbers dynamically for the Generator table
+    function updateItemNumbersGenerator() {
+        const rows = document.querySelectorAll('#itemTableBodyGenerator tr');
+        rows.forEach((row, index) => {
+            row.querySelector('td:first-child').innerText = index + 1; // Update the item number
+        });
+        itemCountGenerator = rows.length; // Adjust itemCountGenerator to the current number of rows
+    }
+
+    document.getElementById('addItemButtonGenerator').addEventListener('click', function() {
+        itemCountGenerator++;
+
+        // Create a new row for the Generator table
+        const newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td>${itemCountGenerator}</td>
+            <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
+            <td>
+                <select name="item_description[]" class="form-select" required>
+                    <option value="">Select Item</option>
+                    <!-- Dynamically load options from the database using PHP -->
+                    <?php
+                    $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+                    $result = mysqli_query($conn, $query);
+
+                    // Check if there are results and populate the options
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </td>
+            <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
+            <td><input type="text" name="amount[]" class="form-control" readonly></td>
+            <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+            <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
+        `;
+
+        document.getElementById('itemTableBodyGenerator').appendChild(newRow);
+
+        // Add event listener to update amount and unit when an item is selected
+        const descriptionSelect = newRow.querySelector('select[name="item_description[]"]');
+        descriptionSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const amountField = newRow.querySelector('input[name="amount[]"]');
+            const unitField = newRow.querySelector('input[name="unit[]"]');
+            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+            const amount = selectedOption.dataset.amount;
+            const unit = selectedOption.dataset.unit;
+
+            amountField.value = amount;
+            unitField.value = unit;
+            totalCostField.value = amount; // Set total cost initially to the amount
+        });
+
+        // Add event listener to update total cost when quantity changes
+        const quantityInput = newRow.querySelector('input[name="quantity[]"]');
+        quantityInput.addEventListener('input', function() {
+            const quantity = this.value;
+            const amount = newRow.querySelector('input[name="amount[]"]').value;
+            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+            totalCostField.value = (quantity * amount) || 0; // Update total cost based on quantity
+        });
+
+        // Add event listener to the remove button to delete the row
+        newRow.querySelector('.remove-row').addEventListener('click', function() {
+            newRow.remove(); // Removes the row from the table
+            updateItemNumbersGenerator(); // Update item numbers after removing a row
+        });
+    });
+</script>
+
