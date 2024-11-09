@@ -275,66 +275,115 @@
                         </div>
                     </div>
 
-                    <!-- Running_hours Section -->
-                        <div class="row row-sm mt-3">
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                                <div class="card custom-card">
-                                    <div class="card-header border-bottom-0 d-block">                            
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <label class="main-content-label mb-0">Running Hours</label>
-                                            <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addRunningHoursModal">
-                                                <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                            </button>
+                   <!-- PACKAGE FOR TUNE-UP (GENERATOR) -->
+                            <div class="row row-sm mt-3">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                    <div class="card custom-card">
+                                        <div class="card-header border-bottom-0 d-block">                            
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <label class="main-content-label mb-0">PACKAGE FOR TUNE-UP (GENERATOR)</label>
+                                                <!-- Add Item Button -->
+                                                <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorTuneUpModal">
+                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive userlist-table">
-                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="wd-lg-8p"><span>id</span></th>
-                                                        <th class="wd-lg-20p"><span>name</span></th>
-                                                        <th class="wd-lg-20p"><span>amount</span></th>
-                                                        <th class="wd-lg-20p"><span>created_at</span></th>
-                                                        <th class="wd-lg-20p"><span>Action</span></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php 
-                                                    $select = "Select * from running_hours";
-                                                    $result = mysqli_query($conn , $select);
-                                                    if(mysqli_num_rows($result) > 0){
-                                                        foreach($result as $resultItem){
-                                                    ?> 
-                                                    <tr>
-                                                        <td><?= $resultItem['running_id']?></td>  
-                                                        <td><?= $resultItem['name']?></td>     
-                                                        <td><?= $resultItem['amount']?></td>                                       
-                                                        <td><?= $resultItem['created_at']?></td>                       
-                                                        <td>
-                                                            <button
-                                                             type="button" 
-                                                             lass="btn btn-sm btn-info" 
-                                                             data-bs-toggle="modal" 
-                                                             data-bs-target="#editRunningHoursModal" 
-                                                             data-running-id="<?= $resultItem['running_id'] ?>"
-                                                             data-name="<?= $resultItem['name'] ?>"          
-                                                             data-amount="<?= $resultItem['amount'] ?>">
-                                                                <i class="fe fe-edit-2"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <?php 
-                                                        }
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
+                                        <div class="card-body">
+                                            <div class="table-responsive userlist-table">
+                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="wd-lg-8p"><span>ID</span></th>
+                                                            <th class="wd-lg-20p"><span>Description</span></th>
+                                                            <th class="wd-lg-20p"><span>Unit</span></th>
+                                                            <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                            <th class="wd-lg-20p"><span>Amount</span></th>
+                                                            <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                            <th class="wd-lg-20p"><span>Created</span></th>
+                                                            <th class="wd-lg-20p"><span>Action</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php        
+                                                        $totalCost = 0; // Variable to store the total cost sum                                  
+                                                        $select = "SELECT * FROM package_tuneup_generator";
+                                                        $result = mysqli_query($conn, $select);
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            foreach ($result as $resultItem) {
+                                                                $totalCost += $resultItem['total_cost'];
+                                                        ?> 
+                                                        <tr>
+                                                            <td><?= $resultItem['id'] ?></td>  
+                                                            <td><?= $resultItem['description'] ?></td>                                          
+                                                            <td><?= $resultItem['unit'] ?></td>         
+                                                            <td><?= $resultItem['quantity'] ?></td>            
+                                                            <td><?= $resultItem['amount'] ?></td>       
+                                                            <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                            <td><?= $resultItem['created_at'] ?></td>                       
+                                                            <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                        </tr>
+                                                        <?php 
+                                                            }                                          
+                                                        }                                              
+                                                        ?>
+                                                    </tbody>
+                                                    <!-- Display the total sum of all total costs -->
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                            <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                            <td colspan="2"></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <!-- Modal for Adding to tune up -->
+                            <div class="modal fade" id="GeneratorTuneUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorTuneUpModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="GeneratorTuneUpModalLabel">SET PACKAGE FOR GENERATOR TUNE-UP</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="function.php" method="POST">        
+                                                        <input type="hidden" name="account_id" id="user_id">
+                                                        <input type="hidden" name="appointment_id" id="appointment_id">               
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Item No.</th>
+                                                                    <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                                    <th>Description</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Amount</th>
+                                                                    <th>Total Cost</th>
+                                                                    <th>Action</th> <!-- Action Column for the close button -->
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="itemTableBodyTuneup">
+                                                                <!-- Rows will be added here dynamically -->
+                                                            </tbody>
+                                                        </table>
+
+                                                        <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
+                                                        <!-- Submit Button -->
+                                                        <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    </div>
+
 
                         <!-- Brands Section -->
                         <div class="row row-sm mt-3">
@@ -649,40 +698,53 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
             
 
             <!-- Add running_hours Modal -->
-                <div class="modal fade" id="addRunningHoursModal" tabindex="-1" aria-labelledby="addRunningHoursModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+            <div class="container-fluid">
+                <div class="modal fade" id="TuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="TuneupPackageModal" aria-hidden="true">
+                    <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR TUNE-UP</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="function.php" method="post">
-                                 
-                                    <!-- Name field -->
-                                    <div class="mb-3">
-                                        <label for="productName" class="form-label">Product Name</label>
-                                        <input type="text" class="form-control"  name="name" required>
-                                    </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="function.php" method="POST">        
+                                            <input type="hidden" name="account_id" id="user_id">
+                                            <input type="hidden" name="appointment_id" id="appointment_id">               
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Item No.</th>
+                                                        <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                        <th>Description</th>
+                                                        <th>Quantity</th>
+                                                        <th>Amount</th>
+                                                        <th>Total Cost</th>
+                                                        <th>Action</th> <!-- Action Column for the close button -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="itemTableBodyTuneup">
+                                                    <!-- Rows will be added here dynamically -->
+                                                </tbody>
+                                            </table>
 
-                                    <!-- Amount field -->
-                                    <div class="mb-3">
-                                        <label for="productAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control"  name="amount" required>
+                                            <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
+                                            <!-- Submit Button -->
+                                            <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
+                                        </form>
                                     </div>
-
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" name="running_save">Add Product</button>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
 
                 <!-- Edit running_hours Modal -->
                 <div class="modal fade" id="editRunningHoursModal" tabindex="-1" aria-labelledby="editRunningHoursModalLabel" aria-hidden="true">
@@ -1162,6 +1224,84 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.querySelector('.remove-row').addEventListener('click', function() {
             newRow.remove(); // Removes the row from the table
             updateItemNumbersGenerator(); // Update item numbers after removing a row
+        });
+    });
+</script>
+
+<script>
+    let itemCounts = 0;
+
+    // Function to update item numbers dynamically
+    function updateItemNumbers() {
+        const rows = document.querySelectorAll('#itemTableBodyTuneup tr');
+        rows.forEach((row, index) => {
+            row.querySelector('td:first-child').innerText = index + 1; // Update the item number
+        });
+        itemCounts = rows.length; // Adjust itemCount to the current number of rows
+    }
+
+    document.getElementById('addItemButtonTuneup').addEventListener('click', function() {
+        itemCounts++;
+
+        // Create a new row
+        const newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td>${itemCounts}</td>
+            <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
+            <td>
+                <select name="item_description[]" class="form-select" required>
+                    <option value="">Select Item</option>
+                    <!-- Dynamically load options from the database using PHP -->
+                    <?php
+                    $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
+                    $result = mysqli_query($conn, $query);
+
+                    // Check if there are results and populate the options
+                    if ($result) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </td>
+            <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
+            <td><input type="text" name="amount[]" class="form-control" readonly></td>
+            <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
+            <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
+        `;
+
+        document.getElementById('itemTableBodyTuneup').appendChild(newRow);
+
+        // Add event listener to update amount and unit when an item is selected
+        const descriptionSelect = newRow.querySelector('select[name="item_description[]"]');
+        descriptionSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const amountField = newRow.querySelector('input[name="amount[]"]');
+            const unitField = newRow.querySelector('input[name="unit[]"]');
+            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+            const amount = selectedOption.dataset.amount;
+            const unit = selectedOption.dataset.unit;
+
+            amountField.value = amount;
+            unitField.value = unit;
+            totalCostField.value = amount; // Set total cost initially to the amount
+        });
+
+        // Add event listener to update total cost when quantity changes
+        const quantityInput = newRow.querySelector('input[name="quantity[]"]');
+        quantityInput.addEventListener('input', function() {
+            const quantity = this.value;
+            const amount = newRow.querySelector('input[name="amount[]"]').value;
+            const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
+            totalCostField.value = (quantity * amount) || 0; // Update total cost based on quantity
+        });
+
+        // Add event listener to the remove button to delete the row
+        newRow.querySelector('.remove-row').addEventListener('click', function() {
+            newRow.remove(); // Removes the row from the table
+            updateItemNumbers(); // Update item numbers after removing a row
         });
     });
 </script>

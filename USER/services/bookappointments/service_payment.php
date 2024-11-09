@@ -4,7 +4,8 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
-
+$service_type = $_POST['serviceType']; 
+$product_type = $_POST['productType'];   
 if (isset($_POST['installation_submit'])) {
  
         $totalCost = 0;
@@ -16,8 +17,7 @@ if (isset($_POST['installation_submit'])) {
 
         //user input
         $pin_location = $_POST['location'];
-        $service_type = $_POST['serviceType']; 
-        $product_type = $_POST['productType'];   
+
         $quantity = $_POST['quantity'];  
 
         //NOT CUSTOM
@@ -27,6 +27,23 @@ if (isset($_POST['installation_submit'])) {
 
         
 
+}
+else if(isset($_POST['tuneup_submit'])){
+    $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
+        $date = $_POST['date'];
+        $start_time = $_POST['start_time'];
+        $end_time = $_POST['end_time'];
+
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $kva = $_POST['kva'];
+        $running_hours = $_POST['running_hours'];
+        $brand = $_POST['brand'];
+        echo "TEST";
+        exit();
 }
 ?>
 
