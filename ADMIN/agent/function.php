@@ -8,19 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require '../../vendor/autoload.php';
 
-if(isset($_POST['save'])){
-
-  $Availability = $_POST['Availability'] == true ? 1:0;
-  $Description=$_POST['Description'];
-  $Specification=$_POST['Specification'];
-  //WITHOUT IMAGE SUBMISSION
-      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification' where ProductID='$id'";
-          $result = mysqli_query($conn , $sql);
-          echo json_encode(['success' => true]);
-  
-}
-
-elseif (isset($_GET['PrType'])) {
+if (isset($_GET['PrType'])) {
     // Use a prepared statement to prevent SQL injection
     $sql = "SELECT ProductID, ProductName FROM products Where Availability = 1";
     if ($stmt = $conn->prepare($sql)) {
@@ -47,8 +35,6 @@ elseif (isset($_GET['PrType'])) {
 elseif(isset($_POST['addtask'])){
     $email = $_POST['email'];
     $name = $_POST['name'];
-    $age = $_POST['age'];
-    $location = $_POST['location'];
     $products = $_POST['products'];
     $date = $_POST['date'];
     $start_time = $_POST['start_time'];
@@ -56,8 +42,8 @@ elseif(isset($_POST['addtask'])){
     $user_id = $_SESSION['user_id'];
 
 
-    $sql_insert = "insert into kanban (email, name, age, location, products, date, start_time, end_time, status, user_id)
-                VALUES ('$email' , '$name' , '$age' , '$location', '$products', '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
+    $sql_insert = "insert into kanban (email, name, products, date, start_time, end_time, status, user_id)
+                VALUES ('$email' , '$name' , '$products', '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
         echo json_encode(['success' => true]); 
     }
@@ -92,7 +78,7 @@ elseif (isset($_GET['gettasks'])) {
                         $result2 = $stmt2->get_result(); // Use a different variable for the inner result
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
-                                $productnamearray[] = $row2['ProductName'];
+                                $productnamearray[] = " ".$row2['ProductName'];
                             }
                         }
                         $stmt2->close(); // Close the inner statement here
@@ -104,7 +90,6 @@ elseif (isset($_GET['gettasks'])) {
                     'status' => $row['status'],
                     'email' => $row['email'],
                     'name' => $row['name'],
-                    'location' => $row['location'],
                     'products' => $productnamearray
                 ];
             }
