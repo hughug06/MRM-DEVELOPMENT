@@ -164,8 +164,7 @@ function formatMoney($number) {
                                             <th class="wd-lg-20p"><span>Item Name</span></th>       
                                                 <th class="wd-lg-8p"><span>Type</span></th>
                                                 <th class="wd-lg-20p"><span>Power output</span></th>
-                                                <th class="wd-lg-20p"><span>Min Price</span></th> 
-                                                <th class="wd-lg-20p"><span>Max Price</span></th>                                                 
+                                                <th class="wd-lg-20p"><span>Price</span></th>                                               
                                                 <th class="wd-lg-20p"><span>Stock</span></th>  
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
@@ -183,8 +182,7 @@ function formatMoney($number) {
                                                  <td><?= $resultItem['ProductName']?></td>     
                                                  <td <?= $resultItem['ProductType'] == 'Solar Panel' ? 'class="text-warning"' : 'class="text-info"'?>><?= $resultItem['ProductType']?></td>                                       
                                                  <td><?= $resultItem['ProductType'] == 'Solar Panel' ? $resultItem['Watts_KVA'].'W' : $resultItem['Watts_KVA'].'KVA' ?></td>                       
-                                                 <td>₱<?= number_format($resultItem['min_price'])?></td> 
-                                                 <td>₱<?= number_format($resultItem['max_price'])?></td>                                         
+                                                 <td>₱<?= number_format($resultItem['price'])?></td>                                       
                                                 <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
                                                 ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
                                                     <?= $resultItem['stock']?>

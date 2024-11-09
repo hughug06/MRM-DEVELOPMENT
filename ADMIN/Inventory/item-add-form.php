@@ -106,12 +106,8 @@ include_once '../../Database/database.php';
                                             <input type="number" class="form-control py-2"  placeholder="Stocks" id="stocks">
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Minimum Price</label>
-                                            <input type="number" id="min_price" class="form-control py-2"  placeholder="Minimum Price">
-                                        </div>
-                                        <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Maximum Price</label>
-                                            <input type="number" id="max_price" class="form-control py-2"  placeholder="Maximum Price">
+                                            <label class="form-label" required>Price</label>
+                                            <input type="number" id="price" class="form-control py-2"  placeholder="Price">
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Description</label>
@@ -199,8 +195,7 @@ include_once '../../Database/database.php';
                 var customCheckbox = document.getElementById("Custom");
                 var custom_ID = document.getElementById("Custom");
                 var stocks = document.getElementById("stocks");
-                var min_price = document.getElementById("min_price");
-                var max_price = document.getElementById("max_price");
+                var price = document.getElementById("price");
                 var specification_ID = document.getElementById("Specs");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
@@ -215,8 +210,7 @@ include_once '../../Database/database.php';
                 var PPower_value = PPower.value;
                 var custom = custom_ID.value;
                 var stocks_value = parseFloat(stocks.value);
-                var min_price_value = parseFloat(min_price.value);
-                var max_price_value = parseFloat(max_price.value);
+                var price_value = parseFloat(price.value);
                 var specification = specification_ID.value;
                 var description = description_ID.value;
                 if(availability_ID.checked){
@@ -232,7 +226,7 @@ include_once '../../Database/database.php';
                 else{
                     power_checker = 20;
                 }
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || min_price.value == ""  || max_price.value == ""){
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -254,21 +248,10 @@ include_once '../../Database/database.php';
                         }
                     });
                 } 
-                else if(min_price_value <= 0){
+                else if(price_value <= 0){
                     Swal.fire({
                         title: 'ERROR',
-                        html: "Minimum Price cannot be less than 0.",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                }
-                else if(max_price_value <= min_price_value){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "Maximum Price cannot be less than  or equal to minimum price.",
+                        html: "Price cannot be less than 0.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
@@ -301,8 +284,7 @@ include_once '../../Database/database.php';
                             formData.append('AddItem', true);
                             formData.append('ProductName', IName_value);
                             formData.append('stocks', stocks_value);
-                            formData.append('min_price', min_price_value);
-                            formData.append('max_price', max_price_value);
+                            formData.append('price', price_value);
                             formData.append('Availability', availability);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
