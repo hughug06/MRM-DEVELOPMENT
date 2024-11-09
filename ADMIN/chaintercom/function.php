@@ -33,7 +33,7 @@ if (isset($_POST['confirm'])) {
 elseif (isset($_POST['confirmtask'])) {
     $kanban_id = $_POST['confirmtask']; 
     // check if the choose date, start time and end time is available
-    $sql_check = "UPDATE kanban SET status = 'waiting' WHERE kanban_id = $kanban_id";
+    $sql_check = "UPDATE kanban SET status = 'approved' WHERE kanban_id = $kanban_id";
     $result_check = mysqli_query($conn , $sql_check);
     if($result_check)
     {

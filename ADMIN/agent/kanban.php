@@ -159,16 +159,6 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Waiting for approval</div>
-                                </div>
-                                <div class="card-body" id="waiting">
-                                   
-                                </div>
-                            </div>    
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card custom-card">
-                                <div class="card-header">
                                     <div class="card-title">Approved</div>
                                 </div>
                                 <div class="card-body" id="approved">
@@ -517,9 +507,6 @@ require_once '../../Database/database.php';
 
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
-                            }
-                            else if(status == 'waiting'){
-                                document.getElementById('waiting').appendChild(newTask);
                             }
                             else if(status == 'ongoing'){
                                 document.getElementById('ongoing').appendChild(newTask);
