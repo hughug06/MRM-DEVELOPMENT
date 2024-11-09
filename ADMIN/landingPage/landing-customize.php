@@ -100,7 +100,7 @@ include_once '../../Database/database.php';
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
                                             <div>
-                                                <h5><?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?></h5>
+                                                <h5><?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?></h5>
                                                 <p><?php echo $descs["desc1"] ?> (editable)</p>
                                             </div>
                                             <div>
@@ -214,12 +214,12 @@ include_once '../../Database/database.php';
                             <div class="modal-body">
 
                                 <div class="col-md-6 col-6 mb-3">
-                                    <input type="text" value="<?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?>"></input>
+                                    <input type="text" id="title1" value="<?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?>"></input>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc1"><?php echo $descs["desc1"] ?></textarea>
                                 </div>
 
                                 <div class="col-md-6 col-6 mb-3">
-                                    <input type="text" value="<?php echo $titles["title2"]?>"></input>
+                                    <input type="text" value="<?php echo $titles["title2"]?>" id="title2"></input>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc2"><?php echo $descs["desc2"] ?></textarea>
                                 </div>
 
@@ -245,34 +245,34 @@ include_once '../../Database/database.php';
                                     <h5><span>FAQ'S ?
                                     We are here to help you</span></h5>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q1">1. <?php echo $faqs["faq_q1"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q1"><?php echo $faqs["faq_q1"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q2">2. <?php echo $faqs["faq_q2"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q2"><?php echo $faqs["faq_q2"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q3">3. <?php echo $faqs["faq_q3"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q3"><?php echo $faqs["faq_q3"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q4">4. <?php echo $faqs["faq_q4"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q4"><?php echo $faqs["faq_q4"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q5">5. <?php echo $faqs["faq_q5"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q5"><?php echo $faqs["faq_q5"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q6">6. <?php echo $faqs["faq_q6"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q6"><?php echo $faqs["faq_q6"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q7">7. <?php echo $faqs["faq_q7"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q7"><?php echo $faqs["faq_q7"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q8">8. <?php echo $faqs["faq_q8"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q8"><?php echo $faqs["faq_q8"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q9">9. <?php echo $faqs["faq_q9"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q9"><?php echo $faqs["faq_q9"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
 
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q10">10. <?php echo $faqs["faq_q10"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q10"><?php echo $faqs["faq_q10"] ?></textarea>
                                     <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
                                 </div>
 
@@ -377,30 +377,92 @@ include_once '../../Database/database.php';
 
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.save', function(e) {
+            $(document).on('click', '#save', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
-                const email = document.getElementById('email').value;
-                const name = document.getElementById('name').value;
-                const ageid = document.getElementById('age');
-                const age = parseInt(ageid.value);
-                const location = document.getElementById('location').value;
-                const product = document.getElementById('product').value;
-                const productContainer = document.getElementById("productContainer");
-                const productInputs = productContainer.getElementsByTagName("select");
-                const date_time_btn = document.querySelector(".date_time_btn");
-                const date_time = JSON.parse(date_time_btn.value);
-                const date = date_time.date;
-                const start_time = date_time.start_time;
-                const end_time = date_time.end_time;
-                    
-                const productValues = [];
-                for (let i = 0; i < productInputs.length; i++) {
-                    productValues.push(productInputs[i].value); // Get the value of each sinput
-                }
+                const title1 = document.getElementById('title1').value;
+                const title2 = document.getElementById('title2').value;
 
+                const desc1 = document.getElementById('desc1').value;
+                const desc2 = document.getElementById('desc2').value;
+                const desc3 = document.getElementById('desc3').value;
+                const desc4 = document.getElementById('desc4').value;
+
+                const goal1 = document.getElementById('goal1').value;
+                const goal2 = document.getElementById('goal2').value;
+                const goal3 = document.getElementById('goal3').value;
+                const goal4 = document.getElementById('goal4').value;
+
+                const faqdesc = document.getElementById('faqdesc').value;
+
+                const faq_q1 = document.getElementById('faq_q1').value;
+                const faq_q2 = document.getElementById('faq_q2').value;
+                const faq_q3 = document.getElementById('faq_q3').value;
+                const faq_q4 = document.getElementById('faq_q4').value;
+                const faq_q5 = document.getElementById('faq_q5').value;
+                const faq_q6 = document.getElementById('faq_q6').value;
+                const faq_q7 = document.getElementById('faq_q7').value;
+                const faq_q8 = document.getElementById('faq_q8').value;
+                const faq_q9 = document.getElementById('faq_q9').value;
+                const faq_q10 = document.getElementById('faq_q10').value;
+
+                const faq_a1 = document.getElementById('faq_a1').value;
+                const faq_a2 = document.getElementById('faq_a2').value;
+                const faq_a3 = document.getElementById('faq_a3').value;
+                const faq_a4 = document.getElementById('faq_a4').value;
+                const faq_a5 = document.getElementById('faq_a5').value;
+                const faq_a6 = document.getElementById('faq_a6').value;
+                const faq_a7 = document.getElementById('faq_a7').value;
+                const faq_a8 = document.getElementById('faq_a8').value;
+                const faq_a9 = document.getElementById('faq_a9').value;
+                const faq_a10 = document.getElementById('faq_a10').value;
+
+                const pj1_title = document.getElementById('pj1_title').value;
+                const pj2_title = document.getElementById('pj2_title').value;
+                const pj3_title = document.getElementById('pj3_title').value;
+                const pj4_title = document.getElementById('pj4_title').value;
+                const pj5_title = document.getElementById('pj5_title').value;
+                const pj6_title = document.getElementById('pj6_title').value;
+
+                const pj1_desc = document.getElementById('pj1_desc').value;
+                const pj2_desc = document.getElementById('pj2_desc').value;
+                const pj3_desc = document.getElementById('pj3_desc').value;
+                const pj4_desc = document.getElementById('pj4_desc').value;
+                const pj5_desc = document.getElementById('pj5_desc').value;
+                const pj6_desc = document.getElementById('pj6_desc').value;
+
+                const xp1_name = document.getElementById('xp1_name').value;
+                const xp2_name = document.getElementById('xp2_name').value;
+                const xp3_name = document.getElementById('xp3_name').value;
+
+                const xp1_comment = document.getElementById('xp1_comment').value;
+                const xp2_comment = document.getElementById('xp2_comment').value;
+                const xp3_comment = document.getElementById('xp3_comment').value;
+
+                const about = document.getElementById('about').value;
+
+                const array_checker = [
+                    title1, title2, desc1, desc2, desc3, desc4, goal1, goal2, goal3, goal4,
+                    faqdesc, faq_q1,  faq_q2,  faq_q3,  faq_q4,  faq_q5,  faq_q6,  faq_q7,  faq_q8,  faq_q9,  faq_q10,
+                    faq_a1,  faq_a2,  faq_a3,  faq_a4,  faq_a5,  faq_a6,  faq_a7,  faq_a8,  faq_a9,  faq_a10,
+                    pj1_title,  pj2_title, pj3_title, pj4_title, pj5_title, pj6_title, pj1_desc,  pj2_desc, pj3_desc, pj4_desc, pj5_desc, pj6_desc,
+                    xp1_name, xp2_name, xp3_name, xp1_comment, xp2_comment, xp3_comment, about
+                ];
+                
+                if(array_checker.some(check => check === "")){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. form should not have empty values",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Are you sure to submit the task?",
+                        html: "Are you sure to save the information?",
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -408,16 +470,37 @@ include_once '../../Database/database.php';
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
-                            formData.append('addtask', true);
-                            formData.append('email', email);
-                            formData.append('name', name);
-                            formData.append('age', age);
-                            formData.append('location', location);
-                            formData.append('products', JSON.stringify(productValues));
-                            formData.append('date', date);
-                            formData.append('start_time', start_time);
-                            formData.append('end_time', end_time);
+                            formData.append('save', true);
+                            formData.append('title1', title1); formData.append('title2', title2);
+                            formData.append('desc1', desc1); formData.append('desc2', desc2);
+                            formData.append('desc3', desc3); formData.append('desc4', desc4);
 
+                            formData.append('goal1', goal1); formData.append('goal2', goal2);
+                            formData.append('goal3', goal3); formData.append('goal4', goal4);
+
+                            formData.append('faqdesc', faqdesc); formData.append('faq_q1', faq_q1); formData.append('faq_q2', faq_q2);
+                            formData.append('faq_q3', faq_q3); formData.append('faq_q4', faq_q4);
+                            formData.append('faq_q5', faq_q5); formData.append('faq_q6', faq_q6);
+                            formData.append('faq_q7', faq_q7); formData.append('faq_q8', faq_q8);
+                            formData.append('faq_q9', faq_q9); formData.append('faq_q10', faq_q10);
+
+                            formData.append('faq_a1', faq_a1); formData.append('faq_a2', faq_a2);
+                            formData.append('faq_a3', faq_a3); formData.append('faq_a4', faq_a4);
+                            formData.append('faq_a5', faq_a5); formData.append('faq_a6', faq_a6);
+                            formData.append('faq_a7', faq_a7); formData.append('faq_a8', faq_a8);
+                            formData.append('faq_a9', faq_a9); formData.append('faq_a10', faq_a10);
+
+                            formData.append('pj1_title', pj1_title); formData.append('pj2_title', pj2_title);
+                            formData.append('pj3_title', pj3_title); formData.append('pj4_title', pj4_title);
+                            formData.append('pj5_title', pj5_title); formData.append('pj6_title', pj6_title);
+
+                            formData.append('pj1_desc', pj1_desc); formData.append('pj2_desc', pj2_desc);
+                            formData.append('pj3_desc', pj3_desc); formData.append('pj4_desc', pj4_desc);
+                            formData.append('pj5_desc', pj5_desc); formData.append('pj6_desc', pj6_desc);
+
+                            formData.append('xp1_name', xp1_name); formData.append('xp2_name', xp2_name); formData.append('xp3_name', xp3_name);
+                            formData.append('xp1_comment', xp1_comment); formData.append('xp2_comment', xp2_comment); formData.append('xp3_comment', xp3_comment);
+                            formData.append('about', about);
                             
                             $.ajax({
                                 url: 'function.php',
@@ -438,7 +521,7 @@ include_once '../../Database/database.php';
                                             showConfirmButton: false // Hide the confirm button
                                         }).then(() => {
                                             // Redirect after the timer ends
-                                            window.location.href = 'kanban.php';
+                                            window.location.href = 'landing-customize.php';
                                         });
                                     }
                                     else{
@@ -463,6 +546,7 @@ include_once '../../Database/database.php';
                             });
                         }
                     });
+                }
             })
         });
     </script>

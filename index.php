@@ -152,8 +152,8 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="mt-6">
               <h1 class="xl-text">
-                <span class="text-secondary"><?php echo $titles["title1_f"] ?></span> 
-                <span><?php echo $titles["title1_d"] ?></span> 
+                <span class="text-secondary"><?php echo $titles["title1_f"] ?> </span> 
+                <span><?php echo $titles["title1_d"] ?> </span> 
                 <span class="text-primary"><?php echo $titles["title1_l"] ?></span>
               </h1>
               <p class="lead mb-4">
