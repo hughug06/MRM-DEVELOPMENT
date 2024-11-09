@@ -11,8 +11,7 @@ if(isset($_POST['AddItem']))
   $Availability = $_POST['Availability'] == true ? 1:0;
   $Description = $_POST['Description'];
   $Specification = $_POST['Specification'];
-  $min_price = $_POST['min_price'];
-  $max_price = $_POST['max_price'];
+  $price = $_POST['price'];
   $WattsKVA = $_POST['WattsKVA'];
 
   if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
@@ -29,8 +28,8 @@ if(isset($_POST['AddItem']))
         $upload = '../../assets/images/Product-Images/'.$ImageFileName;
         move_uploaded_file($ImageTempName,$upload);
 
-        $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification, stock, min_price, max_price) 
-                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$min_price', '$max_price')";
+        $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification, stock, price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$price')";
           if (mysqli_query($conn, $sql_insert)) {
             $user_id = $_SESSION['user_id'];
             $sql_get_userinfo = "select * from user_info where user_id = $user_id";
@@ -58,8 +57,8 @@ if(isset($_POST['AddItem']))
     }
     //WITHOUT IMAGE SUBMISSION
     else{                                                               
-      $sql_insert = "INSERT INTO products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, min_price, max_price) 
-                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$min_price', '$max_price')";
+      $sql_insert = "INSERT INTO products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$price')";
           if (mysqli_query($conn, $sql_insert)) {
               $user_id = $_SESSION['user_id'];
               $sql_get_userinfo = "select * from user_info where user_id = $user_id";
@@ -128,8 +127,7 @@ elseif(isset($_POST['save'])){
   $Description=$_POST['Description'];
   $Specification=$_POST['Specification'];
   $stocks = $_POST['stocks'];
-  $max_price=$_POST['max_price'];
-  $min_price=$_POST['min_price'];
+  $price=$_POST['price'];
   $edit_type = $_POST['editType'];
   
   //WITH IMAGE SUBMISSION
@@ -146,7 +144,7 @@ elseif(isset($_POST['save'])){
           $upload = '../../assets/images/Product-Images/'.$ImageFileName;
           move_uploaded_file($ImageTempName,$upload);
 
-          $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
+          $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
             //LOG FOR EDIT PRODUCT
@@ -175,7 +173,7 @@ elseif(isset($_POST['save'])){
   }
   //WITHOUT IMAGE SUBMISSION
   else{
-      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', min_price='$min_price', max_price='$max_price' where ProductID='$id'";
+      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
           //LOG FOR EDIT PRODUCT

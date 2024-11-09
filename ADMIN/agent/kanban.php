@@ -159,7 +159,7 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Waiting for Meeting</div>
+                                    <div class="card-title">Waiting for approval</div>
                                 </div>
                                 <div class="card-body" id="waiting">
                                    
@@ -169,9 +169,9 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Ongoing Meeting</div>
+                                    <div class="card-title">Approved</div>
                                 </div>
-                                <div class="card-body" id="ongoing">
+                                <div class="card-body" id="approved">
                                    
                                 </div>
                             </div>    
@@ -179,9 +179,9 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Approved - Ongoing Project</div>
+                                    <div class="card-title">Ongoing</div>
                                 </div>
-                                <div class="card-body" id="approved">
+                                <div class="card-body" id="ongoing">
                                    
                                 </div>
                             </div>    
@@ -264,8 +264,6 @@ require_once '../../Database/database.php';
                                 <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
                                 <input type="email" class="form-control" id="email" placeholder="Enter email">
                                 <input type="text" class="form-control" id="name" placeholder="Full Name">
-                                <input type="number" class="form-control" id="age" placeholder="Age">
-                                <input type="text" class="form-control" id="location" placeholder="location">
                             <div id="productContainer">
                                 <select class="form-control product" id="product" placeholder="Product">
                                 </select>
@@ -439,8 +437,6 @@ require_once '../../Database/database.php';
         productContainer.appendChild(newProductInput);
         document.getElementById('email').value = '';
         document.getElementById('name').value = '';
-        document.getElementById('age').value = '';
-        document.getElementById('location').value = '';
             $.ajax({
                 url: 'function.php',
                 type: 'GET',
@@ -491,7 +487,6 @@ require_once '../../Database/database.php';
                             const id = item.kanban_id;
                             const email = item.email;
                             const name = item.name;
-                            const location = item.location;
                             const productValues = item.products;   
                             const status = item.status;  
 
@@ -505,17 +500,17 @@ require_once '../../Database/database.php';
                                 newTask.innerHTML = `
                                 ${id}. ${email || 'No email'}
                                 <strong>Name:</strong> ${name || 'No name'}
-                                <strong>Location:</strong> ${location || 'No location'}
                                 <strong>Product:</strong> ${productValues || 'No Products'}
                             `;
                             }
                             else{
                                 newTask.innerHTML = `
-                                ${id}. ${email || 'No email'}
-                                <strong>Name:</strong> ${name || 'No name'}
-                                <strong>Location:</strong> ${location || 'No location'}
-                                <strong>Product:</strong> ${productValues || 'No Products'}
-                                <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
+                                <div class="header">
+                                    <strong>${id}. ${email || 'No email'}</strong>
+                                    <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
+                                </div>
+                                    <strong>Name: ${name || 'No name'}</strong>
+                                    <strong>Product: ${productValues || 'No Products'}</strong>
                             `;
                             }
 
@@ -722,9 +717,6 @@ require_once '../../Database/database.php';
                 e.preventDefault(); // Prevent the default link behavior
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
-                const ageid = document.getElementById('age');
-                const age = parseInt(ageid.value);
-                const location = document.getElementById('location').value;
                 const product = document.getElementById('product').value;
                 const productContainer = document.getElementById("productContainer");
                 const productInputs = productContainer.getElementsByTagName("select");
@@ -752,8 +744,6 @@ require_once '../../Database/database.php';
                             formData.append('addtask', true);
                             formData.append('email', email);
                             formData.append('name', name);
-                            formData.append('age', age);
-                            formData.append('location', location);
                             formData.append('products', JSON.stringify(productValues));
                             formData.append('date', date);
                             formData.append('start_time', start_time);
@@ -813,9 +803,6 @@ require_once '../../Database/database.php';
                 e.preventDefault(); // Prevent the default link behavior
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
-                const ageid = document.getElementById('age');
-                const age = parseInt(ageid.value);
-                const location = document.getElementById('location').value;
                 const product = document.getElementById('product').value;
                 const productContainer = document.getElementById("productContainer");
                 const productInputs = productContainer.getElementsByTagName("select");
@@ -845,7 +832,7 @@ require_once '../../Database/database.php';
                     }
                 }
 
-                if(email == "" || name == "" || age == "" || location == "" || productValues.length === 0){
+                if(email == "" || name == "" ||  productValues.length === 0){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -869,18 +856,6 @@ require_once '../../Database/database.php';
                     });
                     haserror = true;
                 } 
-                else if(age < 18){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "Age is supposed to be 18+",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                    haserror = true;
-                }
                 else{
             
                 }

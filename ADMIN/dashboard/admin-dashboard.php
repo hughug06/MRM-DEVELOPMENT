@@ -224,10 +224,10 @@ function formatMoney($number) {
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <!-- Total Minimum Stock value -->
+                                        <!-- Total Stock value -->
                                         <div class="col-xl-12 mb-3">
                                             <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Total Minimum Stock Value</thead>
+                                                <thead>Total Stock Value</thead>
                                                 <tbody>
                                                     <?php 
                                                     require '../../Database/database.php';                                          
@@ -236,7 +236,7 @@ function formatMoney($number) {
                                                     $total = 0.00;
                                                     if(mysqli_num_rows($result) > 0){
                                                         foreach($result as $resultItem){
-                                                            $product_total = $resultItem['min_price'] * $resultItem['stock'];
+                                                            $product_total = $resultItem['price'] * $resultItem['stock'];
                                                             $total = $total + $product_total;
                                                         }      
                                                     ?>
@@ -257,43 +257,11 @@ function formatMoney($number) {
                                             </table>
                                         </div>
 
-                                        <!-- Total Maximum Stock value -->
-                                        <div class="col-xl-12 mb-3">
-                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Total Maximum Stock Value</thead>
-                                                <tbody>
-                                                    <?php 
-                                                    require '../../Database/database.php';                                          
-                                                    $select = "Select * from products";
-                                                    $result = mysqli_query($conn , $select);
-                                                    $total = 0.00;
-                                                    if(mysqli_num_rows($result) > 0){
-                                                        foreach($result as $resultItem){
-                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
-                                                            $total = $total + $product_total;
-                                                        }      
-                                                    ?>
-                                                        <tr>
-                                                            <td>₱<?php echo formatMoney($total) ?></td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                    else{
-                                                    ?>
-                                                        <tr>
-                                                            <td>Empty</td>   
-                                                        </tr>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
 
-                                        <!-- Solar Total Minimum Stock value -->
+                                        <!-- Solar Total Stock value -->
                                         <div class="col-xl-12 mb-3">
                                             <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Solar Panel Total Minimum Stock Value</thead>
+                                                <thead>Solar Panel Total Stock Value</thead>
                                                 <tbody>
                                                     <?php 
                                                     require '../../Database/database.php';                                          
@@ -302,7 +270,7 @@ function formatMoney($number) {
                                                     $total = 0.00;
                                                     if(mysqli_num_rows($result) > 0){
                                                         foreach($result as $resultItem){
-                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $product_total = $resultItem['price'] * $resultItem['stock'];
                                                             $total = $total + $product_total;
                                                         }      
                                                     ?>
@@ -323,43 +291,11 @@ function formatMoney($number) {
                                             </table>
                                         </div>
 
-                                        <!-- Solar Total Maximum Stock value -->
-                                        <div class="col-xl-12 mb-3">
-                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Solar Panel Total Maximum Stock Value</thead>
-                                                <tbody>
-                                                    <?php 
-                                                    require '../../Database/database.php';                                          
-                                                    $select = "Select * from products Where ProductType = 'Solar Panel'";
-                                                    $result = mysqli_query($conn , $select);
-                                                    $total = 0.00;
-                                                    if(mysqli_num_rows($result) > 0){
-                                                        foreach($result as $resultItem){
-                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
-                                                            $total = $total + $product_total;
-                                                        }      
-                                                    ?>
-                                                        <tr>
-                                                            <td>₱<?php echo formatMoney($total) ?></td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                    else{
-                                                    ?>
-                                                        <tr>
-                                                            <td>Empty</td>   
-                                                        </tr>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
 
-                                        <!-- Gen Total Maximum Stock value -->
+                                        <!-- Gen Total Stock value -->
                                         <div class="col-xl-12 mb-3">
                                             <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Generator Total Maximum Stock Value</thead>
+                                                <thead>Generator Total Stock Value</thead>
                                                 <tbody>
                                                     <?php 
                                                     require '../../Database/database.php';                                          
@@ -368,7 +304,7 @@ function formatMoney($number) {
                                                     $total = 0.00;
                                                     if(mysqli_num_rows($result) > 0){
                                                         foreach($result as $resultItem){
-                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
+                                                            $product_total = $resultItem['price'] * $resultItem['stock'];
                                                             $total = $total + $product_total;
                                                         }      
                                                     ?>
@@ -389,38 +325,6 @@ function formatMoney($number) {
                                             </table>
                                         </div>
 
-                                        <!-- Gen Total Maximum Stock value -->
-                                        <div class="col-xl-12 mb-3">
-                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                <thead>Generator Total Maximum Stock Value</thead>
-                                                <tbody>
-                                                    <?php 
-                                                    require '../../Database/database.php';                                          
-                                                    $select = "Select * from products Where ProductType = 'Generator'";
-                                                    $result = mysqli_query($conn , $select);
-                                                    $total = 0.00;
-                                                    if(mysqli_num_rows($result) > 0){
-                                                        foreach($result as $resultItem){
-                                                            $product_total = $resultItem['max_price'] * $resultItem['stock'];
-                                                            $total = $total + $product_total;
-                                                        }      
-                                                    ?>
-                                                        <tr>
-                                                            <td>₱<?php echo formatMoney($total) ?></td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                    else{
-                                                    ?>
-                                                        <tr>
-                                                            <td>Empty</td>   
-                                                        </tr>
-                                                    <?php 
-                                                        }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

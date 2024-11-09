@@ -9,8 +9,7 @@ global $conn;
   $stocks = "";
   $error="";
   $success="";
-  $min_price="";
-  $max_price="";
+  $price="";
   $power_output="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
@@ -33,8 +32,7 @@ global $conn;
     $Description = $row["Description"];
     $Specification = $row["Specification"];
     $stocks = $row["stock"];
-    $max_price = $row["max_price"];
-    $min_price = $row["min_price"];
+    $price = $row["price"];
     $power_output = $row["ProductType"] == 'Solar Panel'? $row["Watts_KVA"].'W':$row["Watts_KVA"].'KVA';
     $item_type = $row["ProductType"];
 
@@ -136,12 +134,8 @@ global $conn;
                                             <input type="number" value="<?= $stocks ?>" class="form-control py-2" id="stocks">
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Minimum Price</label>
-                                            <input type="number" value="<?= $min_price ?>" id="min_price" class="form-control py-2">
-                                        </div>
-                                        <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Maximum Price</label>
-                                            <input type="number" value="<?= $max_price ?>" class="form-control py-2" id="max_price">
+                                            <label class="form-label" required>Price</label>
+                                            <input type="number" value="<?= $price ?>" class="form-control py-2" id="price">
                                         </div>
                                         <div class="col-xl-12  mb-3">
                                             <label class="form-label">Description</label>
@@ -188,14 +182,12 @@ global $conn;
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
                 var stocks = document.getElementById("stocks");
-                var min_price = document.getElementById("min_price");
-                var max_price = document.getElementById("max_price");
+                var price = document.getElementById("price");
                 var Pname = document.getElementById("Pname");
 
                 var item_id_value = item_id.value;
                 var stocks_value = parseFloat(stocks.value);
-                var min_price_value = parseFloat(min_price.value);
-                var max_price_value = parseFloat(max_price.value);
+                var price_value = parseFloat(price.value);
                 var specification_ID_value = specification_ID.value;
                 var description_ID_value = description_ID.value;
                 if(availability_ID.checked){
@@ -207,7 +199,7 @@ global $conn;
                 var image = document.getElementById("image").files[0];
                 var Pname_value = Pname.value;
 
-                if(stocks.value == "" || min_price.value == "" || max_price.value == ""){
+                if(stocks.value == "" || price.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -218,21 +210,10 @@ global $conn;
                         }
                     });
                 }
-                else if(min_price_value <= 0){
+                else if(price_value <= 0){
                     Swal.fire({
                         title: 'ERROR',
                         html: "Minimum Price cannot be less than 0.",
-                        icon: 'warning',
-                        confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                }
-                else if(max_price_value <= min_price_value){
-                    Swal.fire({
-                        title: 'ERROR',
-                        html: "Maximum Price cannot be less than or equal to minimum price.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
@@ -254,7 +235,7 @@ global $conn;
                 else{
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Please Confirm the details of the Product!<br>Stocks: "+stocks_value+"<br>Minimum Price: "+min_price_value+"<br>Maximum Price: "+max_price_value,
+                        html: "Please Confirm the details of the Product!<br>Stocks: "+stocks_value+"<br>Price: "+price_value,
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -266,8 +247,7 @@ global $conn;
                             formData.append('editType', 'item');
                             formData.append('id', item_id_value);
                             formData.append('stocks', stocks_value);
-                            formData.append('min_price', min_price_value);
-                            formData.append('max_price', max_price_value);
+                            formData.append('price', price_value);
                             formData.append('Specification', specification_ID_value);
                             formData.append('Description', description_ID_value);
                             formData.append('Availability', availability_ID_value);

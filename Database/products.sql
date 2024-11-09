@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2024 at 06:02 PM
+-- Generation Time: Nov 09, 2024 at 04:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,8 +33,7 @@ CREATE TABLE `products` (
   `ProductType` varchar(20) NOT NULL,
   `Watts_KVA` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `min_price` int(11) NOT NULL,
-  `max_price` int(11) NOT NULL,
+  `price` float NOT NULL,
   `Description` text NOT NULL,
   `Availability` tinyint(1) DEFAULT 1,
   `Image` varchar(255) DEFAULT NULL,
@@ -61,7 +60,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1062;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1070;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
