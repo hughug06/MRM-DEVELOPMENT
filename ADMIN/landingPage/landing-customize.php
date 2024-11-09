@@ -59,15 +59,35 @@ include_once '../../Database/database.php';
             <div class="main-content app-content">
                 <div class="container-fluid">
                     <!-- content here -->
-                    <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                    <div>
-                        <h2 class="main-content-title fs-24 mb-1">Products</h2>
-                        <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item">overview</li>
-                            <li class="breadcrumb-item active" aria-current="page">Products</li>
-                        </ol>
-                    </div>
+                    <?php
+                        require '../../Database/database.php'; 
+                        $sql = "SELECT * FROM landing_page_info WHERE id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $id = 1;
+                        $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $row = $result->fetch_assoc();
+                        $stmt->close();
+                        $conn->close();
+                                    
+                        $titles = json_decode($row["title"], true);
+                        $descs = json_decode($row["description"], true);
+                        $goals = json_decode($row["goals"], true);
+                        $faqs = json_decode($row["faq"], true);
+                        $projects = json_decode($row["projects"], true);
+                        $user_experience = json_decode($row["user_experience"], true);
+                    ?>
 
+                    <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                        <div>
+                            <h2 class="main-content-title fs-24 mb-1">Products</h2>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">overview</li>
+                                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                            </ol>
+                            <a class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#editmodal">Edit Information</a>
+                        </div>
                     </div>
 
                     <div class="row row-sm">
@@ -79,25 +99,6 @@ include_once '../../Database/database.php';
                                 <div class="card custom-card">
                                     <div class="p-0 ht-100p">
                                         <div class="product-grid">
-                                        <?php
-                                            require '../../Database/database.php'; 
-                                            $sql = "SELECT * FROM landing_page_info WHERE id = ?";
-                                            $stmt = $conn->prepare($sql);
-                                            $id = 1;
-                                            $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
-                                            $stmt->close();
-                                            $conn->close();
-                                    
-                                                $titles = json_decode($row["title"], true);
-                                                $descs = json_decode($row["description"], true);
-                                                $goals = json_decode($row["goals"], true);
-                                                $faqs = json_decode($row["faq"], true);
-                                                $projects = json_decode($row["projects"], true);
-                                                $user_experience = json_decode($row["user_experience"], true);
-                                        ?>
                                             <div>
                                                 <h5><?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?></h5>
                                                 <p><?php echo $descs["desc1"] ?> (editable)</p>
@@ -129,7 +130,7 @@ include_once '../../Database/database.php';
                                                 <p><?php echo $faqs["faq_a1"] ?> (editable)</p>
 
                                                 <p>2. <?php echo $faqs["faq_q2"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a2"] ?> (editable) (editable)</p>
+                                                <p><?php echo $faqs["faq_a2"] ?> (editable)</p>
 
                                                 <p>3. <?php echo $faqs["faq_q3"] ?> (editable)</p>
                                                 <p><?php echo $faqs["faq_a3"] ?> (editable)</p>
@@ -201,6 +202,126 @@ include_once '../../Database/database.php';
                     </div>
                 </div>
                 <!--End::row-1 -->
+
+                <!--modal for editing -->
+                <div class="modal fade" id="editmodal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="editmodalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="editmodalLabel">Edit Information</h3>
+                                <a type="button" class="btn-close" onclick="closemodal()" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <input type="text" value="<?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?>"></input>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $descs["desc1"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <input type="text" value="<?php echo $titles["title2"]?>"></input>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $descs["desc1"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>The Goal of Solar Energy</h5>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $goals["goal1"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $goals["goal2"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $goals["goal3"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $goals["goal4"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>Services that we offer</h5>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $descs["desc3"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>Unlock Your Independence with SunSparkPower!</h5>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $descs["desc4"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5><span>FAQ'S ?
+                                    We are here to help you</span></h5>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faqdesc"] ?></textarea>
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">1. <?php echo $faqs["faq_q1"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a1"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">2. <?php echo $faqs["faq_q2"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a2"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">3. <?php echo $faqs["faq_q3"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a3"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">4. <?php echo $faqs["faq_q4"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a4"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">5. <?php echo $faqs["faq_q5"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a5"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">6. <?php echo $faqs["faq_q6"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a6"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">7. <?php echo $faqs["faq_q7"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a7"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">8. <?php echo $faqs["faq_q8"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a8"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">9. <?php echo $faqs["faq_q9"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a9"] ?></textarea>
+
+                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12">10. <?php echo $faqs["faq_q10"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $faqs["faq_a10"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>Some of our Projects</h5>
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj1_title"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj1_desc"] ?></textarea>
+
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj2_title"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj2_desc"] ?></textarea>
+
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj3_title"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj3_desc"] ?></textarea>
+
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj4_title"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj4_desc"] ?></textarea>
+
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj5_title"] ?>)</textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj5_desc"] ?></textarea>
+
+                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj6_title"] ?></textarea>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $projects["pj6_desc"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>User Experience</h5>
+                                    <input type="text" value="<?php echo $user_experience["xp1_name"] ?>"></input>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $user_experience["xp1_comment"] ?></textarea>
+
+                                    <input type="text" value="<?php echo $user_experience["xp2_name"] ?>"></input>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $user_experience["xp2_comment"] ?></textarea>
+
+                                    <input type="text" value="<?php echo $user_experience["xp3_name"] ?>"></input>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $user_experience["xp3_comment"] ?></textarea>
+                                </div>
+
+                                <div class="col-md-6 col-6 mb-3">
+                                    <h5>About</h5>
+                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12"><?php echo $descs["about"] ?></textarea>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                <a type="button" class="btn btn-primary" id="save">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 </div>
             </div>
