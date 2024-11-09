@@ -423,13 +423,13 @@ require_once '../authetincation.php';
                                                                     <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#checking">For Checking
                                                                         <span class="badge bg-secondary rounded-pill" id="notif-agent-checking">0</span>
                                                                     </a>
-                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#waiting-meeting">Waiting for Meeting
+                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#waiting-meeting">Waiting for Approval
                                                                         <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
-                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#ongoing-meeting">Ongoing Meeting
+                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#ongoing-meeting">Approved
                                                                         <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
-                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved-task">Approved - Ongoing Project
+                                                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved-task">Ongoing Project
                                                                         <span class="badge bg-secondary rounded-pill" id="notif-agent-">0</span>
                                                                     </a>
                                                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed-task">Completed
@@ -449,7 +449,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -487,7 +486,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -516,7 +514,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -554,7 +551,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -583,7 +579,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -621,7 +616,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -650,7 +644,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -688,7 +681,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -717,7 +709,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -755,7 +746,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -784,7 +774,6 @@ require_once '../authetincation.php';
                                                                                         <th class="col-lg-2"><span>client name</span></th>
                                                                                         <th class="col-lg-2"><span>agent</span></th>
                                                                                         <th class="col-lg-2"><span>products</span></th>
-                                                                                        <th class="col-lg-3"><span>location</span></th>
                                                                                         <th class="col-lg-2"><span>date</span></th>
                                                                                         <th class="col-lg-2"><span>time</span></th>
                                                                                         <th class="col-lg-1">action</th>
@@ -822,7 +811,6 @@ require_once '../authetincation.php';
                                                                                                 <td><?= $resultItem['name'] ?></td>    
                                                                                                 <td><?= $resultItem['first_name'] ?></td>    
                                                                                                 <td><?php echo $productString ?></a></td>     
-                                                                                                <td><?= $resultItem['location'] ?></td>
                                                                                                 <td><?= $resultItem['date'] ?></td>
                                                                                                 <td><?= $resultItem['start_time'] . " - " . $resultItem['end_time'] ?></td>                                                
                                                                                                 <td>
@@ -1089,9 +1077,7 @@ require_once '../authetincation.php';
                             <p class="form-control">Client Name: ${data.name}</p>
                             <p class="form-control">Agent: ${data.first_name}</p>
                             <p class="form-control">Client email: ${data.email}</p>
-                            <p class="form-control">Client Age: ${data.age}</p>
                             <p class="form-control">Products: ${data.products}</p>
-                            <p class="form-control">Location: ${data.location}</p>
                             <p class="form-control">Date: ${data.date}</p>
                             <p class="form-control">Start time - End time: ${data.start_time} - ${data.end_time}</p>
                             <p class="form-control">Status: ${data.status}</p>

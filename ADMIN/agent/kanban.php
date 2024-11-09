@@ -179,7 +179,7 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Ongoing</div>
+                                    <div class="card-title">Ongoing Project</div>
                                 </div>
                                 <div class="card-body" id="ongoing">
                                    
