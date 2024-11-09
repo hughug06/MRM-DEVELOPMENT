@@ -7,7 +7,7 @@ require_once '../../../ADMIN/authetincation.php';
 
 if (isset($_POST['installation_submit'])) {
  
-    $totalCost = 0;
+        $totalCost = 0;
     //4 HIDDEN DATA
         $availability_id = $_POST['availability_id'];
         $date = $_POST['date'];
@@ -15,10 +15,6 @@ if (isset($_POST['installation_submit'])) {
         $end_time = $_POST['end_time'];
 
         //user input
-        $full_name = $_POST['name'];
-        $address = $_POST['address'];
-        $city = $_POST['city'];
-        $province = $_POST['province'];
         $pin_location = $_POST['location'];
         $service_type = $_POST['serviceType']; 
         $product_type = $_POST['productType'];   
@@ -31,7 +27,7 @@ if (isset($_POST['installation_submit'])) {
 
         
 
-
+}
 ?>
 
 
@@ -134,39 +130,215 @@ if (isset($_POST['installation_submit'])) {
     
                     
                     mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
                     while($resultItem = mysqli_fetch_assoc($result_solar)){ 
                         $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
                     }
+                    mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
                     // Get the total amount of package_installation_solar + product itself and 10% mark-up
                     $quotation = $amount + $totalCost;
                     $mark_up = $quotation * .1;
                     $final_value = $quotation + $mark_up;
-                    echo $final_value;
+                    
                     ?> 
-                    <form action="">
-                        
-                    </form>
+                    <div class="container my-5">
+                        <div class="text-center mb-4">
+                        <h4>Address: Aguilar Pangasinan</h4>
+                        <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
+                        <h6>Bugallon Pangasinan</h6>
+                        </div>
                     
+                    <table class="table table-bordered">
+                    <thead class="table-warning text-center">
+                        <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Unit</th>
+                        <th>Qty</th>
+                        <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $totalitem = 1;
+                        while($row = mysqli_fetch_assoc($result_solar))
+                        {
+                        ?>
+                        <tr>
+                        <td><?= $totalitem++ ?></td>
+                        <td><?= $row['description'] ?></td>
+                        <td><?= $row['unit'] ?></td>
+                        <td><?= $row['quantity'] ?></td>
+                        <td></td>
+                        </tr>
+                        <?php 
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-warning text-center">
+                        <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                        <td>₱<strong><?= $final_value ?></strong></td>
+                        </tr>
+                       
+                    </tfoot>
                     
-                    <?php
+                    </table>
+                   
+                    <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
+                    <!-- Checkbox for accepting terms and conditions -->
+                    <div class="form-check text-center mt-4">
+                        <label class="form-check-label" for="acceptTerms">
+                        <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                            I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                        </label>
+                    </div>
+                </div>    
+                   <?php
                     
-                    
-                    
-    
+                    }
+
+
+                else if($option2 && $service_type == 'installation' && $product_type == 'solar'){ // IF THE CONDITION IS INSTALLATION , GENERATOR 
+                $sql = "select * from brand where name = '$option2' and type = 'solar'";
+                $result = mysqli_query($conn , $sql);
+                $row = mysqli_fetch_assoc($result);
+                echo "TEST";
+                $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                       
+
+                // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
+              
+                $service_pricing = "select * from service_pricing"; 
+                $package_installation_solar = "select * from package_installation_generator";
+
+                $result_generator = mysqli_query($conn , $package_installation_solar);
+                $result_pricing = mysqli_query($conn , $service_pricing);
+
+                while($row = mysqli_fetch_assoc($result_generator)){
+                    // Make sure to reset $result_pricing before looping through it again
+                    mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+
+                    while($row2 = mysqli_fetch_assoc($result_pricing)){
+                        if($row2['quantity'] < $row['quantity']){
+                            echo "not on stock<br>";    // FALSE 
+                            exit();
+                        }
+                        else if($row2['quantity'] > $row['quantity']){
+                            echo "on stock<br>";    // PROCEED
+                        }
+                    }
+                }
+
                 
-            }
-
-
-            // else if($option1 && $service_type == 'installation' && $product_type == 'generator'){ // IF THE CONDITION IS INSTALLATION , GENERATOR 
-    
-            // }
-            // else if($option2){
-            //     echo $option2;
-            // }
-        
-        exit();
-    }
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                
+                while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                    $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                }
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                $quotation = $amount + $totalCost;
+                $mark_up = $quotation * .1;
+                $final_value = $quotation + $mark_up;
+                
+                ?> 
+                <div class="container my-5">
+                    <div class="text-center mb-4">
+                    <h4>Address: Aguilar Pangasinan</h4>
+                    <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
+                    <h6>Bugallon Pangasinan</h6>
+                    </div>
+                
+                <table class="table table-bordered">
+                <thead class="table-warning text-center">
+                    <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Unit</th>
+                    <th>Qty</th>
+                    <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $totalitem = 1;
+                    while($row = mysqli_fetch_assoc($result_generator))
+                    {
+                    ?>
+                    <tr>
+                    <td><?= $totalitem++ ?></td>
+                    <td><?= $row['description'] ?></td>
+                    <td><?= $row['unit'] ?></td>
+                    <td><?= $row['quantity'] ?></td>
+                    <td></td>
+                    </tr>
+                    <?php 
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr class="table-warning text-center">
+                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                    <td>₱<strong><?= $final_value ?></strong></td>
+                    </tr>
+                   
+                </tfoot>
+                
+                </table>
+               
+                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
+                <!-- Checkbox for accepting terms and conditions -->
+                <div class="form-check text-center mt-4">
+                    <label class="form-check-label" for="acceptTerms">
+                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                    </label>
+                </div>
+            </div>    
+            <?php
+             }  
                 ?>
+                <!-- Modal for Terms and Conditions -->
+       <!-- Modal Structure -->
+            <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>1. Terms of Payment:</h5>
+                    <p>The customer/client shall pay per site.</p>
+                    <ul>
+                    <li>20% Down payment (370,000) for reservation of Solar and Accessories.</li>
+                    <li>25% Payment (462,500.00) for mobilization of Solar Panel/Pump and accessories.</li>
+                    <li>40% upon/after delivery of all Solar materials. (740,000.00)</li>
+                    <li>15% after the installation and testing. (277,500.00)</li>
+                    </ul>
+
+                    <h5>2. Preparation Time:</h5>
+                    <p>Upon down payment, the customer/client shall wait 3 to 5 days for the preparation of manpower and materials for solar delivery and installation. Materials that are not in stock will be ordered from the supplier depending on their availability.</p>
+
+                    <h5>3. Duration of Work:</h5>
+                    <p>The work will be completed within 10 to 15 days for Solar Panel/Pump installation, depending on the weather conditions and the location where the solar panels are being mounted.</p>
+
+                    <h5>4. Solar Panel Warranty:</h5>
+                    <p>Ten (10) years warranty under normal operating conditions, excluding damage caused by external influences (e.g., stone, arrow, bullet, natural disaster, etc.). The warranty for Solar Pump, Inverter, and Combination box is one (1) year under normal operating conditions, excluding human error.</p>
+
+                    <h5>5. Validity:</h5>
+                    <p>The proposal is valid for 10 working days.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
+                
+            </div>
+            </div>
             </div>
         </div>
         <!-- Footer Start -->
@@ -180,6 +352,8 @@ if (isset($_POST['installation_submit'])) {
         <span class="arrow"><i class="fe fe-arrow-up"></i></span>
     </div>
     <div id="responsive-overlay"></div>
+
+    
     <!-- Scroll To Top -->
 
     <!-- Popper JS -->
