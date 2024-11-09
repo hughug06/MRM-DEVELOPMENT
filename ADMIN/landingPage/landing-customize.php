@@ -58,147 +58,154 @@ include_once '../../Database/database.php';
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                 <div class="container-fluid">
-                    <!-- content here -->
-                    <?php
-                        require '../../Database/database.php'; 
-                        $sql = "SELECT * FROM landing_page_info WHERE id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $id = 1;
-                        $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $row = $result->fetch_assoc();
-                        $stmt->close();
-                        $conn->close();
-                                    
-                        $titles = json_decode($row["title"], true);
-                        $descs = json_decode($row["description"], true);
-                        $goals = json_decode($row["goals"], true);
-                        $faqs = json_decode($row["faq"], true);
-                        $projects = json_decode($row["projects"], true);
-                        $user_experience = json_decode($row["user_experience"], true);
-                    ?>
-
-                    <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                        <div>
-                            <h2 class="main-content-title fs-24 mb-1">Products</h2>
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item">overview</li>
-                                <li class="breadcrumb-item active" aria-current="page">Products</li>
-                            </ol>
-                            <a class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#editmodal">Edit Information</a>
-                        </div>
+                <!-- content here -->
+                <?php
+                    require '../../Database/database.php'; 
+                    $sql = "SELECT * FROM landing_page_info WHERE id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $id = 1;
+                    $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                    $stmt->close();
+                    $conn->close();
+                                
+                    $titles = json_decode($row["title"], true);
+                    $descs = json_decode($row["description"], true);
+                    $goals = json_decode($row["goals"], true);
+                    $faqs = json_decode($row["faq"], true);
+                    $projects = json_decode($row["projects"], true);
+                    $user_experience = json_decode($row["user_experience"], true);
+                ?>
+                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                    <div>
+                        <h2 class="main-content-title fs-24 mb-1">Products</h2>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">overview</li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
                     </div>
-
-                    <div class="row row-sm">
-                    <div class="col-md-8 col-lg-9">
+                    <a class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#editmodal">Edit Information</a>
+                </div>
+                
+                <div class="row row-sm">
+                    <div class="col-md-12 col-lg-12">
                         <div id="ProductList" class="row row-sm">
-                        <!-- Show Available products -->
-
-                            <div class="col-md-6 col-lg-6 col-xl-4 col-sm-6">
+                            <!-- Show Available products -->
+                            <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
                                 <div class="card custom-card">
-                                    <div class="p-0 ht-100p">
-                                        <div class="product-grid">
-                                            <div>
-                                                <h5><?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?></h5>
-                                                <p><?php echo $descs["desc1"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5><?php echo $titles["title2"]?></h5>
-                                                <p><?php echo $descs["desc1"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5>The Goal of Solar Energy</h5>
-                                                <p><?php echo $goals["goal1"] ?> (editable)</p>
-                                                <p><?php echo $goals["goal2"] ?> (editable)</p>
-                                                <p><?php echo $goals["goal3"] ?> (editable)</p>
-                                                <p><?php echo $goals["goal4"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5>Services that we offer</h5>
-                                                <p><?php echo $descs["desc3"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5>Unlock Your Independence with SunSparkPower!</h5>
-                                                <p><?php echo $descs["desc4"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5><span>FAQ'S ?
-                                                We are here to help you</span></h5>
-                                                <p><?php echo $faqs["faqdesc"] ?> (editable)</p>
-                                                <p>1. <?php echo $faqs["faq_q1"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a1"] ?> (editable)</p>
+                                    <div class="card-body">
+                                        <h5><?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?></h5>
+                                        <p><?php echo $descs["desc1"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5><?php echo $titles["title2"]?></h5>
+                                        <p><?php echo $descs["desc1"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>The Goal of Solar Energy</h5>
+                                        <p><?php echo $goals["goal1"] ?> (editable)</p>
+                                        <p><?php echo $goals["goal2"] ?> (editable)</p>
+                                        <p><?php echo $goals["goal3"] ?> (editable)</p>
+                                        <p><?php echo $goals["goal4"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>Services that we offer</h5>
+                                        <p><?php echo $descs["desc3"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>Unlock Your Independence with SunSparkPower!</h5>
+                                        <p><?php echo $descs["desc4"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5><span>FAQ'S ?
+                                        We are here to help you</span></h5>
+                                        <p><?php echo $faqs["faqdesc"] ?> (editable)</p>
+                                        <p>1. <?php echo $faqs["faq_q1"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a1"] ?> (editable)</p>
 
-                                                <p>2. <?php echo $faqs["faq_q2"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a2"] ?> (editable)</p>
+                                        <p>2. <?php echo $faqs["faq_q2"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a2"] ?> (editable)</p>
 
-                                                <p>3. <?php echo $faqs["faq_q3"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a3"] ?> (editable)</p>
+                                        <p>3. <?php echo $faqs["faq_q3"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a3"] ?> (editable)</p>
 
-                                                <p>4. <?php echo $faqs["faq_q4"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a4"] ?> (editable)</p>
+                                        <p>4. <?php echo $faqs["faq_q4"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a4"] ?> (editable)</p>
 
-                                                <p>5. <?php echo $faqs["faq_q5"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a5"] ?> (editable)</p>
+                                        <p>5. <?php echo $faqs["faq_q5"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a5"] ?> (editable)</p>
 
-                                                <p>6. <?php echo $faqs["faq_q6"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a6"] ?> (editable)</p>
+                                        <p>6. <?php echo $faqs["faq_q6"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a6"] ?> (editable)</p>
 
-                                                <p>7. <?php echo $faqs["faq_q7"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a7"] ?> (editable)</p>
+                                        <p>7. <?php echo $faqs["faq_q7"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a7"] ?> (editable)</p>
 
-                                                <p>8. <?php echo $faqs["faq_q8"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a8"] ?> (editable)</p>
+                                        <p>8. <?php echo $faqs["faq_q8"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a8"] ?> (editable)</p>
 
-                                                <p>9. <?php echo $faqs["faq_q9"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a9"] ?> (editable)</p>
+                                        <p>9. <?php echo $faqs["faq_q9"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a9"] ?> (editable)</p>
 
-                                                <p>10. <?php echo $faqs["faq_q10"] ?> (editable)</p>
-                                                <p><?php echo $faqs["faq_a10"] ?> (editable)</p>
-                                            </div>
+                                        <p>10. <?php echo $faqs["faq_q10"] ?> (editable)</p>
+                                        <p><?php echo $faqs["faq_a10"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>Some of our Projects</h5>
+                                        <p><?php echo $projects["pj1_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj1_desc"] ?> (editable)</p>
 
-                                            <div>
-                                                <h5>Some of our Projects</h5>
-                                                <p><?php echo $projects["pj1_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj1_desc"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj2_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj2_desc"] ?> (editable)</p>
 
-                                                <p><?php echo $projects["pj2_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj2_desc"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj3_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj3_desc"] ?> (editable)</p>
 
-                                                <p><?php echo $projects["pj3_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj3_desc"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj4_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj4_desc"] ?> (editable)</p>
 
-                                                <p><?php echo $projects["pj4_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj4_desc"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj5_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj5_desc"] ?> (editable)</p>
 
-                                                <p><?php echo $projects["pj5_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj5_desc"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj6_title"] ?> (editable)</p>
+                                        <p><?php echo $projects["pj6_desc"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>User Experience</h5>
+                                        <p><?php echo $user_experience["xp1_name"] ?> (editable)</p>
+                                        <p><?php echo $user_experience["xp1_comment"] ?> (editable)</p>
 
-                                                <p><?php echo $projects["pj6_title"] ?> (editable)</p>
-                                                <p><?php echo $projects["pj6_desc"] ?> (editable)</p>
-                                            </div>
+                                        <p><?php echo $user_experience["xp2_name"] ?> (editable)</p>
+                                        <p><?php echo $user_experience["xp2_comment"] ?> (editable)</p>
 
-                                            <div>
-                                                <h5>User Experience</h5>
-                                                <p><?php echo $user_experience["xp1_name"] ?> (editable)</p>
-                                                <p><?php echo $user_experience["xp1_comment"] ?> (editable)</p>
-
-                                                <p><?php echo $user_experience["xp2_name"] ?> (editable)</p>
-                                                <p><?php echo $user_experience["xp2_comment"] ?> (editable)</p>
-
-                                                <p><?php echo $user_experience["xp3_name"] ?> (editable)</p>
-                                                <p><?php echo $user_experience["xp3_comment"] ?> (editable)</p>
-                                            </div>
-                                            <div>
-                                                <h5>About</h5>
-                                                <p><?php echo $descs["about"] ?> (editable)</p>
-                                            </div>
-                                        </div>
+                                        <p><?php echo $user_experience["xp3_name"] ?> (editable)</p>
+                                        <p><?php echo $user_experience["xp3_comment"] ?> (editable)</p>
+                                    </div>
+                                </div>
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <h5>About</h5>
+                                        <p><?php echo $descs["about"] ?> (editable)</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <!--End::row-1 -->
@@ -211,109 +218,160 @@ include_once '../../Database/database.php';
                                 <h3 class="modal-title" id="editmodalLabel">Edit Information</h3>
                                 <a type="button" class="btn-close" onclick="closemodal()" data-bs-dismiss="modal" aria-label="Close"></a>
                             </div>
-                            <div class="modal-body">
+                            <div class="col-xl-12">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 1</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control mb-2 text-black" id="title1" value="<?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?>"></input>
+                                            <label class="form-label">Content</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc1"><?php echo $descs["desc1"] ?></textarea>
+                                           
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 2</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $titles["title2"]?>" id="title2"></input>
+                                            <label class="form-label">Content</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc2"><?php echo $descs["desc2"] ?></textarea>
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 3</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="The Goal of Solar Energy" disabled></input>
+                                            <label class="form-label">Contents</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal1"><?php echo $goals["goal1"] ?></textarea>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal2"><?php echo $goals["goal2"] ?></textarea>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal3"><?php echo $goals["goal3"] ?></textarea>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="goal4"><?php echo $goals["goal4"] ?></textarea>
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 4</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="Services that we offer" disabled></input>
+                                            <label class="form-label">Content</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc3"><?php echo $descs["desc3"] ?></textarea>
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 5</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="Unlock Your Independence with SunSparkPower!" disabled></input>
+                                            <label class="form-label">Content</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc4"><?php echo $descs["desc4"] ?></textarea>
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 6</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="FAQ'S ? We are here to help you" disabled></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
+                                            
+                                            <label class="form-label">Question 1</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q1"] ?>" id="faq_q1"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
 
-                                <div class="col-md-6 col-6 mb-3">
-                                    <input type="text" id="title1" value="<?php echo $titles["title1_f"].$titles["title1_d"].$titles["title1_l"] ?>"></input>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc1"><?php echo $descs["desc1"] ?></textarea>
+                                            <label class="form-label">Question 2</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q2"] ?>" id="faq_q2"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
+
+                                            <label class="form-label">Question 3</label>  
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q3"] ?>" id="faq_q3"></input>
+                                            <label class="form-label">Answer</label>    
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
+
+                                            <label class="form-label">Question 4</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q4"] ?>" id="faq_q4"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
+
+                                            <label class="form-label">Question 5</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q5"] ?>" id="faq_q5"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
+
+                                            <label class="form-label">Question 6</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q6"] ?>" id="faq_q6"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
+
+                                            <label class="form-label">Question 7</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q7"] ?>" id="faq_q7"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
+
+                                            <label class="form-label">Question 8</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q8"] ?>" id="faq_q8"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
+
+                                            <label class="form-label">Question 9</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q9"] ?>" id="faq_q9"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
+
+                                            <label class="form-label">Question 10</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q10"] ?>" id="faq_q10"></input>
+                                            <label class="form-label">Answer</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
+
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h4>Section 7</h4>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control text-black mb-2" value="Some of our Projects" disabled></input>
+
+                                            <label class="form-label">Project 1</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj1_title"] ?>" id="pj1_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
+                                            <label class="form-label">Project 2</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj2_title"] ?>" id="pj2_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
+                                            <label class="form-label">Project 3</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj3_title"] ?>" id="pj3_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
+                                            <label class="form-label">Project 4</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj4_title"] ?>" id="pj4_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
+                                            <label class="form-label">Project 5</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj5_title"] ?>" id="pj5_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
+                                            <label class="form-label">Project 6</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj6_title"] ?>" id="pj6_title"></input>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
+                                        </div>
+                                        <div class="mb-4 border p-3 rounded-3">
+                                            <h5>User Experience</h5>
+                                            <label class="form-label">Client 1</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp1_name"] ?>" id="xp1_name"></input>
+                                            <label class="form-label">Statement</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
+
+                                            <label class="form-label">Client 2</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
+                                            <label class="form-label">Statement</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
+
+                                            <label class="form-label">Client 3</label>
+                                            <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
+                                            <label class="form-label">Statement</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
+                                        </div>
+                                        <div class="border p-3 rounded-3">
+                                            <h5>About</h5>
+                                            <label class="form-label">Description</label>
+                                            <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="about"><?php echo $descs["about"] ?></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <input type="text" value="<?php echo $titles["title2"]?>" id="title2"></input>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc2"><?php echo $descs["desc2"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>The Goal of Solar Energy</h5>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="goal1"><?php echo $goals["goal1"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="goal2"><?php echo $goals["goal2"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="goal3"><?php echo $goals["goal3"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="goal4"><?php echo $goals["goal4"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>Services that we offer</h5>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc3"><?php echo $descs["desc3"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>Unlock Your Independence with SunSparkPower!</h5>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="desc4"><?php echo $descs["desc4"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5><span>FAQ'S ?
-                                    We are here to help you</span></h5>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q1"><?php echo $faqs["faq_q1"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q2"><?php echo $faqs["faq_q2"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q3"><?php echo $faqs["faq_q3"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q4"><?php echo $faqs["faq_q4"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q5"><?php echo $faqs["faq_q5"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q6"><?php echo $faqs["faq_q6"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q7"><?php echo $faqs["faq_q7"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q8"><?php echo $faqs["faq_q8"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q9"><?php echo $faqs["faq_q9"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
-
-                                    <textarea rows="3" class="col-xl-12 col-md-12 col-12" id="faq_q10"><?php echo $faqs["faq_q10"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>Some of our Projects</h5>
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj1_title"><?php echo $projects["pj1_title"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
-
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj2_title"><?php echo $projects["pj2_title"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
-
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj3_title"><?php echo $projects["pj3_title"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
-
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj4_title"><?php echo $projects["pj4_title"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
-
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj5_title"><?php echo $projects["pj5_title"] ?>)</textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
-
-                                    <textarea rows="2" class="col-xl-12 col-md-12 col-12" id="pj6_title"><?php echo $projects["pj6_title"] ?></textarea>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>User Experience</h5>
-                                    <input type="text" value="<?php echo $user_experience["xp1_name"] ?>" id="xp1_name"></input>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
-
-                                    <input type="text" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
-
-                                    <input type="text" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
-                                </div>
-
-                                <div class="col-md-6 col-6 mb-3">
-                                    <h5>About</h5>
-                                    <textarea rows="6" class="col-xl-12 col-md-12 col-12" id="about"><?php echo $descs["about"] ?></textarea>
-                                </div>
-                                
                             </div>
                             <div class="modal-footer">
                                 <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
