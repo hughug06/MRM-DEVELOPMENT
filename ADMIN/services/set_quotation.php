@@ -2,10 +2,8 @@
 
 <?php
 require_once '../../Database/database.php';
-session_start();
 
-$account_id = $_POST['account_id'];
-$appointment_id = $_POST['appointment_id'];
+
 $item_descriptions = $_POST['item_description'];
 $units = $_POST['unit'];
 $quantities = $_POST['quantity'];

@@ -1120,7 +1120,8 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </div>
 
-     <!-- Sign up Modal  -->
+    
+    <!-- Sign up Modal  -->
     <div
       class="modal fade"
       id="signupmodal"
@@ -1130,7 +1131,7 @@ if (isset($_SESSION['success_message'])) {
       aria-labelledby="signupmodal"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
           <button
             type="button"
@@ -1169,86 +1170,149 @@ if (isset($_SESSION['success_message'])) {
                         >
                           SIGN UP
                         </h1>
+
+                        <!-- First Name, Last Name, Middle Name Row -->
+                        <div class="row">
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="firstname"
+                              id="su_firstname"
+                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            />
+                            <label for="su_firstname" class="text-muted"
+                              >First Name</label
+                            >
+                          </div>
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="lastname"
+                              id="su_lastname"
+                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            />
+                            <label for="su_lastname" class="text-muted"
+                              >Last Name</label
+                            >
+                          </div>
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="middlename"
+                              id="su_middlename"
+                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            />
+                            <label for="su_middlename" class="text-muted"
+                              >Middle Name</label
+                            >
+                          </div>
+                        </div>
+
+                        <!-- Email and Password Row -->
+                        <div class="row">
+                          <div class="col-md-6 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="email"
+                              name="email"
+                              id="su_email"
+                            />
+                            <label for="su_email" class="text-muted">Email Address</label>
+                          </div>
+                          <div class="col-md-6 form-floating text-start mb-3">
+                            <i
+                              class="ri-eye-fill icon icon-c"
+                              id="toggle_Pass"
+                            ></i>
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="password"
+                              name="password"
+                              id="su_password"
+                            />
+                            <label for="su_password" class="text-muted">Password</label>
+                          </div>
+                        </div>
+
+                        <!-- Address Row -->
                         <div class="form-floating text-start mb-3">
                           <input
                             class="form-control rounded-2"
                             placeholder=""
                             type="text"
-                            name="firstname"
-                            id="su_firstname"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            name="address"
+                            id="su_address"
                           />
-                          <label for="su_FirstName" class="text-muted"
-                            >First Name</label
-                          >
+                          <label for="su_address" class="text-muted">Address</label>
                         </div>
-                        <div class="form-floating text-start mb-3">
+
+                        <!-- City, Province, ZIP Code Row -->
+                        <div class="row">
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="city"
+                              id="su_city"
+                            />
+                            <label for="su_city" class="text-muted">City</label>
+                          </div>
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="province"
+                              id="su_province"
+                            />
+                            <label for="su_province" class="text-muted">Province</label>
+                          </div>
+                          <div class="col-md-4 form-floating text-start mb-3">
+                            <input
+                              class="form-control rounded-2"
+                              placeholder=""
+                              type="text"
+                              name="zipcode"
+                              id="su_zipcode"
+                              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            />
+                            <label for="su_zipcode" class="text-muted">ZIP Code</label>
+                          </div>
+                        </div>
+
+                        <!-- Radio Buttons for Organization or Individual -->
+                        <div class="form-check form-check-inline mb-3">
                           <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="text"
-                            name="lastname"
-                            id="su_lastname"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            class="form-check-input"
+                            type="radio"
+                            name="user_type"
+                            id="individual"
+                            value="individual"
+                            checked
                           />
-                          <label for="su_LastName" class="text-muted"
-                            >Last Name</label
-                          >
+                          <label class="form-check-label" for="individual">Individual</label>
                         </div>
-                        <div class="form-floating text-start mb-3">
+                        <div class="form-check form-check-inline mb-3">
                           <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="text"
-                            name="middlename"
-                            id="su_middlename"
-                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                            class="form-check-input"
+                            type="radio"
+                            name="user_type"
+                            id="organization"
+                            value="organization"
                           />
-                          <label for="su_MiddleInitial" class="text-muted"
-                            >Middle Name</label
-                          >
+                          <label class="form-check-label" for="organization">Organization</label>
                         </div>
-                        <div class="form-floating text-start mb-3">
-                          <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="email"
-                            name="email"
-                            id="su_email"
-                          />
-                          <label for="su_Email" class="text-muted"
-                            >Email Address</label
-                          >
-                        </div>
-                        <div class="form-floating text-start mb-3">
-                          <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="text"
-                            name="contactnum"
-                            id="su_contactnum"
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                          />
-                          <label for="su_contactNum" class="text-muted"
-                            >Contact No.</label
-                          >
-                        </div>
-                        <div class="form-floating text-start mb-3">
-                          <i
-                            class="ri-eye-fill icon icon-c"
-                            id="toggle_Pass"
-                          ></i>
-                          <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="password"
-                            name="password"
-                            id="su_password"
-                          />
-                          <label for="su_Password" class="text-muted"
-                            >Password</label
-                          >
-                        </div>
+
+                        <!-- Submit Button -->
                         <div class="d-grid pb-2">
                           <button
                             type="submit"
@@ -1278,6 +1342,10 @@ if (isset($_SESSION['success_message'])) {
           </div>
         </div>
       </div>
+    </div>
+
+
+
 
       <div id="loadingOverlay" style="display:none;">
         <div class="spinner">
@@ -1304,6 +1372,11 @@ if (isset($_SESSION['success_message'])) {
             middlename: $("#su_middlename").val(),
             email: $("#su_email").val(),
             password: $("#su_password").val(),
+            address: $("#su_address").val(),
+            city: $("#su_city").val(),
+            province: $("#su_province").val(),
+            zip_code: $("#su_zipcode").val(),
+            user_type: $('input[name="user_type"]:checked').val(),
             signup: true,
           };
 

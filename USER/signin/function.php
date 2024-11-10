@@ -42,7 +42,7 @@ session_start();
                             $_SESSION['user_id'] = $user;                     
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
                         }
-                        else if($role == 'user')
+                        else if($role == 'client')
                         {
                             $_SESSION['auth'] = "user";
                             $_SESSION['user_id'] = $user;

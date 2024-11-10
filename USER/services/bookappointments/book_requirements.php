@@ -3,16 +3,7 @@
 
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
-if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['end_time'])) {
-    $_SESSION['availability_id'] = $_GET['availability_id'];
-    $_SESSION['date'] = $_GET['date'];
-    $_SESSION['start_time'] = $_GET['start_time'];
-    $_SESSION['end_time'] = $_GET['end_time'];
 
-    // Now you have the availability_id, date, start_time, and end_time to process further
-   // echo "Booking confirmed for availability ID: $availability_id on $date from $start_time to $end_time.";
-    
-} 
 
 
 
@@ -64,6 +55,10 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
+    /* <div class="form-group text-start mb-3">
+                            <label for="location" class="text-muted">PIN YOUR Address</label>
+                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
+                        </div> */
         #map {
             height: 400px;
             width: 100%;
@@ -87,108 +82,102 @@ if (isset($_GET['availability_id'], $_GET['date'], $_GET['start_time'], $_GET['e
             <div class="container-fluid">
             
                 <div class="card custom-card mt-3">
-                    <form class="p-5" action="book_appointment.php" method="POST" id="serviceForm">
-                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                        <?php
-                        require_once '../../../Database/database.php';
-                        
-                        $user = $_SESSION['user_id'];
-                        $sql = "select * from user_info where user_id = '$user'";
-                        $result = mysqli_query($conn, $sql);
-                    
-                        if(mysqli_num_rows($result)) {
-                            $row = mysqli_fetch_assoc($result);
-                            $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
-                        ?>
-                        <div class="form-group text-start mb-3">
-                            <label for="s_fName" class="text-muted">Full Name</label>
-                            <input class="form-control" type="text" name="name" id="s_fName" disabled placeholder="" value="<?= $name ?>">
+                    <?php
+                   $user_id = $_SESSION['user_id'];
+                   $sql = "select * from user_info where user_id = $user_id";
+                   $result = mysqli_query($conn , $sql);
+                   $row = mysqli_fetch_assoc($result);
+                   $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
+                    ?>
+                <form class="p-5" action="book_appointment.php" method="POST">
+                        <!-- Row 1: Full Name -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" id="fullName" class="form-control" name="name"  value="<?= $name?>" >
+                            </div>
                         </div>
-
-                        <div class="form-group text-start mb-3">
-                            <label for="location" class="text-muted">Address</label>
+                        <!-- Row 2: Address, City, and Province -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" id="address" class="form-control" name="address" value="<?= $row['address'] ?>" >
+                            </div>
+                            <div class="col-md-4">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" id="city" class="form-control" name="city" value="<?= $row['city'] ?>" >
+                            </div>
+                            <div class="col-md-4">
+                                <label for="province" class="form-label">Province</label>
+                                <input type="text" id="province" class="form-control" name="province" value="<?= $row['province'] ?>" >
+                            </div>
+                        </div>
+                        <!-- Row 3: Address, City, and Province -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                            <label for="location" class="text-muted">PIN YOUR Address</label>
                             <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
+                            </div>
+                            
                         </div>
 
-                        <?php } ?>
-                        
-                        <div class="form-group text-start mb-3">
-                            <label for="s_Product" class="text-muted">Product</label>
-                            <select class="form-control" name="product" id="s_Product">
-                                <option value="">Select Product</option>
-                                <option value="solar">Solar</option>
-                                <option value="generator">Generator</option>
-                            </select>
+                        <!-- Row 4: Radio Buttons -->
+                        <div class="row mb-3">
+                            <label class="form-label">Service Type</label>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="serviceType" id="installation" value="installation" required>
+                                    <label class="form-check-label" for="installation">Installation</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="serviceType" id="tuneUp" value="tune-up" required>
+                                    <label class="form-check-label" for="tuneUp">Tune-Up</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="serviceType" id="maintenance" value="maintenance" required>
+                                    <label class="form-check-label" for="maintenance">Maintenance</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="serviceType" id="repair" value="repair" required>
+                                    <label class="form-check-label" for="repair">Repair</label>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="form-group text-start mb-3">
-                            <label for="s_Brand" class="text-muted">Brand</label>
-                            <select class="form-control" name="" id="product-dummy" style="display:block;">
-                                <option value="">Please select product</option>
-                            </select>
-                            <select class="form-control" name="brand" id="s_Brand" style="display:none;">
-                                <option value="solar-philippines">Solar Philippines</option>
-                                <option value="enphase-energy">Enphase Energy</option>
-                                <option value="sungrow">Sungrow</option>
-                                <option value="ja-solar">JA Solar</option>
-                                <option value="trina-solar">Trina Solar</option>
-                                <option value="canadian-solar">Canadian Solar</option>
-                                <option value="rec-solar">REC Solar</option>
-                                <option value="longi-solar">Longi Solar</option>
-                                <option value="first-solar">First Solar</option>
-                                <option value="gcl-poly-energy">GCL-Poly Energy</option>
-                                <option value="jinkosolar">JinkoSolar</option>
-                                <option value="sunpower">SunPower</option>
-                                <option value="hanwha-q-cells">Hanwha Q CELLS</option>
-                                <option value="solaric">Solaric</option>
-                                <option value="philsolar">PhilSolar</option>
-                                <option value="solartech">Solartech</option>
-                            </select>
-
-                            <select class="form-control" name="brand" id="g_Brand" style="display:none;">
-                                <option value="honda">Honda</option>
-                                <option value="yamaha">Yamaha</option>
-                                <option value="kipor">Kipor</option>
-                                <option value="fogo">Fogo</option>
-                                <option value="kohler">Kohler</option>
-                                <option value="cummins">Cummins</option>
-                                <option value="perkins">Perkins</option>
-                                <option value="volvo-penta">Volvo Penta</option>
-                                <option value="mtu-onsite-energy">MTU Onsite Energy</option>
-                                <option value="isuzu">Isuzu</option>
-                                <option value="powertech">Powertech</option>
-                                <option value="sdmo">SDMO</option>
-                                <option value="atlas-copco">Atlas Copco</option>
-                                <option value="generac">Generac</option>
-                                <option value="sullivan-palatek">Sullivan-Palatek</option>
-                                <option value="caterpillar">Caterpillar</option>
-                                <option value="wanco">Wanco</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group text-start mb-3">
-                            <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                            <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="power" id="powerInput" placeholder="">
-                        </div>
-                        
-                        <div class="form-group text-start mb-3">
-                            <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                            <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" id="su_Email" placeholder="">
-                        </div>
-                        
-                        <div class="form-group text-start mb-3">
-                            <label for="s_Type" class="text-muted">Service Type</label>
-                            <select class="form-control" name="service_type" id="s_Type">
-                                <option value="maintenance">Maintenance</option>
-                                <option value="repair">Repair</option>
-                                <option value="installation">Installation</option>
-                                <option value="tune_up">Tune-up</option>
-                            </select>
+                         <!-- Row 5: type radio button Buttons -->
+                         <div class="row mb-3">
+                            <label class="form-label">Product type</label>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="productType" value="solar" required>
+                                    <label class="form-check-label" for="solar">Solar</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="productType"  value="generator" required>
+                                    <label class="form-check-label" for="generator">Generator</label>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="d-flex flex-column align-items-stretch flex-grow mt-5">
-                            <button type="submit" id="ConfirmBook" class="btn btn-warning text-white py-2">Book</button>
+                        <!-- Submit Button -->
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                            </div>
                         </div>
+                     
+                        <input type="hidden" value="<?=$_GET['availability_id'] ?>" name="availability_id">
+                        <input type="hidden" value="<?=$_GET['date']; ?>" name="date">
+                        <input type="hidden" value="<?=$_GET['start_time']; ?>" name="start_time">
+                        <input type="hidden" value="<?=$_GET['end_time']; ?>" name="end_time">
+
                     </form>
                 </div>
 
@@ -484,3 +473,5 @@ document.getElementById('s_Product').addEventListener('change', function() {
     }
 });
 </script>
+
+
