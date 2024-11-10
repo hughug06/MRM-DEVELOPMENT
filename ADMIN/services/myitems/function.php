@@ -113,36 +113,109 @@ else if(isset($_POST['tuneup_save'])){
   header("Location: manageitems.php");
   exit; 
 }
-else if(isset($_POST['watts_edit'])){
-  $watts_id = $_POST['watts_id'];
-  $watts_name = $_POST['name'];
-  $type = $_POST['type'];
-  $amount = $_POST['amount'];
+else if(isset($_POST['solar_maintenance_save'])){
+  $delete = "DELETE FROM package_maintenance_solar;";
+  $result_del = mysqli_query($conn , $delete);
+  $item_descriptions = $_POST['item_description'];
+  $units = $_POST['unit'];
+  $quantities = $_POST['quantity'];
+  $amounts = $_POST['amount'];
+  $total_costs = $_POST['total_cost'];
 
-  $sql = "UPDATE watts SET name='$watts_name' , type = '$type' , amount = '$amount' WHERE watts_id=$watts_id";
-  $result = mysqli_query($conn , $sql);
-  
-  header("Location: manageitems.php");
-  exit; 
-}
-else if(isset($_POST['running_save'])){
-  $name = $_POST['name'];
-  $amount = $_POST['amount'];
-  $sql_insert = "INSERT INTO running_hours (name, amount) 
-               VALUES ('$name hrs', '$amount')";
-  $result = mysqli_query($conn, $sql_insert);
+  $sql = "INSERT INTO package_maintenance_solar (description, unit, quantity, amount, total_cost) VALUES ";
+// Loop through all the items and build the query for multiple rows
+$valuesArr = [];
+for ($i = 0; $i < count($item_descriptions); $i++) {
+    $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+    $unit = mysqli_real_escape_string($conn, $units[$i]);
+    $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+    $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+    $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
 
-  header("Location: manageitems.php");
-  exit; 
+    $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
 }
-else if(isset($_POST['running_edit'])){
-  $id = $_POST['id']; 
-  $name = $_POST['name'];
-  $amount = $_POST['amount'];
-  $sql = "UPDATE running_hours SET name='$name hrs' ,  amount = '$amount' WHERE running_id=$id";
-  $result = mysqli_query($conn , $sql);
-  header("Location: manageitems.php");
-  exit();
+$sql .= implode(',', $valuesArr);
+$result = mysqli_query($conn , $sql);
+header("Location: manageitems.php");
+exit; 
+}
+else if(isset($_POST['generator_maintenance_save'])){
+  $delete = "DELETE FROM package_maintenance_generator;";
+  $result_del = mysqli_query($conn , $delete);
+  $item_descriptions = $_POST['item_description'];
+  $units = $_POST['unit'];
+  $quantities = $_POST['quantity'];
+  $amounts = $_POST['amount'];
+  $total_costs = $_POST['total_cost'];
+
+  $sql = "INSERT INTO package_maintenance_generator (description, unit, quantity, amount, total_cost) VALUES ";
+// Loop through all the items and build the query for multiple rows
+$valuesArr = [];
+for ($i = 0; $i < count($item_descriptions); $i++) {
+    $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+    $unit = mysqli_real_escape_string($conn, $units[$i]);
+    $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+    $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+    $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
+
+    $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
+}
+$sql .= implode(',', $valuesArr);
+$result = mysqli_query($conn , $sql);
+header("Location: manageitems.php");
+exit; 
+}
+else if(isset($_POST['solar_repair_save'])){
+  $delete = "DELETE FROM package_repair_solar;";
+  $result_del = mysqli_query($conn , $delete);
+  $item_descriptions = $_POST['item_description'];
+  $units = $_POST['unit'];
+  $quantities = $_POST['quantity'];
+  $amounts = $_POST['amount'];
+  $total_costs = $_POST['total_cost'];
+
+  $sql = "INSERT INTO package_repair_solar (description, unit, quantity, amount, total_cost) VALUES ";
+// Loop through all the items and build the query for multiple rows
+$valuesArr = [];
+for ($i = 0; $i < count($item_descriptions); $i++) {
+    $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+    $unit = mysqli_real_escape_string($conn, $units[$i]);
+    $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+    $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+    $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
+
+    $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
+}
+$sql .= implode(',', $valuesArr);
+$result = mysqli_query($conn , $sql);
+header("Location: manageitems.php");
+exit; 
+}
+else if(isset($_POST['generator_repair_save'])){
+  $delete = "DELETE FROM package_repair_generator;";
+  $result_del = mysqli_query($conn , $delete);
+  $item_descriptions = $_POST['item_description'];
+  $units = $_POST['unit'];
+  $quantities = $_POST['quantity'];
+  $amounts = $_POST['amount'];
+  $total_costs = $_POST['total_cost'];
+
+  $sql = "INSERT INTO package_repair_generator (description, unit, quantity, amount, total_cost) VALUES ";
+// Loop through all the items and build the query for multiple rows
+$valuesArr = [];
+for ($i = 0; $i < count($item_descriptions); $i++) {
+    $item_description = mysqli_real_escape_string($conn, $item_descriptions[$i]);
+    $unit = mysqli_real_escape_string($conn, $units[$i]);
+    $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+    $amount = mysqli_real_escape_string($conn, $amounts[$i]);
+    $total_cost = mysqli_real_escape_string($conn, $total_costs[$i]);
+
+    $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
+}
+$sql .= implode(',', $valuesArr);
+$result = mysqli_query($conn , $sql);
+header("Location: manageitems.php");
+exit; 
 }
 else if(isset($_POST['brand_save'])){
   $name = $_POST['name'];

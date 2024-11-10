@@ -220,7 +220,104 @@ else if(isset($_POST['tuneup_submit'])){
                 $sql = "select * from brand where name = '$option2' and type = 'solar'";
                 $result = mysqli_query($conn , $sql);
                 $row = mysqli_fetch_assoc($result);
-                echo "TEST";
+                $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                       
+
+                // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
+              
+                $service_pricing = "select * from service_pricing"; 
+                $package_installation_solar = "select * from package_installation_solar";
+
+                $result_generator = mysqli_query($conn , $package_installation_solar);
+                $result_pricing = mysqli_query($conn , $service_pricing);
+
+                while($row = mysqli_fetch_assoc($result_generator)){
+                    // Make sure to reset $result_pricing before looping through it again
+                    mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+
+                    while($row2 = mysqli_fetch_assoc($result_pricing)){
+                        if($row2['quantity'] < $row['quantity']){
+                            echo "not on stock<br>";    // FALSE 
+                            exit();
+                        }
+                        else if($row2['quantity'] > $row['quantity']){
+                            echo "on stock<br>";    // PROCEED
+                        }
+                    }
+                }
+
+                
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                
+                while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                    $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                }
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                $quotation = $amount + $totalCost;
+                $mark_up = $quotation * .1;
+                $final_value = $quotation + $mark_up;
+                
+                ?> 
+                <div class="container my-5">
+                    <div class="text-center mb-4">
+                    <h4>Address: Aguilar Pangasinan</h4>
+                    <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
+                    <h6>Bugallon Pangasinan</h6>
+                    </div>
+                
+                <table class="table table-bordered">
+                <thead class="table-warning text-center">
+                    <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Unit</th>
+                    <th>Qty</th>
+                    <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $totalitem = 1;
+                    while($row = mysqli_fetch_assoc($result_generator))
+                    {
+                    ?>
+                    <tr>
+                    <td><?= $totalitem++ ?></td>
+                    <td><?= $row['description'] ?></td>
+                    <td><?= $row['unit'] ?></td>
+                    <td><?= $row['quantity'] ?></td>
+                    <td></td>
+                    </tr>
+                    <?php 
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr class="table-warning text-center">
+                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                    <td>₱<strong><?= $final_value ?></strong></td>
+                    </tr>
+                   
+                </tfoot>
+                
+                </table>
+               
+                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
+                <!-- Checkbox for accepting terms and conditions -->
+                <div class="form-check text-center mt-4">
+                    <label class="form-check-label" for="acceptTerms">
+                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                    </label>
+                </div>
+            </div>    
+            <?php
+             }  
+             else if($option1 && $service_type == 'installation' && $product_type == 'generator'){    
+                $sql = "select * from brand where name = '$option1' and type = 'generator'";
+                $result = mysqli_query($conn , $sql);
+                $row = mysqli_fetch_assoc($result);
                 $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                        
 
@@ -312,13 +409,32 @@ else if(isset($_POST['tuneup_submit'])){
                         I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
                     </label>
                 </div>
-            </div>    
-            <?php
-             }  
+            </div>  
+                <?php 
+                }
                 ?>
-                <!-- Modal for Terms and Conditions -->
-       <!-- Modal Structure -->
-            <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+               
+                
+            </div>
+            </div>
+            </div>
+        </div>
+        <!-- Footer Start -->
+        <?php include_once(__DIR__. '/../../../partials/footer.php') ?>
+        <!-- Footer End -->  
+    </div>
+
+    
+    <!-- Scroll To Top -->
+    <div class="scrollToTop d-none">
+        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+
+    
+
+     <!-- Modal for Terms and Conditions -->
+     <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -353,24 +469,8 @@ else if(isset($_POST['tuneup_submit'])){
                 </div>
             </div>
             </div>
-                
-            </div>
-            </div>
-            </div>
-        </div>
-        <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../../../partials/footer.php') ?>
-        <!-- Footer End -->  
-    </div>
 
-    
-    <!-- Scroll To Top -->
-    <div class="scrollToTop d-none">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
 
-    
     <!-- Scroll To Top -->
 
     <!-- Popper JS -->
