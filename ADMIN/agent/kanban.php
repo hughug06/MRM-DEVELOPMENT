@@ -508,11 +508,11 @@ require_once '../../Database/database.php';
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
                             }
-                            else if(status == 'ongoing'){
-                                document.getElementById('ongoing').appendChild(newTask);
-                            }
                             else if(status == 'approved'){
                                 document.getElementById('approved').appendChild(newTask);
+                            }
+                            else if(status == 'ongoing'){
+                                document.getElementById('ongoing').appendChild(newTask);
                             }
                             else if(status == 'completed'){
                                 document.getElementById('completed').appendChild(newTask);
