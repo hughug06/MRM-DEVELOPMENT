@@ -14,10 +14,13 @@ if(isset($_POST['serviceItem_save']))
                           VALUES ('$unit_name' , '$Description' , '$quantity' , '$amount')";
       $result = mysqli_query($conn , $sql_insert);    
           
-      header("Location: manageitems.php");
-      exit; 
+      if($result){
+        echo json_encode(['success' => true]);
+      }
       
 }
+
+
 else if(isset($_POST['serviceItem_edit']))
 {
 
@@ -30,10 +33,13 @@ else if(isset($_POST['serviceItem_edit']))
   $sql = "UPDATE service_pricing SET unit='$unit' , description = '$description' , amount = '$amount' , quantity = '$quantity' WHERE pricingid=$id";
   $result = mysqli_query($conn , $sql);
   
-  header("Location: manageitems.php");
-  exit; 
+  if($result){
+    echo json_encode(['success' => true]);
+  }
 
 }
+
+
 else if(isset($_POST['installation_save'])){
   $delete = "DELETE FROM package_installation_solar;";
   $result_del = mysqli_query($conn , $delete);
@@ -87,6 +93,8 @@ else if(isset($_POST['generator_save'])){
   header("Location: manageitems.php");
   exit; 
 }
+
+
 else if(isset($_POST['tuneup_save'])){
     $delete = "DELETE FROM package_tuneup_generator;";
     $result_del = mysqli_query($conn , $delete);
@@ -113,6 +121,8 @@ else if(isset($_POST['tuneup_save'])){
   header("Location: manageitems.php");
   exit; 
 }
+
+
 else if(isset($_POST['solar_maintenance_save'])){
   $delete = "DELETE FROM package_maintenance_solar;";
   $result_del = mysqli_query($conn , $delete);
@@ -139,6 +149,8 @@ $result = mysqli_query($conn , $sql);
 header("Location: manageitems.php");
 exit; 
 }
+
+
 else if(isset($_POST['generator_maintenance_save'])){
   $delete = "DELETE FROM package_maintenance_generator;";
   $result_del = mysqli_query($conn , $delete);
@@ -160,11 +172,15 @@ for ($i = 0; $i < count($item_descriptions); $i++) {
 
     $valuesArr[] = "('$item_description', '$unit', '$quantity', '$amount', '$total_cost')";
 }
+
+
 $sql .= implode(',', $valuesArr);
 $result = mysqli_query($conn , $sql);
 header("Location: manageitems.php");
 exit; 
 }
+
+
 else if(isset($_POST['solar_repair_save'])){
   $delete = "DELETE FROM package_repair_solar;";
   $result_del = mysqli_query($conn , $delete);
@@ -191,6 +207,8 @@ $result = mysqli_query($conn , $sql);
 header("Location: manageitems.php");
 exit; 
 }
+
+
 else if(isset($_POST['generator_repair_save'])){
   $delete = "DELETE FROM package_repair_generator;";
   $result_del = mysqli_query($conn , $delete);
@@ -217,6 +235,9 @@ $result = mysqli_query($conn , $sql);
 header("Location: manageitems.php");
 exit; 
 }
+
+
+
 else if(isset($_POST['brand_save'])){
   $name = $_POST['name'];
   $amount = $_POST['amount'];
@@ -224,9 +245,27 @@ else if(isset($_POST['brand_save'])){
   $sql_insert = "INSERT INTO brand (name, type , amount) 
                VALUES ('$name', '$type' , $amount)";
   $result = mysqli_query($conn, $sql_insert);
-  header("Location: manageitems.php");
-  exit; 
+  if($result){
+    echo json_encode(['success' => true]);
+  }
 }
+
+else if(isset($_POST['brand_edit'])){
+  $id = $_POST['id'];
+  $name = $_POST['name'];
+  $amount = $_POST['amount'];
+  $type = $_POST['type'];
+  $sql_insert = "UPDATE brand SET name = '$name', amount = $amount, type = '$type' WHERE brand_id = '$id'";
+  $result = mysqli_query($conn, $sql_insert);
+  if($result){
+    echo json_encode(['success' => true]);
+  }
+}
+
+
+
+
+
 elseif(isset($_POST['save'])){
 
   $id = $_POST["id"];

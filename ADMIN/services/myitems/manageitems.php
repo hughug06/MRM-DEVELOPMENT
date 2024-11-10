@@ -732,16 +732,15 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="function.php" method="post">
                                     <!-- Name field -->
                                     <div class="mb-3">
-                                        <label for="brandName" class="form-label">Brand Name</label>
-                                        <input type="text" class="form-control" id="brandName" name="name" required>
+                                        <label for="addbrandName" class="form-label">Brand Name</label>
+                                        <input type="text" class="form-control" id="addbrandName" name="name" required>
                                     </div>
                                    <!-- Type field -->
                                     <div class="mb-3">
-                                        <label for="typeSelect" class="form-label">Type</label>
-                                        <select class="form-select" id="typeSelect" name="type" required>
+                                        <label for="addbrandtype" class="form-label">Type</label>
+                                        <select class="form-select" id="addbrandtype" name="type" required>
                                             <option value="">-- Select Type --</option>
                                             <option value="Solar">Solar</option>
                                             <option value="Generator">Generator</option>
@@ -751,14 +750,13 @@
 
                                     <!-- Amount field -->
                                     <div class="mb-3">
-                                        <label for="brandAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                        <label for="addbrandAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="addbrandAmount" name="amount" required>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" name="brand_save">Add Brand</button>
+                                        <button type="submit" class="btn btn-primary" id="addbrand">Add Brand</button>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -773,29 +771,27 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="editBrandForm" method="post" action="edit_brand.php">
                                     <input type="hidden" id="brandId" name="brand_id">
                                     
                                     <div class="mb-3">
                                         <label for="brandName" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="brandName" name="name" required>
+                                        <input type="text" class="form-control" id="editbrandName" name="name" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="brandType" class="form-label">Type</label>
-                                        <select class="form-select" id="brandType" name="type" required>
+                                        <label for="editbrandType" class="form-label">Type</label>
+                                        <select class="form-select" id="editbrandType" name="type" required>
                                             <option value="Solar">Solar</option>
                                             <option value="Generator">Generator</option>
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="brandAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                        <label for="editbrandAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="editbrandAmount" name="amount" required>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </form>
+                                    <button type="submit" name="brand_save" id="editbrand" class="btn btn-primary">Save Changes</button>
                             </div>
                         </div>
                     </div>
@@ -810,11 +806,10 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="function.php" method="post">
                                     <!-- Unit selection dropdown -->
                                     <div class="mb-3">
-                                        <label for="serviceUnit" class="form-label">Unit</label>
-                                        <select class="form-control" id="serviceUnit" name="service_unit" required>
+                                        <label for="item_unit" class="form-label">Unit</label>
+                                        <select class="form-control" id="item_unit" name="service_unit" required>
                                             <option value="">Select unit</option>
                                             <option value="items">Items</option>
                                             <option value="set">Set</option>
@@ -825,26 +820,25 @@
 
                                     <!-- Description field -->
                                     <div class="mb-3">
-                                        <label for="serviceDescription" class="form-label">Description</label>
-                                        <input type="text" class="form-control" id="serviceDescription" name="service_description" required>
+                                        <label for="itemdescription" class="form-label">Description</label>
+                                        <input type="text" class="form-control" id="item_description" name="service_description" required>
                                     </div>
 
                                     <!-- Quantity field -->
                                     <div class="mb-3">
-                                        <label for="serviceQuantity" class="form-label">Quantity</label>
-                                        <input type="number" class="form-control" id="serviceQuantity" name="service_quantity" required>
+                                        <label for="itemquantity" class="form-label">Quantity</label>
+                                        <input type="number" class="form-control" id="item_quantity" name="service_quantity" required>
                                     </div>
 
                                     <!-- Amount field -->
                                     <div class="mb-3">
-                                        <label for="serviceAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control" id="serviceAmount" name="service_amount" required>
+                                        <label for="itemamount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="item_amount" name="service_amount" required>
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" name="serviceItem_save">Add Service Item</button>
+                                        <button type="submit" class="btn btn-primary" id="item_add" name="serviceItem_save">Add Service Item</button>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -865,8 +859,8 @@
 
                                              <!-- Unit field as a select input -->
                                                 <div class="mb-3">
-                                                    <label for="editItemUnit" class="form-label">Unit</label>
-                                                    <select class="form-select" id="editItemUnit" name="item_unit" required>
+                                                    <label for="item_edit_unit" class="form-label">Unit</label>
+                                                    <select class="form-select" id="item_edit_unit" name="item_unit" required>
                                                         <option value="items">Items</option>
                                                         <option value="set">Set</option>
                                                         <option value="job">Job</option>
@@ -876,24 +870,24 @@
 
                                             <!-- Description field -->
                                             <div class="mb-3">
-                                                <label for="editItemDescription" class="form-label">Description</label>
-                                                <input type="text" class="form-control" id="editItemDescription" name="item_description" required>
+                                                <label for="item_edit_description" class="form-label">Description</label>
+                                                <input type="text" class="form-control" id="item_edit_description" name="item_description" required>
                                             </div>
 
                                             <!-- Quantity field -->
                                             <div class="mb-3">
-                                                <label for="editItemQuantity" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" id="editItemQuantity" name="item_quantity" required>
+                                                <label for="item_edit_quantity" class="form-label">Quantity</label>
+                                                <input type="number" class="form-control" id="item_edit_quantity" name="item_quantity" required>
                                             </div>
 
                                             <!-- Amount field -->
                                             <div class="mb-3">
-                                                <label for="editItemAmount" class="form-label">Amount</label>
-                                                <input type="number" class="form-control" id="editItemAmount" name="item_amount" required>
+                                                <label for="item_edit_amount" class="form-label">Amount</label>
+                                                <input type="number" class="form-control" id="item_edit_amount" name="item_amount" required>
                                             </div>
 
                                             <div class="modal-footer">  
-                                                <button type="submit" class="btn btn-primary" name="serviceItem_edit">Save Changes</button>
+                                                <button type="submit" class="btn btn-primary" id="item_edit" name="serviceItem_edit">Save Changes</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1353,10 +1347,10 @@
              
 
                 var modalItemIdInput = editItemModal.querySelector('#editItemId');
-                var modalItemUnitInput = editItemModal.querySelector('#editItemUnit');
-                var modalItemDescriptionInput = editItemModal.querySelector('#editItemDescription');
-                var modalItemNQuantityInput = editItemModal.querySelector('#editItemQuantity');
-                var modalItemAmountInput = editItemModal.querySelector('#editItemAmount');
+                var modalItemUnitInput = editItemModal.querySelector('#item_edit_unit');
+                var modalItemDescriptionInput = editItemModal.querySelector('#item_edit_description');
+                var modalItemNQuantityInput = editItemModal.querySelector('#item_edit_quantity');
+                var modalItemAmountInput = editItemModal.querySelector('#item_edit_amount');
 
                 modalItemIdInput.value = itemId;
                 modalItemUnitInput.value = itemUnit;
@@ -1384,9 +1378,9 @@
 
             // Populate the modal's form fields with the extracted data
             var modalIdInput = editBrandModal.querySelector('#brandId');
-            var modalNameInput = editBrandModal.querySelector('#brandName');
-            var modalTypeInput = editBrandModal.querySelector('#brandType');
-            var modalAmountInput = editBrandModal.querySelector('#brandAmount');
+            var modalNameInput = editBrandModal.querySelector('#editbrandName');
+            var modalTypeInput = editBrandModal.querySelector('#editbrandType');
+            var modalAmountInput = editBrandModal.querySelector('#editbrandAmount');
 
             modalIdInput.value = brand_id;
             modalNameInput.value = name;
@@ -1730,4 +1724,362 @@
         addNewRow('itemRepairGeneratorTableBody', itemCountRepairGenerator, 'repairGenerator');
     });
 </script>
+<script>
+    $(document).ready(function() {
+        //FOR ADDING BRAND
+        $('#addbrand').on('click', function(e) {
+            e.preventDefault();
+            const addbrandname = document.getElementById("addbrandName").value;
+            const addbrandtype = document.getElementById("addbrandtype").value;
+            const addbrandAmount = parseFloat(document.getElementById("addbrandAmount").value);
 
+            if(addbrandname == "" || addbrandtype == "" || addbrandAmount == ""){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Please Complete the Form",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(addbrandAmount < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Amount cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to confirm?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('brand_save', true);
+                        formData.append('name', addbrandname);
+                        formData.append('amount', addbrandAmount);
+                        formData.append('type', addbrandtype);
+                            
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                Swal.fire({
+                                    title: 'Brand Added!',
+                                    text: 'You have successfully added the Brand.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'manageitems.php';
+                                });
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error Adding the brand. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+
+        //FOR EDITING BRAND
+        $('#editbrand').on('click', function(e) {
+            e.preventDefault();
+            const editbrandName = document.getElementById("editbrandName").value;
+            const brandId = document.getElementById("brandId").value;
+            const editbrandtype = document.getElementById("editbrandType").value;
+            const editbrandAmount = parseFloat(document.getElementById("editbrandAmount").value);
+            if(editbrandName == "" || editbrandtype == "" || editbrandAmount == ""){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Please Complete the Form",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(editbrandAmount < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Amount cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to confirm?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('brand_edit', true);
+                        formData.append('id', brandId);
+                        formData.append('name', editbrandName);
+                        formData.append('amount', editbrandAmount);
+                        formData.append('type', editbrandtype);
+                            
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                Swal.fire({
+                                    title: 'Item Edited!',
+                                    text: 'You have successfully edited the brand.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'manageitems.php';
+                                });
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error editing the brand. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+
+        //FOR ADDING ITEMS
+        $('#item_add').on('click', function(e) {
+            e.preventDefault();
+            const item_unit = document.getElementById("item_unit").value;
+            const item_description = document.getElementById("item_description").value;
+            const item_quantity = parseFloat(document.getElementById("item_quantity").value);
+            const item_amount = parseFloat(document.getElementById("item_amount").value);
+
+            if(item_unit == "" || item_description == "" || item_quantity == "" || item_amount == ""){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Please Complete the Form",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(item_amount < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Amount cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(item_quantity < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "quantity cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to confirm?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('serviceItem_save', true);
+                        formData.append('service_unit', item_unit);
+                        formData.append('service_quantity', item_quantity);
+                        formData.append('service_description', item_description);
+                        formData.append('service_amount', item_amount);
+                            
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                Swal.fire({
+                                    title: 'Item Added!',
+                                    text: 'You have successfully added the item.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'manageitems.php';
+                                });
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error adding the item. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        //FOR EDITING ITEMS
+        $('#item_edit').on('click', function(e) {
+            e.preventDefault();
+            const editItemId = document.getElementById("editItemId").value;
+            const item_edit_unit = document.getElementById("item_edit_unit").value;
+            const item_edit_description = document.getElementById("item_edit_description").value;
+            const item_edit_quantity = parseFloat(document.getElementById("item_edit_quantity").value);
+            const item_edit_amount = parseFloat(document.getElementById("item_edit_amount").value);
+            alert(editItemId);
+            alert(item_edit_unit);
+            alert(item_edit_description);
+            alert(item_edit_quantity);
+            alert(item_edit_amount);
+
+            if(item_edit_unit == "" || item_edit_description == "" || item_edit_quantity == "" || item_edit_amount == ""){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Please Complete the Form",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(item_edit_amount < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "Amount cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else if(item_edit_quantity < 0){
+                Swal.fire({
+                    title: 'ERROR',
+                    html: "quantity cannot be less than 0",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            }
+            else{
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to confirm?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, send AJAX request for Add product
+                        var formData = new FormData();
+                        formData.append('serviceItem_edit', true);
+                        formData.append('item_unit', item_edit_unit);
+                        formData.append('item_id', editItemId);
+                        formData.append('item_quantity', item_edit_quantity);
+                        formData.append('item_description', item_edit_description);
+                        formData.append('item_amount', item_edit_amount);
+                            
+                        $.ajax({
+                            url: 'function.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data:formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                // Handle successful add
+                                Swal.fire({
+                                    title: 'Item Edited!',
+                                    text: 'You have successfully edited the item.',
+                                    icon: 'success',
+                                    allowOutsideClick: false,
+                                    timer: 2000, // 2 seconds timer
+                                    showConfirmButton: false // Hide the confirm button
+                                }).then(() => {
+                                    // Redirect after the timer ends
+                                    window.location.href = 'manageitems.php';
+                                });
+                            },
+                            error: function(response) {
+                                // Handle erro
+                                Swal.fire(
+                                    'Error!',
+                                    'There was an error editing the item. Please try again.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
