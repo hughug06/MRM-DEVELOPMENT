@@ -523,8 +523,8 @@
                 <?php 
                  $count_appointment = 0;
                  $userid = $_SESSION['account_id'];
-                 $sql_select = "select COUNT(*) AS total_appointments from appointments 
-                 where appointments.account_id = '$userid' and appointments.status = 'Waiting' OR appointments.status = 'Approved' OR appointments.status = 'Checking' ";
+                 $sql_select = "select COUNT(*) AS total_appointments from service_booking 
+                 where service_booking.account_id = '$userid' and service_booking.status = 'Waiting' OR service_booking.status = 'Approved' OR service_booking.status = 'Checking' ";
                  $sql_result = mysqli_query($conn, $sql_select);
                  $row_count_appointments = mysqli_fetch_assoc($sql_result);
                  $count_appointment = $row_count_appointments['total_appointments'];    
@@ -751,7 +751,7 @@
                             <?php
                         
                             $userid = $_SESSION['account_id'];
-                            $sql = "select * from appointments                
+                            $sql = "select * from service_booking                
                             where account_id = '$userid'";
                             $result = mysqli_query($conn, $sql);
 
