@@ -6,6 +6,10 @@ require_once '../../../ADMIN/authetincation.php';
 
 $service_type = $_POST['serviceType']; 
 $product_type = $_POST['productType'];   
+ //NOT CUSTOM
+ $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
+ //CUSTOM INPUT
+ $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
 if (isset($_POST['installation_submit'])) {
  
         $totalCost = 0;
@@ -20,10 +24,7 @@ if (isset($_POST['installation_submit'])) {
 
         $quantity = $_POST['quantity'];  
 
-        //NOT CUSTOM
-        $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
-        //CUSTOM INPUT
-        $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
+       
 
         
 
@@ -42,8 +43,7 @@ else if(isset($_POST['tuneup_submit'])){
         $kva = $_POST['kva'];
         $running_hours = $_POST['running_hours'];
         $brand = $_POST['brand'];
-        echo "TEST";
-        exit();
+        
 }
 ?>
 
@@ -157,60 +157,12 @@ else if(isset($_POST['tuneup_submit'])){
                     $mark_up = $quotation * .1;
                     $final_value = $quotation + $mark_up;
                     
+                    while ($row = mysqli_fetch_assoc($result_solar)) {
+                        $rows_generator[] = $row;
+                    }
+
                     ?> 
-                    <div class="container my-5">
-                        <div class="text-center mb-4">
-                        <h4>Address: Aguilar Pangasinan</h4>
-                        <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
-                        <h6>Bugallon Pangasinan</h6>
-                        </div>
-                    
-                    <table class="table table-bordered">
-                    <thead class="table-warning text-center">
-                        <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Unit</th>
-                        <th>Qty</th>
-                        <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        $totalitem = 1;
-                        while($row = mysqli_fetch_assoc($result_solar))
-                        {
-                        ?>
-                        <tr>
-                        <td><?= $totalitem++ ?></td>
-                        <td><?= $row['description'] ?></td>
-                        <td><?= $row['unit'] ?></td>
-                        <td><?= $row['quantity'] ?></td>
-                        <td></td>
-                        </tr>
-                        <?php 
-                        }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr class="table-warning text-center">
-                        <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
-                        <td>₱<strong><?= $final_value ?></strong></td>
-                        </tr>
-                       
-                    </tfoot>
-                    
-                    </table>
-                   
-                    <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
-                    <!-- Checkbox for accepting terms and conditions -->
-                    <div class="form-check text-center mt-4">
-                        <label class="form-check-label" for="acceptTerms">
-                        <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                            I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                        </label>
-                    </div>
-                </div>    
+                      
                    <?php
                     
                     }
@@ -223,8 +175,7 @@ else if(isset($_POST['tuneup_submit'])){
                 $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                        
 
-                // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
-              
+            
                 $service_pricing = "select * from service_pricing"; 
                 $package_installation_solar = "select * from package_installation_solar";
 
@@ -258,68 +209,26 @@ else if(isset($_POST['tuneup_submit'])){
                 $mark_up = $quotation * .1;
                 $final_value = $quotation + $mark_up;
                 
+
+                while ($row = mysqli_fetch_assoc($result_generator)) {
+                    $rows_generator[] = $row;
+                }
+
                 ?> 
-                <div class="container my-5">
-                    <div class="text-center mb-4">
-                    <h4>Address: Aguilar Pangasinan</h4>
-                    <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
-                    <h6>Bugallon Pangasinan</h6>
-                    </div>
-                
-                <table class="table table-bordered">
-                <thead class="table-warning text-center">
-                    <tr>
-                    <th>Item</th>
-                    <th>Description</th>
-                    <th>Unit</th>
-                    <th>Qty</th>
-                    <th>Remarks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $totalitem = 1;
-                    while($row = mysqli_fetch_assoc($result_generator))
-                    {
-                    ?>
-                    <tr>
-                    <td><?= $totalitem++ ?></td>
-                    <td><?= $row['description'] ?></td>
-                    <td><?= $row['unit'] ?></td>
-                    <td><?= $row['quantity'] ?></td>
-                    <td></td>
-                    </tr>
-                    <?php 
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr class="table-warning text-center">
-                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
-                    <td>₱<strong><?= $final_value ?></strong></td>
-                    </tr>
-                   
-                </tfoot>
-                
-                </table>
-               
-                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
-                <!-- Checkbox for accepting terms and conditions -->
-                <div class="form-check text-center mt-4">
-                    <label class="form-check-label" for="acceptTerms">
-                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                    </label>
-                </div>
-            </div>    
+                  
             <?php
              }  
              else if($option1 && $service_type == 'installation' && $product_type == 'generator'){    
-                $sql = "select * from brand where name = '$option1' and type = 'generator'";
-                $result = mysqli_query($conn , $sql);
+                $sql = "select * from products where ProductName = '$option1'";
+                $result = mysqli_query($conn , $sql);         
                 $row = mysqli_fetch_assoc($result);
-                $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                $stocks = $row['stock']; 
+                $amount = $row['max_price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                        
+                if($stocks < $quantity){
+                    echo "Product is out of stock"; // SHOW FALSE
+                    exit();
+                }
 
                 // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
               
@@ -356,66 +265,368 @@ else if(isset($_POST['tuneup_submit'])){
                 $mark_up = $quotation * .1;
                 $final_value = $quotation + $mark_up;
                 
+                while ($row = mysqli_fetch_assoc($result_generator)) {
+                    $rows_generator[] = $row;
+                }
                 ?> 
-                <div class="container my-5">
-                    <div class="text-center mb-4">
-                    <h4>Address: Aguilar Pangasinan</h4>
-                    <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
-                    <h6>Bugallon Pangasinan</h6>
-                    </div>
-                
-                <table class="table table-bordered">
-                <thead class="table-warning text-center">
-                    <tr>
-                    <th>Item</th>
-                    <th>Description</th>
-                    <th>Unit</th>
-                    <th>Qty</th>
-                    <th>Remarks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $totalitem = 1;
-                    while($row = mysqli_fetch_assoc($result_generator))
-                    {
-                    ?>
-                    <tr>
-                    <td><?= $totalitem++ ?></td>
-                    <td><?= $row['description'] ?></td>
-                    <td><?= $row['unit'] ?></td>
-                    <td><?= $row['quantity'] ?></td>
-                    <td></td>
-                    </tr>
-                    <?php 
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr class="table-warning text-center">
-                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
-                    <td>₱<strong><?= $final_value ?></strong></td>
-                    </tr>
-                   
-                </tfoot>
-                
-                </table>
-               
-                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
-                <!-- Checkbox for accepting terms and conditions -->
-                <div class="form-check text-center mt-4">
-                    <label class="form-check-label" for="acceptTerms">
-                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                    </label>
-                </div>
-            </div>  
+                 
                 <?php 
                 }
-                ?>
-               
+                else if($option2 && $service_type == 'installation' && $product_type == 'generator'){ 
+                    $sql = "select * from brand where name = '$option2' and type = 'generator'";
+                    $result = mysqli_query($conn , $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $amount = $row['amount'] * $quantity;   // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                           
+                    // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
+                  
+                    $service_pricing = "select * from service_pricing"; 
+                    $package_installation_solar = "select * from package_installation_generator";
+    
+                    $result_generator = mysqli_query($conn , $package_installation_solar);
+                    $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                    while($row = mysqli_fetch_assoc($result_generator)){
+                        // Make sure to reset $result_pricing before looping through it again
+                        mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                        while($row2 = mysqli_fetch_assoc($result_pricing)){
+                            if($row2['quantity'] < $row['quantity']){
+                                echo "not on stock<br>";    // FALSE 
+                                exit();
+                            }
+                            else if($row2['quantity'] > $row['quantity']){
+                                echo "on stock<br>";    // PROCEED
+                            }
+                        }
+                    }
+    
+                    
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
+                    while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                        $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                    }
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                    $quotation = $amount + $totalCost;
+                    $mark_up = $quotation * .1;
+                    $final_value = $quotation + $mark_up;
+                    
+                    while ($row = mysqli_fetch_assoc($result_generator)) {
+                        $rows_generator[] = $row;
+                    }
+                    ?> 
+                    
+               <?php 
+               }
+              else if($service_type == 'tune-up' && $product_type == 'generator'){
+
+                $sql = "select * from brand where name = '$brand' and type = 'generator'";
+                $result = mysqli_query($conn , $sql);
+                $row = mysqli_fetch_assoc($result);
+                $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                       
+
+            
+                $service_pricing = "select * from service_pricing"; 
+                $package_installation_solar = "select * from package_tuneup_generator";
+
+                $result_generator = mysqli_query($conn , $package_installation_solar);
+                $result_pricing = mysqli_query($conn , $service_pricing);
+
+                while($row = mysqli_fetch_assoc($result_generator)){
+                    // Make sure to reset $result_pricing before looping through it again
+                    mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+
+                    while($row2 = mysqli_fetch_assoc($result_pricing)){
+                        if($row2['quantity'] < $row['quantity']){
+                            echo "not on stock<br>";    // FALSE 
+                            exit();
+                        }
+                        else if($row2['quantity'] > $row['quantity']){
+                            echo "on stock<br>";    // PROCEED
+                        }
+                    }
+                }
+
                 
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                
+                while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                    $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                }
+                mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                $quotation = $amount + $totalCost;
+                $mark_up = $quotation * .1;
+                $final_value = $quotation + $mark_up;
+                
+                while ($row = mysqli_fetch_assoc($result_generator)) {
+                    $rows_generator[] = $row;
+                }
+
+                ?> 
+                
+                <?php 
+                }
+                else if($service_type == 'maintenance' && $product_type == 'solar'){
+                
+                    $sql = "select * from brand where name = '$brand' and type = 'solar'";
+                    $result = mysqli_query($conn , $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                           
+    
+                
+                    $service_pricing = "select * from service_pricing"; 
+                    $package_installation_solar = "select * from package_maintenance_solar";
+    
+                    $result_generator = mysqli_query($conn , $package_installation_solar);
+                    $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                    while($row = mysqli_fetch_assoc($result_generator)){
+                        // Make sure to reset $result_pricing before looping through it again
+                        mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                        while($row2 = mysqli_fetch_assoc($result_pricing)){
+                            if($row2['quantity'] < $row['quantity']){
+                                echo "not on stock<br>";    // FALSE 
+                                exit();
+                            }
+                            else if($row2['quantity'] > $row['quantity']){
+                                echo "on stock<br>";    // PROCEED
+                            }
+                        }
+                    }
+    
+                    
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
+                    while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                        $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                    }
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                    $quotation = $amount + $totalCost;
+                    $mark_up = $quotation * .1;
+                    $final_value = $quotation + $mark_up;
+                    
+                    while ($row = mysqli_fetch_assoc($result_generator)) {
+                        $rows_generator[] = $row;
+                    }
+
+                    ?> 
+                   
+                <?php
+                }
+                else if($service_type == 'maintenance' && $product_type == 'generator'){
+                    $sql = "select * from brand where name = '$brand' and type = 'generator'";
+                    $result = mysqli_query($conn , $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                           
+    
+                
+                    $service_pricing = "select * from service_pricing"; 
+                    $package_installation_solar = "select * from package_maintenance_generator";
+    
+                    $result_generator = mysqli_query($conn , $package_installation_solar);
+                    $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                    while($row = mysqli_fetch_assoc($result_generator)){
+                        // Make sure to reset $result_pricing before looping through it again
+                        mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                        while($row2 = mysqli_fetch_assoc($result_pricing)){
+                            if($row2['quantity'] < $row['quantity']){
+                                echo "not on stock<br>";    // FALSE 
+                                exit();
+                            }
+                            else if($row2['quantity'] > $row['quantity']){
+                                echo "on stock<br>";    // PROCEED
+                            }
+                        }
+                    }
+    
+                    
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
+                    while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                        $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                    }
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                    $quotation = $amount + $totalCost;
+                    $mark_up = $quotation * .1;
+                    $final_value = $quotation + $mark_up;
+                    
+                    
+                   
+                        
+                        while ($row = mysqli_fetch_assoc($result_generator)) {
+                            $rows_generator[] = $row;
+                        }
+                    
+
+                    ?> 
+                   
+                <?php 
+                }
+                else if($service_type == 'repair' && $product_type == 'solar'){
+                    $sql = "select * from brand where name = '$brand' and type = 'solar'";
+                    $result = mysqli_query($conn , $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                           
+    
+                
+                    $service_pricing = "select * from service_pricing"; 
+                    $package_installation_solar = "select * from package_repair_solar";
+    
+                    $result_generator = mysqli_query($conn , $package_installation_solar);
+                    $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                    while($row = mysqli_fetch_assoc($result_generator)){
+                        // Make sure to reset $result_pricing before looping through it again
+                        mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                        while($row2 = mysqli_fetch_assoc($result_pricing)){
+                            if($row2['quantity'] < $row['quantity']){
+                                echo "not on stock<br>";    // FALSE 
+                                exit();
+                            }
+                            else if($row2['quantity'] > $row['quantity']){
+                                echo "on stock<br>";    // PROCEED
+                            }
+                        }
+                    }
+    
+                    
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
+                    while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                        $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                    }
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                    $quotation = $amount + $totalCost;
+                    $mark_up = $quotation * .1;
+                    $final_value = $quotation + $mark_up;
+                    
+                    
+                   
+                        
+                        while ($row = mysqli_fetch_assoc($result_generator)) {
+                            $rows_generator[] = $row;
+                        }
+                    
+
+                    ?> 
+
+                    <?php
+                }
+                else if($service_type == 'repair' && $product_type == 'generator'){
+                    $sql = "select * from brand where name = '$brand' and type = 'generator'";
+                    $result = mysqli_query($conn , $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $amount = $row['amount'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                           
+    
+                
+                    $service_pricing = "select * from service_pricing"; 
+                    $package_installation_solar = "select * from package_repair_generator";
+    
+                    $result_generator = mysqli_query($conn , $package_installation_solar);
+                    $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                    while($row = mysqli_fetch_assoc($result_generator)){
+                        // Make sure to reset $result_pricing before looping through it again
+                        mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                        while($row2 = mysqli_fetch_assoc($result_pricing)){
+                            if($row2['quantity'] < $row['quantity']){
+                                echo "not on stock<br>";    // FALSE 
+                                exit();
+                            }
+                            else if($row2['quantity'] > $row['quantity']){
+                                echo "on stock<br>";    // PROCEED
+                            }
+                        }
+                    }
+    
+                    
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    
+                    while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                        $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                    }
+                    mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                    // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                    $quotation = $amount + $totalCost;
+                    $mark_up = $quotation * .1;
+                    $final_value = $quotation + $mark_up;
+                    
+                    
+                   
+                        
+                        while ($row = mysqli_fetch_assoc($result_generator)) {
+                            $rows_generator[] = $row;
+                        }
+                    
+
+                }
+                ?>
             </div>
+            <div class="container my-5">
+                        <div class="text-center mb-4">
+                            <h4>Address: Aguilar Pangasinan</h4>
+                            <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
+                            <h6>Bugallon Pangasinan</h6>
+                        </div>
+                        
+                        <table class="table table-bordered">
+                            <thead class="table-warning text-center">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                    <th>Unit</th>
+                                    <th>Qty</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                $totalitem = 1;
+                                foreach ($rows_generator as $row):
+                                ?>
+                                <tr>
+                                    <td><?= $totalitem++ ?></td>
+                                    <td><?= htmlspecialchars($row['description']) ?></td>
+                                    <td><?= htmlspecialchars($row['unit']) ?></td>
+                                    <td><?= htmlspecialchars($row['quantity']) ?></td>
+                                    <td></td>
+                                </tr>
+                                <?php 
+                                endforeach;
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-warning text-center">
+                                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                                    <td>₱<strong><?= htmlspecialchars($final_value) ?></strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
+                    <!-- Checkbox for accepting terms and conditions -->
+                    <div class="form-check text-center mt-4">
+                        <label class="form-check-label" for="acceptTerms">
+                        <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                            I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                        </label>
+                    </div>
+                    </div>
             </div>
             </div>
         </div>
