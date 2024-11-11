@@ -136,12 +136,9 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
+                                // SHOW ERROR 
                             }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                            
                         }
                     }
     
@@ -188,12 +185,10 @@ else if(isset($_POST['tuneup_submit'])){
 
                     while($row2 = mysqli_fetch_assoc($result_pricing)){
                         if($row2['quantity'] < $row['quantity']){
-                            echo "not on stock<br>";    // FALSE 
-                            exit();
+                              // SHOW ERROR 
+                            
                         }
-                        else if($row2['quantity'] > $row['quantity']){
-                            echo "on stock<br>";    // PROCEED
-                        }
+                        
                     }
                 }
 
@@ -244,12 +239,9 @@ else if(isset($_POST['tuneup_submit'])){
 
                     while($row2 = mysqli_fetch_assoc($result_pricing)){
                         if($row2['quantity'] < $row['quantity']){
-                            echo "not on stock<br>";    // FALSE 
-                            exit();
+                            // SHOW ERROR 
                         }
-                        else if($row2['quantity'] > $row['quantity']){
-                            echo "on stock<br>";    // PROCEED
-                        }
+                       
                     }
                 }
 
@@ -292,12 +284,8 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
-                            }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                                // SHOW ERROR 
+                            }                        
                         }
                     }
     
@@ -341,12 +329,9 @@ else if(isset($_POST['tuneup_submit'])){
 
                     while($row2 = mysqli_fetch_assoc($result_pricing)){
                         if($row2['quantity'] < $row['quantity']){
-                            echo "not on stock<br>";    // FALSE 
-                            exit();
+                            // SHOW ERROR 
                         }
-                        else if($row2['quantity'] > $row['quantity']){
-                            echo "on stock<br>";    // PROCEED
-                        }
+                       
                     }
                 }
 
@@ -391,12 +376,9 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
+                                // SHOW ERROR 
                             }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                           
                         }
                     }
     
@@ -440,12 +422,9 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
+                                // SHOW ERROR 
                             }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                            
                         }
                     }
     
@@ -493,12 +472,9 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
+                                // SHOW ERROR 
                             }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                            
                         }
                     }
     
@@ -546,12 +522,9 @@ else if(isset($_POST['tuneup_submit'])){
     
                         while($row2 = mysqli_fetch_assoc($result_pricing)){
                             if($row2['quantity'] < $row['quantity']){
-                                echo "not on stock<br>";    // FALSE 
-                                exit();
+                                // SHOW ERROR 
                             }
-                            else if($row2['quantity'] > $row['quantity']){
-                                echo "on stock<br>";    // PROCEED
-                            }
+                            
                         }
                     }
     
