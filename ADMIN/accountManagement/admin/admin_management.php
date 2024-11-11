@@ -98,7 +98,7 @@
                                            <?php 
                                            require '../../../Database/database.php';
                                            require 'function.php';
-                                           $select = "Select * from user_info INNER JOIN accounts on user_info.email = accounts.email where role = 'admin' || role = 'service_worker' || role = 'agent'";
+                                           $select = "Select * from user_info INNER JOIN accounts on user_info.email = accounts.email where role = 'admin' || role = 'worker' || role = 'agent'";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){

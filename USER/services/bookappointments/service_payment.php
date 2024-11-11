@@ -21,9 +21,6 @@ if (isset($_POST['installation_submit'])) {
         $totalCost = 0;
     //4 HIDDEN DATA
         $availability_id = $_POST['availability_id'];
-        $date = $_POST['date'];
-        $start_time = $_POST['start_time'];
-        $end_time = $_POST['end_time'];
 
         //user input
         $pin_location = $_POST['location'];
@@ -38,9 +35,6 @@ else if(isset($_POST['tuneup_submit'])){
     $totalCost = 0;
     //4 HIDDEN DATA
         $availability_id = $_POST['availability_id'];
-        $date = $_POST['date'];
-        $start_time = $_POST['start_time'];
-        $end_time = $_POST['end_time'];
 
         //user input
         $pin_location = $_POST['location'];
@@ -49,6 +43,7 @@ else if(isset($_POST['tuneup_submit'])){
         $running_hours = $_POST['running_hours'];
         $brand = $_POST['brand'];
         
+
 }
 ?>
 
@@ -678,7 +673,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     <p>TOTAL :₱<strong><?= htmlspecialchars($final_value) ?></strong></p>
                                                                 </div>
                                                             
-                                                                <form action="/USER/services/bookappointments/service_payment.php" method="POST" enctype="multipart/form-data">
+                                                                <form action="process_booking.php" method="POST" enctype="multipart/form-data">
                                                                     <div class="row mb-3">
                                                                         <!-- First Row -->
                                                                         <div class="col">
@@ -708,15 +703,42 @@ else if(isset($_POST['tuneup_submit'])){
                                                                         </div>
                                                                     </div>
 
-                                                                     <!-- Hidden fields for account_id and appointment_id -->
-                                                                        <input type="hidden" name="account_id" value="">
-                                                                        <input type="hidden" name="appointment_id" value="">
-                                                                        <input type="hidden" name="">
+                                                                     <?php if(isset($_POST['tuneup_submit'])){
 
+                                                                     ?>
+                                                                        <!-- Hidden input fields -->
+                                                                        <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
+
+                                                                        <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
+                                                                        <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
+                                                                        <input type="text" name="kva" value="<?= htmlspecialchars($kva); ?>">
+                                                                        <input type="text" name="running_hours" value="<?= htmlspecialchars($running_hours); ?>">
+                                                                        <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
+                                                                        <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
+
+                                                                    <?php 
+                                                                     }
+                                                                     else if(isset($_POST['installation_submit'])){
+   
+                                                                    ?>
+                                                                        <!-- Hidden input fields -->
+                                                                        <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">
+
+                                                                        <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
+                                                                        <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
+                                                                        <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
+                                                                        <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
+                                                                        <input type="text" name="kva" value="N/A">
+                                                                        <input type="text" name="running_hours" value="N/A">
+                                                                    <?php 
+                                                                       }
+                                                                    ?>
                                                                     <!-- Submit Button -->
                                                                     <div class="text-center mt-3">
-                                                                   
-                                                                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                                                    <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type); ?>">
+                                                                    <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type); ?>">
+
+                                                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
                                                                     </div>
                                                                 </form>
 

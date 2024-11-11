@@ -521,15 +521,15 @@
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
                 <?php 
-                 $count_appointment = 0;
-                 $userid = $_SESSION['account_id'];
-                 $sql_select = "select COUNT(*) AS total_appointments from service_booking 
-                 where service_booking.account_id = '$userid' and service_booking.status = 'Waiting' OR service_booking.status = 'Approved' OR service_booking.status = 'Checking' ";
-                 $sql_result = mysqli_query($conn, $sql_select);
-                 $row_count_appointments = mysqli_fetch_assoc($sql_result);
-                 $count_appointment = $row_count_appointments['total_appointments'];    
+                //  $count_appointment = 0;
+                //  $userid = $_SESSION['account_id'];
+                //  $sql_select = "select COUNT(*) AS total_appointments from service_booking 
+                //  where service_booking.account_id = '$userid' and service_booking.status = 'Waiting' OR service_booking.status = 'Approved' OR service_booking.status = 'Checking' ";
+                //  $sql_result = mysqli_query($conn, $sql_select);
+                //  $row_count_appointments = mysqli_fetch_assoc($sql_result);
+                //  $count_appointment = $row_count_appointments['total_appointments'];    
                 ?>
-                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount"><?= $count_appointment ?></span>
+                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount">0</span>
             </a>
             <!-- End::header-link -->
         </div>
@@ -768,78 +768,24 @@
                                         <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
                                         <td> N/A</td>
                                         
-                                            <?php 
-                                            $appoint_id = $row['appointment_id'];                                   
-                                            $payment_check = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
-                                            $payment_check_result = mysqli_query($conn , $payment_check);
-                                            $payment_status = mysqli_fetch_assoc($payment_check_result);
-                                            if(mysqli_num_rows($payment_check_result) > 0){
-                                                
-                                            
-                                                if($payment_status['payment_status'] === "pending"){
-                                                    echo "<td class='text-primary " . $payment_status['payment_status'] . "'>" . $payment_status['payment_status'] . "</td>";
-
-                                                }
-                                                else if($payment_status['payment_status'] === "confirmed"){
-                                                    echo "<td class='text-primary " . "'>Under review " ."</td>";
-
-                                                }
-                                                else if($payment_status['payment_status'] === "approved"){
-                                                    echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
-
-                                                }
-                                                else if($payment_status['payment_status'] === "rejected"){
-                                                    echo "<td class='text-success " . $payment_status['payment_status'] . "'> " . $payment_status['payment_status'] . "</td>";
-                                                }
-                                                                                        
-                                            }
-                                            else{
-                                                echo "<td class='text-danger " . "'>Unpaid " ."</td>";
-                                            }
-                                            ?>
+                                           
                                         
                                         <td><?= htmlspecialchars($row['status']) ?></td>
                                         <td>
-                                            <?php 
-                                            if ($row['status'] === "Pending")
-                                            { 
-
-                                            ?>
-                                             <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
-                                            <?php 
-                                            }
-                                            else if($row['status'] === "Completed"){
-
-                                                ?> 
+                                            
                                                
 
                                             
                                                 
-                                                <?php
-                                            }
-                                        else{
-                                                $checker = "select * from service_payment where account_id = '$userid' and appointment_id = '$appoint_id'";
-                                                $check_result = mysqli_query($conn , $checker);
-                                                if(mysqli_num_rows($check_result) > 0)
-                                                {
-
                                                 
-                                                ?>
                                                 <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
 
-                                                <?php
-                                                }
-                                                else if($row['status'] == "Waiting"){
-                                                    
                                                 
-                                                ?>
+                                                
                                             <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
                                                                     
-                                                <?php 
-                                                }
-                                                }
                                                 
-                                                ?>
+                                                
                                         </td>
                                     </tr>
                                     <?php 

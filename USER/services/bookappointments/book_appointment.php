@@ -7,9 +7,6 @@ if (isset($_POST['submit'])) {
    
 //4 HIDDEN DATA
 $availability_id = $_POST['availability_id'];
-$date = $_POST['date'];
-$start_time = $_POST['start_time'];
-$end_time = $_POST['end_time'];
 
 //user input
 $full_name = $_POST['name'];

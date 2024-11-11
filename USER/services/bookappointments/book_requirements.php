@@ -116,7 +116,7 @@ require_once '../../../ADMIN/authetincation.php';
                         <div class="row mb-3">
                             <div class="col-md-4">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
-                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
+                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal" required>
                             </div>
                             
                         </div>
@@ -174,9 +174,6 @@ require_once '../../../ADMIN/authetincation.php';
                         </div>
                      
                         <input type="hidden" value="<?=$_GET['availability_id'] ?>" name="availability_id">
-                        <input type="hidden" value="<?=$_GET['date']; ?>" name="date">
-                        <input type="hidden" value="<?=$_GET['start_time']; ?>" name="start_time">
-                        <input type="hidden" value="<?=$_GET['end_time']; ?>" name="end_time">
 
                     </form>
                 </div>

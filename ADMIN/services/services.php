@@ -148,7 +148,7 @@ include_once '../../Database/database.php';
                                         <tbody>
                                            <?php 
                                            require '../../Database/database.php';                                          
-                                           $select = "Select * from admin_availability";
+                                           $select = "Select * from service_availability";
                                            $result = mysqli_query($conn , $select);
                                            if(mysqli_num_rows($result) > 0){
                                             foreach($result as $resultItem){

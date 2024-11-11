@@ -9,37 +9,31 @@
     $count_approved = 0;
     $count_canceled = 0;
 
-    // Pending
-    $pending_count = "SELECT COUNT(*) AS total_pending FROM appointments WHERE status = 'Pending'";
-    $pending_result = mysqli_query($conn , $pending_count);
-    $row_count_pending = mysqli_fetch_assoc($pending_result);
-    $count_pending = $row_count_pending['total_pending'];
+    // // Pending
+    // $pending_count = "SELECT COUNT(*) AS total_pending FROM service_booking WHERE status = 'Pending'";
+    // $pending_result = mysqli_query($conn , $pending_count);
+    // $row_count_pending = mysqli_fetch_assoc($pending_result);
+    // $count_pending = $row_count_pending['total_pending'];
 
-    // waiting for payment
-    $waiting_count = "SELECT COUNT(*) AS total_waiting FROM appointments WHERE status = 'Waiting'";
-    $waiting_result = mysqli_query($conn, $waiting_count);  
-    $row_count_waiting = mysqli_fetch_assoc($waiting_result);  // Fetch the result as an associative array
-    $count_waiting = $row_count_waiting['total_waiting']; 
+    // // waiting for payment
+    // $waiting_count = "SELECT COUNT(*) AS total_waiting FROM service_booking WHERE status = 'Waiting'";
+    // $waiting_result = mysqli_query($conn, $waiting_count);  
+    // $row_count_waiting = mysqli_fetch_assoc($waiting_result);  // Fetch the result as an associative array
+    // $count_waiting = $row_count_waiting['total_waiting']; 
 
-    //payment checking
-    $checking_count = "SELECT COUNT(*) AS total_checking FROM service_payment where payment_status = 'confirmed'";
-    $checking_result = mysqli_query($conn, $checking_count);  
-    $row_count_checking = mysqli_fetch_assoc($checking_result);  // Fetch the result as an associative array
-    $count_checking = $row_count_checking['total_checking']; 
+    // //payment checking
+    // $checking_count = "SELECT COUNT(*) AS total_checking FROM service_payment where payment_status = 'confirmed'";
+    // $checking_result = mysqli_query($conn, $checking_count);  
+    // $row_count_checking = mysqli_fetch_assoc($checking_result);  // Fetch the result as an associative array
+    // $count_checking = $row_count_checking['total_checking']; 
 
-    //approved payment
-    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment 
-                       inner join appointments on appointments.appointment_id = service_payment.appointment_id
-                       where payment_status = 'approved' AND status = 'Approved'";
-    $approved_result = mysqli_query($conn, $approved_count);  
-    $row_count_approved = mysqli_fetch_assoc($approved_result);  // Fetch the result as an associative array
-    $count_approved = $row_count_approved['total_approved']; 
+ 
     
-     // Cancel
-     $canceled_count = "SELECT COUNT(*) AS total_canceled FROM appointments WHERE status = 'Canceled'";
-     $canceled_result = mysqli_query($conn , $canceled_count);
-     $row_count_canceled = mysqli_fetch_assoc($canceled_result);
-     $count_canceled = $row_count_canceled['total_canceled'];
+    //  // Cancel
+    //  $canceled_count = "SELECT COUNT(*) AS total_canceled FROM service_booking WHERE status = 'Canceled'";
+    //  $canceled_result = mysqli_query($conn , $canceled_count);
+    //  $row_count_canceled = mysqli_fetch_assoc($canceled_result);
+    //  $count_canceled = $row_count_canceled['total_canceled'];
     
 ?>
 
@@ -98,69 +92,24 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                
-                <!-- MODAL FOR SELECTING WORKER -->
+        
                 <div class="container-fluid">
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">SET QUOTATION</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="set_quotation.php" method="POST">        
-                                                <input type="hidden" name="account_id" id="user_id">
-                                                <input type="hidden" name="appointment_id" id="appointment_id">               
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Item No.</th>
-                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                            <th>Description</th>
-                                                            <th>Quantity</th>
-                                                            <th>Amount</th>
-                                                            <th>Total Cost</th>
-                                                            <th>Action</th> <!-- Action Column for the close button -->
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="itemTableBody">
-                                                        <!-- Rows will be added here dynamically -->
-                                                    </tbody>
-                                                </table>
-
-                                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
-                                                <!-- Submit Button -->
-                                                <button type="add" class="btn btn-success mt-3">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     <div class="row square row-sm">
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
-                                    <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#pending">Pending
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_pending ?></span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#profile">Waiting for Payment
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_waiting ?></span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#chain">Payment Checking
+
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#payment_checking">Payment Checking
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_checking ?></span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved">Approved
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#on_going">On going
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Completed
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#contact">Cancelled Appointment
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Cancel
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_canceled ?></span>
                                     </a>
                                 </nav>
@@ -169,215 +118,64 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="card custom-card main-content-body-profile">
                                         <div class="tab-content">
-                                            <div class="main-content-body tab-pane p-4 border-top-0 active" id="pending">
-                                                <div class="mb-4 main-content-label">Pending</div>
-                                                <div class="card-body border"> 
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Pending'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    $count_pending++;
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?= $resultItem['status']?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                        <?php 
-                                                                        if($resultItem['status'] === "Canceled"){
-
-                                                                            echo "no available action";
-                                                                    
-                                                                        ?> 
-                                                                        
-                                                                        <?php 
-                                                                        }
-                                                                        else if($resultItem['status'] === "Approved" ){
-
-                                                                        
-                                                                        ?>       
-                                                                        <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
-                                                                                                                
-                                                                        <?php 
-                                                                                        
-                                                                        }
-                                                                        else if($resultItem['status'] === "Pending"){
-                                                                            
-                                                                        ?> 
-                                                                        <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                        data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                        data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                        data-bs-toggle="modal" 
-                                                                        data-bs-target="#staticBackdrop">
-                                                                            <i class="fe fe-edit-2">SET QUOTATION</i>
-                                                                        </a>
-                                                                        <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger d-none"> <i class="fe fe-trash">REJECT</i>  </a>
-                                                                        <?php                                                               
-                                                                    }
-                                                                    
-                                                                        ?> 
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>       
-                                                </div>
-                                            </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="profile">
-                                                <div class="mb-4 main-content-label">Waiting for Payment</div>
-                                                <div class="card-body border"> 
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Appointment Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Waiting'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?=  "Waiting to pay" ?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                    <?= "No action available"?>
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>                            
-                                                </div>
-                                            </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="chain">
+                                    
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="payment_checking">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
                                                 <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
-                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments 
-                                                                        INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
-                                                                        where payment_status = 'checking' and status = 'Checking'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
-                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
-                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
-                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
-                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
-                                                                                                    
-                                                                    <td>
-                                                                    <a href="#" 
-                                                                    class="btn btn-sm btn-success payment-check-button" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#paymentCheckModal"
-                                                                    data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                    data-appointment-id="<?= $resultItem['appointment_id'] ?>"
-                                                                    data-payment-id="<?= $resultItem['payment_id'] ?>">
-                                                                        Check Payment <i class="fa fa-check-circle"></i>
-                                                                    </a>
-                                                                    
-                                                                </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
+                                                    <div class="row">
+                                                        <?php 
+                                                                                                                                                                        
+                                                        $select = "SELECT * FROM service_booking     
+                                                                    INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id                                       
+                                                                    WHERE payment_status ='advance_payment' AND booking_status = 'pending'";
+                                                        $result = mysqli_query($conn , $select);
+                                                        $row = mysqli_fetch_assoc($result);
+                                                        $account_id = $row['account_id'];
+                                                        $name = "select * from accounts 
+                                                                inner join user_info on user_info.user_id = accounts.user_id
+                                                                where account_id = '$account_id'";
+                                                        $result_name = mysqli_query($conn , $name);
+                                                        $row_name = mysqli_fetch_assoc($result_name);
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            foreach ($result as $resultItem) { 
+                                                        ?>
+                                                            <div class="col-md-4">
+                                                                <div class="card mb-4">
+                                                                    <div class="card-header">
+                                                                        <h5 class="card-title"><?= htmlspecialchars($row_name['first_name']) .' '.htmlspecialchars($row_name['last_name']) ; ?></h5>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <!-- Service and Product Info -->
+                                                                        <h6><strong>Service Type:</strong> <?= htmlspecialchars($resultItem['service_type']); ?></h6>
+                                                                        <h6><strong>Product Type:</strong> <?= htmlspecialchars($resultItem['product_type']); ?></h6>
+                                                                        <h6><strong>Brand / Power / Running Hours:</strong> <?= htmlspecialchars($resultItem['brand'] . ' / ' . $resultItem['KVA'] . ' / ' . $resultItem['running_hours']); ?></h6>
+
+                                                                        <!-- Schedule Info -->
+                                                                        <h6><strong>Schedule:</strong> <?= htmlspecialchars($resultItem['date'] . ' / ' . $resultItem['start_time'] . ' - ' . $resultItem['end_time']); ?></h6>
+
+                                                                        <!-- Payment Info -->
+                                                                        <h6><strong>Payment Method:</strong> <?= htmlspecialchars($resultItem['payment_method']); ?></h6>
+                                                                        <h6><strong>Bank Name:</strong> <?= htmlspecialchars($resultItem['bank_name']); ?></h6>
+                                                                        <h6><strong>Reference Number:</strong> <?= htmlspecialchars($resultItem['reference_number']); ?></h6>
+                                                                        <h6><strong>Payment Date:</strong> <?= htmlspecialchars($resultItem['payment_date']); ?></h6>
+
+                                                                        <!-- Payment and Booking Status -->
+                                                                        <h6><strong>Payment Status:</strong> <?= htmlspecialchars($resultItem['payment_status']); ?></h6>
+                                                                        <h6><strong>Booking Status:</strong> <?= htmlspecialchars($resultItem['booking_status']); ?></h6>
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                        <button class="btn btn-primary">APPROVE</button>
+                                                                        <button class="btn btn-primary">DECLINE</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php 
                                                             }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>             
+                                                        }
+                                                        ?> 
+                                                    </div>
                                                 </div>
+
                                             </div>
                                             <div class="modal fade" id="paymentCheckModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paymentCheckModal" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -427,8 +225,8 @@
                                                             </div>
                                                     </div>
                                                 </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="approved">
-                                                <div class="mb-4 main-content-label">Payment Checking</div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="on_going">
+                                                <div class="mb-4 main-content-label">On going projects</div>
                                                 <div class="card-body border">
                                                     <div class="table-responsive userlist-table">
                                                         <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
@@ -444,47 +242,21 @@
                                                                     <th class="wd-lg-20p">Action</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments 
-                                                                        INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
-                                                                        where payment_status = 'approved' and status = 'Approved'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
-                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
-                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
-                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
-                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
-                                                                                                    
-                                                                    
-
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            ?> 
-                                                            </tbody>
+                                                         
                                                         </table>
                                                     </div>             
                                                 </div>
                                             </div>
                                            
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
-                                                <div class="mb-4 main-content-label">Payment Checking</div>
+                                                <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
                                                     
 
                                             
                                                 </div>
                                             </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="contact">
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="cancel">
                                                 <div class="mb-4 main-content-label">Cancelled Appointment</div>
                                                 <div class="card-body border">
                                                     <div class="table-responsive userlist-table">
@@ -500,63 +272,8 @@
                                                                     <th class="wd-lg-20p">Action</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Canceled'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?=  "Rejected" ?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                        <?php 
-                                                                        if($resultItem['status'] === "Canceled"){
-
-                                                                            echo "no available action";
-                                                                    
-                                                                        ?> 
-                                                                        
-                                                                        <?php 
-                                                                        }
-                                                                        else if($resultItem['status'] === "Approved" ){
-
-                                                                        
-                                                                        ?>       
-                                                                        <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
-                                                                                                                
-                                                                        <?php 
-                                                                                        
-                                                                        }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
+                                                           
+                                                           
                                                         </table>
                                                     </div>                     
                                                 </div>
