@@ -87,135 +87,169 @@ $product_type = $_POST['productType'];
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
             <div class="container-fluid">
-            
-            <?php if ($service_type == 'tune-up' && $product_type == 'generator') : ?>
-                <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                    
-
-                    <div class="form-group text-start mb-3">
-                        <label for="s_Brand" class="text-muted">Brand</label>
-                        <select name="brand" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand WHERE type = 'generator'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
-                                        <?php endwhile; ?>
-                        </select>
-
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Quantity</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                        <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
-                    </div>
-
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="tuneup_submit">Proceed to payment</button>
+                <!-- Tune up Generator -->
+                <?php if ($service_type == 'tune-up' && $product_type == 'generator') : ?> 
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                            <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR TUNE-UP</h1>
+                            <div class="form-group text-start mb-3">
+                                <label for="s_Brand" class="text-muted">Brand</label>
+                                <select name="brand" id="serviceSelect" class="form-select">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand WHERE type = 'generator'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Quantity</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
                             <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
                             <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
                             <!-- User Input Fields -->
-                         
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                </form>
-
-            
-            
-            <!-- Form for Maintenance solar -->
-            <?php elseif ($service_type == 'maintenance' && $product_type == 'solar') : ?>
-                <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                    
-
-                    <div class="form-group text-start mb-3">
-                        <label for="s_Brand" class="text-muted">Brand</label>
-                        <select name="brand" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand WHERE type = 'solar'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
-                                        <?php endwhile; ?>
-                        </select>
+                        </form>
                     </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Quantity</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                        <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
-                    </div>
-
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="tuneup_submit">Proceed to payment</button>
+                </div>
+                
+                <!-- Form for Maintenance solar -->
+                <?php elseif ($service_type == 'maintenance' && $product_type == 'solar') : ?>
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                            <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR MAINTENANCE</h1>
+                            <div class="form-group text-start mb-3">
+                                <label for="s_Brand" class="text-muted">Brand</label>
+                                <select name="brand" id="serviceSelect" class="form-select">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand WHERE type = 'solar'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Quantity</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
                             <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
                             <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
                             <!-- User Input Fields -->
-                         
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                </form>
+                        </form>
+                    </div>
+                </div>
             
                 <!-- maintenance generator -->
                 <?php elseif ($service_type == 'maintenance' && $product_type == 'generator') : ?>
-                <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                    
-
-                    <div class="form-group text-start mb-3">
-                        <label for="s_Brand" class="text-muted">Brand</label>
-                        <select name="brand" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand WHERE type = 'generator'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
-                                        <?php endwhile; ?>
-                        </select>
-
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                            <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR MAINTENANCE</h1>
+                            <div class="form-group text-start mb-3">
+                                <label for="s_Brand" class="text-muted">Brand</label>
+                                <select name="brand" id="serviceSelect" class="form-select">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand WHERE type = 'generator'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Quantity</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <!-- Hidden Inputs for Data -->
+                            <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
+                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
+                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
+                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
+                            <!-- User Input Fields -->
+                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
+                            <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
+                            <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
+                        </form>
                     </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Quantity</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                        <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
-                    </div>
+                </div>                
 
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="tuneup_submit">Proceed to payment</button>
+                <!-- repair solar -->
+                <?php elseif ($service_type == 'repair' && $product_type == 'solar') : ?>
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                            <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR REPAIR</h1>
+                            <div class="form-group text-start mb-3">
+                                <label for="s_Brand" class="text-muted">Brand</label>
+                                <select name="brand" id="serviceSelect" class="form-select">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand WHERE type = 'solar'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Quantity</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
@@ -223,116 +257,68 @@ $product_type = $_POST['productType'];
                             <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             
                             <!-- User Input Fields -->
-                         
+                            
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                </form>
-
-                 <!-- repair solar -->
-                 <?php elseif ($service_type == 'repair' && $product_type == 'solar') : ?>
-                <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                    
-
-                    <div class="form-group text-start mb-3">
-                        <label for="s_Brand" class="text-muted">Brand</label>
-                        <select name="brand" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand WHERE type = 'solar'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
-                                        <?php endwhile; ?>
-                        </select>
-
+                        </form>
                     </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Quantity</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                        <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
-                    </div>
+                </div>
 
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="tuneup_submit">Proceed to payment</button>
+                <!-- repair generator -->
+                <?php elseif ($service_type == 'repair' && $product_type == 'generator') : ?>
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                            <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR REPAIR</h1>
+                            <div class="form-group text-start mb-3">
+                                <label for="s_Brand" class="text-muted">Brand</label>
+                                <select name="brand" id="serviceSelect" class="form-select">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand WHERE type = 'generator'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Quantity</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
+                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                            </div>
+                            <div class="form-group text-start mb-3">
+                                <label for="su_Email" class="text-muted">Running Hours Unit</label>
+                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
                             <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
                             <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
                             <!-- User Input Fields -->
-                         
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                </form>
-
-        <!-- repair generator -->
-        <?php elseif ($service_type == 'repair' && $product_type == 'generator') : ?>
-                <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
-                    <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SERVICES</h1>
-                    
-
-                    <div class="form-group text-start mb-3">
-                        <label for="s_Brand" class="text-muted">Brand</label>
-                        <select name="brand" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand WHERE type = 'generator'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"> <?="Product name:". htmlspecialchars($row['name'])?></option>
-                                        <?php endwhile; ?>
-                        </select>
-
+                        </form>
                     </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Quantity</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
-                    </div>
-                    <div class="form-group text-start mb-3">
-                        <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                        <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
-                    </div>
+                </div>
 
-                    <div class="form-group text-start mb-3">
-                        <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                        <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="tuneup_submit">Proceed to payment</button>
-                            <!-- Hidden Inputs for Data -->
-                            <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
-                            <!-- User Input Fields -->
-                         
-                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
-                            <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
-                            <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                </form>
-
-            <!-- Form for Installation solar-->
-            <?php elseif ($service_type == 'installation' && $product_type == 'solar') : ?>
-                <div class="card shadow-lg border-0">
-                    
-                    <div class="card-body">
-                        <form method="post" action="service_payment.php">
-                            <div class="mb-3">
-                                <label for="serviceSelect" class="form-label">Select Product</label>
-                                <div class="input-group">
-                                    <select name="serviceSelect1" id="serviceSelect" class="form-select">
+                <!-- Form for Installation solar-->
+                <?php elseif ($service_type == 'installation' && $product_type == 'solar') : ?>
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR INSTALLATION</h1>
+                        <div class="card-body">
+                            <form method="post" action="service_payment.php">
+                                <div class="mb-3">
+                                    <label for="serviceSelect" class="form-label">Select Product</label>
+                                    <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
                                         <option value="">-- Select a Product --</option>
                                         <?php 
                                         $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Solar Panel'";
@@ -341,17 +327,17 @@ $product_type = $_POST['productType'];
                                             <option value="<?= htmlspecialchars($row['ProductName']) ?>"> <?="Product name:". htmlspecialchars($row['ProductName']) . "| STOCKS:". htmlspecialchars($row['stock'])  ?></option>
                                         <?php endwhile; ?>
                                     </select>
-                                    <div class="input-group-text">
-                                <label for="">Custom Item</label>
-                                <input type="checkbox" id="customCheck" class="form-check-input" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
-                            </div>
+                                    <div class="form-check d-flex mt-2 gap-2">
+                                        <input type="checkbox" id="customCheck" class="ms-auto" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
+                                        <label class="text-primary fw-bold" for="customCheck">
+                                            Customer Item
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!-- Custom input field, initially hidden -->
-                            <div class="mb-3 d-none" id="customInputContainer">
-                                <h1>AVAILABLE PRODUCTS</h1>
-                                <select name="serviceSelect2" id="serviceSelect" class="form-select">
+                                <!-- Custom input field, initially hidden -->
+                                <div class="mb-3 d-none" id="customInputContainer">
+                                    <label class="form-label">Available Products</label>
+                                    <select name="serviceSelect2" id="serviceSelect" class="form-select py-2">
                                         <option value="">-- Select a Product --</option>
                                         <?php 
                                         $query = "SELECT * FROM brand where type = 'solar'";
@@ -359,19 +345,71 @@ $product_type = $_POST['productType'];
                                         while ($row = mysqli_fetch_assoc($result)) : ?>
                                             <option value="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></option>
                                         <?php endwhile; ?>
+                                    </select>
+                                </div>
+                                <label class="form-label">Quantity</label>
+                                <input type="number" name="quantity" class="form-control mb-5">
+                                <button type="submit" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
+                                <!-- Hidden Inputs for Data -->
+                                <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
+                                <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
+                                <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
+                                <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
+                                <!-- User Input Fields -->
+                                <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
+                                <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
+                                <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form for installation generator -->
+                <?php elseif ($service_type == 'installation' && $product_type == 'generator') : ?>
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="card custom-card p-5 w-75">
+                        <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR INSTALLATION</h1>
+                        <form method="post" action="service_payment.php">
+                            <div class="mb-3">
+                                <label for="serviceSelect" class="form-label">Select Product</label>
+                                <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Generator'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['ProductName']) ?>"> <?="Product name:". htmlspecialchars($row['ProductName']) . "| STOCKS:". htmlspecialchars($row['stock'])  ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                                <div class="form-check d-flex mt-2 gap-2">
+                                    <input type="checkbox" id="customCheck" class="ms-auto" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
+                                    <label class="text-primary fw-bold" for="customCheck">
+                                        Customer Item
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Custom input field, initially hidden -->
+                            <div class="mb-3 d-none" id="customInputContainer">
+                                <label class="form-label">Available Products</label>
+                                <select name="serviceSelect2" id="serviceSelect" class="form-select py-2">
+                                    <option value="">-- Select a Product --</option>
+                                    <?php 
+                                    $query = "SELECT * FROM brand where type = 'generator'";
+                                    $result = mysqli_query($conn, $query);
+                                    while ($row = mysqli_fetch_assoc($result)) : ?>
+                                        <option value="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></option>
+                                    <?php endwhile; ?>
                                 </select>
                             </div>
-                            <label for="">QUANTITY</label>
-                            <input type="number" name="quantity">
-                            <button type="submit" class="btn btn-primary" name="installation_submit">Proceed to payment</button>
+                            <label class="form-label">Quantity</label>
+                            <input type="number" name="quantity" class="form-control mb-5">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
                             <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
                             <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
                             <!-- User Input Fields -->
-                         
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
@@ -379,60 +417,7 @@ $product_type = $_POST['productType'];
                     </div>
                 </div>
                 
-                 <!-- Form for installation generator -->
-            <?php elseif ($service_type == 'installation' && $product_type == 'generator') : ?>
-                <form method="post" action="service_payment.php">
-                            <div class="mb-3">
-                                <label for="serviceSelect" class="form-label">Select Product</label>
-                                <div class="input-group">
-                                    <select name="serviceSelect1" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Generator'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['ProductName']) ?>"> <?="Product name:". htmlspecialchars($row['ProductName']) . "| STOCKS:". htmlspecialchars($row['stock'])  ?></option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                    <div class="input-group-text">
-                                <label for="">Custom Item</label>
-                                <input type="checkbox" id="customCheck" class="form-check-input" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
-                            </div>
-                                </div>
-                            </div>
-
-                            <!-- Custom input field, initially hidden -->
-                            <div class="mb-3 d-none" id="customInputContainer">
-                                <h1>AVAILABLE PRODUCTS</h1>
-                                <select name="serviceSelect2" id="serviceSelect" class="form-select">
-                                        <option value="">-- Select a Product --</option>
-                                        <?php 
-                                        $query = "SELECT * FROM brand where type = 'generator'";
-                                        $result = mysqli_query($conn, $query);
-                                        while ($row = mysqli_fetch_assoc($result)) : ?>
-                                            <option value="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></option>
-                                        <?php endwhile; ?>
-                                    </select>
-                            </div>
-                            <label for="">QUANTITY</label>
-                            <input type="number" name="quantity">
-                            <button type="submit" class="btn btn-primary" name="installation_submit">Proceed to payment</button>
-                            <!-- Hidden Inputs for Data -->
-                            <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
-                            
-                            <!-- User Input Fields -->
-                         
-                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
-                            <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
-                            <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
-                        </form>
-            <?php endif; ?>
-
-             
-
+                <?php endif; ?>
             </div>
             <!--APP-CONTENT CLOSE-->
         </div>
