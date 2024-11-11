@@ -709,9 +709,9 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     </div>
 
                                                                      <!-- Hidden fields for account_id and appointment_id -->
-                                                                        <input type="hidden" id="modalAccountId" name="account_id">
-                                                                        <input type="hidden" id="modalAppointmentId" name="appointment_id">
-                                                                        <input type="hidden" name="total_cost" id="modalTotalCost">
+                                                                        <input type="hidden" name="account_id" value="">
+                                                                        <input type="hidden" name="appointment_id" value="">
+                                                                        <input type="hidden" name="">
 
                                                                     <!-- Submit Button -->
                                                                     <div class="text-center mt-3">
