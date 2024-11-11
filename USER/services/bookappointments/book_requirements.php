@@ -80,16 +80,15 @@ require_once '../../../ADMIN/authetincation.php';
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
             <div class="container-fluid">
-            
                 <div class="card custom-card mt-3">
                     <?php
-                   $user_id = $_SESSION['user_id'];
-                   $sql = "select * from user_info where user_id = $user_id";
-                   $result = mysqli_query($conn , $sql);
-                   $row = mysqli_fetch_assoc($result);
-                   $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
+                        $user_id = $_SESSION['user_id'];
+                        $sql = "select * from user_info where user_id = $user_id";
+                        $result = mysqli_query($conn , $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
                     ?>
-                <form class="p-5" action="book_appointment.php" method="POST">
+                    <form class="p-5" action="book_appointment.php" method="POST">
                         <!-- Row 1: Full Name -->
                         <div class="row mb-3">
                             <div class="col">
@@ -118,7 +117,6 @@ require_once '../../../ADMIN/authetincation.php';
                             <label for="location" class="text-muted">PIN YOUR Address</label>
                             <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal" required>
                             </div>
-                            
                         </div>
 
                         <!-- Row 4: Radio Buttons -->
@@ -165,19 +163,16 @@ require_once '../../../ADMIN/authetincation.php';
                                 </div>
                             </div>
                         </div>
-
                         <!-- Submit Button -->
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                <button type="submit" class="btn btn-primary d-flex ms-auto" name="submit">Submit</button>
                             </div>
                         </div>
-                     
                         <input type="hidden" value="<?=$_GET['availability_id'] ?>" name="availability_id">
 
                     </form>
                 </div>
-
                 <!-- Map Modal -->
                 <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -195,7 +190,6 @@ require_once '../../../ADMIN/authetincation.php';
                         </div>
                     </div>
                 </div>
-
             </div>
             <!--APP-CONTENT CLOSE-->
         </div>
