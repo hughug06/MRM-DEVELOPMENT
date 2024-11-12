@@ -114,7 +114,7 @@ else if(isset($_POST['tuneup_submit'])){
                     $result = mysqli_query($conn , $sql);
                     $row = mysqli_fetch_assoc($result);
                     $stocks = $row['stock'];  // CURRENT STOCKS OF SELECTED ITEM
-                    $amount = $row['max_price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                    $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                     
     
                     if($stocks < $quantity){
@@ -218,7 +218,7 @@ else if(isset($_POST['tuneup_submit'])){
                 $result = mysqli_query($conn , $sql);         
                 $row = mysqli_fetch_assoc($result);
                 $stocks = $row['stock']; 
-                $amount = $row['max_price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                        
                 if($stocks < $quantity){
                     echo "Product is out of stock"; // SHOW FALSE
