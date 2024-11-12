@@ -41,13 +41,17 @@ else if(isset($_POST['serviceItem_edit']))
 
 
 else if(isset($_POST['installation_save'])){
-  $delete = "DELETE FROM package_installation_solar;";
-  $result_del = mysqli_query($conn , $delete);
+  
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
   $quantities = $_POST['quantity'];
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
+
+  if(count($item_descriptions) > 0){
+    $delete = "DELETE FROM package_installation_solar;";
+    $result_del = mysqli_query($conn , $delete);
+  }
 
   $sql = "INSERT INTO package_installation_solar (description, unit, quantity, amount, total_cost) VALUES ";
  // Loop through all the items and build the query for multiple rows
@@ -63,18 +67,32 @@ else if(isset($_POST['installation_save'])){
  }
  $sql .= implode(',', $valuesArr);
  $result = mysqli_query($conn , $sql);
-header("Location: manageitems.php");
-exit; 
+ if ($result) {
+  echo json_encode([
+    "success" => true,
+    "message" => 'Package saved successfully'
+  ]);
+ }
+ else{
+  echo json_encode([
+    'failed' => true,
+    'message' => 'No Package Inserted'
+  ]);
+ }
 
 }
+
 else if(isset($_POST['generator_save'])){
-    $delete = "DELETE FROM package_installation_generator;";
-    $result_del = mysqli_query($conn , $delete);
     $item_descriptions = $_POST['item_description'];
     $units = $_POST['unit'];
     $quantities = $_POST['quantity'];
     $amounts = $_POST['amount'];
     $total_costs = $_POST['total_cost'];
+
+    if(count($item_descriptions) > 0){
+      $delete = "DELETE FROM package_installation_generator;";
+      $result_del = mysqli_query($conn , $delete);
+    }
 
     $sql = "INSERT INTO package_installation_generator (description, unit, quantity, amount, total_cost) VALUES ";
   // Loop through all the items and build the query for multiple rows
@@ -90,19 +108,32 @@ else if(isset($_POST['generator_save'])){
   }
   $sql .= implode(',', $valuesArr);
   $result = mysqli_query($conn , $sql);
-  header("Location: manageitems.php");
-  exit; 
+  if ($result) {
+    echo json_encode([
+      "success" => true,
+      "message" => 'Package saved successfully'
+    ]);
+   }
+   else{
+    echo json_encode([
+      'failed' => true,
+      'message' => 'No Package Inserted'
+    ]);
+   }
 }
 
 
 else if(isset($_POST['tuneup_save'])){
-    $delete = "DELETE FROM package_tuneup_generator;";
-    $result_del = mysqli_query($conn , $delete);
     $item_descriptions = $_POST['item_description'];
     $units = $_POST['unit'];
     $quantities = $_POST['quantity'];
     $amounts = $_POST['amount'];
     $total_costs = $_POST['total_cost'];
+
+    if(count($item_descriptions) > 0){
+      $delete = "DELETE FROM package_tuneup_generator;";
+      $result_del = mysqli_query($conn , $delete);
+    }
 
     $sql = "INSERT INTO package_tuneup_generator (description, unit, quantity, amount, total_cost) VALUES ";
   // Loop through all the items and build the query for multiple rows
@@ -118,19 +149,43 @@ else if(isset($_POST['tuneup_save'])){
   }
   $sql .= implode(',', $valuesArr);
   $result = mysqli_query($conn , $sql);
-  header("Location: manageitems.php");
-  exit; 
+  if ($result) {
+    echo json_encode([
+      "success" => true,
+      "message" => 'Package saved successfully'
+    ]);
+   }
+   else{
+    echo json_encode([
+      'failed' => true,
+      'message' => 'No Package Inserted'
+    ]);
+   }
 }
 
 
 else if(isset($_POST['solar_maintenance_save'])){
-  $delete = "DELETE FROM package_maintenance_solar;";
-  $result_del = mysqli_query($conn , $delete);
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
   $quantities = $_POST['quantity'];
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
+
+  //FOR GETTING VALUES OF ID PLEASE USE THIS WHEN FINISHED ADDING ID HIDDEN IN THE PAGE BEFORE HERE
+  // $id_list = [];
+  // $sqlgetid = "SELECT id FROM package_maintenance_solar;";
+  // $result_sel = mysqli_query($conn , $sqlgetid);
+  // if ($result_sel) {
+  //   // Fetch each row and add the id to the array
+  //   while ($row = mysqli_fetch_assoc($result_sel)) {
+  //       $id_list[] = $row['id'];
+  //   }
+  // }
+
+  if(count($item_descriptions) > 0){
+    $delete = "DELETE FROM package_maintenance_solar;";
+    $result_del = mysqli_query($conn , $delete);
+  }
 
   $sql = "INSERT INTO package_maintenance_solar (description, unit, quantity, amount, total_cost) VALUES ";
 // Loop through all the items and build the query for multiple rows
@@ -146,19 +201,33 @@ for ($i = 0; $i < count($item_descriptions); $i++) {
 }
 $sql .= implode(',', $valuesArr);
 $result = mysqli_query($conn , $sql);
-header("Location: manageitems.php");
-exit; 
+
+  if ($result) {
+  echo json_encode([
+    "success" => true,
+    "message" => 'Package saved successfully'
+  ]);
+ }
+ else{
+  echo json_encode([
+    'failed' => true,
+    'message' => 'No Package Inserted'
+  ]);
+ }
 }
 
 
 else if(isset($_POST['generator_maintenance_save'])){
-  $delete = "DELETE FROM package_maintenance_generator;";
-  $result_del = mysqli_query($conn , $delete);
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
   $quantities = $_POST['quantity'];
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
+
+  if(count($item_descriptions) > 0){
+    $delete = "DELETE FROM package_maintenance_generator;";
+    $result_del = mysqli_query($conn , $delete);
+  }
 
   $sql = "INSERT INTO package_maintenance_generator (description, unit, quantity, amount, total_cost) VALUES ";
 // Loop through all the items and build the query for multiple rows
@@ -176,19 +245,32 @@ for ($i = 0; $i < count($item_descriptions); $i++) {
 
 $sql .= implode(',', $valuesArr);
 $result = mysqli_query($conn , $sql);
-header("Location: manageitems.php");
-exit; 
+if ($result) {
+  echo json_encode([
+    "success" => true,
+    "message" => 'Package saved successfully'
+  ]);
+ }
+ else{
+  echo json_encode([
+    'failed' => true,
+    'message' => 'No Package Inserted'
+  ]);
+ }
 }
 
 
 else if(isset($_POST['solar_repair_save'])){
-  $delete = "DELETE FROM package_repair_solar;";
-  $result_del = mysqli_query($conn , $delete);
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
   $quantities = $_POST['quantity'];
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
+
+  if(count($item_descriptions) > 0){
+    $delete = "DELETE FROM package_repair_solar;";
+    $result_del = mysqli_query($conn , $delete);
+  }
 
   $sql = "INSERT INTO package_repair_solar (description, unit, quantity, amount, total_cost) VALUES ";
 // Loop through all the items and build the query for multiple rows
@@ -204,19 +286,32 @@ for ($i = 0; $i < count($item_descriptions); $i++) {
 }
 $sql .= implode(',', $valuesArr);
 $result = mysqli_query($conn , $sql);
-header("Location: manageitems.php");
-exit; 
+if ($result) {
+  echo json_encode([
+    "success" => true,
+    "message" => 'Package saved successfully'
+  ]);
+ }
+ else{
+  echo json_encode([
+    'failed' => true,
+    'message' => 'No Package Inserted'
+  ]);
+ }
 }
 
 
 else if(isset($_POST['generator_repair_save'])){
-  $delete = "DELETE FROM package_repair_generator;";
-  $result_del = mysqli_query($conn , $delete);
   $item_descriptions = $_POST['item_description'];
   $units = $_POST['unit'];
   $quantities = $_POST['quantity'];
   $amounts = $_POST['amount'];
   $total_costs = $_POST['total_cost'];
+
+  if(count($item_descriptions) > 0){
+    $delete = "DELETE FROM package_repair_generator;";
+    $result_del = mysqli_query($conn , $delete);
+  }
 
   $sql = "INSERT INTO package_repair_generator (description, unit, quantity, amount, total_cost) VALUES ";
 // Loop through all the items and build the query for multiple rows
@@ -232,8 +327,18 @@ for ($i = 0; $i < count($item_descriptions); $i++) {
 }
 $sql .= implode(',', $valuesArr);
 $result = mysqli_query($conn , $sql);
-header("Location: manageitems.php");
-exit; 
+  if ($result) {
+    echo json_encode([
+      "success" => true,
+      "message" => 'Package saved successfully'
+    ]);
+   }
+   else{
+    echo json_encode([
+      'failed' => true,
+      'message' => 'No Package Inserted'
+    ]);
+   }
 }
 
 

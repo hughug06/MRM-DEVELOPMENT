@@ -162,7 +162,7 @@
                                                     <th class="wd-lg-20p"><span>action</span></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="dp_ins_solar">
                                                 <?php        
                                                   $totalCost = 0; // Variable to store the total cost sum                                  
                                                 $select = "Select * from package_installation_solar";
@@ -353,7 +353,7 @@
                                         <div class="modal-body">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <form action="function.php" method="POST">        
+                                                    <form action="function.php" id="tnup_gen" method="POST">        
                                                         <input type="hidden" name="account_id" id="user_id">
                                                         <input type="hidden" name="appointment_id" id="appointment_id">               
                                                         <table class="table table-bordered">
@@ -853,7 +853,6 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="function.php" method="post">
                                             <!-- Hidden input for item ID -->
                                             <input type="hidden" id="editItemId" name="item_id">
 
@@ -889,7 +888,6 @@
                                             <div class="modal-footer">  
                                                 <button type="submit" class="btn btn-primary" id="item_edit" name="serviceItem_edit">Save Changes</button>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -910,7 +908,7 @@
                                             <div class="modal-body">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <form action="function.php" method="POST">        
+                                                        <form action="function.php" id="ins_solar" method="POST">        
                                                              
                                                             <table class="table table-bordered">
                                                                 <thead>
@@ -931,7 +929,7 @@
 
                                                             <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
                                                             <!-- Submit Button -->
-                                                            <button type="add" class="btn btn-success mt-3" name="installation_save">Submit</button>
+                                                            <button type="add" class="btn btn-success mt-3" value="installation_save" name="installation_save">Submit</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -952,7 +950,7 @@
                                             <div class="modal-body">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <form action="function.php" method="POST">        
+                                                        <form action="function.php" id="ins_gen" method="POST">        
                                                              
                                                             <table class="table table-bordered">
                                                                 <thead>
@@ -988,7 +986,7 @@
 
 
                 <!-- Modal for Installation (Solar) -->
-<div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -1012,7 +1010,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="itemTableBodyInstallation">
-                                    <!-- Rows will be added here dynamically -->
                                 </tbody>
                             </table>
                             <button type="button" class="btn btn-primary" id="addItemButtonInstallation">Add Item</button>
@@ -1023,10 +1020,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Modal for Tune-Up (Generator) -->
-<div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -1036,7 +1033,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="function.php" method="POST">
+                        <form action="function.php" id="tnup_gen" method="POST">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -1050,7 +1047,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="itemTableBodyTuneup">
-                                    <!-- Rows will be added here dynamically -->
+                                    
                                 </tbody>
                             </table>
                             <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
@@ -1061,7 +1058,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Modal for Maintenance (Solar) -->
 <div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
@@ -1074,7 +1071,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="function.php" method="POST">
+                        <form action="function.php" id="main_solar" method="POST">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -1088,7 +1085,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="itemMaintenanceSolarTableBody">
-                                    <!-- Rows will be added here dynamically -->
+                                    
                                 </tbody>
                             </table>
                             <button type="button" class="btn btn-primary" id="addMaintenanceSolarItemButton">Add Item</button>
@@ -1113,7 +1110,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="function.php" method="POST">
+                        <form action="function.php" id="main_gen" method="POST">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -1151,7 +1148,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="function.php" method="POST">
+                        <form action="function.php" id="rep_solar" method="POST">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -1189,7 +1186,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="function.php" method="POST">
+                        <form action="function.php" id="rep_gen" method="POST">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -1359,6 +1356,533 @@
                 modalItemAmountInput.value = itemAmount;
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            //INSTALLATION SOLAR SUBMISSION VALIDATION
+            const form_ins_solar = document.querySelector("#ins_solar");
+            const form_ins_gen = document.querySelector("#ins_gen");
+            const form_tnup_gen = document.querySelector("#tnup_gen");
+            const form_main_solar = document.querySelector("#main_solar");
+            const form_main_gen = document.querySelector("#main_gen");
+            const form_rep_solar = document.querySelector("#rep_solar");
+            const form_rep_gen = document.querySelector("#rep_gen");
+            
+
+
+            form_ins_solar.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('installation_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            }),
+
+
+            //INSTALLATION GENERATOR SUBMISSION VALIDATION
+            form_ins_gen.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('generator_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            }),
+
+            //TUNE UP GENERATOR SUBMISSION VALIDATION
+            form_tnup_gen.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('tuneup_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            }),
+//MAINTENANCE SOLAR SUBMISSION VALIDATION
+form_main_solar.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('solar_maintenance_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) { 
+                                 if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        
+
+            //MAINTENANCE GEN SUBMISSION VALIDATION
+            form_main_gen.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('generator_maintenance_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            }),
+
+            //REPAIR SOLAR SUBMISSION VALIDATION
+            form_rep_solar.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('solar_repair_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            }),
+
+
+            //REPAIR GEN SUBMISSION VALIDATION
+            form_rep_gen.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);  // Use FormData directly from the form
+                formData.append('generator_repair_save', true);  // Append the installation_save field
+
+                // Debugging alert to preview FormData (can be removed later)
+                let formDataPreview = "";
+                formData.forEach(function(value, key) {
+                    formDataPreview += key + ": " + value + "\n";  // Prepare a string for alert
+                });
+                
+
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to Set Package?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "function.php",  // URL to send the request to
+                            type: "POST",         // HTTP method
+                            data: formData,       // Data to send (FormData)
+                            dataType: 'json',
+                            processData: false,   // Don't process the data (form data is already in the correct format)
+                            contentType: false,   // Don't set content type (FormData will handle it)
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Success alert
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Package saved successfully!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'manageitems.php';
+                                        
+                                    })
+                                 } else if (response.failed == true) {
+                                     // Error alert
+                                     Swal.fire({
+                                         icon: 'error',
+                                         title: 'Error!',
+                                         text: 'An error occurred: ' + response.message,
+                                         showConfirmButton: true,
+                                         confirmButtonText: 'OK'
+                                     });
+                                 }
+                                // Reset the form after submission
+                                $('#ins_solar')[0].reset();  // Replace 'ins_solar' with the actual form ID
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                console.error("Error:", status, error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'An error occurred while processing the request.',
+                                    showConfirmButton: true,
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+
+        
+
+            
+        
+        
+        
 
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -2082,4 +2606,6 @@
             }
         });
     });
+
+
 </script>
