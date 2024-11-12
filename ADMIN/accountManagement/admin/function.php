@@ -28,9 +28,9 @@ if(isset($_POST['saveuser']))
             $accounts_result = mysqli_query($conn , $insert_accounts);
             
 
-            if($role == 'service_worker'){
+            if($role == 'worker'){
                 $account_id = $conn->insert_id;
-                $insert_worker = "insert into worker_availability(account_id,is_available) values('$account_id' , '0' )";
+                $insert_worker = "insert into worker_availability(account_id,is_available) values('$account_id' , '1' )";
                 $worker_result = mysqli_query($conn , $insert_worker);
                 echo json_encode(['success' => true]);
             }

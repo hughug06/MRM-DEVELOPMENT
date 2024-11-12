@@ -56,8 +56,8 @@ session_start();
                             $_SESSION['user_id'] = $user; 
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\agent\kanban.php']);
                         }
-                        else if($role == 'service_worker'){
-                            $_SESSION['auth'] = "service_worker";
+                        else if($role == 'worker'){
+                            $_SESSION['auth'] = "worker";
                             $_SESSION['worker_id'] = $id;
                             $_SESSION['user_id'] = $user; 
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\worker\dashboard.php']);

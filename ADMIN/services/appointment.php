@@ -2,7 +2,6 @@
    
     require_once '../../Database/database.php';
     require_once '../authetincation.php';
-
     $count_pending = 0;
     $count_waiting = 0;
     $count_checking = 0;
@@ -164,7 +163,15 @@
                                                                         <h6><strong>Booking Status:</strong> <?= htmlspecialchars($resultItem['booking_status']); ?></h6>
                                                                     </div>
                                                                     <div class="card-footer">
-                                                                        <button class="btn btn-primary">APPROVE</button>
+                                                                    <button type="button" class="btn btn-success" 
+                                                                            data-bs-toggle="modal" 
+                                                                            data-bs-target="#assign_worker"
+                                                                            booking-id="<?= $resultItem['booking_id'];?>"
+                                                                            admin-id="<?= $_SESSION['admin_id']?>"
+                                                                            client-id="<?= $resultItem['account_id'];?>"
+                                                                            availability-id="<?=$resultItem['availability_id']; ?>">
+                                                                        Assign Worker
+                                                                    </button>
                                                                         <button class="btn btn-primary">DECLINE</button>
                                                                     </div>
                                                                 </div>
@@ -177,54 +184,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="modal fade" id="paymentCheckModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paymentCheckModal" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                            <div class="card" style="width: 18rem;">
-                                                            <?php 
-                                                                $sql = "SELECT * FROM user_info 
-                                                                        INNER JOIN accounts ON user_info.user_id = accounts.user_id 
-                                                                        WHERE role = 'service_worker'";
-                                                                $result = mysqli_query($conn, $sql);
-
-                                                                if (mysqli_num_rows($result) > 0) {                
-                                                                    while ($resultitem = mysqli_fetch_assoc($result)) {                
-                                                                ?>
-                                                                        <div class="card-body">
-                                                                            <form action="assign_worker.php" method="POST">
-                                                                                <!-- Worker ID -->
-                                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
-                                                                                
-                                                                                <!-- Display Worker Name and Role -->
-                                                                                <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
-                                                                                <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
-                                                                                
-                                                                                <!-- Submit Button -->
-                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
-                                                                                
-                                                                                <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="hidden" class="accountId" name="account_id">
-                                                                                <input type="hidden" class="appointmentId" name="appointment_id">
-                                                                                <input type="hidden" class="paymentId" name="payment_id">
-                                                                            </form>                                                                        
-                                                                        </div>
-                                                                <?php
-                                                                    }
-                                                                }
-                                                                ?>
-
-
-                                                                            
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                    </div>
-                                                </div>
+                    
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="on_going">
                                                 <div class="mb-4 main-content-label">On going projects</div>
                                                 <div class="card-body border">
@@ -288,6 +248,60 @@
             </div>
 
             
+                             <!-- MODAL FOR CHOOSE WORKER -->
+                             <div class="modal fade" id="assign_worker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="assign_workerModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Form for assigning a worker -->
+                                                <form action="assign_worker.php" method="POST">
+                                                    <!-- Hidden inputs for booking, admin, client, and availability IDs -->
+                                                    <input type="text" class="bookingId" name="booking_id">
+                                                    <input type="text" class="adminId" name="admin_id">
+                                                    <input type="text" class="clientId" name="client_id">
+                                                    <input type="text" class="availabilityId" name="availability_id">
+
+                                                    <div class="card" style="width: 18rem;">
+                                                        <?php 
+                                                        $sql = "SELECT * FROM accounts  
+                                                                INNER JOIN user_info ON user_info.user_id = accounts.user_id 
+                                                                WHERE role = 'worker'";
+                                                        $result = mysqli_query($conn, $sql);
+
+                                                        if (mysqli_num_rows($result) > 0) {                
+                                                            while ($resultitem = mysqli_fetch_assoc($result)) {                
+                                                        ?>
+                                                            <div class="card-body">
+                                                                <!-- Worker ID -->
+                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                                                                
+                                                                <!-- Display Worker Name and Role -->
+                                                                <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
+                                                                <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
+                                                                
+                                                                <!-- Submit Button -->
+                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
+                                                                
+                                                                <!-- Hidden input for id of user -->
+                                                                <input type="text" name="worker_id" value="<?= $resultitem['account_id'] ?>">
+                                                            </div>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+</div>
+
+
+
             <!--APP-CONTENT CLOSE-->
 
             <!-- Footer Start -->
@@ -333,128 +347,40 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // When the assign button is clicked
-                $('.assign-btn').on('click', function() {
-                
-                    // Get the account_id and appointment_id from data attributes
-                    var userId = $(this).data('account-id');
-                    var appointmentId = $(this).data('appointment-id');
+      
 
-                    // Set the values in the modal's hidden fields or display them as needed
-                    $('#user_id').val(userId);
-                    $('#appointment_id').val(appointmentId);
-                    
-                });
-            });
-        </script>
-
-        <!-- For Add Item Quotation -->
-        <script>
-            let itemCount = 0;
-
-            // Function to update item numbers dynamically
-            function updateItemNumbers() {
-                const rows = document.querySelectorAll('#itemTableBody tr');
-                rows.forEach((row, index) => {
-                    row.querySelector('td:first-child').innerText = index + 1; // Update the item number
-                });
-                itemCount = rows.length; // Adjust itemCount to the current number of rows
-            }
-
-            document.getElementById('addItemButton').addEventListener('click', function() {
-                itemCount++;
-
-                // Create a new row
-                const newRow = document.createElement('tr');
-
-                newRow.innerHTML = `
-                    <td>${itemCount}</td>
-                    <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
-                    <td>
-                        <select name="item_description[]" class="form-select" required>
-                            <option value="">Select Item</option>
-                            <!-- Dynamically load options from the database using PHP -->
-                            <?php
-                            $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
-                                            $result = mysqli_query($conn, $query);
-                        
-                                            // Check if there are results and populate the options
-                                            if ($result) {
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
-                                                }
-                                            }
-                            ?>
-                        </select>
-                    </td>
-                    <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
-                    <td><input type="text" name="amount[]" class="form-control" readonly></td>
-                    <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
-                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
-                `;
-
-                document.getElementById('itemTableBody').appendChild(newRow);
-
-                // Add event listener to update amount and unit when an item is selected
-                newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
-                    const selectedOption = this.options[this.selectedIndex];
-                    const amountField = newRow.querySelector('input[name="amount[]"]');
-                    const unitField = newRow.querySelector('input[name="unit[]"]');
-                    const amount = selectedOption.dataset.amount;
-                    const unit = selectedOption.dataset.unit;
-                    amountField.value = amount;
-                    unitField.value = unit;
-                });
-
-                // Add event listener to update total cost when quantity changes
-                newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
-                    const quantity = this.value;
-                    const amount = newRow.querySelector('input[name="amount[]"]').value;
-                    const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
-                    totalCostField.value = (quantity * amount) || 0;
-                });
-
-                // Add event listener to the remove button to delete the row
-                newRow.querySelector('.remove-row').addEventListener('click', function() {
-                    newRow.remove(); // Removes the row from the table
-                    updateItemNumbers(); // Update item numbers after removing a row
-                });
-            });
-        </script>
+    
 
     </body>
 
 </html>
 
-<script>
- document.addEventListener('DOMContentLoaded', function() {
-    const paymentButtons = document.querySelectorAll('.payment-check-button');
+            <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                    const modal = document.getElementById('assign_worker');
+                    const bookingInput = modal.querySelector('.bookingId');
+                    const adminInput = modal.querySelector('.adminId');
+                    const clientInput = modal.querySelector('.clientId');
+                    const availabilityInput = modal.querySelector('.availabilityId');
 
-    paymentButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const accountId = this.getAttribute('data-account-id');
-            const appointmentId = this.getAttribute('data-appointment-id');
-            const paymentId = this.getAttribute('data-payment-id');
+                    // Event listener for the modal show event
+                    modal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
 
-            // Populate all elements with the class 'accountId'
-            document.querySelectorAll('.accountId').forEach(el => {
-                el.value = accountId;
-            });
+                        // Extract info from data-* attributes
+                        const bookingId = button.getAttribute('booking-id');
+                        const adminId = button.getAttribute('admin-id');
+                        const clientId = button.getAttribute('client-id');
+                        const availabilityId = button.getAttribute('availability-id');
 
-            // Populate all elements with the class 'appointmentId'
-            document.querySelectorAll('.appointmentId').forEach(el => {
-                el.value = appointmentId;
-            });
-
-            // Populate all elements with the class 'paymentId'
-            document.querySelectorAll('.paymentId').forEach(el => {
-                el.value = paymentId;
-            });
-        });
-    });
-});
+                        // Populate the hidden input fields
+                        bookingInput.value = bookingId;
+                        adminInput.value = adminId;
+                        clientInput.value = clientId;
+                        availabilityInput.value = availabilityId;
+                    });
+                });
 
 
-</script>
+        </script>
