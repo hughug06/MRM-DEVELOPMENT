@@ -62,162 +62,355 @@ function formatMoney($number) {
                 <div class="container-fluid">
                     <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
                         <div>
-                            <h2 class="main-content-title fs-24 mb-1">Dashboard</h2>
+                            <h2 class="main-content-title fs-24 mb-1">Welcome To Dashboard</h2>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Project Dashboard</li>
+                            </ol>
                         </div>
                     </div>
 
-                    <div class="row">
-
-
-                        <!-- Stocks -->
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <div class="card-title">Stocks</div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <div class="row">
-                                            <div class="col-xl-12 mb-3">
-                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                    <thead>Total Solar Panel in Stocks</thead>
-                                                    <tbody>
-                                                        <?php 
-                                                        require '../../Database/database.php';                                          
-                                                        $select = "Select * from products Where ProductType = 'Solar Panel'";
-                                                        $result = mysqli_query($conn , $select);
-                                                        $total = 0.00;
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                                $total = $total + $resultItem['stock'];
-                                                            }      
-                                                        ?>
-                                                            <tr>
-                                                                <td><?php echo $total ?></td>
-                                                            </tr>
-                                                        <?php
-                                                        }
-                                                        else{
-                                                        ?>
-                                                            <tr>
-                                                                <td>Empty</td>   
-                                                            </tr>
-                                                        <?php 
-                                                            }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="col-xl-12 mb-3">
-                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                    <thead>Total Generator in Stocks</thead>
-                                                    <tbody>
-                                                        <?php 
-                                                        require '../../Database/database.php';                                          
-                                                        $select = "Select * from products Where ProductType = 'Generator'";
-                                                        $result = mysqli_query($conn , $select);
-                                                        $total = 0.00;
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                                $total = $total + $resultItem['stock'];
-                                                            }      
-                                                        ?>
-                                                            <tr>
-                                                                <td><?php echo $total ?></td>
-                                                            </tr>
-                                                        <?php
-                                                        }
-                                                        else{
-                                                        ?>
-                                                            <tr>
-                                                                <td>Empty</td>   
-                                                            </tr>
-                                                        <?php 
-                                                            }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
+                    <div class="row row-sm">
+                        <div class="col-sm-12 col-lg-12 col-xl-8">
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                             </div>
                                         </div>
-                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Out of Stock Items -->
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <div class="card-title">Out of Stocks</div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <div class="row">
-                                            <div class="col-xl-12 mb-3">
-                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                    <thead>Solar Panel</thead>
-                                                    <tbody>
-                                                    <?php 
-                                                        require '../../Database/database.php';                                          
-                                                        $select = "Select * from products Where ProductType = 'Solar Panel' and stock =0";
-                                                        $result = mysqli_query($conn , $select);
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                                ?>
-                                                                    <tr>
-                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
-                                                                    </tr>
-                                                                <?php
-                                                            }      
-                                                        }
-                                                        else{
-                                                        ?>
-                                                            <tr>
-                                                                <td>All items on Solar Panel have stocks</td>   
-                                                            </tr>
-                                                        <?php 
-                                                            }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                             </div>
-                                            <div class="col-xl-12 mb-3">
-                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                    <thead>Generator</thead>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-xl-4">
+                                    <div class="card custom-card">
+                                        <div class="card-body">
+                                            <div class="card-order">
+                                                <label class="main-content-label mb-3 pt-1">Total tax</label>
+                                                <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                                <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-6 col-xl-6">
+                                    <div class="card custom-card">
+                                        <div class="card-header">
+                                            <div class="card-title">Generator Stocks</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-xl-6">
+                                    <div class="card custom-card">
+                                        <div class="card-header">
+                                            <div class="card-title">Solar Panel Stocks</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-12 col-xl-12">
+                                    <div class="card custom-card">
+                                        <div class="card-header border-bottom-0">
+                                            <div>
+                                                <div class="card-title">TRADING ACTIVITIES</div>
+                                                <span class="d-block fs-12 mb-0 text-muted">Cryptocurrency trading is the act of speculating on cryptocurrency price movements via a CFD trading account, or buying and selling the underlying coins via an exchange</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <div class="table-responsive tasks">
+                                                <table class="table card-table table-vcenter text-nowrap border">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="wd-lg-20p">#</th>
+                                                            <th class="wd-lg-20p">NAME</th>
+                                                            <th class="wd-lg-20p">PRICE</th>
+                                                            <th class="wd-lg-20p">CHANGE</th>
+                                                            <th class="wd-lg-20p">CHART</th>
+                                                            <th class="wd-lg-20p">STATUS</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody>
-                                                        <?php 
-                                                        require '../../Database/database.php';                                          
-                                                        $select = "Select * from products Where ProductType = 'Generator' and stock =0";
-                                                        $result = mysqli_query($conn , $select);
-                                                        if(mysqli_num_rows($result) > 0){
-                                                            foreach($result as $resultItem){
-                                                                ?>
-                                                                    <tr>
-                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
-                                                                    </tr>
-                                                                <?php
-                                                            }      
-                                                        }
-                                                        else{
-                                                        ?>
-                                                            <tr>
-                                                            <td>All items on Generator have stocks</td>    
-                                                            </tr>
-                                                        <?php 
-                                                            }
-                                                        ?>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td class="coin_icon mt-2">
+                                                                <div class="d-flex">
+                                                                    <div class="cryp-icon bg-primary me-2"> 
+                                                                        <i class="cf cf-btc"></i>
+                                                                    </div>
+                                                                    <span class="my-auto">Bitcoin <b>BTC</b></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>USD 680,175.06</td>
+                                                            <td><span class="text-success ">+1.13%</span></td>
+                                                            <td>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-start"><a href="javascript:void(0);" class="text-success">DELIVERY</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td class="coin_icon mt-2">
+                                                                <div class="d-flex">
+                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-eth"></i> </div>
+                                                                    <span class="my-auto">Ethereum <b>ETH</b></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>USD 345,235.02</td>
+                                                            <td><span class="text-danger">-1.13%</span></td>
+                                                            <td>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-start"><a href="javascript:void(0);" class="text-danger">CANCEL</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td class="coin_icon mt-2">
+                                                                <div class="d-flex">
+                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-xrp"></i> </div>
+                                                                    <span class="my-auto">Ripple <b>XRP</b></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>USD 235,356.12</td>
+                                                            <td><span class="text-muted">-2.23%</span></td>
+                                                            <td>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-start"><a href="javascript:void(0);" class="text-muted">HOLD</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td class="coin_icon mt-2">
+                                                                <div class="d-flex">
+                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-ltc"></i> </div>
+                                                                    <span class="my-auto">Litecoin <b>LTC</b></span>
+                                                                </div>
+                                                            </td>
+                                                            <td>USD 456,235.52</td>
+                                                            <td><span class="text-danger ">-1.13%</span></td>
+                                                            <td>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-start"><a href="javascript:void(0);" class="text-danger">CANCEL</a></td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-6 col-xl-6">
+                                    <div class="card custom-card">
+                                        <div class="card-header">
+                                            <div class="card-title">Stocks</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive userlist-table">
+                                                <div class="row">
+                                                    <div class="col-xl-12 mb-3">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                            <thead>Total Solar Panel in Stocks</thead>
+                                                            <tbody>
+                                                                <?php 
+                                                                require '../../Database/database.php';                                          
+                                                                $select = "Select * from products Where ProductType = 'Solar Panel'";
+                                                                $result = mysqli_query($conn , $select);
+                                                                $total = 0.00;
+                                                                if(mysqli_num_rows($result) > 0){
+                                                                    foreach($result as $resultItem){
+                                                                        $total = $total + $resultItem['stock'];
+                                                                    }      
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?php echo $total ?></td>
+                                                                    </tr>
+                                                                <?php
+                                                                }
+                                                                else{
+                                                                ?>
+                                                                    <tr>
+                                                                        <td>Empty</td>   
+                                                                    </tr>
+                                                                <?php 
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-xl-12 mb-3">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                            <thead>Total Generator in Stocks</thead>
+                                                            <tbody>
+                                                                <?php 
+                                                                require '../../Database/database.php';                                          
+                                                                $select = "Select * from products Where ProductType = 'Generator'";
+                                                                $result = mysqli_query($conn , $select);
+                                                                $total = 0.00;
+                                                                if(mysqli_num_rows($result) > 0){
+                                                                    foreach($result as $resultItem){
+                                                                        $total = $total + $resultItem['stock'];
+                                                                    }      
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?php echo $total ?></td>
+                                                                    </tr>
+                                                                <?php
+                                                                }
+                                                                else{
+                                                                ?>
+                                                                    <tr>
+                                                                        <td>Empty</td>   
+                                                                    </tr>
+                                                                <?php 
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>      
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-xl-6">
+                                    <div class="card custom-card">
+                                        <div class="card-header">
+                                            <div class="card-title">Out of Stocks</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive userlist-table">
+                                                <div class="row">
+                                                    <div class="col-xl-12 mb-3">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                            <thead>Solar Panel</thead>
+                                                            <tbody>
+                                                            <?php 
+                                                                require '../../Database/database.php';                                          
+                                                                $select = "Select * from products Where ProductType = 'Solar Panel' and stock =0";
+                                                                $result = mysqli_query($conn , $select);
+                                                                if(mysqli_num_rows($result) > 0){
+                                                                    foreach($result as $resultItem){
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
+                                                                            </tr>
+                                                                        <?php
+                                                                    }      
+                                                                }
+                                                                else{
+                                                                ?>
+                                                                    <tr>
+                                                                        <td>All items on Solar Panel have stocks</td>   
+                                                                    </tr>
+                                                                <?php 
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-xl-12 mb-3">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
+                                                            <thead>Generator</thead>
+                                                            <tbody>
+                                                                <?php 
+                                                                require '../../Database/database.php';                                          
+                                                                $select = "Select * from products Where ProductType = 'Generator' and stock =0";
+                                                                $result = mysqli_query($conn , $select);
+                                                                if(mysqli_num_rows($result) > 0){
+                                                                    foreach($result as $resultItem){
+                                                                        ?>
+                                                                            <tr>
+                                                                                <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
+                                                                            </tr>
+                                                                        <?php
+                                                                    }      
+                                                                }
+                                                                else{
+                                                                ?>
+                                                                    <tr>
+                                                                    <td>All items on Generator have stocks</td>    
+                                                                    </tr>
+                                                                <?php 
+                                                                    }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
-                    
-                        <!-- Stock value -->
-                        <div class="col-xl-6">
+                        <div class="col-sm-12 col-lg-12 col-xl-4">
                             <div class="card custom-card">
                                 <div class="card-header">
                                     <div class="card-title">Stock Value</div>
@@ -256,8 +449,6 @@ function formatMoney($number) {
                                                 </tbody>
                                             </table>
                                         </div>
-
-
                                         <!-- Solar Total Stock value -->
                                         <div class="col-xl-12 mb-3">
                                             <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
@@ -290,8 +481,6 @@ function formatMoney($number) {
                                                 </tbody>
                                             </table>
                                         </div>
-
-
                                         <!-- Gen Total Stock value -->
                                         <div class="col-xl-12 mb-3">
                                             <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
@@ -324,27 +513,9 @@ function formatMoney($number) {
                                                 </tbody>
                                             </table>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- REPORTS TABLE -->
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <div class="card-title">Solar Panel Stocks</div>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="chartjs-bar" class="chartjs-chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Reports for Solar -->
-                        <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
                                     <div class="card-title">Solar Panel low stock list</div>
@@ -382,24 +553,6 @@ function formatMoney($number) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- STOCK GENERATOR -->
-                    <div class="row">
-                        <!-- Bar chart for Generator -->
-                        <div class="col-xl-6">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <div class="card-title">Generator Stocks</div>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="chartjs-bar2" class="chartjs-chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Reports for Generator -->
-                        <div class="col-xl-6">
                             <div class="card custom-card">
                                 <div class="card-header">
                                     <div class="card-title">Generator low stock list</div>
@@ -439,7 +592,6 @@ function formatMoney($number) {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
