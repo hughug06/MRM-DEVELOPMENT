@@ -9,10 +9,6 @@ if (isset($_POST['submit'])) {
 $availability_id = $_POST['availability_id'];
 
 //user input
-$full_name = $_POST['name'];
-$address = $_POST['address'];
-$city = $_POST['city'];
-$province = $_POST['province'];
 $pin_location = $_POST['location'];
 $service_type = $_POST['serviceType']; 
 $product_type = $_POST['productType'];   
@@ -88,11 +84,11 @@ $product_type = $_POST['productType'];
                 <?php if ($service_type == 'tune-up' && $product_type == 'generator') : ?> 
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
-                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                        <form class="p-5" action="service_payment.php" method="POST" id="tune_up_form">
                             <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR TUNE-UP</h1>
                             <div class="form-group text-start mb-3">
                                 <label for="s_Brand" class="text-muted">Brand</label>
-                                <select name="brand" id="serviceSelect" class="form-select">
+                                <select name="brand" id="serviceSelect" class="form-select tp_brand">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand WHERE type = 'generator'";
@@ -104,26 +100,24 @@ $product_type = $_POST['productType'];
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Quantity</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                                <input class="form-control tp_quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" name="quantity" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                                <input class="form-control tp_kva" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                                <input class="form-control tp_rh" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" name="running_hours" placeholder="">
                             </div>
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <input type="hidden" name="tuneup_submit">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto tp_submit" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             <!-- User Input Fields -->
-                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
-                            <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
-                            <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
+                            <input type="hidden" class="tp_location" id="tp_location" name="location" value="<?= htmlspecialchars($pin_location) ?>">
+                            <input type="hidden" class="tp_serviceType" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
+                            <input type="hidden" class="tp_productType" name="productType" value="<?= htmlspecialchars($product_type) ?>">
                         </form>
                     </div>
                 </div>
@@ -132,11 +126,11 @@ $product_type = $_POST['productType'];
                 <?php elseif ($service_type == 'maintenance' && $product_type == 'solar') : ?>
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
-                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                        <form class="p-5" action="service_payment.php" method="POST" id="sol_main_form">
                             <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR MAINTENANCE</h1>
                             <div class="form-group text-start mb-3">
                                 <label for="s_Brand" class="text-muted">Brand</label>
-                                <select name="brand" id="serviceSelect" class="form-select">
+                                <select name="brand" id="serviceSelect" class="form-select sol_main_brand">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand WHERE type = 'solar'";
@@ -148,24 +142,22 @@ $product_type = $_POST['productType'];
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Quantity</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                                <input class="form-control sol_main_quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                                <input class="form-control sol_main_kva" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                                <input class="form-control  sol_main_rh" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
                             </div>
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <input type="hidden" name="tuneup_submit">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto sol_main_submit" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
-                            <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
+                            <input type="hidden" class="" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <!-- User Input Fields -->
-                            <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
+                            <input type="hidden" class="sol_main_location" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
                             <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type) ?>">
                         </form>
@@ -176,11 +168,11 @@ $product_type = $_POST['productType'];
                 <?php elseif ($service_type == 'maintenance' && $product_type == 'generator') : ?>
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
-                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                        <form class="p-5" action="service_payment.php" method="POST" id="gen_main_form">
                             <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR MAINTENANCE</h1>
                             <div class="form-group text-start mb-3">
                                 <label for="s_Brand" class="text-muted">Brand</label>
-                                <select name="brand" id="serviceSelect" class="form-select">
+                                <select name="brand" id="serviceSelect" class="form-select gen_main_brand">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand WHERE type = 'generator'";
@@ -192,22 +184,20 @@ $product_type = $_POST['productType'];
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Quantity</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                                <input class="form-control gen_main_quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                                <input class="form-control gen_main_kva" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                                <input class="form-control gen_main_rh" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
                             </div>
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <input type="hidden" name="tuneup_submit">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto gen_main_submit" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             <!-- User Input Fields -->
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
@@ -220,11 +210,11 @@ $product_type = $_POST['productType'];
                 <?php elseif ($service_type == 'repair' && $product_type == 'solar') : ?>
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
-                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                        <form class="p-5" action="service_payment.php" method="POST" id="sol_rep_form">
                             <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR REPAIR</h1>
                             <div class="form-group text-start mb-3">
                                 <label for="s_Brand" class="text-muted">Brand</label>
-                                <select name="brand" id="serviceSelect" class="form-select">
+                                <select name="brand" id="serviceSelect" class="form-select sol_rep_brand">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand WHERE type = 'solar'";
@@ -236,22 +226,20 @@ $product_type = $_POST['productType'];
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Quantity</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                                <input class="form-control sol_rep_quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                                <input class="form-control sol_rep_kva" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                                <input class="form-control sol_rep_rh" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
                             </div>
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <input type="hidden" name="tuneup_submit">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto sol_rep_submit" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             
                             <!-- User Input Fields -->
                             
@@ -266,11 +254,11 @@ $product_type = $_POST['productType'];
                 <?php elseif ($service_type == 'repair' && $product_type == 'generator') : ?>
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
-                        <form class="p-5" action="service_payment.php" method="POST" id="serviceForm">
+                        <form class="p-5" action="service_payment.php" method="POST" id="gen_rep_form">
                             <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR REPAIR</h1>
                             <div class="form-group text-start mb-3">
                                 <label for="s_Brand" class="text-muted">Brand</label>
-                                <select name="brand" id="serviceSelect" class="form-select">
+                                <select name="brand" id="serviceSelect" class="form-select gen_rep_brand">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand WHERE type = 'generator'";
@@ -282,22 +270,20 @@ $product_type = $_POST['productType'];
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Quantity</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
+                                <input class="form-control gen_rep_quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="quantity" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="powerLabel" class="text-muted" id="powerLabel">KVA</label>
-                                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
+                                <input class="form-control gen_rep_kva" type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="kva" id="kva" placeholder="">
                             </div>
                             <div class="form-group text-start mb-3">
                                 <label for="su_Email" class="text-muted">Running Hours Unit</label>
-                                <input class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
+                                <input class="form-control gen_rep_rh" oninput="this.value = this.value.replace(/[^0-9]/g, '')" type="text" id="RHU" name="running_hours" placeholder="">
                             </div>
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="tuneup_submit">Proceed to payment</button>
+                            <input type="hidden" name="tuneup_submit">
+                            <button type="submit" class="btn btn-primary d-flex ms-auto gen_rep_submit" name="tuneup_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             <!-- User Input Fields -->
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
@@ -312,7 +298,7 @@ $product_type = $_POST['productType'];
                     <div class="card custom-card p-5 w-75">
                         <h1 class="text-start pb-4 d-flex justify-content-center text-warning">SOLAR INSTALLATION</h1>
                         <div class="card-body">
-                            <form method="post" action="service_payment.php">
+                            <form method="post" action="service_payment.php" id="sol_ins_form">
                                 <div class="mb-3">
                                     <label for="serviceSelect" class="form-label">Select Product</label>
                                     <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
@@ -346,12 +332,10 @@ $product_type = $_POST['productType'];
                                 </div>
                                 <label class="form-label">Quantity</label>
                                 <input type="number" name="quantity" class="form-control mb-5">
-                                <button type="submit" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
+                                <input type="hidden" name="installation_submit">
+                                <button type="submit" class="btn btn-primary d-flex ms-auto" id="" name="installation_submit">Proceed to payment</button>
                                 <!-- Hidden Inputs for Data -->
                                 <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                                <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                                <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                                <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                                 <!-- User Input Fields -->
                                 <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                                 <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
@@ -366,7 +350,7 @@ $product_type = $_POST['productType'];
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="card custom-card p-5 w-75">
                         <h1 class="text-start pb-4 d-flex justify-content-center text-warning">GENERATOR INSTALLATION</h1>
-                        <form method="post" action="service_payment.php">
+                        <form method="post" action="service_payment.php" id="gen_ins_form">
                             <div class="mb-3">
                                 <label for="serviceSelect" class="form-label">Select Product</label>
                                 <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
@@ -400,12 +384,10 @@ $product_type = $_POST['productType'];
                             </div>
                             <label class="form-label">Quantity</label>
                             <input type="number" name="quantity" class="form-control mb-5">
-                            <button type="submit" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
+                            <input type="hidden" name="installation_submit">
+                            <button type="submit" id="" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
-                            <input type="hidden" name="date" value="<?= htmlspecialchars($date) ?>">
-                            <input type="hidden" name="start_time" value="<?= htmlspecialchars($start_time) ?>">
-                            <input type="hidden" name="end_time" value="<?= htmlspecialchars($end_time) ?>">
                             <!-- User Input Fields -->
                             <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location) ?>">
                             <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type) ?>">
@@ -466,8 +448,8 @@ $product_type = $_POST['productType'];
 
 
 <script>
-        // jQuery to handle checkbox behavior
-        $(document).ready(function() {
+    // jQuery to handle checkbox behavior
+    $(document).ready(function() {
             $('#customCheck').on('change', function() {
                 if ($(this).is(':checked')) {
                     $('#serviceSelect').prop('disabled', true);
@@ -477,8 +459,339 @@ $product_type = $_POST['productType'];
                     $('#customInputContainer').addClass('d-none');
                 }
             });
+
+            //TUNE UP GENERATOR
+            $('.tp_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const tp_quantity = parseInt(document.querySelector('.tp_quantity').value);
+                const tp_kva = parseInt(document.querySelector('.tp_kva').value);
+                const tp_rh = parseInt(document.querySelector('.tp_rh').value);
+                const tp_brand = document.querySelector('.tp_brand').value;
+                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_rh <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Running Hours cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_kva < 20 || tp_kva > 1000){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "KVA cannot be less than 20 or Higher than 1000.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("tune_up_form").submit();
+                        }
+                    });
+                }
+            });
+
+            //SOLAR MAINTENANCE
+            $('.sol_main_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const tp_quantity = parseInt(document.querySelector('.sol_main_quantity').value);
+                const tp_kva = parseInt(document.querySelector('.sol_main_kva').value);
+                const tp_rh = parseInt(document.querySelector('.sol_main_rh').value);
+                const tp_brand = document.querySelector('.sol_main_brand').value;
+                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_rh <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Running Hours cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_kva < 20 || tp_kva > 1000){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "KVA cannot be less than 20 or Higher than 1000.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("sol_main_form").submit();
+                        }
+                    });
+                }
+            });
+
+            //GEN MAINTENANCE
+            $('.gen_main_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const tp_quantity = parseInt(document.querySelector('.gen_main_quantity').value);
+                const tp_kva = parseInt(document.querySelector('.gen_main_kva').value);
+                const tp_rh = parseInt(document.querySelector('.gen_main_rh').value);
+                const tp_brand = document.querySelector('.gen_main_brand').value;
+                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_rh <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Running Hours cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_kva < 20 || tp_kva > 1000){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "KVA cannot be less than 20 or Higher than 1000.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("gen_main_form").submit();
+                        }
+                    });
+                }
+            });
+
+            //SOLAR REPAIR
+            $('.sol_rep_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const tp_quantity = parseInt(document.querySelector('.sol_rep_quantity').value);
+                const tp_kva = parseInt(document.querySelector('.sol_rep_kva').value);
+                const tp_rh = parseInt(document.querySelector('.sol_rep_rh').value);
+                const tp_brand = document.querySelector('.sol_rep_brand').value;
+                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_rh <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Running Hours cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_kva < 20 || tp_kva > 1000){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "KVA cannot be less than 20 or Higher than 1000.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("sol_rep_form").submit();
+                        }
+                    });
+                }
+            });
+
+            //GEN REPAIR
+            $('.gen_rep_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const tp_quantity = parseInt(document.querySelector('.gen_rep_quantity').value);
+                const tp_kva = parseInt(document.querySelector('.gen_rep_kva').value);
+                const tp_rh = parseInt(document.querySelector('.gen_rep_rh').value);
+                const tp_brand = document.querySelector('.gen_rep_brand').value;
+                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_rh <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Running Hours cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_kva < 20 || tp_kva > 1000){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "KVA cannot be less than 20 or Higher than 1000.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(tp_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("gen_rep_form").submit();
+                        }
+                    });
+                }
+            });
+
         });
-    </script>
+</script>
 
 
 
