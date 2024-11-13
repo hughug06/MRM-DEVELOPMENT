@@ -60,64 +60,82 @@ require_once '../../Database/database.php';
             <!-- End::app-sidebar -->
 
             <div class="main-content app-content">
-                <div class="container-fluid">
-                    <div class="row g-3"> 
-                        <?php 
-                        require_once '../../Database/database.php';
-                        $workerid = $_SESSION['worker_id'];
+            <div class="container-fluid">
+                    <div class="card mt-5" style="width: 100%; padding: 20px;">
+                        <div class="card-body">
+                            <!-- Heading -->
+                            <h3 class="card-title text-center mb-4">For pick up</h3>
 
-                        $sql = "SELECT * FROM accounts WHERE role = 'service_worker' AND account_id = '$workerid'";
-                       
-                        $result = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($result) > 0){
-                            $service = "SELECT * FROM service_worker 
-                                        INNER JOIN accounts ON accounts.account_id = service_worker.account_id                      
-                                        INNER JOIN appointments ON appointments.appointment_id = service_worker.appointment_id
-                                        INNER JOIN service_payment ON service_payment.payment_id = service_worker.payment_id
-                                        WHERE service_worker.account_id = '$workerid' AND appointments.status = 'Approved'";
-                            $service_result = mysqli_query($conn, $service);
-                            foreach ($service_result as $serviceitem) {
-                               
-                        ?>
-                            <div class="col-lg-3 col-md-4 col-sm-6"> 
-                                <div class="card">
-                                    <img src="../../assets/images/mrm-images/mrm-banner.png" class="card-img-top" alt="Image 1">
-                                    <div class="card-body">
-                                        <p class="card-text">Name: 
-                                            <span class="text-success">
-                                                <?= $serviceitem['name'] ?>
-                                            </span>
-                                        </p>
-                                        <p class="card-text">Contact: 
-                                            <span class="text-success">
-                                                (NO FUNCTION YET)
-                                            </span>
-                                        </p>
-                                        <p class="card-text">Service: 
-                                            <span class="text-success">
-                                                <?= $serviceitem['service_type'] ?>
-                                            </span>
-                                        </p>
-                                        <?php 
-                                        $currentDate = date('Y-m-d');
-                                            if($serviceitem['date'] == $currentDate){                                                                                        
-                                        ?>
-                                         
-                                         <a href="service_complete.php?account_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>&&payment_id=<?= $serviceitem['payment_id']?>" class="btn btn-primary">Done</a>  
-                                        <?php 
-                                        }
-                                        ?>     
-                                        <a href="user_details.php?user_id=<?= $serviceitem['account_id']?>&&appointment_id=<?= $serviceitem['appointment_id']?>" class="btn btn-primary">Details</a>                                                                                                            
-                                    </div>  
-                                    
-                                </div>
-                            </div> 
-                        <?php
-                            }
-                        }
-                        ?>
+                            <!-- Checklist -->
+                            <ul class="list-group mb-4">
+                                <?php 
+                                $sql = "select * from worker_ongoing
+                                        inner join service_booking on service_booking.booking_id = worker_ongoing.booking_id
+                                        ";
+                                $result = mysqli_query($conn , $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                $product_type = $row['product_type'];
+                                $service_type = $row['service_type'];
+                                $is_custom = $row['is_custom_brand'];
+
+
+                                if($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar'){ // IF NOT CUSTOM
+                                   
+                                    $command = "select * from package_installation_solar";
+                                }
+                 
+                                else if($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar'){ // IF CUSTOM
+                                    $command = "select * from brands where brand = '" . $row['brand'] ."'";
+                                }  
+
+                                else if($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator'){     // IF NOT CUSTOM
+                                    $command = "select * from package_installation_generator";
+                                }
+                                else if($is_custom == '1' && $option2 && $service_type == 'installation' && $product_type == 'generator'){  // IF CUSTOM
+                                    $command = "select * from brands where brand = '" . $row['brand'] ."'";
+                                }
+                                else if($service_type == 'tune-up' && $product_type == 'generator'){
+                
+                                    $command = "select * from package_tuneup_generator";
+                                }
+                                else if($service_type == 'maintenance' && $product_type == 'solar'){
+                                
+                                    $command = "select * from package_maintenance_solar";
+                                }
+                                else if($service_type == 'maintenance' && $product_type == 'generator'){
+                                    $command = "select * from package_maintenance_generator";
+                                }
+                                else if($service_type == 'repair' && $product_type == 'solar'){
+                                    $command = "select * from package_repair_solar";
+                                }
+                                else if($service_type == 'repair' && $product_type == 'generator'){
+                                    $command = "select * from package_repair_generator";
+                                }
+
+                                $check_list = $command;
+                                $result_list = mysqli_query($conn , $check_list);
+                              
+                                while($listing = mysqli_fetch_assoc($result_list)){
+
+                                
+                                ?>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-2" type="checkbox" id="task1">
+                                    <label class="form-check-label" for="task1"><?= $listing['description'] .'|'. $listing['unit'] ?> </label>
+                                </li>
+                                <?php 
+                                }
+                                ?>
+                            </ul>
+
+                            <!-- Button -->
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>

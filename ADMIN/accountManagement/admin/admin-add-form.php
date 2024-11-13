@@ -108,7 +108,7 @@ require_once '../../../Database/database.php';
                                                 <select id="role" class="form-select" name="role">
                                                     <option value="admin">admin</option>
                                                     <option value="agent">agent</option>
-                                                    <option value="worker">service worker</option>
+                                                    <option value="worker">worker</option>
                                                 </select>
                                             </div>                                                       
                                         <div class="col-md-12 d-flex justify-content-end">
