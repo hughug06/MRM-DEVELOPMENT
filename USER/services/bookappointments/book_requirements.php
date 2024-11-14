@@ -4,6 +4,31 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
+$worker_availability = "SELECT * FROM worker_availability WHERE is_available = 1";
+$exec = mysqli_query($conn, $worker_availability);
+if ($exec) {
+    if (mysqli_num_rows($exec) > 0) {
+        // Add SweetAlert2 for an alert and then redirect after 2 seconds
+       
+    }
+    else{
+        echo "TEST";
+        echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Notice',
+                    text: 'No available workers currently!',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'service.php';
+                });
+            </script>
+        ";
+    }
+}
 
 
 

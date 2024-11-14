@@ -748,53 +748,7 @@
                         </thead>
                         <tbody>
 
-                            <?php
-                        
-                            $userid = $_SESSION['account_id'];
-                            $sql = "select * from service_booking                
-                            where account_id = '$userid'";
-                            $result = mysqli_query($conn, $sql);
-
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    if ($row['status'] === "Canceled") { // Ensure to use === for strict comparison
-                                        continue; // Skip this iteration
-                                    }
-                                    ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($row['name']) ?></td>
-                                        <td><?= htmlspecialchars($row['location']) ?></td>
-                                        <td><?= htmlspecialchars($row['date']) ?></td>
-                                        <td><?= htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) ?></td>
-                                        <td> N/A</td>
-                                        
-                                           
-                                        
-                                        <td><?= htmlspecialchars($row['status']) ?></td>
-                                        <td>
-                                            
-                                               
-
-                                            
-                                                
-                                                
-                                                <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
-
-                                                
-                                                
-                                            <a href="/USER/services/myappointments/myappointments.php" style="color: white; text-decoration: none;" class="btn btn-sm btn-info">Check update</a>  
-                                                                    
-                                                
-                                                
-                                        </td>
-                                    </tr>
-                                    <?php 
-                                }
-                            } else {
-                                // Display a message if no appointments are found
-                                echo "<tr><td colspan='8' class='text-center'>Waiting for approval</td></tr>";
-                            }
-                            ?>
+                            
                         </tbody>
                     </table>
                 </div>

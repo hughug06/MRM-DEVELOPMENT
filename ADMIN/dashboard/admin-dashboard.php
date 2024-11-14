@@ -179,7 +179,6 @@ function formatMoney($number) {
                                                         <tr>
                                                             <th class="wd-lg-20p">#</th>
                                                             <th class="wd-lg-20p">CLIENT NAME</th>
-                                                            <th class="wd-lg-20p">WORKER NAME</th>
                                                             <th class="wd-lg-20p">LOCATION</th>
                                                             <th class="wd-lg-20p">PAYMENT STATUS</th>
                                                             <th class="wd-lg-20p">AMOUNT TO PAY</th>
@@ -190,7 +189,9 @@ function formatMoney($number) {
                                                     <tbody>
                                                         <?php 
                                                             $ongoing = "SELECT * FROM service_booking
-                                                                        INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id";
+                                                                        INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                        INNER JOIN user_info on user_info.user_id = service_booking.user_id      
+                                                                        ";
                                                             $result_ongoing = mysqli_query($conn, $ongoing);
                                                             if (mysqli_num_rows($result_ongoing) > 0) {
                                                                 // Define progress mapping for each enum status
@@ -210,8 +211,7 @@ function formatMoney($number) {
                                                         ?>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td><?= htmlspecialchars($row['pin_location']) ?></td>
-                                                            <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                            <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
                                                             <td><?= htmlspecialchars($row['pin_location']) ?></td>
                                                             <td><?= htmlspecialchars($row['payment_status']) ?></td>
                                                             <td><?= htmlspecialchars($row['total_cost']) ?></td>
