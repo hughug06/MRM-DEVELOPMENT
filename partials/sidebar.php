@@ -294,7 +294,7 @@
 
                 <?php 
                 }
-               else if($_SESSION['auth'] == "service_worker")
+               else if($_SESSION['auth'] == "worker")
                 {
                 ?>
                 <!-- Start::slide__category -->

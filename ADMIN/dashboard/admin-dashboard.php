@@ -169,8 +169,7 @@ function formatMoney($number) {
                                     <div class="card custom-card">
                                         <div class="card-header border-bottom-0">
                                             <div>
-                                                <div class="card-title">TRADING ACTIVITIES</div>
-                                                <span class="d-block fs-12 mb-0 text-muted">Cryptocurrency trading is the act of speculating on cryptocurrency price movements via a CFD trading account, or buying and selling the underlying coins via an exchange</span>
+                                                <div class="card-title">On going projects</div>
                                             </div>
                                         </div>
                                         <div class="card-body pt-3">
@@ -179,85 +178,61 @@ function formatMoney($number) {
                                                     <thead>
                                                         <tr>
                                                             <th class="wd-lg-20p">#</th>
-                                                            <th class="wd-lg-20p">NAME</th>
-                                                            <th class="wd-lg-20p">PRICE</th>
-                                                            <th class="wd-lg-20p">CHANGE</th>
-                                                            <th class="wd-lg-20p">CHART</th>
+                                                            <th class="wd-lg-20p">CLIENT NAME</th>
+                                                            <th class="wd-lg-20p">WORKER NAME</th>
+                                                            <th class="wd-lg-20p">LOCATION</th>
+                                                            <th class="wd-lg-20p">PAYMENT STATUS</th>
+                                                            <th class="wd-lg-20p">AMOUNT TO PAY</th>
+                                                            <th class="wd-lg-20p">PROJECT PROGRESS</th>
                                                             <th class="wd-lg-20p">STATUS</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php 
+                                                            $ongoing = "SELECT * FROM service_booking
+                                                                        INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id";
+                                                            $result_ongoing = mysqli_query($conn, $ongoing);
+                                                            if (mysqli_num_rows($result_ongoing) > 0) {
+                                                                // Define progress mapping for each enum status
+                                                                $statusMap = [
+                                                                    'pick_up' => 16, // 1/6 of 100%
+                                                                    'delivery' => 33, // 2/6 of 100%
+                                                                    'arrive' => 50, // 3/6 of 100%
+                                                                    'ongoing_construction' => 66, // 4/6 of 100%
+                                                                    'checking' => 83, // 5/6 of 100%
+                                                                    'completed' => 100 // 6/6 of 100%
+                                                                ];
+
+                                                                while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                                    // Get the current progress percentage based on the status
+                                                                    $status = $row['status'];
+                                                                    $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
+                                                        ?>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td class="coin_icon mt-2">
-                                                                <div class="d-flex">
-                                                                    <div class="cryp-icon bg-primary me-2"> 
-                                                                        <i class="cf cf-btc"></i>
+                                                            <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                            <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                            <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                            <td><?= htmlspecialchars($row['payment_status']) ?></td>
+                                                            <td><?= htmlspecialchars($row['total_cost']) ?></td>
+                                                            <td>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" 
+                                                                        style="width: <?= $progressPercentage; ?>%;" 
+                                                                        aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                        aria-valuemin="0" aria-valuemax="100">
+                                                                        <?= $progressPercentage; ?>%
                                                                     </div>
-                                                                    <span class="my-auto">Bitcoin <b>BTC</b></span>
                                                                 </div>
                                                             </td>
-                                                            <td>USD 680,175.06</td>
-                                                            <td><span class="text-success ">+1.13%</span></td>
-                                                            <td>
-                                                                <div class="progress" style="height: 20px;">
-                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-start"><a href="javascript:void(0);" class="text-success">DELIVERY</a></td>
+                                                            <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td class="coin_icon mt-2">
-                                                                <div class="d-flex">
-                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-eth"></i> </div>
-                                                                    <span class="my-auto">Ethereum <b>ETH</b></span>
-                                                                </div>
-                                                            </td>
-                                                            <td>USD 345,235.02</td>
-                                                            <td><span class="text-danger">-1.13%</span></td>
-                                                            <td>
-                                                                <div class="progress" style="height: 20px;">
-                                                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-start"><a href="javascript:void(0);" class="text-danger">CANCEL</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td class="coin_icon mt-2">
-                                                                <div class="d-flex">
-                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-xrp"></i> </div>
-                                                                    <span class="my-auto">Ripple <b>XRP</b></span>
-                                                                </div>
-                                                            </td>
-                                                            <td>USD 235,356.12</td>
-                                                            <td><span class="text-muted">-2.23%</span></td>
-                                                            <td>
-                                                                <div class="progress" style="height: 20px;">
-                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-start"><a href="javascript:void(0);" class="text-muted">HOLD</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td class="coin_icon mt-2">
-                                                                <div class="d-flex">
-                                                                    <div class="cryp-icon bg-primary my-auto me-2"> <i class="cf cf-ltc"></i> </div>
-                                                                    <span class="my-auto">Litecoin <b>LTC</b></span>
-                                                                </div>
-                                                            </td>
-                                                            <td>USD 456,235.52</td>
-                                                            <td><span class="text-danger ">-1.13%</span></td>
-                                                            <td>
-                                                                <div class="progress" style="height: 20px;">
-                                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="text-start"><a href="javascript:void(0);" class="text-danger">CANCEL</a></td>
-                                                        </tr>
+                                                        <?php 
+                                                                }
+                                                            }
+                                                        ?>                                                     
                                                     </tbody>
+
                                                 </table>
                                             </div>
                                         </div>
