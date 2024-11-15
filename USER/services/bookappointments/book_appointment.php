@@ -301,7 +301,7 @@ $product_type = $_POST['productType'];
                             <form method="post" action="service_payment.php" id="sol_ins_form">
                                 <div class="mb-3">
                                     <label for="serviceSelect" class="form-label">Select Product</label>
-                                    <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
+                                    <select name="serviceSelect1" id="serviceSelect" class="form-select py-2 sol_ins_prod1">
                                         <option value="">-- Select a Product --</option>
                                         <?php 
                                         $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Solar Panel'";
@@ -311,7 +311,7 @@ $product_type = $_POST['productType'];
                                         <?php endwhile; ?>
                                     </select>
                                     <div class="form-check d-flex mt-2 gap-2">
-                                        <input type="checkbox" id="customCheck" class="ms-auto" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
+                                        <input type="checkbox" id="customCheck" class="ms-auto sol_ins_check" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
                                         <label class="text-primary fw-bold" for="customCheck">
                                             Customer Item
                                         </label>
@@ -320,7 +320,7 @@ $product_type = $_POST['productType'];
                                 <!-- Custom input field, initially hidden -->
                                 <div class="mb-3 d-none" id="customInputContainer">
                                     <label class="form-label">Available Products</label>
-                                    <select name="serviceSelect2" id="serviceSelect" class="form-select py-2">
+                                    <select name="serviceSelect2" id="serviceSelect" class="form-select py-2 sol_ins_prod2">
                                         <option value="">-- Select a Product --</option>
                                         <?php 
                                         $query = "SELECT * FROM brand where type = 'solar'";
@@ -331,9 +331,9 @@ $product_type = $_POST['productType'];
                                     </select>
                                 </div>
                                 <label class="form-label">Quantity</label>
-                                <input type="number" name="quantity" class="form-control mb-5">
+                                <input type="number" name="quantity" class="form-control mb-5 sol_ins_quantity">
                                 <input type="hidden" name="installation_submit">
-                                <button type="submit" class="btn btn-primary d-flex ms-auto" id="" name="installation_submit">Proceed to payment</button>
+                                <button type="submit" class="btn btn-primary d-flex ms-auto sol_ins_submit" id="" name="installation_submit">Proceed to payment</button>
                                 <!-- Hidden Inputs for Data -->
                                 <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                                 <!-- User Input Fields -->
@@ -353,7 +353,7 @@ $product_type = $_POST['productType'];
                         <form method="post" action="service_payment.php" id="gen_ins_form">
                             <div class="mb-3">
                                 <label for="serviceSelect" class="form-label">Select Product</label>
-                                <select name="serviceSelect1" id="serviceSelect" class="form-select py-2">
+                                <select name="serviceSelect1" id="serviceSelect" class="form-select py-2 gen_ins_prod1">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Generator'";
@@ -363,7 +363,7 @@ $product_type = $_POST['productType'];
                                     <?php endwhile; ?>
                                 </select>
                                 <div class="form-check d-flex mt-2 gap-2">
-                                    <input type="checkbox" id="customCheck" class="ms-auto" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
+                                    <input type="checkbox" id="customCheck" class="ms-auto gen_ins_check" aria-label="Custom Input Toggle" onchange="toggleCustomInput(this)">
                                     <label class="text-primary fw-bold" for="customCheck">
                                         Customer Item
                                     </label>
@@ -372,7 +372,7 @@ $product_type = $_POST['productType'];
                             <!-- Custom input field, initially hidden -->
                             <div class="mb-3 d-none" id="customInputContainer">
                                 <label class="form-label">Available Products</label>
-                                <select name="serviceSelect2" id="serviceSelect" class="form-select py-2">
+                                <select name="serviceSelect2" id="serviceSelect" class="form-select py-2 gen_ins_prod2">
                                     <option value="">-- Select a Product --</option>
                                     <?php 
                                     $query = "SELECT * FROM brand where type = 'generator'";
@@ -383,9 +383,9 @@ $product_type = $_POST['productType'];
                                 </select>
                             </div>
                             <label class="form-label">Quantity</label>
-                            <input type="number" name="quantity" class="form-control mb-5">
+                            <input type="number" name="quantity" class="form-control mb-5 gen_ins_quantity">
                             <input type="hidden" name="installation_submit">
-                            <button type="submit" id="" class="btn btn-primary d-flex ms-auto" name="installation_submit">Proceed to payment</button>
+                            <button type="submit" id="" class="btn btn-primary d-flex ms-auto gen_ins_submit" name="installation_submit">Proceed to payment</button>
                             <!-- Hidden Inputs for Data -->
                             <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id) ?>">
                             <!-- User Input Fields -->
@@ -661,11 +661,11 @@ $product_type = $_POST['productType'];
             //SOLAR REPAIR
             $('.sol_rep_submit').on('click', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
-                const tp_quantity = parseInt(document.querySelector('.sol_rep_quantity').value);
-                const tp_kva = parseInt(document.querySelector('.sol_rep_kva').value);
-                const tp_rh = parseInt(document.querySelector('.sol_rep_rh').value);
-                const tp_brand = document.querySelector('.sol_rep_brand').value;
-                if(tp_quantity == "" || tp_brand == ""  || tp_kva == "" || tp_rh == ""){
+                const sol_quantity = parseInt(document.querySelector('.sol_rep_quantity').value);
+                const sol_kva = parseInt(document.querySelector('.sol_rep_kva').value);
+                const sol_rh = parseInt(document.querySelector('.sol_rep_rh').value);
+                const sol_brand = document.querySelector('.sol_rep_brand').value;
+                if(sol_quantity == "" || sol_brand == ""  || sol_kva == "" || sol_rh == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -676,7 +676,7 @@ $product_type = $_POST['productType'];
                         }
                     });
                 }
-                else if(tp_rh <= 0){
+                else if(sol_rh <= 0){
                     Swal.fire({
                         title: 'ERROR',
                         html: "Running Hours cannot be less than 0.",
@@ -687,7 +687,7 @@ $product_type = $_POST['productType'];
                         }
                     });
                 }
-                else if(tp_kva < 20 || tp_kva > 1000){
+                else if(sol_kva < 20 || sol_kva > 1000){
                     Swal.fire({
                         title: 'ERROR',
                         html: "KVA cannot be less than 20 or Higher than 1000.",
@@ -698,7 +698,7 @@ $product_type = $_POST['productType'];
                         }
                     });
                 }
-                else if(tp_quantity <= 0){
+                else if(sol_quantity <= 0){
                     Swal.fire({
                         title: 'ERROR',
                         html: "Quantity cannot be less than 0.",
@@ -785,6 +785,128 @@ $product_type = $_POST['productType'];
                     }).then((result) => {
                         if (result.isConfirmed) {
                             document.getElementById("gen_rep_form").submit();
+                        }
+                    });
+                }
+            });
+
+            //SOLAR INSTALLATION
+            $('.sol_ins_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const sol_ins_quantity = parseInt(document.querySelector('.sol_ins_quantity').value);
+                const sol_ins_prod1 = document.querySelector('.sol_ins_prod1').value;
+                const sol_ins_prod2 = document.querySelector('.sol_ins_prod2').value;
+                const sol_ins_check = document.querySelector('.sol_ins_check').checked;
+                if((sol_ins_check == true && sol_ins_prod2 == "") || (sol_ins_check == false && sol_ins_prod1 == "")){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(Number.isNaN(sol_ins_quantity)){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(sol_ins_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("sol_ins_form").submit();
+                        }
+                    });
+                }
+            });
+
+
+            //SOLAR INSTALLATION
+            $('.gen_ins_submit').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const gen_ins_quantity = parseInt(document.querySelector('.gen_ins_quantity').value);
+                const gen_ins_prod1 = document.querySelector('.gen_ins_prod1').value;
+                const gen_ins_prod2 = document.querySelector('.gen_ins_prod2').value;
+                const gen_ins_check = document.querySelector('.gen_ins_check').checked;
+                if(gen_ins_check == true && gen_ins_prod2 == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(gen_ins_check == false && gen_ins_prod1 == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(Number.isNaN(gen_ins_quantity)){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else if(gen_ins_quantity <= 0){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Quantity cannot be less than 0.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("gen_ins_form").submit();
                         }
                     });
                 }
