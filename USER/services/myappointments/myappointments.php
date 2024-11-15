@@ -65,9 +65,7 @@
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
-                                    <a class="nav-link  active" data-bs-toggle="tab" href="#payment_checking">Pending</a>
-                                    <a class="nav-link" data-bs-toggle="tab" href="#payment">Payment</a>         
-                                    <a class="nav-link" data-bs-toggle="tab" href="#paymentchecking">Payment Checking</a>              
+                                    <a class="nav-link  active" data-bs-toggle="tab" href="#paymentchecking">Payment Checking</a>              
                                     <a class="nav-link" data-bs-toggle="tab" href="#approved">Approved</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#completed">Completed</a>
                                     <a class="nav-link" data-bs-toggle="tab" href="#cancelled">Cancelled</a>
@@ -77,53 +75,30 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="card custom-card main-content-body-profile">
                                         <div class="tab-content">
-                                            <div class="main-content-body tab-pane p-4 border-top-0 active" id="pending">
-                                                <div class="mb-4 main-content-label">Pending</div>
-                                                    <div class="card-body border">  
-                                                            <!-- Content Here -->
-                                                         
-
-                                                    </div>
-                                                
-                                            </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="payment">
-                                                <div class="mb-4 main-content-label">Quotation</div>
-                                                        <div class="card-body border">
-                                              
-
-                                                        </div>
-                                               
-
-                                            </div>
-                                            <div class="main-content-body p-4 border tab-pane border-top-0" id="paymentchecking">
+                                            <div class="main-content-body p-4 border tab-pane border-top-0 active" id="paymentchecking">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
                                                 <div class="card-body border">
-                                                    <!-- Content Here -->
-                                                    
+                                                <!-- Content Here -->
                                                 </div>
                                             </div>           
                                             <div class="main-content-body  tab-pane p-4 border-top-0 p-0" id="approved">
                                                 <div class="mb-4 main-content-label">Approved</div>
                                                 <div class="card-body border">
-                                                    <!-- Content Here -->
-                                                   
+                                                <!-- Content Here -->
                                                 </div>
                                             </div>   
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
                                                      <!-- Content Here -->
-                                                    
                                                 </div>
                                             </div>
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="cancelled">
                                                 <div class="mb-4 main-content-label">Cancelled</div>
-                                                    <div class="card-body border">
-                                                    <!-- Content Here -->
-                                                   
-                                                    </div>
-                                            </div>            
-                                                                            
+                                                <div class="card-body border">
+                                                <!-- Content Here -->
+                                                </div>
+                                            </div>                                          
                                         </div>
                                     </div>
                                 </div>
@@ -132,13 +107,6 @@
                     </div>
                 </div>
             </div>
-
-        
-
-
- 
-            
-
             <!-- Footer Start -->
             <?php include_once(__DIR__.'/../../../partials/footer.php') ?>
             <!-- Footer End -->  
