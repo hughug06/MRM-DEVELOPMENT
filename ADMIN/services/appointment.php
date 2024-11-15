@@ -169,7 +169,13 @@
                                                                             availability-id="<?=$resultItem['availability_id']; ?>">
                                                                         Assign Worker
                                                                     </button>
-                                                                        <button class="btn btn-primary">DECLINE</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#reject_user"
+                                                                            data-reject-booking-id="<?= $resultItem['booking_id']; ?>"                                                                        >
+                                                                        Reject User
+                                                                    </button>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -179,7 +185,6 @@
                                                         ?> 
                                                     </div>
                                                 </div>
-
                                             </div>
                     
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="on_going">
@@ -271,23 +276,58 @@
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="cancel">
                                                 <div class="mb-4 main-content-label">Cancelled Appointment</div>
                                                 <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Appointment Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                           
-                                                           
-                                                        </table>
-                                                    </div>                     
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Service Type</th>
+                                                                <th>Product Type</th>
+                                                                <th>Brand / Power / Running Hours</th>
+                                                                <th>Schedule</th>
+                                                                <th>Payment Method</th>
+                                                                <th>Bank Name</th>
+                                                                <th>Reference Number</th>
+                                                                <th>Payment Date</th>
+                                                                <th>Payment Status</th>
+                                                                <th>Booking Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php 
+                                                            $select = "SELECT * FROM service_booking     
+                                                                        INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id   
+                                                                        INNER JOIN user_info ON user_info.user_id = service_booking.user_id                                    
+                                                                        WHERE payment_status ='advance_payment' AND booking_status = 'canceled'";
+                                                            $result = mysqli_query($conn, $select);
+                                                            
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                            <tr>
+                                                                <td><?= htmlspecialchars($row['first_name']) . ' ' . htmlspecialchars($row['last_name']); ?></td>
+                                                                <td><?= htmlspecialchars($row['service_type']); ?></td>
+                                                                <td><?= htmlspecialchars($row['product_type']); ?></td>
+                                                                <td><?= htmlspecialchars($row['brand'] . ' / ' . $row['KVA'] . ' / ' . $row['running_hours']); ?></td>
+                                                                <td><?= htmlspecialchars($row['date'] . ' / ' . $row['start_time'] . ' - ' . $row['end_time']); ?></td>
+                                                                <td><?= htmlspecialchars($row['payment_method']); ?></td>
+                                                                <td><?= htmlspecialchars($row['bank_name']); ?></td>
+                                                                <td><?= htmlspecialchars($row['reference_number']); ?></td>
+                                                                <td><?= htmlspecialchars($row['payment_date']); ?></td>
+                                                                <td><span class="badge bg-warning"><?= htmlspecialchars($row['payment_status']); ?></span></td>
+                                                                <td><span class="badge bg-danger"><?= htmlspecialchars($row['booking_status']); ?></span></td>
+                                                                
+                                                            </tr>
+                                                            <?php 
+                                                                }
+                                                            } else {
+                                                                echo '<tr><td colspan="12" class="text-center">No records found</td></tr>';
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                     
                                                 </div>
                                             </div>
                                         </div>
@@ -305,7 +345,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">APPROVE BOOK AND CHOOSE WORKER </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -329,7 +369,7 @@
                                                         ?>
                                                             <div class="card-body">
                                                                 <!-- Worker ID -->
-                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
+                    
                                                                 
                                                                 <!-- Display Worker Name and Role -->
                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
@@ -339,7 +379,7 @@
                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                 
                                                                 <!-- Hidden input for id of user -->
-                                                                <input type="text" name="worker_id" value="<?= $resultitem['account_id'] ?>">
+                                                                <input type="text" name="worker_id" value="<?= $resultitem['user_id'] ?>">
                                                             </div>
                                                         <?php
                                                             }
@@ -350,7 +390,31 @@
                                             </div>
                                         </div>
                                     </div>
-</div>
+                                </div>
+
+                                 <!-- MODAL FOR CHOOSE WORKER -->
+                             <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">REJECT PAYMENT</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Form for assigning a worker -->
+                                                <form action="reject_payment.php" method="POST">
+                                                    <!-- Hidden inputs for booking, admin, client, and availability IDs -->
+                                                    <input type="text" class="bookingId" name="booking_id">
+                                                 
+
+                                                    <h5 class="card-title">Enter Reason for Rejection</h5>
+                                                    <textarea name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                                    <button type="submit">SUBMIT</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
 
 
 
@@ -410,6 +474,7 @@
             <script>
                     document.addEventListener('DOMContentLoaded', () => {
                     const modal = document.getElementById('assign_worker');
+                    const reject_modal = document.getElementById('reject_user');
                     const bookingInput = modal.querySelector('.bookingId');
                     const adminInput = modal.querySelector('.adminId');
                     const clientInput = modal.querySelector('.clientId');
@@ -431,6 +496,22 @@
                         adminInput.value = adminId;
                         clientInput.value = clientId;
                         availabilityInput.value = availabilityId;
+                    });
+
+
+                    //FOR REJECT MODAL
+                    const rejectModal = document.getElementById('reject_user');
+                    const bookingInput_reject = rejectModal.querySelector('.bookingId');
+
+                    rejectModal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
+
+                        // Extract data from data-* attributes
+                        const bookingId = button.dataset.rejectBookingId;
+
+                        // Populate the hidden input field
+                        bookingInput_reject.value = bookingId;
                     });
                 });
 

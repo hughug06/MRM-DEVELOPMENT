@@ -682,6 +682,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                         <!-- Hidden input fields -->
                                                                         <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
 
+                                                                        <input type="text" name="first_payment" value="<?= $final_value * .45 ?>">
                                                                         <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
                                                                         <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
                                                                         <input type="text" name="kva" value="<?= htmlspecialchars($kva); ?>">
@@ -696,7 +697,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     ?>
                                                                         <!-- Hidden input fields -->
                                                                         <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">
-
+                                                                        <input type="text" name="first_payment" value="<?= $final_value * .45 ?>">
                                                                         <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
                                                                         <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
                                                                         <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">

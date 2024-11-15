@@ -20,8 +20,8 @@
             // Retrieve POST data
             $service_type = $_POST['serviceType'];
             $product_type = $_POST['productType'];
-
-        
+            $first_payment = $_POST['first_payment'];
+      
 
 // Create the SQL statement
 $sql = "INSERT INTO service_booking (
@@ -34,10 +34,8 @@ $sql = "INSERT INTO service_booking (
             KVA, 
             running_hours, 
             brand, 
-            total_cost, 
             payment_method, 
             bank_name, 
-            reference_number, 
             payment_date, 
             payment_status, 
             booking_status
@@ -51,10 +49,8 @@ $sql = "INSERT INTO service_booking (
             '$kva',
             '$running_hours',
             '$brand',
-            '$total_cost',
             '$payment_method',
             '$bank_name',
-            '$reference_number',
             '$date',
             'advance_payment',  -- Example default value for payment_status
             'pending'         -- Example default value for booking_status       
@@ -62,6 +58,11 @@ $sql = "INSERT INTO service_booking (
 
 $result = mysqli_query($conn , $sql);
 
+ $booking_id = $conn->insert_id;
+ $sql2 = "INSERT INTO service_payment(booking_id, first_payment, first_reference, total_cost)
+ VALUES ('$booking_id', '$first_payment', '$reference_number', '$total_cost')";
+
+$result2 = mysqli_query($conn , $sql2);
     }
    
    header("Location: service.php");

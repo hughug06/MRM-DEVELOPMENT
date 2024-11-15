@@ -93,33 +93,7 @@
                     </ul>
                 </li>
 
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Inquire/Schedule</span></li>
-                <!-- End::slide__category -->
-
-                <!-- Start::slide__category -->
-                <li class="slide has-sub <?= $page == 'chaintercom_landing.php' || $page == 'chaintercom_appointments.php' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'chaintercom_landing.php' || $page == 'chaintercom_appointments.php' ? 'active':''?>">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-chalkboard-user side-menu__icon"></i>
-                        <span class="side-menu__label">Chaintercom</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == "chaintercom_landing.php" ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_landing.php" class="side-menu__item <?= $page == 'chaintercom_landing.php' ? 'active':''?>">Booking</a>
-                        </li> 
-                        <li class="slide <?= $page == 'chaintercom_appointments.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_appointments.php" class="side-menu__item <?= $page == 'chaintercom_appointments.php' ? 'active':''?>">Appointments</a>
-                        </li>                                
-                    </ul>
-                </li>
-                <!-- End::slide__category -->
-
-
-
-            
+        
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Account</span></li>
                 <!-- End::slide__category -->
