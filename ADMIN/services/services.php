@@ -154,7 +154,7 @@ include_once '../../Database/database.php';
                                             foreach($result as $resultItem){
                                                 ?> 
                                                 <tr>
-                                                <td><?= $resultItem['account_id']?></td>     
+                                                <td><?= $resultItem['admin_id']?></td>     
                                                 <td class="text-success"><?= $resultItem['date']?></td>                                        
                                                 <td><?= $resultItem['start_time']?></td>                        
                                                 <td><?= $resultItem['end_time']?></td>                                           
