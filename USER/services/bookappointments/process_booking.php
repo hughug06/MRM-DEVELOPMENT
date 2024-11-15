@@ -5,7 +5,7 @@
     if (isset($_POST['save_payment'])) {
     
             $availability_id = $_POST['availability_id'];
-            $account_id = $_SESSION['account_id'];
+            $user_id = $_SESSION['user_id'];
             $pin_location = $_POST['location'];
             $quantity = $_POST['quantity'];
             $kva = $_POST['kva'];
@@ -25,7 +25,7 @@
 
 // Create the SQL statement
 $sql = "INSERT INTO service_booking (
-            account_id, 
+            user_id, 
             availability_id, 
             service_type, 
             product_type, 
@@ -42,7 +42,7 @@ $sql = "INSERT INTO service_booking (
             payment_status, 
             booking_status
         ) VALUES (
-            '$account_id',
+            '$user_id',
             '$availability_id',
             '$service_type',
             '$product_type',

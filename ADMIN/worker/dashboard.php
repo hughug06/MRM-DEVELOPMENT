@@ -61,79 +61,112 @@ require_once '../../Database/database.php';
 
             <div class="main-content app-content">
             <div class="container-fluid">
-                    <div class="card mt-5" style="width: 100%; padding: 20px;">
+            <div class="card mt-5" style="width: 100%; padding: 20px;">
                         <div class="card-body">
-                            <!-- Heading -->
-                            <h3 class="card-title text-center mb-4">For pick up</h3>
-
                             <!-- Checklist -->
                             <ul class="list-group mb-4">
                                 <?php 
-                                $sql = "select * from worker_ongoing
-                                        inner join service_booking on service_booking.booking_id = worker_ongoing.booking_id
-                                        ";
-                                $result = mysqli_query($conn , $sql);
-                                $row = mysqli_fetch_assoc($result);
-                                $product_type = $row['product_type'];
-                                $service_type = $row['service_type'];
-                                $is_custom = $row['is_custom_brand'];
+                                $worker_id = $_SESSION['worker_id'];
 
+                                // Query to get data for the current worker
+                                $sql = "SELECT * FROM worker_ongoing
+                                        INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
+                                        WHERE worker_id = $worker_id";
+                                $result = mysqli_query($conn, $sql);
 
-                                if($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar'){ // IF NOT CUSTOM
-                                   
-                                    $command = "select * from package_installation_solar";
-                                }
-                 
-                                else if($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar'){ // IF CUSTOM
-                                    $command = "select * from brands where brand = '" . $row['brand'] ."'";
-                                }  
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    $product_type = $row['product_type'];
+                                    $service_type = $row['service_type'];
+                                    $is_custom = $row['is_custom_brand'];
+                                    $status = $row['status'];
+                                    $booking_id = $row['booking_id'];
+                                    $working_id = $row['working_id'];
+                                    // Determine the command based on conditions
+                                    if ($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar') {
+                                        $command = "SELECT * FROM package_installation_solar";
+                                    } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar') {
+                                        $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                    } elseif ($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator') {
+                                        $command = "SELECT * FROM package_installation_generator";
+                                    } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'generator') {
+                                        $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                    } elseif ($service_type == 'tune-up' && $product_type == 'generator') {
+                                        $command = "SELECT * FROM package_tuneup_generator";
+                                    } elseif ($service_type == 'maintenance' && $product_type == 'solar') {
+                                        $command = "SELECT * FROM package_maintenance_solar";
+                                    } elseif ($service_type == 'maintenance' && $product_type == 'generator') {
+                                        $command = "SELECT * FROM package_maintenance_generator";
+                                    } elseif ($service_type == 'repair' && $product_type == 'solar') {
+                                        $command = "SELECT * FROM package_repair_solar";
+                                    } elseif ($service_type == 'repair' && $product_type == 'generator') {
+                                        $command = "SELECT * FROM package_repair_generator";
+                                    } else {
+                                        echo "<h3>No matching service type or product type found.</h3>";
+                                        $command = null;
+                                    }
 
-                                else if($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator'){     // IF NOT CUSTOM
-                                    $command = "select * from package_installation_generator";
-                                }
-                                else if($is_custom == '1' && $option2 && $service_type == 'installation' && $product_type == 'generator'){  // IF CUSTOM
-                                    $command = "select * from brands where brand = '" . $row['brand'] ."'";
-                                }
-                                else if($service_type == 'tune-up' && $product_type == 'generator'){
-                
-                                    $command = "select * from package_tuneup_generator";
-                                }
-                                else if($service_type == 'maintenance' && $product_type == 'solar'){
-                                
-                                    $command = "select * from package_maintenance_solar";
-                                }
-                                else if($service_type == 'maintenance' && $product_type == 'generator'){
-                                    $command = "select * from package_maintenance_generator";
-                                }
-                                else if($service_type == 'repair' && $product_type == 'solar'){
-                                    $command = "select * from package_repair_solar";
-                                }
-                                else if($service_type == 'repair' && $product_type == 'generator'){
-                                    $command = "select * from package_repair_generator";
-                                }
+                                    if ($command) {
+                                        $result_list = mysqli_query($conn, $command);
+                                    }
 
-                                $check_list = $command;
-                                $result_list = mysqli_query($conn , $check_list);
-                              
-                                while($listing = mysqli_fetch_assoc($result_list)){
-
-                                
+                                    // Display status header
+                                    switch ($status) {
+                                        case 'pick_up':
+                                            echo "<h3>PICK UP</h3>";
+                                            break;
+                                        case 'delivery':
+                                            echo "<h3>DELIVERY</h3>";
+                                            break;
+                                        case 'arrive':
+                                            echo "<h3>ARRIVE</h3>";
+                                            break;
+                                        case 'ongoing_construction':
+                                            echo "<h3>ONGOING CONSTRUCTION</h3>";
+                                            break;
+                                        case 'checking':
+                                            echo "<h3>CHECKING</h3>";
+                                            break;
+                                        case 'completed':
+                                            echo "<h3>COMPLETED</h3>";
+                                            break;
+                                        default:
+                                            echo "<h3>STATUS UNKNOWN</h3>";
+                                            break;
+                                    }
+                                if($status == 'pick_up' || $status == 'delivery'){
                                 ?>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-2" type="checkbox" id="task1">
-                                    <label class="form-check-label" for="task1"><?= $listing['description'] .'|'. $listing['unit'] ?> </label>
-                                </li>
-                                <?php 
-                                }
-                                ?>
-                            </ul>
-
-                            <!-- Button -->
-                            <div class="d-grid">
-                                <button type="button" class="btn btn-primary">Submit</button>
-                            </div>
+                                <form action="function.php" method="POST">
+                                    <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
+                                        <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
+                                            <li class="list-group-item">
+                                                <input class="form-check-input me-2" type="checkbox" name="tasks[]">
+                                                <label class="form-check-label">
+                                                    <?= htmlspecialchars($listing['description']) . ' | ' . htmlspecialchars($listing['unit']) ?>
+                                                </label>
+                                            </li>
+                                        <?php endwhile; ?>
+                                        <!-- Button -->
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <!-- hidden data for booking_id -->
+                                        <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
+                                        <input type="hidden" name="working_id" value="<?= $working_id ?>">
+                                    </div>
+                                            
+                                    <?php else: ?>
+                                        <li class="list-group-item">No items found.</li>
+                                    <?php endif; ?>
+                                    
+                                </form>
+                                </ul>
+                                
+                                <?php }  } else { ?>
+                                    <h3>No work for now</h3>
+                                <?php } ?>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -181,3 +214,4 @@ require_once '../../Database/database.php';
     </body>
 
 </html>
+

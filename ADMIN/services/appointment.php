@@ -125,23 +125,20 @@
                                                         <?php 
                                                                                                                                                                         
                                                         $select = "SELECT * FROM service_booking     
-                                                                    INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id                                       
+                                                                    INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id   
+                                                                    INNER JOIN user_info on user_info.user_id = service_booking.user_id                                    
                                                                     WHERE payment_status ='advance_payment' AND booking_status = 'pending'";
                                                         $result = mysqli_query($conn , $select);
                                                         $row = mysqli_fetch_assoc($result);
-                                                        $account_id = $row['account_id'];
-                                                        $name = "select * from accounts 
-                                                                inner join user_info on user_info.user_id = accounts.user_id
-                                                                where account_id = '$account_id'";
-                                                        $result_name = mysqli_query($conn , $name);
-                                                        $row_name = mysqli_fetch_assoc($result_name);
+
+                                                        
                                                         if (mysqli_num_rows($result) > 0) {
                                                             foreach ($result as $resultItem) { 
                                                         ?>
                                                             <div class="col-md-4">
                                                                 <div class="card mb-4">
                                                                     <div class="card-header">
-                                                                        <h5 class="card-title"><?= htmlspecialchars($row_name['first_name']) .' '.htmlspecialchars($row_name['last_name']) ; ?></h5>
+                                                                        <h5 class="card-title"><?= htmlspecialchars($row['first_name']) .' '.htmlspecialchars($row['last_name']) ; ?></h5>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <!-- Service and Product Info -->
@@ -168,7 +165,7 @@
                                                                             data-bs-target="#assign_worker"
                                                                             booking-id="<?= $resultItem['booking_id'];?>"
                                                                             admin-id="<?= $_SESSION['admin_id']?>"
-                                                                            client-id="<?= $resultItem['account_id'];?>"
+                                                                            user-id="<?= $resultItem['user_id'];?>"
                                                                             availability-id="<?=$resultItem['availability_id']; ?>">
                                                                         Assign Worker
                                                                     </button>
@@ -186,25 +183,80 @@
                                             </div>
                     
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="on_going">
-                                                <div class="mb-4 main-content-label">On going projects</div>
-                                                <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
-                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                         
-                                                        </table>
-                                                    </div>             
+                                                <div class="row row-sm">
+                                                    <div class="col-sm-12 col-md-12 col-xl-12">
+                                                        <div class="card custom-card">
+                                                            <div class="card-header border-bottom-0">
+                                                                <div>
+                                                                    <div class="card-title">On going projects</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body pt-3">
+                                                                <div class="table-responsive tasks">
+                                                                    <table class="table card-table table-vcenter text-nowrap border">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="wd-lg-20p">#</th>
+                                                                                <th class="wd-lg-20p">CLIENT NAME</th>
+                                                                                <th class="wd-lg-20p">LOCATION</th>
+                                                                                <th class="wd-lg-20p">PAYMENT STATUS</th>
+                                                                                <th class="wd-lg-20p">AMOUNT TO PAY</th>
+                                                                                <th class="wd-lg-20p">PROJECT PROGRESS</th>
+                                                                                <th class="wd-lg-20p">STATUS</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php 
+                                                                                $ongoing = "SELECT * FROM service_booking
+                                                                                            INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                                            INNER JOIN user_info on user_info.user_id = service_booking.user_id      
+                                                                                            ";
+                                                                                $result_ongoing = mysqli_query($conn, $ongoing);
+                                                                                if (mysqli_num_rows($result_ongoing) > 0) {
+                                                                                    // Define progress mapping for each enum status
+                                                                                    $statusMap = [
+                                                                                        'pick_up' => 16, // 1/6 of 100%
+                                                                                        'delivery' => 33, // 2/6 of 100%
+                                                                                        'arrive' => 50, // 3/6 of 100%
+                                                                                        'ongoing_construction' => 66, // 4/6 of 100%
+                                                                                        'checking' => 83, // 5/6 of 100%
+                                                                                        'completed' => 100 // 6/6 of 100%
+                                                                                    ];
+
+                                                                                    while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                                                        // Get the current progress percentage based on the status
+                                                                                        $status = $row['status'];
+                                                                                        $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
+                                                                                <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                                                <td><?= htmlspecialchars($row['payment_status']) ?></td>
+                                                                                <td><?= htmlspecialchars($row['total_cost']) ?></td>
+                                                                                <td>
+                                                                                    <div class="progress" style="height: 20px;">
+                                                                                        <div class="progress-bar bg-success" role="progressbar" 
+                                                                                            style="width: <?= $progressPercentage; ?>%;" 
+                                                                                            aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                                            aria-valuemin="0" aria-valuemax="100">
+                                                                                            <?= $progressPercentage; ?>%
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
+                                                                            </tr>
+                                                                            <?php 
+                                                                                    }
+                                                                                }
+                                                                            ?>                                                     
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                            
@@ -371,7 +423,7 @@
                         // Extract info from data-* attributes
                         const bookingId = button.getAttribute('booking-id');
                         const adminId = button.getAttribute('admin-id');
-                        const clientId = button.getAttribute('client-id');
+                        const clientId = button.getAttribute('user-id');
                         const availabilityId = button.getAttribute('availability-id');
 
                         // Populate the hidden input fields
