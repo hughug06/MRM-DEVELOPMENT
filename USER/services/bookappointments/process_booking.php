@@ -61,6 +61,9 @@ $sql = "INSERT INTO service_booking (
         )";
 
 $result = mysqli_query($conn , $sql);
+
     }
    
+   header("Location: service.php");
+   exit();
 ?>
