@@ -35,17 +35,24 @@ if (isset($_GET['PrType'])) {
 elseif(isset($_POST['addtask'])){
     $email = $_POST['email'];
     $name = $_POST['name'];
-    $products = $_POST['products'];
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
     $date = $_POST['date'];
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     $user_id = $_SESSION['user_id'];
+    $location = $_POST['location'];
+    $contact = $_POST['contact'];
+    $availability_id = $_POST['availability_id'];
 
 
-    $sql_insert = "insert into kanban (email, name, products, date, start_time, end_time, status, user_id)
-                VALUES ('$email' , '$name' , '$products', '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
+    $sql_insert = "insert into kanban (email, name, contact , product_id, location, product_quantity, date, start_time, end_time, status, user_id)
+                VALUES ('$email' , '$name' , '$contact' , '$product_id', '$location' , '$quantity' , '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
-        echo json_encode(['success' => true]); 
+        $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
+        if(mysqli_query($conn , $update_availability)){
+            echo json_encode(['success' => true]); 
+        } 
     }
 
 }
@@ -66,31 +73,28 @@ elseif (isset($_GET['gettasks'])) {
         if ($result->num_rows > 0) {
             $info = [];
             while ($row = $result->fetch_assoc()) {
-                $productsid = json_decode($row['products'], true);
-                $productnamearray = [];
-                foreach ($productsid as $product) {
+                $productsid = $row['product_id'];
                     $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
                     if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
-                        $stmt2->bind_param("i", $product);
+                        $stmt2->bind_param("i", $productsid);
 
                         // Execute the statement
                         $stmt2->execute();
                         $result2 = $stmt2->get_result(); // Use a different variable for the inner result
                         if ($result2->num_rows > 0) {
                             while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
-                                $productnamearray[] = " ".$row2['ProductName'];
+                                $productname = $row2['ProductName'];
                             }
                         }
                         $stmt2->close(); // Close the inner statement here
                     }
-                }
 
                 $info[] = [
                     'kanban_id' => $row['kanban_id'],
                     'status' => $row['status'],
                     'email' => $row['email'],
                     'name' => $row['name'],
-                    'products' => $productnamearray
+                    'product' => $productname
                 ];
             }
             echo json_encode(['success' => true, 'data' => ['info' => $info]]);

@@ -1,6 +1,59 @@
 <?php 
 require_once '../authetincation.php';
 require_once '../../Database/database.php';
+
+$booking_total = 0;
+$workers_total = 0;
+$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled'";
+$workers = "SELECT * FROM worker_availability ";
+$result1 = mysqli_query($conn , $service_booking);
+$result2 = mysqli_query($conn , $workers);
+while($row1 = mysqli_fetch_assoc($result1)){
+    $booking_total++;
+}
+
+while($row2 = mysqli_fetch_assoc($result2)){
+    $workers_total++;
+}
+
+if($booking_total >= $workers_total){
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Notice',
+                text: 'No available workers currently!',
+                timer: 2000,
+                showConfirmButton: false
+            })
+        </script>
+    ";
+}
+
+
+$worker_availability = "SELECT * FROM worker_availability WHERE is_available = 1";
+$exec = mysqli_query($conn, $worker_availability);
+if ($exec) {
+    if (mysqli_num_rows($exec) > 0) {
+        // Add SweetAlert2 for an alert and then redirect after 2 seconds
+       
+    }
+    else{
+        echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Notice',
+                    text: 'No available workers currently!',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+            </script>
+        ";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +196,7 @@ require_once '../../Database/database.php';
             <div class="container-fluid">
                     <div class="row">
                         <div class="d-flex mt-4 mb-4">
-                            <h1 class="my-auto">Kanban</h1>
+                            <h1 class="my-auto">Kanban Booking</h1>
                             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addTaskModal" id="addTaskBtn">Add Task</button>
                         </div>
                         <div class="col-lg 4">
@@ -159,9 +212,9 @@ require_once '../../Database/database.php';
                         <div class="col-lg-4">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <div class="card-title">Approved</div>
+                                    <div class="card-title">Finding Available Worker</div>
                                 </div>
-                                <div class="card-body" id="approved">
+                                <div class="card-body" id="finding">
                                    
                                 </div>
                             </div>    
@@ -252,18 +305,19 @@ require_once '../../Database/database.php';
                             </div>
                             <div class="modal-body">
                                 <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email">
-                                <input type="text" class="form-control" id="name" placeholder="Full Name">
-                            <div id="productContainer">
-                                <select class="form-control product" id="product" placeholder="Product">
-                                </select>
-                            </div>
-                                <a class="btn btn-primary ms-auto" onclick="addMore()">Add more product</a>
-                               
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                                <input type="text" class="form-control" id="name" placeholder="Full Name" required>
+                                <input type="text" class="form-control" id="contact" placeholder="Contact Number" required>
+                                <input type="text" class="form-control" id="location" placeholder="Location" required>
+                                <div>
+                                    <select class="form-control product" id="product" placeholder="Product">
+                                    </select>
+                                </div>
+                                <input type="number" class="form-control" id="quantity" placeholder="Quantity" required>
                             </div>
                             <div class="modal-footer">
                                 <a type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
-                                <a type="button" class="btn btn-primary" id="checkadd">Add and Set Appointment</a>
+                                <a type="button" class="btn btn-primary" id="checkadd">Add and Set Schedule</a>
                             </div>
                         </div>
                     </div>
@@ -361,105 +415,15 @@ require_once '../../Database/database.php';
             });
 
 
-    //function for adding another product input
-    function addMore() {
-        // Get the product container
-        const productContainer = document.getElementById("productContainer");
-
-            // Create a new `<select>` element
-        const newProductInput = document.createElement("select");
-        newProductInput.className = "form-control product"; // Set class for styling
-        newProductInput.id = "product-" + Date.now(); // Set a unique ID based on the current timestamp
-
-            // Append the new `<select>` to the product container
-        productContainer.appendChild(newProductInput);
-
-            // Fetch product options via AJAX
-        $.ajax({
-            url: 'function.php',
-            type: 'GET',
-            data: { PrType: true }, // Pass data to the backend
-            success: function(response) {
-                response = JSON.parse(response); // Parse JSON response
-
-                if (response.success) {
-                    // Clear existing options in the newly created select element
-                    $(newProductInput).empty();
-                    $(newProductInput).append('<option value="">Select Product</option>'); // Add default option
-
-                    var existingValues = []; // Array to track existing values
-
-                    // Loop through the response products and add options
-                    $.each(response.data.products, function(index, item) {
-                        // Check if the value is already in the existingValues array
-                        if (!existingValues.includes(item.value)) {
-                            $(newProductInput).append('<option value="' + item.value + '">' + item.text + '</option>');
-                            existingValues.push(item.value); // Add value to the array
-                        }
-                    });
-                } else {
-                    alert('no products found.');
-                }
-            },
-            error: function() {
-                alert('An error occurred while fetching products.');
-            }
-        });
-    }
-
     //Function when modal closes
     function closemodal() {
-        // Get the product container and reset it
-        const productContainer = document.getElementById("productContainer");
-        
-        // Clear all child nodes (inputs) within the productContainer
-        while (productContainer.firstChild) {
-            productContainer.removeChild(productContainer.firstChild);
-        }
 
-        // Create a new `<option>` element
-        const newProductInput = document.createElement("select");
-        newProductInput.id = "product"; // Set id
-        newProductInput.className ="form-control product";
-        newProductInput.placeholder="Product";
-
-        // Append the new `<option>` to the product container (assuming it's a `<select>` element)
-        productContainer.appendChild(newProductInput);
         document.getElementById('email').value = '';
         document.getElementById('name').value = '';
-            $.ajax({
-                url: 'function.php',
-                type: 'GET',
-                data: { PrType: true }, // Pass data to the backend
-                success: function(response) {
-                    response = JSON.parse(response); // Parse JSON response
-                        
-                    if (response.success) {
-                        // Select all elements with the class "product" and iterate over them
-                        $('.product').each(function() {
-                            // Clear existing options in each product dropdown
-                            $(this).empty();
-                            $(this).append('<option value="">Select Product</option>'); // Add default option
-
-                            var existingValues = []; // Array to track existing values
-
-                            // Loop through the response products and add options
-                            $.each(response.data.products, function(index, item) {
-                                // Check if the value is already in the existingValues array
-                                if (!existingValues.includes(item.value)) {
-                                    $(this).append('<option value="' + item.value + '">' + item.text + '</option>');
-                                    existingValues.push(item.value); // Add value to the array
-                                }
-                            }.bind(this)); // Bind the current "this" to the function context
-                        });
-                    } else {
-                        alert('no products found.');
-                    }
-                },
-                error: function() {
-                    alert('An error occurred while fetching products.');
-                }
-            });
+        document.getElementById('contact').value = '';
+        document.getElementById('product').value = "";
+        document.getElementById('quantity').value = '';
+        document.getElementById('location').value = '';
     }
 
     //display on load function of tasks
@@ -477,7 +441,7 @@ require_once '../../Database/database.php';
                             const id = item.kanban_id;
                             const email = item.email;
                             const name = item.name;
-                            const productValues = item.products;   
+                            const product = item.product;   
                             const status = item.status;  
 
                             // Create a new task element
@@ -486,11 +450,11 @@ require_once '../../Database/database.php';
                             newTask.id = item.kanban_id;
 
                             // Add the task details
-                            if(status == 'approved' || status == 'completed' || status == 'cancelled'){
+                            if(status == 'finding' || status == 'completed' || status == 'cancelled'){
                                 newTask.innerHTML = `
                                 ${id}. ${email || 'No email'}
                                 <strong>Name:</strong> ${name || 'No name'}
-                                <strong>Product:</strong> ${productValues || 'No Products'}
+                                <strong>Product:</strong> ${product || 'No Product Error'}
                             `;
                             }
                             else{
@@ -500,7 +464,7 @@ require_once '../../Database/database.php';
                                     <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                                 </div>
                                     <strong>Name: ${name || 'No name'}</strong>
-                                    <strong>Product: ${productValues || 'No Products'}</strong>
+                                    <strong>Product: ${product || 'No Product Error'}</strong>
                             `;
                             }
 
@@ -508,8 +472,8 @@ require_once '../../Database/database.php';
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
                             }
-                            else if(status == 'approved'){
-                                document.getElementById('approved').appendChild(newTask);
+                            else if(status == 'finding'){
+                                document.getElementById('finding').appendChild(newTask);
                             }
                             else if(status == 'ongoing'){
                                 document.getElementById('ongoing').appendChild(newTask);
@@ -679,7 +643,7 @@ require_once '../../Database/database.php';
                  $('#availableTimes').append(`
                      <li class="list-group-item">
                          ${slot.start_time} - ${slot.end_time}
-                         <button value='{"date":"${slot.date}", "start_time": "${slot.start_time}", "end_time": "${slot.end_time}"}'
+                         <button value='{"date":"${slot.date}", "start_time": "${slot.start_time}", "end_time": "${slot.end_time}", "availability_id": "${slot.availability_id}"}'
                             class="btn btn-success btn-sm float-end date_time_btn">
                             Book
                          </button>
@@ -704,19 +668,19 @@ require_once '../../Database/database.php';
                 e.preventDefault(); // Prevent the default link behavior
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
-                const product = document.getElementById('product').value;
-                const productContainer = document.getElementById("productContainer");
-                const productInputs = productContainer.getElementsByTagName("select");
-                const date_time_btn = document.querySelector(".date_time_btn");
-                const date_time = JSON.parse(date_time_btn.value);
+                const location = document.getElementById('location').value;
+                const contact = parseInt(document.getElementById('contact').value);
+                const quantity = parseInt(document.getElementById('quantity').value);
+                const product = parseInt(document.getElementById('product').value);
+                // Extract JSON from the clicked button's value
+                const date_time_btn = this; // Refers to the clicked button
+                let date_time = JSON.parse(date_time_btn.value);
                 const date = date_time.date;
                 const start_time = date_time.start_time;
                 const end_time = date_time.end_time;
+                const availability_id = date_time.availability_id;
+                
                     
-                const productValues = [];
-                for (let i = 0; i < productInputs.length; i++) {
-                    productValues.push(productInputs[i].value); // Get the value of each sinput
-                }
 
                     Swal.fire({
                         title: 'Confirmation',
@@ -731,10 +695,14 @@ require_once '../../Database/database.php';
                             formData.append('addtask', true);
                             formData.append('email', email);
                             formData.append('name', name);
-                            formData.append('products', JSON.stringify(productValues));
+                            formData.append('contact', contact);
+                            formData.append('product_id', product);
+                            formData.append('quantity', quantity);
+                            formData.append('availability_id', availability_id);
                             formData.append('date', date);
                             formData.append('start_time', start_time);
                             formData.append('end_time', end_time);
+                            formData.append('location', location);
 
                             
                             $.ajax({
@@ -784,42 +752,17 @@ require_once '../../Database/database.php';
             }),
 
 
-
             //For checking the data before going to appointment
             $(document).on('click', '#checkadd', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
+                haserror = false;
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
+                const location = document.getElementById('location').value;
                 const product = document.getElementById('product').value;
-                const productContainer = document.getElementById("productContainer");
-                const productInputs = productContainer.getElementsByTagName("select");
-                    
-                const productValues = [];
-                for (let i = 0; i < productInputs.length; i++) {
-                    productValues.push(productInputs[i].value); // Get the value of each sinput
-                }
-
-                let haserror = false;
-
-                for(let product of productValues){
-                    if(product == ""){
-                        Swal.fire({
-                            title: 'ERROR',
-                            html: "There seems to be missing information. Please complete the form",
-                            icon: 'warning',
-                            confirmButtonText: 'Confirm'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                            }
-                        });
-                        haserror = true;
-                    }
-                    else{
-
-                    }
-                }
-
-                if(email == "" || name == "" ||  productValues.length === 0){
+                const contact = parseInt(document.getElementById('contact').value);
+                const quantity = parseInt(document.getElementById('quantity').value);
+                if(email == "" || name == "" ||  product =="" || contact=="" || quantity =="" || location==""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
