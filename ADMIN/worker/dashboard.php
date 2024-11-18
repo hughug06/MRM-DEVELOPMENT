@@ -66,7 +66,7 @@ require_once '../../Database/database.php';
                             <!-- Checklist -->
                             <ul class="list-group mb-4">
                                 <?php 
-                                $worker_id = $_SESSION['worker_id'];
+                                $worker_id = $_SESSION['user_id'];
 
                                 // Query to get data for the current worker
                                 $sql = "SELECT * FROM worker_ongoing
@@ -134,7 +134,7 @@ require_once '../../Database/database.php';
                                             echo "<h3>STATUS UNKNOWN</h3>";
                                             break;
                                     }
-                                if($status == 'pick_up' || $status == 'delivery'){
+                                if($status == 'pick_up' || $status == 'arrive'){
                                 ?>
                                 <form action="function.php" method="POST">
                                     <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>

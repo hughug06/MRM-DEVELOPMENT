@@ -22,7 +22,7 @@
             $product_type = $_POST['productType'];
             $first_payment = $_POST['first_payment'];
       
-
+            
 // Create the SQL statement
 $sql = "INSERT INTO service_booking (
             user_id, 
@@ -56,13 +56,16 @@ $sql = "INSERT INTO service_booking (
             'pending'         -- Example default value for booking_status       
         )";
 
-$result = mysqli_query($conn , $sql);
+    $result = mysqli_query($conn , $sql);
 
- $booking_id = $conn->insert_id;
- $sql2 = "INSERT INTO service_payment(booking_id, first_payment, first_reference, total_cost)
- VALUES ('$booking_id', '$first_payment', '$reference_number', '$total_cost')";
+    $booking_id = $conn->insert_id;
+    $sql2 = "INSERT INTO service_payment(booking_id, first_payment, first_reference, total_cost)
+    VALUES ('$booking_id', '$first_payment', '$reference_number', '$total_cost')";
+    $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
 
-$result2 = mysqli_query($conn , $sql2);
+    
+    $result2 = mysqli_query($conn , $sql2);
+    $result3 = mysqli_query($conn , $update_availability);
     }
    
    header("Location: service.php");

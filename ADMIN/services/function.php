@@ -17,7 +17,7 @@ if (isset($_POST['confirm'])) {
         echo json_encode(['success' => false, 'message' => 'Date and time not available']);  
     }
     else{
-        $sql = "INSERT INTO service_availability (admin_id, date, start_time, end_time) VALUES ('$admin_id', '$date', '$start_time', '$end_time')";
+        $sql = "INSERT INTO service_availability (admin_id, date, start_time, end_time, is_available) VALUES ('$admin_id', '$date', '$start_time', '$end_time' , 1)";
         $result = mysqli_query($conn , $sql);
         echo json_encode(['success' => true]);
     }

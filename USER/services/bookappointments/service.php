@@ -339,7 +339,7 @@ require_once '../../../Database/database.php';
                     $('#availableTimes').append(`
                         <li class="list-group-item">
                             ${slot.start_time} - ${slot.end_time}
-                            <a href="book_requirements.php?availability_id=${slot.availability_id}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
+                            <a href="book_requirements.php?availability_id=${slot.availability_id}" 
                                class="btn btn-success btn-sm float-end">
                                Book
                             </a>

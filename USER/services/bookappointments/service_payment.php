@@ -614,152 +614,9 @@ else if(isset($_POST['tuneup_submit'])){
                     </div>
                 </div>
             </div>
-            <!-- Modal payment -->
-            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="paymentModalLabel">Payment Confirmation</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Centered Blank Image Placeholder -->
-                            <div class="text-center mb-3">
-                                <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
-                            </div>
-                            <div class="text-center mx-4">
-                                <p>PAYMENT NOW:₱<?= $final_value * .45 ?></p>
-                                <p>UPON DELIVERY: ₱<?= $final_value * .4 ?></p>
-                                <p>AFTER INSTALLATION: ₱<?= $final_value * .15 ?></p>
-                                <p>TOTAL :₱<strong><?= htmlspecialchars($final_value) ?></strong></p>
-                            </div>
-                        
-                            <form action="process_booking.php" method="POST" enctype="multipart/form-data">
-                                <div class="row mb-3">
-                                    <!-- First Row -->
-                                    <div class="col">
-                                        <label for="firstField" class="form-label">Reference Number</label>
-                                        <input class="form-control" type="text" id="firstField" name="reference_number" required>
-                                    </div>
-                                    <div class="col">
-                                        <label for="secondField" class="form-label">Bank Name</label>
-                                        <input class="form-control" type="text" id="secondField" name="bank_name" required>
-                                    </div>
-                                </div>                                         
-                                <div class="row mb-3">
-                                    <!-- Second Row -->
-                                    <div class="col">
-                                        <label for="thirdField" class="form-label">Payment method</label>
-                                        <select class="form-control" id="thirdField" name="payment_method" required>
-                                            <option value="" disabled selected>Select Payment Method</option>                        
-                                            <option value="cheque">Cheque</option>
-                                            <option value="bank_to_bank">Bank to bank</option>
-                                        
-                                        </select>
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="fourthField" class="form-label">Date of process</label>
-                                        <input class="form-control" type="date" id="fourthField" name="date" required>
-                                    </div>
-                                </div>
-
-                                    <?php if(isset($_POST['tuneup_submit'])){
-
-                                    ?>
-                                    <!-- Hidden input fields -->
-                                    <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
-
-                                    <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
-                                    <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
-                                    <input type="text" name="kva" value="<?= htmlspecialchars($kva); ?>">
-                                    <input type="text" name="running_hours" value="<?= htmlspecialchars($running_hours); ?>">
-                                    <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
-                                    <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
-
-                                <?php 
-                                    }
-                                    else if(isset($_POST['installation_submit'])){
-
-                                ?>
-                                    <!-- Hidden input fields -->
-                                    <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">
-
-                                    <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
-                                    <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
-                                    <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
-                                    <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
-                                    <input type="text" name="kva" value="N/A">
-                                    <input type="text" name="running_hours" value="N/A">
-                                <?php 
-                                    }
-                                ?>
-                                <!-- Submit Button -->
-                                <div class="text-center mt-3">
-                                <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type); ?>">
-                                <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type); ?>">
-
-                                    <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal for Terms and Conditions -->
-            <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>1. Terms of Payment:</h5>
-                        <p>The customer/client shall pay per site.</p>
-                        <ul>
-                        <li>20% Down payment (370,000) for reservation of Solar and Accessories.</li>
-                        <li>25% Payment (462,500.00) for mobilization of Solar Panel/Pump and accessories.</li>
-                        <li>40% upon/after delivery of all Solar materials. (740,000.00)</li>
-                        <li>15% after the installation and testing. (277,500.00)</li>
-                        </ul>
-
-                        <h5>2. Preparation Time:</h5>
-                        <p>Upon down payment, the customer/client shall wait 3 to 5 days for the preparation of manpower and materials for solar delivery and installation. Materials that are not in stock will be ordered from the supplier depending on their availability.</p>
-
-                        <h5>3. Duration of Work:</h5>
-                        <p>The work will be completed within 10 to 15 days for Solar Panel/Pump installation, depending on the weather conditions and the location where the solar panels are being mounted.</p>
-
-                        <h5>4. Solar Panel Warranty:</h5>
-                        <p>Ten (10) years warranty under normal operating conditions, excluding damage caused by external influences (e.g., stone, arrow, bullet, natural disaster, etc.). The warranty for Solar Pump, Inverter, and Combination box is one (1) year under normal operating conditions, excluding human error.</p>
-
-                        <h5>5. Validity:</h5>
-                        <p>The proposal is valid for 10 working days.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../../../partials/footer.php') ?>
-        <!-- Footer End -->  
-    </div>
-
-    
-    <!-- Scroll To Top -->
-    <div class="scrollToTop d-none">
-        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
-    </div>
-    <div id="responsive-overlay"></div>
-
-    
-<<<<<<< HEAD
-                <!-- Modal payment -->
-                              <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+         
+                                            <!-- Modal payment -->
+                                            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -852,6 +709,57 @@ else if(isset($_POST['tuneup_submit'])){
                                                         </div>
                                                     </div>
                                                 </div>
+            <!-- Modal for Terms and Conditions -->
+            <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>1. Terms of Payment:</h5>
+                        <p>The customer/client shall pay per site.</p>
+                        <ul>
+                        <li>20% Down payment (370,000) for reservation of Solar and Accessories.</li>
+                        <li>25% Payment (462,500.00) for mobilization of Solar Panel/Pump and accessories.</li>
+                        <li>40% upon/after delivery of all Solar materials. (740,000.00)</li>
+                        <li>15% after the installation and testing. (277,500.00)</li>
+                        </ul>
+
+                        <h5>2. Preparation Time:</h5>
+                        <p>Upon down payment, the customer/client shall wait 3 to 5 days for the preparation of manpower and materials for solar delivery and installation. Materials that are not in stock will be ordered from the supplier depending on their availability.</p>
+
+                        <h5>3. Duration of Work:</h5>
+                        <p>The work will be completed within 10 to 15 days for Solar Panel/Pump installation, depending on the weather conditions and the location where the solar panels are being mounted.</p>
+
+                        <h5>4. Solar Panel Warranty:</h5>
+                        <p>Ten (10) years warranty under normal operating conditions, excluding damage caused by external influences (e.g., stone, arrow, bullet, natural disaster, etc.). The warranty for Solar Pump, Inverter, and Combination box is one (1) year under normal operating conditions, excluding human error.</p>
+
+                        <h5>5. Validity:</h5>
+                        <p>The proposal is valid for 10 working days.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Start -->
+        <?php include_once(__DIR__. '/../../../partials/footer.php') ?>
+        <!-- Footer End -->  
+    </div>
+
+    
+    <!-- Scroll To Top -->
+    <div class="scrollToTop d-none">
+        <span class="arrow"><i class="fe fe-arrow-up"></i></span>
+    </div>
+    <div id="responsive-overlay"></div>
+
+    
+              
 
 
                             <!-- Modal for Terms and Conditions -->
@@ -890,9 +798,6 @@ else if(isset($_POST['tuneup_submit'])){
                                         </div>
                                     </div>
                                     </div>
-=======
-    
->>>>>>> 1789637a8aedd4132ea89781f746f3ac7b333a0c
 
 
     <!-- Scroll To Top -->

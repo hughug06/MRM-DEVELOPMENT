@@ -141,7 +141,8 @@ include_once '../../Database/database.php';
                                                 <th class="wd-lg-20p"><span>admin</span></th>       
                                                 <th class="wd-lg-8p"><span>Date</span></th>
                                                 <th class="wd-lg-20p"><span>Start time</span></th>
-                                                <th class="wd-lg-20p"><span>End Time</span></th>                                                   
+                                                <th class="wd-lg-20p"><span>End Time</span></th>    
+                                                <th class="wd-lg-20p"><span>is_available?</span></th>                                               
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -157,7 +158,16 @@ include_once '../../Database/database.php';
                                                 <td><?= $resultItem['admin_id']?></td>     
                                                 <td class="text-success"><?= $resultItem['date']?></td>                                        
                                                 <td><?= $resultItem['start_time']?></td>                        
-                                                <td><?= $resultItem['end_time']?></td>                                           
+                                                <td><?= $resultItem['end_time']?></td>          
+                                                <td>
+                                                <?php 
+                                                    if ($resultItem['is_available'] == 1) {
+                                                    echo '<i class="fas fa-check-circle" style="color: green;"></i>'; // Green check icon
+                                                    } else {
+                                                    echo '<i class="fas fa-times-circle" style="color: red;"></i>'; // Red X icon
+                                                    }
+                                                ?>
+                                                </td>                                   
                                                 <td>                                                 
                                                     <a data-href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger delete-btn-time"> <i class="fe fe-trash"></i>  </a>
                                                 </td>

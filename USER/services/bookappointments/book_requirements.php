@@ -4,6 +4,41 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
+$booking_total = 0;
+$workers_total = 0;
+$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled'";
+$workers = "SELECT * FROM worker_availability ";
+$result1 = mysqli_query($conn , $service_booking);
+$result2 = mysqli_query($conn , $workers);
+while($row1 = mysqli_fetch_assoc($result1)){
+    $booking_total++;
+}
+
+while($row2 = mysqli_fetch_assoc($result2)){
+    $workers_total++;
+}
+
+echo "BOOKING TOTAL" .  $booking_total;
+echo "workers TOTAL" .  $workers_total;
+if($booking_total >= $workers_total){
+    echo "TEST";
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Notice',
+                text: 'No available workers currently!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'service.php';
+            });
+        </script>
+    ";
+}
+
+
 $worker_availability = "SELECT * FROM worker_availability WHERE is_available = 1";
 $exec = mysqli_query($conn, $worker_availability);
 if ($exec) {
