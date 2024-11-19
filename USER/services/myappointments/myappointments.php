@@ -82,6 +82,7 @@
                                                                 $user_id = $_SESSION['user_id'];
                                                                 $sql = "select * from service_booking
                                                                 inner join service_availability on service_availability.availability_id = service_booking.availability_id
+                                                                INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id
                                                                 where booking_status = 'pending' and user_id = '$user_id'";
                                                                 $result = mysqli_query($conn , $sql);
                                                                 if(mysqli_num_rows($result) > 0)
@@ -107,7 +108,7 @@
                                                                                         <!-- Payment Info -->
                                                                                         <h6><strong>Payment Method:</strong> <?= htmlspecialchars($resultItem['payment_method']); ?></h6>
                                                                                         <h6><strong>Bank Name:</strong> <?= htmlspecialchars($resultItem['bank_name']); ?></h6>
-                                                                                        <h6><strong>Reference Number:</strong> <?= htmlspecialchars($resultItem['reference_number']); ?></h6>
+                                                                                        <h6><strong>Reference Number:</strong> <?= htmlspecialchars($resultItem['first_reference']); ?></h6>
                                                                                         <h6><strong>Payment Date:</strong> <?= htmlspecialchars($resultItem['payment_date']); ?></h6>
 
                                                                                         <!-- Payment and Booking Status -->

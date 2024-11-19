@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once '../../Database/database.php';
-$worker_id = $_SESSION['worker_id'];
+$worker_id = $_SESSION['user_id'];
 $working_id = $_POST['working_id'];
 
 $sql = "select * from worker_ongoing
