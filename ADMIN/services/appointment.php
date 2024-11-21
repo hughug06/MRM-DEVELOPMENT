@@ -280,78 +280,78 @@
 
                                                                                <!-- Modal -->
                                                                         <div class="modal fade" id="paymentLogModal" tabindex="-1" aria-labelledby="paymentLogModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg">
-                                                                            <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="paymentLogModalLabel">Payment Log</h5>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- Initial Payment Section -->
-                                                                                <div class="payment-section">
-                                                                                <h6 class="fw-bold">Initial Payment</h6>
-                                                                                <p id="first-payment-status" class="text-muted"></p>
-                                                                                <table class="table table-sm">
-                                                                                    <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">Reference Number</th>
-                                                                                        <th scope="col">Amount</th>
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                    <tr>
-                                                                                        <td id="first-reference"></td>
-                                                                                        <td id="first-payment"></td>
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                            <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="paymentLogModalLabel">Payment Log</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
+                                                                                <div class="modal-body">
+                                                                                    <!-- Initial Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Initial Payment</h6>
+                                                                                    <p id="first-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="first-reference"></td>
+                                                                                            <td id="first-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
 
-                                                                                <!-- Second Payment Section -->
-                                                                                <div class="payment-section">
-                                                                                <h6 class="fw-bold">Second Payment</h6>
-                                                                                <p id="second-payment-status" class="text-muted"></p>
-                                                                                <table class="table table-sm">
-                                                                                    <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">Reference Number</th>
-                                                                                        <th scope="col">Amount</th>
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                    <tr>
-                                                                                        <td id="second-reference"></td>
-                                                                                        <td id="second-payment"></td>
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                </div>
+                                                                                    <!-- Second Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Second Payment</h6>
+                                                                                    <p id="second-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="second-reference"></td>
+                                                                                            <td id="second-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
 
-                                                                                <!-- Last Payment Section -->
-                                                                                <div class="payment-section">
-                                                                                <h6 class="fw-bold">Last Payment</h6>
-                                                                                <p id="third-payment-status" class="text-muted"></p>
-                                                                                <table class="table table-sm">
-                                                                                    <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">Reference Number</th>
-                                                                                        <th scope="col">Amount</th>
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                    <tr>
-                                                                                        <td id="third-reference"></td>
-                                                                                        <td id="third-payment"></td>
-                                                                                    </tr>
-                                                                                    </tbody>
-                                                                                </table>
+                                                                                    <!-- Last Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Last Payment</h6>
+                                                                                    <p id="third-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="third-reference"></td>
+                                                                                            <td id="third-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                            </div>
-                                                                        </div>
                                                                         </div>
 
 

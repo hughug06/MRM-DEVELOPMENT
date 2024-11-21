@@ -45,7 +45,26 @@ $worker_id = $_SESSION['user_id'];
 
         <!-- Choices Css -->
         <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
+        <!-- Leaflet CSS -->
+ 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+        <!-- Leaflet Routing Machine CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
 
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+        <!-- Leaflet Routing Machine JS -->
+        <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 0.25rem;
+        }
+    </style>
     </head>
 
     <body>
@@ -62,201 +81,284 @@ $worker_id = $_SESSION['user_id'];
 
             <div class="main-content app-content">
             <div class="container-fluid">
-            <div class="card mt-5" style="width: 100%; padding: 20px;">
-                        <div class="card-body">
-                            <!-- Checklist -->
-                            <ul class="list-group mb-4">
-                                <?php 
-                                $worker_id = $_SESSION['user_id'];
+                <div class="card mt-5" style="width: 100%; padding: 20px;">
+                            <div class="card-body">
+                                <!-- Checklist -->
+                                <ul class="list-group mb-4">
+                                    <?php 
+                                    $worker_id = $_SESSION['user_id'];
 
-                                // Query to get data for the current worker
-                                $sql = "SELECT * FROM worker_ongoing
+                                    // Query to get data for the current worker
+                                    $sql = "SELECT * FROM worker_ongoing
                                         INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
-                                        WHERE worker_id = $worker_id";
-                                $result = mysqli_query($conn, $sql);
+                                        INNER JOIN user_info on user_info.user_id = service_booking.user_id 
+                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id   
+                                        where worker_id = '$worker_id'
+                                        ";
+                                    $result = mysqli_query($conn, $sql);
 
-                                if ($result && mysqli_num_rows($result) > 0) {
-                                    $row = mysqli_fetch_assoc($result);
-                                    $product_type = $row['product_type'];
-                                    $service_type = $row['service_type'];
-                                    $is_custom = $row['is_custom_brand'];
-                                    $status = $row['status'];
-                                    $booking_id = $row['booking_id'];
-                                    $working_id = $row['working_id'];
-                                    // Determine the command based on conditions
-                                    if ($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar') {
-                                        $command = "SELECT * FROM package_installation_solar";
-                                    } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar') {
-                                        $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
-                                    } elseif ($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator') {
-                                        $command = "SELECT * FROM package_installation_generator";
-                                    } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'generator') {
-                                        $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
-                                    } elseif ($service_type == 'tune-up' && $product_type == 'generator') {
-                                        $command = "SELECT * FROM package_tuneup_generator";
-                                    } elseif ($service_type == 'maintenance' && $product_type == 'solar') {
-                                        $command = "SELECT * FROM package_maintenance_solar";
-                                    } elseif ($service_type == 'maintenance' && $product_type == 'generator') {
-                                        $command = "SELECT * FROM package_maintenance_generator";
-                                    } elseif ($service_type == 'repair' && $product_type == 'solar') {
-                                        $command = "SELECT * FROM package_repair_solar";
-                                    } elseif ($service_type == 'repair' && $product_type == 'generator') {
-                                        $command = "SELECT * FROM package_repair_generator";
-                                    } else {
-                                        echo "<h3>No matching service type or product type found.</h3>";
-                                        $command = null;
-                                    }
+                                    if ($result && mysqli_num_rows($result) > 0) {
+                                        $row = mysqli_fetch_assoc($result);
+                                        $product_type = $row['product_type'];
+                                        $service_type = $row['service_type'];
+                                        $is_custom = $row['is_custom_brand'];
+                                        $status = $row['status'];
+                                        $booking_id = $row['booking_id'];
+                                        $working_id = $row['working_id'];
+                                        // Determine the command based on conditions
+                                        if ($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar') {
+                                            $command = "SELECT * FROM package_installation_solar";
+                                        } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar') {
+                                            $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                        } elseif ($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator') {
+                                            $command = "SELECT * FROM package_installation_generator";
+                                        } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'generator') {
+                                            $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                        } elseif ($service_type == 'tune-up' && $product_type == 'generator') {
+                                            $command = "SELECT * FROM package_tuneup_generator";
+                                        } elseif ($service_type == 'maintenance' && $product_type == 'solar') {
+                                            $command = "SELECT * FROM package_maintenance_solar";
+                                        } elseif ($service_type == 'maintenance' && $product_type == 'generator') {
+                                            $command = "SELECT * FROM package_maintenance_generator";
+                                        } elseif ($service_type == 'repair' && $product_type == 'solar') {
+                                            $command = "SELECT * FROM package_repair_solar";
+                                        } elseif ($service_type == 'repair' && $product_type == 'generator') {
+                                            $command = "SELECT * FROM package_repair_generator";
+                                        } else {
+                                            echo "<h3>No matching service type or product type found.</h3>";
+                                            $command = null;
+                                        }
 
-                                    if ($command) {
-                                        $result_list = mysqli_query($conn, $command);
-                                    }
+                                        if ($command) {
+                                            $result_list = mysqli_query($conn, $command);
+                                        }
 
-                                    // Display status header
-                                    switch ($status) {
-                                        case 'pick_up':
-                                            echo "<h3>PICK UP ( CHECKLIST )</h3>";
-                                            break;
-                                        case 'delivery':
-                                            echo "<h3>DELIVERY</h3>";
-                                            break;
-                                        case 'arrive':
-                                            echo "<h3>ARRIVE</h3> ( CHECKLIST )";
-                                            break;
-                                        case 'ongoing_construction':
-                                            echo "<h3>ONGOING CONSTRUCTION</h3>";
-                                            break;
-                                        case 'checking':
-                                            echo "<h3>CHECKING</h3>";
-                                            break;
-                                        case 'completed':
-                                            echo "<h3>COMPLETED</h3>";
-                                            break;
-                                        default:
-                                            echo "<h3>STATUS UNKNOWN</h3>";
-                                            break;
-                                    }
-                                if($status == 'pick_up' || $status == 'arrive'){
-                                ?>
-                                <form action="function.php" method="POST">
-                                    <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
-                                        <input class="form-check-input me-2" type="checkbox">
-                                        <label class="form-check-label">
-                                                    <?=htmlspecialchars($row['brand']) ?>
-                                                </label>
-                                        <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
-                                            <li class="list-group-item">
-                                                <input class="form-check-input me-2" type="checkbox" name="tasks[]">
-                                                <label class="form-check-label">
-                                                    <?= htmlspecialchars($listing['description']) . ' | ' . htmlspecialchars($listing['unit']) ?>
-                                                </label>
-                                            </li>
-                                        <?php endwhile; ?>
-                                        <!-- Button -->
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <!-- hidden data for booking_id -->
-                                        <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
-                                        <input type="hidden" name="working_id" value="<?= $working_id ?>">
-                                    </div>
-                                            
-                                    <?php else: ?>
-                                        <li class="list-group-item">No items found.</li>
-                                    <?php endif; ?>
-                                    
-                                </form>
-                                </ul>
-                                
-                                <?php } 
-                                else if($status == 'delivery'){
-                                    $delivery = "SELECT * FROM worker_ongoing
-                                    INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
-                                    INNER JOIN user_info on user_info.user_id = service_booking.user_id 
-                                    INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id   
-                                    where worker_id = '$worker_id' and working_id = '$working_id'
-                                    ";
-                                    $delivery_result = mysqli_query($conn , $delivery);
-                                    if(mysqli_num_rows($delivery_result) > 0){
-                                        $statusMap = [
-                                            'pick_up' => 16, // 1/6 of 100%
-                                            'delivery' => 33, // 2/6 of 100%
-                                            'arrive' => 50, // 3/6 of 100%
-                                            'ongoing_construction' => 66, // 4/6 of 100%
-                                            'checking' => 83, // 5/6 of 100%
-                                            'completed' => 100 // 6/6 of 100%
-                                        ];
-                                       
-                                        $result = mysqli_fetch_assoc($delivery_result);
-                                        $status = $result['status'];
-                                        $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
-                                        
-                                    ?> 
-                                    <div class="container mt-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-4">Client Information</h5>
-                                                
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6">
-                                                        <p><strong>Client Name:</strong> <?= htmlspecialchars($result['first_name'] . " " . $result['last_name']); ?></p>
+                                        // Display status header
+                                        switch ($status) {
+                                            case 'pick_up':
+                                                echo "<h3>PICK UP ( CHECKLIST )</h3>";
+                                                break;
+                                            case 'delivery':
+                                                echo "<h3>DELIVERY</h3>";
+                                                break;
+                                            case 'arrive':
+                                                echo "<h3>ARRIVE</h3> ( CHECKLIST )";
+                                                break;
+                                            case 'ongoing_construction':
+                                                echo "<h3>ONGOING CONSTRUCTION</h3>";
+                                                break;
+                                            case 'checking':
+                                                echo "<h3>CHECKING</h3>";
+                                                break;
+                                            case 'completed':
+                                                echo "<h3>COMPLETED</h3>";
+                                                break;
+                                            default:
+                                                echo "<h3>STATUS UNKNOWN</h3>";
+                                                break;
+                                        }
+                                    if($status == 'pick_up' || $status == 'arrive'){
+                                    ?>
+                                    <form action="function.php" method="POST">
+                                        <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
+                                            <div class="row mt-4">
+                                                    <!-- First Card: Where the item is from -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Item Origin</h5>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">!NOTE: PUT LOCATION OF WAREHOUSE HERE</span></p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <p><strong>Pin Location:</strong> <?= htmlspecialchars($result['pin_location']); ?></p>
-                                                        <p><strong>Address:</strong> <?= htmlspecialchars($result['address']); ?></p>
+
+                                                    <!-- Second Card: Where it will deliver -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Delivery Location</h5>
+                                                                <p><strong>To:</strong> <span class="fw-bold text-primary"><?= htmlspecialchars($row['pin_location']); ?></span></p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                
-                                                <div class="row mb-3">
-                                                    <div class="col-md-6">
-                                                        <p><strong>Payment Status:</strong> <span class="badge bg-success">For second payment</span></p>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <p><strong>Project Progress:</strong></p>
-                                                        <div class="progress" style="height: 20px;">
-                                                            <div class="progress-bar bg-success" role="progressbar"
-                                                                style="width: <?= $progressPercentage; ?>%;"
-                                                                aria-valuenow="<?= $progressPercentage; ?>"
-                                                                aria-valuemin="0" aria-valuemax="100">
-                                                                <?= $progressPercentage; ?>%
+
+                                                    <!-- Third Card: Goal -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Goal</h5>
+        
+                                                                <ul class="list-unstyled">
+                                                                    <li><span class="fw-bold text-success">Service:</span> <?= htmlspecialchars($row['service_type']); ?></li>
+                                                                    <li><span class="fw-bold text-success">Product Type:</span> <?= htmlspecialchars($row['product_type']); ?></li>
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <p><strong>Status:</strong> <span class="badge bg-warning text-dark">Delivery</span></p>
+
+
+                                                <div class="card mt-4">
+                                                        <div class="card-header">
+                                                            <h5 class="mb-0">Requirements Checklist</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <form action="process_requirements.php" method="POST">
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Description</th>
+                                                                            <th>Unit</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Check</th>
+                                                                            <th>Damage Report</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <!-- Custom Brand Row -->
+                                                                        <?php if ($row['is_custom_brand'] == 0): ?>
+                                                                            <tr>
+                                                                                <td><?= htmlspecialchars($row['brand']) ?></td>
+                                                                                <td>Custom</td>
+                                                                                <td>1</td>
+                                                                                <td>
+                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($row['brand']); ?>][checked]">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($row['brand']); ?>][damage]" placeholder="Specify damage (if any)">
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php endif; ?>
+
+                                                                        <!-- Dynamic List Rows -->
+                                                                        <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
+                                                                            <tr>
+                                                                                <td><?= htmlspecialchars($listing['description']); ?></td>
+                                                                                <td><?= htmlspecialchars($listing['unit']); ?></td>
+                                                                                <td><?= htmlspecialchars($listing['quantity']); ?></td>
+                                                                                <td>
+                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($listing['description']); ?>][checked]">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($listing['description']); ?>][damage]" placeholder="Specify damage (if any)">
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php endwhile; ?>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="d-grid mt-3">
+                                                                    <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                    <!-- hidden data for booking_id -->
+                                                                    <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
+                                                                    <input type="hidden" name="working_id" value="<?= $working_id ?>">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>                                                                               
+                                        <?php endif; ?>
+                                        
+                                    </form>
+                                    </ul>
+                                    
+                                    <?php } 
+                                    else if($status == 'delivery'){
+                                    
+                                    
+                                    
+                                            $statusMap = [
+                                                'pick_up' => 16, // 1/6 of 100%
+                                                'delivery' => 33, // 2/6 of 100%
+                                                'arrive' => 50, // 3/6 of 100%
+                                                'ongoing_construction' => 66, // 4/6 of 100%
+                                                'checking' => 83, // 5/6 of 100%
+                                                'completed' => 100 // 6/6 of 100%
+                                            ];
+                                        
+                                        
+                                            $status = $row['status'];
+                                            $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
+                                            
+                                        ?> 
+                                        
+                                                 <div class="row mt-4">
+                                                    <!-- First Card: Where the item is from -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Item Origin</h5>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary" id="start-location"><?= htmlspecialchars("Ilayang Ilog B, Lopez, Quezon, Calabarzon, Philippines"); ?></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Second Card: Where it will deliver -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Delivery Location</h5>
+                                                                <p><strong>To:</strong> <span class="fw-bold text-primary" id="end-location"><?= htmlspecialchars($row['pin_location']); ?></span></p>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Third Card: Goal -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Goal</h5>
+        
+                                                                <ul class="list-unstyled">
+                                                                    <li><span class="fw-bold text-success">Service:</span> <?= htmlspecialchars($row['service_type']); ?></li>
+                                                                    <li><span class="fw-bold text-success">Product Type:</span> <?= htmlspecialchars($row['product_type']); ?></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <form action="function.php" method="POST">
-                                        <div class="d-grid mt-3">
-                                            <button type="submit" class="btn btn-primary">Arrive</button>
-                                            <!-- hidden data for booking_id -->
-                                            <input type="hidden" name="booking_id" value="<?= htmlspecialchars($result['booking_id']); ?>">
-                                            <input type="hidden" name="working_id" value="<?= htmlspecialchars($result['working_id']); ?>">
-                                        </div>
-                                        </form>
-                                    </div>
 
+                                        <div class="container mt-4">
+                                                <div class="card shadow">
+                                                    <div class="card-header bg-primary text-white">
+                                                        <h5 class="mb-0">Delivery Routing</h5>
+                                                    </div>
+                                                        <div class="card-body">
+                                                            <p class="card-text">
+                                                                Below is the route from the warehouse to the delivery location. The blue line indicates the primary route.
+                                                            </p>
+                                                            <!-- Map Container -->
+                                                            <div id="map"></div>
+                                                        </div>
+                                                </div>
                                     
-                                    <?php
-                                         
+                                            
+                                            <form action="function.php" method="POST">
+                                                <div class="d-grid mt-3">
+                                                    <button type="submit" class="btn btn-primary">Arrive</button>
+                                                    <!-- hidden data for booking_id -->
+                                                    <input type="hidden" name="booking_id" value="<?= htmlspecialchars($row['booking_id']); ?>">
+                                                    <input type="hidden" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        
+                                        <?php
+                                               
                                     }
                                 }
-                            }
-                                
-                                else { ?>
-                                    <h3>No work for now</h3>
-                                <?php } ?>
+                                    
+                                    else { ?>
+                                        <h3>No work for now</h3>
+                                    <?php } ?>
+                            </div>
                         </div>
+
                     </div>
 
-                </div>
-
+             </div>
             </div>
-
+                         
         </div>
       
 
@@ -300,4 +402,87 @@ $worker_id = $_SESSION['user_id'];
     </body>
 
 </html>
+
+<script>
+// Initialize the Leaflet map with the Philippines as the default view
+const map = L.map('map').setView([13.41, 122.56], 6); // Coordinates for the Philippines, zoom level 6
+
+// Add the OpenStreetMap tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// Get the start and end addresses from the page (from PHP)
+const startAddress = document.getElementById('start-location').textContent.trim();
+const endAddress = document.getElementById('end-location').textContent.trim();
+
+// Function to geocode the address and return latitude/longitude
+function geocode(address) {
+    return new Promise((resolve, reject) => {
+        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+        fetch(geocodeUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const lat = data[0].lat;
+                    const lon = data[0].lon;
+                    resolve({ lat, lon });
+                } else {
+                    reject('Address not found');
+                }
+            })
+            .catch(error => reject(error));
+    });
+}
+
+// Geocode the start address and add marker
+geocode(startAddress)
+    .then(({ lat, lon }) => {
+        // Add a marker for the start location
+        const startMarker = L.marker([lat, lon]).addTo(map)
+            .bindPopup(`<b>Start Location:</b><br>${startAddress}`)
+            .openPopup();
+
+        // Optionally, set the map's view to include both locations
+        map.setView([lat, lon], 7);  // Adjust zoom level for better fit
+
+        // Store the start location lat/lon for routing
+        window.startLatLon = [lat, lon];
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Failed to geocode start address');
+    });
+
+// Geocode the end address (delivery location) and add marker
+geocode(endAddress)
+    .then(({ lat, lon }) => {
+        // Add a marker for the end location (delivery location)
+        const endMarker = L.marker([lat, lon]).addTo(map)
+            .bindPopup(`<b>Delivery Location:</b><br>${endAddress}`)
+            .openPopup();
+
+        // Optionally, set the map's view to include both locations
+        map.setView([lat, lon], 7);  // Adjust zoom level for better fit
+
+        // Store the end location lat/lon for routing
+        window.endLatLon = [lat, lon];
+
+        // After both start and end locations are geocoded, create the route
+        if (window.startLatLon && window.endLatLon) {
+            // Create the route between the start and end locations
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(window.startLatLon),
+                    L.latLng(window.endLatLon)
+                ],
+                routeWhileDragging: true
+            }).addTo(map);
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Failed to geocode end address');
+    });
+</script>
+
+
 

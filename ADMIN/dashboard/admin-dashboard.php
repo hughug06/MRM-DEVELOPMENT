@@ -4,6 +4,61 @@ include_once '../../Database/database.php';
 function formatMoney($number) {
     return number_format($number, 2, '.', ',');
 }
+
+  // SQL query to count clients, workers, and agents
+  $sql = "SELECT 
+  role,
+  COUNT(*) AS role_count
+FROM 
+  accounts
+WHERE
+  role IN ('client', 'worker', 'agent')
+GROUP BY 
+  role";
+
+   $sql2 = "SELECT 
+   booking_status,
+   COUNT(*) AS booking_status_count
+ FROM 
+   service_booking
+ WHERE
+   booking_status IN ('pending', 'ongoing', 'completed')
+ GROUP BY 
+   booking_status";
+
+  $result = mysqli_query($conn , $sql);
+  $result2 = mysqli_query($conn , $sql2);
+        //hold the value of number of role
+        $clientCount = 0;
+        $workerCount = 0;
+        $agentCount = 0;
+
+         //hold the value of number of booking status
+         $pendingCount = 0;
+         $ongoingCount = 0;
+         $completedCount = 0;
+
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['role'] == 'client') {
+            $clientCount = $row['role_count'];
+        } elseif ($row['role'] == 'worker') {
+            $workerCount = $row['role_count'];
+        } elseif ($row['role'] == 'agent') {
+            $agentCount = $row['role_count'];
+        }
+    }
+
+    while ($row2= mysqli_fetch_assoc($result2)) {
+        if ($row2['booking_status'] == 'pending') {
+            $pendingCount = $row2['booking_status_count'];
+        } elseif ($row2['booking_status'] == 'ongoing') {
+            $ongoingCount = $row2['booking_status_count'];
+        } elseif ($row2['booking_status'] == 'completed') {
+            $completedCount = $row2['booking_status_count'];
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -75,8 +130,8 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">Payment checking</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $pendingCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
@@ -86,8 +141,8 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">On going project</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $ongoingCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
@@ -97,8 +152,8 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">Completed</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $completedCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
@@ -108,8 +163,8 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">Number of agent</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $agentCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
@@ -119,8 +174,8 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">Number of worker</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $workerCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
@@ -130,89 +185,183 @@ function formatMoney($number) {
                             <div class="card custom-card">
                                 <div class="card-body">
                                     <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Total tax</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold">$89,265</span></h2>
+                                        <label class="main-content-label mb-3 pt-1">Number of client</label>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $clientCount ?></span></h2>
                                         <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
                             </div>
                         </div>     
                     </div>
-                    <div class="row row-sm">
-                        <div class="col-sm-12 col-lg-12 col-xl-12">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0">
-                                    <div>
-                                        <div class="card-title">On going projects</div>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-3">
-                                    <div class="table-responsive tasks">
-                                        <table class="table card-table table-vcenter text-nowrap border">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-20p">#</th>
-                                                    <th class="wd-lg-20p">CLIENT NAME</th>
-                                                    <th class="wd-lg-20p">LOCATION</th>
-                                                    <th class="wd-lg-20p">PAYMENT STATUS</th>
-                                                    <th class="wd-lg-20p">AMOUNT TO PAY</th>
-                                                    <th class="wd-lg-20p">PROJECT PROGRESS</th>
-                                                    <th class="wd-lg-20p">STATUS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                    $ongoing = "SELECT * FROM service_booking
-                                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
-                                                                INNER JOIN user_info on user_info.user_id = service_booking.user_id      
-                                                                ";
-                                                    $result_ongoing = mysqli_query($conn, $ongoing);
-                                                    if (mysqli_num_rows($result_ongoing) > 0) {
-                                                        // Define progress mapping for each enum status
-                                                        $statusMap = [
-                                                            'pick_up' => 16, // 1/6 of 100%
-                                                            'delivery' => 33, // 2/6 of 100%
-                                                            'arrive' => 50, // 3/6 of 100%
-                                                            'ongoing_construction' => 66, // 4/6 of 100%
-                                                            'checking' => 83, // 5/6 of 100%
-                                                            'completed' => 100 // 6/6 of 100%
-                                                        ];
+                                        <div class="row row-sm">
+                                            <div class="col-sm-12 col-lg-12 col-xl-12">
+                                                <div class="card custom-card">
+                                                    <div class="card-header border-bottom-0">
+                                                        <div>
+                                                            <div class="card-title">On going projects</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body pt-3">
+                                                        <div class="table-responsive tasks">
+                                                        <table class="table card-table table-vcenter text-nowrap border">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="wd-lg-20p">#</th>
+                                                                                <th class="wd-lg-20p">CLIENT NAME</th>
+                                                                                <th class="wd-lg-20p">LOCATION</th>
+                                                                                <th class="wd-lg-20p">PAYMENT STATUS</th>
+                                                                                <th class="wd-lg-20p">AMOUNT TO PAY</th>
+                                                                                <th class="wd-lg-20p">PROJECT PROGRESS</th>
+                                                                                <th class="wd-lg-20p">STATUS</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php 
+                                                                                $ongoing = "SELECT * FROM service_booking
+                                                                                            INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                                            INNER JOIN user_info on user_info.user_id = service_booking.user_id 
+                                                                                            INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id     
+                                                                                            ";
+                                                                                $result_ongoing = mysqli_query($conn, $ongoing);
+                                                                                if (mysqli_num_rows($result_ongoing) > 0) {
+                                                                                    // Define progress mapping for each enum status
+                                                                                    $statusMap = [
+                                                                                        'pick_up' => 16, // 1/6 of 100%
+                                                                                        'delivery' => 33, // 2/6 of 100%
+                                                                                        'arrive' => 50, // 3/6 of 100%
+                                                                                        'ongoing_construction' => 66, // 4/6 of 100%
+                                                                                        'checking' => 83, // 5/6 of 100%
+                                                                                        'completed' => 100 // 6/6 of 100%
+                                                                                    ];
 
-                                                        while ($row = mysqli_fetch_assoc($result_ongoing)) {
-                                                            // Get the current progress percentage based on the status
-                                                            $status = $row['status'];
-                                                            $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
-                                                ?>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
-                                                    <td><?= htmlspecialchars($row['pin_location']) ?></td>
-                                                    <td><?= htmlspecialchars($row['payment_status']) ?></td>
-                                                    <td><?= htmlspecialchars($row['total_cost']) ?></td>
-                                                    <td>
-                                                        <div class="progress" style="height: 20px;">
-                                                            <div class="progress-bar bg-success" role="progressbar" 
-                                                                style="width: <?= $progressPercentage; ?>%;" 
-                                                                aria-valuenow="<?= $progressPercentage; ?>" 
-                                                                aria-valuemin="0" aria-valuemax="100">
-                                                                <?= $progressPercentage; ?>%
+                                                                                    while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                                                        // Get the current progress percentage based on the status
+                                                                                        $status = $row['status'];
+                                                                                        $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
+                                                                                <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                                                <td><?= htmlspecialchars($row['payment_status']) ?></td>
+                                                                                <td><?= htmlspecialchars($row['total_cost']) ?></td>
+                                                                                <td>
+                                                                                    <div class="progress" style="height: 20px;">
+                                                                                        <div class="progress-bar bg-success" role="progressbar" 
+                                                                                            style="width: <?= $progressPercentage; ?>%;" 
+                                                                                            aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                                            aria-valuemin="0" aria-valuemax="100">
+                                                                                            <?= $progressPercentage; ?>%
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
+                                                                                <!-- Button to trigger the modal with data attributes -->
+                                                                                <td>
+                                                                                    <button class="btn btn-primary" 
+                                                                                            data-bs-toggle="modal" 
+                                                                                            data-bs-target="#paymentLogModal"
+                                                                                            data-first-payment="<?php echo $row['first_payment']; ?>"
+                                                                                            data-second-payment="<?php echo $row['second_payment']; ?>"
+                                                                                            data-third-payment="<?php echo $row['third_payment']; ?>"
+                                                                                            data-first-reference="<?php echo $row['first_reference']; ?>"
+                                                                                            data-second-reference="<?php echo $row['second_reference']; ?>"
+                                                                                            data-third-reference="<?php echo $row['third_reference']; ?>">
+                                                                                        <i class="fas fa-credit-card"></i> <!-- Payment icon from FontAwesome -->
+                                                                                    </button>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <?php 
+                                                                                    }
+                                                                                }
+                                                                            ?>                                                     
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
-                                                </tr>
-                                                <?php 
-                                                        }
-                                                    }
-                                                ?>                                                     
-                                            </tbody>
+                                                    </div>  
+                                                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="paymentLogModal" tabindex="-1" aria-labelledby="paymentLogModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="paymentLogModalLabel">Payment Log</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <!-- Initial Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Initial Payment</h6>
+                                                                                    <p id="first-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="first-reference"></td>
+                                                                                            <td id="first-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
 
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
+                                                                                    <!-- Second Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Second Payment</h6>
+                                                                                    <p id="second-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="second-reference"></td>
+                                                                                            <td id="second-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+
+                                                                                    <!-- Last Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Last Payment</h6>
+                                                                                    <p id="third-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="third-reference"></td>
+                                                                                            <td id="third-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
                     <div class="row row-sm">
                         <div class="col-sm-12 col-lg-12 col-xl-8">
                             <div class="row row-sm">
@@ -768,3 +917,53 @@ function formatMoney($number) {
     </body>
 
 </html>
+
+<script>
+  // JavaScript to populate modal with data when button is clicked
+  var paymentLogModal = document.getElementById('paymentLogModal');
+  paymentLogModal.addEventListener('show.bs.modal', function (event) {
+    // Get the button that triggered the modal
+    var button = event.relatedTarget;
+
+    // Get data attributes from the button
+    var firstPayment = button.getAttribute('data-first-payment');
+    var secondPayment = button.getAttribute('data-second-payment');
+    var thirdPayment = button.getAttribute('data-third-payment');
+    var firstReference = button.getAttribute('data-first-reference');
+    var secondReference = button.getAttribute('data-second-reference');
+    var thirdReference = button.getAttribute('data-third-reference');
+
+    // Set the modal content dynamically for the first payment
+    if (firstPayment === 'null' || firstPayment === '') {
+      document.getElementById('first-payment-status').textContent = 'The client has not paid';
+      document.getElementById('first-reference').textContent = '';
+      document.getElementById('first-payment').textContent = '';
+    } else {
+      document.getElementById('first-payment-status').textContent = '';
+      document.getElementById('first-reference').textContent = firstReference;
+      document.getElementById('first-payment').textContent = firstPayment;
+    }
+
+    // Set the modal content dynamically for the second payment
+    if (secondPayment === 'null' || secondPayment === '') {
+      document.getElementById('second-payment-status').textContent = 'The client has not paid';
+      document.getElementById('second-reference').textContent = '';
+      document.getElementById('second-payment').textContent = '';
+    } else {
+      document.getElementById('second-payment-status').textContent = '';
+      document.getElementById('second-reference').textContent = secondReference;
+      document.getElementById('second-payment').textContent = secondPayment;
+    }
+
+    // Set the modal content dynamically for the third payment
+    if (thirdPayment === 'null' || thirdPayment === '') {
+      document.getElementById('third-payment-status').textContent = 'The client has not paid';
+      document.getElementById('third-reference').textContent = '';
+      document.getElementById('third-payment').textContent = '';
+    } else {
+      document.getElementById('third-payment-status').textContent = '';
+      document.getElementById('third-reference').textContent = thirdReference;
+      document.getElementById('third-payment').textContent = thirdPayment;
+    }
+  });
+</script>

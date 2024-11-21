@@ -10,6 +10,7 @@ where  worker_id = '$worker_id' and working_id = '$working_id'
 ";
 $result = mysqli_query($conn , $sql);
 if(mysqli_num_rows($result) > 0){
+    
     $row = mysqli_fetch_assoc($result);
     $status = $row['status'];
     $final_status = '';
