@@ -286,7 +286,7 @@ $worker_id = $_SESSION['user_id'];
                                                         <div class="card mb-3 h-100">
                                                             <div class="card-body d-flex flex-column justify-content-between">
                                                                 <h5 class="card-title">Item Origin</h5>
-                                                                <p><strong>From:</strong> <span class="fw-bold text-primary" id="start-location"><?= htmlspecialchars("Ilayang Ilog B, Lopez, Quezon, Calabarzon, Philippines"); ?></span></p>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary" id="start-location"><?= htmlspecialchars("Pangil, Majayjay, Laguna, Calabarzon, 4005, Philippines"); ?></span></p>
                                                             </div>
                                                         </div>
                                                     </div>
