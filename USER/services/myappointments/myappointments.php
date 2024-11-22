@@ -124,88 +124,148 @@
                                                             <?php }} ?>
                                                 </div>
                                             </div>           
-                                            <div class="main-content-body  tab-pane p-4 border-top-0 p-0" id="approved">
-                                                <div class="mb-4 main-content-label">Approved</div>
-                                                <div class="card-body border">
-                                                <div class="row row-sm">
-                                                    <div class="col-sm-12 col-md-12 col-xl-12">
-                                                        <div class="card custom-card">
-                                                            <div class="card-header border-bottom-0">
-                                                                <div>
-                                                                    <div class="card-title">On going projects</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body pt-3">
-                                                                <div class="table-responsive tasks">
-                                                                    <table class="table card-table table-vcenter text-nowrap border">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th class="wd-lg-20p">#</th>
-                                                                                <th class="wd-lg-20p">WORKER NAME</th>
-                                                                                <th class="wd-lg-20p">LOCATION</th>
-                                                                                <th class="wd-lg-20p">PAYMENT STATUS</th>
-                                                                                <th class="wd-lg-20p">AMOUNT TO PAY</th>
-                                                                                <th class="wd-lg-20p">PROJECT PROGRESS</th>
-                                                                                <th class="wd-lg-20p">STATUS</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <?php 
-                                                                                $ongoing = "SELECT * FROM worker_ongoing
-                                                                                            INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
-                                                                                            INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id      
-                                                                                            where client_id = '$user_id' AND booking_status = 'ongoing'
-                                                                                            ";
-                                                                                $result_ongoing = mysqli_query($conn, $ongoing);
-                                                                               
-                                                                                if (mysqli_num_rows($result_ongoing) > 0) {
-                                                                                    // Define progress mapping for each enum status
-                                                                                    $statusMap = [
-                                                                                        'pick_up' => 16, // 1/6 of 100%
-                                                                                        'delivery' => 33, // 2/6 of 100%
-                                                                                        'arrive' => 50, // 3/6 of 100%
-                                                                                        'ongoing_construction' => 66, // 4/6 of 100%
-                                                                                        'checking' => 83, // 5/6 of 100%
-                                                                                        'completed' => 100 // 6/6 of 100%
-                                                                                    ];
+                                            <div class="main-content-body tab-pane p-4 border-top-0 p-0" id="approved">
+                                                <div class="mb-4 main-content-label text-center">Approved Projects</div>
+                                                <div class="card border-0 shadow-sm">
+                                                    <div class="card-header bg-primary text-white border-bottom-0">
+                                                        <h5 class="mb-0">Ongoing Projects</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-hover table-bordered text-nowrap">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Worker Name</th>
+                                                                        <th>Location</th>
+                                                                        <th>Payment Status</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Project Progress</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php 
+                                                                    $ongoing = "SELECT * FROM service_booking
+                                                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                                INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
+                                                                                INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
+                                                                                WHERE client_id = '$user_id' AND booking_status = 'ongoing'";
+                                                                    $result_ongoing = mysqli_query($conn, $ongoing);
 
-                                                                                    while ($row = mysqli_fetch_assoc($result_ongoing)) {
-                                                                                        // Get the current progress percentage based on the status
-                                                                                        $status = $row['status'];
-                                                                                        $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
-                                                                            ?>
-                                                                            <tr>
-                                                                                <td>1</td>
-                                                                                <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
-                                                                                <td><?= htmlspecialchars($row['pin_location']) ?></td>
-                                                                                <td><?= htmlspecialchars($row['payment_status']) ?></td>
-                                                                                <td><?= htmlspecialchars($row['total_cost']) ?></td>
-                                                                                <td>
-                                                                                    <div class="progress" style="height: 20px;">
-                                                                                        <div class="progress-bar bg-success" role="progressbar" 
-                                                                                            style="width: <?= $progressPercentage; ?>%;" 
-                                                                                            aria-valuenow="<?= $progressPercentage; ?>" 
-                                                                                            aria-valuemin="0" aria-valuemax="100">
-                                                                                            <?= $progressPercentage; ?>%
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
-                                                                            </tr>
-                                                                            <?php 
-                                                                                    }
-                                                                                }
-                                                                            ?>                                                     
-                                                                        </tbody>
+                                                                    // Progress mapping for each enum status
+                                                                    $statusMap = [
+                                                                        'pick_up' => 16,
+                                                                        'delivery' => 33,
+                                                                        'arrive' => 50,
+                                                                        'ongoing_construction' => 66,
+                                                                        'checking' => 83,
+                                                                        'completed' => 100
+                                                                    ];
 
-                                                                    </table>
-                                                                </div>
-                                                            </div>
+                                                                    if (mysqli_num_rows($result_ongoing) > 0) {
+                                                                        while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                                            $status = $row['status'];
+                                                                            $progressPercentage = $statusMap[$status] ?? 0;
+                                                                    ?>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td><?= htmlspecialchars($row['first_name']) . ' ' . htmlspecialchars($row['last_name']) ?></td>
+                                                                        <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                                        <td>
+                                                                            <span class="badge <?= $row['payment_status'] == 'Paid' ? 'bg-success' : 'bg-warning' ?>">
+                                                                                <?= htmlspecialchars($row['payment_status']) ?>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>₱<?= number_format($row['total_cost'], 2) ?></td>
+                                                                        <td>
+                                                                            <div class="progress" style="height: 20px;">
+                                                                                <div class="progress-bar" role="progressbar" 
+                                                                                    style="width: <?= $progressPercentage; ?>%;" 
+                                                                                    aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                                    aria-valuemin="0" aria-valuemax="100">
+                                                                                    <?= $progressPercentage; ?>%
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <span class="badge bg-<?= $status == 'completed' ? 'success' : 'primary' ?>">
+                                                                                <?= ucfirst($status) ?>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <?php 
+                                                                    if($row['status'] == 'arrive' && $row['second_payment'] == null){
+                                                                        
+                                                                        ?> 
+                                                                      <!-- Displaying the total cost and booking ID on the page -->
+                                                                        <input type="hidden" id="total_cost_input" name="total_cost" value="<?= $row['total_cost'] ?>">
+                                                                        <input type="hidden" id="booking_id_input" name="booking_id" value="<?= $row['booking_id'] ?>">
+
+                                                                        <!-- Button to open the payment modal -->
+                                                                        <button class="btn btn-primary open-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                                                            Open Payment Modal
+                                                                        </button>
+                                                                        
+                                                                        <?php
+                                                                    }
+                                                                        }
+                                                                    }
+                                                                    ?>                                 
+                                                                </tbody>
+                                                            </table>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                
+                                            <!-- Modal payment -->
+                                            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="paymentModalLabel">Payment Confirmation</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Centered Blank Image Placeholder -->
+                                                            <div class="text-center mb-3">
+                                                                <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                                            </div>
+                                                            <div class="text-center mx-4">
+                                                                <!-- Displaying Total Cost and Booking ID -->
+                                                                <p id="paymentnow">TOTAL: ₱0.00</p>
+                                                                <p id="totalCostModal">TOTAL: ₱0.00</p>
+                                                                <p id="bookingIdModal">Booking ID: N/A</p>
+                                                            </div>
+
+                                                            <form action="process_second_payment.php" method="POST" enctype="multipart/form-data">
+                                                                <div class="row mb-3">
+                                                                    <div class="col">
+                                                                        <label for="firstField" class="form-label">Reference Number</label>
+                                                                        <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                                                    </div>                                                             
+                                                                </div>                                         
+               
+                                                                <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                                                <input type="hidden" id="booking_id_modal_input" name="booking_id">
+                                                                <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
+
+                                                                <!-- Submit Button -->
+                                                                <div class="text-center mt-3">
+                                                                    <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>   
+                                            </div>
+
+
+                                            </div>
+
+ 
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
@@ -378,6 +438,34 @@
 
 </html>
 
+
+<script>
+    // Function to open the modal and populate with the total cost and booking ID
+    function openPaymentModal() {
+        // Get the total cost and booking ID from the hidden input and text input fields
+        var totalCost = document.getElementById('total_cost_input').value;
+        var bookingId = document.getElementById('booking_id_input').value;
+        
+        // Calculate 40% of the total cost
+        var duePayment = totalCost * 0.40;
+        var totalCost = parseFloat(document.getElementById('total_cost_input').value);
+        // Format the amounts with commas as thousand separators
+        var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+        var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+        // Update the text content of the paymentnow and totalCostModal elements
+        document.getElementById('paymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+        document.getElementById('totalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+        document.getElementById('bookingIdModal').innerText = 'Booking ID: ' + bookingId;
+        
+        // Optionally, populate the form with the total cost and booking ID
+        document.getElementById('booking_id_modal_input').value = bookingId;
+        document.getElementById('duePaymentInput').value = duePayment.toFixed(2); 
+    }
+
+    // Event listener for button click to open the modal
+    document.querySelector('.open-payment-modal-btn').addEventListener('click', openPaymentModal);
+</script>
 
 
 

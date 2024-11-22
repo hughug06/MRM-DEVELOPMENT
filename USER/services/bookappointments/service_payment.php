@@ -709,6 +709,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
             <!-- Modal for Terms and Conditions -->
             <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
