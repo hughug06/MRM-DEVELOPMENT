@@ -242,7 +242,7 @@
                                                                                 <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
                                                                                 <td><?= htmlspecialchars($row['pin_location']) ?></td>
                                                                                 <td><?= htmlspecialchars($row['payment_status']) ?></td>
-                                                                                <td><?= htmlspecialchars($row['total_cost']) ?></td>
+                                                                                <td>₱<?= number_format($row['total_cost'], 2) ?></td>
                                                                                 <td>
                                                                                     <div class="progress" style="height: 20px;">
                                                                                         <div class="progress-bar bg-success" role="progressbar" 
