@@ -118,6 +118,41 @@ elseif (isset($_POST['delete'])) {
     
 }
 
+elseif (isset($_POST['PrType'])) {
+    $PrType = $_POST['PrType'];
+    $typeuse;
+    if($PrType == 'generator'){
+        $typeuse = 'Generator';
+    }
+    elseif($PrType == 'solar'){
+        $typeuse = 'Solar Panel';
+    }
+    // Use a prepared statement to prevent SQL injection
+    $sql = "SELECT ProductName, ProductID FROM products WHERE ProductType = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        // Bind parameters
+        $stmt->bind_param("s", $typeuse);
+        // Execute the statement
+        $stmt->execute();
+        $result = $stmt->get_result();
+  
+        if ($result->num_rows > 0) {
+            $products = [];
+            while ($row = $result->fetch_assoc()) {
+                $products[] = ['value' => $row['ProductID'],'text' => $row['ProductName']];
+            }
+            echo json_encode(['success' => true, 'data' => ['products' => $products]]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'No Products Exists']);
+        }
+  
+        $stmt->close();
+    } else {
+        echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);
+    }
+  
+  }
+
 
 else{
   echo json_encode(['success' => false, 'message' => 'SQL prepare error: ' . $conn->error]);

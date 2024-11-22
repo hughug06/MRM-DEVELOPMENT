@@ -200,7 +200,7 @@ if ($exec) {
                             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addTaskModal" id="addTaskBtn">Add Task</button>
                         </div>
                         <div class="col-lg 4">
-                            <div class="card custom-card">
+                            <div class="card custom-card h-100">
                                 <div class="card-header">
                                     <div class="card-title">For checking</div>
                                 </div>
@@ -210,17 +210,7 @@ if ($exec) {
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <div class="card-title">Finding Available Worker</div>
-                                </div>
-                                <div class="card-body" id="finding">
-                                   
-                                </div>
-                            </div>    
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card h-100">
                                 <div class="card-header">
                                     <div class="card-title">Ongoing Project</div>
                                 </div>
@@ -230,7 +220,7 @@ if ($exec) {
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card h-100">
                                 <div class="card-header">
                                     <div class="card-title">Completed</div>
                                 </div>
@@ -240,7 +230,7 @@ if ($exec) {
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card mt-5 h-100">
                                 <div class="card-header">
                                     <div class="card-title">Cancelled</div>
                                 </div>
@@ -310,7 +300,15 @@ if ($exec) {
                                 <input type="text" class="form-control" id="contact" placeholder="Contact Number" required>
                                 <input type="text" class="form-control" id="location" placeholder="Location" required>
                                 <div>
+                                    <select class="form-control product" id="producttype" placeholder="Product Type">
+                                        <option value="">Select Product Type</option>
+                                        <option value="solar">Solar Panel</option>
+                                        <option value="generator">Generator</option>
+                                    </select>
+                                </div>
+                                <div>
                                     <select class="form-control product" id="product" placeholder="Product">
+                                        <option value="">Select Product Type First</option>
                                     </select>
                                 </div>
                                 <input type="number" class="form-control" id="quantity" placeholder="Quantity" required>
@@ -380,39 +378,6 @@ if ($exec) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
 
         <script>
-            //Load Functions
-            $(document).ready(function() {
-                $('#product').append('<option value="">Select Product</option>'); // Add default option
-                
-                $.ajax({
-                    url: 'function.php',
-                    type: 'GET',
-                    data: { PrType: true }, // Pass data to the backend
-                    success: function(response) {
-                        response = JSON.parse(response); // Parse JSON response
-                        
-                        if (response.success) {
-                            $('#product').empty(); // Clear existing options
-                            $('#product').append('<option value="">Select Product</option>'); // Add default option
-
-                            var existingValues = []; // Array to track existing values
-
-                            $.each(response.data.products, function(index, item) {
-                                // Check if the value is already in the existingValues array
-                                if (!existingValues.includes(item.value)) {
-                                    $('#product').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                    existingValues.push(item.value); // Add value to the array
-                                }
-                            });
-                        } else {
-                            alert('no products found.');
-                        }
-                    },
-                    error: function() {
-                        alert('An error occurred while fetching products.');
-                    }
-                });
-            });
 
 
     //Function when modal closes
@@ -471,9 +436,6 @@ if ($exec) {
 
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
-                            }
-                            else if(status == 'finding'){
-                                document.getElementById('finding').appendChild(newTask);
                             }
                             else if(status == 'ongoing'){
                                 document.getElementById('ongoing').appendChild(newTask);
@@ -672,6 +634,7 @@ if ($exec) {
                 const contact = parseInt(document.getElementById('contact').value);
                 const quantity = parseInt(document.getElementById('quantity').value);
                 const product = parseInt(document.getElementById('product').value);
+                const producttype = document.getElementById('producttype').value;
                 // Extract JSON from the clicked button's value
                 const date_time_btn = this; // Refers to the clicked button
                 let date_time = JSON.parse(date_time_btn.value);
@@ -691,62 +654,99 @@ if ($exec) {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
+                            // var formData = new FormData();
+                            // formData.append('addtask', true);
+                            // formData.append('email', email);
+                            // formData.append('name', name);
+                            // formData.append('contact', contact);
+                            // formData.append('product_id', product);
+                            // formData.append('quantity', quantity);
+                            // formData.append('availability_id', availability_id);
+                            // formData.append('date', date);
+                            // formData.append('start_time', start_time);
+                            // formData.append('end_time', end_time);
+                            // formData.append('location', location);
+                            // formData.append('producttype', producttype);
                             var formData = new FormData();
-                            formData.append('addtask', true);
-                            formData.append('email', email);
-                            formData.append('name', name);
-                            formData.append('contact', contact);
-                            formData.append('product_id', product);
-                            formData.append('quantity', quantity);
-                            formData.append('availability_id', availability_id);
-                            formData.append('date', date);
-                            formData.append('start_time', start_time);
-                            formData.append('end_time', end_time);
                             formData.append('location', location);
+                            formData.append('availability_id', availability_id);
+                            formData.append('product_id', product);
+                            formData.append('productType', producttype);
+                            formData.append('quantity', quantity);
+                            formData.append('serviceType', 'installation')
+                            formData.append('agentmode', true);
+                            formData.append('name', name);
+                            formData.append('email', email);
+                            formData.append('contact', contact);
+
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '../../USER/services/bookappointments/service_payment.php';
+
+                            // Iterate over FormData using entries()
+                            for (const [key, value] of formData.entries()) {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = key;
+                                input.value = value;
+                                form.appendChild(input);
+                            }
+
+                            // Append the form to the body
+                            document.body.appendChild(form);
+
+                            // Submit the form
+                            form.submit();
+
+                            // Remove the form after submission to clean up
+                            document.body.removeChild(form);
 
                             
-                            $.ajax({
-                                url: 'function.php',
-                                type: 'POST',
-                                dataType: 'json',
-                                data:formData,
-                                processData: false,
-                                contentType: false,
-                                success: function(response) {
-                                    // Handle successful add
-                                    if(response.success){
-                                        Swal.fire({
-                                            title: 'Task Added!',
-                                            text: 'Task has been added successfully.',
-                                            icon: 'success',
-                                            allowOutsideClick: false,
-                                            timer: 2000, // 2 seconds timer
-                                            showConfirmButton: false // Hide the confirm button
-                                        }).then(() => {
-                                            // Redirect after the timer ends
-                                            window.location.href = 'kanban.php';
-                                        });
-                                    }
-                                    else{
-                                        Swal.fire({
-                                            title: 'Task not Added!',
-                                            text: response.message || 'An error occurred while adding the task.',
-                                            icon: 'error',
-                                            allowOutsideClick: false,
-                                            timer: 2000, // 2 seconds timer
-                                            showConfirmButton: false // Hide the confirm button
-                                        });
-                                    }
-                                },
-                                error: function(response) {
-                                    // Handle erro
-                                    Swal.fire(
-                                        'Error!',
-                                        'There was an error Adding the task. Please try again.',
-                                        'error'
-                                    );
-                                }
-                            });
+
+
+                            
+                            // $.ajax({
+                            //     url: 'function.php',
+                            //     type: 'POST',
+                            //     dataType: 'json',
+                            //     data:formData,
+                            //     processData: false,
+                            //     contentType: false,
+                            //     success: function(response) {
+                            //         // Handle successful add
+                            //         if(response.success){
+                            //             Swal.fire({
+                            //                 title: 'Task Added!',
+                            //                 text: 'Task has been added successfully.',
+                            //                 icon: 'success',
+                            //                 allowOutsideClick: false,
+                            //                 timer: 2000, // 2 seconds timer
+                            //                 showConfirmButton: false // Hide the confirm button
+                            //             }).then(() => {
+                            //                 // Redirect after the timer ends
+                            //                 window.location.href = 'kanban.php';
+                            //             });
+                            //         }
+                            //         else{
+                            //             Swal.fire({
+                            //                 title: 'Task not Added!',
+                            //                 text: response.message || 'An error occurred while adding the task.',
+                            //                 icon: 'error',
+                            //                 allowOutsideClick: false,
+                            //                 timer: 2000, // 2 seconds timer
+                            //                 showConfirmButton: false // Hide the confirm button
+                            //             });
+                            //         }
+                            //     },
+                            //     error: function(response) {
+                            //         // Handle erro
+                            //         Swal.fire(
+                            //             'Error!',
+                            //             'There was an error Adding the task. Please try again.',
+                            //             'error'
+                            //         );
+                            //     }
+                            // });
                         }
                     });
             }),
@@ -760,9 +760,10 @@ if ($exec) {
                 const name = document.getElementById('name').value;
                 const location = document.getElementById('location').value;
                 const product = document.getElementById('product').value;
+                const producttype = document.getElementById('producttype').value;
                 const contact = parseInt(document.getElementById('contact').value);
                 const quantity = parseInt(document.getElementById('quantity').value);
-                if(email == "" || name == "" ||  product =="" || contact=="" || quantity =="" || location==""){
+                if(email == "" || name == "" ||  product =="" || contact=="" || quantity =="" || location=="" || producttype ==""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -807,6 +808,44 @@ if ($exec) {
                 }
                 else{
 
+                }
+            });
+
+
+
+            document.getElementById('producttype').addEventListener('change', function() {
+                var selectedValue = this.value;
+                if (!selectedValue == "") {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:{'PrType':selectedValue},
+                        success: function(response) {
+                            // Handle successful add
+                            if(response.success){
+                                $('#product').empty();
+
+                                var existingValues = [];
+                                $.each(response.data.products, function(index, item) {
+                                    // Check if the value is already in the existingValues array
+                                    if (!existingValues.includes(item.value)) {
+                                        $('#product').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                        existingValues.push(item.value); // Add value to the array
+                                    }
+                                });
+                            }
+                            else{
+                                $('#product').empty();
+                                $('#product').append("<option value=''>Select Product Type First</option>");
+                            }
+                        },
+                        error: function(response) {
+                            // Handle error
+                            $('#product').empty();
+                            $('#product').append("<option value=''>Select Product Type First</option>");
+                        }
+                    });
                 }
             });
         });

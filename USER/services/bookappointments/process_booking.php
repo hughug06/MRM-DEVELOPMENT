@@ -21,6 +21,7 @@
             $service_type = $_POST['serviceType'];
             $product_type = $_POST['productType'];
             $first_payment = $_POST['first_payment'];
+            $agentmode = isset($_POST['agentmode'])? true:false;
       
             
 // Create the SQL statement
@@ -67,7 +68,26 @@ $sql = "INSERT INTO service_booking (
     $result2 = mysqli_query($conn , $sql2);
     $result3 = mysqli_query($conn , $update_availability);
     }
-   
-   header("Location: service.php");
+   if($agentmode == true){
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $product_id = $_POST['product_id'];
+    $contact = $_POST['contact'];
+
+
+    $sql_insert = "insert into kanban (email, name, contact, booking_id , product_id, location, product_quantity, date, status, user_id)
+                VALUES ('$email' , '$name' , '$contact', '$booking_id' , '$product_id', '$pin_location' , '$quantity' , '$date' , 'checking', '$user_id')";
+    if (mysqli_query($conn, $sql_insert)) {
+        $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
+        if(mysqli_query($conn , $update_availability)){
+            
+        } 
+    }
+
+    header("Location: ../../../ADMIN/agent/kanban.php");
+   }
+   else{
+    header("Location: service.php");
+   }
    exit();
 ?>
