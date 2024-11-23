@@ -135,58 +135,58 @@ require_once '../../ADMIN/authetincation.php';
                         </div>
                         <div class="row row-sm">
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/solar/solar.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Mountains<span class="badge bg-primary float-end fs-10">New</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <div class="card custom-card">
+                                <a class="card custom-card" href="/MRM-DEVELOPMENT/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div class="row row-sm">
@@ -197,7 +197,7 @@ require_once '../../ADMIN/authetincation.php';
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">MRM EG Electric Power Generation Services offers comprehensive solutions for solar panels and generators, including expert tuning, repair, regular maintenance, and installation. Our experienced technicians ensure your power systems run efficiently and reliably. Click inquire to know more about our availability and specialized services tailored to meet your energy needs.</p>
-                                        <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="btn btn-primary">Inquire Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@ require_once '../../ADMIN/authetincation.php';
                                     </div>
                                     <div class="card-body">                                    
                                         <p class="card-text">MRM EG Electric Power Generation Services has a proven track record in delivering high-quality projects, from the seamless installation of solar panels and generators to reliable repair and maintenance solutions. Each project reflects our commitment to sustainability, efficiency, and customer satisfaction, tailored to meet diverse energy needs. Inquire now to see how our expertise can power your next project.</p>
-                                        <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                        <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="btn btn-primary">Inquire Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +305,7 @@ require_once '../../ADMIN/authetincation.php';
                             </div>
                             <div class="card-body">
                                 <img src="../../assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img mb-3" alt="...">
-                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
                         <div class="card custom-card">
@@ -314,7 +314,7 @@ require_once '../../ADMIN/authetincation.php';
                             </div>
                             <div class="card-body">
                                 <img src="../../assets/images/mrm-images/dashboard-images/project-solar2.jpg" class="card-img mb-3" alt="...">
-                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
                         <div class="card custom-card">
@@ -323,7 +323,7 @@ require_once '../../ADMIN/authetincation.php';
                             </div>
                             <div class="card-body">
                                 <img src="../../assets/images/mrm-images/dashboard-images/project-solar3.jpg" class="card-img mb-3" alt="...">
-                                <a href="javascript:void(0);" class="btn btn-primary">Inquire Now</a>
+                                <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="btn btn-primary">Inquire Now</a>
                             </div>
                         </div>
                     </div>
