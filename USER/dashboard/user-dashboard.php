@@ -52,9 +52,12 @@ require_once '../../ADMIN/authetincation.php';
             border: none;
         }
         #calendar {
-            max-width: 100%;
-            margin: 0 auto;
+            width: 100%; /* Make the calendar fill the container */
+            max-width: 100%; /* Prevent overflow on smaller screens */
+            height: auto; /* Allow the height to adjust */
+            overflow-x: auto; /* Enable horizontal scrolling if necessary */
         }
+
         .fc-toolbar h2 {
             font-size: 1.5rem;
             font-weight: 600;
@@ -294,9 +297,7 @@ require_once '../../ADMIN/authetincation.php';
                     </div>
                     <div class="col-sm-12 col-lg-12 col-xl-4">
                         <div class="card custom-card">
-                            <div class="border">
-                                <div id='calendar'></div> 
-                            </div>
+                            <div id='calendar'></div> 
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
