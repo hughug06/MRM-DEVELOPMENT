@@ -63,1170 +63,1191 @@
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu">
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#payment_checking">Items
+                                    <a class="nav-link active" data-bs-toggle="tab" id="about-tab" href="#items">Items
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#on_going">Solar - Installation
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solar">Solar
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Generator - Installation
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generator">Generator 
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Generator - Tuneup
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#brand">Brand
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Solar - Maintenance
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Generator - Maintenance
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Solar - Repair
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Generator - Repair
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Brands
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#markup-disc">Markup / Discount
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
                                 </nav>
                             </div>
-                        </div>
-                    </div>
+                            <div class="row row-sm">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="border border-dark rounded-3 main-content-body-profile">
+                                        <div class="tab-content">
+                                            <div class="main-content-body tab-pane p-4 border-top-0 active" id="items">
+                                                <div class="mb-4 main-content-label"></div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                                        <div class="card custom-card">
+                                                            <div class="card-header border-bottom-0 d-block">                            
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <label class="main-content-label mb-0">Items</label>
+                                                            
+                                                                <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addServiceItemModal">
+                                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                </button>
+                                                            </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="table-responsive userlist-table">
+                                                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                <th class="wd-lg-20p"><span>Action</span></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php 
+                                                                            require '../../../Database/database.php';                                          
+                                                                            $select = "Select * from service_pricing";
+                                                                            $result = mysqli_query($conn , $select);
+                                                                            if(mysqli_num_rows($result) > 0){
+                                                                                foreach($result as $resultItem){
+                                                                            ?> 
+                                                                            <tr>
+                                                                                <td><?= $resultItem['pricingid']?></td>  
+                                                                                <td><?= $resultItem['unit']?></td>     
+                                                                                <td><?= $resultItem['description']?></td>                                       
+                                                                                <td><?= $resultItem['quantity']?></td>                       
+                                                                                <td><?= $resultItem['amount']?></td> 
+                                                                                <td>                                                 
+                                                                                <button 
+                                                                                    type="button" 
+                                                                                    class="btn btn-sm btn-info" 
+                                                                                    data-bs-toggle="modal" 
+                                                                                    data-bs-target="#editItemModal" 
+                                                                                    data-item-id="<?= $resultItem['pricingid'] ?>"
+                                                                                    data-item-unit="<?= $resultItem['unit'] ?>"
+                                                                                    data-item-description="<?= $resultItem['description'] ?>"
+                                                                                    data-item-quantity="<?= $resultItem['quantity'] ?>"
+                                                                                    data-item-amount="<?= $resultItem['amount'] ?>"              
+                                                                                    >
+                                                                                    <i class="fe fe-edit-2"></i>
+                                                                                </button>
+                                                                                <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                                                </td>
+                                                                            </tr>
 
+                                                                            <?php 
+                                                                                }
+                                                                        
+                                                                            }
+                                                                            else{
 
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">Items</label>
-                                   
-                                    <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addServiceItemModal">
-                                        <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                    </button>
-                                   
-                                </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                require '../../../Database/database.php';                                          
-                                                $select = "Select * from service_pricing";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                                ?> 
-                                                 <tr>
-                                                    <td><?= $resultItem['pricingid']?></td>  
-                                                    <td><?= $resultItem['unit']?></td>     
-                                                    <td><?= $resultItem['description']?></td>                                       
-                                                    <td><?= $resultItem['quantity']?></td>                       
-                                                    <td><?= $resultItem['amount']?></td> 
-                                                    <td>                                                 
-                                                    <button 
-                                                        type="button" 
-                                                        class="btn btn-sm btn-info" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#editItemModal" 
-                                                        data-item-id="<?= $resultItem['pricingid'] ?>"
-                                                        data-item-unit="<?= $resultItem['unit'] ?>"
-                                                        data-item-description="<?= $resultItem['description'] ?>"
-                                                        data-item-quantity="<?= $resultItem['quantity'] ?>"
-                                                        data-item-amount="<?= $resultItem['amount'] ?>"              
-                                                        >
-                                                        <i class="fe fe-edit-2"></i>
-                                                    </button>
-                                                    <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
-                                                    </td>
-                                                </tr>
-
-                                                <?php 
-                                                    }
-                                            
-                                                }
-                                                else{
-
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                
+                                            </div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="solar">
+                                                <div class="col-md-12 col-lg-6">
+                                                    <div class="card custom-card">
+                                                        <nav class="nav main-nav-line p-3">
+                                                            <a class="nav-link active" data-bs-toggle="tab" id="about-tab" href="#solarInstallation">Installation
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
+                                                            </a>
+                                                            <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solarMaintenance">Maintenance
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                            </a>
+                                                            <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solarRepair">Repair
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                            </a>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-sm">
+                                                    <div class="tab-content">
+                                                        <div class="main-content-body tab-pane p-0 border-top-0 active" id="solarInstallation">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION(SOLAR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#installationPackageModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>total cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "Select * from package_installation_solar";
+                                                                                $result = mysqli_query($conn , $select);
+                                                                                if(mysqli_num_rows($result) > 0){
+                                                                                    foreach($result as $resultItem){
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['installation_id']?></td>  
+                                                                                    <td><?= $resultItem['description']?></td>                                          
+                                                                                    <td><?= $resultItem['unit']?></td>         
+                                                                                    <td><?= $resultItem['quantity']?></td>            
+                                                                                    <td><?= $resultItem['amount']?></td>       
+                                                                                    <td><?= $resultItem['total_cost']?></td>                                            
+                                                                                    <td><?= $resultItem['created_at']?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                    
+                                                                                    
+                                                                                </tr>
+                                                                                
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Outside the loop: Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td> <!-- Display the sum of all total costs -->
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main-content-body tab-pane p-0 border-top-0" id="solarMaintenance">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR MAINTENANCE (SOLAR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#SolarMaintenanceModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "SELECT * FROM package_maintenance_solar";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if (mysqli_num_rows($result) > 0) {
+                                                                                    foreach ($result as $resultItem) {
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['id'] ?></td>  
+                                                                                    <td><?= $resultItem['description'] ?></td>                                          
+                                                                                    <td><?= $resultItem['unit'] ?></td>         
+                                                                                    <td><?= $resultItem['quantity'] ?></td>            
+                                                                                    <td><?= $resultItem['amount'] ?></td>       
+                                                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                                                    <td><?= $resultItem['created_at'] ?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                </tr>
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="main-content-body tab-pane p-0 border-top-0" id="solarRepair">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR REPAIR (SOLAR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#SolarRepairModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "SELECT * FROM package_repair_solar";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if (mysqli_num_rows($result) > 0) {
+                                                                                    foreach ($result as $resultItem) {
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['id'] ?></td>  
+                                                                                    <td><?= $resultItem['description'] ?></td>                                          
+                                                                                    <td><?= $resultItem['unit'] ?></td>         
+                                                                                    <td><?= $resultItem['quantity'] ?></td>            
+                                                                                    <td><?= $resultItem['amount'] ?></td>       
+                                                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                                                    <td><?= $resultItem['created_at'] ?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                </tr>
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="generator">
+                                                <div class="col-md-12 col-lg-6">
+                                                    <div class="card custom-card">
+                                                        <nav class="nav main-nav-line p-3">
+                                                            <a class="nav-link active" data-bs-toggle="tab" id="about-tab" href="#generatorInstallation">Installation
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
+                                                            </a>
+                                                            <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorMaintenance">Maintenance
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                            </a>
+                                                            <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorRepair">Repair
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                            </a>
+                                                            <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorTuneup">Tune-up
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                            </a>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div class="row row-sm">
+                                                    <div class="tab-content">
+                                                        <div class="main-content-body tab-pane p-0 border-top-0 active" id="generatorInstallation">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION (GENERATOR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorPackageModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>total cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "Select * from package_installation_generator";
+                                                                                $result = mysqli_query($conn , $select);
+                                                                                if(mysqli_num_rows($result) > 0){
+                                                                                    foreach($result as $resultItem){
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['installation_id']?></td>  
+                                                                                    <td><?= $resultItem['description']?></td>                                          
+                                                                                    <td><?= $resultItem['unit']?></td>         
+                                                                                    <td><?= $resultItem['quantity']?></td>            
+                                                                                    <td><?= $resultItem['amount']?></td>       
+                                                                                    <td><?= $resultItem['total_cost']?></td>                                            
+                                                                                    <td><?= $resultItem['created_at']?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                    
+                                                                                    
+                                                                                </tr>
+                                                                                
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Outside the loop: Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td> <!-- Display the sum of all total costs -->
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main-content-body tab-pane p-0 border-top-0" id="generatorMaintenance">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR MAINTENANCE (GENERATOR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorMaintenanceModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "SELECT * FROM package_maintenance_generator";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if (mysqli_num_rows($result) > 0) {
+                                                                                    foreach ($result as $resultItem) {
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['id'] ?></td>  
+                                                                                    <td><?= $resultItem['description'] ?></td>                                          
+                                                                                    <td><?= $resultItem['unit'] ?></td>         
+                                                                                    <td><?= $resultItem['quantity'] ?></td>            
+                                                                                    <td><?= $resultItem['amount'] ?></td>       
+                                                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                                                    <td><?= $resultItem['created_at'] ?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                </tr>
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main-content-body tab-pane p-0 border-top-0" id="generatorRepair">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR REPAIR (GENERATOR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorRepairModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "SELECT * FROM package_repair_generator";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if (mysqli_num_rows($result) > 0) {
+                                                                                    foreach ($result as $resultItem) {
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['id'] ?></td>  
+                                                                                    <td><?= $resultItem['description'] ?></td>                                          
+                                                                                    <td><?= $resultItem['unit'] ?></td>         
+                                                                                    <td><?= $resultItem['quantity'] ?></td>            
+                                                                                    <td><?= $resultItem['amount'] ?></td>       
+                                                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                                                    <td><?= $resultItem['created_at'] ?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                </tr>
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="main-content-body tab-pane p-0 border-top-0" id="generatorTuneup">
+                                                            <div class="card custom-card">
+                                                                <div class="card-header border-bottom-0 d-block">                            
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <label class="main-content-label mb-0">PACKAGE FOR TUNE-UP (GENERATOR)</label>
+                                                                        <!-- Add Item Button -->
+                                                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorTuneUpModal">
+                                                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive userlist-table">
+                                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="wd-lg-8p"><span>ID</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Description</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Created</span></th>
+                                                                                    <th class="wd-lg-20p"><span>Action</span></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php        
+                                                                                $totalCost = 0; // Variable to store the total cost sum                                  
+                                                                                $select = "SELECT * FROM package_tuneup_generator";
+                                                                                $result = mysqli_query($conn, $select);
+                                                                                if (mysqli_num_rows($result) > 0) {
+                                                                                    foreach ($result as $resultItem) {
+                                                                                        $totalCost += $resultItem['total_cost'];
+                                                                                ?> 
+                                                                                <tr>
+                                                                                    <td><?= $resultItem['id'] ?></td>  
+                                                                                    <td><?= $resultItem['description'] ?></td>                                          
+                                                                                    <td><?= $resultItem['unit'] ?></td>         
+                                                                                    <td><?= $resultItem['quantity'] ?></td>            
+                                                                                    <td><?= $resultItem['amount'] ?></td>       
+                                                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
+                                                                                    <td><?= $resultItem['created_at'] ?></td>                       
+                                                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
+                                                                                </tr>
+                                                                                <?php 
+                                                                                    }                                          
+                                                                                }                                              
+                                                                                ?>
+                                                                            </tbody>
+                                                                            <!-- Display the total sum of all total costs -->
+                                                                            <tfoot>
+                                                                                <tr>
+                                                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
+                                                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
+                                                                                    <td colspan="2"></td>
+                                                                                </tr>
+                                                                            </tfoot>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="brand">
+                                                <div class="card custom-card">
+                                                    <div class="card-header border-bottom-0 d-block">                            
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <label class="main-content-label mb-0">BRANDS</label>
+                                                            <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                                                                <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive userlist-table">
+                                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="wd-lg-8p"><span>id</span></th>
+                                                                        <th class="wd-lg-20p"><span>name</span></th>
+                                                                        <th class="wd-lg-20p"><span>amount</span></th>
+                                                                        <th class="wd-lg-20p"><span>Type</span></th>
+                                                                        <th class="wd-lg-20p"><span>created_at</span></th>
+                                                                        <th class="wd-lg-20p"><span>Action</span></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php 
+                                                                    $select = "Select * from brand";
+                                                                    $result = mysqli_query($conn , $select);
+                                                                    if(mysqli_num_rows($result) > 0){
+                                                                        foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                        <td><?= $resultItem['brand_id']?></td>  
+                                                                        <td><?= $resultItem['name']?></td>     
+                                                                        <td><?= $resultItem['type']?></td>     
+                                                                        <td><?= $resultItem['amount']?></td>                                       
+                                                                        <td><?= $resultItem['created_at']?></td>                       
+                                                                        <td>
+                                                                            <button 
+                                                                            type="button" 
+                                                                            class="btn btn-sm btn-info" 
+                                                                            data-bs-toggle="modal" 
+                                                                            data-bs-target="#editBrandModal" 
+                                                                            data-brand-id="<?= $resultItem['brand_id'] ?>"
+                                                                            data-name="<?= $resultItem['name'] ?>"
+                                                                            data-type="<?= $resultItem['type'] ?>"
+                                                                            data-amount="<?= $resultItem['amount'] ?>"
+                                                                            >
+                                                                                <i class="fe fe-edit-2"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <?php 
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="markup-disc">
+                                                <div class="card custom-card">
+                                                    <div class="card-body">
+                                                        <!-- content here -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-                    <!-- PACKAGE FOR INSTALLATION SOLAR -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION(SOLAR) </label>
-                                   <!-- Add Item Button -->
-                                   <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#installationPackageModal">
-                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                     
+
+                    <!-- Modal for Adding to tune up -->
+                    <div class="modal fade" id="GeneratorTuneUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorTuneUpModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="GeneratorTuneUpModalLabel">SET PACKAGE FOR GENERATOR TUNE-UP</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">        
+                                                <input type="hidden" name="account_id" id="user_id">
+                                                <input type="hidden" name="appointment_id" id="appointment_id">               
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th> <!-- Action Column for the close button -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyTuneup">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+
+                                                <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Brand Modal -->
+                    <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="function.php" method="post">
+                                        <!-- Name field -->
+                                        <div class="mb-3">
+                                            <label for="brandName" class="form-label">Brand Name</label>
+                                            <input type="text" class="form-control" id="brandName" name="name" required>
+                                        </div>
+                                        <!-- Type field -->
+                                        <div class="mb-3">
+                                            <label for="typeSelect" class="form-label">Type</label>
+                                            <select class="form-select" id="typeSelect" name="type" required>
+                                                <option value="">-- Select Type --</option>
+                                                <option value="Solar">Solar</option>
+                                                <option value="Generator">Generator</option>
+                                            </select>
+                                        </div>
+
+
+                                        <!-- Amount field -->
+                                        <div class="mb-3">
+                                            <label for="brandAmount" class="form-label">Amount</label>
+                                            <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" name="brand_save">Add Brand</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Brand Modal -->
+                    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editBrandForm" method="post" action="edit_brand.php">
+                                        <input type="hidden" id="brandId" name="brand_id">
+                                        
+                                        <div class="mb-3">
+                                            <label for="brandName" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="brandName" name="name" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="brandType" class="form-label">Type</label>
+                                            <select class="form-select" id="brandType" name="type" required>
+                                                <option value="Solar">Solar</option>
+                                                <option value="Generator">Generator</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="brandAmount" class="form-label">Amount</label>
+                                            <input type="number" class="form-control" id="brandAmount" name="amount" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Service Item Modal -->
+                    <div class="modal fade" id="addServiceItemModal" tabindex="-1" aria-labelledby="addServiceItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addServiceItemModalLabel">Add New Service Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="function.php" method="post">
+                                        <!-- Unit selection dropdown -->
+                                        <div class="mb-3">
+                                            <label for="serviceUnit" class="form-label">Unit</label>
+                                            <select class="form-control" id="serviceUnit" name="service_unit" required>
+                                                <option value="">Select unit</option>
+                                                <option value="items">Items</option>
+                                                <option value="set">Set</option>
+                                                <option value="job">Job</option>
+                                                <option value="lot">Lot</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Description field -->
+                                        <div class="mb-3">
+                                            <label for="serviceDescription" class="form-label">Description</label>
+                                            <input type="text" class="form-control" id="serviceDescription" name="service_description" required>
+                                        </div>
+
+                                        <!-- Quantity field -->
+                                        <div class="mb-3">
+                                            <label for="serviceQuantity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="serviceQuantity" name="service_quantity" required>
+                                        </div>
+
+                                        <!-- Amount field -->
+                                        <div class="mb-3">
+                                            <label for="serviceAmount" class="form-label">Amount</label>
+                                            <input type="number" class="form-control" id="serviceAmount" name="service_amount" required>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" name="serviceItem_save">Add Service Item</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit items Modal -->
+                    <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="function.php" method="post">
+                                        <!-- Hidden input for item ID -->
+                                        <input type="hidden" id="editItemId" name="item_id">
+
+                                            <!-- Unit field as a select input -->
+                                            <div class="mb-3">
+                                                <label for="editItemUnit" class="form-label">Unit</label>
+                                                <select class="form-select" id="editItemUnit" name="item_unit" required>
+                                                    <option value="items">Items</option>
+                                                    <option value="set">Set</option>
+                                                    <option value="job">Job</option>
+                                                    <option value="lot">Lot</option>
+                                                </select>
+                                            </div>
+
+                                        <!-- Description field -->
+                                        <div class="mb-3">
+                                            <label for="editItemDescription" class="form-label">Description</label>
+                                            <input type="text" class="form-control" id="editItemDescription" name="item_description" required>
+                                        </div>
+
+                                        <!-- Quantity field -->
+                                        <div class="mb-3">
+                                            <label for="editItemQuantity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="editItemQuantity" name="item_quantity" required>
+                                        </div>
+
+                                        <!-- Amount field -->
+                                        <div class="mb-3">
+                                            <label for="editItemAmount" class="form-label">Amount</label>
+                                            <input type="number" class="form-control" id="editItemAmount" name="item_amount" required>
+                                        </div>
+
+                                        <div class="modal-footer">  
+                                            <button type="submit" class="btn btn-primary" name="serviceItem_edit">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal FOR ADD ITEM FOR SET PACKAGE FOR SOLAR  -->
+                    <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR SOLAR</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">        
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th> <!-- Action Column for the close button -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                                                <!-- Submit Button -->
+                                                <button type="add" class="btn btn-success mt-3" name="installation_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal FOR ADD SET PACKAGE FOR GENERATOR -->
+                    <div class="modal fade" id="GeneratorPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorPackageModal" aria-hidden="true">
+                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR GENERATOR</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">        
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th> <!-- Action Column for the close button -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyGenerator">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
+                                                <!-- Submit Button -->
+                                                <button type="add" class="btn btn-success mt-3" name="generator_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                                     
+                    <!-- Modal for Installation (Solar) -->
+                    <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="installationPackageModalLabel">SET PACKAGE FOR INSTALLATION (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>unit</span></th>
-                                                    <th class="wd-lg-20p"><span>quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>amount</span></th>
-                                                    <th class="wd-lg-20p"><span>total cost</span></th>
-                                                    <th class="wd-lg-20p"><span>created</span></th>
-                                                    <th class="wd-lg-20p"><span>action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                  $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "Select * from package_installation_solar";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                 <tr>
-                                                    <td><?= $resultItem['installation_id']?></td>  
-                                                    <td><?= $resultItem['description']?></td>                                          
-                                                    <td><?= $resultItem['unit']?></td>         
-                                                    <td><?= $resultItem['quantity']?></td>            
-                                                    <td><?= $resultItem['amount']?></td>       
-                                                    <td><?= $resultItem['total_cost']?></td>                                            
-                                                    <td><?= $resultItem['created_at']?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                    
-                                                    
-                                                </tr>
-                                                
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Outside the loop: Display the total sum of all total costs -->
-                                                    <tfoot>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
                                                         <tr>
-                                                            <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                            <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td> <!-- Display the sum of all total costs -->
-                                                            <td colspan="2"></td>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
-                                        </table>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyInstallation">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButtonInstallation">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="installation_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- PACKAGE INSTALLATION FOR GENERATOR -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="main-content-label mb-0">PACKAGE FOR INSTALLATION (GENERATOR)</label>
-                                   <!-- Add Item Button -->
-                                   <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorPackageModal">
-                                                    <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
+
+                    <!-- Modal for Tune-Up (Generator) -->
+                    <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="tuneupPackageModalLabel">SET PACKAGE FOR TUNE-UP (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>unit</span></th>
-                                                    <th class="wd-lg-20p"><span>quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>amount</span></th>
-                                                    <th class="wd-lg-20p"><span>total cost</span></th>
-                                                    <th class="wd-lg-20p"><span>created</span></th>
-                                                    <th class="wd-lg-20p"><span>action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                  $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "Select * from package_installation_generator";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                 <tr>
-                                                    <td><?= $resultItem['installation_id']?></td>  
-                                                    <td><?= $resultItem['description']?></td>                                          
-                                                    <td><?= $resultItem['unit']?></td>         
-                                                    <td><?= $resultItem['quantity']?></td>            
-                                                    <td><?= $resultItem['amount']?></td>       
-                                                    <td><?= $resultItem['total_cost']?></td>                                            
-                                                    <td><?= $resultItem['created_at']?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                    
-                                                    
-                                                </tr>
-                                                
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Outside the loop: Display the total sum of all total costs -->
-                                                    <tfoot>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
                                                         <tr>
-                                                            <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                            <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td> <!-- Display the sum of all total costs -->
-                                                            <td colspan="2"></td>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
                                                         </tr>
-                                                    </tfoot>
-                                        </table>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyTuneup">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- PACKAGE FOR TUNE-UP (GENERATOR) -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">PACKAGE FOR TUNE-UP (GENERATOR)</label>
-                                        <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorTuneUpModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </div>
+
+                    <!-- Modal for Maintenance (Solar) -->
+                    <div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SolarMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
-                                                    <th class="wd-lg-20p"><span>Created</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "SELECT * FROM package_tuneup_generator";
-                                                $result = mysqli_query($conn, $select);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    foreach ($result as $resultItem) {
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['id'] ?></td>  
-                                                    <td><?= $resultItem['description'] ?></td>                                          
-                                                    <td><?= $resultItem['unit'] ?></td>         
-                                                    <td><?= $resultItem['quantity'] ?></td>            
-                                                    <td><?= $resultItem['amount'] ?></td>       
-                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
-                                                    <td><?= $resultItem['created_at'] ?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                </tr>
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Display the total sum of all total costs -->
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemMaintenanceSolarTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addMaintenanceSolarItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="solar_maintenance_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- PACKAGE FOR MAINTENANCE (SOLAR) -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">PACKAGE FOR MAINTENANCE (SOLAR)</label>
-                                        <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#SolarMaintenanceModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </div>
+
+                    <!-- Modal for Maintenance (Generator) -->
+                    <div class="modal fade" id="GeneratorMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorMaintenanceModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="GeneratorMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
-                                                    <th class="wd-lg-20p"><span>Created</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "SELECT * FROM package_maintenance_solar";
-                                                $result = mysqli_query($conn, $select);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    foreach ($result as $resultItem) {
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['id'] ?></td>  
-                                                    <td><?= $resultItem['description'] ?></td>                                          
-                                                    <td><?= $resultItem['unit'] ?></td>         
-                                                    <td><?= $resultItem['quantity'] ?></td>            
-                                                    <td><?= $resultItem['amount'] ?></td>       
-                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
-                                                    <td><?= $resultItem['created_at'] ?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                </tr>
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Display the total sum of all total costs -->
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemMaintenanceGeneratorTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addMaintenanceGeneratorItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="generator_maintenance_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- PACKAGE FOR MAINTENANCE (GENERATOR) -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">PACKAGE FOR MAINTENANCE (GENERATOR)</label>
-                                        <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorMaintenanceModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </div>
+                        
+                    <!-- Modal for Repair (Solar) -->
+                    <div class="modal fade" id="SolarRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarRepairModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SolarRepairModalLabel">SET PACKAGE FOR REPAIR (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
-                                                    <th class="wd-lg-20p"><span>Created</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "SELECT * FROM package_maintenance_generator";
-                                                $result = mysqli_query($conn, $select);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    foreach ($result as $resultItem) {
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['id'] ?></td>  
-                                                    <td><?= $resultItem['description'] ?></td>                                          
-                                                    <td><?= $resultItem['unit'] ?></td>         
-                                                    <td><?= $resultItem['quantity'] ?></td>            
-                                                    <td><?= $resultItem['amount'] ?></td>       
-                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
-                                                    <td><?= $resultItem['created_at'] ?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                </tr>
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Display the total sum of all total costs -->
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemRepairSolarTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addRepairSolarItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="solar_repair_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                     <!-- PACKAGE FOR REPAIR (SOLAR) -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">PACKAGE FOR REPAIR (SOLAR)</label>
-                                        <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#SolarRepairModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
+
+                    <!-- Modal for Repair (Generator) -->
+                    <div class="modal fade" id="GeneratorRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorRepairModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="GeneratorRepairModalLabel">SET PACKAGE FOR REPAIR (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemRepairGeneratorTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addRepairGeneratorItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="generator_repair_save">Submit</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
-                                                    <th class="wd-lg-20p"><span>Created</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "SELECT * FROM package_repair_solar";
-                                                $result = mysqli_query($conn, $select);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    foreach ($result as $resultItem) {
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['id'] ?></td>  
-                                                    <td><?= $resultItem['description'] ?></td>                                          
-                                                    <td><?= $resultItem['unit'] ?></td>         
-                                                    <td><?= $resultItem['quantity'] ?></td>            
-                                                    <td><?= $resultItem['amount'] ?></td>       
-                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
-                                                    <td><?= $resultItem['created_at'] ?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                </tr>
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Display the total sum of all total costs -->
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- PACKAGE FOR REPAIR (GENERATOR) -->
-                    <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">PACKAGE FOR REPAIR (GENERATOR)</label>
-                                        <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#GeneratorRepairModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>ID</span></th>
-                                                    <th class="wd-lg-20p"><span>Description</span></th>
-                                                    <th class="wd-lg-20p"><span>Unit</span></th>
-                                                    <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                    <th class="wd-lg-20p"><span>Amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Total Cost</span></th>
-                                                    <th class="wd-lg-20p"><span>Created</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php        
-                                                $totalCost = 0; // Variable to store the total cost sum                                  
-                                                $select = "SELECT * FROM package_repair_generator";
-                                                $result = mysqli_query($conn, $select);
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    foreach ($result as $resultItem) {
-                                                        $totalCost += $resultItem['total_cost'];
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['id'] ?></td>  
-                                                    <td><?= $resultItem['description'] ?></td>                                          
-                                                    <td><?= $resultItem['unit'] ?></td>         
-                                                    <td><?= $resultItem['quantity'] ?></td>            
-                                                    <td><?= $resultItem['amount'] ?></td>       
-                                                    <td><?= $resultItem['total_cost'] ?></td>                                            
-                                                    <td><?= $resultItem['created_at'] ?></td>                       
-                                                    <td>NO AVAILABLE ACTION ONLY ADD</td>     
-                                                </tr>
-                                                <?php 
-                                                    }                                          
-                                                }                                              
-                                                ?>
-                                            </tbody>
-                                            <!-- Display the total sum of all total costs -->
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="5" class="text-end"><strong>Total Cost:</strong></td>
-                                                    <td class="text-success"><strong><?= number_format($totalCost, 2) ?></strong></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- BRANDS -->
-                    <div class="row row-sm mt-3">
-                        <div class="row row-sm mt-3">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                            <div class="card custom-card">
-                                <div class="card-header border-bottom-0 d-block">                            
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <label class="main-content-label mb-0">BRANDS</label>
-                                        <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addBrandModal">
-                                            <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive userlist-table">
-                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="wd-lg-8p"><span>id</span></th>
-                                                    <th class="wd-lg-20p"><span>name</span></th>
-                                                    <th class="wd-lg-20p"><span>amount</span></th>
-                                                    <th class="wd-lg-20p"><span>Type</span></th>
-                                                    <th class="wd-lg-20p"><span>created_at</span></th>
-                                                    <th class="wd-lg-20p"><span>Action</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                $select = "Select * from brand";
-                                                $result = mysqli_query($conn , $select);
-                                                if(mysqli_num_rows($result) > 0){
-                                                    foreach($result as $resultItem){
-                                                ?> 
-                                                <tr>
-                                                    <td><?= $resultItem['brand_id']?></td>  
-                                                    <td><?= $resultItem['name']?></td>     
-                                                    <td><?= $resultItem['type']?></td>     
-                                                    <td><?= $resultItem['amount']?></td>                                       
-                                                    <td><?= $resultItem['created_at']?></td>                       
-                                                    <td>
-                                                        <button 
-                                                        type="button" 
-                                                        class="btn btn-sm btn-info" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#editBrandModal" 
-                                                        data-brand-id="<?= $resultItem['brand_id'] ?>"
-                                                        data-name="<?= $resultItem['name'] ?>"
-                                                        data-type="<?= $resultItem['type'] ?>"
-                                                        data-amount="<?= $resultItem['amount'] ?>"
-                                                        >
-                                                            <i class="fe fe-edit-2"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <?php 
-                                                    }
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Adding to tune up -->
-            <div class="modal fade" id="GeneratorTuneUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorTuneUpModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="GeneratorTuneUpModalLabel">SET PACKAGE FOR GENERATOR TUNE-UP</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">        
-                                        <input type="hidden" name="account_id" id="user_id">
-                                        <input type="hidden" name="appointment_id" id="appointment_id">               
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th> <!-- Action Column for the close button -->
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemTableBodyTuneup">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-
-                                        <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
-                                        <!-- Submit Button -->
-                                        <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add Brand Modal -->
-            <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="function.php" method="post">
-                                <!-- Name field -->
-                                <div class="mb-3">
-                                    <label for="brandName" class="form-label">Brand Name</label>
-                                    <input type="text" class="form-control" id="brandName" name="name" required>
-                                </div>
-                                <!-- Type field -->
-                                <div class="mb-3">
-                                    <label for="typeSelect" class="form-label">Type</label>
-                                    <select class="form-select" id="typeSelect" name="type" required>
-                                        <option value="">-- Select Type --</option>
-                                        <option value="Solar">Solar</option>
-                                        <option value="Generator">Generator</option>
-                                    </select>
-                                </div>
-
-
-                                <!-- Amount field -->
-                                <div class="mb-3">
-                                    <label for="brandAmount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="brandAmount" name="amount" required>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" name="brand_save">Add Brand</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Edit Brand Modal -->
-            <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="editBrandForm" method="post" action="edit_brand.php">
-                                <input type="hidden" id="brandId" name="brand_id">
-                                
-                                <div class="mb-3">
-                                    <label for="brandName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="brandName" name="name" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="brandType" class="form-label">Type</label>
-                                    <select class="form-select" id="brandType" name="type" required>
-                                        <option value="Solar">Solar</option>
-                                        <option value="Generator">Generator</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="brandAmount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="brandAmount" name="amount" required>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add Service Item Modal -->
-            <div class="modal fade" id="addServiceItemModal" tabindex="-1" aria-labelledby="addServiceItemModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addServiceItemModalLabel">Add New Service Item</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="function.php" method="post">
-                                <!-- Unit selection dropdown -->
-                                <div class="mb-3">
-                                    <label for="serviceUnit" class="form-label">Unit</label>
-                                    <select class="form-control" id="serviceUnit" name="service_unit" required>
-                                        <option value="">Select unit</option>
-                                        <option value="items">Items</option>
-                                        <option value="set">Set</option>
-                                        <option value="job">Job</option>
-                                        <option value="lot">Lot</option>
-                                    </select>
-                                </div>
-
-                                <!-- Description field -->
-                                <div class="mb-3">
-                                    <label for="serviceDescription" class="form-label">Description</label>
-                                    <input type="text" class="form-control" id="serviceDescription" name="service_description" required>
-                                </div>
-
-                                <!-- Quantity field -->
-                                <div class="mb-3">
-                                    <label for="serviceQuantity" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="serviceQuantity" name="service_quantity" required>
-                                </div>
-
-                                <!-- Amount field -->
-                                <div class="mb-3">
-                                    <label for="serviceAmount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="serviceAmount" name="service_amount" required>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" name="serviceItem_save">Add Service Item</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Edit items Modal -->
-            <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="function.php" method="post">
-                                <!-- Hidden input for item ID -->
-                                <input type="hidden" id="editItemId" name="item_id">
-
-                                    <!-- Unit field as a select input -->
-                                    <div class="mb-3">
-                                        <label for="editItemUnit" class="form-label">Unit</label>
-                                        <select class="form-select" id="editItemUnit" name="item_unit" required>
-                                            <option value="items">Items</option>
-                                            <option value="set">Set</option>
-                                            <option value="job">Job</option>
-                                            <option value="lot">Lot</option>
-                                        </select>
-                                    </div>
-
-                                <!-- Description field -->
-                                <div class="mb-3">
-                                    <label for="editItemDescription" class="form-label">Description</label>
-                                    <input type="text" class="form-control" id="editItemDescription" name="item_description" required>
-                                </div>
-
-                                <!-- Quantity field -->
-                                <div class="mb-3">
-                                    <label for="editItemQuantity" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="editItemQuantity" name="item_quantity" required>
-                                </div>
-
-                                <!-- Amount field -->
-                                <div class="mb-3">
-                                    <label for="editItemAmount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="editItemAmount" name="item_amount" required>
-                                </div>
-
-                                <div class="modal-footer">  
-                                    <button type="submit" class="btn btn-primary" name="serviceItem_edit">Save Changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal FOR ADD ITEM FOR SET PACKAGE FOR SOLAR  -->
-            <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR SOLAR</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">        
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th> <!-- Action Column for the close button -->
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemTableBody">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
-                                        <!-- Submit Button -->
-                                        <button type="add" class="btn btn-success mt-3" name="installation_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal FOR ADD SET PACKAGE FOR GENERATOR -->
-            <div class="modal fade" id="GeneratorPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorPackageModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR GENERATOR</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">        
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th> <!-- Action Column for the close button -->
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemTableBodyGenerator">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
-                                        <!-- Submit Button -->
-                                        <button type="add" class="btn btn-success mt-3" name="generator_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                            
-            <!-- Modal for Installation (Solar) -->
-            <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="installationPackageModalLabel">SET PACKAGE FOR INSTALLATION (SOLAR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemTableBodyInstallation">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addItemButtonInstallation">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="installation_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Tune-Up (Generator) -->
-            <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="tuneupPackageModalLabel">SET PACKAGE FOR TUNE-UP (GENERATOR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemTableBodyTuneup">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Maintenance (Solar) -->
-            <div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="SolarMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (SOLAR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemMaintenanceSolarTableBody">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addMaintenanceSolarItemButton">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="solar_maintenance_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Maintenance (Generator) -->
-            <div class="modal fade" id="GeneratorMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorMaintenanceModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="GeneratorMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (GENERATOR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemMaintenanceGeneratorTableBody">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addMaintenanceGeneratorItemButton">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="generator_maintenance_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                
-            <!-- Modal for Repair (Solar) -->
-            <div class="modal fade" id="SolarRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarRepairModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="SolarRepairModalLabel">SET PACKAGE FOR REPAIR (SOLAR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemRepairSolarTableBody">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addRepairSolarItemButton">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="solar_repair_save">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for Repair (Generator) -->
-            <div class="modal fade" id="GeneratorRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorRepairModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="GeneratorRepairModalLabel">SET PACKAGE FOR REPAIR (GENERATOR)</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="function.php" method="POST">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Item No.</th>
-                                                    <th>Unit</th>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Amount</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="itemRepairGeneratorTableBody">
-                                                <!-- Rows will be added here dynamically -->
-                                            </tbody>
-                                        </table>
-                                        <button type="button" class="btn btn-primary" id="addRepairGeneratorItemButton">Add Item</button>
-                                        <button type="submit" class="btn btn-success mt-3" name="generator_repair_save">Submit</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
