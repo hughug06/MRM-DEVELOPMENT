@@ -5,7 +5,26 @@ require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
 $service_type = $_POST['serviceType']; 
-$product_type = $_POST['productType'];   
+$product_type = $_POST['productType'];
+$agent_mode = isset($_POST['agentmode']) ? true : false;
+if($agent_mode){
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity']; 
+    $pin_location = $_POST['location'];
+    $availability_id = $_POST['availability_id'];
+    $totalCost = 0;
+    $sql = 'SELECT ProductName FROM products where ProductID = ?';
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $brand = $row['ProductName'];
+            }
+        }
+    }
+}
  //NOT CUSTOM
  $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
  //CUSTOM INPUT
@@ -164,6 +183,64 @@ else if(isset($_POST['tuneup_submit'])){
                     
                     }
 
+                    else if($agent_mode && $service_type == 'installation' && $product_type == 'solar'){ // IF THE CONDITION IS INSTALLATION , SOLAR AND AGENT 
+                        $sql = "select * from products where ProductID = '$product_id'";
+                        $result = mysqli_query($conn , $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $stocks = $row['stock'];  // CURRENT STOCKS OF SELECTED ITEM
+                        $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                        
+        
+                        if($stocks < $quantity){
+                            echo "Product is out of stock"; // SHOW FALSE
+                            exit();
+                        }
+        
+                        // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
+                      
+                        $service_picing = "select * from service_pricing"; 
+                        $package_installation_solar = "select * from package_installation_solar";
+        
+                        $result_solar = mysqli_query($conn , $package_installation_solar);
+                        $result_pricing = mysqli_query($conn , $service_picing);
+        
+                        while($row = mysqli_fetch_assoc($result_solar)){
+                            // Make sure to reset $result_pricing before looping through it again
+                            mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+        
+                            while($row2 = mysqli_fetch_assoc($result_pricing)){
+                                if($row2['quantity'] < $row['quantity']){
+                                    // SHOW ERROR 
+                                }
+                                
+                            }
+                        }
+        
+                        
+                        mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
+                        
+                        while($resultItem = mysqli_fetch_assoc($result_solar)){ 
+                            $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                        }
+                            mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
+                            // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                            $quotation = $amount + $totalCost;
+                            $mark_up = $quotation * .1;
+                            $final_value = $quotation + $mark_up;
+
+                            $agent_mark_up = $final_value * .05;
+                            $final_value_withagent = $final_value + $agent_mark_up ;
+                            
+                            while ($row = mysqli_fetch_assoc($result_solar)) {
+                                $rows_generator[] = $row;
+                            }
+    
+                            ?> 
+                            
+                        <?php
+                        
+                        }
+
 
                 else if($option2 && $service_type == 'installation' && $product_type == 'solar'){ // IF THE CONDITION IS INSTALLATION , GENERATOR 
                     $sql = "select * from brand where name = '$option2' and type = 'solar'";
@@ -212,8 +289,8 @@ else if(isset($_POST['tuneup_submit'])){
                   
                 <?php
                 }  
-                else if($option1 && $service_type == 'installation' && $product_type == 'generator'){    
-                    $sql = "select * from products where ProductName = '$option1'";
+                else if($agent_mode && $service_type == 'installation' && $product_type == 'generator'){    
+                    $sql = "select * from products where ProductID = '$product_id'";
                     $result = mysqli_query($conn , $sql);         
                     $row = mysqli_fetch_assoc($result);
                     $stocks = $row['stock']; 
@@ -255,6 +332,8 @@ else if(isset($_POST['tuneup_submit'])){
                     $quotation = $amount + $totalCost;
                     $mark_up = $quotation * .1;
                     $final_value = $quotation + $mark_up;
+                    $agent_mark_up = $final_value * .05;
+                    $final_value_withagent = $final_value + $agent_mark_up;
                     
                     while ($row = mysqli_fetch_assoc($result_generator)) {
                         $rows_generator[] = $row;
@@ -263,7 +342,63 @@ else if(isset($_POST['tuneup_submit'])){
                     
                     <?php 
                     }
-                    else if($option2 && $service_type == 'installation' && $product_type == 'generator'){ 
+
+                    else if($option1 && $service_type == 'installation' && $product_type == 'generator'){    
+                        $sql = "select * from products where ProductName = '$option1'";
+                        $result = mysqli_query($conn , $sql);         
+                        $row = mysqli_fetch_assoc($result);
+                        $stocks = $row['stock']; 
+                        $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
+                            
+                        if($stocks < $quantity){
+                            echo "Product is out of stock"; // SHOW FALSE
+                            exit();
+                        }
+    
+                        // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
+                    
+                        $service_pricing = "select * from service_pricing"; 
+                        $package_installation_solar = "select * from package_installation_generator";
+    
+                        $result_generator = mysqli_query($conn , $package_installation_solar);
+                        $result_pricing = mysqli_query($conn , $service_pricing);
+    
+                        while($row = mysqli_fetch_assoc($result_generator)){
+                            // Make sure to reset $result_pricing before looping through it again
+                            mysqli_data_seek($result_pricing, 0); // Resets $result_pricing pointer to the start
+    
+                            while($row2 = mysqli_fetch_assoc($result_pricing)){
+                                if($row2['quantity'] < $row['quantity']){
+                                    // SHOW ERROR 
+                                }
+                            
+                            }
+                        }
+    
+                        
+                        mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                        
+                        while($resultItem = mysqli_fetch_assoc($result_generator)){ 
+                            $totalCost += $resultItem['total_cost'];   // GET THE TOTAL COST FROM PACKAGE_INSTALLATION_SOLAR
+                        }
+                        mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
+                        // Get the total amount of package_installation_solar + product itself and 10% mark-up
+                        $quotation = $amount + $totalCost;
+                        $mark_up = $quotation * .1;
+                        $final_value = $quotation + $mark_up;
+                        $agent_mark_up = $final_value * .05;
+                        $final_value_withagent = $final_value + $agent_mark_up ;
+                        
+                        while ($row = mysqli_fetch_assoc($result_generator)) {
+                            $rows_generator[] = $row;
+                        }
+                        ?> 
+                        
+                        <?php 
+                        }
+
+
+                else if($option2 && $service_type == 'installation' && $product_type == 'generator'){ 
                         $sql = "select * from brand where name = '$option2' and type = 'generator'";
                         $result = mysqli_query($conn , $sql);
                         $row = mysqli_fetch_assoc($result);
@@ -596,6 +731,16 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
                                             <td>₱<strong><?= htmlspecialchars($final_value) ?></strong></td>
                                         </tr>
+                                        <?php if($agent_mode){
+                                        
+                                        ?>
+                                        <tr class="table-warning text-center">
+                                            <td colspan="4"><strong>Total Price Vat Exclusive with Agent markup:</strong></td>
+                                            <td>₱<strong><?= htmlspecialchars($final_value_withagent) ?></strong></td>
+                                        </tr>
+                                        <?php
+                                            }
+                                        ?>
                                     </tfoot>
                                 </table>
                                 <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
@@ -681,7 +826,7 @@ else if(isset($_POST['tuneup_submit'])){
 
                                                                     <?php 
                                                                      }
-                                                                     else if(isset($_POST['installation_submit'])){
+                                                                     else if(isset($_POST['installation_submit']) || $agent_mode){
    
                                                                     ?>
                                                                         <!-- Hidden input fields -->
@@ -694,6 +839,17 @@ else if(isset($_POST['tuneup_submit'])){
                                                                         <input type="text" name="kva" value="N/A">
                                                                         <input type="text" name="running_hours" value="N/A">
                                                                     <?php 
+                                                                        if($agent_mode){
+
+                                                                        
+                                                                    ?>
+                                                                        <input type="text" name="name" value="<?php echo $_POST['name'] ?>">
+                                                                        <input type="text" name="email" value="<?php echo $_POST['email'] ?>">
+                                                                        <input type="text" name="product_id" value="<?php echo $_POST['product_id'] ?>">
+                                                                        <input type="text" name="contact" value="<?php echo $_POST['contact'] ?>">
+                                                                        <input type="text" name="agentmode" value="">
+                                                                    <?php
+                                                                        }
                                                                        }
                                                                     ?>
                                                                     <!-- Submit Button -->
