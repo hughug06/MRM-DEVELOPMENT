@@ -1086,7 +1086,7 @@ if (isset($_SESSION['success_message'])) {
                             <small class="text-secondary">Remember me</small>
                           </label>
                           <a
-                            href="forgot.html"
+                            href="forgot_password.php"
                             class="text-secondary ms-auto text-decoration-none"
                             ><small>Forgot password?</small></a
                           >

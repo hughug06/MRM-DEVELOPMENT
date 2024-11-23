@@ -104,7 +104,7 @@ if ($exec) {
                 border-radius: 5px;
                 padding: 5px;
                 margin-bottom: 5px;
-                cursor: move;
+                cursor: pointer;
                 transition: transform 0.2s, background-color 0.2s;
             }
 
@@ -200,7 +200,7 @@ if ($exec) {
                             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addTaskModal" id="addTaskBtn">Add Task</button>
                         </div>
                         <div class="col-lg 4">
-                            <div class="card custom-card h-100">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">For checking</div>
                                 </div>
@@ -210,17 +210,57 @@ if ($exec) {
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card h-100">
+                            <div class="card custom-card ">
                                 <div class="card-header">
-                                    <div class="card-title">Ongoing Project</div>
+                                    <div class="card-title">Picking up</div>
                                 </div>
-                                <div class="card-body" id="ongoing">
+                                <div class="card-body" id="pickup">
                                    
                                 </div>
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card h-100">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Delivery</div>
+                                </div>
+                                <div class="card-body" id="delivery">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Arrived</div>
+                                </div>
+                                <div class="card-body" id="arrive">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Ongoing Construction</div>
+                                </div>
+                                <div class="card-body" id="ongoing_construction">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Final checking</div>
+                                </div>
+                                <div class="card-body" id="final_checking">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">Completed</div>
                                 </div>
@@ -230,7 +270,7 @@ if ($exec) {
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card mt-5 h-100">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">Cancelled</div>
                                 </div>
@@ -437,8 +477,20 @@ if ($exec) {
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
                             }
-                            else if(status == 'ongoing'){
-                                document.getElementById('ongoing').appendChild(newTask);
+                            else if(status == 'pick_up'){
+                                document.getElementById('pickup').appendChild(newTask);
+                            }
+                            else if(status == 'delivery'){
+                                document.getElementById('delivery').appendChild(newTask);
+                            }
+                            else if(status == 'arrive'){
+                                document.getElementById('arrive').appendChild(newTask);
+                            }
+                            else if(status == 'ongoing_construction'){
+                                document.getElementById('ongoing_construction').appendChild(newTask);
+                            }
+                            else if(status == 'final_checking'){
+                                document.getElementById('final_checking').appendChild(newTask);
                             }
                             else if(status == 'completed'){
                                 document.getElementById('completed').appendChild(newTask);
