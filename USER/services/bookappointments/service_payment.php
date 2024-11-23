@@ -30,9 +30,11 @@ if($agent_mode){
  //CUSTOM INPUT
  $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
  if($option1){
+    $is_custom = 0;
     $brand = $option1;
  }
  else if($option2){
+    $is_custom = 1;
     $brand = $option2;
  }
 if (isset($_POST['installation_submit'])) {
@@ -746,13 +748,24 @@ else if(isset($_POST['tuneup_submit'])){
                                 <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
                                 <!-- Checkbox for accepting terms and conditions -->
                                 <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
-                                    <label class="form-check-label" for="acceptTerms">
+                                <label>
                                     <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                                        I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                                    </label>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                        Open Payment Confirmation
-                                    </button>
+                                    I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                                </label>
+
+                                <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
+                                    Open Payment Confirmation
+                                </button>
+
+                                <script>
+                                    // Function to toggle the button's disabled state
+                                    function toggleAvailButton() {
+                                        const checkbox = document.getElementById('acceptTerms');
+                                        const button = document.getElementById('paymentButton');
+                                        button.disabled = !checkbox.checked; // Enable if checked, disable if not
+                                    }
+                                </script>
+
                                 </div>
                             </div>
                         </div>
@@ -815,7 +828,6 @@ else if(isset($_POST['tuneup_submit'])){
                                                                      ?>
                                                                         <!-- Hidden input fields -->
                                                                         <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
-
                                                                         <input type="text" name="first_payment" value="<?= $final_value * .45 ?>">
                                                                         <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
                                                                         <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
@@ -823,7 +835,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                         <input type="text" name="running_hours" value="<?= htmlspecialchars($running_hours); ?>">
                                                                         <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
                                                                         <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
-
+                                                                        
                                                                     <?php 
                                                                      }
                                                                      else if(isset($_POST['installation_submit']) || $agent_mode){
@@ -838,6 +850,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                         <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
                                                                         <input type="text" name="kva" value="N/A">
                                                                         <input type="text" name="running_hours" value="N/A">
+                                                                    
                                                                     <?php 
                                                                         if($agent_mode){
 
@@ -856,8 +869,8 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     <div class="text-center mt-3">
                                                                     <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type); ?>">
                                                                     <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type); ?>">
-
-                                                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                                                    <input type="text" name="is_custom" value="<?= $is_custom ?>">
+                                                                    <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
                                                                     </div>
                                                                 </form>
 

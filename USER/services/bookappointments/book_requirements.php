@@ -4,12 +4,18 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
+
 $booking_total = 0;
 $workers_total = 0;
 $service_booking = "SELECT * FROM service_booking where booking_status != 'canceled'";
 $workers = "SELECT * FROM worker_availability ";
+
+
+
 $result1 = mysqli_query($conn , $service_booking);
 $result2 = mysqli_query($conn , $workers);
+
+
 while($row1 = mysqli_fetch_assoc($result1)){
     $booking_total++;
 }
@@ -28,7 +34,7 @@ if($booking_total >= $workers_total){
             Swal.fire({
                 icon: 'warning',
                 title: 'Notice',
-                text: 'No available workers currently!',
+                text: 'There are no available slots',
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
@@ -153,22 +159,22 @@ if ($exec) {
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" id="fullName" class="form-control" name="name"  value="<?= $name?>" >
+                                <input type="text" id="fullName" class="form-control" name="name"  value="<?= $name?>" readonly>
                             </div>
                         </div>
                         <!-- Row 2: Address, City, and Province -->
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" id="address" class="form-control" name="address" value="<?= $row['address'] ?>" >
+                                <input type="text" id="address" class="form-control" name="address" value="<?= $row['address'] ?>" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="city" class="form-label">City</label>
-                                <input type="text" id="city" class="form-control" name="city" value="<?= $row['city'] ?>" >
+                                <input type="text" id="city" class="form-control" name="city" value="<?= $row['city'] ?>" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="province" class="form-label">Province</label>
-                                <input type="text" id="province" class="form-control" name="province" value="<?= $row['province'] ?>" >
+                                <input type="text" id="province" class="form-control" name="province" value="<?= $row['province'] ?>" readonly>
                             </div>
                         </div>
                         <!-- Row 3: Address, City, and Province -->

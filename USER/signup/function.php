@@ -72,10 +72,40 @@ if ($stmt_insert->execute()) {
         $user_id = $conn->insert_id;
     
         // Insert into accounts table
-        $stmt_ins = $conn->prepare("INSERT INTO accounts (user_id, email, password, verify_token) VALUES (?, ?, ?, ?)");
-        $stmt_ins->bind_param("isss", $user_id, $email, $password_hash, $verify_token);
-        $stmt_ins->execute();
+       // Insert into accounts table
+$stmt_ins = $conn->prepare("INSERT INTO accounts (user_id, email, password, verify_token) VALUES (?, ?, ?, ?)");
+$stmt_ins->bind_param("isss", $user_id, $email, $password_hash, $verify_token);
+
+if ($stmt_ins->execute()) {
+    // Retrieve the last inserted account_id
+    $account_id = $conn->insert_id;
+
+    // Check if the role of the account is 'client'
+    $check_role = $conn->prepare("SELECT role FROM accounts WHERE account_id = ?");
+    $check_role->bind_param("i", $account_id);
+    $check_role->execute();
+    $check_role_result = $check_role->get_result();
+
+    if ($check_role_result->num_rows > 0) {
+        $row = $check_role_result->fetch_assoc();
+        if ($row['role'] === 'client') {
+            // Insert into service_count table
+            $stmt_service = $conn->prepare("INSERT INTO service_count (account_id) VALUES (?)");
+            $stmt_service->bind_param("i", $account_id);
+
+            if ($stmt_service->execute()) {
+                echo json_encode(['success' => true, 'message' => 'SUCCESS']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to insert into service_count.']);
+            }
+        } 
+    } 
+} else {
+    echo json_encode(['success' => false, 'message' => 'Failed to insert into accounts.']);
+}
+
         
+
         echo json_encode(['success' => true, 'message' => 'SUCCESS']);
         email_verification($firstname . " " . $lastname, $email, $verify_token);
     } else {
