@@ -142,7 +142,7 @@ if (isset($_GET['id']) && isset($_GET['iv'])) {
   
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
       <div class="container">
-        <a href="index.php" class="navbar-brand d-flex">
+        <a href="index.php" onclick="link_home(event)" class="navbar-brand d-flex">
           <img
             src="assets/landing_assets/images/logo-mrm.png"
             alt=""
@@ -395,6 +395,18 @@ if (isset($_GET['id']) && isset($_GET['iv'])) {
           }
         });
       });
+
+      function link_home(e){
+        e.preventDefault();
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Are you sure you want to leave this page? Your changes may not be saved.",
+          icon: "warning",
+          confirmButtonText: "ok",
+        }).then(() => {
+          window.location.href = "index.php";
+        });
+      }    
     </script>
   </body>
 </html>
