@@ -1,30 +1,95 @@
 <?php 
-  session_start();
 
-  if(isset($_SESSION['login'])){
-      if($_SESSION['login'] == true)  {
-        $role = $_SESSION['role'];
-        if($role == 'user'){
-          header("location: /USER/dashboard/user-dashboard.php");
-          exit();
-      }
-      else{
-          header("location: /ADMIN/accountManagement/accountcontrol/user-management.php");
-          exit();
-      }
+require 'Database/database.php';
+session_start();
+
+$key = "ansdlakjsdfuasduid";  // Must be the same key used for encryption
+
+if (isset($_GET['id']) && isset($_GET['iv'])) {
+    // Get the encrypted ID and IV from the URL parameters
+    $encrypted_id = base64_decode($_GET['id']);
+    $encoded_iv = base64_decode($_GET['iv']);
+
+    // Decrypt the ID using openssl_decrypt
+    $id = openssl_decrypt($encrypted_id, 'aes-256-cbc', $key, 0, $encoded_iv);
+
+    // Now you have the original ID, proceed with your logic
+    if ($id) {
+        // Prepare the SQL query with a placeholder
+        $sql_select = "SELECT * FROM accounts WHERE account_id = ?";
+        $stmt = $conn->prepare($sql_select); // Prepare the query
+        $stmt->bind_param("i", $id); // Bind the 'id' as an integer parameter
+        $stmt->execute(); // Execute the query
+        $select_result = $stmt->get_result(); // Get the result
+
+        // Check if any results were returned
+        if ($select_result->num_rows > 0) {
+            $row = $select_result->fetch_array(MYSQLI_ASSOC); // Fetch the result as an associative array
+            
+            if ($row['re_password_request'] == 1) {
+                // If re_password_request is 1, you can update or take further actions here
+                // Example (uncomment if necessary):
+                // $sql_update = "UPDATE accounts SET re_password_request = 0 WHERE account_id = ?";
+                // $stmt_update = $conn->prepare($sql_update);
+                // $stmt_update->bind_param("i", $id);
+                // $stmt_update->execute();
+            } else {
+                // Show an error if the reset password request is not found (using SweetAlert)
+                echo '
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "The account has no reset password request.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        window.location.href = "index.php";
+                    });
+                }); 
+                </script>';
+            }
+        } else {
+            // If no matching account found
+            echo '
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Account not found.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location.href = "index.php";
+                });
+            });
+            </script>';
+        }
+
+        // Close the prepared statement
+        $stmt->close();
+    } else {
+        // If 'id' is not a valid numeric value, show an error
+        echo '
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                title: "Error!",
+                text: "Invalid account ID.",
+                icon: "error",
+                confirmButtonText: "OK"
+            }).then(() => {
+                window.location.href = "index.php";
+            });
+        });
+        </script>';
     }
-  }
-
-
-  
-if (isset($_SESSION['success_message'])) {
-    echo "<div class='alert alert-success'>" . $_SESSION['success_message'] . "</div>";
-    unset($_SESSION['success_message']); // Clear the message after displaying it
 }
-
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,29 +193,44 @@ if (isset($_SESSION['success_message'])) {
                     <div class="row row-sm gx-0">
                       <div class="card-body p-5">
                         <form
-                          id="forgot_req"
+                          id="change"
                           method="POST"
                           action="forgot_password_function.php"
                         >
                           <h1
                             class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
                           >
-                            FORGOT PASSWORD
+                            RESET PASSWORD
                           </h1>
-                          <p>Enter your email of your account which will receive the password reset mail.</p>
+                          <p>Enter your new password.</p>
                           
 
-                          <!-- Email and Password Row -->
                           <div class="row">
                             <div class="form-floating text-start mb-3">
+                              <h5>Password</h5>
                               <input
                                 class="form-control rounded-2"
-                                placeholder=""
-                                type="email"
-                                name="email"
-                                id="su_email"
+                                placeholder="Password"
+                                type="password"
+                                name="password"
+                                id="password"
                               />
-                              <label for="su_email" class="text-muted">Email Address</label>
+                            </div>
+                            <div class="form-floating text-start mb-3">
+                            <h5>Confirm Password</h5>
+                                <input
+                                  class="form-control rounded-2"
+                                  placeholder="Confirm Password"
+                                  type="password"
+                                  name="con_password"
+                                  id="con_password"
+                                />
+                                <input
+                                  type="hidden"
+                                  name="acc_id"
+                                  id="acc_id"
+                                  value="<?php echo openssl_decrypt($encrypted_id, 'aes-256-cbc', $key, 0, $encoded_iv) ?>"
+                                />
                             </div>
                           </div>
 
@@ -159,7 +239,6 @@ if (isset($_SESSION['success_message'])) {
                           <div class="d-grid pb-2">
                             <button
                               type="submit"
-                              name="forgotsent"
                               class="btn btn-secondary text-white py-2 fw-bold"
                             >
                               Continue
@@ -253,25 +332,34 @@ if (isset($_SESSION['success_message'])) {
 
     <script>
       $(document).ready(function () {
-        $("#forgot_req").on("submit", function (e) {
+        $("#change").on("submit", function (e) {
           e.preventDefault(); // Prevent default form submission
-          if($("#su_email").val() == ""){
+          if($("#password").val() == "" || $("con_password").val() == ""){
             Swal.fire({
                   title: "Error!",
-                  text: "Enter an email first",
+                  text: "Complete the form first",
+                  icon: "warning",
+                  confirmButtonText: "ok",
+                });
+          }
+          else if($("#password").val() !== $("#con_password").val()){
+            Swal.fire({
+                  title: "Error!",
+                  text: "Password and Confirm Password does not match",
                   icon: "warning",
                   confirmButtonText: "ok",
                 });
           }
           else{
             var formData = {
-              email: $("#su_email").val(),
-              forgotsent: true,
+              password: $("#password").val(),
+              change: true,
+              id:$("#acc_id").val(),
             };
 
             $.ajax({
               type: "POST",
-              url: "forgot_password_function.php",
+              url: "change_password.php",
               data: formData,
               dataType: "json",
               beforeSend: function () {
@@ -281,13 +369,14 @@ if (isset($_SESSION['success_message'])) {
                 $("#loadingOverlay").hide(); // Hide the loading indicator
                 if (response.success) {
                   Swal.fire({
-                    title: "Success",
-                    text: "Request of new password has been sent to your email",
+                    title: "Password Changed",
+                    text: "password has been saved",
                     icon: "success",
                     allowOutsideClick: false,
+                  }).then(() => {
+                    $("#signupmodal").modal("hide");
+                    window.location.href = "index.php";
                   });
-                  $("#signupmodal").modal("hide");
-                  //  window.location.href = "USER/generator/generator.php";
                 } else {
                   Swal.fire({
                     title: "Error!",
