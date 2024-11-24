@@ -437,7 +437,13 @@
                 </div>
             </div>
 
-            
+                            <?php 
+                            $sql2 = "select * from accounts where role = 'worker'";
+                            $result_sql2 = mysqli_query($conn , $sql2);
+                            if (mysqli_num_rows($result_sql2) > 0){
+                                
+                            
+                            ?>
                              <!-- MODAL FOR CHOOSE WORKER -->
                              <div class="modal fade" id="assign_worker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="assign_workerModal" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -457,10 +463,9 @@
 
                                                     <div class="card" style="width: 18rem;">
                                                         <?php 
-                                                        $sql = "SELECT * FROM accounts  
-                                                                INNER JOIN user_info ON user_info.user_id = accounts.user_id 
-                                                                INNER JOIN worker_availability ON worker_availability.account_id = accounts.account_id
-                                                                WHERE role = 'worker' AND is_available=1";
+                                                        $sql = "SELECT * FROM worker_availability
+                                                                INNER JOIN user_info ON user_info.user_id = worker_availability.user_id 
+                                                                WHERE is_available=1";
                                                         $result = mysqli_query($conn, $sql);
 
                                                         if (mysqli_num_rows($result) > 0) {                
@@ -478,8 +483,7 @@
                                                                 <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
                                                                 
                                                                 <!-- Hidden input for id of user -->
-                                                                <input type="text" name="worker_id" value="<?= $resultitem['user_id'] ?>">
-                                                                <input type="text" name="account_id" value="<?= $resultitem['account_id'] ?>">
+                                                                <input type="text" name="user_id" value="<?= $resultitem['user_id'] ?>">
                                                             </div>
                                                         <?php
                                                             }
@@ -491,8 +495,10 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                 <!-- MODAL FOR CHOOSE WORKER -->
+                                                        <?php 
+                                                        }
+                                                        ?>
+                                 <!-- MODAL FOR reject -->
                              <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

@@ -150,7 +150,7 @@
                                                                                 INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
                                                                                 INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
                                                                                 INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                                                                WHERE client_id = '$user_id' AND booking_status = 'ongoing'";
+                                                                                WHERE client_id = '$user_id' AND booking_status = 'ongoing' AND status != 'completed'";
                                                                     $result_ongoing = mysqli_query($conn, $ongoing);
 
                                                                     // Progress mapping for each enum status
@@ -209,6 +209,19 @@
                                                                         
                                                                         <?php
                                                                     }
+                                                                    else if($row['status'] == 'checking' && $row['third_payment'] == null){
+                                                                        ?> 
+                                                                                                   <!-- Displaying the total cost and booking ID on the page -->
+                                                                        <input type="text" id="total_cost_input_third" name="total_cost" value="<?= $row['total_cost'] ?>">
+                                                                        <input type="text" id="booking_id_input_third" name="booking_id" value="<?= $row['booking_id'] ?>">
+
+                                                                        <button type="button" class="btn btn-primary open-third-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
+                                                                            Open Third Payment Modal
+                                                                        </button>
+
+                                                                        <?php
+                                                                    }
+                                                                    
                                                                         }
                                                                     }
                                                                     ?>                                 
@@ -220,12 +233,12 @@
                                                 </div>
 
                                                 
-                                            <!-- Modal payment -->
+                                            <!-- Modal SECOND payment -->
                                             <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="paymentModalLabel">Payment Confirmation</h5>
+                                                            <h5 class="modal-title" id="paymentModalLabel">Second Payment Confirmation</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -262,6 +275,48 @@
                                                 </div>
                                             </div>
 
+                                                   
+                                            <!-- Modal THIRD payment -->
+                                            <div class="modal fade" id="paymentThirdModal" tabindex="-1" aria-labelledby="paymentThirdModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="paymentModalLabel">Third Payment Confirmation</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Centered Blank Image Placeholder -->
+                                                            <div class="text-center mb-3">
+                                                                <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                                            </div>
+                                                            <div class="text-center mx-4">
+                                                                <!-- Displaying Total Cost and Booking ID -->
+                                                                <p id="Thirdpaymentnow">TOTAL: ₱0.00</p>
+                                                                <p id="ThirdtotalCostModal">TOTAL: ₱0.00</p>
+                                                                <p id="ThirdbookingIdModal">Booking ID: N/A</p>
+                                                            </div>
+
+                                                            <form action="process_third_payment.php" method="POST" enctype="multipart/form-data">
+                                                                <div class="row mb-3">
+                                                                    <div class="col">
+                                                                        <label for="firstField" class="form-label">Reference Number</label>
+                                                                        <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                                                    </div>                                                             
+                                                                </div>                                         
+               
+                                                                <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                                                <input type="text" id="booking_id_third" name="booking">
+                                                                <input type="text" id="duePayment_third" name="due" readonly>
+
+                                                                <!-- Submit Button -->
+                                                                <div class="text-center mt-3">
+                                                                    <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             </div>
 
@@ -269,7 +324,7 @@
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
-                                                     <!-- Content Here -->
+                                                                    
                                                 </div>
                                             </div>
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="cancelled">
@@ -466,6 +521,37 @@
     // Event listener for button click to open the modal
     document.querySelector('.open-payment-modal-btn').addEventListener('click', openPaymentModal);
 </script>
+<script>
+    // Function to open the modal and populate with the total cost and booking ID for third payment
+    function openThirdPaymentModal() {
+        // Get the total cost and booking ID from the input fields
+        var totalCost = document.getElementById('total_cost_input_third').value;
+        var bookingId = document.getElementById('booking_id_input_third').value;
+        
+        // Calculate 40% of the total cost
+        var duePayment = totalCost * 0.15;
+        var totalCost = parseFloat(totalCost);
+        
+        // Format the amounts with commas as thousand separators
+        var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+        var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+        // Update the text content of the Thirdpaymentnow, ThirdtotalCostModal, and ThirdbookingIdModal elements
+        document.getElementById('Thirdpaymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+        document.getElementById('ThirdtotalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+        document.getElementById('ThirdbookingIdModal').innerText = 'Booking ID: ' + bookingId;
+        
+        // Populate the form with the total cost and booking ID
+        document.getElementById('booking_id_third').value = bookingId;
+        document.getElementById('duePayment_third').value = duePayment.toFixed(2); 
+    }
+
+    // Event listener for button click to open the third payment modal
+    document.querySelector('.open-third-payment-modal-btn').addEventListener('click', openThirdPaymentModal);
+</script>
+
+
+
 
 
 

@@ -2,8 +2,8 @@
 require_once '../../../ADMIN/authetincation.php';
 require_once '../../../Database/database.php';
 
-$account_id = $_SESSION['account_id'];
-$service_count = "select * from service_count where account_id = '$account_id'";
+$user_id = $_SESSION['user_id'];
+$service_count = "select * from service_count where user_id = '$user_id'";
 $result3 = mysqli_query($conn , $service_count);
 
 $count = mysqli_fetch_assoc($result3);

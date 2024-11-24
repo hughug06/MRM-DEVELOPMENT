@@ -7,12 +7,11 @@ if (isset($_POST['pick'])) {
     $admin_id = $_POST['admin_id'];
     $client_id = $_POST['client_id'];
     $availability_id = $_POST['availability_id'];
-    $worker_id = $_POST['worker_id'];
-    $account_id = $_POST['account_id'];
+    $user_id = $_POST['user_id'];
     // Echo the variables in a readable format
     $sql = "INSERT INTO `worker_ongoing`(`booking_id`, `admin_id`, `client_id`, `availability_id`, `worker_id`)
-            VALUES ('$booking_id','$admin_id','$client_id','$availability_id','$worker_id')";
-    $sql2 = "UPDATE worker_availability SET is_available='0' WHERE account_id= $account_id";
+            VALUES ('$booking_id','$admin_id','$client_id','$availability_id','$user_id')";
+    $sql2 = "UPDATE worker_availability SET is_available='0' WHERE user_id= $user_id";
     $sql3 = "UPDATE service_booking SET booking_status='ongoing' , payment_status = 'delivery_payment' WHERE booking_id= $booking_id";
     $sql4 = "UPDATE kanban SET status='pick_up' WHERE booking_id= $booking_id";
 

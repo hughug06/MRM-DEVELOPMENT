@@ -4,6 +4,7 @@
     
 
     if (isset($_POST['save_payment'])) {
+            $user_id = $_SESSION['user_id'];
             $account_id = $_SESSION['account_id'];
             $availability_id = $_POST['availability_id'];
             $user_id = $_SESSION['user_id'];
@@ -66,7 +67,7 @@ $sql = "INSERT INTO service_booking (
     $sql2 = "INSERT INTO service_payment(booking_id, first_payment, first_reference, total_cost)
     VALUES ('$booking_id', '$first_payment', '$reference_number', '$total_cost')";
     $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
-    $service_count = "UPDATE service_count SET service_count='1' WHERE account_id = '$account_id'";
+    $service_count = "UPDATE service_count SET service_count='1' WHERE user_id = '$user_id'";
    
     $count_result = mysqli_query($conn , $service_count);
     $result2 = mysqli_query($conn , $sql2);

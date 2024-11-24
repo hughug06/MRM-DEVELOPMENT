@@ -87,12 +87,11 @@ $worker_id = $_SESSION['user_id'];
                                 <ul class="list-group mb-4">
                                     <?php 
                                     $worker_id = $_SESSION['user_id'];
-
                                     // Query to get data for the current worker
                                     $sql = "SELECT * FROM worker_ongoing
                                         INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
                                         INNER JOIN user_info on user_info.user_id = service_booking.user_id 
-                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id   
+                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                                         where worker_id = '$worker_id'
                                         ";
                                     $result = mysqli_query($conn, $sql);
@@ -239,7 +238,8 @@ $worker_id = $_SESSION['user_id'];
                                                                                 <td><?= htmlspecialchars($listing['unit']); ?></td>
                                                                                 <td><?= htmlspecialchars($listing['quantity']); ?></td>
                                                                                 <td>
-                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($listing['description']); ?>][checked]">
+                                                                                    <input class="form-check-input task-checkbox" type="checkbox" 
+                                                                                        name="tasks[<?= htmlspecialchars($listing['description']); ?>][checked]">
                                                                                 </td>
                                                                                 <td>
                                                                                     <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($listing['description']); ?>][damage]" placeholder="Specify damage (if any)">
@@ -263,19 +263,21 @@ $worker_id = $_SESSION['user_id'];
                                                                          <input type="text" name="brand" value="<?= $row['brand'] ?>">
                                                                          <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
                                                                          <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
-                                                                         <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                         <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
                                                                         <?php
                                                                     }
                                                                     else{
                                                                         ?> 
                                                 
-                                                                        <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                       <!-- Submit button -->
+                                                                        <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
                                                                         <?php
                                                                     }
                                                                     ?>
                                                                    
                                                                     
                                                                 </div>
+                                                                <input type="text" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
                                                             </form>
                                                         </div>
                                                     </div>                                                                               
@@ -563,7 +565,45 @@ $worker_id = $_SESSION['user_id'];
                                                             </table>
 
                                                             <div class="d-grid mt-3">
-                                                                <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                            <?php
+                                                            $sql_check_good = "SELECT COUNT(*) AS pending_count FROM ongoing_checklist WHERE is_good = 0 AND booking_id = $booking_id";
+                                                            $check_good = mysqli_query($conn , $sql_check_good);
+                                                            $checker = mysqli_fetch_assoc($check_good);
+                                                            $pending_count = $checker['pending_count'];
+                                                               if($pending_count == 0){    
+                                                               
+                                                                    if($row['third_reference'] == null && $status == 'checking'){
+                                                                        ?> 
+                                                                       <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
+                                                                        <?php
+                                                                    }
+                                                                    else if(!$row['third_reference'] == null){
+                                                                        
+                                                                        ?>
+                                                                        <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
+                                                                        <input type="text" name="client_id" value="<?= $row['client_id'] ?>">
+                                                                        <input type="text" name="working_id" value="<?= $row['working_id'] ?>">
+                                                                        <input type="text" name="worker_id" value="<?= $row['worker_id'] ?>">
+                                                                         <button type="submit" class="btn btn-primary">SubmitBBB Checklist</button>
+                                                                        <?php
+                                                                    }
+                                                                    else{
+                                                                        ?> 
+                                                                        
+                                                                        <button type="submit" class="btn btn-primary">SubmitBBB Checklist</button>
+                                                                        <?php
+                                                                    }
+                                                                  
+                                                                  
+                                                                }
+                                                                else if($pending_count >= 1){
+                                                                    ?> 
+                                                                     <button type="submit" class="btn btn-primary">Save checklist</button>
+                                                                    <?php
+                                                                }     
+                                                                
+                                                                    ?>
+                                                
                                                                 <!-- Hidden data for booking_id and working_id -->
                                                                 <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
                                                                 <input type="hidden" name="working_id" value="<?= $working_id ?>">
@@ -726,4 +766,26 @@ geocode(endAddress)
         footer: 'Please contact client'
         });
     });
+</script>
+
+<!-- this javascript handle if the pick up is not all check -->
+<script>
+    // Function to enable or disable the submit button
+    function updateSubmitButtonState() {
+        // Get all checkboxes with the 'task-checkbox' class
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        // Check if all checkboxes are checked
+        const areAllChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+        // Enable the button if all checkboxes are checked, otherwise disable it
+        document.getElementById('submitButton').disabled = !areAllChecked;
+    }
+
+    // Add event listeners to all checkboxes
+    document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', updateSubmitButtonState);
+    });
+
+    // Initial check on page load
+    updateSubmitButtonState();
 </script>

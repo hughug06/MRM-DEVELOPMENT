@@ -90,8 +90,8 @@ if ($stmt_ins->execute()) {
         $row = $check_role_result->fetch_assoc();
         if ($row['role'] === 'client') {
             // Insert into service_count table
-            $stmt_service = $conn->prepare("INSERT INTO service_count (account_id) VALUES (?)");
-            $stmt_service->bind_param("i", $account_id);
+            $stmt_service = $conn->prepare("INSERT INTO service_count (user_id) VALUES (?)");
+            $stmt_service->bind_param("i", $user_id);
 
             if ($stmt_service->execute()) {
                 echo json_encode(['success' => true, 'message' => 'SUCCESS']);
