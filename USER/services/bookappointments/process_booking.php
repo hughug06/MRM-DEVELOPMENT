@@ -1,9 +1,10 @@
 <?php
     require_once '../../../ADMIN/authetincation.php';
     require_once '../../../Database/database.php';
-   
-    if (isset($_POST['save_payment'])) {
     
+
+    if (isset($_POST['save_payment'])) {
+            $account_id = $_SESSION['account_id'];
             $availability_id = $_POST['availability_id'];
             $user_id = $_SESSION['user_id'];
             $pin_location = $_POST['location'];
@@ -12,7 +13,7 @@
             $running_hours = $_POST['running_hours'];
             $brand = $_POST['brand'];
             $total_cost = $_POST['total_cost'];
-
+            $is_custom = $_POST['is_custom'];
             $date = $_POST['date'];
             $payment_method = $_POST['payment_method'];
             $bank_name = $_POST['bank_name'];
@@ -22,7 +23,7 @@
             $product_type = $_POST['productType'];
             $first_payment = $_POST['first_payment'];
             $agentmode = isset($_POST['agentmode'])? true:false;
-      
+  
             
 // Create the SQL statement
 $sql = "INSERT INTO service_booking (
@@ -35,6 +36,7 @@ $sql = "INSERT INTO service_booking (
             KVA, 
             running_hours, 
             brand, 
+            is_custom_brand,
             payment_method, 
             bank_name, 
             payment_date, 
@@ -50,6 +52,7 @@ $sql = "INSERT INTO service_booking (
             '$kva',
             '$running_hours',
             '$brand',
+            '$is_custom',
             '$payment_method',
             '$bank_name',
             '$date',
@@ -63,8 +66,9 @@ $sql = "INSERT INTO service_booking (
     $sql2 = "INSERT INTO service_payment(booking_id, first_payment, first_reference, total_cost)
     VALUES ('$booking_id', '$first_payment', '$reference_number', '$total_cost')";
     $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
-
-    
+    $service_count = "UPDATE service_count SET service_count='1' WHERE account_id = '$account_id'";
+   
+    $count_result = mysqli_query($conn , $service_count);
     $result2 = mysqli_query($conn , $sql2);
     $result3 = mysqli_query($conn , $update_availability);
     }

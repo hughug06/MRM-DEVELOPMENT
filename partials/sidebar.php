@@ -158,26 +158,6 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
-                     <!-- Start::slide -->  
-                <li class="slide has-sub 
-                <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active open':''?>"              >
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active':''?>">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-box side-menu__icon"></i>
-                        <span class="side-menu__label">Chaintercom</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == 'project-appointment.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/project-appointment.php" class="side-menu__item <?= $page == 'project-appointment.php'  ? 'active':''?>">Appointment</a>
-                        </li> 
-                        <li class="slide <?= $page == 'time-management.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/time-management.php" class="side-menu__item <?= $page == 'time-management.php' ? 'active':''?>">Time management</a>
-                        </li>                   
-                    </ul>
-                </li>
-                <!-- End::slide -->                                       
                 
                 <!-- Start::slide -->  
                 <li class="slide 

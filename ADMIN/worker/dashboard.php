@@ -109,11 +109,13 @@ $worker_id = $_SESSION['user_id'];
                                         if ($is_custom == '0' && $service_type == 'installation' && $product_type == 'solar') {
                                             $command = "SELECT * FROM package_installation_solar";
                                         } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'solar') {
-                                            $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                            // $custom = "SELECT * FROM brand WHERE name = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                            $command = "SELECT * FROM package_installation_solar";
                                         } elseif ($is_custom == '0' && $service_type == 'installation' && $product_type == 'generator') {
                                             $command = "SELECT * FROM package_installation_generator";
                                         } elseif ($is_custom == '1' && $service_type == 'installation' && $product_type == 'generator') {
-                                            $command = "SELECT * FROM brands WHERE brand = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                            // $custom= "SELECT * FROM brand WHERE name = '" . mysqli_real_escape_string($conn, $row['brand']) . "'";
+                                            $command = "SELECT * FROM package_installation_generator";
                                         } elseif ($service_type == 'tune-up' && $product_type == 'generator') {
                                             $command = "SELECT * FROM package_tuneup_generator";
                                         } elseif ($service_type == 'maintenance' && $product_type == 'solar') {
@@ -215,12 +217,12 @@ $worker_id = $_SESSION['user_id'];
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <!-- Custom Brand Row -->
-                                                                        <?php if ($row['is_custom_brand'] == 0): ?>
+                                                                      
+                                                                       <!-- ITEM -->
                                                                             <tr>
                                                                                 <td><?= htmlspecialchars($row['brand']) ?></td>
                                                                                 <td>Custom</td>
-                                                                                <td>1</td>
+                                                                                <td><?= htmlspecialchars($row['quantity']) ?></td>
                                                                                 <td>
                                                                                     <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($row['brand']); ?>][checked]">
                                                                                 </td>
@@ -228,7 +230,7 @@ $worker_id = $_SESSION['user_id'];
                                                                                     <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($row['brand']); ?>][damage]" placeholder="Specify damage (if any)">
                                                                                 </td>
                                                                             </tr>
-                                                                        <?php endif; ?>
+                                                                      
 
                                                                         <!-- Dynamic List Rows -->
                                                                         <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
@@ -248,21 +250,31 @@ $worker_id = $_SESSION['user_id'];
                                                                 </table>
                                                                 <div class="d-grid mt-3">
                                                                     <?php 
-                                                                    if($row['second_reference'] == null){
+                                                                    if($row['second_reference'] == null && $status == 'arrive'){
                                                                         ?> 
                                                                        <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
                                                                         <?php
                                                                     }
                                                                     else if(!$row['second_reference'] == null){
+                                                                        
                                                                         ?>
+                                                                         <input type="text" name="sql" value="<?= $command ?>">
+                                                                         <input type="text" name="status" value="<?= $status ?>">
+                                                                         <input type="text" name="brand" value="<?= $row['brand'] ?>">
+                                                                         <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
+                                                                         <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
                                                                          <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                        <?php
+                                                                    }
+                                                                    else{
+                                                                        ?> 
+                                                
+                                                                        <button type="submit" class="btn btn-primary">Submit Checklist</button>
                                                                         <?php
                                                                     }
                                                                     ?>
                                                                    
-                                                                    <!-- hidden data for booking_id -->
-                                                                    <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
-                                                                    <input type="hidden" name="working_id" value="<?= $working_id ?>">
+                                                                    
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -398,80 +410,171 @@ $worker_id = $_SESSION['user_id'];
                                                     </div>
                                                 </div>
 
+                                                <?php 
+                                                $ongoing_booking = $row['booking_id'];
+                                                $ongoing_checklist = "select * from ongoing_checklist where booking_id = $ongoing_booking";
+                                                $ongoing_result = mysqli_query($conn , $ongoing_checklist);
 
+                                                ?>
                                                 <div class="card mt-4">
                                                         <div class="card-header">
                                                             <h5 class="mb-0">Check if the </h5>
                                                         </div>
                                                         <div class="card-body">
-                                                            <form action="process_requirements.php" method="POST">
-                                                                <table class="table table-striped">
-                                                                    <thead>
+                                                        <form action="process_requirements.php" method="POST">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Unit</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>is_done?</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- Dynamic List Rows -->
+                                                                    <?php while ($ongoing_listing = mysqli_fetch_assoc($ongoing_result)): ?>
                                                                         <tr>
-                                                                            <th>Description</th>
-                                                                            <th>Unit</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>Check</th>
-                                                                            <th>Damage Report</th>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['description']); ?></td>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['unit']); ?></td>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['quantity']); ?></td>
+                                                                            <td>
+                                                                                <!-- Checkbox with disabled logic -->
+                                                                                <input class="form-check-input" type="checkbox" 
+                                                                                    name="tasks[<?= htmlspecialchars($ongoing_listing['description']); ?>][checked]" 
+                                                                                    <?= $ongoing_listing['is_done'] == 1 ? 'checked disabled' : ''; ?>>
+                                                                            </td>
+                                                                            <td>
+                                                                                <!-- Display status -->
+                                                                                <?php if ($ongoing_listing['is_done'] == 0): ?>
+                                                                                    <span class="badge bg-warning text-dark">Not done installing</span>
+                                                                                <?php else: ?>
+                                                                                    <span class="badge bg-success text-white">Done</span>
+                                                                                <?php endif; ?>
+                                                                            </td>
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <!-- Custom Brand Row -->
-                                                                        <?php if ($row['is_custom_brand'] == 0): ?>
-                                                                            <tr>
-                                                                                <td><?= htmlspecialchars($row['brand']) ?></td>
-                                                                                <td>Custom</td>
-                                                                                <td>1</td>
-                                                                                <td>
-                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($row['brand']); ?>][checked]">
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($row['brand']); ?>][damage]" placeholder="Specify damage (if any)">
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php endif; ?>
+                                                                    <?php endwhile; ?>
+                                                                </tbody>
+                                                            </table>
 
-                                                                        <!-- Dynamic List Rows -->
-                                                                        <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
-                                                                            <tr>
-                                                                                <td><?= htmlspecialchars($listing['description']); ?></td>
-                                                                                <td><?= htmlspecialchars($listing['unit']); ?></td>
-                                                                                <td><?= htmlspecialchars($listing['quantity']); ?></td>
-                                                                                <td>
-                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($listing['description']); ?>][checked]">
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($listing['description']); ?>][damage]" placeholder="Specify damage (if any)">
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php endwhile; ?>
-                                                                    </tbody>
-                                                                </table>
-                                                                <div class="d-grid mt-3">
-                                                                    <?php 
-                                                                    if($row['second_reference'] == null){
-                                                                        ?> 
-                                                                       <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
-                                                                        <?php
-                                                                    }
-                                                                    else if(!$row['second_reference'] == null){
-                                                                        ?>
-                                                                         <button type="submit" class="btn btn-primary">Submit Checklist</button>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
-                                                                   
-                                                                    <!-- hidden data for booking_id -->
-                                                                    <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
-                                                                    <input type="hidden" name="working_id" value="<?= $working_id ?>">
-                                                                </div>
-                                                            </form>
+                                                            <div class="d-grid mt-3">
+                                                                <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                <!-- Hidden data for booking_id and working_id -->
+                                                                <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
+                                                                <input type="hidden" name="working_id" value="<?= $working_id ?>">
+                                                            </div>
+                                                        </form>
+
                                                         </div>
                                                     </div>                                                                               
                                         <?php endif; ?>
                                         
                                     </form>
                                         
+                                        <?php
+                                    }
+                                    else if($status == 'checking'){
+                                        ?> 
+                                        <form action="function.php" method="POST">
+                                        <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
+                                            <div class="row mt-4">
+                                                    <!-- First Card: Where the item is from -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Item Origin</h5>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">!NOTE: PUT LOCATION OF WAREHOUSE HERE</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Second Card: Where it will deliver -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Delivery Location</h5>
+                                                                <p><strong>To:</strong> <span class="fw-bold text-primary"><?= htmlspecialchars($row['pin_location']); ?></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Third Card: Goal -->
+                                                    <div class="col-md-4">
+                                                        <div class="card mb-3 h-100">
+                                                            <div class="card-body d-flex flex-column justify-content-between">
+                                                                <h5 class="card-title">Goal</h5>
+        
+                                                                <ul class="list-unstyled">
+                                                                    <li><span class="fw-bold text-success">Service:</span> <?= htmlspecialchars($row['service_type']); ?></li>
+                                                                    <li><span class="fw-bold text-success">Product Type:</span> <?= htmlspecialchars($row['product_type']); ?></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php 
+                                                $ongoing_booking = $row['booking_id'];
+                                                $ongoing_checklist = "select * from ongoing_checklist where booking_id = $ongoing_booking";
+                                                $ongoing_result = mysqli_query($conn , $ongoing_checklist);
+
+                                                ?>
+                                                <div class="card mt-4">
+                                                        <div class="card-header">
+                                                            <h5 class="mb-0">Check if the </h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                        <form action="process_requirements.php" method="POST">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Unit</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>is good?</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- Dynamic List Rows -->
+                                                                    <?php while ($ongoing_listing = mysqli_fetch_assoc($ongoing_result)): ?>
+                                                                        <tr>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['description']); ?></td>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['unit']); ?></td>
+                                                                            <td><?= htmlspecialchars($ongoing_listing['quantity']); ?></td>
+                                                                            <td>
+                                                                                <!-- Checkbox with disabled logic -->
+                                                                                <input class="form-check-input" type="checkbox" 
+                                                                                    name="tasks[<?= htmlspecialchars($ongoing_listing['description']); ?>][checked]" 
+                                                                                    <?= $ongoing_listing['is_good'] == 1 ? 'checked disabled' : ''; ?>>
+                                                                            </td>
+                                                                            <td>
+                                                                                <!-- Display status -->
+                                                                                <?php if ($ongoing_listing['is_good'] == 0): ?>
+                                                                                    <span class="badge bg-warning text-dark">Not done checking</span>
+                                                                                <?php else: ?>
+                                                                                    <span class="badge bg-success text-white">Done</span>
+                                                                                <?php endif; ?>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php endwhile; ?>
+                                                                </tbody>
+                                                            </table>
+
+                                                            <div class="d-grid mt-3">
+                                                                <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                <!-- Hidden data for booking_id and working_id -->
+                                                                <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
+                                                                <input type="hidden" name="working_id" value="<?= $working_id ?>">
+                                                            </div>
+                                                        </form>
+
+                                                        </div>
+                                                    </div>                                                                               
+                                        <?php endif; ?>
+                                        
+                                    </form>
                                         <?php
                                     }
                                 }
