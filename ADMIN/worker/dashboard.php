@@ -725,6 +725,7 @@ geocode(startAddress)
     });
 
 // Geocode the end address (delivery location) and add marker
+
 geocode(endAddress)
     .then(({ lat, lon }) => {
         // Add a marker for the end location (delivery location)

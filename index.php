@@ -13,8 +13,8 @@
         exit();
       }
       
-      else{
-          header("location: /ADMIN/accountManagement/accountcontrol/user-management.php");
+      else if($role == 'admin'){
+          header("location: /MRM-DEVELOPMENT/ADMIN/dashboard/admin-dashboard.php");
           exit();
       }
     }

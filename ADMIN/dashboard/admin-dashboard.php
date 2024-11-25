@@ -151,11 +151,23 @@ GROUP BY
                         <div class="col-sm-4 col-md-4 col-xl-2">
                             <div class="card custom-card">
                                 <div class="card-body">
-                                    <div class="card-order">
-                                        <label class="main-content-label mb-3 pt-1">Completed</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $completedCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                <div class="card-order">
+                                    <label class="main-content-label mb-3 pt-1">Completed</label>
+                                    <h2 class="text-end">
+                                        <i class="mdi mdi-cube icon-size float-start text-primary"></i>
+                                        <span class="fw-bold"><?= $completedCount ?></span>
+                                    </h2>
+                                    <p class="mb-0 mt-4 text-muted">Reports<span class="float-end" id="report-amount">$1000.00</span></p>
+                                    
+                                    <!-- Buttons for Weekly, Monthly, and Yearly Reports -->
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary me-2 report-btn" data-type="weekly">Weekly Reports</button>
+                                        <button class="btn btn-secondary me-2 report-btn" data-type="monthly">Monthly Reports</button>
+                                        <button class="btn btn-success report-btn" data-type="yearly">Yearly Reports</button>
                                     </div>
+                                </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -966,4 +978,27 @@ GROUP BY
       document.getElementById('third-payment').textContent = thirdPayment;
     }
   });
+</script>
+
+<script>
+    document.querySelectorAll('.report-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const reportType = button.getAttribute('data-type'); // Get report type (weekly, monthly, yearly)
+        
+        fetch('fetch_sales_reports.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ type: reportType })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the report amount dynamically
+            document.getElementById('report-amount').textContent = `$${data.total_cost.toFixed(2)}`;
+        })
+        .catch(error => console.error('Error fetching reports:', error));
+    });
+});
+
 </script>
