@@ -37,6 +37,9 @@ if (isset($_POST['forgotsent'])) {
         echo json_encode(['success' => true, 'message' => 'SUCCESS']);
 
     }
+    else{
+        echo json_encode(['success' => false, 'message' => 'Email Does not Exist']);
+    }
 }
 
 
