@@ -46,7 +46,7 @@ elseif(isset($_POST['addtask'])){
     $availability_id = $_POST['availability_id'];
 
 
-    $sql_insert = "insert into kanban (email, name, contact , product_id, location, product_quantity, date, start_time, end_time, status, user_id)
+    $sql_insert = "insert into kanban (client_email, name, contact , product_id, location, product_quantity, date, start_time, end_time, kanban_status, user_id)
                 VALUES ('$email' , '$name' , '$contact' , '$product_id', '$location' , '$quantity' , '$date' , '$start_time', '$end_time', 'checking', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
         $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
@@ -61,7 +61,15 @@ elseif(isset($_POST['addtask'])){
 //for getting tasks
 elseif (isset($_GET['gettasks']) && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * FROM kanban k LEFT JOIN service_booking sb ON sb.booking_id = k.booking_id WHERE k.user_id = ?";
+    $sql = "
+SELECT *
+FROM kanban k
+LEFT JOIN service_booking sb ON sb.booking_id = k.booking_id
+LEFT JOIN worker_ongoing wo ON sb.booking_id = wo.booking_id
+LEFT JOIN user_info ui ON ui.user_id = wo.worker_id
+LEFT JOIN service_payment sp ON sp.booking_id = sb.booking_id
+WHERE k.user_id = ?";
+
 
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters
@@ -93,13 +101,15 @@ elseif (isset($_GET['gettasks']) && isset($_SESSION['user_id'])) {
 
                 $info[] = [
                     'kanban_id' => $row['kanban_id'],
-                    'status' => $row['status'],
-                    'email' => $row['email'],
+                    'status' => $row['kanban_status'],
+                    'email' => $row['client_email'],
                     'name' => $row['name'],
                     'product' => $productname,
                     'product_type' => $row['product_type'],
                     'pin_location' => $row['pin_location'],
-                    'quantity' => $row['quantity']
+                    'quantity' => $row['quantity'],
+                    'total_cost' => $row['total_cost'],
+                    'booking_id' => $row['booking_id']
                 ];
             }
             echo json_encode(['success' => true, 'data' => ['info' => $info]]);
@@ -115,11 +125,14 @@ elseif (isset($_GET['gettasks']) && isset($_SESSION['user_id'])) {
 //for deleting tasks
 elseif (isset($_POST['delete'])) {
     $deleteid = $_POST['delete'];
-    $sql = "DELETE from kanban where kanban_id=$deleteid";
+    $sql = "UPDATE kanban SET kanban_status = 'cancelled' WHERE kanban_id=$deleteid";
     $result = mysqli_query($conn , $sql);
     if($result)
     {
-        echo json_encode(['success' => true]);
+        echo json_encode(['success' => true, 'message' => 'Successfully cancelled']);
+    }
+    else{
+        echo json_encode(['success' => false, 'message' => 'Unsuccessful cancel']);
     }
     
 }

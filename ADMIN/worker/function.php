@@ -124,11 +124,11 @@ if(mysqli_num_rows($result) > 0){
                             }
                         }
                     }
-                      
-
+            $kanban_status = 'delivery';
             $final_status = 'delivery';
           break;
             case 'delivery':
+                $kanban_status = 'arrive';
                 $final_status = 'arrive';
             break;
                 case 'arrive':
@@ -199,8 +199,8 @@ if(mysqli_num_rows($result) > 0){
                             }
                         }
                     }
-
                     $final_status = 'ongoing_construction';
+                    $kanban_status = 'ongoing_construction';
                 break;
                 case 'ongoing_construction':
                         // Loop through the submitted tasks (checkboxes)
@@ -244,6 +244,7 @@ if(mysqli_num_rows($result) > 0){
                         // Display message based on pending tasks
                         if ($pending_count == 0) {
                             $final_status = 'checking';
+                            $kanban_status = 'final_checking';
                             echo '<div class="alert alert-success" role="alert">
                                     <strong>Congratulations!</strong> All tasks are complete. You are done.
                                 </div>';
@@ -309,6 +310,7 @@ if(mysqli_num_rows($result) > 0){
                                               VALUES('$client_id_maintenance','$booking_id_maintenance','$working_id_maintenance','$start_timestamp','$end_timestamp')";
                                     $maintenance_result = mysqli_query($conn , $maintenance);
                                     $final_status = 'completed';
+                                    $kanban_status = 'completed';
 
                                     //UPDATE WORKER_AVAILABILITY , AND CLIENT AVAILABILITY
                                     $worker_availability = "update worker_availability set is_available = '1' where user_id = '$worker_id'";
@@ -344,6 +346,11 @@ if(mysqli_num_rows($result) > 0){
     if(!$final_status == null){
         $upd = "UPDATE worker_ongoing SET status='$final_status' WHERE working_id = '$working_id' AND worker_id = '$worker_id'";
         $result_upd = mysqli_query($conn ,$upd);
+
+        if($_SESSION['account_id']){
+            $kanbanupd="UPDATE kanban SET kanban_status='$kanban_status' WHERE booking_id='$booking_id'";
+            $result_updkanban = mysqli_query($conn ,$kanbanupd);
+        }
     }
     
 }
