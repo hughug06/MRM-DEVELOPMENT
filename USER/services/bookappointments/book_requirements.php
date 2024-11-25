@@ -122,7 +122,7 @@ if ($exec) {
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
     /* <div class="form-group text-start mb-3">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
@@ -301,6 +301,8 @@ if ($exec) {
     <!-- Custom JS -->
     <script src="../../../assets/js/custom.js"></script>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </body>
 
 </html>
@@ -445,7 +447,14 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
     });
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script>
+        $('#mapModal').on('shown.bs.modal', function(){
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 10);
+        });
+    </script>
     
     <script>
         // SCRIPT USE TO SHOW MAPS AND GET THE VALUE, AND PASS TO LOCATION INPUT
