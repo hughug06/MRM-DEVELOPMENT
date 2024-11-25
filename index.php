@@ -9,7 +9,7 @@
           exit();
       }
       else if($role == 'worker'){
-        header("location: /ADMIN/worker/accountcontrol/dashboard.php");
+        header("location: /MRM-DEVELOPMENT/ADMIN/worker/dashboard.php");
         exit();
       }
       
