@@ -273,8 +273,8 @@
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
-                        <li class="slide <?= $page == '' ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Pending</a>
+                        <li class="slide <?= $page == 'pending.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/worker/pending.php" class="side-menu__item <?= $page == 'pending.php' ? 'active':''?>">Pending</a>
                         </li> 
                         <li class="slide <?= $page == "" ? 'active':''?>">
                             <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Completed</a>
