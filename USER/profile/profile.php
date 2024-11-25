@@ -6,28 +6,30 @@ $userid = $_SESSION['user_id'];
 $select = "select * from user_info left join accounts on user_info.user_id = accounts.user_id where accounts.user_id = '$userid'";
 $result = mysqli_query($conn , $select);
 
-        if(mysqli_num_rows($result) > 0)
-        {
-            $row = mysqli_fetch_assoc($result);
-            $fullname = $row['first_name'] . " " .$row['last_name'];
-            $firstname = $row['first_name'];
-            $lastname = $row['last_name'];
-            $middlename = $row['middle_name'];
-            $email = $row['email'];
+    if(mysqli_num_rows($result) > 0)
+    {
+        $row = mysqli_fetch_assoc($result);
+        $fullname = $row['first_name'] . " " .$row['last_name'];
+        $firstname = $row['first_name'];
+        $lastname = $row['last_name'];
+        $middlename = $row['middle_name'];
+        $email = $row['email'];
+        $address = $row['address'];
+    
+    }
+
+
+    if(isset($_POST['save_edit'])){
+        $fname = $_POST['firstname'];
+        $lname = $_POST['lastname'];
+        $mname = $_POST['middlename'];
+        $address = $_POST['addresss'];
         
-        }
-
-
-        if(isset($_POST['save_edit'])){
-            $fname = $_POST['firstname'];
-            $lname = $_POST['lastname'];
-            $mname = $_POST['middlename'];
-         
-            $upd = "UPDATE user_info SET first_name='$fname', last_name='$lname' , middle_name='$mname' WHERE user_id='$userid'";
-            $upd_result = mysqli_query($conn , $upd);
-            header("Location: profile.php");
-            
-        }
+        $upd = "UPDATE user_info SET first_name='$fname', last_name='$lname' , middle_name='$mname', address='$address' WHERE user_id='$userid'";
+        $upd_result = mysqli_query($conn , $upd);
+        header("Location: profile.php");
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -71,10 +73,6 @@ $result = mysqli_query($conn , $select);
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
-    <!-- Prism CSS -->
-    <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
-
-
 </head>
 
 <body>
@@ -113,7 +111,6 @@ $result = mysqli_query($conn , $select);
                                         <a class="nav-link" data-bs-toggle="tab" href="#edit">Edit Profile</a>
                                         <a class="nav-link" data-bs-toggle="tab" href="#chaintercom">Chaintercom</a>
                                         <a class="nav-link" data-bs-toggle="tab" href="#service">Service</a>
-
                                     </nav>
                                 </div>
                             </div>
@@ -187,8 +184,6 @@ $result = mysqli_query($conn , $select);
                                             <div class="card-body border">
                                                 <div class="mb-4 main-content-label">Personal Information</div>
                                                 <form class="form-horizontal" method="POST" action="profile.php">
-                                                   
-                                                    
                                                     <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
@@ -231,18 +226,38 @@ $result = mysqli_query($conn , $select);
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="form-group ">
+                                                    <div class="mb-4 main-content-label">Location</div>
+                                                    <div class="form-group ">
                                                         <div class="row row-sm">
                                                             <div class="col-md-3">
-                                                                <label class="form-label">Contact number</label>
+                                                                <label class="form-label">Address</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" value="info@Spruha.in">
+                                                                <input type="text" class="form-control" placeholder="Address" value="<?= $address ?>" name="addresss">
                                                             </div>
                                                         </div>
-                                                    </div> -->
-                                                                                                                                                       
-                                                    <button name="save_edit">Save</button>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <div class="row row-sm">
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">City</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" placeholder="Address" value="<?= $address ?>" name="addresss">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row row-sm">
+                                                            <div class="col-md-3">
+                                                                <label class="form-label">City</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control" placeholder="Address" value="<?= $address ?>" name="addresss">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="d-flex ms-auto btn btn-primary" name="save_edit">Save</button>
                                                 </form>
                                             </div>
                                         </div>

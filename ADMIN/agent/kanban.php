@@ -361,6 +361,46 @@ if ($exec) {
                     </div>
                 </div>
                 </form>
+
+
+
+                <!-- Modal structure for showing information of tasks (hidden by default) -->
+                <!-- <div id="infoModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Task Information</h2>
+                        <p><strong>ID:</strong> <span id="modal-id"></span></p>
+                        <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                        <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                        <p><strong>Product:</strong> <span id="modal-product"></span></p>
+                        <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                        <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
+                        <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
+                        <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                    </div>
+                </div> -->
+
+                <div class="modal" id="infoModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="addTaskModalLabel">Task Information</h3>
+                                <a type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body" class="form-control">
+                                <h5 class="modal-title" id="addTaskModalLabel">Project Information</h5><br>
+                                <input type="hidden" id="modal-id"></input>
+                                <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                                <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                                <p><strong>Product:</strong> <span id="modal-product"></span></p>
+                                <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                                <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
+                                <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
+                                <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
 
@@ -431,6 +471,38 @@ if ($exec) {
         document.getElementById('location').value = '';
     }
 
+    // Function to create and display modal with task information
+    function showModal(item) {
+        // Get the modal and its elements
+        const modal = document.getElementById("infoModal");
+        const closeBtn = document.querySelector(".close");
+
+        // Populate modal with task information
+        document.getElementById("modal-id").value = item.kanban_id;
+        document.getElementById("modal-email").textContent = item.email;
+        document.getElementById("modal-name").textContent = item.name;
+        document.getElementById("modal-product").textContent = item.product;
+        document.getElementById("modal-status").textContent = item.status;
+        document.getElementById("modal-product_type").textContent = item.product_type;
+        document.getElementById("modal-pin_location").textContent = item.pin_location;
+        document.getElementById("modal-quantity").textContent = item.quantity;
+
+        // Show the modal
+        modal.style.display = "block";
+
+        // Close the modal when the close button is clicked
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Close the modal if the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+            if (event.target === modal) {
+            modal.style.display = "none";
+            }
+        };
+    }
+
     //display on load function of tasks
     function Display(){
         $.ajax({
@@ -447,12 +519,18 @@ if ($exec) {
                             const email = item.email;
                             const name = item.name;
                             const product = item.product;   
-                            const status = item.status;  
+                            const status = item.status; 
+                            const product_type = item.product_type;
+                            const pin_location = item.pin_location;
+                            const quantity = item.quantity;
 
                             // Create a new task element
                             const newTask = document.createElement('div');
                             newTask.className = 'task p-3 d-flex flex-column justify-content-between align-items-center';
                             newTask.id = item.kanban_id;
+                            newTask.onclick = function(){
+                                showModal(item);
+                            };
 
                             // Add the task details
                             if(status == 'finding' || status == 'completed' || status == 'cancelled'){
