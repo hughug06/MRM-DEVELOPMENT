@@ -731,7 +731,8 @@ else if(isset($_POST['tuneup_submit'])){
                                     <tfoot>
                                         <tr class="table-warning text-center">
                                             <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
-                                            <td>₱<strong><?= htmlspecialchars($final_value) ?></strong></td>
+                                            <td>₱<strong><?= htmlspecialchars(number_format($final_value, 2)) ?></strong></td>
+
                                         </tr>
                                         <?php if($agent_mode){
                                         
@@ -787,22 +788,28 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
                                                                 </div>
                                                                 <div class="text-center mx-4">
-                                                                    <p>PAYMENT NOW:₱<?= $final_value * .45 ?></p>
-                                                                    <p>UPON DELIVERY: ₱<?= $final_value * .4 ?></p>
-                                                                    <p>AFTER INSTALLATION: ₱<?= $final_value * .15 ?></p>
-                                                                    <p>TOTAL :₱<strong><?= htmlspecialchars($final_value) ?></strong></p>
+                                                                    <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2) ?></p>
+                                                                    <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
+                                                                    <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
+                                                                    <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
                                                                 </div>
                                                             
-                                                                <form action="process_booking.php" method="POST" enctype="multipart/form-data">
+                                                                <form action="process_booking.php" method="POST" enctype="multipart/form-data" id="paymentForm">
                                                                     <div class="row mb-3">
                                                                         <!-- First Row -->
                                                                         <div class="col">
-                                                                            <label for="firstField" class="form-label">Reference Number</label>
-                                                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                                                             <!-- Reference Number -->
+                                                                                <label for="reference_number">Reference Number:</label>
+                                                                                <input class="form-control" type="text" id="reference_number" name="reference_number" required>
                                                                         </div>
                                                                         <div class="col">
-                                                                            <label for="secondField" class="form-label">Bank Name</label>
-                                                                            <input class="form-control" type="text" id="secondField" name="bank_name" required>
+                                                                        <label for="bank_name">Select Bank:</label>
+                                                                            <select class="form-control" id="bank_name" name="bank_name" required>
+                                                                                <option value="" disabled selected>Select Bank</option>
+                                                                                <option value="BDO">BDO</option>
+                                                                                <option value="Metro Bank">Metro Bank</option>
+                                                                            </select>
+
                                                                         </div>
                                                                     </div>                                         
                                                                     <div class="row mb-3">
@@ -819,7 +826,13 @@ else if(isset($_POST['tuneup_submit'])){
 
                                                                         <div class="col">
                                                                             <label for="fourthField" class="form-label">Date of process</label>
-                                                                            <input class="form-control" type="date" id="fourthField" name="date" required>
+                                                                            <input 
+                                                                            class="form-control" 
+                                                                            type="date" 
+                                                                            id="fourthField" 
+                                                                            name="date" 
+                                                                            max="<?= date('Y-m-d') ?>" 
+                                                                            required>
                                                                         </div>
                                                                     </div>
 
@@ -1004,6 +1017,32 @@ else if(isset($_POST['tuneup_submit'])){
 
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+        const bankName = document.getElementById('bank_name').value;
+        const referenceNumber = document.getElementById('reference_number').value;
+
+        // Define valid lengths for each bank
+        const validLengths = {
+            BDO: 12, // Example: BDO reference numbers are 12 digits
+            "Metro Bank": 10 // Example: Metro Bank reference numbers are 10 digits
+        };
+
+        // Validate the reference number length
+        if (bankName && referenceNumber.length !== validLengths[bankName]) {
+            e.preventDefault(); // Prevent form submission
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Reference Number',
+                text: `Reference number for ${bankName} must be ${validLengths[bankName]} characters long.`,
+                confirmButtonText: 'OK'
+            });
+        }
+
+    });
+</script>
 
 
 

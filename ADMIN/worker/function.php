@@ -179,10 +179,11 @@ if(mysqli_num_rows($result) > 0){
                                     //UPDATE WORKER_AVAILABILITY , AND CLIENT AVAILABILITY
                                     $worker_availability = "update worker_availability set is_available = '1' where user_id = '$worker_id'";
                                     $client_availability = "update service_count set service_count = 0 where user_id = '$client_id_maintenance'";
-
+                                    $update_booking = "update service_booking set booking_status = 'completed' where booking_id = '$booking_id_maintenance'";
                                     $result_worker = mysqli_query($conn , $worker_availability);
                                     $result_client = mysqli_query($conn , $client_availability);
-                                }
+                                    $result_booking = mysqli_query($conn , $update_booking);
+                                }   
                                
                                
                    
