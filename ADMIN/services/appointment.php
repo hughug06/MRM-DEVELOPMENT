@@ -639,6 +639,14 @@
     var secondReference = button.getAttribute('data-second-reference');
     var thirdReference = button.getAttribute('data-third-reference');
 
+    // Function to format payments as money with peso sign
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-PH', {
+        style: 'currency',
+        currency: 'PHP'
+      }).format(amount);
+    }
+
     // Set the modal content dynamically for the first payment
     if (firstPayment === 'null' || firstPayment === '') {
       document.getElementById('first-payment-status').textContent = 'The client has not paid';
@@ -647,7 +655,7 @@
     } else {
       document.getElementById('first-payment-status').textContent = '';
       document.getElementById('first-reference').textContent = firstReference;
-      document.getElementById('first-payment').textContent = firstPayment;
+      document.getElementById('first-payment').textContent = formatCurrency(parseFloat(firstPayment));
     }
 
     // Set the modal content dynamically for the second payment
@@ -658,7 +666,7 @@
     } else {
       document.getElementById('second-payment-status').textContent = '';
       document.getElementById('second-reference').textContent = secondReference;
-      document.getElementById('second-payment').textContent = secondPayment;
+      document.getElementById('second-payment').textContent = formatCurrency(parseFloat(secondPayment));
     }
 
     // Set the modal content dynamically for the third payment
@@ -669,7 +677,7 @@
     } else {
       document.getElementById('third-payment-status').textContent = '';
       document.getElementById('third-reference').textContent = thirdReference;
-      document.getElementById('third-payment').textContent = thirdPayment;
+      document.getElementById('third-payment').textContent = formatCurrency(parseFloat(thirdPayment));
     }
   });
 </script>

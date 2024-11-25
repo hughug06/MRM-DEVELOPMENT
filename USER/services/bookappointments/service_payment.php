@@ -904,10 +904,9 @@ else if(isset($_POST['tuneup_submit'])){
                         <h5>1. Terms of Payment:</h5>
                         <p>The customer/client shall pay per site.</p>
                         <ul>
-                        <li>20% Down payment (370,000) for reservation of Solar and Accessories.</li>
-                        <li>25% Payment (462,500.00) for mobilization of Solar Panel/Pump and accessories.</li>
-                        <li>40% upon/after delivery of all Solar materials. (740,000.00)</li>
-                        <li>15% after the installation and testing. (277,500.00)</li>
+                        <li>45% Down payment / Payment for reservation and mobilization of Solar and Accessories.</li>
+                        <li>40% upon/after delivery of all Solar materials.</li>
+                        <li>15% after the installation and testing.</li>
                         </ul>
 
                         <h5>2. Preparation Time:</h5>
@@ -928,6 +927,8 @@ else if(isset($_POST['tuneup_submit'])){
                     </div>
                 </div>
             </div>
+
+
         </div>
         <!-- Footer Start -->
         <?php include_once(__DIR__. '/../../../partials/footer.php') ?>

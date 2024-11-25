@@ -92,7 +92,7 @@ $worker_id = $_SESSION['user_id'];
                                         INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
                                         INNER JOIN user_info on user_info.user_id = service_booking.user_id 
                                         INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                        where worker_id = '$worker_id'
+                                        where worker_id = '$worker_id' AND booking_status != 'completed'
                                         ";
                                     $result = mysqli_query($conn, $sql);
 
@@ -204,86 +204,87 @@ $worker_id = $_SESSION['user_id'];
                                                             <h5 class="mb-0">Requirements Checklist</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                            <form action="process_requirements.php" method="POST">
-                                                                <table class="table table-striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Description</th>
-                                                                            <th>Unit</th>
-                                                                            <th>Quantity</th>
-                                                                            <th>Check</th>
-                                                                            <th>Damage Report</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                      
-                                                                       <!-- ITEM -->
-                                                                            <tr>
-                                                                                <td><?= htmlspecialchars($row['brand']) ?></td>
-                                                                                <td>Custom</td>
-                                                                                <td><?= htmlspecialchars($row['quantity']) ?></td>
-                                                                                <td>
-                                                                                    <input class="form-check-input" type="checkbox" name="tasks[<?= htmlspecialchars($row['brand']); ?>][checked]">
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($row['brand']); ?>][damage]" placeholder="Specify damage (if any)">
-                                                                                </td>
-                                                                            </tr>
-                                                                      
+                                                        <form action="process_requirements.php" method="POST">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Check</th>
+                <th>Damage Report</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ITEM -->
+            <tr>
+                <td><?= htmlspecialchars($row['brand']) ?></td>
+                <td>Custom</td>
+                <td><?= htmlspecialchars($row['quantity']) ?></td>
+                <td>
+                    <input class="form-check-input" type="checkbox" name="checked_<?= htmlspecialchars($row['brand']); ?>">
+                </td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <!-- Input for specifying damage -->
+                        <input type="hidden" name="brand" value="<?=$row['brand']?>">
+                        <input type="text" class="form-control damage_input" name="damage_brand" id="damage_brand_<?=$row['brand']?>" placeholder="Specify damage (if any)">
+                        <!-- Input for number of damages -->
+                        <input type="number" class="form-control number_input" name="number_brand" id="number_brand_<?=$row['brand']?>" placeholder="No. of damages" disabled>
+                    </div>
+                </td>
+            </tr>
 
-                                                                        <!-- Dynamic List Rows -->
-                                                                        <?php while ($listing = mysqli_fetch_assoc($result_list)): ?>
-                                                                            <tr>
-                                                                                <td><?= htmlspecialchars($listing['description']); ?></td>
-                                                                                <td><?= htmlspecialchars($listing['unit']); ?></td>
-                                                                                <td><?= htmlspecialchars($listing['quantity']); ?></td>
-                                                                                <td>
-                                                                                    <input class="form-check-input task-checkbox" type="checkbox" 
-                                                                                        name="tasks[<?= htmlspecialchars($listing['description']); ?>][checked]">
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" class="form-control" name="tasks[<?= htmlspecialchars($listing['description']); ?>][damage]" placeholder="Specify damage (if any)">
-                                                                                </td>
-                                                                            </tr>
-                                                                        <?php endwhile; ?>
-                                                                    </tbody>
-                                                                </table>
-                                                                <div class="d-grid mt-3">
-                                                                    <?php 
-                                                                    if($row['second_reference'] == null && $status == 'arrive'){
-                                                                        ?> 
-                                                                       <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
-                                                                        <?php
-                                                                    }
-                                                                    else if(!$row['second_reference'] == null){
-                                                                        
-                                                                        ?>
-                                                                         <input type="text" name="sql" value="<?= $command ?>">
-                                                                         <input type="text" name="status" value="<?= $status ?>">
-                                                                         <input type="text" name="brand" value="<?= $row['brand'] ?>">
-                                                                         <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
-                                                                         <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
-                                                                         <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
-                                                                        <?php
-                                                                    }
-                                                                    else{
-                                                                        ?> 
-                                                
-                                                                       <!-- Submit button -->
-                                                                        <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
-                                                                   
-                                                                    
-                                                                </div>
-                                                                <input type="text" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
-                                                            </form>
-                                                        </div>
-                                                    </div>                                                                               
-                                        <?php endif; ?>
-                                        
-                                    </form>
+            <!-- Dynamic List Rows -->
+            <?php while ($listing = mysqli_fetch_assoc($result_list)){ ?>
+                <tr>
+                    <td><?= htmlspecialchars($listing['description']); ?></td>
+                    <td><?= htmlspecialchars($listing['unit']); ?></td>
+                    <td><?= htmlspecialchars($listing['quantity']); ?></td>
+                    <td>
+                        <input class="form-check-input task-checkbox" type="checkbox">
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <!-- Set name as arrays by appending [] -->
+                            <input type="hidden" name="description[]" value="<?= htmlspecialchars($listing['description']); ?>">
+                            <input type="text" class="form-control damage_input" name="damage[]" id="damage_<?= htmlspecialchars($listing['description']); ?>" placeholder="Specify damage (if any)">
+                            <input type="number" class="form-control number_input" name="number[]" id="number_<?= htmlspecialchars($listing['description']); ?>" placeholder="No. of damages" disabled>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+            <input type="text" name="book_id" value="<?= $row['booking_id'] ?>">
+        </tbody>
+    </table>
+
+    <div class="d-grid mt-3">
+        <?php 
+        if($row['second_reference'] == null && $status == 'arrive'){
+            ?> 
+            <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
+            <?php
+        }
+        else if(!$row['second_reference'] == null){
+            ?>
+            <input type="text" name="sql" value="<?= $command ?>">
+            <input type="text" name="status" value="<?= $status ?>">
+            <input type="text" name="brand" value="<?= $row['brand'] ?>">
+            <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
+            <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
+            <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
+            <?php
+        }
+        else{
+            ?> 
+            <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
+            <?php
+        }
+        ?>
+    </div>
+    <input type="text" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
+    <?php endif; ?>
+</form>
                                     </ul>
                                     
                                     <?php } 
@@ -788,4 +789,38 @@ geocode(endAddress)
 
     // Initial check on page load
     updateSubmitButtonState();
+</script>
+<script>
+    // Handle dynamic inputs for damage and number fields
+    document.addEventListener("DOMContentLoaded", function() {
+        // Handle damage input field for enabling/disabling the number field
+        const damageInputs = document.querySelectorAll('.damage_input');  // All damage input fields
+        const numberInputs = document.querySelectorAll('.number_input');  // All number input fields
+
+        damageInputs.forEach(function(input, index) {
+            input.addEventListener('input', function() {
+                // Check if the damage input is not empty
+                if (input.value.trim() !== "") {
+                    numberInputs[index].disabled = false;  // Enable the number input
+                    numberInputs[index].required = true;  // Make it required
+                } else {
+                    numberInputs[index].disabled = true;  // Disable the number input
+                    numberInputs[index].required = false;  // Remove required
+                }
+            });
+        });
+
+        // Initialize the first brand's damage field
+        const firstBrandDamageInput = document.getElementById('damage_brand_<?=$row['brand']?>');
+        const firstBrandNumberInput = document.getElementById('number_brand_<?=$row['brand']?>');
+        firstBrandDamageInput.addEventListener('input', function() {
+            if (firstBrandDamageInput.value.trim() !== "") {
+                firstBrandNumberInput.disabled = false;
+                firstBrandNumberInput.required = true;
+            } else {
+                firstBrandNumberInput.disabled = true;
+                firstBrandNumberInput.required = false;
+            }
+        });
+    });
 </script>
