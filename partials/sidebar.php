@@ -260,29 +260,18 @@
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-chart-line side-menu__icon"></i>
-                        <span class="side-menu__label">Dashboard</span>
+                        <span class="side-menu__label">On going</span>
                     </a>
                 </li>
-                
-                <li class="slide has-sub <?= $page == '' || $page == '' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == "" || $page == '' ? 'active':''?>">
+
+                <li class="slide <?= $page == "completed.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/worker/completed.php" class="side-menu__item <?= $page == "completed.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
-                        <span class="side-menu__label">Services</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                        <span class="side-menu__label">Completed</span>
                     </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == 'pending.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/worker/pending.php" class="side-menu__item <?= $page == 'pending.php' ? 'active':''?>">Pending</a>
-                        </li> 
-                        <li class="slide <?= $page == "" ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Completed</a>
-                        </li>                                
-                    </ul>
                 </li>
-
-                
 
                 
                 <?php 

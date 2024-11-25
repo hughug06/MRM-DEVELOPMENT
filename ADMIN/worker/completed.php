@@ -49,7 +49,7 @@
 
             <div class="main-content app-content">
                 <div class="container-fluid">
-                    <h2 class="main-content-title fs-24">Pending</h2>
+                    <h2 class="main-content-title fs-24">Completed</h2>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="card custom-card">
