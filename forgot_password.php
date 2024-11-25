@@ -117,63 +117,51 @@ if (isset($_SESSION['success_message'])) {
     </header>
 
     <section>
-    <div class="row my-6">
-        <div class="text-center">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-          <div class="modal-content">
-            <div class="card mb-0 border-0">
-              <div class="row row-sm gx-0">
-                <div class="col-lg-7 col-xl-7 col-xs-12 col-sm-12 login_form">
-                  <div class="main-container container-fluid">
-                    <div class="row row-sm gx-0">
-                      <div class="card-body p-5">
-                        <form
-                          id="forgot_req"
-                          method="POST"
-                          action="forgot_password_function.php"
-                        >
-                          <h1
-                            class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
-                          >
-                            FORGOT PASSWORD
-                          </h1>
-                          <p>Enter your email of your account which will receive the password reset mail.</p>
-                          
-
-                          <!-- Email and Password Row -->
-                          <div class="row">
-                            <div class="form-floating text-start mb-3">
-                              <input
-                                class="form-control rounded-2"
-                                placeholder=""
-                                type="email"
-                                name="email"
-                                id="su_email"
-                              />
-                              <label for="su_email" class="text-muted">Email Address</label>
-                            </div>
-                          </div>
-
-
-                          <!-- Submit Button -->
-                          <div class="d-grid pb-2">
-                            <button
-                              type="submit"
-                              name="forgotsent"
-                              class="btn btn-secondary text-white py-2 fw-bold"
-                            >
-                              Continue
-                            </button>
-                          </div>
-                        </form>
+      <div class="container d-flex justify-content-center">
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="text-center">
+              <div class="card mb-0 border-0">
+                <div class="card-body">
+                  <form
+                    id="forgot_req"
+                    method="POST"
+                    action="forgot_password_function.php"
+                  >
+                    <h1
+                      class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
+                    >
+                      FORGOT PASSWORD
+                    </h1>
+                    <p>Enter your email of your account which will receive the password reset mail.</p>
+                    <!-- Email and Password Row -->
+                    <div class="row">
+                      <div class="form-floating text-start mb-3">
+                        <input
+                          class="form-control rounded-2"
+                          placeholder=""
+                          type="email"
+                          name="email"
+                          id="su_email"
+                        />
+                        <label for="su_email" class="text-muted">Email Address</label>
                       </div>
                     </div>
-                  </div>
+                    <!-- Submit Button -->
+                    <div class="d-grid pb-2">
+                      <button
+                        type="submit"
+                        name="forgotsent"
+                        class="btn btn-secondary text-white py-2 fw-bold"
+                      >
+                        Continue
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
@@ -185,7 +173,6 @@ if (isset($_SESSION['success_message'])) {
             <h6>About MRM-EG</h6>
             <p>
             <?php echo $descs["about"] ?>
-              
             </p>
           </div>
           <div class="col-md-4 my-3">
