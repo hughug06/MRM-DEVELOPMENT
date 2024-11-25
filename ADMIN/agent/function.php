@@ -59,9 +59,10 @@ elseif(isset($_POST['addtask'])){
 
 
 //for getting tasks
-elseif (isset($_GET['gettasks'])) {
+elseif (isset($_GET['gettasks']) && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * FROM kanban WHERE user_id = ?";
+    $sql = "SELECT * FROM kanban k LEFT JOIN service_booking sb ON sb.booking_id = k.booking_id WHERE k.user_id = ?";
+
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters
         $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
@@ -74,37 +75,42 @@ elseif (isset($_GET['gettasks'])) {
             $info = [];
             while ($row = $result->fetch_assoc()) {
                 $productsid = $row['product_id'];
-                    $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
-                    if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
-                        $stmt2->bind_param("i", $productsid);
+                $productname = ''; // Initialize the productname variable
+                $sqlget = "SELECT ProductName FROM products WHERE ProductID = ?";
+                if ($stmt2 = $conn->prepare($sqlget)) { // Use a different variable for the inner statement
+                    $stmt2->bind_param("i", $productsid);
 
-                        // Execute the statement
-                        $stmt2->execute();
-                        $result2 = $stmt2->get_result(); // Use a different variable for the inner result
-                        if ($result2->num_rows > 0) {
-                            while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
-                                $productname = $row2['ProductName'];
-                            }
+                    // Execute the statement
+                    $stmt2->execute();
+                    $result2 = $stmt2->get_result(); // Use a different variable for the inner result
+                    if ($result2->num_rows > 0) {
+                        while ($row2 = $result2->fetch_assoc()) { // Use a different variable for the inner row
+                            $productname = $row2['ProductName'];
                         }
-                        $stmt2->close(); // Close the inner statement here
                     }
+                    $stmt2->close(); // Close the inner statement here
+                }
 
                 $info[] = [
                     'kanban_id' => $row['kanban_id'],
                     'status' => $row['status'],
                     'email' => $row['email'],
                     'name' => $row['name'],
-                    'product' => $productname
+                    'product' => $productname,
+                    'product_type' => $row['product_type'],
+                    'pin_location' => $row['pin_location'],
+                    'quantity' => $row['quantity']
                 ];
             }
             echo json_encode(['success' => true, 'data' => ['info' => $info]]);
         } else {
-            echo json_encode(['success' => true, 'message' => 'No tasks']);
+            echo json_encode(['success' => true, 'data' => ['info' => []]]);
         }
 
         $stmt->close(); // Close the main statement
     }
 }
+
 
 //for deleting tasks
 elseif (isset($_POST['delete'])) {
