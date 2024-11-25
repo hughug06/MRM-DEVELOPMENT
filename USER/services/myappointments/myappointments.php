@@ -323,9 +323,106 @@
  
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
-                                                <div class="card-body border">
-                                                                    
-                                                </div>
+                                                <?php 
+                                                $completed = "SELECT * FROM service_booking
+                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
+                                                INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
+                                                INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
+                                                WHERE booking_status = 'completed'";
+                                                $result_completed = mysqli_query($conn, $completed);
+                                                $row_completed = mysqli_fetch_assoc($result_completed);
+                                                ?>
+
+                                               <!-- Card -->
+                                                    <div class="card shadow-lg mt-4">
+                                                        <!-- Card Header -->
+                                                        <div class="card-header bg-success text-white text-center">
+                                                            <h5>Completed</h5>
+                                                        </div>
+                                                        <!-- Card Body -->
+                                                        <div class="card-body">
+                                                            <!-- Full Name and Worker Name -->
+                                                            <div class="row mb-3">
+                                               
+                                                                <div class="col-md-6">
+                                                                    <strong>Worker Name:</strong>
+                                                                    <p id="worker_name"><?= $row_completed['first_name'] . " " .$row_completed['last_name']  ?></p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Location -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <strong>Location:</strong>
+                                                                    <p id="location"><?= $row_completed['pin_location'] ?></p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Service Type and Product Type -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <strong>Service Type:</strong>
+                                                                    <p id="service_type"><?= $row_completed['service_type'] ?></p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <strong>Product Type:</strong>
+                                                                    <p id="product_type"><?= $row_completed['product_type'] ?></p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Start Time and End Time -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <strong>Start Time:</strong>
+                                                                    <p id="start_time">2024-11-24 10:00:00</p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <strong>End Time:</strong>
+                                                                    <p id="end_time">2024-11-24 12:00:00</p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Note -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <strong>Note:</strong>
+                                                                    <p class="text-muted">
+                                                                        Contact us through Chaintercom or email for maintenance/warranty issues. 
+                                                                        <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Receipt Button -->
+                                                            <div class="d-flex justify-content-end">
+                                                                <button class="btn btn-primary" onclick="generateReceipt()">Download Receipt</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                <!-- Modal for Maintenance Coverage -->
+                                                    <div class="modal fade" id="maintenanceCoverageModal" tabindex="-1" aria-labelledby="maintenanceCoverageModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="maintenanceCoverageModalLabel">Maintenance Coverage</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>The maintenance coverage includes the following:</p>
+                                                                    <ul>
+                                                                        <li>Regular inspections and tune-ups</li>
+                                                                        <li>Repair of defects covered under the warranty</li>
+                                                                        <li>Replacement of parts as per the terms and conditions</li>
+                                                                        <li>Support for operational issues</li>
+                                                                        <li>Comprehensive warranty terms available in your service agreement</li>
+                                                                    </ul>
+                                                                    <p>For detailed information, please contact our support team.</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                             </div>
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="cancelled">
                                                 <div class="mb-4 main-content-label">Cancelled</div>
@@ -550,7 +647,37 @@
     document.querySelector('.open-third-payment-modal-btn').addEventListener('click', openThirdPaymentModal);
 </script>
 
+<!-- JavaScript for Receipt Button -->
+<script>
+    function generateReceipt() {
+        const clientName = document.getElementById('client_name').innerText;
+        const workerName = document.getElementById('worker_name').innerText;
+        const location = document.getElementById('location').innerText;
+        const serviceType = document.getElementById('service_type').innerText;
+        const productType = document.getElementById('product_type').innerText;
+        const startTime = document.getElementById('start_time').innerText;
+        const endTime = document.getElementById('end_time').innerText;
+        const amount = "10,000.00"; // Replace with dynamic amount if needed
 
+        const receiptContent = `
+            <h3 style="text-align: center;">ACKNOWLEDGEMENT RECEIPT</h3>
+            <p>
+                This is to acknowledge receipt of the total amount of TEN THOUSAND PESOS (PhP ${amount}), from ${clientName} of ${location}, 
+                as payment for ${serviceType} services of ${productType} provided by MRM EG Electric Power Generation Services. 
+                This amount covers all labor and material costs associated with the installation as per our agreed terms.
+            </p>
+            <p>We appreciate your prompt payment and look forward to supporting your energy needs with reliable and efficient services.</p>
+            <p><strong>RECEIVED BY:</strong></p>
+            <p>ENGR. MARIA L. SANTOS<br>MRM EG Electric Power Generation Services</p>
+            <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+        `;
+
+        const receiptWindow = window.open('', '_blank', 'width=800,height=600');
+        receiptWindow.document.write('<html><head><title>Receipt</title></head><body>' + receiptContent + '</body></html>');
+        receiptWindow.document.close();
+        receiptWindow.print();
+    }
+</script>
 
 
 

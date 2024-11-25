@@ -7,7 +7,7 @@ require_once '../../../ADMIN/authetincation.php';
 
 $booking_total = 0;
 $workers_total = 0;
-$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled'";
+$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled' AND booking_status != 'completed' ";
 $workers = "SELECT * FROM worker_availability ";
 
 
@@ -88,6 +88,7 @@ if ($exec) {
     include_once(__DIR__. '/../../../partials/head.php');
     ?>
     <title> Inquries </title>
+    
     <!-- Favicon -->
     <link rel="icon" href="../../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
@@ -120,15 +121,14 @@ if ($exec) {
     <link rel="stylesheet" href="../../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
     /* <div class="form-group text-start mb-3">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
                             <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
                         </div> */
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+        
     </style>
 </head>
 
@@ -248,6 +248,7 @@ if ($exec) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <p class="text-info">NOTE: zoom in using scroll wheel for precise location</p>
                                 <div id="map"></div>
                             </div>
                             <div class="modal-footer">
@@ -303,7 +304,7 @@ if ($exec) {
 </body>
 
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
     // Event listener for product selection
@@ -445,8 +446,7 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <script>
         // SCRIPT USE TO SHOW MAPS AND GET THE VALUE, AND PASS TO LOCATION INPUT
         let map;
