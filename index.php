@@ -4,10 +4,15 @@
   if(isset($_SESSION['login'])){
       if($_SESSION['login'] == true)  {
         $role = $_SESSION['role'];
-        if($role == 'user'){
+        if($role == 'client'){
           header("location: /USER/dashboard/user-dashboard.php");
           exit();
       }
+      else if($role == 'worker'){
+        header("location: /ADMIN/worker/accountcontrol/dashboard.php");
+        exit();
+      }
+      
       else{
           header("location: /ADMIN/accountManagement/accountcontrol/user-management.php");
           exit();
