@@ -40,7 +40,7 @@ session_start();
                             $_SESSION['auth'] = "admin";
                             $_SESSION['admin_id'] =  $id;
                             $_SESSION['user_id'] = $user;                     
-                            echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
+                            echo json_encode(['success' => true, 'redirect' => 'ADMIN/dashboard/admin-dashboard.php']);
                         }
                         else if($role == 'client')
                         {

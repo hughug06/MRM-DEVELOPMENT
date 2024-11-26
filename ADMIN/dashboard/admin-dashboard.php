@@ -131,8 +131,7 @@ GROUP BY
                                 <div class="card-body">
                                     <div class="card-order">
                                         <label class="main-content-label mb-3 pt-1">Payment checking</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $pendingCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $pendingCount ?></span></h2>                                
                                     </div>
                                 </div>
                             </div>
@@ -142,8 +141,7 @@ GROUP BY
                                 <div class="card-body">
                                     <div class="card-order">
                                         <label class="main-content-label mb-3 pt-1">On going project</label>
-                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $ongoingCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
+                                        <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $ongoingCount ?></span></h2>                          
                                     </div>
                                 </div>
                             </div>
@@ -152,19 +150,11 @@ GROUP BY
                             <div class="card custom-card">
                                 <div class="card-body">
                                 <div class="card-order">
-                                    <label class="main-content-label mb-3 pt-1">Completed</label>
+                                    <label class="main-content-label mb-3 pt-1">Completed projects</label>
                                     <h2 class="text-end">
                                         <i class="mdi mdi-cube icon-size float-start text-primary"></i>
                                         <span class="fw-bold"><?= $completedCount ?></span>
-                                    </h2>
-                                    <p class="mb-0 mt-4 text-muted">Reports<span class="float-end" id="report-amount">$1000.00</span></p>
-                                    
-                                    <!-- Buttons for Weekly, Monthly, and Yearly Reports -->
-                                    <div class="mt-3">
-                                        <button class="btn btn-primary me-2 report-btn" data-type="weekly">Weekly Reports</button>
-                                        <button class="btn btn-secondary me-2 report-btn" data-type="monthly">Monthly Reports</button>
-                                        <button class="btn btn-success report-btn" data-type="yearly">Yearly Reports</button>
-                                    </div>
+                                    </h2>     
                                 </div>
 
 
@@ -177,7 +167,6 @@ GROUP BY
                                     <div class="card-order">
                                         <label class="main-content-label mb-3 pt-1">Number of agent</label>
                                         <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $agentCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +177,6 @@ GROUP BY
                                     <div class="card-order">
                                         <label class="main-content-label mb-3 pt-1">Number of worker</label>
                                         <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $workerCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +187,6 @@ GROUP BY
                                     <div class="card-order">
                                         <label class="main-content-label mb-3 pt-1">Number of client</label>
                                         <h2 class="text-end"><i class="mdi mdi-cube icon-size float-start text-primary"></i><span class="fw-bold"><?= $clientCount ?></span></h2>
-                                        <p class="mb-0 mt-4 text-muted">Monthly Income<span class="float-end">$7,893</span></p>
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +221,7 @@ GROUP BY
                                                                                             INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
                                                                                             INNER JOIN user_info on user_info.user_id = service_booking.user_id 
                                                                                             INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id     
-                                                                                            ";
+                                                                                            WHERE status != 'completed'";
                                                                                 $result_ongoing = mysqli_query($conn, $ongoing);
                                                                                 if (mysqli_num_rows($result_ongoing) > 0) {
                                                                                     // Define progress mapping for each enum status
@@ -287,6 +274,9 @@ GROUP BY
                                                                             </tr>
                                                                             <?php 
                                                                                     }
+                                                                                }
+                                                                                else{
+                                                                                    echo "<td class='text-center align-middle text-danger'>no ongoing works</td>";
                                                                                 }
                                                                             ?>                                                     
                                                                         </tbody>
