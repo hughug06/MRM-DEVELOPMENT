@@ -404,7 +404,6 @@ if ($exec) {
                                 <input type="hidden" id="booking_id_input_third" name="booking_id">
                             </div>
                             <div class="modal-footer" id="cancel">
-                                <a type="button"class="btn btn-secondary remove-btn" id="cancelval" data-bs-dismiss="modal">Cancel</a>
                                 <button class="btn btn-primary open-payment-modal-btn payment2" id="payment2" data-bs-toggle="modal" data-bs-target="#paymentModal">
                                     Proceed next Payment
                                 </button>
@@ -634,7 +633,6 @@ if ($exec) {
         document.getElementById("modal-product_type").textContent = item.product_type;
         document.getElementById("modal-pin_location").textContent = item.pin_location;
         document.getElementById("modal-quantity").textContent = item.quantity;
-        document.getElementById("cancelval").dataset.id = item.kanban_id;
         document.getElementById("total_cost_input").value = item.total_cost;
         document.getElementById("booking_id_input").value = item.booking_id;
         document.getElementById("total_cost_input_third").value = item.total_cost;
@@ -651,7 +649,6 @@ if ($exec) {
         }
         else if(item.status == 'checking'){
             document.getElementById("cancel").style.display = "block";
-            document.getElementById("cancelval").style.display = "block";
             document.getElementById("payment3").style.display = "none";
             document.getElementById("payment2").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
@@ -659,7 +656,6 @@ if ($exec) {
         else if(item.status == 'arrive'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment2").style.display = "block";
-            document.getElementById("cancelval").style.display = "none";
             document.getElementById("payment3").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
         }
@@ -667,7 +663,6 @@ if ($exec) {
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment3").style.display = "block";
             document.getElementById("payment2").style.display = "none";
-            document.getElementById("cancelval").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
         }
         else if(item.status == 'cancelled'){
@@ -789,61 +784,6 @@ if ($exec) {
         });
 
     }
-
-    // Delegate event listener to handle task removal
-    //NEEDS TO BE CONNECTED TO DB
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('remove-btn')) {
-            const id = e.target.dataset.id;
-            Swal.fire({
-                title: 'Confirmation',
-                html: "Are you sure on cancelling this task?",
-                icon: 'warning',
-                confirmButtonText: 'Confirm',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data:{ delete : id },
-                        dataType: 'json',
-                        success: function(response) {
-                                // Handle successful cancel
-                                if(response.success){
-                                    Swal.fire({
-                                        title: 'Task cancelled!',
-                                        text: 'You have successfully cancelled the task.',
-                                        icon: 'success',
-                                        allowOutsideClick: false,
-                                        timer: 2000, // 2 seconds timer
-                                        showConfirmButton: false // Hide the confirm button
-                                    }).then(() => {
-                                        // Redirect after the timer ends
-                                        window.location.href = 'kanban.php';
-                                    });
-                                }
-                                else{
-                                    Swal.fire(
-                                        'Error!',
-                                        'There was an error cancelling task. Please try again.',
-                                        'error'
-                                    );
-                                }
-                        },
-                        error: function(response) {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error in sql. Please try again.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        }
-    });
 
 
 </script>
@@ -1178,11 +1118,6 @@ if ($exec) {
         $(document).ready(function () {
             $("#reject_form").on("submit", function (e) { // Target the form, not the button
                 e.preventDefault(); // Prevent default form submission
-
-                alert($("#reasonarea").val().trim());
-                alert($("#book_id").val());
-                alert($("#user_id").val());
-                alert($("#avail_id").val());
                 if ($("#reasonarea").val() == "") {
                     Swal.fire({
                         title: "Error!",

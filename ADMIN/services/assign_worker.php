@@ -20,10 +20,13 @@ if (isset($_POST['pick'])) {
     $result3 = mysqli_query($conn , $sql3);
     $result4 = mysqli_query($conn , $sql4);
 
-
-    echo "SUCCESS";
+    if($result && $result2 && $result3 && $result4){
+        echo json_encode(['success' => true,]);
+    }else{
+        echo json_encode(['success' => false, 'message' => 'Error in SQL']);
+    }
 } else {
-    echo "No data received.";
+    echo json_encode(['success' => false, 'message' => 'Error In function']);
 }
 
 // Close connection
