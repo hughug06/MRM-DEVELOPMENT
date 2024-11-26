@@ -1,5 +1,6 @@
 <?php
   date_default_timezone_set('Asia/Manila');
+  $userid = $_SESSION['user_id'];
  ?>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header border-bottom">
@@ -521,15 +522,15 @@
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="modal" data-bs-target="#appointmentmodal">
                 <i class="si icon-book-open header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View Appointments"></i>
                 <?php 
-                //  $count_appointment = 0;
-                //  $userid = $_SESSION['account_id'];
-                //  $sql_select = "select COUNT(*) AS total_appointments from service_booking 
-                //  where service_booking.account_id = '$userid' and service_booking.status = 'Waiting' OR service_booking.status = 'Approved' OR service_booking.status = 'Checking' ";
-                //  $sql_result = mysqli_query($conn, $sql_select);
-                //  $row_count_appointments = mysqli_fetch_assoc($sql_result);
-                //  $count_appointment = $row_count_appointments['total_appointments'];    
+                 $count_appointment = 0;
+                
+                 $sql_select = "select COUNT(*) AS total_appointments from service_booking 
+                 where user_id = '$userid' and booking_status != 'completed' ";
+                 $sql_result = mysqli_query($conn, $sql_select);
+                 $row_count_appointments = mysqli_fetch_assoc($sql_result);
+                 $count_appointment = $row_count_appointments['total_appointments'];    
                 ?>
-                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount">0</span>
+                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount"><?= $count_appointment ?></span>
             </a>
             <!-- End::header-link -->
         </div>
@@ -747,7 +748,23 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                        <?php 
+                                                   
+                                $sql_select = "select * from service_booking 
+                                INNER JOIN user_info on user_info.user_id = service_booking.user_id
+                                where service_booking.user_id = '$userid' and service_booking.booking_status != 'completed' ";
+                                $sql_result = mysqli_query($conn, $sql_select);
+                                while($row= mysqli_fetch_assoc($sql_result)){
+                                    echo "<td> " . $row['first_name'] . ' ' . $row['last_name'] . " </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                    echo "<td> </td>";
+                                }                 
+                                ?>
                             
                         </tbody>
                     </table>
