@@ -525,12 +525,21 @@
                  $count_appointment = 0;
                 
                  $sql_select = "select COUNT(*) AS total_appointments from service_booking 
-                 where user_id = '$userid' and booking_status != 'completed' ";
+                 where user_id = '$userid' and booking_status != 'completed' and booking_status != 'canceled'";
                  $sql_result = mysqli_query($conn, $sql_select);
                  $row_count_appointments = mysqli_fetch_assoc($sql_result);
                  $count_appointment = $row_count_appointments['total_appointments'];    
                 ?>
-                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="appointCount"><?= $count_appointment ?></span>
+                
+                    <?php if($count_appointment <= 0){
+                            
+                     } 
+                     else{
+                        echo "<span class=\"badge bg-secondary header-icon-badge pulse pulse-secondary\" id=\"appointCount\">";
+                        echo $count_appointment;
+                        echo "</span>";
+                     }
+                     ?></span>
             </a>
             <!-- End::header-link -->
         </div>
@@ -741,32 +750,36 @@
                                 <th scope="col">My Address</th>
                                 <th scope="col">Set Date</th>
                                 <th scope="col">Set Time</th>
-                                <th scope="col">Amount</th>
                                 <th scope="col">Payment Status</th>
                                 <th scope="col">Appointment Status</th>
                                 <th scope="col">Check Update</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        
                         <?php 
                                                    
-                                $sql_select = "select * from service_booking 
-                                INNER JOIN user_info on user_info.user_id = service_booking.user_id
-                                where service_booking.user_id = '$userid' and service_booking.booking_status != 'completed' ";
-                                $sql_result = mysqli_query($conn, $sql_select);
-                                while($row= mysqli_fetch_assoc($sql_result)){
-                                    echo "<td> " . $row['first_name'] . ' ' . $row['last_name'] . " </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                    echo "<td> </td>";
-                                }                 
+                                                   $sql_select = "SELECT * 
+                                                   FROM service_booking 
+                                                   INNER JOIN user_info ON user_info.user_id = service_booking.user_id
+                                                   INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id
+                                                   WHERE service_booking.user_id = '$userid' 
+                                                   AND service_booking.booking_status != 'completed' 
+                                                   AND service_booking.booking_status != 'canceled'";
+                                                $sql_result = mysqli_query($conn, $sql_select);
+                                                while($row= mysqli_fetch_assoc($sql_result)){
+                                                echo "<tbody> ";
+                                                    echo "<td> " . $row['first_name'] . ' ' . $row['last_name'] . " </td>";
+                                                    echo "<td> " . $row['pin_location'] . " </td>";
+                                                    echo "<td> " . $row['date'] . " </td>";
+                                                    echo "<td> " . $row['start_time'] . '-' . $row['end_time'] . " </td>";
+                                                    echo "<td> " . $row['payment_status'] . " </td>";
+                                                    echo "<td> " . $row['booking_status'] . " </td>";
+                                                   
+                                                echo "</tbody>";
+                                                }                 
                                 ?>
                             
-                        </tbody>
+                        
                     </table>
                 </div>
             </div>

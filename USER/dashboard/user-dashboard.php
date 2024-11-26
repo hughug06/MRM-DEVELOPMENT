@@ -41,8 +41,13 @@ require_once '../../ADMIN/authetincation.php';
 
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
-    <!-- FullCalendar JS -->
-    <link rel="stylesheet" href="../../assets/libs/fullcalendar/main.min.css">
+     <!-- FullCalendar Stylesheets -->
+     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet" />
+
+
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
 
     <style>
         .custom-card {
@@ -418,32 +423,42 @@ s0.parentNode.insertBefore(s1,s0);
                 right: 'dayGridMonth,dayGridWeek,dayGridDay'
             },
             initialView: 'dayGridMonth',
-            events: 'fetch_appointments.php', // Fetch events from this PHP file
+            events: function(info, successCallback, failureCallback) {
+                $.ajax({
+                    url: 'fetch_appointments.php',
+                    dataType: 'json',
+                    success: function(data) {
+                        successCallback(data);
+                    },
+                    error: function() {
+                        failureCallback();
+                    }
+                });
+            },
             eventClick: function(info) {
                 // Show details in a modal on event click
-                $('#eventDetailsModal .modal-title').text(info.event.title);
+                $('#eventDetailsModal .modal-title').text(info.event.title); // Title is first_name + pin_location
                 $('#eventDetailsModal .modal-body').html(`
-                    <p><strong>Location:</strong> ${info.event.extendedProps.location}</p>
-                    <p><strong>Brand:</strong> ${info.event.extendedProps.brand}</p>
-                    <p><strong>Product:</strong> ${info.event.extendedProps.product}</p>
-                    <p><strong>Power:</strong> ${info.event.extendedProps.power}</p>
-                    <p><strong>Running Hours:</strong> ${info.event.extendedProps.running_hours}</p>
-                    <p><strong>Status:</strong> ${info.event.extendedProps.status}</p>
-                    <p><strong>Worker Update:</strong> ${info.event.extendedProps.worker_update}</p>
+                    <p><strong>Name:</strong> ${info.event.extendedProps.first_name}</p>
+                    <p><strong>Location:</strong> ${info.event.extendedProps.pin_location}</p>
                     <p><strong>Date:</strong> ${info.event.extendedProps.date}</p>
                     <p><strong>Start Time:</strong> ${info.event.extendedProps.start_time}</p>
                     <p><strong>End Time:</strong> ${info.event.extendedProps.end_time}</p>
+                    <p><strong>Payment Status:</strong> ${info.event.extendedProps.payment_status}</p>
+                    <p><strong>Booking Status:</strong> ${info.event.extendedProps.booking_status}</p>
+                    <p><strong>Payment:</strong> ${info.event.extendedProps.payment}</p>
                 `);
                 $('#eventDetailsModal').modal('show');
             },
             eventColor: '#007bff', // Default color for events
             eventTextColor: '#ffffff', // Text color for events
             eventRender: function(info) {
-                // Render event title as only the service type
-                return info.event.title; // This ensures only the service type is shown
+                // Render event title as first_name + pin_location
+                return info.event.title; // This ensures the title shows "first_name - pin_location"
             }
         });
 
         calendar.render();
     });
 </script>
+
