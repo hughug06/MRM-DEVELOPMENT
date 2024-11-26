@@ -554,11 +554,11 @@
 
                                         <!-- Modal Body -->
                                         <div class="modal-body">
-                                            <form action="reject_payment.php" method="POST">
+                                            <form id="reject_form" action="reject_payment.php" method="POST">
                                                 <!-- Hidden Inputs for Booking ID and User ID -->
-                                                <input type="text" class="bookingId" name="booking_id">
-                                                <input type="text" class="userId" name="user_id">
-                                                <input type="text" class="availabilityId" name="availability_id">
+                                                <input type="text" id="bookingId" class="bookingId" name="booking_id">
+                                                <input type="text" id="user_id" class="userId" name="user_id">
+                                                <input type="text" id="availability_id" class="availabilityId" name="availability_id">
 
                                                 <!-- Rejection Reason -->
                                                 <div class="mb-3">
@@ -759,4 +759,77 @@
       document.getElementById('third-payment').textContent = formatCurrency(parseFloat(thirdPayment));
     }
   });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $("#reject_form").on("submit", function (e) { // Target the form, not the button
+        e.preventDefault(); // Prevent default form submission
+        if ($("#reason").val() == "") {
+            Swal.fire({
+                title: "Error!",
+                text: "Enter a reason first",
+                icon: "warning",
+                confirmButtonText: "OK",
+            });
+            return; // Stop further execution
+        }else{
+            Swal.fire({
+            title: 'Confirmation',
+            html: "Are you sure to reject this project?",
+            icon: 'warning',
+            confirmButtonText: 'Confirm',
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                // Gather form data
+                var formData = {
+                    reason: $("#reason").val().trim(),
+                    booking_id: $("#bookingId").val(),
+                    user_id: $("#user_id").val(),
+                    availability_id: $("#availability_id").val(),
+                };
+
+                // AJAX call
+                $.ajax({
+                    type: "POST",
+                    url: "reject_payment.php",
+                    data: formData,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Success",
+                                text: "Rejection complete!",
+                                icon: "success",
+                                allowOutsideClick: false,
+                            }).then(() => {
+                                window.location.href = "appointment.php"; // Redirect
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "OK",
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: "SQL Error!",
+                            text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                            icon: "error",
+                            confirmButtonText: "OK",
+                        });
+                    },
+                });
+            }
+        });
+
+        }
+
+    });
+});
+
 </script>
