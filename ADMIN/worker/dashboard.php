@@ -2,6 +2,7 @@
 session_start();
 require_once '../../Database/database.php';
 $worker_id = $_SESSION['user_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -86,13 +87,13 @@ $worker_id = $_SESSION['user_id'];
                                 <!-- Checklist -->
                                 <ul class="list-group mb-4">
                                     <?php 
-                                    $worker_id = $_SESSION['user_id'];
+                                    
                                     // Query to get data for the current worker
                                     $sql = "SELECT * FROM worker_ongoing
                                         INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
                                         INNER JOIN user_info on user_info.user_id = service_booking.user_id 
                                         INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                        where worker_id = '$worker_id' AND booking_status != 'completed'
+                                        where worker_id = '$worker_id' AND status != 'completed'
                                         ";
                                     $result = mysqli_query($conn, $sql);
 
@@ -243,7 +244,7 @@ $worker_id = $_SESSION['user_id'];
                                                                          <tr>
                                                                             
                                                                             <td><?= htmlspecialchars($row['brand']) ?></td>
-                                                                            <td><?= $row['unit'] ?></td>
+                                                                            <td>items</td>
                                                                             <td><?= htmlspecialchars($row['quantity']) ?></td>
                                                                             <td>
                                                                                 <input class="form-check-input" type="checkbox" name="checked_<?= htmlspecialchars($row['brand']); ?>">
@@ -294,7 +295,8 @@ $worker_id = $_SESSION['user_id'];
                                                                 <?php 
                                                                 if($row['second_reference'] == null && $status == 'arrive'){
                                                                     ?> 
-                                                                    <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
+                                                                    <p class="text-info">Note!:Inform user for second payment</p>
+                                                                    <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist aa</button>
                                                                     <?php
                                                                 }
                                                                 else if(!$row['second_reference'] == null){
@@ -304,12 +306,13 @@ $worker_id = $_SESSION['user_id'];
                                                                     <input type="text" name="brand" value="<?= $row['brand'] ?>">
                                                                     <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
                                                                     <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
-                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
+                                                                    <p class="text-info">Note: proceed to drop off</p>
+                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit aa Checklist</button>
                                                                     <?php
                                                                 }
                                                                 else{
                                                                     ?> 
-                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit Checklist</button>
+                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Save and proceed to delivery</button>
                                                                     <?php
                                                                 }
                                                                 ?>
@@ -393,7 +396,7 @@ $worker_id = $_SESSION['user_id'];
                                             
                                             <form action="function.php" method="POST">
                                                 <div class="d-grid mt-3">
-                                                    <button type="submit" class="btn btn-primary">Arrive</button>
+                                                    <button type="submit" class="btn btn-primary">Drop off now</button>
                                                     <!-- hidden data for booking_id -->
                                                     <input type="hidden" name="booking_id" value="<?= htmlspecialchars($row['booking_id']); ?>">
                                                     <input type="hidden" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
@@ -453,7 +456,7 @@ $worker_id = $_SESSION['user_id'];
                                                 ?>
                                                 <div class="card mt-4">
                                                         <div class="card-header">
-                                                            <h5 class="mb-0">Check if the </h5>
+                                                            <h5 class="mb-0">Check if the construction of material is done</h5>
                                                         </div>
                                                         <div class="card-body">
                                                         <form action="process_requirements.php" method="POST">

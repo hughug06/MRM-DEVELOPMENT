@@ -852,14 +852,14 @@ else if(isset($_POST['tuneup_submit'])){
 
                                                                      ?>
                                                                         <!-- Hidden input fields -->
-                                                                        <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
-                                                                        <input type="text" name="first_payment" value="<?= $final_value * .45 ?>">
-                                                                        <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
-                                                                        <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
-                                                                        <input type="text" name="kva" value="<?= htmlspecialchars($kva); ?>">
-                                                                        <input type="text" name="running_hours" value="<?= htmlspecialchars($running_hours); ?>">
-                                                                        <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
-                                                                        <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
+                                                                        <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">                                             
+                                                                        <input type="hidden" name="first_payment" value="<?= $final_value * .45 ?>">
+                                                                        <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location); ?>">
+                                                                        <input type="hidden" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
+                                                                        <input type="hidden" name="kva" value="<?= htmlspecialchars($kva); ?>">
+                                                                        <input type="hidden" name="running_hours" value="<?= htmlspecialchars($running_hours); ?>">
+                                                                        <input type="hidden" name="brand" value="<?= htmlspecialchars($brand); ?>">
+                                                                        <input type="hidden" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
                                                                         
                                                                     <?php 
                                                                      }
@@ -867,14 +867,14 @@ else if(isset($_POST['tuneup_submit'])){
    
                                                                     ?>
                                                                         <!-- Hidden input fields -->
-                                                                        <input type="text" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">
-                                                                        <input type="text" name="first_payment" value="<?= $final_value * .45 ?>">
-                                                                        <input type="text" name="location" value="<?= htmlspecialchars($pin_location); ?>">
-                                                                        <input type="text" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
-                                                                        <input type="text" name="brand" value="<?= htmlspecialchars($brand); ?>">
-                                                                        <input type="text" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
-                                                                        <input type="text" name="kva" value="N/A">
-                                                                        <input type="text" name="running_hours" value="N/A">
+                                                                        <input type="hidden" name="availability_id" value="<?= htmlspecialchars($availability_id); ?>">
+                                                                        <input type="hidden" name="first_payment" value="<?= $final_value * .45 ?>">
+                                                                        <input type="hidden" name="location" value="<?= htmlspecialchars($pin_location); ?>">
+                                                                        <input type="hidden" name="quantity" value="<?= htmlspecialchars($quantity); ?>">
+                                                                        <input type="hidden" name="brand" value="<?= htmlspecialchars($brand); ?>">
+                                                                        <input type="hidden" name="total_cost" value="<?=  htmlspecialchars($final_value)  ?>">
+                                                                        <input type="hidden" name="kva" value="N/A">
+                                                                        <input type="hidden" name="running_hours" value="N/A">
                                                                     
                                                                     <?php 
                                                                         if($agent_mode){
@@ -894,7 +894,7 @@ else if(isset($_POST['tuneup_submit'])){
                                                                     <div class="text-center mt-3">
                                                                     <input type="hidden" name="serviceType" value="<?= htmlspecialchars($service_type); ?>">
                                                                     <input type="hidden" name="productType" value="<?= htmlspecialchars($product_type); ?>">
-                                                                    <input type="text" name="is_custom" value="<?= $is_custom ?>">
+                                                                    <input type="hidden" name="is_custom" value="<?= $is_custom ?>">
                                                                     <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
                                                                     </div>
                                                                 </form>
