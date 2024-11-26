@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 08:32 AM
+-- Generation Time: Nov 26, 2024 at 07:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mrm_backup`
+-- Database: `mrm`
 --
 
 -- --------------------------------------------------------
@@ -31,14 +31,14 @@ CREATE TABLE `kanban` (
   `kanban_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `booking_id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `client_email` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
   `contact` int(11) NOT NULL,
   `location` varchar(20) NOT NULL,
   `product_id` int(11) NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `date` date NOT NULL,
-  `status` enum('completed','cancelled','checking','pick_up','delivery','arrive','ongoing_construction','final_checking') NOT NULL
+  `kanban_status` enum('completed','cancelled','checking','pick_up','delivery','arrive','ongoing_construction','final_checking') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -61,7 +61,7 @@ ALTER TABLE `kanban`
 -- AUTO_INCREMENT for table `kanban`
 --
 ALTER TABLE `kanban`
-  MODIFY `kanban_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `kanban_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
