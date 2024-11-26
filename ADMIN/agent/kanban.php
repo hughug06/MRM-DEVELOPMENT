@@ -646,28 +646,33 @@ if ($exec) {
         if(item.status == 'completed' || item.status == 'pick_up'|| item.status == 'delivery' || item.status == 'ongoing_construction'){
             document.getElementById("cancel").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
+            document.getElementById("reject").style.display = "none";
         }
         else if(item.status == 'checking'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment3").style.display = "none";
             document.getElementById("payment2").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
+            document.getElementById("reject").style.display = "block";
         }
         else if(item.status == 'arrive'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment2").style.display = "block";
             document.getElementById("payment3").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
+            document.getElementById("reject").style.display = "none";
         }
         else if(item.status == 'final_checking'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment3").style.display = "block";
             document.getElementById("payment2").style.display = "none";
             document.getElementById("reasondisp").style.display = "none";
+            document.getElementById("reject").style.display = "none";
         }
         else if(item.status == 'cancelled'){
             document.getElementById("cancel").style.display = "none";
             document.getElementById("reasondisp").style.display = "block";
+            document.getElementById("reject").style.display = "none";
         }
 
 
