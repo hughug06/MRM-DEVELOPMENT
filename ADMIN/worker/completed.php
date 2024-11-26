@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once '../../Database/database.php';
+$worker_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -56,36 +57,57 @@ require_once '../../Database/database.php';
                 <div class="container-fluid">
                     <h2 class="main-content-title fs-24">Completed</h2>
                     <div class="row">
+                    <?php 
+                     $completed = "SELECT * FROM service_booking
+                     INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
+                     INNER JOIN user_info on user_info.user_id = worker_ongoing.client_id  
+                     INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
+                     INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
+                     WHERE booking_status = 'completed' and worker_ongoing.worker_id = '$worker_id'";
+                     $result_completed = mysqli_query($conn, $completed);
+                    if(mysqli_num_rows($result_completed) > 0){
+                        while($row = mysqli_fetch_assoc($result_completed)){
+                         
+                      
+                    ?>
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="card custom-card">
                                 <div class="card-header">
-                                    <h5 class="mb-0">Title here</h5>
+                                    <h5 class="mb-0 text-success"><?= $row['service_type'] . " - " . $row['product_type']?></h5>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Content Here -->
+                                    <!-- Location Field -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Location</label>
+                                        <div class="form-control" readonly>
+                                            <?= $row['pin_location'] ?>
+                                        </div>
+                                    </div>
+
+                                    <!-- Start Time Field -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Start Time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['start_time'] ?>
+                                        </div>
+                                    </div>
+
+                                    <!-- End Time Field -->
+                                    <div class="mb-3">
+                                        <label class="form-label">End Time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['end_time'] ?>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Title here</h5>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Content Here -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="card custom-card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Title here</h5>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Content Here -->
-                                </div>
-                            </div>
-                        </div>
+                       <?php
+                          }
+                    } 
+                    ?>
+                        
                     </div>
                 </div>
             </div>
