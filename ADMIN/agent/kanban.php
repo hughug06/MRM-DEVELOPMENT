@@ -397,6 +397,110 @@ if ($exec) {
                                 <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
                                 <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
                                 <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                                <input type="hidden" id="total_cost_input" name="total_cost">
+                                <input type="hidden" id="booking_id_input" name="booking_id">
+                                <input type="hidden" id="total_cost_input_third" name="total_cost">
+                                <input type="hidden" id="booking_id_input_third" name="booking_id">
+                            </div>
+                            <div class="modal-footer" id="cancel">
+                                <a type="button"class="btn btn-secondary remove-btn" id="cancelval" data-bs-dismiss="modal">Cancel</a>
+                                <button class="btn btn-primary open-payment-modal-btn payment2" id="payment2" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                    Proceed next Payment
+                                </button>
+                                <button class="btn btn-primary open-third-payment-modal-btn payment3" id="payment3" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
+                                    Proceed next Payment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <!-- Modal SECOND payment -->
+                <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Second Payment Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Centered Blank Image Placeholder -->
+                                <div class="text-center mb-3">
+                                    <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                </div>
+                                <div class="text-center mx-4">
+                                    <!-- Displaying Total Cost and Booking ID -->
+                                    <p id="paymentnow">TOTAL: ₱0.00</p>
+                                    <p id="totalCostModal">TOTAL: ₱0.00</p>
+                                    <p id="bookingIdModal">Booking ID: N/A</p>
+                                </div>
+
+                                <form action="../../USER/services/myappointments/process_second_payment.php" method="POST" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="firstField" class="form-label">Reference Number</label>
+                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                        </div>                                                             
+                                    </div>                                         
+               
+                                    <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                    <input type="hidden" id="booking_id_modal_input" name="booking_id">
+                                    <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                                   
+                <!-- Modal THIRD payment -->
+                <div class="modal fade" id="paymentThirdModal" tabindex="-1" aria-labelledby="paymentThirdModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Third Payment Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Centered Blank Image Placeholder -->
+                                <div class="text-center mb-3">
+                                    <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                </div>
+                                <div class="text-center mx-4">
+                                    <!-- Displaying Total Cost and Booking ID -->
+                                    <p id="Thirdpaymentnow">TOTAL: ₱0.00</p>
+                                    <p id="ThirdtotalCostModal">TOTAL: ₱0.00</p>
+                                    <p id="ThirdbookingIdModal">Booking ID: N/A</p>
+                                </div>
+
+                                <form action="../../USER/services/myappointments/process_third_payment.php" method="POST" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="firstField" class="form-label">Reference Number</label>
+                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                        </div>                                                             
+                                    </div>                                         
+               
+                                    <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                    <input type="text" id="booking_id_third" name="booking">
+                                    <input type="text" id="booking_id_input_third" name="due" readonly>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -486,6 +590,34 @@ if ($exec) {
         document.getElementById("modal-product_type").textContent = item.product_type;
         document.getElementById("modal-pin_location").textContent = item.pin_location;
         document.getElementById("modal-quantity").textContent = item.quantity;
+        document.getElementById("cancelval").dataset.id = item.kanban_id;
+        document.getElementById("total_cost_input").value = item.total_cost;
+        document.getElementById("booking_id_input").value = item.booking_id;
+        document.getElementById("total_cost_input_third").value = item.total_cost;
+        document.getElementById("booking_id_input_third").value = item.booking_id;
+
+        if(item.status == 'completed' || item.status == 'cancelled' || item.status == 'pick_up'|| item.status == 'delivery' || item.status == 'ongoing_construction'){
+            document.getElementById("cancel").style.display = "none";
+        }
+        else if(item.status == 'checking'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("cancelval").style.display = "block";
+            document.getElementById("payment3").style.display = "none";
+            document.getElementById("payment2").style.display = "none";
+        }
+        else if(item.status == 'arrive'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("payment2").style.display = "block";
+            document.getElementById("cancelval").style.display = "none";
+            document.getElementById("payment3").style.display = "none";
+        }
+        else if(item.status == 'final_checking'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("payment3").style.display = "block";
+            document.getElementById("payment2").style.display = "none";
+            document.getElementById("cancelval").style.display = "none";
+        }
+
 
         // Show the modal
         modal.style.display = "block";
@@ -533,22 +665,21 @@ if ($exec) {
                             };
 
                             // Add the task details
-                            if(status == 'finding' || status == 'completed' || status == 'cancelled'){
+                            if(status == 'completed' || status == 'cancelled' || status == 'pick_up'|| status == 'delivery' || status == 'arrive' || status == 'ongoing_construction' || status == 'final_checking'){
                                 newTask.innerHTML = `
                                 ${id}. ${email || 'No email'}
                                 <strong>Name:</strong> ${name || 'No name'}
                                 <strong>Product:</strong> ${product || 'No Product Error'}
-                            `;
+                                `;
                             }
                             else{
                                 newTask.innerHTML = `
                                 <div class="header">
                                     <strong>${id}. ${email || 'No email'}</strong>
-                                    <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                                 </div>
                                     <strong>Name: ${name || 'No name'}</strong>
                                     <strong>Product: ${product || 'No Product Error'}</strong>
-                            `;
+                                `;
                             }
 
 
@@ -619,25 +750,35 @@ if ($exec) {
                         url: 'function.php',
                         type: 'POST',
                         data:{ delete : id },
+                        dataType: 'json',
                         success: function(response) {
                                 // Handle successful cancel
-                                Swal.fire({
-                                    title: 'Task Deleted!',
-                                    text: 'You have successfully cancelled the task.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'kanban.php';
-                                });
+                                if(response.success){
+                                    Swal.fire({
+                                        title: 'Task cancelled!',
+                                        text: 'You have successfully cancelled the task.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'kanban.php';
+                                    });
+                                }
+                                else{
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error cancelling task. Please try again.',
+                                        'error'
+                                    );
+                                }
                         },
                         error: function(response) {
                             // Handle error
                             Swal.fire(
                                 'Error!',
-                                'There was an error cancelling task. Please try again.',
+                                'There was an error in sql. Please try again.',
                                 'error'
                             );
                         }
@@ -979,6 +1120,61 @@ if ($exec) {
                 }
             });
         });
+    </script>
+
+    <script>
+        function openPaymentModal() {
+            // Get the total cost and booking ID from the hidden input and text input fields
+            var totalCost = document.getElementById('total_cost_input').value;
+            var bookingId = document.getElementById('booking_id_input').value;
+            
+            // Calculate 40% of the total cost
+            var duePayment = totalCost * 0.40;
+            var totalCost = parseFloat(document.getElementById('total_cost_input').value);
+            // Format the amounts with commas as thousand separators
+            var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+            var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+            // Update the text content of the paymentnow and totalCostModal elements
+            document.getElementById('paymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+            document.getElementById('totalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+            document.getElementById('bookingIdModal').innerText = 'Booking ID: ' + bookingId;
+            
+            // Optionally, populate the form with the total cost and booking ID
+            document.getElementById('booking_id_modal_input').value = bookingId;
+            document.getElementById('duePaymentInput').value = duePayment.toFixed(2); 
+        }
+
+        // Event listener for button click to open the modal
+        document.querySelector('.open-payment-modal-btn').addEventListener('click', openPaymentModal);
+    </script>
+    <script>
+        // Function to open the modal and populate with the total cost and booking ID for third payment
+        function openThirdPaymentModal() {
+            // Get the total cost and booking ID from the input fields
+            var totalCost = document.getElementById('total_cost_input_third').value;
+            var bookingId = document.getElementById('booking_id_input_third').value;
+            
+            // Calculate 40% of the total cost
+            var duePayment = totalCost * 0.15;
+            var totalCost = parseFloat(totalCost);
+            
+            // Format the amounts with commas as thousand separators
+            var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+            var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+            // Update the text content of the Thirdpaymentnow, ThirdtotalCostModal, and ThirdbookingIdModal elements
+            document.getElementById('Thirdpaymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+            document.getElementById('ThirdtotalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+            document.getElementById('ThirdbookingIdModal').innerText = 'Booking ID: ' + bookingId;
+            
+            // Populate the form with the total cost and booking ID
+            document.getElementById('booking_id_third').value = bookingId;
+            document.getElementById('duePayment_third').value = duePayment.toFixed(2); 
+        }
+
+        // Event listener for button click to open the third payment modal
+        document.querySelector('.open-third-payment-modal-btn').addEventListener('click', openThirdPaymentModal);
     </script>
         
     </body>

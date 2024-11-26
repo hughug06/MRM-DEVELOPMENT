@@ -80,7 +80,7 @@ $sql = "INSERT INTO service_booking (
     $contact = $_POST['contact'];
 
 
-    $sql_insert = "insert into kanban (email, name, contact, booking_id , product_id, location, product_quantity, date, status, user_id)
+    $sql_insert = "insert into kanban (client_email, name, contact, booking_id , product_id, location, product_quantity, date, kanban_status, user_id)
                 VALUES ('$email' , '$name' , '$contact', '$booking_id' , '$product_id', '$pin_location' , '$quantity' , '$date' , 'checking', '$user_id')";
     if (mysqli_query($conn, $sql_insert)) {
         $update_availability = "UPDATE service_availability SET is_available='0' WHERE availability_id = '$availability_id'";
