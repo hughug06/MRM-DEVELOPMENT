@@ -10,7 +10,7 @@ require_once '../../ADMIN/authetincation.php';
 
     <!-- Meta Data -->
     <?php include_once(__DIR__. '/../../partials/head.php')?>
-    <title> Products Overview </title>
+    <title>Home</title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
@@ -20,8 +20,8 @@ require_once '../../ADMIN/authetincation.php';
     <!-- Bootstrap Css -->
     <link id="style" href="../../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
 
-     <!-- Main Theme Js -->
-     <script src="../../assets/js/main.js"></script>
+    <!-- Main Theme Js -->
+    <script src="../../assets/js/main.js"></script>
 
     <!-- Style Css -->
     <link href="../../assets/css/styles.min.css" rel="stylesheet" >
@@ -41,13 +41,11 @@ require_once '../../ADMIN/authetincation.php';
 
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
-     <!-- FullCalendar Stylesheets -->
-     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet" />
+    <!-- FullCalendar Stylesheets -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet" /> -->
 
-
-
-<!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
+    <!-- FullCalendar JS -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script> -->
 
     <style>
         .custom-card {
@@ -56,14 +54,14 @@ require_once '../../ADMIN/authetincation.php';
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border: none;
         }
-        #calendar {
-            width: 100%; /* Make the calendar fill the container */
-            max-width: 100%; /* Prevent overflow on smaller screens */
-            height: auto; /* Allow the height to adjust */
-            overflow-x: auto; /* Enable horizontal scrolling if necessary */
-        }
+        /* #calendar {
+            width: 100%; 
+            max-width: 100%;
+            height: auto; 
+            overflow-x: auto; 
+        } */
 
-        .fc-toolbar h2 {
+        /* .fc-toolbar h2 {
             font-size: 1.5rem;
             font-weight: 600;
         }
@@ -76,7 +74,7 @@ require_once '../../ADMIN/authetincation.php';
         }
         .fc-daygrid-event:hover {
             background-color: #0056b3;
-        }
+        } */
         .modal-content {
             border-radius: 10px;
         }
@@ -107,17 +105,6 @@ require_once '../../ADMIN/authetincation.php';
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
-
-                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                    <div>
-                        <h2 class="main-content-title fs-24 mb-1">Welcome To Dashboard</h2>
-                        <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                        </ol>
-                    </div>
-                </div>
-
                 <div class="row row-sm">
                     <div class="col-sm-12 col-lg-12 col-xl-8">
                         <div class="row row-sm">
@@ -218,92 +205,11 @@ require_once '../../ADMIN/authetincation.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-sm">
-                            <div class="col-md-12 col-xl-12">
-                                <div class="card custom-card overflow-hidden">
-                                    <div class="card-header border-bottom-0 d-flex pb-0">
-                                        <div>
-                                            <label class="main-content-label mb-2 pt-1">Request Lists</label>
-                                            <p class="fs-12 mb-3 text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, sit aspernatur quibusdam corporis mollitia quam nobis sed ducimus omnis? Optio tempore nostrum enim aliquam voluptatum blanditiis corporis molestiae aspernatur est?</p>
-                                        </div>
-                                        <div class="card-options float-end">
-                                            <a href="javascript:void(0);" class="me-0 text-default" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="fe fe-more-vertical fs-17 float-end"></span> </a>
-                                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
-                                                <li><a href="javascript:void(0);"><i class="fe fe-eye me-2"></i>View</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fe fe-plus-circle me-2"></i>Add</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fe fe-trash-2 me-2"></i>Remove</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fe fe-download-cloud me-2"></i>Download</a></li>
-                                                <li><a href="javascript:void(0);"><i class="fe fe-settings me-2"></i>More</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="table-responsive">
-                                            <table class="table table-vcenter border mb-0 text-nowrap table-product">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Request ID</th>
-                                                        <th>Request</th>
-                                                        <!-- <th>Product Cost</th>
-                                                        <th>Total</th> -->
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>#C234</td>
-                                                        <td class="d-flex my-auto"><img src="../../assets/images/pngs/14.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">Service Request</span></td>
-                                                        <!-- <td><b>$14,500</b></td>
-                                                        <td>2,977</td> -->
-                                                        <td><span class="badge bg-primary">Approved</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#C389</td>
-                                                        <td class="d-flex my-auto"><img src="../../assets/images/pngs/15.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">Service Request</span></td>
-                                                        <!-- <td><b>$30,000</b></td>
-                                                        <td>678</td> -->
-                                                        <td><span class="badge bg-primary">Approved</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#C936</td>
-                                                        <td class="d-flex my-auto"><img src="../../assets/images/pngs/16.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">Service Request</span></td>
-                                                        <!-- <td><b>$13,200</b></td>
-                                                        <td>4,922</td> -->
-                                                        <td><span class="badge bg-primary">Approved</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#C493</td>
-                                                        <td class="d-flex my-auto"><img src="../../assets/images/pngs/17.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">Service Request</span></td>
-                                                        <!-- <td><b>$15,100</b></td>
-                                                        <td>1,234</td> -->
-                                                        <td><span class="badge bg-primary">Approved</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#C729</td>
-                                                        <td class="d-flex my-auto"><img src="../../assets/images/pngs/18.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">BService Request</span></td>
-                                                        <!-- <td><b>$5,987</b></td>
-                                                        <td>4,789</td> -->
-                                                        <td><span class="badge bg-primary op-5">Approved</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>#C529</td>
-                                                        <td class="my-auto"><img src="../../assets/images/pngs/19.png" alt="" class="ht-40 wd-40 me-3"><span class="my-auto text-truncate">Service Request</span></td>
-                                                        <!-- <td><b>$11,987</b></td>
-                                                        <td>938</td> -->
-                                                        <td><span class="badge bg-primary">Approved</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-12 col-lg-12 col-xl-4">
-                        <div class="card custom-card">
+                        <!-- <div class="card custom-card">
                             <div id='calendar'></div> 
-                        </div>
+                        </div> -->
                         <div class="card custom-card">
                             <div class="card-header">
                                 <div class="card-title">Project 1</div>
@@ -389,30 +295,25 @@ require_once '../../ADMIN/authetincation.php';
     <!-- Custom JS -->
     <script src="../../assets/js/custom.js"></script>
 
-    
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6744c1904304e3196ae86e53/1idi987he';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6744c1904304e3196ae86e53/1idi987he';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>
 
-
-
-
-
+<!-- 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
-<!-- FullCalendar Script Integration -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('calendar');
@@ -436,8 +337,8 @@ s0.parentNode.insertBefore(s1,s0);
                 });
             },
             eventClick: function(info) {
-                // Show details in a modal on event click
-                $('#eventDetailsModal .modal-title').text(info.event.title); // Title is first_name + pin_location
+              
+                $('#eventDetailsModal .modal-title').text(info.event.title); 
                 $('#eventDetailsModal .modal-body').html(`
                     <p><strong>Name:</strong> ${info.event.extendedProps.first_name}</p>
                     <p><strong>Location:</strong> ${info.event.extendedProps.pin_location}</p>
@@ -450,15 +351,15 @@ s0.parentNode.insertBefore(s1,s0);
                 `);
                 $('#eventDetailsModal').modal('show');
             },
-            eventColor: '#007bff', // Default color for events
-            eventTextColor: '#ffffff', // Text color for events
+            eventColor: '#007bff',
+            eventTextColor: '#ffffff', 
             eventRender: function(info) {
-                // Render event title as first_name + pin_location
-                return info.event.title; // This ensures the title shows "first_name - pin_location"
+                
+                return info.event.title; 
             }
         });
 
         calendar.render();
     });
-</script>
+</script> -->
 
