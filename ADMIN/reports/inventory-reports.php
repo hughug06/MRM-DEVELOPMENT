@@ -1,8 +1,65 @@
 <?php
 require_once '../authetincation.php';
 include_once '../../Database/database.php';
-?>
+function formatMoney($number) {
+    return number_format($number, 2, '.', ',');
+}
 
+  // SQL query to count clients, workers, and agents
+  $sql = "SELECT 
+  role,
+  COUNT(*) AS role_count
+FROM 
+  accounts
+WHERE
+  role IN ('client', 'worker', 'agent')
+GROUP BY 
+  role";
+
+   $sql2 = "SELECT 
+   booking_status,
+   COUNT(*) AS booking_status_count
+ FROM 
+   service_booking
+ WHERE
+   booking_status IN ('pending', 'ongoing', 'completed')
+ GROUP BY 
+   booking_status";
+
+  $result = mysqli_query($conn , $sql);
+  $result2 = mysqli_query($conn , $sql2);
+        //hold the value of number of role
+        $clientCount = 0;
+        $workerCount = 0;
+        $agentCount = 0;
+
+         //hold the value of number of booking status
+         $pendingCount = 0;
+         $ongoingCount = 0;
+         $completedCount = 0;
+
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['role'] == 'client') {
+            $clientCount = $row['role_count'];
+        } elseif ($row['role'] == 'worker') {
+            $workerCount = $row['role_count'];
+        } elseif ($row['role'] == 'agent') {
+            $agentCount = $row['role_count'];
+        }
+    }
+
+    while ($row2= mysqli_fetch_assoc($result2)) {
+        if ($row2['booking_status'] == 'pending') {
+            $pendingCount = $row2['booking_status_count'];
+        } elseif ($row2['booking_status'] == 'ongoing') {
+            $ongoingCount = $row2['booking_status_count'];
+        } elseif ($row2['booking_status'] == 'completed') {
+            $completedCount = $row2['booking_status_count'];
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
 
@@ -55,7 +112,7 @@ include_once '../../Database/database.php';
         <div class="page">
             <div class="main-content app-content">
                 <div class="container-fluid">
-                    <div class="row row-sm">
+                    <div class="row row-sm mt-4">
                         <div class="col-sm-12 col-lg-12 col-xl-8">
                             <div class="row row-sm">
                                 <div class="col-sm-12 col-md-6 col-xl-6">
@@ -404,7 +461,6 @@ include_once '../../Database/database.php';
                             </div>
                         </div>
                     </div>      
-                    
                 </div>
             </div>
             <!-- Footer Start -->
