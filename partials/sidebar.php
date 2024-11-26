@@ -215,21 +215,21 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
+                <li class="slide has-sub <?= $page == 'inventory-control.php' || $page == 'inventory-logs.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'inventory-control.php' || $page == 'inventory-logs.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="ion-md-filing side-menu__icon"></i> -->
-                            <i class="fa-solid fa-warehouse side-menu__icon"></i>
+                        <i class="fa-solid fa-warehouse side-menu__icon"></i>
                         <span class="side-menu__label">Inventory</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
-                    <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item">Inventory Control</a>
+                        <li class="slide <?= $page == 'inventory-control.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item <?= $page == 'inventory-control.php' ? 'active':''?>">Inventory Control</a>
                         </li> 
-                        <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item">Inventory Logs</a>
+                        <li class="slide <?= $page == 'inventory-logs.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item <?= $page == 'inventory-logs.php' ? 'active':''?>">Inventory Logs</a>
                         </li>                                
                     </ul>
                 </li>
