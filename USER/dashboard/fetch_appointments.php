@@ -11,7 +11,7 @@ $sql_select = "SELECT service_booking.date, service_booking.start_time, service_
                FROM service_booking
                INNER JOIN user_info ON user_info.user_id = service_booking.user_id
                INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id
-               WHERE service_booking.user_id = '$userid'
+               
                ";
 
 $result = $conn->query($sql_select);
