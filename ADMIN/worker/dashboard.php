@@ -2,6 +2,7 @@
 session_start();
 require_once '../../Database/database.php';
 $worker_id = $_SESSION['user_id'];
+
 ?>
 
 <!DOCTYPE html>
@@ -86,13 +87,13 @@ $worker_id = $_SESSION['user_id'];
                                 <!-- Checklist -->
                                 <ul class="list-group mb-4">
                                     <?php 
-                                    $worker_id = $_SESSION['user_id'];
+                                    
                                     // Query to get data for the current worker
                                     $sql = "SELECT * FROM worker_ongoing
                                         INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
                                         INNER JOIN user_info on user_info.user_id = service_booking.user_id 
                                         INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                        where worker_id = '$worker_id' AND booking_status != 'completed'
+                                        where worker_id = '$worker_id' AND status != 'completed'
                                         ";
                                     $result = mysqli_query($conn, $sql);
 
@@ -243,7 +244,7 @@ $worker_id = $_SESSION['user_id'];
                                                                          <tr>
                                                                             
                                                                             <td><?= htmlspecialchars($row['brand']) ?></td>
-                                                                            <td><?= $row['unit'] ?></td>
+                                                                            <td>items</td>
                                                                             <td><?= htmlspecialchars($row['quantity']) ?></td>
                                                                             <td>
                                                                                 <input class="form-check-input" type="checkbox" name="checked_<?= htmlspecialchars($row['brand']); ?>">

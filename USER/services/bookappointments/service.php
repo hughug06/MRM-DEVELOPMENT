@@ -3,8 +3,7 @@ require_once '../../../ADMIN/authetincation.php';
 require_once '../../../Database/database.php';
 
 $user_id = $_SESSION['user_id'];
-echo $user_id;
-$service_count = "select * from service_count";
+$service_count = "select * from service_count where user_id = '$user_id'";
 $result3 = mysqli_query($conn , $service_count);
 $count = mysqli_fetch_assoc($result3);
 
@@ -184,7 +183,7 @@ $count = mysqli_fetch_assoc($result3);
                         <?php 
                         
                         if($count['service_count'] == 0){           
-                        
+                        echo $count['service_count'];
                         ?>
                         <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
                         <?php 

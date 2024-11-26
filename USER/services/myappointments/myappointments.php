@@ -239,7 +239,7 @@
 
                                                                         <!-- Button to open the payment modal -->
                                                                         <button class="btn btn-primary open-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                                                            Open Payment Modal
+                                                                            Payment
                                                                         </button>
                                                                         
                                                                         <?php
@@ -251,7 +251,7 @@
                                                                         <input type="text" id="booking_id_input_third" name="booking_id" value="<?= $row['booking_id'] ?>">
 
                                                                         <button type="button" class="btn btn-primary open-third-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
-                                                                            Open Third Payment Modal
+                                                                            Payment
                                                                         </button>
 
                                                                         <?php
@@ -364,7 +364,7 @@
                                                 INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
                                                 INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                                                 INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
-                                                WHERE booking_status = 'completed'";
+                                                WHERE booking_status = 'completed' and service_booking.user_id = '$user_id'";
                                                 $result_completed = mysqli_query($conn, $completed);
                                                 if(mysqli_num_rows($result_completed)){
                                                     while($row_completed = mysqli_fetch_assoc($result_completed)){

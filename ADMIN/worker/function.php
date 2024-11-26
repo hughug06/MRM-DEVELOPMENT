@@ -2,6 +2,7 @@
 session_start();
 require_once '../../Database/database.php';
 $worker_id = $_SESSION['user_id'];
+
 $working_id = $_POST['working_id'];
 $sql_command = isset($_POST['sql']) ? $_POST['sql'] : null;
 $brand = isset($_POST['brand']) ? $_POST['brand'] : null;

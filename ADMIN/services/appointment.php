@@ -220,7 +220,8 @@
                                                                                 $ongoing = "SELECT * FROM service_booking
                                                                                             INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
                                                                                             INNER JOIN user_info on user_info.user_id = service_booking.user_id 
-                                                                                            INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id     
+                                                                                            INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id  
+                                                                                            where booking_status != 'completed'   
                                                                                             ";
                                                                                 $result_ongoing = mysqli_query($conn, $ongoing);
                                                                                 if (mysqli_num_rows($result_ongoing) > 0) {

@@ -1,4 +1,5 @@
 <?php
+ 
   date_default_timezone_set('Asia/Manila');
   $userid = $_SESSION['user_id'];
  ?>
@@ -499,10 +500,7 @@
 
     <!-- Start::header-content-right -->
     <div class="header-content-right">
-        <?php 
-        if($_SESSION['auth'] == "user")
-        {
-        ?>
+       
     <div class="header-element d-xl-flex align-items-center">
             <!-- Start::header-link -->
             <a href="#" id="view-projects" class="header-link" name="projects">
@@ -543,9 +541,7 @@
             </a>
             <!-- End::header-link -->
         </div>
-        <?php 
-        }
-        ?>
+       
         <!--  -->
         <!-- Start::header-element -->
         <div class="header-element header-theme-mode">
