@@ -174,10 +174,12 @@
                                                                     <button type="button" class="btn btn-danger"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#reject_user"
-                                                                            data-reject-booking-id="<?= $resultItem['booking_id']; ?>"                                                                        >
+                                                                            data-reject-booking-id="<?= $resultItem['booking_id']; ?>"     
+                                                                            data-user-id="<?= $resultItem['user_id'];?>"      
+                                                                            time-availability-id="<?= $resultItem['availability_id'];?>"                                                                 >
                                                                         Reject User
                                                                     </button>
-
+                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -389,13 +391,15 @@
                                                                 <th>Payment Date</th>
                                                                 <th>Payment Status</th>
                                                                 <th>Booking Status</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php 
                                                             $select = "SELECT * FROM service_booking     
                                                                         INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id   
-                                                                        INNER JOIN user_info ON user_info.user_id = service_booking.user_id                                    
+                                                                        INNER JOIN user_info ON user_info.user_id = service_booking.user_id  
+                                                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id                                  
                                                                         WHERE payment_status ='advance_payment' AND booking_status = 'canceled'";
                                                             $result = mysqli_query($conn, $select);
                                                             
@@ -410,11 +414,20 @@
                                                                 <td><?= htmlspecialchars($row['date'] . ' / ' . $row['start_time'] . ' - ' . $row['end_time']); ?></td>
                                                                 <td><?= htmlspecialchars($row['payment_method']); ?></td>
                                                                 <td><?= htmlspecialchars($row['bank_name']); ?></td>
-                                                                <td><?= htmlspecialchars($row['reference_number']); ?></td>
+                                                                <td><?= htmlspecialchars($row['first_reference']); ?></td>
                                                                 <td><?= htmlspecialchars($row['payment_date']); ?></td>
                                                                 <td><span class="badge bg-warning"><?= htmlspecialchars($row['payment_status']); ?></span></td>
-                                                                <td><span class="badge bg-danger"><?= htmlspecialchars($row['booking_status']); ?></span></td>
-                                                                
+                                                                <td><span class="badge bg-danger"><?= htmlspecialchars($row['booking_status']); ?></span></td>                                                            
+                                                                    <td>
+                                                                    <button type="button" class="btn btn-success"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#recover_booking"
+                                                                            recover-payment-id="<?= $row['payment_id']; ?>"                              
+                                                                            recover-booking-id="<?= $row['booking_id'];?>"
+                                                                            recover-user-id="<?= $row['user_id'];?>"                                                                       >
+                                                                        Recover account
+                                                                    </button>
+                                                                    </td>                                                                                 
                                                             </tr>
                                                             <?php 
                                                                 }
@@ -436,6 +449,38 @@
                     </div>
                 </div>
             </div>
+                    <!-- Recover Booking Modal -->
+                    <div class="modal fade" id="recover_booking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="recoverBookingLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="recoverBookingLabel">Recover Booking</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="recover_booking.php" method="POST">
+                                        <!-- Hidden Inputs for Payment and Booking IDs -->
+                                        <input type="hidden" class="paymentId" name="payment_id">
+                                        <input type="hidden" class="bookingId" name="booking_id">
+                                        <input type="text" class="userId" name="user_id">
+                                        <!-- Reason for Recovery -->
+                                        <h5 class="card-title">Enter new reference number</h5>
+                                        <input type="number" name="new_reference_number">
+                                        
+                                        <!-- Submit Button -->
+                                        <div class="mt-3 text-end">
+                                            <button type="submit" class="btn btn-success">Recover</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
 
                             <?php 
                             $sql2 = "select * from accounts where role = 'worker'";
@@ -498,29 +543,39 @@
                                                         <?php 
                                                         }
                                                         ?>
-                                 <!-- MODAL FOR reject -->
-                             <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">REJECT PAYMENT</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Form for assigning a worker -->
-                                                <form action="reject_payment.php" method="POST">
-                                                    <!-- Hidden inputs for booking, admin, client, and availability IDs -->
-                                                    <input type="text" class="bookingId" name="booking_id">
-                                                 
+                            <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title" id="reject_userModal">Reject Payment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
 
-                                                    <h5 class="card-title">Enter Reason for Rejection</h5>
-                                                    <textarea name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
-                                                    <button type="submit">SUBMIT</button>
-                                                </form>
-                                            </div>
+                                        <!-- Modal Body -->
+                                        <div class="modal-body">
+                                            <form action="reject_payment.php" method="POST">
+                                                <!-- Hidden Inputs for Booking ID and User ID -->
+                                                <input type="text" class="bookingId" name="booking_id">
+                                                <input type="text" class="userId" name="user_id">
+                                                <input type="text" class="availabilityId" name="availability_id">
+
+                                                <!-- Rejection Reason -->
+                                                <div class="mb-3">
+                                                    <label for="reason" class="form-label">Enter Reason for Rejection</label>
+                                                    <textarea id="reason" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                              </div>
+                                </div>
+                            </div>
+
 
 
 
@@ -608,17 +663,41 @@
                     //FOR REJECT MODAL
                     const rejectModal = document.getElementById('reject_user');
                     const bookingInput_reject = rejectModal.querySelector('.bookingId');
-
+                    const userInputReject = rejectModal.querySelector('.userId');
+                    const availabilityInputReject = rejectModal.querySelector('.availabilityId');
                     rejectModal.addEventListener('show.bs.modal', (event) => {
                         // Button that triggered the modal
                         const button = event.relatedTarget;
 
                         // Extract data from data-* attributes
                         const bookingId = button.dataset.rejectBookingId;
-
+                        const userId = button.getAttribute('data-user-id');
+                        const availabilityId = button.getAttribute('time-availability-id');
                         // Populate the hidden input field
                         bookingInput_reject.value = bookingId;
+                        userInputReject.value = userId;
+                        availabilityInputReject.value = availabilityId;
                     });
+
+                    // FOR RECOVER MODAL
+                    const recoverModal = document.getElementById('recover_booking');
+                    const paymentInput = recoverModal.querySelector('.paymentId');
+                    const booking = recoverModal.querySelector('.bookingId');
+                    const userInput = recoverModal.querySelector('.userId');
+                    recoverModal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
+
+                        // Extract data from data-* attributes
+                        const paymentId = button.getAttribute('recover-payment-id');
+                        const bookingId = button.getAttribute('recover-booking-id');
+                        const userId = button.getAttribute('recover-user-id');
+                        // Populate the hidden input fields
+                        paymentInput.value = paymentId;
+                        booking.value = bookingId;
+                        userInput.value = userId;
+                    });
+
                 });
 
 

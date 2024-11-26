@@ -1,6 +1,10 @@
 <?php 
     require_once '../../../ADMIN/authetincation.php';
     require_once '../../../Database/database.php';
+    $user_id = $_SESSION['user_id'];
+    $name = "select * from user_info where user_id = '$user_id'";
+    $name_result = mysqli_query($conn , $name);
+    $name_row = mysqli_fetch_assoc($name_result);
 ?>
 
 <!DOCTYPE html>
@@ -91,35 +95,53 @@
                                                                 
                                                                 ?>
 
-                                                                        <div class="col-md-4">
-                                                                            <div class="card mb-4">
-                                                                                    <div class="card-header">
-                                                                                        <h5 class="card-title">Book Details</h5>
-                                                                                    </div>
-                                                                                    <div class="card-body">
-                                                                                        <!-- Service and Product Info -->
-                                                                                        <h6><strong>Service Type:</strong> <?= htmlspecialchars($resultItem['service_type']); ?></h6>
-                                                                                        <h6><strong>Product Type:</strong> <?= htmlspecialchars($resultItem['product_type']); ?></h6>
-                                                                                        <h6><strong>Brand / Power / Running Hours:</strong> <?= htmlspecialchars($resultItem['brand'] . ' / ' . $resultItem['KVA'] . ' / ' . $resultItem['running_hours']); ?></h6>
-
-                                                                                        <!-- Schedule Info -->
-                                                                                        <h6><strong>Schedule:</strong> <?= htmlspecialchars($resultItem['date'] . ' / ' . $resultItem['start_time'] . ' - ' . $resultItem['end_time']); ?></h6>
-
-                                                                                        <!-- Payment Info -->
-                                                                                        <h6><strong>Payment Method:</strong> <?= htmlspecialchars($resultItem['payment_method']); ?></h6>
-                                                                                        <h6><strong>Bank Name:</strong> <?= htmlspecialchars($resultItem['bank_name']); ?></h6>
-                                                                                        <h6><strong>Reference Number:</strong> <?= htmlspecialchars($resultItem['first_reference']); ?></h6>
-                                                                                        <h6><strong>Payment Date:</strong> <?= htmlspecialchars($resultItem['payment_date']); ?></h6>
-
-                                                                                        <!-- Payment and Booking Status -->
-                                                                                        <h6><strong>Payment Status:</strong> <?= htmlspecialchars($resultItem['payment_status']); ?></h6>
-                                                                                        <h6><strong>Booking Status:</strong> <?= htmlspecialchars($resultItem['booking_status']); ?></h6>
-                                                                                    </div>
-                                                                                    <div class="card-footer">                                         
-                                                                                        <button class="btn btn-primary">Request for refund</button>
-                                                                                    </div>
-                                                                            </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="card mb-4 shadow-lg border-primary">
+                                                                        <div class="card-header bg-primary text-white">
+                                                                            <h5 class="card-title mb-0">Book Details</h5>
                                                                         </div>
+                                                                        <div class="card-body bg-light">
+                                                                            <!-- Service and Product Info -->
+                                                                            <h6 class="text-secondary"><strong>Service Type:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['service_type']); ?></p>
+
+                                                                            <h6 class="text-secondary"><strong>Product Type:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['product_type']); ?></p>
+
+                                                                            <h6 class="text-secondary"><strong>Brand / Power / Running Hours:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['brand'] . ' / ' . $resultItem['KVA'] . ' / ' . $resultItem['running_hours']); ?></p>
+
+                                                                            <!-- Schedule Info -->
+                                                                            <h6 class="text-secondary"><strong>Schedule:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['date'] . ' / ' . $resultItem['start_time'] . ' - ' . $resultItem['end_time']); ?></p>
+
+                                                                            <!-- Payment Info -->
+                                                                            <h6 class="text-secondary"><strong>Payment Method:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['payment_method']); ?></p>
+
+                                                                            <h6 class="text-secondary"><strong>Bank Name:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['bank_name']); ?></p>
+
+                                                                            <h6 class="text-secondary"><strong>Reference Number:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['first_reference']); ?></p>
+
+                                                                            <h6 class="text-secondary"><strong>Payment Date:</strong></h6>
+                                                                            <p class="text-dark"><?= htmlspecialchars($resultItem['payment_date']); ?></p>
+
+                                                                            <!-- Payment and Booking Status -->
+                                                                            <h6 class="text-secondary"><strong>Payment Status:</strong></h6>
+                                                                            <p class="<?= htmlspecialchars($resultItem['payment_status'] === 'Paid' ? 'text-success' : 'text-danger'); ?>">
+                                                                                <?= htmlspecialchars($resultItem['payment_status']); ?>
+                                                                            </p>
+
+                                                                            <h6 class="text-secondary"><strong>Booking Status:</strong></h6>
+                                                                            <p class="<?= htmlspecialchars($resultItem['booking_status'] === 'Confirmed' ? 'text-success' : 'text-warning'); ?>">
+                                                                                <?= htmlspecialchars($resultItem['booking_status']); ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                                 
                                                             <?php }} ?>
                                                 </div>
@@ -325,77 +347,86 @@
                                                 <div class="mb-4 main-content-label">Completed</div>
                                                 <?php 
                                                 $completed = "SELECT * FROM service_booking
-                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
                                                 INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
                                                 INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                                                 INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
                                                 WHERE booking_status = 'completed'";
                                                 $result_completed = mysqli_query($conn, $completed);
-                                                $row_completed = mysqli_fetch_assoc($result_completed);
+                                                if(mysqli_num_rows($result_completed)){
+                                                    while($row_completed = mysqli_fetch_assoc($result_completed)){
+
+                                                   
+                                                
+                                                
                                                 ?>
 
                                                <!-- Card -->
-                                                    <div class="card shadow-lg mt-4">
-                                                        <!-- Card Header -->
-                                                        <div class="card-header bg-success text-white text-center">
-                                                            <h5>Completed</h5>
+                                               <div class="card shadow-lg mt-4">
+                                                    <!-- Card Header -->
+                                                    <div class="card-header bg-success text-white text-center">
+                                                        <h5>Completed</h5>
+                                                    </div>
+                                                    <!-- Card Body -->
+                                                    <div class="card-body">
+                                                        <!-- Full Name and Worker Name -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <strong>Client Name:</strong>
+                                                                <p id="client_name"><?= htmlspecialchars($name_row['first_name'] . " " . $name_row['last_name']); ?></p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <strong>Worker Name:</strong>
+                                                                <p id="worker_name"><?= htmlspecialchars($row_completed['first_name'] . " " . $row_completed['last_name']); ?></p>
+                                                            </div>
                                                         </div>
-                                                        <!-- Card Body -->
-                                                        <div class="card-body">
-                                                            <!-- Full Name and Worker Name -->
-                                                            <div class="row mb-3">
-                                               
-                                                                <div class="col-md-6">
-                                                                    <strong>Worker Name:</strong>
-                                                                    <p id="worker_name"><?= $row_completed['first_name'] . " " .$row_completed['last_name']  ?></p>
-                                                                </div>
+                                                        <!-- Location -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-12">
+                                                                <strong>Location:</strong>
+                                                                <p id="location"><?= htmlspecialchars($row_completed['pin_location']); ?></p>
                                                             </div>
-                                                            <!-- Location -->
-                                                            <div class="row mb-3">
-                                                                <div class="col-12">
-                                                                    <strong>Location:</strong>
-                                                                    <p id="location"><?= $row_completed['pin_location'] ?></p>
-                                                                </div>
+                                                        </div>
+                                                        <!-- Service Type and Product Type -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <strong>Service Type:</strong>
+                                                                <p id="service_type"><?= htmlspecialchars($row_completed['service_type']); ?></p>
                                                             </div>
-                                                            <!-- Service Type and Product Type -->
-                                                            <div class="row mb-3">
-                                                                <div class="col-md-6">
-                                                                    <strong>Service Type:</strong>
-                                                                    <p id="service_type"><?= $row_completed['service_type'] ?></p>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <strong>Product Type:</strong>
-                                                                    <p id="product_type"><?= $row_completed['product_type'] ?></p>
-                                                                </div>
+                                                            <div class="col-md-6">
+                                                                <strong>Product Type:</strong>
+                                                                <p id="product_type"><?= htmlspecialchars($row_completed['product_type']); ?></p>
                                                             </div>
-                                                            <!-- Start Time and End Time -->
-                                                            <div class="row mb-3">
-                                                                <div class="col-md-6">
-                                                                    <strong>Start Time:</strong>
-                                                                    <p id="start_time">2024-11-24 10:00:00</p>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <strong>End Time:</strong>
-                                                                    <p id="end_time">2024-11-24 12:00:00</p>
-                                                                </div>
+                                                        </div>
+                                                        <!-- Start Time and End Time -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <strong>Start Time:</strong>
+                                                                <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
                                                             </div>
-                                                            <!-- Note -->
-                                                            <div class="row mb-3">
-                                                                <div class="col-12">
-                                                                    <strong>Note:</strong>
-                                                                    <p class="text-muted">
-                                                                        Contact us through Chaintercom or email for maintenance/warranty issues. 
-                                                                        <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
-                                                                    </p>
-                                                                </div>
+                                                            <div class="col-md-6">
+                                                                <strong>End Time:</strong>
+                                                                <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
                                                             </div>
-                                                            <!-- Receipt Button -->
-                                                            <div class="d-flex justify-content-end">
-                                                                <button class="btn btn-primary" onclick="generateReceipt()">Download Receipt</button>
+                                                        </div>
+                                                        <!-- Note -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-12">
+                                                                <strong>Note:</strong>
+                                                                <p class="text-muted">
+                                                                    Contact us through Chaintercom or email for maintenance/warranty issues. 
+                                                                    <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
+                                                                </p>
                                                             </div>
+                                                        </div>
+                                                        <!-- Receipt Button -->
+                                                        <div class="d-flex justify-content-end">
+                                                            <button class="btn btn-primary" onclick="generateReceipt('<?= $row_completed['total_cost']; ?>')">Download Receipt</button>
                                                         </div>
                                                     </div>
+                                                </div>
 
+                                                <?php  }}?>
 
                                                 <!-- Modal for Maintenance Coverage -->
                                                     <div class="modal fade" id="maintenanceCoverageModal" tabindex="-1" aria-labelledby="maintenanceCoverageModalLabel" aria-hidden="true">
@@ -425,7 +456,9 @@
 
                                             </div>
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="cancelled">
+                                                
                                                 <div class="mb-4 main-content-label">Cancelled</div>
+                                                <div class="text-danger">Note!:Contact us on chaintercom module if you have any question</div>
                                                 <div class="text-danger"></div>
                                                 <div class="card-body border">
                                                 <div class="table-responsive">
@@ -452,6 +485,7 @@
                                                             $sql = "SELECT * FROM service_booking
                                                                     INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id
                                                                     INNER JOIN cancel_reason ON cancel_reason.booking_id = service_booking.booking_id
+                                                                    INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id            
                                                                     WHERE booking_status = 'canceled' AND user_id = '$user_id'";
                                                             $result = mysqli_query($conn, $sql);
                                                             
@@ -465,13 +499,13 @@
                                                                 <td><?= htmlspecialchars($resultItem['date'] . ' / ' . $resultItem['start_time'] . ' - ' . $resultItem['end_time']); ?></td>
                                                                 <td><?= htmlspecialchars($resultItem['payment_method']); ?></td>
                                                                 <td><?= htmlspecialchars($resultItem['bank_name']); ?></td>
-                                                                <td><?= htmlspecialchars($resultItem['reference_number']); ?></td>
+                                                                <td><?= htmlspecialchars($resultItem['first_reference']); ?></td>
                                                                 <td><?= htmlspecialchars($resultItem['payment_date']); ?></td>
                                                                 <td><span class="badge bg-warning"><?= htmlspecialchars($resultItem['payment_status']); ?></span></td>
                                                                 <td><span class="badge bg-danger"><?= htmlspecialchars($resultItem['booking_status']); ?></span></td>
                                                                 <td><span class="text-info"><?= htmlspecialchars($resultItem['reason']); ?></span></td>
                                                                 <td>
-                                                                    <button class="btn btn-primary btn-sm">Request for refund</button>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                             <?php 
@@ -649,34 +683,44 @@
 
 <!-- JavaScript for Receipt Button -->
 <script>
-    function generateReceipt() {
-        const clientName = document.getElementById('client_name').innerText;
-        const workerName = document.getElementById('worker_name').innerText;
-        const location = document.getElementById('location').innerText;
-        const serviceType = document.getElementById('service_type').innerText;
-        const productType = document.getElementById('product_type').innerText;
-        const startTime = document.getElementById('start_time').innerText;
-        const endTime = document.getElementById('end_time').innerText;
-        const amount = "10,000.00"; // Replace with dynamic amount if needed
+    function generateReceipt(totalCost) {
+    // Retrieve data from the HTML
+    const clientName = document.getElementById('client_name')?.innerText || "Client Name Unavailable";
+    const workerName = document.getElementById('worker_name')?.innerText || "Worker Name Unavailable";
+    const location = document.getElementById('location')?.innerText || "Location Unavailable";
+    const serviceType = document.getElementById('service_type')?.innerText || "Service Type Unavailable";
+    const productType = document.getElementById('product_type')?.innerText || "Product Type Unavailable";
+    const startTime = document.getElementById('start_time')?.innerText || "Start Time Unavailable";
+    const endTime = document.getElementById('end_time')?.innerText || "End Time Unavailable";
+    const amount = totalCost ? parseFloat(totalCost).toLocaleString('en-US', { style: 'currency', currency: 'PHP' }) : "Amount Unavailable";
 
-        const receiptContent = `
-            <h3 style="text-align: center;">ACKNOWLEDGEMENT RECEIPT</h3>
-            <p>
-                This is to acknowledge receipt of the total amount of TEN THOUSAND PESOS (PhP ${amount}), from ${clientName} of ${location}, 
-                as payment for ${serviceType} services of ${productType} provided by MRM EG Electric Power Generation Services. 
-                This amount covers all labor and material costs associated with the installation as per our agreed terms.
-            </p>
-            <p>We appreciate your prompt payment and look forward to supporting your energy needs with reliable and efficient services.</p>
-            <p><strong>RECEIVED BY:</strong></p>
-            <p>ENGR. MARIA L. SANTOS<br>MRM EG Electric Power Generation Services</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-        `;
+    // Create receipt content
+    const receiptContent = `
+        <h3 style="text-align: center;">ACKNOWLEDGEMENT RECEIPT</h3>
+        <p>
+            This is to acknowledge receipt of the total amount of ${amount}, 
+            from ${clientName} of ${location}, as payment for ${serviceType} services of ${productType} 
+            provided by MRM EG Electric Power Generation Services.
+        </p>
+        <p>This amount covers all labor and material costs associated with the installation as per our agreed terms.</p>
+        <p>We appreciate your prompt payment and look forward to supporting your energy needs with reliable and efficient services.</p>
+        <p><strong>RECEIVED BY:</strong></p>
+        <p>ENGR. MARIA L. SANTOS<br>MRM EG Electric Power Generation Services</p>
+        <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+    `;
 
-        const receiptWindow = window.open('', '_blank', 'width=800,height=600');
+    // Open a new window for the receipt
+    const receiptWindow = window.open('', '_blank', 'width=800,height=600');
+    if (receiptWindow) {
         receiptWindow.document.write('<html><head><title>Receipt</title></head><body>' + receiptContent + '</body></html>');
         receiptWindow.document.close();
         receiptWindow.print();
+    } else {
+        alert("Please enable popups to download the receipt.");
     }
+}
+
+
 </script>
 
 
