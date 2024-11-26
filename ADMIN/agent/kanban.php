@@ -397,6 +397,7 @@ if ($exec) {
                                 <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
                                 <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
                                 <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                                <p id="reasondisp"><strong>Cancel Reason:</strong> <span id="reason"></span></p>
                                 <input type="hidden" id="total_cost_input" name="total_cost">
                                 <input type="hidden" id="booking_id_input" name="booking_id">
                                 <input type="hidden" id="total_cost_input_third" name="total_cost">
@@ -409,6 +410,11 @@ if ($exec) {
                                 </button>
                                 <button class="btn btn-primary open-third-payment-modal-btn payment3" id="payment3" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
                                     Proceed next Payment
+                                </button>
+                                <button type="button" class="btn btn-danger" id="reject"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#reject_user"                                                               >
+                                    cancel Project
                                 </button>
                             </div>
                         </div>
@@ -505,6 +511,44 @@ if ($exec) {
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+                <!-- Modal cancel task -->
+                <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="reject_userModal">Reject Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <form action="/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php" method="POST">
+                                    <!-- Hidden Inputs for Booking ID and User ID -->
+                                    <input type="text" class="bookingId" id="book_id" name="booking_id">
+                                    <input type="text" class="userId" id="user_id" name="user_id">
+                                    <input type="text" class="availabilityId" id="avail_id" name="availability_id">
+
+                                    <!-- Rejection Reason -->
+                                    <div class="mb-3">
+                                        <label for="reason" class="form-label">Enter Reason for Rejection</label>
+                                        <textarea id="reason" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
 
@@ -595,27 +639,40 @@ if ($exec) {
         document.getElementById("booking_id_input").value = item.booking_id;
         document.getElementById("total_cost_input_third").value = item.total_cost;
         document.getElementById("booking_id_input_third").value = item.booking_id;
+        document.getElementById("reason").textContent = item.cancel_reason;
 
-        if(item.status == 'completed' || item.status == 'cancelled' || item.status == 'pick_up'|| item.status == 'delivery' || item.status == 'ongoing_construction'){
+        document.getElementById("book_id").value = item.booking_id;
+        document.getElementById("user_id").value = item.user_id;
+        document.getElementById("avail_id").value = item.availability_id;
+
+        if(item.status == 'completed' || item.status == 'pick_up'|| item.status == 'delivery' || item.status == 'ongoing_construction'){
             document.getElementById("cancel").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
         }
         else if(item.status == 'checking'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("cancelval").style.display = "block";
             document.getElementById("payment3").style.display = "none";
             document.getElementById("payment2").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
         }
         else if(item.status == 'arrive'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment2").style.display = "block";
             document.getElementById("cancelval").style.display = "none";
             document.getElementById("payment3").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
         }
         else if(item.status == 'final_checking'){
             document.getElementById("cancel").style.display = "block";
             document.getElementById("payment3").style.display = "block";
             document.getElementById("payment2").style.display = "none";
             document.getElementById("cancelval").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
+        }
+        else if(item.status == 'cancelled'){
+            document.getElementById("cancel").style.display = "none";
+            document.getElementById("reasondisp").style.display = "block";
         }
 
 
