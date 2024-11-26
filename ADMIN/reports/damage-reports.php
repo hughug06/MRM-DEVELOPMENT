@@ -55,12 +55,95 @@ include_once '../../Database/database.php';
         <?php include_once('../../partials/sidebar.php')?>
         <!-- End::app-sidebar -->
 
-        <div class="page">
-            <div class="main-content app-content">
+            <div class="page">
+                <div class="main-content app-content">
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- content here -->
-
+                        <!-- Total Damages -->
+                        <div class="col-lg-4">
+                            <div class="card text-white bg-danger mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Damages Reported</h5>
+                                    <h3 class="card-text">
+                                        <?php
+                                        $totalDamagesQuery = "SELECT SUM(quantity) AS total_damages FROM damage_report";
+                                        $totalDamagesResult = $conn->query($totalDamagesQuery);
+                                        echo $totalDamagesResult->fetch_assoc()['total_damages'] ?? 0;
+                                        ?>
+                                    </h3>              
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <!-- Damage Reports -->
+                        <div class="col-lg-4">
+                            <div class="card text-white bg-warning mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Reports</h5>
+                                    <h3 class="card-text">
+                                        <?php
+                                        $totalReportsQuery = "SELECT COUNT(*) AS total_reports FROM damage_report";
+                                        $totalReportsResult = $conn->query($totalReportsQuery);
+                                        echo $totalReportsResult->fetch_assoc()['total_reports'] ?? 0;
+                                        ?>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Damage by Time -->
+                        <div class="col-lg-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Damages by When it Happened</h5>
+                                    <!-- Chart -->
+                                    <canvas id="damageChart" style="height: 300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Damage Table -->
+                        <div class="col-lg-12">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Detailed Damage Reports</h5>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Working ID</th>
+                                                <th>Description</th>
+                                                <th>Damage Type</th>
+                                                <th>Quantity</th>
+                                                <th>When it Happened</th>
+                                                <th>Reported At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $damageTableQuery = "SELECT * FROM damage_report ORDER BY created_at DESC";
+                                            $damageTableResult = $conn->query($damageTableQuery);
+                                            while ($row = $damageTableResult->fetch_assoc()):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $row['working_id']; ?></td>
+                                                <td><?php echo $row['description']; ?></td>
+                                                <td><?php echo $row['damage']; ?></td>
+                                                <td><?php echo $row['quantity']; ?></td>
+                                                <td><?php echo $row['when_happen']; ?></td>
+                                                <td><?php echo $row['created_at']; ?></td>
+                                            </tr>
+                                            <?php endwhile; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Download Report Buttons -->
+                                <div class="d-flex justify-content-center gap-3 my-3">
+                                    <button class="btn btn-outline-warning" onclick="downloadReport('weekly')">Download Weekly Report</button>
+                                    <button class="btn btn-outline-success" onclick="downloadReport('monthly')">Download Monthly Report</button>
+                                    <button class="btn btn-outline-info" onclick="downloadReport('yearly')">Download Yearly Report</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,3 +190,32 @@ include_once '../../Database/database.php';
     </body>
 
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fetch data for the damage chart
+        fetch('fetch_damage_chart.php')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('damageChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.when_happen_labels,
+                        datasets: [{
+                            label: 'Total Damages',
+                            data: data.damage_counts,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    
+                });
+            });
+
+        // Function to trigger download
+        function downloadReport(period) {
+            window.location.href = 'download_damage_report.php?period=' + period;
+        }
+    </script>
