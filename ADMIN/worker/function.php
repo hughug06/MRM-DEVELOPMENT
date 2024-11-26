@@ -56,6 +56,7 @@ if(mysqli_num_rows($result) > 0){
     $row = mysqli_fetch_assoc($result);
     $status = $row['status'];
     $final_status = '';
+    $service_from = $row['service_from'];
     
     switch ($status) {
         case 'pick_up':
@@ -301,7 +302,7 @@ if(mysqli_num_rows($result) > 0){
         $upd = "UPDATE worker_ongoing SET status='$final_status' WHERE working_id = '$working_id' AND worker_id = '$worker_id'";
         $result_upd = mysqli_query($conn ,$upd);
 
-        if($_SESSION['auth'] = "agent"){
+        if($service_from = "agent"){
             // Assuming $conn is your database connection
             $getbookid = "SELECT booking_id FROM worker_ongoing WHERE working_id = '$working_id'";
             $result = $conn->query($getbookid);
@@ -309,7 +310,7 @@ if(mysqli_num_rows($result) > 0){
             if ($result && $result->num_rows > 0) {
                 // Fetch the row as an associative array
                 $row = $result->fetch_assoc();
-                $booking_id = $row['booking_id']; // Store the booking_id into $booking_id
+                $booking_ids = $row['booking_id']; // Store the booking_id into $booking_id
             } else {
                 // Handle the case where no booking_id was found
                 $booking_id = null;
@@ -317,7 +318,7 @@ if(mysqli_num_rows($result) > 0){
             }
 
 
-            $kanbanupd="UPDATE kanban SET kanban_status='$kanban_status' WHERE booking_id='$booking_id'";
+            $kanbanupd="UPDATE kanban SET kanban_status='$kanban_status' WHERE booking_id='$booking_ids'";
             $result_updkanban = mysqli_query($conn ,$kanbanupd);
             echo($kanban_status);
             echo($booking_id);
