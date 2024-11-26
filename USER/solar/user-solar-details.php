@@ -119,20 +119,6 @@ global $conn;
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-12 col-md-12">
                                         <div class="row">
-                                            <div class="col-2">
-                                                <div class="clearfix carousel-slider">
-                                                    <div id="thumbcarousel" class="carousel slide" data-bs-interval="false">
-                                                        <div class="carousel-inner">
-                                                            <div class="carousel-item active">
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="0" class="thumb my-2"><img src="../assets/images/pngs/24.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="1" class="thumb my-2"><img src="../assets/images/pngs/26.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="2" class="thumb my-2"><img src="../assets/images/pngs/25.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="3" class="thumb my-2"><img src="../assets/images/pngs/23.png" alt="img"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-md-7 offset-md-1 col-sm-9 col-8">
                                                 <div class="product-carousel">
                                                     <div id="carousel" class="carousel slide" data-bs-ride="false">
@@ -141,9 +127,6 @@ global $conn;
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/26.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/25.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/23.png" alt="img" class="img-fluid mx-auto d-block"></div>
-                                                        </div>
-                                                        <div class="text-center mt-4 mb-4 btn-list">
-                                                            <a href="ecommerce-cart.html" class="btn ripple btn-primary d-inline-flex align-items-center"><i class="fe fe-shopping-cart me-1"> </i> Add to cart</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,9 +139,10 @@ global $conn;
                                             <h6 class="mt-4 fs-16">Description</h6>
                                             <pre style="text-wrap: wrap; text-align: justify;"><?= $Description ?></pre>
                                         </div>
+                                        
                                     </div>
                                 </div>
-                                <div class="mt-4">
+                                <div class="mt-4 p-5">
                                     <h5 class="mb-3">Specifications :</h5>
                                     <div class="">
                                         <div class="row">
@@ -168,7 +152,7 @@ global $conn;
 
                                             
                                             <div class="col-xl-12 mt-4">
-                                                <div class="card">
+                                                <div class="card d-none">
                                                     <div>
                                                         <div class="d-flex p-3">
                                                             <h5 class="float-start main-content-label mb-0 mt-2">All Ratings and Reviews</h5>

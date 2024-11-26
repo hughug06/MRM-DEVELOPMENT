@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2024 at 06:47 PM
+-- Generation Time: Nov 11, 2024 at 06:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,52 +48,8 @@ CREATE TABLE `accounts` (
 
 INSERT INTO `accounts` (`account_id`, `user_id`, `email`, `password`, `role`, `is_ban`, `service_count`, `account_created`, `verify_token`, `verify_status`, `created_at`, `updated_at`) VALUES
 (94, 132, 'janariesimpuerto13@gmail.com', '$2y$10$e6Tqx/lUPaD5KrxLOUYOIegpApyNuNNv.C94gIXilx/GT6.mnuoaS', 'admin', 0, 0, '2024-11-06 18:58:45', '809cd573caa6a5e505f3af6f092898c3', 1, '2024-11-06 18:58:45', '2024-11-06 20:10:24'),
-(95, 133, 'user@gmail.com', '$2y$10$/tL.pCUL4KCdErVQ3zcqbeuojI0XeQUmhnPi0gGu7RpE48LE3GJaS', 'client', 0, 1, '2024-11-06 20:05:22', '49752de8a662d6b0966f76a3b28b0a79', 1, '2024-11-06 20:05:22', '2024-11-07 19:17:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_availability`
---
-
-CREATE TABLE `admin_availability` (
-  `availability_id` int(11) NOT NULL,
-  `account_id` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin_availability`
---
-
-INSERT INTO `admin_availability` (`availability_id`, `account_id`, `date`, `start_time`, `end_time`) VALUES
-(40, 94, '2024-11-30', '07:00:00', '09:00:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `appointments`
---
-
-CREATE TABLE `appointments` (
-  `appointment_id` int(11) NOT NULL,
-  `account_id` int(11) DEFAULT NULL,
-  `availability_id` int(11) DEFAULT NULL,
-  `name` varchar(20) NOT NULL,
-  `location` varchar(20) NOT NULL,
-  `brand` varchar(50) NOT NULL,
-  `product` varchar(20) NOT NULL,
-  `power` int(20) NOT NULL,
-  `running_hours` int(20) NOT NULL,
-  `service_type` varchar(20) NOT NULL,
-  `status` enum('Pending','Approved','Canceled','Waiting','Checking','Completed') DEFAULT 'Pending',
-  `worker_update` varchar(50) NOT NULL DEFAULT 'No update' COMMENT 'no update, on the way, worker is on the site',
-  `date` date NOT NULL,
-  `start_time` time DEFAULT NULL,
-  `end_time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(95, 133, 'user@gmail.com', '$2y$10$/tL.pCUL4KCdErVQ3zcqbeuojI0XeQUmhnPi0gGu7RpE48LE3GJaS', 'client', 0, 1, '2024-11-06 20:05:22', '49752de8a662d6b0966f76a3b28b0a79', 1, '2024-11-06 20:05:22', '2024-11-07 19:17:35'),
+(96, 134, 'tesT@gmail.com', '$2y$10$6tn65XUvgqGHl7AYmfb87OdkCzYdAo.lXFH6XE71j8E8DPgv8mdyK', 'admin', 0, 0, '2024-11-11 17:15:07', NULL, 1, '2024-11-11 17:15:07', '2024-11-11 17:15:07');
 
 -- --------------------------------------------------------
 
@@ -236,15 +192,38 @@ CREATE TABLE `kanban` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `location`
+-- Table structure for table `landing_page_info`
 --
 
-CREATE TABLE `location` (
-  `location_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `landing_page_info` (
+  `id` int(11) NOT NULL,
+  `title` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`title`)),
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`description`)),
+  `goals` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`goals`)),
+  `faq` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`faq`)),
+  `projects` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`projects`)),
+  `user_experience` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`user_experience`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `landing_page_info`
+--
+
+INSERT INTO `landing_page_info` (`id`, `title`, `description`, `goals`, `faq`, `projects`, `user_experience`) VALUES
+(1, '{\"title1_f\": \"Power\",\n\"title1_d\": \"Your Home with Clean, Reliable\",  \n\"title1_l\": \"Energy\",\n\"title2\": \"What is Clean Energy?\"}', '{\"desc1\": \"At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.\",\r\n\"desc2\": \"At MRM Electric Power Generation Services, we deliver reliable solar solutions that promote a cleaner planet by reducing fossil fuel reliance and empowering communities to embrace renewable energy for a sustainable future.\",\r\n\"desc3\": \"The services offered are varied and vast to help accommodate costumers with their needs within the comforts of their own homes or businesses. The main function of our services is to cater towards a goal of helping organizations and businesses to have a smooth and stable product that works and can be used at a moment’s notice.\",    \r\n\"desc4\": \"We’re here to help you make the switch to solar energy and backup power as easy and seamless as possible. Our team understands that every home is unique, with different energy    requirements and concerns. That’s why we’re dedicated to providing you with a personalized energy solution that fits your specific needs, lifestyle, and budget.\",\r\n\"about\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni laboriosam sint, pariatur eos ullam laudantium!\"}', '{\"goal1\": \"To enhance livelihoods across various sectors within communities in the Philippines.\",\r\n\"goal2\": \"To foster new connections by providing sustainable energy opportunities for local communities.\",\r\n\"goal3\": \"To cultivate a culture of clean energy consumption that benefits both individuals and their communities.\",\r\n\"goal4\": \"To raise awareness about the advantages of using clean and solar-based energy products and generators within the community.\"}', '{\"faqdesc\": \"Find answers to common questions about our generators, solar panels, and services. For further inquiries, please reach out through our contact page!\",\r\n\"faq_q1\": \"What types of generators do you offer?\",\r\n\"faq_q2\": \"What types of solar panels do you provide?\",\r\n\"faq_q3\": \"Do you provide installation services?\",\r\n\"faq_q4\": \"Can you help with generator or solar panel maintenance?\",\r\n\"faq_q5\": \"What repair services do you offer?\",\r\n\"faq_q6\": \"How often should I schedule maintenance for my generator?\",\r\n\"faq_q7\": \"Can you help with system tuning for better performance?\",\r\n\"faq_q8\": \"Are there financing options available for generator and solar panel installations?\",\r\n\"faq_q9\": \"Do you offer warranties on your products and services?\",\r\n\"faq_q10\": \"How can I request a quote or consultation?\",\r\n\"faq_a1\": \" MRM E-G Electric Power Generation Services offers a range of generators to meet diverse power needs, from residential units to heavy-duty commercial and industrial generators. Our options include diesel, gas, and portable models to fit various applications and preferences.\",\r\n\"faq_a2\": \"We offer high-efficiency solar panels suitable for residential, commercial, and industrial installations. Our solar panels are chosen for their durability, performance, and cost-effectiveness, helping you achieve sustainable energy solutions.\",\r\n\"faq_a3\": \"Yes, we offer comprehensive installation services for both generators and solar panels. Our skilled technicians ensure safe, efficient, and compliant installation, helping you get your system up and running smoothly.\",\r\n\"faq_a4\": \"Absolutely! We provide maintenance services for both generators and solar panel systems. Regular maintenance extends the lifespan of your equipment and ensures it operates at peak efficiency.\",\r\n\"faq_a5\": \"MRM E-G Electric Power Generation Services offers complete repair services for generators and solar panel systems. Whether it\'s a minor issue or a major repair, our team can diagnose and resolve problems efficiently to get your system back to optimal performance.\",\r\n\"faq_a6\": \"For optimal performance, we recommend generator maintenance at least once a year, though heavy-use generators may need more frequent checks. Regular maintenance reduces the risk of breakdowns and extends the lifespan of your equipment.\",\r\n\"faq_a7\": \"Yes, we offer tuning services for generators to ensure they perform at their best. Our technicians adjust settings and calibrate components for maximum efficiency and reliability.\",\r\n\"faq_a8\": \"We understand that investing in a power generation system is significant. We offer flexible financing options to help you achieve energy independence affordably. Please reach out to discuss available plans.\",\r\n\"faq_a9\": \"Yes, all our products come with a manufacturer’s warranty, and we also provide warranties on our installation and repair services. Our goal is to give you peace of mind and confidence in your purchase.\",\r\n\"faq_a10\": \"You can easily request a quote or consultation by contacting us via phone or email, or by visiting our website. We’ll assess your power needs and provide a detailed proposal tailored to your specific requirements.\"}', '{\"pj1_title\": \"Cagayan Solar Farm Project\",\r\n\"pj2_title\": \"Ilocos Solar Farm Irrigation Project\",\r\n\"pj3_title\": \"Boracay Clean Water Irrigation Project\",\r\n\"pj4_title\": \"Cebu Solar Farm Project\",\r\n\"pj5_title\": \"Isabela Farm Project\",\r\n\"pj6_title\": \"Samar Potato Farm Project\",\r\n\"pj1_desc\": \"Develop a large-scale solar farm in Cagayan to provide renewable energy for local communities and reduce reliance on fossil fuels.\",\r\n\"pj2_desc\": \"Utilize solar energy to power irrigation systems in Ilocos, enhancing agricultural productivity in areas with limited access to consistent water resources.\",\r\n\"pj3_desc\": \"Establish an eco-friendly irrigation system in Boracay to support sustainable landscaping, local agriculture, and clean water access.\",\r\n\"pj4_desc\": \"Construct a solar farm in Cebu to supply renewable energy to industrial areas and reduce electricity costs for local businesses.\",\r\n\"pj5_desc\": \"Establish a sustainable farming project in Isabela that combines renewable energy and modern agricultural practices to improve crop yields and farmer income.\",\r\n\"pj6_desc\": \"Launch a solar-powered potato farm in Samar, aimed at bolstering local food production and creating a sustainable agricultural model for root crops.\"}', '{\"xp1_name\": \"James Velasco\",\r\n\"xp1_comment\": \"MRM E-G Electric Power Generation Services offers exceptional service and knowledgeable staff. The website is user-friendly, making it easy to find what I need among their quality generators and solar solutions. Their commitment to sustainability and prompt support truly sets them apart!\",\r\n\"xp2_name\": \"Alyssa Rivera\",\r\n\"xp2_comment\": \"MRM E-G provides reliable and professional power solutions with a full range of services from solar installations to generator maintenance. The website is clear and concise, offering all the details needed. heir team is always available and helpful—I highly recommend them!\",\r\n\"xp3_name\": \"Carlos Mendoza\",\r\n\"xp3_comment\": \"MRM E-G Electric Power Generation Services is a one-stop shop for green energy needs. The website offers extensive information on eco-friendly products, making it easy to make informed decisions. They truly prioritize customer satisfaction in every interaction.\"}\r\n');
+
+--
+-- Triggers `landing_page_info`
+--
+DELIMITER $$
+CREATE TRIGGER `limit_one_row` BEFORE INSERT ON `landing_page_info` FOR EACH ROW BEGIN
+    IF (SELECT COUNT(*) FROM landing_page_info) >= 1 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Only one row is allowed in this table';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -318,8 +297,10 @@ CREATE TABLE `package_maintenance_generator` (
 --
 
 INSERT INTO `package_maintenance_generator` (`id`, `unit`, `description`, `quantity`, `amount`, `total_cost`, `created_at`) VALUES
-(2, 'job', 'TEST 2', 1, 2000.00, 2000.00, '2024-11-10 17:45:18'),
-(3, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 17:45:18');
+(4, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 19:46:28'),
+(5, 'job', 'TEST 2', 1, 2000.00, 2000.00, '2024-11-10 19:46:28'),
+(6, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 19:46:28'),
+(7, 'job', 'TEST 2', 1, 2000.00, 2000.00, '2024-11-10 19:46:28');
 
 -- --------------------------------------------------------
 
@@ -415,9 +396,8 @@ CREATE TABLE `package_tuneup_generator` (
 --
 
 INSERT INTO `package_tuneup_generator` (`id`, `unit`, `description`, `quantity`, `amount`, `total_cost`, `created_at`) VALUES
-(3, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 17:46:11'),
-(4, 'job', 'TEST 2', 1, 2000.00, 2000.00, '2024-11-10 17:46:11'),
-(5, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 17:46:11');
+(7, 'items', 'TEST', 1, 1000.00, 1000.00, '2024-11-10 18:24:24'),
+(8, 'job', 'TEST 2', 1, 2000.00, 2000.00, '2024-11-10 18:24:24');
 
 -- --------------------------------------------------------
 
@@ -452,23 +432,47 @@ INSERT INTO `products` (`ProductID`, `ProductName`, `ProductType`, `Watts_KVA`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `running_hours`
+-- Table structure for table `service_availability`
 --
 
-CREATE TABLE `running_hours` (
-  `running_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `service_availability` (
+  `availability_id` int(11) NOT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `running_hours`
+-- Dumping data for table `service_availability`
 --
 
-INSERT INTO `running_hours` (`running_id`, `name`, `amount`, `created_at`) VALUES
-(1, '0 - 200 hrs', 1000.00, '2024-11-07 18:28:31'),
-(2, '200 - 100 hrs', 2000.00, '2024-11-07 18:43:19');
+INSERT INTO `service_availability` (`availability_id`, `account_id`, `date`, `start_time`, `end_time`) VALUES
+(40, 94, '2024-11-30', '07:00:00', '09:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_booking`
+--
+
+CREATE TABLE `service_booking` (
+  `appointment_id` int(11) NOT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `availability_id` int(11) DEFAULT NULL,
+  `name` varchar(20) NOT NULL,
+  `location` varchar(20) NOT NULL,
+  `brand` varchar(50) NOT NULL,
+  `product` varchar(20) NOT NULL,
+  `power` int(20) NOT NULL,
+  `running_hours` int(20) NOT NULL,
+  `service_type` varchar(20) NOT NULL,
+  `status` enum('Pending','Approved','Canceled','Waiting','Checking','Completed') DEFAULT 'Pending',
+  `worker_update` varchar(50) NOT NULL DEFAULT 'No update' COMMENT 'no update, on the way, worker is on the site',
+  `date` date NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -598,7 +602,8 @@ CREATE TABLE `user_info` (
 
 INSERT INTO `user_info` (`user_id`, `email`, `first_name`, `middle_name`, `last_name`, `address`, `city`, `province`, `zip_code`, `user_type`, `created_at`, `updated_at`) VALUES
 (132, 'janariesimpuerto13@gmail.com', 'Jan aries', 'Admin', 'Solis', 'Address', 'Qc', 'Metro manila', 1111, 'individual', '2024-11-06 18:58:45', '2024-11-06 18:58:45'),
-(133, 'user@gmail.com', 'User', 'User', 'User', 'Address', 'Test', 'Test', 1111, 'individual', '2024-11-06 20:05:22', '2024-11-06 20:05:22');
+(133, 'user@gmail.com', 'User', 'User', 'User', 'Address', 'Test', 'Test', 1111, 'individual', '2024-11-06 20:05:22', '2024-11-06 20:05:22'),
+(134, 'tesT@gmail.com', 'TEST', 'TEST', 'TEST', '', '', '', 0, 'organization', '2024-11-11 17:15:07', '2024-11-11 17:15:07');
 
 --
 -- Indexes for dumped tables
@@ -611,22 +616,6 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`account_id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `admin_availability`
---
-ALTER TABLE `admin_availability`
-  ADD PRIMARY KEY (`availability_id`),
-  ADD UNIQUE KEY `date` (`date`,`start_time`,`end_time`),
-  ADD KEY `account_id` (`account_id`);
-
---
--- Indexes for table `appointments`
---
-ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`appointment_id`),
-  ADD KEY `account_id` (`account_id`),
-  ADD KEY `availability_id` (`availability_id`);
 
 --
 -- Indexes for table `brand`
@@ -681,10 +670,10 @@ ALTER TABLE `kanban`
   ADD KEY `user_id_constraint` (`user_id`);
 
 --
--- Indexes for table `location`
+-- Indexes for table `landing_page_info`
 --
-ALTER TABLE `location`
-  ADD PRIMARY KEY (`location_id`);
+ALTER TABLE `landing_page_info`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `package_installation_generator`
@@ -735,10 +724,20 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`ProductID`);
 
 --
--- Indexes for table `running_hours`
+-- Indexes for table `service_availability`
 --
-ALTER TABLE `running_hours`
-  ADD PRIMARY KEY (`running_id`);
+ALTER TABLE `service_availability`
+  ADD PRIMARY KEY (`availability_id`),
+  ADD UNIQUE KEY `date` (`date`,`start_time`,`end_time`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Indexes for table `service_booking`
+--
+ALTER TABLE `service_booking`
+  ADD PRIMARY KEY (`appointment_id`),
+  ADD KEY `account_id` (`account_id`),
+  ADD KEY `availability_id` (`availability_id`);
 
 --
 -- Indexes for table `service_or`
@@ -803,19 +802,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
-
---
--- AUTO_INCREMENT for table `admin_availability`
---
-ALTER TABLE `admin_availability`
-  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `appointments`
---
-ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -860,10 +847,10 @@ ALTER TABLE `kanban`
   MODIFY `kanban_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `location`
+-- AUTO_INCREMENT for table `landing_page_info`
 --
-ALTER TABLE `location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `landing_page_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `package_installation_generator`
@@ -881,7 +868,7 @@ ALTER TABLE `package_installation_solar`
 -- AUTO_INCREMENT for table `package_maintenance_generator`
 --
 ALTER TABLE `package_maintenance_generator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `package_maintenance_solar`
@@ -905,7 +892,7 @@ ALTER TABLE `package_repair_solar`
 -- AUTO_INCREMENT for table `package_tuneup_generator`
 --
 ALTER TABLE `package_tuneup_generator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -914,10 +901,16 @@ ALTER TABLE `products`
   MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1065;
 
 --
--- AUTO_INCREMENT for table `running_hours`
+-- AUTO_INCREMENT for table `service_availability`
 --
-ALTER TABLE `running_hours`
-  MODIFY `running_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `service_availability`
+  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `service_booking`
+--
+ALTER TABLE `service_booking`
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `service_or`
@@ -959,7 +952,7 @@ ALTER TABLE `system_log`
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- Constraints for dumped tables
@@ -971,19 +964,6 @@ ALTER TABLE `user_info`
 ALTER TABLE `accounts`
   ADD CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `accounts_ibfk_2` FOREIGN KEY (`email`) REFERENCES `user_info` (`email`) ON DELETE CASCADE;
-
---
--- Constraints for table `admin_availability`
---
-ALTER TABLE `admin_availability`
-  ADD CONSTRAINT `admin_availability_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
-
---
--- Constraints for table `appointments`
---
-ALTER TABLE `appointments`
-  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`),
-  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`availability_id`) REFERENCES `admin_availability` (`availability_id`);
 
 --
 -- Constraints for table `chaintercom_appointment`
@@ -1026,12 +1006,25 @@ ALTER TABLE `kanban`
   ADD CONSTRAINT `user_id_constraint` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`);
 
 --
+-- Constraints for table `service_availability`
+--
+ALTER TABLE `service_availability`
+  ADD CONSTRAINT `service_availability_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
+
+--
+-- Constraints for table `service_booking`
+--
+ALTER TABLE `service_booking`
+  ADD CONSTRAINT `service_booking_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`),
+  ADD CONSTRAINT `service_booking_ibfk_2` FOREIGN KEY (`availability_id`) REFERENCES `service_availability` (`availability_id`);
+
+--
 -- Constraints for table `service_or`
 --
 ALTER TABLE `service_or`
   ADD CONSTRAINT `fk_worker_id` FOREIGN KEY (`worker_id`) REFERENCES `accounts` (`account_id`),
   ADD CONSTRAINT `service_or_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `accounts` (`account_id`),
-  ADD CONSTRAINT `service_or_ibfk_2` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`),
+  ADD CONSTRAINT `service_or_ibfk_2` FOREIGN KEY (`appointment_id`) REFERENCES `service_booking` (`appointment_id`),
   ADD CONSTRAINT `service_or_ibfk_3` FOREIGN KEY (`payment_id`) REFERENCES `service_payment` (`payment_id`);
 
 --
@@ -1039,20 +1032,20 @@ ALTER TABLE `service_or`
 --
 ALTER TABLE `service_payment`
   ADD CONSTRAINT `fk_service_payment_account` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_service_payment_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_service_payment_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `service_booking` (`appointment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `service_quotation`
 --
 ALTER TABLE `service_quotation`
   ADD CONSTRAINT `service_quotation_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`),
-  ADD CONSTRAINT `service_quotation_ibfk_2` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`);
+  ADD CONSTRAINT `service_quotation_ibfk_2` FOREIGN KEY (`appointment_id`) REFERENCES `service_booking` (`appointment_id`);
 
 --
 -- Constraints for table `service_worker`
 --
 ALTER TABLE `service_worker`
-  ADD CONSTRAINT `fk_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`appointment_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_appointment` FOREIGN KEY (`appointment_id`) REFERENCES `service_booking` (`appointment_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_payment` FOREIGN KEY (`payment_id`) REFERENCES `service_payment` (`payment_id`),
   ADD CONSTRAINT `service_worker_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`);
 COMMIT;

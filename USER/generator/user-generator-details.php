@@ -120,20 +120,6 @@ global $conn;
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-12 col-md-12">
                                         <div class="row">
-                                            <div class="col-2">
-                                                <div class="clearfix carousel-slider">
-                                                    <div id="thumbcarousel" class="carousel slide" data-bs-interval="false">
-                                                        <div class="carousel-inner">
-                                                            <div class="carousel-item active">
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="0" class="thumb my-2"><img src="../assets/images/pngs/24.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="1" class="thumb my-2"><img src="../assets/images/pngs/26.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="2" class="thumb my-2"><img src="../assets/images/pngs/25.png" alt="img"></div>
-                                                                <div data-bs-target="#carousel" data-bs-slide-to="3" class="thumb my-2"><img src="../assets/images/pngs/23.png" alt="img"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-md-7 offset-md-1 col-sm-9 col-8">
                                                 <div class="product-carousel">
                                                     <div id="carousel" class="carousel slide" data-bs-ride="false">
@@ -166,104 +152,6 @@ global $conn;
                                             <div class="col-xl-12">
                                                 <pre><?= $Specification ?></pre>
                                             </div>
-
-                                            
-                                            <div class="col-xl-12 mt-4">
-                                                <div class="card">
-                                                    <div>
-                                                        <div class="d-flex p-3">
-                                                            <h5 class="float-start main-content-label mb-0 mt-2">All Ratings and Reviews</h5>
-                                                            <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm float-end ms-auto">Top Rated</a>
-                                                        </div>
-                                                        <div class="media mt-0 p-4 border-bottom border-top">
-                                                            <div class="d-flex me-3">
-                                                                <a href="javascript:void(0);"><img class="media-image avatar avatar-md rounded-circle" alt="64x64" src="../assets/images/faces/8.jpg"> </a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h5 class="mt-0 mb-1 fw-medium fs-16">Bruce Tran
-                                                                    <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-                                                                </h5>
-                                                                <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-
-                                                                <p class="font-13  mb-2 mt-2">
-                                                                   Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
-                                                                </p>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="badge bg-primary">Helpful</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Comment</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Report</span></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media mt-0  p-4 border-bottom">
-                                                            <div class="d-flex me-3">
-                                                                <a href="javascript:void(0);"><img class="media-image avatar avatar-md rounded-circle" alt="64x64" src="../assets/images/faces/3.jpg"> </a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h5 class="mt-0 mb-1 fw-medium fs-16">Mina Harpe
-                                                                    <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-                                                                </h5>
-                                                                <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-
-                                                                <p class="font-13  mb-2 mt-2">
-                                                                   Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
-                                                                </p>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="badge bg-primary">Helpful</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Comment</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Report</span></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="media mt-0 p-4 border-bottom">
-                                                            <div class="d-flex me-3">
-                                                                <a href="javascript:void(0);"><img class="media-image avatar avatar-md rounded-circle" alt="64x64" src="../assets/images/faces/5.jpg"> </a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h5 class="mt-0 mb-1 fw-medium fs-16">Maria Quinn
-                                                                    <span class="fs-14 ms-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-                                                                </h5>
-                                                                <span class="text-muted fs-13">Tue, 20 Mar 2020</span>
-
-                                                                <p class="font-13  mb-2 mt-2">
-                                                                   Lorem Ipsum available, quis Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et  nostrud exercitation ullamco laboris   commodo consequat.
-                                                                </p>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="badge bg-primary">Helpful</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Comment</span></a>
-                                                                <a href="javascript:void(0);" class="me-2"><span class="">Report</span></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-grid">
-                                                            <a class="text-center w-100 p-3 fw-medium" href="javascript:void(0);">See All Reviews</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="border-top px-4 pb-2 pt-4">
-                                                        <h5 class="mb-4">Leave Comment</h5>
-                                                        <div class="mb-1">
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6">
-                                                                    <div class="mb-3 fw-medium">Your Name</div> <input class="form-control" placeholder="Your Name" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <div class="mb-3 fw-medium">Email Address</div> <input class="form-control" placeholder="Email Address" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <span class="star-rating">
-                                                            <a href="javascript:void(0);"><i class="icofont-ui-rating icofont-2x"></i></a>
-                                                            <a href="javascript:void(0);"><i class="icofont-ui-rating icofont-2x"></i></a>
-                                                            <a href="javascript:void(0);"><i class="icofont-ui-rating icofont-2x"></i></a>
-                                                            <a href="javascript:void(0);"><i class="icofont-ui-rating icofont-2x"></i></a>
-                                                            <a href="javascript:void(0);"><i class="icofont-ui-rating icofont-2x"></i></a>
-                                                        </span>
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <div class="mb-3 fw-medium">Your Comment</div>
-                                                                <textarea class="form-control"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button class="btn btn-primary mt-3 mb-0" type="button">Post your review</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +167,7 @@ global $conn;
 
        
         <!-- Footer Start -->
-        <?php include_once(__DIR__. '/../../partials/footers.php') ?>
+        <?php include_once(__DIR__. '/../../partials/footer.php') ?>
         <!-- Footer End -->
         
 

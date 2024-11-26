@@ -4,12 +4,17 @@
   if(isset($_SESSION['login'])){
       if($_SESSION['login'] == true)  {
         $role = $_SESSION['role'];
-        if($role == 'user'){
+        if($role == 'client'){
           header("location: /USER/dashboard/user-dashboard.php");
           exit();
       }
-      else{
-          header("location: /ADMIN/accountManagement/accountcontrol/user-management.php");
+      else if($role == 'worker'){
+        header("location: /MRM-DEVELOPMENT/ADMIN/worker/dashboard.php");
+        exit();
+      }
+      
+      else if($role == 'admin'){
+          header("location: /MRM-DEVELOPMENT/ADMIN/dashboard/admin-dashboard.php");
           exit();
       }
     }
@@ -1086,7 +1091,7 @@ if (isset($_SESSION['success_message'])) {
                             <small class="text-secondary">Remember me</small>
                           </label>
                           <a
-                            href="forgot.html"
+                            href="forgot_password.php"
                             class="text-secondary ms-auto text-decoration-none"
                             ><small>Forgot password?</small></a
                           >
@@ -1365,55 +1370,75 @@ if (isset($_SESSION['success_message'])) {
       $(document).ready(function () {
         $("#signupForm").on("submit", function (e) {
           e.preventDefault(); // Prevent default form submission
-
-          var formData = {
-            firstname: $("#su_firstname").val(),
-            lastname: $("#su_lastname").val(),
-            middlename: $("#su_middlename").val(),
-            email: $("#su_email").val(),
-            password: $("#su_password").val(),
-            address: $("#su_address").val(),
-            city: $("#su_city").val(),
-            province: $("#su_province").val(),
-            zip_code: $("#su_zipcode").val(),
-            user_type: $('input[name="user_type"]:checked').val(),
-            signup: true,
-          };
-
-          $.ajax({
-            type: "POST",
-            url: "USER/signup/function.php",
-            data: formData,
-            dataType: "json",
-            beforeSend: function () {
-              $("#loadingOverlay").show(); // Show the loading indicator
-            },
-            success: function (response) {
-              $("#loadingOverlay").hide(); // Hide the loading indicator
-              if (response.success) {
-                Swal.fire({
-                  title: "Account Created",
-                  text: "Verification has ben send to your email",
-                  icon: "success",
-                  allowOutsideClick: false,
-                });
-                $("#signupmodal").modal("hide");
-                //  window.location.href = "USER/generator/generator.php";
-              } else {
-                Swal.fire({
+          if($("#su_firstname").val() == "" ||
+            $("#su_lastname").val() == "" ||
+            $("#su_middlename").val() == "" ||
+            $("#su_email").val() == "" ||
+            $("#su_password").val() == "" ||
+            $("#su_address").val() == "" ||
+            $("#su_city").val() == "" ||
+            $("#su_province").val() == "" ||
+            $("#su_zipcode").val() == "" ||
+            $('input[name="user_type"]:checked').val() == ""
+          ){
+            Swal.fire({
                   title: "Error!",
-                  text: response.message,
+                  text: "Please fill up the form",
                   icon: "error",
                   confirmButtonText: "ok",
                 });
-              }
-            },
-            error: function (xhr, status, error) {
-              $("#loadingOverlay").hide(); // Hide the loading indicator
-              alert(xhr.responseText);
-              
-            },
-          });
+          }
+          else{
+
+            var formData = {
+              firstname: $("#su_firstname").val(),
+              lastname: $("#su_lastname").val(),
+              middlename: $("#su_middlename").val(),
+              email: $("#su_email").val(),
+              password: $("#su_password").val(),
+              address: $("#su_address").val(),
+              city: $("#su_city").val(),
+              province: $("#su_province").val(),
+              zip_code: $("#su_zipcode").val(),
+              user_type: $('input[name="user_type"]:checked').val(),
+              signup: true,
+            };
+
+            $.ajax({
+              type: "POST",
+              url: "USER/signup/function.php",
+              data: formData,
+              dataType: "json",
+              beforeSend: function () {
+                $("#loadingOverlay").show(); // Show the loading indicator
+              },
+              success: function (response) {
+                $("#loadingOverlay").hide(); // Hide the loading indicator
+                if (response.success) {
+                  Swal.fire({
+                    title: "Account Created",
+                    text: "Verification has ben send to your email",
+                    icon: "success",
+                    allowOutsideClick: false,
+                  });
+                  $("#signupmodal").modal("hide");
+                  //  window.location.href = "USER/generator/generator.php";
+                } else {
+                  Swal.fire({
+                    title: "Error!",
+                    text: response.message,
+                    icon: "error",
+                    confirmButtonText: "ok",
+                  });
+                }
+              },
+              error: function (xhr, status, error) {
+                $("#loadingOverlay").hide(); // Hide the loading indicator
+                alert(xhr.responseText);
+                
+              },
+            });
+          }
         });
       });
 

@@ -3,55 +3,30 @@ require '../../Database/database.php';
 session_start();
 
 if (isset($_POST['pick'])) {
-    $userid = $_POST['account_id']; 
-    $workerid = $_POST['worker_id'];
-    $appointmentid = $_POST['appointment_id'];
-    $payment_id = $_POST['payment_id'];
-    $admin_id = $_SESSION['admin_id'];  
+    $booking_id = $_POST['booking_id'];
+    $admin_id = $_POST['admin_id'];
+    $client_id = $_POST['client_id'];
+    $availability_id = $_POST['availability_id'];
+    $user_id = $_POST['user_id'];
+    // Echo the variables in a readable format
+    $sql = "INSERT INTO `worker_ongoing`(`booking_id`, `admin_id`, `client_id`, `availability_id`, `worker_id`)
+            VALUES ('$booking_id','$admin_id','$client_id','$availability_id','$user_id')";
+    $sql2 = "UPDATE worker_availability SET is_available='0' WHERE user_id= $user_id";
+    $sql3 = "UPDATE service_booking SET booking_status='ongoing' , payment_status = 'delivery_payment' WHERE booking_id= $booking_id";
+    $sql4 = "UPDATE kanban SET kanban_status='pick_up' WHERE booking_id= $booking_id";
 
-   
-    // Use prepared statements to prevent SQL injection
-    $select = "SELECT * FROM accounts INNER JOIN user_info ON user_info.user_id = accounts.user_id WHERE account_id = ?";
-    $stmt = $conn->prepare($select);
-    $stmt->bind_param("i", $workerid); // Assuming account_id is an integer
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = mysqli_query($conn , $sql);
+    $result2 = mysqli_query($conn , $sql2);
+    $result3 = mysqli_query($conn , $sql3);
+    $result4 = mysqli_query($conn , $sql4);
 
-    if ($row = $result->fetch_assoc()) {
-        $name = $row['first_name'] . " " . $row['last_name'];
-        
-        // Insert service worker
-        $sql = "INSERT INTO service_worker(worker_name, account_id, user_id, admin_id, appointment_id, payment_id) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("siissi", $name, $workerid, $userid, $admin_id, $appointmentid, $payment_id);
-        
-        if ($stmt->execute()) {
-            // Update appointment status
-            $sql = "UPDATE appointments SET status='Approved' WHERE account_id = ? AND appointment_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ii", $userid, $appointmentid);
-            $stmt->execute();
-
-            // Update payment status
-            $sql2 = "UPDATE service_payment SET payment_status='approved' WHERE account_id = ? AND appointment_id = ?";
-            $stmt = $conn->prepare($sql2);
-            $stmt->bind_param("ii", $userid, $appointmentid);
-            $stmt->execute();
-
-            // Redirect after successful updates
-            header("Location: appointment.php");
-            exit();
-        } else {
-            echo "Error inserting into service_worker: " . $stmt->error;
-        }
-    } else {
-        echo "No worker found with the given account ID.";
+    if($result && $result2 && $result3 && $result4){
+        echo json_encode(['success' => true,]);
+    }else{
+        echo json_encode(['success' => false, 'message' => 'Error in SQL']);
     }
-
-    // Close statement
-    $stmt->close();
 } else {
-    echo "No data received.";
+    echo json_encode(['success' => false, 'message' => 'Error In function']);
 }
 
 // Close connection

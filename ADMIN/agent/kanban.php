@@ -1,6 +1,59 @@
 <?php 
 require_once '../authetincation.php';
 require_once '../../Database/database.php';
+
+$booking_total = 0;
+$workers_total = 0;
+$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled'";
+$workers = "SELECT * FROM worker_availability ";
+$result1 = mysqli_query($conn , $service_booking);
+$result2 = mysqli_query($conn , $workers);
+while($row1 = mysqli_fetch_assoc($result1)){
+    $booking_total++;
+}
+
+while($row2 = mysqli_fetch_assoc($result2)){
+    $workers_total++;
+}
+
+if($booking_total >= $workers_total){
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Notice',
+                text: 'No available workers currently!',
+                timer: 2000,
+                showConfirmButton: false
+            })
+        </script>
+    ";
+}
+
+
+$worker_availability = "SELECT * FROM worker_availability WHERE is_available = 1";
+$exec = mysqli_query($conn, $worker_availability);
+if ($exec) {
+    if (mysqli_num_rows($exec) > 0) {
+        // Add SweetAlert2 for an alert and then redirect after 2 seconds
+       
+    }
+    else{
+        echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Notice',
+                    text: 'No available workers currently!',
+                    timer: 2000,
+                    showConfirmButton: false
+                })
+            </script>
+        ";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +104,7 @@ require_once '../../Database/database.php';
                 border-radius: 5px;
                 padding: 5px;
                 margin-bottom: 5px;
-                cursor: move;
+                cursor: pointer;
                 transition: transform 0.2s, background-color 0.2s;
             }
 
@@ -143,11 +196,11 @@ require_once '../../Database/database.php';
             <div class="container-fluid">
                     <div class="row">
                         <div class="d-flex mt-4 mb-4">
-                            <h1 class="my-auto">Kanban</h1>
+                            <h1 class="my-auto">Kanban Booking</h1>
                             <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addTaskModal" id="addTaskBtn">Add Task</button>
                         </div>
                         <div class="col-lg 4">
-                            <div class="card custom-card">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">For checking</div>
                                 </div>
@@ -157,27 +210,57 @@ require_once '../../Database/database.php';
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card ">
                                 <div class="card-header">
-                                    <div class="card-title">Approved</div>
+                                    <div class="card-title">Picking up</div>
                                 </div>
-                                <div class="card-body" id="approved">
+                                <div class="card-body" id="pickup">
                                    
                                 </div>
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card ">
                                 <div class="card-header">
-                                    <div class="card-title">Ongoing Project</div>
+                                    <div class="card-title">Delivery</div>
                                 </div>
-                                <div class="card-body" id="ongoing">
+                                <div class="card-body" id="delivery">
                                    
                                 </div>
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Arrived</div>
+                                </div>
+                                <div class="card-body" id="arrive">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Ongoing Construction</div>
+                                </div>
+                                <div class="card-body" id="ongoing_construction">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
+                                <div class="card-header">
+                                    <div class="card-title">Final checking</div>
+                                </div>
+                                <div class="card-body" id="final_checking">
+                                   
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">Completed</div>
                                 </div>
@@ -187,7 +270,7 @@ require_once '../../Database/database.php';
                             </div>    
                         </div>
                         <div class="col-lg-4">
-                            <div class="card custom-card">
+                            <div class="card custom-card ">
                                 <div class="card-header">
                                     <div class="card-title">Cancelled</div>
                                 </div>
@@ -252,23 +335,219 @@ require_once '../../Database/database.php';
                             </div>
                             <div class="modal-body">
                                 <h5 class="modal-title" id="addTaskModalLabel">Client Information</h5><br>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email">
-                                <input type="text" class="form-control" id="name" placeholder="Full Name">
-                            <div id="productContainer">
-                                <select class="form-control product" id="product" placeholder="Product">
-                                </select>
-                            </div>
-                                <a class="btn btn-primary ms-auto" onclick="addMore()">Add more product</a>
-                               
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                                <input type="text" class="form-control" id="name" placeholder="Full Name" required>
+                                <input type="text" class="form-control" id="contact" placeholder="Contact Number" required>
+                                <input type="text" class="form-control" id="location" placeholder="Location" required>
+                                <div>
+                                    <select class="form-control product" id="producttype" placeholder="Product Type">
+                                        <option value="">Select Product Type</option>
+                                        <option value="solar">Solar Panel</option>
+                                        <option value="generator">Generator</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="form-control product" id="product" placeholder="Product">
+                                        <option value="">Select Product Type First</option>
+                                    </select>
+                                </div>
+                                <input type="number" class="form-control" id="quantity" placeholder="Quantity" required>
                             </div>
                             <div class="modal-footer">
                                 <a type="button" onclick="closemodal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
-                                <a type="button" class="btn btn-primary" id="checkadd">Add and Set Appointment</a>
+                                <a type="button" class="btn btn-primary" id="checkadd">Add and Set Schedule</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 </form>
+
+
+
+                <!-- Modal structure for showing information of tasks (hidden by default) -->
+                <!-- <div id="infoModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Task Information</h2>
+                        <p><strong>ID:</strong> <span id="modal-id"></span></p>
+                        <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                        <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                        <p><strong>Product:</strong> <span id="modal-product"></span></p>
+                        <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                        <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
+                        <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
+                        <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                    </div>
+                </div> -->
+
+                <div class="modal" id="infoModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="addTaskModalLabel">Task Information</h3>
+                                <a type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body" class="form-control">
+                                <h5 class="modal-title" id="addTaskModalLabel">Project Information</h5><br>
+                                <input type="hidden" id="modal-id"></input>
+                                <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                                <p><strong>Name:</strong> <span id="modal-name"></span></p>
+                                <p><strong>Product:</strong> <span id="modal-product"></span></p>
+                                <p><strong>Status:</strong> <span id="modal-status"></span></p>
+                                <p><strong>Product Type:</strong> <span id="modal-product_type"></span></p>
+                                <p><strong>Pin Location:</strong> <span id="modal-pin_location"></span></p>
+                                <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                                <p id="reasondisp"><strong>Cancel Reason:</strong> <span id="reason"></span></p>
+                                <input type="hidden" id="total_cost_input" name="total_cost">
+                                <input type="hidden" id="booking_id_input" name="booking_id">
+                                <input type="hidden" id="total_cost_input_third" name="total_cost">
+                                <input type="hidden" id="booking_id_input_third" name="booking_id">
+                            </div>
+                            <div class="modal-footer" id="cancel">
+                                <button class="btn btn-primary open-payment-modal-btn payment2" id="payment2" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                    Proceed next Payment
+                                </button>
+                                <button class="btn btn-primary open-third-payment-modal-btn payment3" id="payment3" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
+                                    Proceed next Payment
+                                </button>
+                                <button type="button" class="btn btn-danger" id="reject"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#reject_user"                                                               >
+                                    cancel Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <!-- Modal SECOND payment -->
+                <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Second Payment Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Centered Blank Image Placeholder -->
+                                <div class="text-center mb-3">
+                                    <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                </div>
+                                <div class="text-center mx-4">
+                                    <!-- Displaying Total Cost and Booking ID -->
+                                    <p id="paymentnow">TOTAL: ₱0.00</p>
+                                    <p id="totalCostModal">TOTAL: ₱0.00</p>
+                                    <p id="bookingIdModal">Booking ID: N/A</p>
+                                </div>
+
+                                <form action="../../USER/services/myappointments/process_second_payment.php" method="POST" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="firstField" class="form-label">Reference Number</label>
+                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                        </div>                                                             
+                                    </div>                                         
+               
+                                    <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                    <input type="hidden" id="booking_id_modal_input" name="booking_id">
+                                    <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                                   
+                <!-- Modal THIRD payment -->
+                <div class="modal fade" id="paymentThirdModal" tabindex="-1" aria-labelledby="paymentThirdModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="paymentModalLabel">Third Payment Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Centered Blank Image Placeholder -->
+                                <div class="text-center mb-3">
+                                    <img src="../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                </div>
+                                <div class="text-center mx-4">
+                                    <!-- Displaying Total Cost and Booking ID -->
+                                    <p id="Thirdpaymentnow">TOTAL: ₱0.00</p>
+                                    <p id="ThirdtotalCostModal">TOTAL: ₱0.00</p>
+                                    <p id="ThirdbookingIdModal">Booking ID: N/A</p>
+                                </div>
+
+                                <form action="../../USER/services/myappointments/process_third_payment.php" method="POST" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="firstField" class="form-label">Reference Number</label>
+                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                        </div>                                                             
+                                    </div>                                         
+               
+                                    <!-- Hidden input for total cost and booking ID (to submit in the form) -->
+                                    <input type="text" id="booking_id_third" name="booking">
+                                    <input type="text" id="booking_id_input_third" name="due" readonly>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- Modal cancel task -->
+                <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="reject_userModal">Reject Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <form id="reject_form" action="/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php" method="POST">
+                                    <!-- Hidden Inputs for Booking ID and User ID -->
+                                    <input type="text" class="bookingId" id="book_id" name="booking_id">
+                                    <input type="text" class="userId" id="user_id" name="user_id">
+                                    <input type="text" class="availabilityId" id="avail_id" name="availability_id">
+
+                                    <!-- Rejection Reason -->
+                                    <div class="mb-3">
+                                        <label for="reason" class="form-label">Enter Reason for Rejection</label>
+                                        <textarea id="reasonarea" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
 
@@ -326,140 +605,86 @@ require_once '../../Database/database.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
 
         <script>
-            //Load Functions
-            $(document).ready(function() {
-                $('#product').append('<option value="">Select Product</option>'); // Add default option
-                
-                $.ajax({
-                    url: 'function.php',
-                    type: 'GET',
-                    data: { PrType: true }, // Pass data to the backend
-                    success: function(response) {
-                        response = JSON.parse(response); // Parse JSON response
-                        
-                        if (response.success) {
-                            $('#product').empty(); // Clear existing options
-                            $('#product').append('<option value="">Select Product</option>'); // Add default option
 
-                            var existingValues = []; // Array to track existing values
-
-                            $.each(response.data.products, function(index, item) {
-                                // Check if the value is already in the existingValues array
-                                if (!existingValues.includes(item.value)) {
-                                    $('#product').append('<option value="' + item.value + '">' + item.text + '</option>');
-                                    existingValues.push(item.value); // Add value to the array
-                                }
-                            });
-                        } else {
-                            alert('no products found.');
-                        }
-                    },
-                    error: function() {
-                        alert('An error occurred while fetching products.');
-                    }
-                });
-            });
-
-
-    //function for adding another product input
-    function addMore() {
-        // Get the product container
-        const productContainer = document.getElementById("productContainer");
-
-            // Create a new `<select>` element
-        const newProductInput = document.createElement("select");
-        newProductInput.className = "form-control product"; // Set class for styling
-        newProductInput.id = "product-" + Date.now(); // Set a unique ID based on the current timestamp
-
-            // Append the new `<select>` to the product container
-        productContainer.appendChild(newProductInput);
-
-            // Fetch product options via AJAX
-        $.ajax({
-            url: 'function.php',
-            type: 'GET',
-            data: { PrType: true }, // Pass data to the backend
-            success: function(response) {
-                response = JSON.parse(response); // Parse JSON response
-
-                if (response.success) {
-                    // Clear existing options in the newly created select element
-                    $(newProductInput).empty();
-                    $(newProductInput).append('<option value="">Select Product</option>'); // Add default option
-
-                    var existingValues = []; // Array to track existing values
-
-                    // Loop through the response products and add options
-                    $.each(response.data.products, function(index, item) {
-                        // Check if the value is already in the existingValues array
-                        if (!existingValues.includes(item.value)) {
-                            $(newProductInput).append('<option value="' + item.value + '">' + item.text + '</option>');
-                            existingValues.push(item.value); // Add value to the array
-                        }
-                    });
-                } else {
-                    alert('no products found.');
-                }
-            },
-            error: function() {
-                alert('An error occurred while fetching products.');
-            }
-        });
-    }
 
     //Function when modal closes
     function closemodal() {
-        // Get the product container and reset it
-        const productContainer = document.getElementById("productContainer");
-        
-        // Clear all child nodes (inputs) within the productContainer
-        while (productContainer.firstChild) {
-            productContainer.removeChild(productContainer.firstChild);
-        }
 
-        // Create a new `<option>` element
-        const newProductInput = document.createElement("select");
-        newProductInput.id = "product"; // Set id
-        newProductInput.className ="form-control product";
-        newProductInput.placeholder="Product";
-
-        // Append the new `<option>` to the product container (assuming it's a `<select>` element)
-        productContainer.appendChild(newProductInput);
         document.getElementById('email').value = '';
         document.getElementById('name').value = '';
-            $.ajax({
-                url: 'function.php',
-                type: 'GET',
-                data: { PrType: true }, // Pass data to the backend
-                success: function(response) {
-                    response = JSON.parse(response); // Parse JSON response
-                        
-                    if (response.success) {
-                        // Select all elements with the class "product" and iterate over them
-                        $('.product').each(function() {
-                            // Clear existing options in each product dropdown
-                            $(this).empty();
-                            $(this).append('<option value="">Select Product</option>'); // Add default option
+        document.getElementById('contact').value = '';
+        document.getElementById('product').value = "";
+        document.getElementById('quantity').value = '';
+        document.getElementById('location').value = '';
+    }
 
-                            var existingValues = []; // Array to track existing values
+    // Function to create and display modal with task information
+    function showModal(item) {
+        // Get the modal and its elements
+        const modal = document.getElementById("infoModal");
+        const closeBtn = document.querySelector(".close");
 
-                            // Loop through the response products and add options
-                            $.each(response.data.products, function(index, item) {
-                                // Check if the value is already in the existingValues array
-                                if (!existingValues.includes(item.value)) {
-                                    $(this).append('<option value="' + item.value + '">' + item.text + '</option>');
-                                    existingValues.push(item.value); // Add value to the array
-                                }
-                            }.bind(this)); // Bind the current "this" to the function context
-                        });
-                    } else {
-                        alert('no products found.');
-                    }
-                },
-                error: function() {
-                    alert('An error occurred while fetching products.');
-                }
-            });
+        // Populate modal with task information
+        document.getElementById("modal-id").value = item.kanban_id;
+        document.getElementById("modal-email").textContent = item.email;
+        document.getElementById("modal-name").textContent = item.name;
+        document.getElementById("modal-product").textContent = item.product;
+        document.getElementById("modal-status").textContent = item.status;
+        document.getElementById("modal-product_type").textContent = item.product_type;
+        document.getElementById("modal-pin_location").textContent = item.pin_location;
+        document.getElementById("modal-quantity").textContent = item.quantity;
+        document.getElementById("total_cost_input").value = item.total_cost;
+        document.getElementById("booking_id_input").value = item.booking_id;
+        document.getElementById("total_cost_input_third").value = item.total_cost;
+        document.getElementById("booking_id_input_third").value = item.booking_id;
+        document.getElementById("reason").textContent = item.cancel_reason;
+
+        document.getElementById("book_id").value = item.booking_id;
+        document.getElementById("user_id").value = item.user_id;
+        document.getElementById("avail_id").value = item.availability_id;
+
+        if(item.status == 'completed' || item.status == 'pick_up'|| item.status == 'delivery' || item.status == 'ongoing_construction'){
+            document.getElementById("cancel").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
+        }
+        else if(item.status == 'checking'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("payment3").style.display = "none";
+            document.getElementById("payment2").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
+        }
+        else if(item.status == 'arrive'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("payment2").style.display = "block";
+            document.getElementById("payment3").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
+        }
+        else if(item.status == 'final_checking'){
+            document.getElementById("cancel").style.display = "block";
+            document.getElementById("payment3").style.display = "block";
+            document.getElementById("payment2").style.display = "none";
+            document.getElementById("reasondisp").style.display = "none";
+        }
+        else if(item.status == 'cancelled'){
+            document.getElementById("cancel").style.display = "none";
+            document.getElementById("reasondisp").style.display = "block";
+        }
+
+
+        // Show the modal
+        modal.style.display = "block";
+
+        // Close the modal when the close button is clicked
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Close the modal if the user clicks anywhere outside the modal
+        window.onclick = function(event) {
+            if (event.target === modal) {
+            modal.style.display = "none";
+            }
+        };
     }
 
     //display on load function of tasks
@@ -477,42 +702,56 @@ require_once '../../Database/database.php';
                             const id = item.kanban_id;
                             const email = item.email;
                             const name = item.name;
-                            const productValues = item.products;   
-                            const status = item.status;  
+                            const product = item.product;   
+                            const status = item.status; 
+                            const product_type = item.product_type;
+                            const pin_location = item.pin_location;
+                            const quantity = item.quantity;
 
                             // Create a new task element
                             const newTask = document.createElement('div');
                             newTask.className = 'task p-3 d-flex flex-column justify-content-between align-items-center';
                             newTask.id = item.kanban_id;
+                            newTask.onclick = function(){
+                                showModal(item);
+                            };
 
                             // Add the task details
-                            if(status == 'approved' || status == 'completed' || status == 'cancelled'){
+                            if(status == 'completed' || status == 'cancelled' || status == 'pick_up'|| status == 'delivery' || status == 'arrive' || status == 'ongoing_construction' || status == 'final_checking'){
                                 newTask.innerHTML = `
                                 ${id}. ${email || 'No email'}
                                 <strong>Name:</strong> ${name || 'No name'}
-                                <strong>Product:</strong> ${productValues || 'No Products'}
-                            `;
+                                <strong>Product:</strong> ${product || 'No Product Error'}
+                                `;
                             }
                             else{
                                 newTask.innerHTML = `
                                 <div class="header">
                                     <strong>${id}. ${email || 'No email'}</strong>
-                                    <button class="btn-close remove-btn" data-id="${id}" aria-label="Remove"></button>
                                 </div>
                                     <strong>Name: ${name || 'No name'}</strong>
-                                    <strong>Product: ${productValues || 'No Products'}</strong>
-                            `;
+                                    <strong>Product: ${product || 'No Product Error'}</strong>
+                                `;
                             }
 
 
                             if(status == 'checking'){
                                 document.getElementById('checking').appendChild(newTask);
                             }
-                            else if(status == 'approved'){
-                                document.getElementById('approved').appendChild(newTask);
+                            else if(status == 'pick_up'){
+                                document.getElementById('pickup').appendChild(newTask);
                             }
-                            else if(status == 'ongoing'){
-                                document.getElementById('ongoing').appendChild(newTask);
+                            else if(status == 'delivery'){
+                                document.getElementById('delivery').appendChild(newTask);
+                            }
+                            else if(status == 'arrive'){
+                                document.getElementById('arrive').appendChild(newTask);
+                            }
+                            else if(status == 'ongoing_construction'){
+                                document.getElementById('ongoing_construction').appendChild(newTask);
+                            }
+                            else if(status == 'final_checking'){
+                                document.getElementById('final_checking').appendChild(newTask);
                             }
                             else if(status == 'completed'){
                                 document.getElementById('completed').appendChild(newTask);
@@ -545,51 +784,6 @@ require_once '../../Database/database.php';
         });
 
     }
-
-    // Delegate event listener to handle task removal
-    //NEEDS TO BE CONNECTED TO DB
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('remove-btn')) {
-            const id = e.target.dataset.id;
-            Swal.fire({
-                title: 'Confirmation',
-                html: "Are you sure on cancelling this task?",
-                icon: 'warning',
-                confirmButtonText: 'Confirm',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'function.php',
-                        type: 'POST',
-                        data:{ delete : id },
-                        success: function(response) {
-                                // Handle successful cancel
-                                Swal.fire({
-                                    title: 'Task Deleted!',
-                                    text: 'You have successfully cancelled the task.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'kanban.php';
-                                });
-                        },
-                        error: function(response) {
-                            // Handle error
-                            Swal.fire(
-                                'Error!',
-                                'There was an error cancelling task. Please try again.',
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        }
-    });
 
 
 </script>
@@ -679,7 +873,7 @@ require_once '../../Database/database.php';
                  $('#availableTimes').append(`
                      <li class="list-group-item">
                          ${slot.start_time} - ${slot.end_time}
-                         <button value='{"date":"${slot.date}", "start_time": "${slot.start_time}", "end_time": "${slot.end_time}"}'
+                         <button value='{"date":"${slot.date}", "start_time": "${slot.start_time}", "end_time": "${slot.end_time}", "availability_id": "${slot.availability_id}"}'
                             class="btn btn-success btn-sm float-end date_time_btn">
                             Book
                          </button>
@@ -704,19 +898,20 @@ require_once '../../Database/database.php';
                 e.preventDefault(); // Prevent the default link behavior
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
-                const product = document.getElementById('product').value;
-                const productContainer = document.getElementById("productContainer");
-                const productInputs = productContainer.getElementsByTagName("select");
-                const date_time_btn = document.querySelector(".date_time_btn");
-                const date_time = JSON.parse(date_time_btn.value);
+                const location = document.getElementById('location').value;
+                const contact = parseInt(document.getElementById('contact').value);
+                const quantity = parseInt(document.getElementById('quantity').value);
+                const product = parseInt(document.getElementById('product').value);
+                const producttype = document.getElementById('producttype').value;
+                // Extract JSON from the clicked button's value
+                const date_time_btn = this; // Refers to the clicked button
+                let date_time = JSON.parse(date_time_btn.value);
                 const date = date_time.date;
                 const start_time = date_time.start_time;
                 const end_time = date_time.end_time;
+                const availability_id = date_time.availability_id;
+                
                     
-                const productValues = [];
-                for (let i = 0; i < productInputs.length; i++) {
-                    productValues.push(productInputs[i].value); // Get the value of each sinput
-                }
 
                     Swal.fire({
                         title: 'Confirmation',
@@ -726,100 +921,58 @@ require_once '../../Database/database.php';
                         showCancelButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
-                            formData.append('addtask', true);
-                            formData.append('email', email);
+                            formData.append('location', location);
+                            formData.append('availability_id', availability_id);
+                            formData.append('product_id', product);
+                            formData.append('productType', producttype);
+                            formData.append('quantity', quantity);
+                            formData.append('serviceType', 'installation')
+                            formData.append('agentmode', true);
                             formData.append('name', name);
-                            formData.append('products', JSON.stringify(productValues));
-                            formData.append('date', date);
-                            formData.append('start_time', start_time);
-                            formData.append('end_time', end_time);
+                            formData.append('email', email);
+                            formData.append('contact', contact);
 
-                            
-                            $.ajax({
-                                url: 'function.php',
-                                type: 'POST',
-                                dataType: 'json',
-                                data:formData,
-                                processData: false,
-                                contentType: false,
-                                success: function(response) {
-                                    // Handle successful add
-                                    if(response.success){
-                                        Swal.fire({
-                                            title: 'Task Added!',
-                                            text: 'Task has been added successfully.',
-                                            icon: 'success',
-                                            allowOutsideClick: false,
-                                            timer: 2000, // 2 seconds timer
-                                            showConfirmButton: false // Hide the confirm button
-                                        }).then(() => {
-                                            // Redirect after the timer ends
-                                            window.location.href = 'kanban.php';
-                                        });
-                                    }
-                                    else{
-                                        Swal.fire({
-                                            title: 'Task not Added!',
-                                            text: response.message || 'An error occurred while adding the task.',
-                                            icon: 'error',
-                                            allowOutsideClick: false,
-                                            timer: 2000, // 2 seconds timer
-                                            showConfirmButton: false // Hide the confirm button
-                                        });
-                                    }
-                                },
-                                error: function(response) {
-                                    // Handle erro
-                                    Swal.fire(
-                                        'Error!',
-                                        'There was an error Adding the task. Please try again.',
-                                        'error'
-                                    );
-                                }
-                            });
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '../../USER/services/bookappointments/service_payment.php';
+
+                            // Iterate over FormData using entries()
+                            for (const [key, value] of formData.entries()) {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = key;
+                                input.value = value;
+                                form.appendChild(input);
+                            }
+
+                            // Append the form to the body
+                            document.body.appendChild(form);
+
+                            // Submit the form
+                            form.submit();
+
+                            // Remove the form after submission to clean up
+                            document.body.removeChild(form);
+
+                        
                         }
                     });
             }),
 
 
-
             //For checking the data before going to appointment
             $(document).on('click', '#checkadd', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
+                haserror = false;
                 const email = document.getElementById('email').value;
                 const name = document.getElementById('name').value;
+                const location = document.getElementById('location').value;
                 const product = document.getElementById('product').value;
-                const productContainer = document.getElementById("productContainer");
-                const productInputs = productContainer.getElementsByTagName("select");
-                    
-                const productValues = [];
-                for (let i = 0; i < productInputs.length; i++) {
-                    productValues.push(productInputs[i].value); // Get the value of each sinput
-                }
-
-                let haserror = false;
-
-                for(let product of productValues){
-                    if(product == ""){
-                        Swal.fire({
-                            title: 'ERROR',
-                            html: "There seems to be missing information. Please complete the form",
-                            icon: 'warning',
-                            confirmButtonText: 'Confirm'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                            }
-                        });
-                        haserror = true;
-                    }
-                    else{
-
-                    }
-                }
-
-                if(email == "" || name == "" ||  productValues.length === 0){
+                const producttype = document.getElementById('producttype').value;
+                const contact = parseInt(document.getElementById('contact').value);
+                const quantity = parseInt(document.getElementById('quantity').value);
+                if(email == "" || name == "" ||  product =="" || contact=="" || quantity =="" || location=="" || producttype ==""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -865,6 +1018,170 @@ require_once '../../Database/database.php';
                 else{
 
                 }
+            });
+
+
+
+            document.getElementById('producttype').addEventListener('change', function() {
+                var selectedValue = this.value;
+                if (!selectedValue == "") {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data:{'PrType':selectedValue},
+                        success: function(response) {
+                            // Handle successful add
+                            if(response.success){
+                                $('#product').empty();
+
+                                var existingValues = [];
+                                $.each(response.data.products, function(index, item) {
+                                    // Check if the value is already in the existingValues array
+                                    if (!existingValues.includes(item.value)) {
+                                        $('#product').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                        existingValues.push(item.value); // Add value to the array
+                                    }
+                                });
+                            }
+                            else{
+                                $('#product').empty();
+                                $('#product').append("<option value=''>Select Product Type First</option>");
+                            }
+                        },
+                        error: function(response) {
+                            // Handle error
+                            $('#product').empty();
+                            $('#product').append("<option value=''>Select Product Type First</option>");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function openPaymentModal() {
+            // Get the total cost and booking ID from the hidden input and text input fields
+            var totalCost = document.getElementById('total_cost_input').value;
+            var bookingId = document.getElementById('booking_id_input').value;
+            
+            // Calculate 40% of the total cost
+            var duePayment = totalCost * 0.40;
+            var totalCost = parseFloat(document.getElementById('total_cost_input').value);
+            // Format the amounts with commas as thousand separators
+            var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+            var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+            // Update the text content of the paymentnow and totalCostModal elements
+            document.getElementById('paymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+            document.getElementById('totalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+            document.getElementById('bookingIdModal').innerText = 'Booking ID: ' + bookingId;
+            
+            // Optionally, populate the form with the total cost and booking ID
+            document.getElementById('booking_id_modal_input').value = bookingId;
+            document.getElementById('duePaymentInput').value = duePayment.toFixed(2); 
+        }
+
+        // Event listener for button click to open the modal
+        document.querySelector('.open-payment-modal-btn').addEventListener('click', openPaymentModal);
+    </script>
+    <script>
+        // Function to open the modal and populate with the total cost and booking ID for third payment
+        function openThirdPaymentModal() {
+            // Get the total cost and booking ID from the input fields
+            var totalCost = document.getElementById('total_cost_input_third').value;
+            var bookingId = document.getElementById('booking_id_input_third').value;
+            
+            // Calculate 40% of the total cost
+            var duePayment = totalCost * 0.15;
+            var totalCost = parseFloat(totalCost);
+            
+            // Format the amounts with commas as thousand separators
+            var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+            var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+
+            // Update the text content of the Thirdpaymentnow, ThirdtotalCostModal, and ThirdbookingIdModal elements
+            document.getElementById('Thirdpaymentnow').innerText = 'Due payment: ' + formattedDuePayment;
+            document.getElementById('ThirdtotalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
+            document.getElementById('ThirdbookingIdModal').innerText = 'Booking ID: ' + bookingId;
+            
+            // Populate the form with the total cost and booking ID
+            document.getElementById('booking_id_third').value = bookingId;
+            document.getElementById('duePayment_third').value = duePayment.toFixed(2); 
+        }
+
+        // Event listener for button click to open the third payment modal
+        document.querySelector('.open-third-payment-modal-btn').addEventListener('click', openThirdPaymentModal);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#reject_form").on("submit", function (e) { // Target the form, not the button
+                e.preventDefault(); // Prevent default form submission
+                if ($("#reasonarea").val() == "") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Enter a reason first",
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                    });
+                    return; // Stop further execution
+                }else{
+                    Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to reject this project?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                        // Gather form data
+                        var formData = {
+                            reason: $("#reason").val().trim(),
+                            booking_id: $("#book_id").val(),
+                            user_id: $("#user_id").val(),
+                            availability_id: $("#avail_id").val(),
+                        };
+
+                        // AJAX call
+                        $.ajax({
+                            type: "POST",
+                            url: "/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php",
+                            data: formData,
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Rejection complete!",
+                                        icon: "success",
+                                        allowOutsideClick: false,
+                                    }).then(() => {
+                                        window.location.href = "kanban.php"; // Redirect
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error",
+                                        confirmButtonText: "OK",
+                                    });
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                Swal.fire({
+                                    title: "SQL Error!",
+                                    text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                                    icon: "error",
+                                    confirmButtonText: "OK",
+                                });
+                            },
+                        });
+                    }
+                });
+
+                }
+
             });
         });
     </script>

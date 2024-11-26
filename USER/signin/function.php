@@ -40,7 +40,7 @@ session_start();
                             $_SESSION['auth'] = "admin";
                             $_SESSION['admin_id'] =  $id;
                             $_SESSION['user_id'] = $user;                     
-                            echo json_encode(['success' => true, 'redirect' => 'ADMIN\accountManagement\accountcontrol\user-management.php']);
+                            echo json_encode(['success' => true, 'redirect' => 'ADMIN/dashboard/admin-dashboard.php']);
                         }
                         else if($role == 'client')
                         {
@@ -54,10 +54,11 @@ session_start();
                             $_SESSION['auth'] = "agent";
                             $_SESSION['agent_id'] = $id;
                             $_SESSION['user_id'] = $user; 
+                            $_SESSION['account_id'] = $id;
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\agent\kanban.php']);
                         }
-                        else if($role == 'service_worker'){
-                            $_SESSION['auth'] = "service_worker";
+                        else if($role == 'worker'){
+                            $_SESSION['auth'] = "worker";
                             $_SESSION['worker_id'] = $id;
                             $_SESSION['user_id'] = $user; 
                             echo json_encode(['success' => true, 'redirect' => 'ADMIN\worker\dashboard.php']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2024 at 08:36 PM
+-- Generation Time: Nov 24, 2024 at 08:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,20 +32,16 @@ CREATE TABLE `accounts` (
   `user_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(20) DEFAULT 'user' COMMENT 'user,admin,agent,service_worker\r\n',
+  `role` enum('client','admin','worker','agent') DEFAULT 'client' COMMENT 'user,admin,agent,service_worker\r\n',
   `is_ban` tinyint(1) DEFAULT 0 COMMENT '0 = not ban , 11',
   `service_count` int(50) NOT NULL DEFAULT 0 COMMENT '0, 1 , 2 , 3 , 4 , 5 ',
   `account_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `verify_token` varchar(255) DEFAULT NULL,
   `verify_status` tinyint(1) DEFAULT 0 COMMENT '0 = not verify , 1 = verify',
+  `re_password_request` tinyint(1) DEFAULT 0 COMMENT '0 = not requesting , 1 = requesting',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `accounts`
---
-
 
 --
 -- Indexes for dumped tables
@@ -67,7 +63,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

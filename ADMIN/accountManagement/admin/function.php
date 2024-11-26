@@ -26,7 +26,14 @@ if(isset($_POST['saveuser']))
             $user_id = $conn->insert_id;
             $insert_accounts = "insert into accounts(user_id,email,password,verify_status,role) values('$user_id' , '$email' , '$password_hash', '1' , '$role')";
             $accounts_result = mysqli_query($conn , $insert_accounts);
-            echo json_encode(['success' => true]);
+            
+
+            if($role == 'worker'){
+
+                $insert_worker = "insert into worker_availability(user_id,is_available) values('$user_id' , '1' )";
+                $worker_result = mysqli_query($conn , $insert_worker);
+                echo json_encode(['success' => true]);
+            }
         }
         }
         else{

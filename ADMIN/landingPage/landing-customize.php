@@ -212,7 +212,7 @@ include_once '../../Database/database.php';
 
                 <!--modal for editing -->
                 <div class="modal fade" id="editmodal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="editmodalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h3 class="modal-title" id="editmodalLabel">Edit Information</h3>

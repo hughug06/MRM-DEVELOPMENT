@@ -1,6 +1,15 @@
 <?php 
 require_once '../../../ADMIN/authetincation.php';
 require_once '../../../Database/database.php';
+
+$user_id = $_SESSION['user_id'];
+echo $user_id;
+$service_count = "select * from service_count";
+$result3 = mysqli_query($conn , $service_count);
+$count = mysqli_fetch_assoc($result3);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +132,19 @@ require_once '../../../Database/database.php';
 </head>
 
 <body>
-
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6744c1904304e3196ae86e53/1idi987he';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        <!--End of Tawk.to Script-->
     <div class="page">
 
              <!-- app-header -->
@@ -143,7 +164,7 @@ require_once '../../../Database/database.php';
                     <div class="d-flex flex-xl-row flex-md-column flex-column justify-content-center mt-4 gap-4">
                         <!-- Generator Card -->
                         <div class="card custom-card">
-                            <img src="/assets/images/mrm-images/dashboard-images/gen1-copy.jpg" class="card-img-top" alt="...">
+                            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/dashboard-images/gen1-copy.jpg" class="card-img-top" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Generator</h6>
                                 <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
@@ -151,7 +172,7 @@ require_once '../../../Database/database.php';
                         </div>
                         <!-- Solar Panel Card -->
                         <div class="card custom-card">
-                            <img src="/assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img-top" alt="...">
+                            <img src="/MRM-DEVELOPMENT/assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img-top" alt="...">
                             <div class="card-body d-flex flex-column">
                                 <h6 class="card-title fw-semibold">Solar Panel</h6>
                                 <p class="card-text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
@@ -161,18 +182,14 @@ require_once '../../../Database/database.php';
                     <!-- Single Avail Now Button -->
                     <div class="d-flex justify-content-center mt-4">
                         <?php 
-                        $service_count = $_SESSION['account_id'];
-                        $check_count = "select * from accounts where account_id = '$service_count'";
-                        $count_result = mysqli_query($conn , $check_count);
-                        $row_count = mysqli_fetch_assoc($count_result);
-                        $count = $row_count['service_count'];
-                        if($count < 5){
-                                                
+                        
+                        if($count['service_count'] == 0){           
+                        
                         ?>
                         <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
                         <?php 
                         }
-                        else{
+                        else if($count['service_count'] >= 1){
                             
                         ?>
                         <!-- Button trigger modal -->
@@ -339,7 +356,7 @@ require_once '../../../Database/database.php';
                     $('#availableTimes').append(`
                         <li class="list-group-item">
                             ${slot.start_time} - ${slot.end_time}
-                            <a href="book_requirements.php?availability_id=${slot.availability_id}&date=${slot.date}&start_time=${slot.start_time}&end_time=${slot.end_time}" 
+                            <a href="book_requirements.php?availability_id=${slot.availability_id}" 
                                class="btn btn-success btn-sm float-end">
                                Book
                             </a>
@@ -360,12 +377,12 @@ require_once '../../../Database/database.php';
     // Function to show modal and auto-close after 2 seconds
     function showMaxServiceModal() {
                     Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "Error, max service",
-            showConfirmButton: false,
-            timer: 1500
-            });
+                    position: "top-end",
+                    icon: "error",
+                    title: "unfortunately, you can only avail 1 appointment",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
                 }
 
     // Example: Call this function to show the modal when needed

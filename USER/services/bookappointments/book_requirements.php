@@ -5,6 +5,72 @@ require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
 
+$booking_total = 0;
+$workers_total = 0;
+$service_booking = "SELECT * FROM service_booking where booking_status != 'canceled' AND booking_status != 'completed' ";
+$workers = "SELECT * FROM worker_availability ";
+
+
+
+$result1 = mysqli_query($conn , $service_booking);
+$result2 = mysqli_query($conn , $workers);
+
+
+while($row1 = mysqli_fetch_assoc($result1)){
+    $booking_total++;
+}
+
+while($row2 = mysqli_fetch_assoc($result2)){
+    $workers_total++;
+}
+
+echo "BOOKING TOTAL" .  $booking_total;
+echo "workers TOTAL" .  $workers_total;
+if($booking_total >= $workers_total){
+    echo "TEST";
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Notice',
+                text: 'There are no available slots',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'service.php';
+            });
+        </script>
+    ";
+}
+
+
+$worker_availability = "SELECT * FROM worker_availability WHERE is_available = 1";
+$exec = mysqli_query($conn, $worker_availability);
+if ($exec) {
+    if (mysqli_num_rows($exec) > 0) {
+        // Add SweetAlert2 for an alert and then redirect after 2 seconds
+       
+    }
+    else{
+        echo "TEST";
+        echo "
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Notice',
+                    text: 'No available workers currently!',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'service.php';
+                });
+            </script>
+        ";
+    }
+}
+
 
 
 
@@ -22,6 +88,7 @@ require_once '../../../ADMIN/authetincation.php';
     include_once(__DIR__. '/../../../partials/head.php');
     ?>
     <title> Inquries </title>
+    
     <!-- Favicon -->
     <link rel="icon" href="../../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
@@ -54,20 +121,31 @@ require_once '../../../ADMIN/authetincation.php';
     <link rel="stylesheet" href="../../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
     <style>
     /* <div class="form-group text-start mb-3">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
                             <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
                         </div> */
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+        
     </style>
 </head>
 
 <body>
-
+        <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6744c1904304e3196ae86e53/1idi987he';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+        <!--End of Tawk.to Script-->
     <div class="page">
 
         <!-- app-header -->
@@ -80,45 +158,43 @@ require_once '../../../ADMIN/authetincation.php';
         <!--APP-CONTENT START-->
         <div class="main-content app-content">
             <div class="container-fluid">
-            
                 <div class="card custom-card mt-3">
                     <?php
-                   $user_id = $_SESSION['user_id'];
-                   $sql = "select * from user_info where user_id = $user_id";
-                   $result = mysqli_query($conn , $sql);
-                   $row = mysqli_fetch_assoc($result);
-                   $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
+                        $user_id = $_SESSION['user_id'];
+                        $sql = "select * from user_info where user_id = $user_id";
+                        $result = mysqli_query($conn , $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $name = $row['first_name'] . " " . $row['middle_name'] . " " . $row['last_name']; 
                     ?>
-                <form class="p-5" action="book_appointment.php" method="POST">
+                    <form class="p-5" action="book_appointment.php" method="POST">
                         <!-- Row 1: Full Name -->
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" id="fullName" class="form-control" name="name"  value="<?= $name?>" >
+                                <input type="text" id="fullName" class="form-control" name="name"  value="<?= $name?>" readonly>
                             </div>
                         </div>
                         <!-- Row 2: Address, City, and Province -->
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" id="address" class="form-control" name="address" value="<?= $row['address'] ?>" >
+                                <input type="text" id="address" class="form-control" name="address" value="<?= $row['address'] ?>" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="city" class="form-label">City</label>
-                                <input type="text" id="city" class="form-control" name="city" value="<?= $row['city'] ?>" >
+                                <input type="text" id="city" class="form-control" name="city" value="<?= $row['city'] ?>" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="province" class="form-label">Province</label>
-                                <input type="text" id="province" class="form-control" name="province" value="<?= $row['province'] ?>" >
+                                <input type="text" id="province" class="form-control" name="province" value="<?= $row['province'] ?>" readonly>
                             </div>
                         </div>
                         <!-- Row 3: Address, City, and Province -->
                         <div class="row mb-3">
                             <div class="col-md-4">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
-                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal">
+                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal" required>
                             </div>
-                            
                         </div>
 
                         <!-- Row 4: Radio Buttons -->
@@ -165,22 +241,16 @@ require_once '../../../ADMIN/authetincation.php';
                                 </div>
                             </div>
                         </div>
-
                         <!-- Submit Button -->
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                <button type="submit" class="btn btn-primary d-flex ms-auto" name="submit">Submit</button>
                             </div>
                         </div>
-                     
                         <input type="hidden" value="<?=$_GET['availability_id'] ?>" name="availability_id">
-                        <input type="hidden" value="<?=$_GET['date']; ?>" name="date">
-                        <input type="hidden" value="<?=$_GET['start_time']; ?>" name="start_time">
-                        <input type="hidden" value="<?=$_GET['end_time']; ?>" name="end_time">
 
                     </form>
                 </div>
-
                 <!-- Map Modal -->
                 <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -190,6 +260,7 @@ require_once '../../../ADMIN/authetincation.php';
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <p class="text-info">NOTE: zoom in using scroll wheel for precise location</p>
                                 <div id="map"></div>
                             </div>
                             <div class="modal-footer">
@@ -198,7 +269,6 @@ require_once '../../../ADMIN/authetincation.php';
                         </div>
                     </div>
                 </div>
-
             </div>
             <!--APP-CONTENT CLOSE-->
         </div>
@@ -243,10 +313,12 @@ require_once '../../../ADMIN/authetincation.php';
     <!-- Custom JS -->
     <script src="../../../assets/js/custom.js"></script>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 </body>
 
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
     // Event listener for product selection
@@ -387,9 +459,15 @@ $(document).ready(function() { // USE TO HIDE tuneup if the user choose solar
     });
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script>
+        $('#mapModal').on('shown.bs.modal', function(){
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 10);
+        });
+    </script>
+    
     <script>
         // SCRIPT USE TO SHOW MAPS AND GET THE VALUE, AND PASS TO LOCATION INPUT
         let map;

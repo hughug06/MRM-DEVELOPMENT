@@ -2,44 +2,37 @@
    
     require_once '../../Database/database.php';
     require_once '../authetincation.php';
-
     $count_pending = 0;
     $count_waiting = 0;
     $count_checking = 0;
     $count_approved = 0;
     $count_canceled = 0;
 
-    // Pending
-    $pending_count = "SELECT COUNT(*) AS total_pending FROM appointments WHERE status = 'Pending'";
-    $pending_result = mysqli_query($conn , $pending_count);
-    $row_count_pending = mysqli_fetch_assoc($pending_result);
-    $count_pending = $row_count_pending['total_pending'];
+    // // Pending
+    // $pending_count = "SELECT COUNT(*) AS total_pending FROM service_booking WHERE status = 'Pending'";
+    // $pending_result = mysqli_query($conn , $pending_count);
+    // $row_count_pending = mysqli_fetch_assoc($pending_result);
+    // $count_pending = $row_count_pending['total_pending'];
 
-    // waiting for payment
-    $waiting_count = "SELECT COUNT(*) AS total_waiting FROM appointments WHERE status = 'Waiting'";
-    $waiting_result = mysqli_query($conn, $waiting_count);  
-    $row_count_waiting = mysqli_fetch_assoc($waiting_result);  // Fetch the result as an associative array
-    $count_waiting = $row_count_waiting['total_waiting']; 
+    // // waiting for payment
+    // $waiting_count = "SELECT COUNT(*) AS total_waiting FROM service_booking WHERE status = 'Waiting'";
+    // $waiting_result = mysqli_query($conn, $waiting_count);  
+    // $row_count_waiting = mysqli_fetch_assoc($waiting_result);  // Fetch the result as an associative array
+    // $count_waiting = $row_count_waiting['total_waiting']; 
 
-    //payment checking
-    $checking_count = "SELECT COUNT(*) AS total_checking FROM service_payment where payment_status = 'confirmed'";
-    $checking_result = mysqli_query($conn, $checking_count);  
-    $row_count_checking = mysqli_fetch_assoc($checking_result);  // Fetch the result as an associative array
-    $count_checking = $row_count_checking['total_checking']; 
+    // //payment checking
+    // $checking_count = "SELECT COUNT(*) AS total_checking FROM service_payment where payment_status = 'confirmed'";
+    // $checking_result = mysqli_query($conn, $checking_count);  
+    // $row_count_checking = mysqli_fetch_assoc($checking_result);  // Fetch the result as an associative array
+    // $count_checking = $row_count_checking['total_checking']; 
 
-    //approved payment
-    $approved_count = "SELECT COUNT(*) AS total_approved FROM service_payment 
-                       inner join appointments on appointments.appointment_id = service_payment.appointment_id
-                       where payment_status = 'approved' AND status = 'Approved'";
-    $approved_result = mysqli_query($conn, $approved_count);  
-    $row_count_approved = mysqli_fetch_assoc($approved_result);  // Fetch the result as an associative array
-    $count_approved = $row_count_approved['total_approved']; 
+ 
     
-     // Cancel
-     $canceled_count = "SELECT COUNT(*) AS total_canceled FROM appointments WHERE status = 'Canceled'";
-     $canceled_result = mysqli_query($conn , $canceled_count);
-     $row_count_canceled = mysqli_fetch_assoc($canceled_result);
-     $count_canceled = $row_count_canceled['total_canceled'];
+    //  // Cancel
+    //  $canceled_count = "SELECT COUNT(*) AS total_canceled FROM service_booking WHERE status = 'Canceled'";
+    //  $canceled_result = mysqli_query($conn , $canceled_count);
+    //  $row_count_canceled = mysqli_fetch_assoc($canceled_result);
+    //  $count_canceled = $row_count_canceled['total_canceled'];
     
 ?>
 
@@ -98,69 +91,24 @@
             <!--APP-CONTENT START-->
             <div class="main-content app-content">
                
-                <!-- MODAL FOR SELECTING WORKER -->
+        
                 <div class="container-fluid">
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">SET QUOTATION</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="set_quotation.php" method="POST">        
-                                                <input type="hidden" name="account_id" id="user_id">
-                                                <input type="hidden" name="appointment_id" id="appointment_id">               
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Item No.</th>
-                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                            <th>Description</th>
-                                                            <th>Quantity</th>
-                                                            <th>Amount</th>
-                                                            <th>Total Cost</th>
-                                                            <th>Action</th> <!-- Action Column for the close button -->
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="itemTableBody">
-                                                        <!-- Rows will be added here dynamically -->
-                                                    </tbody>
-                                                </table>
-
-                                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
-                                                <!-- Submit Button -->
-                                                <button type="add" class="btn btn-success mt-3">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     <div class="row square row-sm">
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
                                 <nav class="nav main-nav-line p-3 tabs-menu ">
-                                    <a class="nav-link  active" data-bs-toggle="tab" id="about-tab" href="#pending">Pending
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_pending ?></span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#profile">Waiting for Payment
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_waiting ?></span>
-                                    </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#chain">Payment Checking
+
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#payment_checking">Payment Checking
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_checking ?></span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#approved">Approved
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#on_going">On going
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#completed">Completed
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
                                     </a>
-                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#contact">Cancelled Appointment
+                                    <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#cancel">Cancel
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"><?= $count_canceled ?></span>
                                     </a>
                                 </nav>
@@ -169,396 +117,328 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="card custom-card main-content-body-profile">
                                         <div class="tab-content">
-                                            <div class="main-content-body tab-pane p-4 border-top-0 active" id="pending">
-                                                <div class="mb-4 main-content-label">Pending</div>
-                                                <div class="card-body border"> 
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Pending'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    $count_pending++;
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?= $resultItem['status']?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                        <?php 
-                                                                        if($resultItem['status'] === "Canceled"){
-
-                                                                            echo "no available action";
-                                                                    
-                                                                        ?> 
-                                                                        
-                                                                        <?php 
-                                                                        }
-                                                                        else if($resultItem['status'] === "Approved" ){
-
-                                                                        
-                                                                        ?>       
-                                                                        <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
-                                                                                                                
-                                                                        <?php 
-                                                                                        
-                                                                        }
-                                                                        else if($resultItem['status'] === "Pending"){
-                                                                            
-                                                                        ?> 
-                                                                        <a href="#" class="btn btn-sm btn-info assign-btn" 
-                                                                        data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                        data-appointment-id="<?= $resultItem['appointment_id'] ?>" 
-                                                                        data-bs-toggle="modal" 
-                                                                        data-bs-target="#staticBackdrop">
-                                                                            <i class="fe fe-edit-2">SET QUOTATION</i>
-                                                                        </a>
-                                                                        <a href="time_delete.php?id=<?= $resultItem['availability_id']?>" class="btn btn-sm btn-danger d-none"> <i class="fe fe-trash">REJECT</i>  </a>
-                                                                        <?php                                                               
-                                                                    }
-                                                                    
-                                                                        ?> 
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>       
-                                                </div>
-                                            </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="profile">
-                                                <div class="mb-4 main-content-label">Waiting for Payment</div>
-                                                <div class="card-body border"> 
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Appointment Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Waiting'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?=  "Waiting to pay" ?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                    <?= "No action available"?>
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>                            
-                                                </div>
-                                            </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="chain">
+                                    
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="payment_checking">
                                                 <div class="mb-4 main-content-label">Payment Checking</div>
                                                 <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
-                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments 
-                                                                        INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
-                                                                        where payment_status = 'checking' and status = 'Checking'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
-                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
-                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
-                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
-                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
-                                                                                                    
-                                                                    <td>
-                                                                    <a href="#" 
-                                                                    class="btn btn-sm btn-success payment-check-button" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#paymentCheckModal"
-                                                                    data-account-id="<?= $resultItem['account_id'] ?>" 
-                                                                    data-appointment-id="<?= $resultItem['appointment_id'] ?>"
-                                                                    data-payment-id="<?= $resultItem['payment_id'] ?>">
-                                                                        Check Payment <i class="fa fa-check-circle"></i>
-                                                                    </a>
-                                                                    
-                                                                </td>
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>             
-                                                </div>
-                                            </div>
-                                            <div class="modal fade" id="paymentCheckModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paymentCheckModal" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLabel">CHOOSE WORKER</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                            <div class="card" style="width: 18rem;">
-                                                            <?php 
-                                                                $sql = "SELECT * FROM user_info 
-                                                                        INNER JOIN accounts ON user_info.user_id = accounts.user_id 
-                                                                        WHERE role = 'service_worker'";
-                                                                $result = mysqli_query($conn, $sql);
+                                                    <div class="row">
+                                                        <?php 
+                                                                                                                                                                        
+                                                        $select = "SELECT * FROM service_booking     
+                                                                    INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id   
+                                                                    INNER JOIN user_info on user_info.user_id = service_booking.user_id    
+                                                                    INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id                                
+                                                                    WHERE payment_status ='advance_payment' AND booking_status = 'pending'";
+                                                        $result = mysqli_query($conn , $select);
+                                                        $row = mysqli_fetch_assoc($result);
 
-                                                                if (mysqli_num_rows($result) > 0) {                
-                                                                    while ($resultitem = mysqli_fetch_assoc($result)) {                
-                                                                ?>
-                                                                        <div class="card-body">
-                                                                            <form action="assign_worker.php" method="POST">
-                                                                                <!-- Worker ID -->
-                                                                                <input type="hidden" name="worker_id" value="<?= htmlspecialchars($resultitem['account_id']) ?>">
-                                                                                
-                                                                                <!-- Display Worker Name and Role -->
-                                                                                <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
-                                                                                <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
-                                                                                
-                                                                                <!-- Submit Button -->
-                                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
-                                                                                
-                                                                                <!-- Hidden Input Fields for Account, Appointment, and Payment IDs -->
-                                                                                <input type="hidden" class="accountId" name="account_id">
-                                                                                <input type="hidden" class="appointmentId" name="appointment_id">
-                                                                                <input type="hidden" class="paymentId" name="payment_id">
-                                                                            </form>                                                                        
-                                                                        </div>
-                                                                <?php
-                                                                    }
-                                                                }
-                                                                ?>
+                                                        
+                                                        if (mysqli_num_rows($result) > 0) {
+                                                            foreach ($result as $resultItem) { 
+                                                        ?>
+                                                            <div class="col-md-4">
+                                                                <div class="card mb-4">
+                                                                    <div class="card-header">
+                                                                        <h5 class="card-title"><?= htmlspecialchars($row['first_name']) .' '.htmlspecialchars($row['last_name']) ; ?></h5>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <!-- Service and Product Info -->
+                                                                        <h6><strong>Service Type:</strong> <?= htmlspecialchars($resultItem['service_type']); ?></h6>
+                                                                        <h6><strong>Product Type:</strong> <?= htmlspecialchars($resultItem['product_type']); ?></h6>
+                                                                        <h6><strong>Brand / Power / Running Hours:</strong> <?= htmlspecialchars($resultItem['brand'] . ' / ' . $resultItem['KVA'] . ' / ' . $resultItem['running_hours']); ?></h6>
 
+                                                                        <!-- Schedule Info -->
+                                                                        <h6><strong>Schedule:</strong> <?= htmlspecialchars($resultItem['date'] . ' / ' . $resultItem['start_time'] . ' - ' . $resultItem['end_time']); ?></h6>
 
-                                                                            
+                                                                        <!-- Payment Info -->
+                                                                        <h6><strong>Payment Method:</strong> <?= htmlspecialchars($resultItem['payment_method']); ?></h6>
+                                                                        <h6><strong>Bank Name:</strong> <?= htmlspecialchars($resultItem['bank_name']); ?></h6>
+                                                                        <h6><strong>Initial Reference Number:</strong> <?= htmlspecialchars($resultItem['first_reference']); ?></h6>
+                                                                        <h6><strong>Initial amount:</strong> <?= htmlspecialchars($resultItem['first_payment']); ?></h6>
+                                                                        <h6><strong>Payment Date:</strong> <?= htmlspecialchars($resultItem['payment_date']); ?></h6>
+
+                                                                        <!-- Payment and Booking Status -->
+                                                                        <h6><strong>Payment Status:</strong> <?= htmlspecialchars($resultItem['payment_status']); ?></h6>
+                                                                        <h6><strong>Booking Status:</strong> <?= htmlspecialchars($resultItem['booking_status']); ?></h6>
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                    <button type="button" class="btn btn-success assign" 
+                                                                            data-bs-toggle="modal" 
+                                                                            data-bs-target="#assign_worker"
+                                                                            booking-id="<?= $resultItem['booking_id'];?>"
+                                                                            admin-id="<?= $_SESSION['admin_id']?>"
+                                                                            user-id="<?= $resultItem['user_id'];?>"
+                                                                            availability-id="<?=$resultItem['availability_id']; ?>">
+                                                                        Assign Worker
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#reject_user"
+                                                                            data-reject-booking-id="<?= $resultItem['booking_id']; ?>"     
+                                                                            data-user-id="<?= $resultItem['user_id'];?>"      
+                                                                            time-availability-id="<?= $resultItem['availability_id'];?>"                                                                 >
+                                                                        Reject User
+                                                                    </button>
+                                        
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            </div>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?> 
                                                     </div>
                                                 </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="approved">
-                                                <div class="mb-4 main-content-label">Payment Checking</div>
-                                                <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Total Cost</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Service Type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Schedule</span></th>
-                                                                    <th class="wd-lg-20p"><span>Mode of Payment</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Reference Number</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Bank Name</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments 
-                                                                        INNER JOIN service_payment on appointments.appointment_id = service_payment.appointment_id                                                                                    
-                                                                        where payment_status = 'approved' and status = 'Approved'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td class="text-success"> ₱<?= $resultItem['total_cost']?></td>    
-                                                                    <td class="text-primary"><?= $resultItem['service_type']?></td>       
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>                                           
-                                                                    <td class="text-warning"> <?= $resultItem['payment_method']?></td> 
-                                                                    <td class="text-info"> <?= $resultItem['payment_status']?></td>         
-                                                                    <td class="text-info"> <?= $resultItem['status']?></td>                     
-                                                                                                    
-                                                                    
+                                            </div>
+                    
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="on_going">
+                                                <div class="row row-sm">
+                                                    <div class="col-sm-12 col-md-12 col-xl-12">
+                                                        <div class="card custom-card">
+                                                            <div class="card-header border-bottom-0">
+                                                                <div>
+                                                                    <div class="card-title">On going projects</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body pt-3">
+                                                                <div class="table-responsive tasks">
+                                                                    <table class="table card-table table-vcenter text-nowrap border">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="wd-lg-20p">#</th>
+                                                                                <th class="wd-lg-20p">CLIENT NAME</th>
+                                                                                <th class="wd-lg-20p">LOCATION</th>
+                                                                                <th class="wd-lg-20p">PAYMENT STATUS</th>
+                                                                                <th class="wd-lg-20p">AMOUNT TO PAY</th>
+                                                                                <th class="wd-lg-20p">PROJECT PROGRESS</th>
+                                                                                <th class="wd-lg-20p">STATUS</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php 
+                                                                                $ongoing = "SELECT * FROM service_booking
+                                                                                            INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                                            INNER JOIN user_info on user_info.user_id = service_booking.user_id 
+                                                                                            INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id     
+                                                                                            ";
+                                                                                $result_ongoing = mysqli_query($conn, $ongoing);
+                                                                                if (mysqli_num_rows($result_ongoing) > 0) {
+                                                                                    // Define progress mapping for each enum status
+                                                                                    $statusMap = [
+                                                                                        'pick_up' => 16, // 1/6 of 100%
+                                                                                        'delivery' => 33, // 2/6 of 100%
+                                                                                        'arrive' => 50, // 3/6 of 100%
+                                                                                        'ongoing_construction' => 66, // 4/6 of 100%
+                                                                                        'checking' => 83, // 5/6 of 100%
+                                                                                        'completed' => 100 // 6/6 of 100%
+                                                                                    ];
 
-                                                                </tr>
-                                                                    <?php 
-                                                                }
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>             
+                                                                                    while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                                                        // Get the current progress percentage based on the status
+                                                                                        $status = $row['status'];
+                                                                                        $progressPercentage = $statusMap[$status] ?? 0; // Default to 0 if status is not found
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td><?= htmlspecialchars($row['first_name']) .' '. htmlspecialchars($row['last_name'])  ?></td>
+                                                                                <td><?= htmlspecialchars($row['pin_location']) ?></td>
+                                                                                <td><?= htmlspecialchars($row['payment_status']) ?></td>
+                                                                                <td>₱<?= number_format($row['total_cost'], 2) ?></td>
+                                                                                <td>
+                                                                                    <div class="progress" style="height: 20px;">
+                                                                                        <div class="progress-bar bg-success" role="progressbar" 
+                                                                                            style="width: <?= $progressPercentage; ?>%;" 
+                                                                                            aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                                            aria-valuemin="0" aria-valuemax="100">
+                                                                                            <?= $progressPercentage; ?>%
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="text-start"><a href="javascript:void(0);" class="text-success"><?= htmlspecialchars($row['status']) ?></a></td>
+                                                                                <!-- Button to trigger the modal with data attributes -->
+                                                                                <td>
+                                                                                    <button class="btn btn-primary" 
+                                                                                            data-bs-toggle="modal" 
+                                                                                            data-bs-target="#paymentLogModal"
+                                                                                            data-first-payment="<?php echo $row['first_payment']; ?>"
+                                                                                            data-second-payment="<?php echo $row['second_payment']; ?>"
+                                                                                            data-third-payment="<?php echo $row['third_payment']; ?>"
+                                                                                            data-first-reference="<?php echo $row['first_reference']; ?>"
+                                                                                            data-second-reference="<?php echo $row['second_reference']; ?>"
+                                                                                            data-third-reference="<?php echo $row['third_reference']; ?>">
+                                                                                        <i class="fas fa-credit-card"></i> <!-- Payment icon from FontAwesome -->
+                                                                                    </button>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <?php 
+                                                                                    }
+                                                                                }
+                                                                            ?>                                                     
+                                                                        </tbody>
+
+                                                                    </table>
+
+                                                                               <!-- Modal -->
+                                                                        <div class="modal fade" id="paymentLogModal" tabindex="-1" aria-labelledby="paymentLogModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="paymentLogModalLabel">Payment Log</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <!-- Initial Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Initial Payment</h6>
+                                                                                    <p id="first-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="first-reference"></td>
+                                                                                            <td id="first-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+
+                                                                                    <!-- Second Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Second Payment</h6>
+                                                                                    <p id="second-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="second-reference"></td>
+                                                                                            <td id="second-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+
+                                                                                    <!-- Last Payment Section -->
+                                                                                    <div class="payment-section">
+                                                                                    <h6 class="fw-bold">Last Payment</h6>
+                                                                                    <p id="third-payment-status" class="text-muted"></p>
+                                                                                    <table class="table table-sm">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Reference Number</th>
+                                                                                            <th scope="col">Amount</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td id="third-reference"></td>
+                                                                                            <td id="third-payment"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                            
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
-                                                <div class="mb-4 main-content-label">Payment Checking</div>
+                                                <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
                                                     
 
                                             
                                                 </div>
                                             </div>
-                                            <div class="main-content-body tab-pane p-4 border-top-0" id="contact">
+                                            <div class="main-content-body tab-pane p-4 border-top-0" id="cancel">
                                                 <div class="mb-4 main-content-label">Cancelled Appointment</div>
                                                 <div class="card-body border">
-                                                    <div class="table-responsive userlist-table">
-                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="wd-lg-20p"><span>Name</span></th>      
-                                                                    <th class="wd-lg-8p"><span>Service type</span></th> 
-                                                                    <th class="wd-lg-8p"><span>Brand/product/power/running hours</span></th>
-                                                                    <th class="wd-lg-20p"><span>Schedule</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Payment Status</span></th>     
-                                                                    <th class="wd-lg-20p"><span>Appointment Status</span></th>                                                                                       
-                                                                    <th class="wd-lg-20p">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Service Type</th>
+                                                                <th>Product Type</th>
+                                                                <th>Brand / Power / Running Hours</th>
+                                                                <th>Schedule</th>
+                                                                <th>Payment Method</th>
+                                                                <th>Bank Name</th>
+                                                                <th>Reference Number</th>
+                                                                <th>Payment Date</th>
+                                                                <th>Payment Status</th>
+                                                                <th>Booking Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <?php 
-                                                            require '../../Database/database.php';                                                                                                                      
-                                                            $select = "Select * from appointments where status ='Canceled'";
-                                                            $result = mysqli_query($conn , $select);
-                                                            if(mysqli_num_rows($result) > 0){
-                                                                foreach($result as $resultItem){
-                                                                    ?> 
-                                                                    <tr>
-                                                                    <td><?= $resultItem['name']?></td>    
-                                                                    <td><?= $resultItem['service_type']?></td>     
-                                                                    <td><?= $resultItem['brand'] . " / " .$resultItem['product'] . " / " .$resultItem['power'] . " / " .$resultItem['running_hours']?></td>                                        
-                                                                    <td><?= $resultItem['date'] . "/" .$resultItem['start_time'] . "-" .$resultItem['end_time']  ?></td>   
-                                                                    <td> <?=  "Rejected" ?></td>                         
-                                                                    <td class="
-                                                                        <?php 
-                                                                        if ($resultItem['status'] === 'Pending') { 
-                                                                            echo 'text-warning';  // Yellow for pending
-                                                                                                                                                    
-                                                                                                                                                                        
-                                                                        
-                                                                        } elseif ($resultItem['status'] === 'Confirmed') { 
-                                                                            echo 'text-success';  // Green for approved
-                                                                        } 
-                                                                        ?>">
-                                                                        <?= $resultItem['status'] ?>
-                                                                    </td>                               
-                                                                    <td>    
-                                                                        <?php 
-                                                                        if($resultItem['status'] === "Canceled"){
-
-                                                                            echo "no available action";
-                                                                    
-                                                                        ?> 
-                                                                        
-                                                                        <?php 
-                                                                        }
-                                                                        else if($resultItem['status'] === "Approved" ){
-
-                                                                        
-                                                                        ?>       
-                                                                        <a href="check_payment.php?id=<?= $resultItem['account_id']?>" class="btn btn-sm btn-success"> <i class="fe fe-trash">Check payment</i> 
-                                                                                                                
-                                                                        <?php 
-                                                                                        
-                                                                        }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                                    <?php 
+                                                            $select = "SELECT * FROM service_booking     
+                                                                        INNER JOIN service_availability ON service_availability.availability_id = service_booking.availability_id   
+                                                                        INNER JOIN user_info ON user_info.user_id = service_booking.user_id  
+                                                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id                                  
+                                                                        WHERE payment_status ='advance_payment' AND booking_status = 'canceled'";
+                                                            $result = mysqli_query($conn, $select);
+                                                            
+                                                            if (mysqli_num_rows($result) > 0) {
+                                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                            <tr>
+                                                                <td><?= htmlspecialchars($row['first_name']) . ' ' . htmlspecialchars($row['last_name']); ?></td>
+                                                                <td><?= htmlspecialchars($row['service_type']); ?></td>
+                                                                <td><?= htmlspecialchars($row['product_type']); ?></td>
+                                                                <td><?= htmlspecialchars($row['brand'] . ' / ' . $row['KVA'] . ' / ' . $row['running_hours']); ?></td>
+                                                                <td><?= htmlspecialchars($row['date'] . ' / ' . $row['start_time'] . ' - ' . $row['end_time']); ?></td>
+                                                                <td><?= htmlspecialchars($row['payment_method']); ?></td>
+                                                                <td><?= htmlspecialchars($row['bank_name']); ?></td>
+                                                                <td><?= htmlspecialchars($row['first_reference']); ?></td>
+                                                                <td><?= htmlspecialchars($row['payment_date']); ?></td>
+                                                                <td><span class="badge bg-warning"><?= htmlspecialchars($row['payment_status']); ?></span></td>
+                                                                <td><span class="badge bg-danger"><?= htmlspecialchars($row['booking_status']); ?></span></td>                                                            
+                                                                    <td>
+                                                                    <button type="button" class="btn btn-success"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#recover_booking"
+                                                                            recover-payment-id="<?= $row['payment_id']; ?>"                              
+                                                                            recover-booking-id="<?= $row['booking_id'];?>"
+                                                                            recover-user-id="<?= $row['user_id'];?>"                                                                       >
+                                                                        Recover account
+                                                                    </button>
+                                                                    </td>                                                                                 
+                                                            </tr>
+                                                            <?php 
                                                                 }
+                                                            } else {
+                                                                echo '<tr><td colspan="12" class="text-center">No records found</td></tr>';
                                                             }
-                                                            else{
-
-                                                            }
-                                                            ?> 
-                                                            </tbody>
-                                                        </table>
-                                                    </div>                     
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                     
                                                 </div>
                                             </div>
                                         </div>
@@ -569,8 +449,136 @@
                     </div>
                 </div>
             </div>
+                    <!-- Recover Booking Modal -->
+                    <div class="modal fade" id="recover_booking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="recoverBookingLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="recoverBookingLabel">Recover Booking</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="recover_booking.php" method="POST">
+                                        <!-- Hidden Inputs for Payment and Booking IDs -->
+                                        <input type="hidden" class="paymentId" name="payment_id">
+                                        <input type="hidden" class="bookingId" name="booking_id">
+                                        <input type="text" class="userId" name="user_id">
+                                        <!-- Reason for Recovery -->
+                                        <h5 class="card-title">Enter new reference number</h5>
+                                        <input type="number" name="new_reference_number">
+                                        
+                                        <!-- Submit Button -->
+                                        <div class="mt-3 text-end">
+                                            <button type="submit" class="btn btn-success">Recover</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            
+
+
+
+
+                            <?php 
+                            $sql2 = "select * from accounts where role = 'worker'";
+                            $result_sql2 = mysqli_query($conn , $sql2);
+                            if (mysqli_num_rows($result_sql2) > 0){
+                                
+                            
+                            ?>
+                             <!-- MODAL FOR CHOOSE WORKER -->
+                             <div class="modal fade" id="assign_worker" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="assign_workerModal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">APPROVE BOOK AND CHOOSE WORKER </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Form for assigning a worker -->
+                                                <form class="assign_worker" action="assign_worker.php" method="POST">
+                                                    <!-- Hidden inputs for booking, admin, client, and availability IDs -->
+                                                    <input type="text" data-value="" class="bookingId booking_id" name="booking_id">
+                                                    <input type="text" data-value="" class="adminId admin_id" name="admin_id">
+                                                    <input type="text" data-value="" class="clientId client_id" name="client_id">
+                                                    <input type="text" data-value="" class="availabilityId availability_id" name="availability_id">
+
+                                                    <div class="card" style="width: 18rem;">
+                                                        <?php 
+                                                        $sql = "SELECT * FROM worker_availability
+                                                                INNER JOIN user_info ON user_info.user_id = worker_availability.user_id 
+                                                                WHERE is_available=1";
+                                                        $result = mysqli_query($conn, $sql);
+
+                                                        if (mysqli_num_rows($result) > 0) {                
+                                                            while ($resultitem = mysqli_fetch_assoc($result)) {                
+                                                        ?>
+                                                            <div class="card-body">
+                                                                <!-- Worker ID -->
+                    
+                                                                
+                                                                <!-- Display Worker Name and Role -->
+                                                                <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
+                                                                <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
+                                                                
+                                                                <!-- Submit Button -->
+                                                                <button type="submit" name="pick" class="btn btn-primary pick">Pick Worker</button>
+                                                                
+                                                                <!-- Hidden input for id of user -->
+                                                                <input type="text" class="user_id" name="user_id" data-user-id="<?= $resultitem['user_id'] ?>" value="<?= $resultitem['user_id'] ?>">
+                                                            </div>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                        <?php 
+                                                        }
+                                                        ?>
+                            <div class="modal fade" id="reject_user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reject_userModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title" id="reject_userModal">Reject Payment</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <!-- Modal Body -->
+                                        <div class="modal-body">
+                                            <form id="reject_form" action="reject_payment.php" method="POST">
+                                                <!-- Hidden Inputs for Booking ID and User ID -->
+                                                <input type="text" id="bookingId" class="bookingId" name="booking_id">
+                                                <input type="text" id="user_id" class="userId" name="user_id">
+                                                <input type="text" id="availability_id" class="availabilityId" name="availability_id">
+
+                                                <!-- Rejection Reason -->
+                                                <div class="mb-3">
+                                                    <label for="reason" class="form-label">Enter Reason for Rejection</label>
+                                                    <textarea id="reason" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
             <!--APP-CONTENT CLOSE-->
 
             <!-- Footer Start -->
@@ -616,128 +624,297 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // When the assign button is clicked
-                $('.assign-btn').on('click', function() {
-                
-                    // Get the account_id and appointment_id from data attributes
-                    var userId = $(this).data('account-id');
-                    var appointmentId = $(this).data('appointment-id');
+      
 
-                    // Set the values in the modal's hidden fields or display them as needed
-                    $('#user_id').val(userId);
-                    $('#appointment_id').val(appointmentId);
-                    
-                });
-            });
-        </script>
-
-        <!-- For Add Item Quotation -->
-        <script>
-            let itemCount = 0;
-
-            // Function to update item numbers dynamically
-            function updateItemNumbers() {
-                const rows = document.querySelectorAll('#itemTableBody tr');
-                rows.forEach((row, index) => {
-                    row.querySelector('td:first-child').innerText = index + 1; // Update the item number
-                });
-                itemCount = rows.length; // Adjust itemCount to the current number of rows
-            }
-
-            document.getElementById('addItemButton').addEventListener('click', function() {
-                itemCount++;
-
-                // Create a new row
-                const newRow = document.createElement('tr');
-
-                newRow.innerHTML = `
-                    <td>${itemCount}</td>
-                    <td><input type="text" name="unit[]" class="form-control" readonly></td> <!-- Unit Column -->
-                    <td>
-                        <select name="item_description[]" class="form-select" required>
-                            <option value="">Select Item</option>
-                            <!-- Dynamically load options from the database using PHP -->
-                            <?php
-                            $query = "SELECT * FROM service_pricing"; // Adjust the query according to your database structure
-                                            $result = mysqli_query($conn, $query);
-                        
-                                            // Check if there are results and populate the options
-                                            if ($result) {
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    echo '<option value="' . $row['description'] . '" data-amount="' . $row['amount'] . '" data-unit="' . $row['unit'] . '">' . $row['description'] . ' - $' . $row['amount'] . '</option>';
-                                                }
-                                            }
-                            ?>
-                        </select>
-                    </td>
-                    <td><input type="number" name="quantity[]" class="form-control" min="1" value="1" required></td>
-                    <td><input type="text" name="amount[]" class="form-control" readonly></td>
-                    <td><input type="text" name="total_cost[]" class="form-control" readonly></td>
-                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td> <!-- Remove Button -->
-                `;
-
-                document.getElementById('itemTableBody').appendChild(newRow);
-
-                // Add event listener to update amount and unit when an item is selected
-                newRow.querySelector('select[name="item_description[]"]').addEventListener('change', function() {
-                    const selectedOption = this.options[this.selectedIndex];
-                    const amountField = newRow.querySelector('input[name="amount[]"]');
-                    const unitField = newRow.querySelector('input[name="unit[]"]');
-                    const amount = selectedOption.dataset.amount;
-                    const unit = selectedOption.dataset.unit;
-                    amountField.value = amount;
-                    unitField.value = unit;
-                });
-
-                // Add event listener to update total cost when quantity changes
-                newRow.querySelector('input[name="quantity[]"]').addEventListener('input', function() {
-                    const quantity = this.value;
-                    const amount = newRow.querySelector('input[name="amount[]"]').value;
-                    const totalCostField = newRow.querySelector('input[name="total_cost[]"]');
-                    totalCostField.value = (quantity * amount) || 0;
-                });
-
-                // Add event listener to the remove button to delete the row
-                newRow.querySelector('.remove-row').addEventListener('click', function() {
-                    newRow.remove(); // Removes the row from the table
-                    updateItemNumbers(); // Update item numbers after removing a row
-                });
-            });
-        </script>
+    
 
     </body>
 
 </html>
 
+            <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                    const modal = document.getElementById('assign_worker');
+                    const reject_modal = document.getElementById('reject_user');
+                    const bookingInput = modal.querySelector('.bookingId');
+                    const adminInput = modal.querySelector('.adminId');
+                    const clientInput = modal.querySelector('.clientId');
+                    const availabilityInput = modal.querySelector('.availabilityId');
+
+                    // Event listener for the modal show event
+                    modal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
+
+                        // Extract info from data-* attributes
+                        const bookingId = button.getAttribute('booking-id');
+                        const adminId = button.getAttribute('admin-id');
+                        const clientId = button.getAttribute('user-id');
+                        const availabilityId = button.getAttribute('availability-id');
+
+                        // Populate the hidden input fields
+                        bookingInput.value = bookingId;
+                        adminInput.value = adminId;
+                        clientInput.value = clientId;
+                        availabilityInput.value = availabilityId;
+                    });
+
+
+                    //FOR REJECT MODAL
+                    const rejectModal = document.getElementById('reject_user');
+                    const bookingInput_reject = rejectModal.querySelector('.bookingId');
+                    const userInputReject = rejectModal.querySelector('.userId');
+                    const availabilityInputReject = rejectModal.querySelector('.availabilityId');
+                    rejectModal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
+
+                        // Extract data from data-* attributes
+                        const bookingId = button.dataset.rejectBookingId;
+                        const userId = button.getAttribute('data-user-id');
+                        const availabilityId = button.getAttribute('time-availability-id');
+                        // Populate the hidden input field
+                        bookingInput_reject.value = bookingId;
+                        userInputReject.value = userId;
+                        availabilityInputReject.value = availabilityId;
+                    });
+
+                    // FOR RECOVER MODAL
+                    const recoverModal = document.getElementById('recover_booking');
+                    const paymentInput = recoverModal.querySelector('.paymentId');
+                    const booking = recoverModal.querySelector('.bookingId');
+                    const userInput = recoverModal.querySelector('.userId');
+                    recoverModal.addEventListener('show.bs.modal', (event) => {
+                        // Button that triggered the modal
+                        const button = event.relatedTarget;
+
+                        // Extract data from data-* attributes
+                        const paymentId = button.getAttribute('recover-payment-id');
+                        const bookingId = button.getAttribute('recover-booking-id');
+                        const userId = button.getAttribute('recover-user-id');
+                        // Populate the hidden input fields
+                        paymentInput.value = paymentId;
+                        booking.value = bookingId;
+                        userInput.value = userId;
+                    });
+
+                });
+
+
+        </script>
+
 <script>
- document.addEventListener('DOMContentLoaded', function() {
-    const paymentButtons = document.querySelectorAll('.payment-check-button');
+  // JavaScript to populate modal with data when button is clicked
+  var paymentLogModal = document.getElementById('paymentLogModal');
+  paymentLogModal.addEventListener('show.bs.modal', function (event) {
+    // Get the button that triggered the modal
+    var button = event.relatedTarget;
 
-    paymentButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const accountId = this.getAttribute('data-account-id');
-            const appointmentId = this.getAttribute('data-appointment-id');
-            const paymentId = this.getAttribute('data-payment-id');
+    // Get data attributes from the button
+    var firstPayment = button.getAttribute('data-first-payment');
+    var secondPayment = button.getAttribute('data-second-payment');
+    var thirdPayment = button.getAttribute('data-third-payment');
+    var firstReference = button.getAttribute('data-first-reference');
+    var secondReference = button.getAttribute('data-second-reference');
+    var thirdReference = button.getAttribute('data-third-reference');
 
-            // Populate all elements with the class 'accountId'
-            document.querySelectorAll('.accountId').forEach(el => {
-                el.value = accountId;
+    // Function to format payments as money with peso sign
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-PH', {
+        style: 'currency',
+        currency: 'PHP'
+      }).format(amount);
+    }
+
+    // Set the modal content dynamically for the first payment
+    if (firstPayment === 'null' || firstPayment === '') {
+      document.getElementById('first-payment-status').textContent = 'The client has not paid';
+      document.getElementById('first-reference').textContent = '';
+      document.getElementById('first-payment').textContent = '';
+    } else {
+      document.getElementById('first-payment-status').textContent = '';
+      document.getElementById('first-reference').textContent = firstReference;
+      document.getElementById('first-payment').textContent = formatCurrency(parseFloat(firstPayment));
+    }
+
+    // Set the modal content dynamically for the second payment
+    if (secondPayment === 'null' || secondPayment === '') {
+      document.getElementById('second-payment-status').textContent = 'The client has not paid';
+      document.getElementById('second-reference').textContent = '';
+      document.getElementById('second-payment').textContent = '';
+    } else {
+      document.getElementById('second-payment-status').textContent = '';
+      document.getElementById('second-reference').textContent = secondReference;
+      document.getElementById('second-payment').textContent = formatCurrency(parseFloat(secondPayment));
+    }
+
+    // Set the modal content dynamically for the third payment
+    if (thirdPayment === 'null' || thirdPayment === '') {
+      document.getElementById('third-payment-status').textContent = 'The client has not paid';
+      document.getElementById('third-reference').textContent = '';
+      document.getElementById('third-payment').textContent = '';
+    } else {
+      document.getElementById('third-payment-status').textContent = '';
+      document.getElementById('third-reference').textContent = thirdReference;
+      document.getElementById('third-payment').textContent = formatCurrency(parseFloat(thirdPayment));
+    }
+  });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $("#reject_form").on("submit", function (e) { // Target the form, not the button
+        e.preventDefault(); // Prevent default form submission
+        if ($("#reason").val() == "") {
+            Swal.fire({
+                title: "Error!",
+                text: "Enter a reason first",
+                icon: "warning",
+                confirmButtonText: "OK",
             });
+            return; // Stop further execution
+        }else{
+            Swal.fire({
+            title: 'Confirmation',
+            html: "Are you sure to reject this project?",
+            icon: 'warning',
+            confirmButtonText: 'Confirm',
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                // Gather form data
+                var formData = {
+                    reason: $("#reason").val().trim(),
+                    booking_id: $("#bookingId").val(),
+                    user_id: $("#user_id").val(),
+                    availability_id: $("#availability_id").val(),
+                };
 
-            // Populate all elements with the class 'appointmentId'
-            document.querySelectorAll('.appointmentId').forEach(el => {
-                el.value = appointmentId;
-            });
+                // AJAX call
+                $.ajax({
+                    type: "POST",
+                    url: "reject_payment.php",
+                    data: formData,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Success",
+                                text: "Rejection complete!",
+                                icon: "success",
+                                allowOutsideClick: false,
+                            }).then(() => {
+                                window.location.href = "appointment.php"; // Redirect
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "OK",
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            title: "SQL Error!",
+                            text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                            icon: "error",
+                            confirmButtonText: "OK",
+                        });
+                    },
+                });
+            }
+        });
 
-            // Populate all elements with the class 'paymentId'
-            document.querySelectorAll('.paymentId').forEach(el => {
-                el.value = paymentId;
+        }
+
+    });
+});
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".assign_worker").on("submit", function (e) { 
+            e.preventDefault(); // Prevent default form submission
+
+            // Get the "Pick Worker" button that was clicked
+            var button = $(document.activeElement); // The button that triggered the form submit event
+            var cardBody = button.closest(".card-body"); // Find the closest card-body to this button
+
+            // Retrieve values specific to this worker
+            var bookingId = $(".booking_id").val(); // Global form-level values
+            var adminId = $(".admin_id").val();
+            var clientId = $(".client_id").val();
+            var availabilityId = $(".availability_id").val();
+            var userId = cardBody.find(".user_id").val(); // Get the user_id for the worker in this card
+
+            // Debugging: Alert the retrieved values
+            alert("Booking ID: " + bookingId);
+            alert("Admin ID: " + adminId);
+            alert("Client ID: " + clientId);
+            alert("Availability ID: " + availabilityId);
+            alert("User ID: " + userId);
+
+            // Show confirmation dialog
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure to assign this worker?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                    // Gather form data
+                    var formData = {
+                        pick: true,
+                        booking_id: bookingId,
+                        admin_id: adminId,
+                        client_id: clientId,
+                        availability_id: availabilityId,
+                        user_id: userId
+                    };
+
+                    // AJAX call
+                    $.ajax({
+                        type: "POST",
+                        url: "assign_worker.php",
+                        data: formData,
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Worker Assigned!",
+                                    icon: "success",
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    window.location.href = "appointment.php"; // Redirect
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: response.message,
+                                    icon: "error",
+                                    confirmButtonText: "OK",
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire({
+                                title: "SQL Error!",
+                                text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                                icon: "error",
+                                confirmButtonText: "OK",
+                            });
+                        },
+                    });
+                }
             });
         });
     });
-});
+
 
 
 </script>

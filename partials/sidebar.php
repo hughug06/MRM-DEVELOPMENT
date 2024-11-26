@@ -93,33 +93,7 @@
                     </ul>
                 </li>
 
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Inquire/Schedule</span></li>
-                <!-- End::slide__category -->
-
-                <!-- Start::slide__category -->
-                <li class="slide has-sub <?= $page == 'chaintercom_landing.php' || $page == 'chaintercom_appointments.php' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'chaintercom_landing.php' || $page == 'chaintercom_appointments.php' ? 'active':''?>">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-chalkboard-user side-menu__icon"></i>
-                        <span class="side-menu__label">Chaintercom</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == "chaintercom_landing.php" ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_landing.php" class="side-menu__item <?= $page == 'chaintercom_landing.php' ? 'active':''?>">Booking</a>
-                        </li> 
-                        <li class="slide <?= $page == 'chaintercom_appointments.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/chaintercom/chaintercom_appointments.php" class="side-menu__item <?= $page == 'chaintercom_appointments.php' ? 'active':''?>">Appointments</a>
-                        </li>                                
-                    </ul>
-                </li>
-                <!-- End::slide__category -->
-
-
-
-            
+        
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">Account</span></li>
                 <!-- End::slide__category -->
@@ -127,7 +101,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "profile.php" ? 'active':''?>">
-                    <a href="/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-gears side-menu__icon"></i>
@@ -184,26 +158,6 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
-                     <!-- Start::slide -->  
-                <li class="slide has-sub 
-                <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active open':''?>"              >
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'project-appointment.php' || $page == 'time-management.php' ? 'active':''?>">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-box side-menu__icon"></i>
-                        <span class="side-menu__label">Chaintercom</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == 'project-appointment.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/project-appointment.php" class="side-menu__item <?= $page == 'project-appointment.php'  ? 'active':''?>">Appointment</a>
-                        </li> 
-                        <li class="slide <?= $page == 'time-management.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/chaintercom/time-management.php" class="side-menu__item <?= $page == 'time-management.php' ? 'active':''?>">Time management</a>
-                        </li>                   
-                    </ul>
-                </li>
-                <!-- End::slide -->                                       
                 
                 <!-- Start::slide -->  
                 <li class="slide 
@@ -261,22 +215,50 @@
                 <!-- End::slide -->
 
                 <!-- Start::slide -->
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
+                <li class="slide has-sub <?= $page == 'inventory-control.php' || $page == 'inventory-logs.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'inventory-control.php' || $page == 'inventory-logs.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="ion-md-filing side-menu__icon"></i> -->
-                            <i class="fa-solid fa-warehouse side-menu__icon"></i>
+                        <i class="fa-solid fa-warehouse side-menu__icon"></i>
                         <span class="side-menu__label">Inventory</span>
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
+                        <li class="slide <?= $page == 'inventory-control.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item <?= $page == 'inventory-control.php' ? 'active':''?>">Inventory Control</a>
+                        </li> 
+                        <li class="slide <?= $page == 'inventory-logs.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item <?= $page == 'inventory-logs.php' ? 'active':''?>">Inventory Logs</a>
+                        </li>                                
+                    </ul>
+                </li>
+                <!-- End::slide -->       
+
+                <li class="slide has-sub">
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-clipboard side-menu__icon"></i>
+                        <span class="side-menu__label">Reports</span>
+                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                    </a>
+                    <ul class="slide-menu child1">
                     <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item">Inventory Control</a>
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/sales-reports.php" class="side-menu__item">Sales Reports</a>
                         </li> 
                         <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item">Inventory Logs</a>
-                        </li>                                
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/damage-reports.php" class="side-menu__item">Damage Reports</a>
+                        </li>           
+                        <li class="slide">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/inventory-reports.php" class="side-menu__item">Inventory Reports</a>
+                        </li>     
+                        <li class="slide">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/agent-reports.php" class="side-menu__item">Agent Reports</a>
+                        </li>      
+                        <li class="slide">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/worker-reports.php" class="side-menu__item">Worker Reports</a>
+                        </li>                           
                     </ul>
                 </li>
                 <!-- End::slide -->       
@@ -294,7 +276,7 @@
 
                 <?php 
                 }
-               else if($_SESSION['auth'] == "service_worker")
+               else if($_SESSION['auth'] == "worker")
                 {
                 ?>
                 <!-- Start::slide__category -->
@@ -306,29 +288,18 @@
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-chart-line side-menu__icon"></i>
-                        <span class="side-menu__label">Dashboard</span>
+                        <span class="side-menu__label">On going</span>
                     </a>
                 </li>
-                
-                <li class="slide has-sub <?= $page == '' || $page == '' ? 'active open':''?>">
-                    <a href="javascript:void(0);" class="side-menu__item <?= $page == "" || $page == '' ? 'active':''?>">
+
+                <li class="slide <?= $page == "completed.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/worker/completed.php" class="side-menu__item <?= $page == "completed.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
-                        <span class="side-menu__label">Services</span>
-                        <i class="fe fe-chevron-right side-menu__angle"></i>
+                        <span class="side-menu__label">Completed</span>
                     </a>
-                    <ul class="slide-menu child1">
-                        <li class="slide <?= $page == '' ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Pending</a>
-                        </li> 
-                        <li class="slide <?= $page == "" ? 'active':''?>">
-                            <a href="" class="side-menu__item <?= $page == '' ? 'active':''?>">Completed</a>
-                        </li>                                
-                    </ul>
                 </li>
-
-                
 
                 
                 <?php 
