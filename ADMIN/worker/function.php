@@ -35,15 +35,15 @@ if(isset($_POST['sql']) && $status == 'arrive'){
             $stmt->bind_param("isisss", $booking_id, $description, $is_done, $quantity, $unit, $updated_at);
             
             if ($stmt->execute()) {
-                echo "Record transferred successfully<br>";
+                // echo "Record transferred successfully<br>";
             } else {
-                echo "Error: " . $stmt->error . "<br>";
+                // echo "Error: " . $stmt->error . "<br>";
             }
             
             $stmt->close();
         }
     } else {
-        echo "No data found in package_maintenance_generator";
+        // echo "No data found in package_maintenance_generator";
     }
 }
 
@@ -173,15 +173,15 @@ if(mysqli_num_rows($result) > 0){
                                     $stmt->bind_param('is', $is_done, $description);
                                     
                                     if ($stmt->execute()) {
-                                        echo "Task updated successfully.";
+                                        // echo "Task updated successfully.";
                                     } else {
-                                        echo "Error: " . $stmt->error;
+                                        // echo "Error: " . $stmt->error;
                                     }
                                     
                                     // Close the statement
                                     $stmt->close();
                                 } else {
-                                    echo "Error preparing statement: " . $conn->error;
+                                    // echo "Error preparing statement: " . $conn->error;
                                 }
                             }
                         }
@@ -201,16 +201,16 @@ if(mysqli_num_rows($result) > 0){
                         if ($pending_count == 0) {
                             $final_status = 'checking';
                             $kanban_status = 'final_checking';
-                            echo '<div class="alert alert-success" role="alert">
-                                    <strong>Congratulations!</strong> All tasks are complete. You are done.
-                                </div>';
+                            // echo '<div class="alert alert-success" role="alert">
+                            //         <strong>Congratulations!</strong> All tasks are complete. You are done.
+                            //     </div>';
                         } else {
-                            echo '<div class="alert alert-warning" role="alert">
-                                    <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
-                                </div>';
+                            // echo '<div class="alert alert-warning" role="alert">
+                            //         <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
+                            //     </div>';
                         }
                     } else {
-                        echo "Error preparing statement: " . $conn->error;
+                        // echo "Error preparing statement: " . $conn->error;
                     }
 
                     
@@ -229,15 +229,15 @@ if(mysqli_num_rows($result) > 0){
                                     $stmt->bind_param('is', $is_done, $description);
                                     
                                     if ($stmt->execute()) {
-                                        echo "Task updated successfully.";
+                                        // echo "Task updated successfully.";
                                     } else {
-                                        echo "Error: " . $stmt->error;
+                                        // echo "Error: " . $stmt->error;
                                     }
                                     
                                     // Close the statement
                                     $stmt->close();
                                 } else {
-                                    echo "Error preparing statement: " . $conn->error;
+                                    // echo "Error preparing statement: " . $conn->error;
                                 }
                             }
                         }
@@ -279,17 +279,17 @@ if(mysqli_num_rows($result) > 0){
                                
                                
                    
-                                echo '<div class="alert alert-success" role="alert">
-                                        <strong>Congratulations!</strong> All tasks are complete. You are done.
-                                    </div>';
+                                // echo '<div class="alert alert-success" role="alert">
+                                //         <strong>Congratulations!</strong> All tasks are complete. You are done.
+                                //     </div>';
                                 
                             } else {
-                                echo '<div class="alert alert-warning" role="alert">
-                                        <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
-                                    </div>';
+                                // echo '<div class="alert alert-warning" role="alert">
+                                //         <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
+                                //     </div>';
                             }
                         } else {
-                            echo "Error preparing statement: " . $conn->error;
+                            // echo "Error preparing statement: " . $conn->error;
                         }
                         
                         break;
@@ -315,21 +315,21 @@ if(mysqli_num_rows($result) > 0){
             } else {
                 // Handle the case where no booking_id was found
                 $booking_id = null;
-                echo "No booking ID found for the given working ID.";
+                // echo "No booking ID found for the given working ID.";
             }
 
 
             $kanbanupd="UPDATE kanban SET kanban_status='$kanban_status' WHERE booking_id='$booking_ids'";
             $result_updkanban = mysqli_query($conn ,$kanbanupd);
-            echo($kanban_status);
-            echo($booking_id);
+            // echo($kanban_status);
+            // echo($booking_id);
         }
     }
-    exit();
+    
 }
 
 header("location: dashboard.php");
-
+exit();
 ?>
 
 
