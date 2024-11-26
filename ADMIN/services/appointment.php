@@ -162,7 +162,7 @@
                                                                         <h6><strong>Booking Status:</strong> <?= htmlspecialchars($resultItem['booking_status']); ?></h6>
                                                                     </div>
                                                                     <div class="card-footer">
-                                                                    <button type="button" class="btn btn-success" 
+                                                                    <button type="button" class="btn btn-success assign" 
                                                                             data-bs-toggle="modal" 
                                                                             data-bs-target="#assign_worker"
                                                                             booking-id="<?= $resultItem['booking_id'];?>"
@@ -499,12 +499,12 @@
                                             </div>
                                             <div class="modal-body">
                                                 <!-- Form for assigning a worker -->
-                                                <form action="assign_worker.php" method="POST">
+                                                <form class="assign_worker" action="assign_worker.php" method="POST">
                                                     <!-- Hidden inputs for booking, admin, client, and availability IDs -->
-                                                    <input type="text" class="bookingId" name="booking_id">
-                                                    <input type="text" class="adminId" name="admin_id">
-                                                    <input type="text" class="clientId" name="client_id">
-                                                    <input type="text" class="availabilityId" name="availability_id">
+                                                    <input type="text" data-value="" class="bookingId booking_id" name="booking_id">
+                                                    <input type="text" data-value="" class="adminId admin_id" name="admin_id">
+                                                    <input type="text" data-value="" class="clientId client_id" name="client_id">
+                                                    <input type="text" data-value="" class="availabilityId availability_id" name="availability_id">
 
                                                     <div class="card" style="width: 18rem;">
                                                         <?php 
@@ -525,10 +525,10 @@
                                                                 <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
                                                                 
                                                                 <!-- Submit Button -->
-                                                                <button type="submit" name="pick" class="btn btn-primary">Pick Worker</button>
+                                                                <button type="submit" name="pick" class="btn btn-primary pick">Pick Worker</button>
                                                                 
                                                                 <!-- Hidden input for id of user -->
-                                                                <input type="text" name="user_id" value="<?= $resultitem['user_id'] ?>">
+                                                                <input type="text" class="user_id" name="user_id" data-user-id="<?= $resultitem['user_id'] ?>" value="<?= $resultitem['user_id'] ?>">
                                                             </div>
                                                         <?php
                                                             }
@@ -831,5 +831,90 @@
 
     });
 });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".assign_worker").on("submit", function (e) { 
+            e.preventDefault(); // Prevent default form submission
+
+            // Get the "Pick Worker" button that was clicked
+            var button = $(document.activeElement); // The button that triggered the form submit event
+            var cardBody = button.closest(".card-body"); // Find the closest card-body to this button
+
+            // Retrieve values specific to this worker
+            var bookingId = $(".booking_id").val(); // Global form-level values
+            var adminId = $(".admin_id").val();
+            var clientId = $(".client_id").val();
+            var availabilityId = $(".availability_id").val();
+            var userId = cardBody.find(".user_id").val(); // Get the user_id for the worker in this card
+
+            // Debugging: Alert the retrieved values
+            alert("Booking ID: " + bookingId);
+            alert("Admin ID: " + adminId);
+            alert("Client ID: " + clientId);
+            alert("Availability ID: " + availabilityId);
+            alert("User ID: " + userId);
+
+            // Show confirmation dialog
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure to assign this worker?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                    // Gather form data
+                    var formData = {
+                        pick: true,
+                        booking_id: bookingId,
+                        admin_id: adminId,
+                        client_id: clientId,
+                        availability_id: availabilityId,
+                        user_id: userId
+                    };
+
+                    // AJAX call
+                    $.ajax({
+                        type: "POST",
+                        url: "assign_worker.php",
+                        data: formData,
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Worker Assigned!",
+                                    icon: "success",
+                                    allowOutsideClick: false,
+                                }).then(() => {
+                                    window.location.href = "appointment.php"; // Redirect
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: response.message,
+                                    icon: "error",
+                                    confirmButtonText: "OK",
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire({
+                                title: "SQL Error!",
+                                text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                                icon: "error",
+                                confirmButtonText: "OK",
+                            });
+                        },
+                    });
+                }
+            });
+        });
+    });
+
+
 
 </script>
