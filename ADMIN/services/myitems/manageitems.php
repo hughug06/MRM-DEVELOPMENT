@@ -975,7 +975,7 @@
 
                                                             <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
                                                             <!-- Submit Button -->
-                                                            <button type="add" class="btn btn-success mt-3" value="installation_save" name="installation_save">Submit</button>
+                                                            <button type="submit" class="btn btn-success mt-3" value="installation_save" name="installation_save">Submit</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -1017,7 +1017,7 @@
 
                                                             <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
                                                             <!-- Submit Button -->
-                                                            <button type="add" class="btn btn-success mt-3" name="generator_save">Submit</button>
+                                                            <button type="submit" class="btn btn-success mt-3" name="generator_save">Submit</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -1069,7 +1069,7 @@
 </div> -->
 
 <!-- Modal for Tune-Up (Generator) -->
-<!-- <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
+ <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -1104,7 +1104,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div> 
 
 <!-- Modal for Maintenance (Solar) -->
 <div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
@@ -1622,9 +1622,9 @@
                     }
                 });
             }),
-//MAINTENANCE SOLAR SUBMISSION VALIDATION
-form_main_solar.addEventListener("submit", function (event) {
-                event.preventDefault();
+            //MAINTENANCE SOLAR SUBMISSION VALIDATION
+            form_main_solar.addEventListener("submit", function (event) {
+                event.preventDefault(); 
 
                 const formData = new FormData(this);  // Use FormData directly from the form
                 formData.append('solar_maintenance_save', true);  // Append the installation_save field
