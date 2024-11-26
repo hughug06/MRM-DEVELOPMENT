@@ -131,10 +131,6 @@ s0.parentNode.insertBefore(s1,s0);
                                                     <img class="pic-1" alt="" src="<?php echo $row['Image']== true? '../../assets/images/'.$row['Image']:"../../assets/images/Product-Images/No-Image-Avail.png" ?>">
                                                 </a>
                                                 <div class="product-link">
-                                                    <a href="user-product-cart.php">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span>Add to cart</span>
-                                                    </a>
                                                     <a href="user-generator-details.php?id=<?= $row['ProductID'];  ?>">
                                                         <i class="fas fa-eye"></i>
                                                         <span>Quick View</span>
