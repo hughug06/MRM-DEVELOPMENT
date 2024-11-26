@@ -217,24 +217,50 @@ $worker_id = $_SESSION['user_id'];
                                                                 </thead>
                                                                 <tbody>
                                                                     <!-- ITEM -->
+                                                                     <?php 
+                                                                     if($row['is_custom_brand'] == 1){
+
+                                                                     
+                                                                     ?>
                                                                     <tr>
+                                                             
                                                                         <td><?= htmlspecialchars($row['brand']) ?></td>
                                                                         <td>Custom</td>
                                                                         <td><?= htmlspecialchars($row['quantity']) ?></td>
                                                                         <td>
-                                                                            <input class="form-check-input" type="checkbox" name="checked_<?= htmlspecialchars($row['brand']); ?>">
+                                                                            <div class="text-danger">not available</div>
                                                                         </td>
                                                                         <td>
                                                                             <div class="d-flex gap-2">
-                                                                                <!-- Input for specifying damage -->
-                                                                                <input type="hidden" name="brand" value="<?=$row['brand']?>">
-                                                                                <input type="text" class="form-control damage_input" name="damage_brand" id="damage_brand_<?=$row['brand']?>" placeholder="Specify damage (if any)">
-                                                                                <!-- Input for number of damages -->
-                                                                                <input type="number" class="form-control number_input" name="number_brand" id="number_brand_<?=$row['brand']?>" placeholder="No. of damages" disabled>
+                                                                                <div class="text-danger">not available</div>         
                                                                             </div>
                                                                         </td>
                                                                     </tr>
-
+                                                                    <?php 
+                                                                    }
+                                                                    else if($row['is_custom_brand'] == 0){
+                                                                        ?> 
+                                                                         <tr>
+                                                                            
+                                                                            <td><?= htmlspecialchars($row['brand']) ?></td>
+                                                                            <td><?= $row['unit'] ?></td>
+                                                                            <td><?= htmlspecialchars($row['quantity']) ?></td>
+                                                                            <td>
+                                                                                <input class="form-check-input" type="checkbox" name="checked_<?= htmlspecialchars($row['brand']); ?>">
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="d-flex gap-2">
+                                                                                    <!-- Input for specifying damage -->
+                                                                                    <input type="hidden" name="brand" value="<?=$row['brand']?>">
+                                                                                    <input type="text" class="form-control damage_input" name="damage_brand" id="damage_brand_<?=$row['brand']?>" placeholder="Specify damage (if any)">
+                                                                                    <!-- Input for number of damages -->
+                                                                                    <input type="number" class="form-control number_input" name="number_brand" id="number_brand_<?=$row['brand']?>" placeholder="No. of damages" disabled>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
                                                                     <!-- Dynamic List Rows -->
                                                                     <?php while ($listing = mysqli_fetch_assoc($result_list)){ ?>
                                                                         <tr>
@@ -248,8 +274,14 @@ $worker_id = $_SESSION['user_id'];
                                                                                 <div class="d-flex gap-2">
                                                                                     <!-- Set name as arrays by appending [] -->
                                                                                     <input type="hidden" name="description[]" value="<?= htmlspecialchars($listing['description']); ?>">
-                                                                                    <input type="text" class="form-control damage_input" name="damage[]" id="damage_<?= htmlspecialchars($listing['description']); ?>" placeholder="Specify damage (if any)">
-                                                                                    <input type="number" class="form-control number_input" name="number[]" id="number_<?= htmlspecialchars($listing['description']); ?>" placeholder="No. of damages" disabled>
+                                                                                    <input type="text" class="form-control damage_input" name="damage[]" 
+                                                                                        id="damage_<?= htmlspecialchars($listing['description']); ?>" 
+                                                                                        placeholder="Specify damage (if any)">
+                                                                                    <input type="number" class="form-control number_input" name="number[]" 
+                                                                                        id="number_<?= htmlspecialchars($listing['description']); ?>" 
+                                                                                        placeholder="No. of damages" 
+                                                                                        max="<?= htmlspecialchars($listing['quantity']); ?>" 
+                                                                                        disabled>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -836,5 +868,43 @@ geocode(endAddress)
         });
     }
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const damageInputs = document.querySelectorAll('.damage_input'); // All damage input fields
+    const numberInputs = document.querySelectorAll('.number_input'); // All number input fields
+
+    // Handle enabling/disabling quantity fields based on damage input
+    damageInputs.forEach(function (input, index) {
+        input.addEventListener('input', function () {
+            if (input.value.trim() !== "") {
+                numberInputs[index].disabled = false; // Enable the quantity input
+                numberInputs[index].required = true; // Make it required
+            } else {
+                numberInputs[index].disabled = true; // Disable the quantity input
+                numberInputs[index].required = false; // Remove required
+                numberInputs[index].value = ""; // Clear value when disabled
+            }
+        });
+    });
+
+    // Add event listener to enforce the max limit on number inputs
+    numberInputs.forEach(function (input) {
+        input.addEventListener('input', function () {
+            const maxValue = parseInt(input.getAttribute('max'), 10); // Get the max value
+            if (parseInt(input.value, 10) > maxValue) {
+                // Display SweetAlert2 message
+                Swal.fire({
+                    title: 'Error!',
+                    text: `The maximum allowed quantity is ${maxValue}.`,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                input.value = maxValue; // Reset to max value
+            }
+        });
+    });
+});
+
 
 </script>
