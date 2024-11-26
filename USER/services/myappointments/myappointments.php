@@ -358,88 +358,85 @@
  
                                             <div class="main-content-body p-4 border tab-pane border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
-                                                <?php 
-                                                $completed = "SELECT * FROM service_booking
-                                                INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
-                                                INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
-                                                INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                                INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
-                                                WHERE booking_status = 'completed' and service_booking.user_id = '$user_id'";
-                                                $result_completed = mysqli_query($conn, $completed);
-                                                if(mysqli_num_rows($result_completed)){
-                                                    while($row_completed = mysqli_fetch_assoc($result_completed)){
-
-                                                   
-                                                
-                                                
-                                                ?>
-
-                                               <!-- Card -->
-                                               <div class="card shadow-lg mt-4">
-                                                    <!-- Card Header -->
-                                                    <div class="card-header bg-success text-white text-center">
-                                                        <h5>Completed</h5>
-                                                    </div>
-                                                    <!-- Card Body -->
-                                                    <div class="card-body">
-                                                        <!-- Full Name and Worker Name -->
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <strong>Client Name:</strong>
-                                                                <p id="client_name"><?= htmlspecialchars($name_row['first_name'] . " " . $name_row['last_name']); ?></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <strong>Worker Name:</strong>
-                                                                <p id="worker_name"><?= htmlspecialchars($row_completed['first_name'] . " " . $row_completed['last_name']); ?></p>
+                                                <div class="row">
+                                                    <?php 
+                                                    $completed = "SELECT * FROM service_booking
+                                                        INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
+                                                        INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
+                                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
+                                                        INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
+                                                        WHERE booking_status = 'completed' and service_booking.user_id = '$user_id'";
+                                                    $result_completed = mysqli_query($conn, $completed);
+                                                    if (mysqli_num_rows($result_completed)) {
+                                                        while ($row_completed = mysqli_fetch_assoc($result_completed)) {
+                                                    ?>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                                            <div class="card h-100">
+                                                                <div class="card-body">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <strong>Client Name:</strong>
+                                                                            <p id="client_name"><?= htmlspecialchars($name_row['first_name'] . " " . $name_row['last_name']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>Worker Name:</strong>
+                                                                            <p id="worker_name"><?= htmlspecialchars($row_completed['first_name'] . " " . $row_completed['last_name']); ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Location -->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-12">
+                                                                            <strong>Location:</strong>
+                                                                            <p id="location"><?= htmlspecialchars($row_completed['pin_location']); ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Service Type and Product Type -->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <strong>Service Type:</strong>
+                                                                            <p id="service_type"><?= htmlspecialchars($row_completed['service_type']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>Product Type:</strong>
+                                                                            <p id="product_type"><?= htmlspecialchars($row_completed['product_type']); ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Start Time and End Time -->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <strong>Start Time:</strong>
+                                                                            <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>End Time:</strong>
+                                                                            <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Note -->
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-12">
+                                                                            <strong>Note:</strong>
+                                                                            <p class="text-muted">
+                                                                                Contact us through Chaintercom or email for maintenance/warranty issues. 
+                                                                                <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Receipt Button -->
+                                                                    <button 
+                                                                        class="btn btn-primary position-absolute bottom-0 end-0 m-3" 
+                                                                        onclick="generateReceipt('<?= $row_completed['total_cost']; ?>')">
+                                                                        Download Receipt
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Location -->
-                                                        <div class="row mb-3">
-                                                            <div class="col-12">
-                                                                <strong>Location:</strong>
-                                                                <p id="location"><?= htmlspecialchars($row_completed['pin_location']); ?></p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Service Type and Product Type -->
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <strong>Service Type:</strong>
-                                                                <p id="service_type"><?= htmlspecialchars($row_completed['service_type']); ?></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <strong>Product Type:</strong>
-                                                                <p id="product_type"><?= htmlspecialchars($row_completed['product_type']); ?></p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Start Time and End Time -->
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <strong>Start Time:</strong>
-                                                                <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <strong>End Time:</strong>
-                                                                <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Note -->
-                                                        <div class="row mb-3">
-                                                            <div class="col-12">
-                                                                <strong>Note:</strong>
-                                                                <p class="text-muted">
-                                                                    Contact us through Chaintercom or email for maintenance/warranty issues. 
-                                                                    <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Receipt Button -->
-                                                        <div class="d-flex justify-content-end">
-                                                            <button class="btn btn-primary" onclick="generateReceipt('<?= $row_completed['total_cost']; ?>')">Download Receipt</button>
-                                                        </div>
-                                                    </div>
+                                                    <?php 
+                                                        }
+                                                    } 
+                                                    ?>
                                                 </div>
 
-                                                <?php  }}?>
 
                                                 <!-- Modal for Maintenance Coverage -->
                                                     <div class="modal fade" id="maintenanceCoverageModal" tabindex="-1" aria-labelledby="maintenanceCoverageModalLabel" aria-hidden="true">
