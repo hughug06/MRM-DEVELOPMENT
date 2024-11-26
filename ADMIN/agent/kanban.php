@@ -528,7 +528,7 @@ if ($exec) {
 
                             <!-- Modal Body -->
                             <div class="modal-body">
-                                <form action="/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php" method="POST">
+                                <form id="reject_form" action="/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php" method="POST">
                                     <!-- Hidden Inputs for Booking ID and User ID -->
                                     <input type="text" class="bookingId" id="book_id" name="booking_id">
                                     <input type="text" class="userId" id="user_id" name="user_id">
@@ -537,7 +537,7 @@ if ($exec) {
                                     <!-- Rejection Reason -->
                                     <div class="mb-3">
                                         <label for="reason" class="form-label">Enter Reason for Rejection</label>
-                                        <textarea id="reason" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
+                                        <textarea id="reasonarea" name="reason" class="form-control" placeholder="Provide the reason for rejection here..." rows="5" required></textarea>
                                     </div>
 
                                     <!-- Submit Button -->
@@ -981,20 +981,6 @@ if ($exec) {
                         showCancelButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // If user confirms, send AJAX request for Add product
-                            // var formData = new FormData();
-                            // formData.append('addtask', true);
-                            // formData.append('email', email);
-                            // formData.append('name', name);
-                            // formData.append('contact', contact);
-                            // formData.append('product_id', product);
-                            // formData.append('quantity', quantity);
-                            // formData.append('availability_id', availability_id);
-                            // formData.append('date', date);
-                            // formData.append('start_time', start_time);
-                            // formData.append('end_time', end_time);
-                            // formData.append('location', location);
-                            // formData.append('producttype', producttype);
                             var formData = new FormData();
                             formData.append('location', location);
                             formData.append('availability_id', availability_id);
@@ -1029,52 +1015,7 @@ if ($exec) {
                             // Remove the form after submission to clean up
                             document.body.removeChild(form);
 
-                            
-
-
-                            
-                            // $.ajax({
-                            //     url: 'function.php',
-                            //     type: 'POST',
-                            //     dataType: 'json',
-                            //     data:formData,
-                            //     processData: false,
-                            //     contentType: false,
-                            //     success: function(response) {
-                            //         // Handle successful add
-                            //         if(response.success){
-                            //             Swal.fire({
-                            //                 title: 'Task Added!',
-                            //                 text: 'Task has been added successfully.',
-                            //                 icon: 'success',
-                            //                 allowOutsideClick: false,
-                            //                 timer: 2000, // 2 seconds timer
-                            //                 showConfirmButton: false // Hide the confirm button
-                            //             }).then(() => {
-                            //                 // Redirect after the timer ends
-                            //                 window.location.href = 'kanban.php';
-                            //             });
-                            //         }
-                            //         else{
-                            //             Swal.fire({
-                            //                 title: 'Task not Added!',
-                            //                 text: response.message || 'An error occurred while adding the task.',
-                            //                 icon: 'error',
-                            //                 allowOutsideClick: false,
-                            //                 timer: 2000, // 2 seconds timer
-                            //                 showConfirmButton: false // Hide the confirm button
-                            //             });
-                            //         }
-                            //     },
-                            //     error: function(response) {
-                            //         // Handle erro
-                            //         Swal.fire(
-                            //             'Error!',
-                            //             'There was an error Adding the task. Please try again.',
-                            //             'error'
-                            //         );
-                            //     }
-                            // });
+                        
                         }
                     });
             }),
@@ -1232,6 +1173,82 @@ if ($exec) {
 
         // Event listener for button click to open the third payment modal
         document.querySelector('.open-third-payment-modal-btn').addEventListener('click', openThirdPaymentModal);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#reject_form").on("submit", function (e) { // Target the form, not the button
+                e.preventDefault(); // Prevent default form submission
+
+                alert($("#reasonarea").val().trim());
+                alert($("#book_id").val());
+                alert($("#user_id").val());
+                alert($("#avail_id").val());
+                if ($("#reasonarea").val() == "") {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Enter a reason first",
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                    });
+                    return; // Stop further execution
+                }else{
+                    Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to reject this project?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) { // Only proceed if the confirm button is clicked
+                        // Gather form data
+                        var formData = {
+                            reason: $("#reason").val().trim(),
+                            booking_id: $("#book_id").val(),
+                            user_id: $("#user_id").val(),
+                            availability_id: $("#avail_id").val(),
+                        };
+
+                        // AJAX call
+                        $.ajax({
+                            type: "POST",
+                            url: "/MRM-DEVELOPMENT/ADMIN/services/reject_payment.php",
+                            data: formData,
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "Rejection complete!",
+                                        icon: "success",
+                                        allowOutsideClick: false,
+                                    }).then(() => {
+                                        window.location.href = "kanban.php"; // Redirect
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response.message,
+                                        icon: "error",
+                                        confirmButtonText: "OK",
+                                    });
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                Swal.fire({
+                                    title: "SQL Error!",
+                                    text: xhr.responseJSON ? xhr.responseJSON.message : "An unexpected error occurred.",
+                                    icon: "error",
+                                    confirmButtonText: "OK",
+                                });
+                            },
+                        });
+                    }
+                });
+
+                }
+
+            });
+        });
     </script>
         
     </body>

@@ -765,11 +765,6 @@
     $(document).ready(function () {
     $("#reject_form").on("submit", function (e) { // Target the form, not the button
         e.preventDefault(); // Prevent default form submission
-
-        alert($("#reason").val().trim());
-        alert($("#bookingId").val());
-        alert($("#user_id").val());
-        alert($("#availability_id").val());
         if ($("#reason").val() == "") {
             Swal.fire({
                 title: "Error!",
