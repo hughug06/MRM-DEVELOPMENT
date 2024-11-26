@@ -235,8 +235,8 @@
                 </li>
                 <!-- End::slide -->       
 
-                <li class="slide has-sub">
-                    <a href="javascript:void(0);" class="side-menu__item">
+                <li class="slide has-sub <?= $page == 'sales-reports.php' || $page == 'damage-reports.php' || $page == 'inventory-reports.php' || $page == 'agent-reports.php' || $page == 'worker-reports.php' ? 'active open':''?>">
+                    <a href="javascript:void(0);" class="side-menu__item <?= $page == 'sales-reports.php' || $page == 'damage-reports.php' || $page == 'inventory-reports.php' || $page == 'agent-reports.php' || $page == 'worker-reports.php' ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-clipboard side-menu__icon"></i>
@@ -244,20 +244,20 @@
                         <i class="fe fe-chevron-right side-menu__angle"></i>
                     </a>
                     <ul class="slide-menu child1">
-                    <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/sales-reports.php" class="side-menu__item">Sales Reports</a>
+                        <li class="slide <?= $page == 'sales-reports.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/sales-reports.php" class="side-menu__item <?= $page == 'sales-reports.php' ? 'active':''?>">Sales Reports</a>
                         </li> 
-                        <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/damage-reports.php" class="side-menu__item">Damage Reports</a>
+                        <li class="slide <?= $page == 'damage-reports.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/damage-reports.php" class="side-menu__item <?= $page == 'damage-reports.php' ? 'active':''?>">Damage Reports</a>
                         </li>           
-                        <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/inventory-reports.php" class="side-menu__item">Inventory Reports</a>
+                        <li class="slide <?= $page == 'inventory-reports.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/inventory-reports.php" class="side-menu__item <?= $page == 'inventory-reports.php' ? 'active':''?>">Inventory Reports</a>
                         </li>     
-                        <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/agent-reports.php" class="side-menu__item">Agent Reports</a>
+                        <li class="slide <?= $page == 'agent-reports.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/agent-reports.php" class="side-menu__item <?= $page == 'agent-reports.php' ? 'active':''?>">Agent Reports</a>
                         </li>      
-                        <li class="slide">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/worker-reports.php" class="side-menu__item">Worker Reports</a>
+                        <li class="slide <?= $page == 'worker-reports.php' ? 'active':''?>">
+                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/worker-reports.php" class="side-menu__item <?= $page == 'worker-reports.php' ? 'active':''?>">Worker Reports</a>
                         </li>                           
                     </ul>
                 </li>
