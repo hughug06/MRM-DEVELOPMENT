@@ -65,8 +65,6 @@ elseif (isset($_GET['gettasks']) && isset($_SESSION['user_id'])) {
 SELECT *
 FROM kanban k
 LEFT JOIN service_booking sb ON sb.booking_id = k.booking_id
-LEFT JOIN worker_ongoing wo ON sb.booking_id = wo.booking_id
-LEFT JOIN user_info ui ON ui.user_id = wo.worker_id
 LEFT JOIN service_payment sp ON sp.booking_id = sb.booking_id
 WHERE k.user_id = ?";
 
@@ -99,6 +97,22 @@ WHERE k.user_id = ?";
                     $stmt2->close(); // Close the inner statement here
                 }
 
+                $reason = "";
+                if($row['kanban_status'] == "cancelled"){
+                    $cancelid=$row['booking_id'];
+                    $sql2 = "SELECT * FROM cancel_reason WHERE booking_id =?";
+                    if($stmt3 = $conn->prepare($sql2)){
+                        $stmt3->bind_param("i", $cancelid);
+                        $stmt3->execute();
+                        $result3 = $stmt3->get_result();
+                        if($result3->num_rows > 0){
+                            while ($row3 = $result3->fetch_assoc()) { // Use a different variable for the inner row
+                                $reason = $row3['reason'];
+                            }
+                        }
+                    }
+                }
+
                 $info[] = [
                     'kanban_id' => $row['kanban_id'],
                     'status' => $row['kanban_status'],
@@ -109,7 +123,10 @@ WHERE k.user_id = ?";
                     'pin_location' => $row['pin_location'],
                     'quantity' => $row['quantity'],
                     'total_cost' => $row['total_cost'],
-                    'booking_id' => $row['booking_id']
+                    'booking_id' => $row['booking_id'],
+                    'cancel_reason' => $reason,
+                    'availability_id' => $row['availability_id'],
+                    'user_id' => $_SESSION['user_id'],
                 ];
             }
             echo json_encode(['success' => true, 'data' => ['info' => $info]]);
