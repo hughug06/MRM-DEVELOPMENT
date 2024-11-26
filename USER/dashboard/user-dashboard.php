@@ -10,7 +10,7 @@ require_once '../../ADMIN/authetincation.php';
 
     <!-- Meta Data -->
     <?php include_once(__DIR__. '/../../partials/head.php')?>
-    <title> Products Overview </title>
+    <title>Home</title>
     <!-- Favicon -->
     <link rel="icon" href="../../assets/images/brand-logos/favicon.ico" type="image/x-icon">
     
