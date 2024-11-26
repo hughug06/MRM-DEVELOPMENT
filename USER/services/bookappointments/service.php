@@ -183,7 +183,7 @@ $count = mysqli_fetch_assoc($result3);
                         <?php 
                         
                         if($count['service_count'] == 0){           
-                        echo $count['service_count'];
+                     
                         ?>
                         <button type="button" class="btn btn-primary btn-wave mb-5" data-bs-toggle="modal" data-bs-target="#services-modal" >Avail now</button>
                         <?php 

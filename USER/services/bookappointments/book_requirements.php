@@ -193,7 +193,7 @@ if ($exec) {
                         <div class="row mb-3">
                             <div class="col-md-4">
                             <label for="location" class="text-muted">PIN YOUR Address</label>
-                            <input class="form-control" type="text" name="location" id="location" readonly placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal" required>
+                            <input class="form-control" type="text" name="location" id="location"  placeholder="Click to select location" data-bs-toggle="modal" data-bs-target="#mapModal" required>
                             </div>
                         </div>
 
