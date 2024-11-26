@@ -100,11 +100,7 @@ if(mysqli_num_rows($result) > 0){
                     }
                 }
             }
-            
-            
-            
-            
-                exit();      
+               
            
             $final_status = 'delivery';
             $kanban_status = 'delivery';
@@ -149,7 +145,7 @@ if(mysqli_num_rows($result) > 0){
                                     // Check if damage and quantity are provided
                                     if (!empty($damage) && !empty($number)) {
                                         $sql = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
-                                                VALUES ('$book_id', '$working_id', '$description', '$damage', '$number', 'pick_up', CURRENT_TIMESTAMP)";
+                                                VALUES ('$book_id', '$working_id', '$description', '$damage', '$number', 'arrive', CURRENT_TIMESTAMP)";
                                         $exec = mysqli_query($conn, $sql);
                                     }
                                 }
