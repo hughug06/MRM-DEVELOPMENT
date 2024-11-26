@@ -59,73 +59,53 @@ if(mysqli_num_rows($result) > 0){
     
     switch ($status) {
         case 'pick_up':
-            $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : ''; 
-
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    
-                        // Handle the first item (brand, damage, and quantity)
-                        if (isset($_POST['brand']) && isset($_POST['damage_brand']) && isset($_POST['number_brand'])) {
-                            $brand = $_POST['brand'];
-                            $damage_brand = $_POST['damage_brand'];
-                            $number_brand = $_POST['number_brand'];
-                    
-                            // Check if damage and quantity are provided
-                            if (!empty($damage_brand) && !empty($number_brand)) {
-                                $sql2 = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
-                                         VALUES ('$book_id', '$working_id', '$brand', '$damage_brand', '$number_brand', 'pick_up', CURRENT_TIMESTAMP)";
-                                $exec2 = mysqli_query($conn, $sql2);
-                    
-                                // Output data for the first item
-                                echo "Brand: $brand <br>";
-                                echo "Damage Report: $damage_brand <br>";
-                                echo "Number of Damages: $number_brand <br>";
-                            } else {
-                                echo "No damage or quantity provided for the brand. Skipping insertion.<br>";
-                            }
-                        }
-                    
-                        // Handle dynamic list rows for description, damage, and quantity
-                        if (isset($_POST['description']) && isset($_POST['damage']) && isset($_POST['number'])) {
-                            // Retrieve the arrays from the POST data
-                            $descriptions = $_POST['description'];  // Array of descriptions
-                            $damages = $_POST['damage'];  // Array of damages
-                            $numbers = $_POST['number'];  // Array of quantities
-                    
-                            // Debugging: Check the lengths of the arrays
-                            echo "Description Array Length: " . count($descriptions) . "<br>";
-                            echo "Damage Array Length: " . count($damages) . "<br>";
-                            echo "Quantity Array Length: " . count($numbers) . "<br>";
-                    
-                            // Check if arrays have the same length before looping
-                            if (count($descriptions) == count($damages) && count($descriptions) == count($numbers)) {
-                                // Loop through each item in the arrays and output the data
-                                for ($i = 0; $i < count($descriptions); $i++) {
-                                    $description = $descriptions[$i];
-                                    $damage = $damages[$i];
-                                    $number = $numbers[$i];
-                    
-                                    // Check if damage and quantity are provided
-                                    if (!empty($damage) && !empty($number)) {
-                                        // Insert data into the database
-                                        $sql = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
-                                                VALUES ('$book_id', '$working_id', '$description', '$damage', '$number', 'pick_up', CURRENT_TIMESTAMP)";
-                                        $exec = mysqli_query($conn, $sql);
-                    
-                                        // Output data for each dynamic row
-                                        echo "Description: $description <br>";
-                                        echo "Damage Report: $damage <br>";
-                                        echo "Number of Damages: $number <br>";
-                                    } else {
-                                        echo "Skipping description '$description' due to missing damage or quantity.<br>";
-                                    }
-                                }
-                            } else {
-                                echo "Error: Arrays have mismatched lengths.<br>";
-                            }
+            
+            $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';
+    
+            
+            $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';
+            $working_id = isset($_POST['working_id']) ? $_POST['working_id'] : '';
+            
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Process the static "brand" row
+                if (!empty($_POST['brand']) && isset($_POST['damage_brand']) && isset($_POST['number_brand'])) {
+                    $brand = $_POST['brand'];
+                    $damage_brand = trim($_POST['damage_brand']);
+                    $number_brand = intval($_POST['number_brand']);
+            
+                    // Insert only if there is damage reported
+                    if (!empty($damage_brand) && $number_brand > 0) {
+                        $sql = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
+                                VALUES ('$book_id', '$working_id', '$brand', '$damage_brand', '$number_brand', 'pick_up', CURRENT_TIMESTAMP)";
+                        mysqli_query($conn, $sql);
+                    }
+                }
+            
+                // Process dynamic rows
+                if (isset($_POST['description']) && isset($_POST['damage']) && isset($_POST['number'])) {
+                    $descriptions = $_POST['description'];
+                    $damages = $_POST['damage'];
+                    $quantities = $_POST['number'];
+            
+                    foreach ($descriptions as $key => $description) {
+                        $damage = isset($damages[$key]) ? trim($damages[$key]) : '';
+                        $quantity = isset($quantities[$key]) ? intval($quantities[$key]) : 0;
+            
+                        // Insert only if there is damage reported and quantity > 0
+                        if (!empty($damage) && $quantity > 0) {
+                            $sql = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
+                                    VALUES ('$book_id', '$working_id', '$description', '$damage', '$quantity', 'pick_up', CURRENT_TIMESTAMP)";
+                            mysqli_query($conn, $sql);
                         }
                     }
-                      
-
+                }
+            }
+            
+            
+            
+            
+                exit();      
+           
             $final_status = 'delivery';
           break;
             case 'delivery':
@@ -134,71 +114,46 @@ if(mysqli_num_rows($result) > 0){
                 case 'arrive':
                     //CREATE FUNCTION THAT WILL INSERT ALL THE CHECKLIST TO DATABASE
                    
-                    $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : ''; 
-
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    
-                        // Handle the first item (brand, damage, and quantity)
-                        if (isset($_POST['brand']) && isset($_POST['damage_brand']) && isset($_POST['number_brand'])) {
-                            $brand = $_POST['brand'];
-                            $damage_brand = $_POST['damage_brand'];
-                            $number_brand = $_POST['number_brand'];
-                    
-                            // Check if damage and quantity are provided
-                            if (!empty($damage_brand) && !empty($number_brand)) {
-                                $sql2 = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
-                                         VALUES ('$book_id', '$working_id', '$brand', '$damage_brand', '$number_brand', 'pick_up', CURRENT_TIMESTAMP)";
-                                $exec2 = mysqli_query($conn, $sql2);
-                    
-                                // Output data for the first item
-                                echo "Brand: $brand <br>";
-                                echo "Damage Report: $damage_brand <br>";
-                                echo "Number of Damages: $number_brand <br>";
-                            } else {
-                                echo "No damage or quantity provided for the brand. Skipping insertion.<br>";
+                    $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';
+             
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            // Handle the first item (brand, damage, and quantity)
+                            if (isset($_POST['brand']) && isset($_POST['damage_brand']) && isset($_POST['number_brand'])) {
+                                $brand = $_POST['brand'];
+                                $damage_brand = $_POST['damage_brand'];
+                                $number_brand = $_POST['number_brand'];
+                        
+                                // Check if damage and quantity are provided
+                                if (!empty($damage_brand) && !empty($number_brand)) {
+                                    $sql2 = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
+                                            VALUES ('$book_id', '$working_id', '$brand', '$damage_brand', '$number_brand', 'pick_up', CURRENT_TIMESTAMP)";
+                                    $exec2 = mysqli_query($conn, $sql2);
+                                }
                             }
-                        }
-                    
-                        // Handle dynamic list rows for description, damage, and quantity
-                        if (isset($_POST['description']) && isset($_POST['damage']) && isset($_POST['number'])) {
-                            // Retrieve the arrays from the POST data
-                            $descriptions = $_POST['description'];  // Array of descriptions
-                            $damages = $_POST['damage'];  // Array of damages
-                            $numbers = $_POST['number'];  // Array of quantities
-                    
-                            // Debugging: Check the lengths of the arrays
-                            echo "Description Array Length: " . count($descriptions) . "<br>";
-                            echo "Damage Array Length: " . count($damages) . "<br>";
-                            echo "Quantity Array Length: " . count($numbers) . "<br>";
-                    
-                            // Check if arrays have the same length before looping
-                            if (count($descriptions) == count($damages) && count($descriptions) == count($numbers)) {
-                                // Loop through each item in the arrays and output the data
+                        
+                            // Handle dynamic list rows for description, damage, and quantity
+                            if (isset($_POST['description']) && isset($_POST['damage']) && isset($_POST['number'])) {
+                                // Retrieve the arrays from the POST data
+                                $descriptions = $_POST['description'];
+                                $damages = $_POST['damage'];
+                                $numbers = $_POST['number'];
+                        
+                                // Ensure arrays are iterated individually
                                 for ($i = 0; $i < count($descriptions); $i++) {
                                     $description = $descriptions[$i];
-                                    $damage = $damages[$i];
-                                    $number = $numbers[$i];
-                    
+                                    $damage = isset($damages[$i]) ? $damages[$i] : '';
+                                    $number = isset($numbers[$i]) ? $numbers[$i] : '';
+                        
                                     // Check if damage and quantity are provided
                                     if (!empty($damage) && !empty($number)) {
-                                        // Insert data into the database
                                         $sql = "INSERT INTO damage_report (booking_id, working_id, description, damage, quantity, when_happen, created_at)
-                                                VALUES ('$book_id', '$working_id', '$description', '$damage', '$number', 'arrive', CURRENT_TIMESTAMP)";
+                                                VALUES ('$book_id', '$working_id', '$description', '$damage', '$number', 'pick_up', CURRENT_TIMESTAMP)";
                                         $exec = mysqli_query($conn, $sql);
-                    
-                                        // Output data for each dynamic row
-                                        echo "Description: $description <br>";
-                                        echo "Damage Report: $damage <br>";
-                                        echo "Number of Damages: $number <br>";
-                                    } else {
-                                        echo "Skipping description '$description' due to missing damage or quantity.<br>";
                                     }
                                 }
-                            } else {
-                                echo "Error: Arrays have mismatched lengths.<br>";
                             }
                         }
-                    }
+          
 
                     $final_status = 'ongoing_construction';
                 break;
