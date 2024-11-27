@@ -169,7 +169,9 @@ $worker_id = $_SESSION['user_id'];
                                                         <div class="card mb-3 h-100">
                                                             <div class="card-body d-flex flex-column justify-content-between">
                                                                 <h5 class="card-title">Item Origin</h5>
-                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Standford Street, E. RODRIGUEZ CUBAO, 1102 QUEZON CITY NCR, SECOND DISTRICT PHILIPPINES</span></p>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Stanford, Quezon City, 1102 Metro Manila
+
+                                                                </span></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -355,7 +357,7 @@ $worker_id = $_SESSION['user_id'];
                                                         <div class="card mb-3 h-100">
                                                             <div class="card-body d-flex flex-column justify-content-between">
                                                                 <h5 class="card-title">Item Origin</h5>
-                                                                <p><strong>From:</strong> <span class="fw-bold text-primary" id="start-location"><?= htmlspecialchars("87 Standford Street, E. RODRIGUEZ CUBAO, 1102 QUEZON CITY NCR, SECOND DISTRICT PHILIPPINES"); ?></span></p>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary" id="start-location"><?= htmlspecialchars("87 Stanford, Quezon City, 1102 Metro Manila"); ?></span></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -425,7 +427,7 @@ $worker_id = $_SESSION['user_id'];
                                                         <div class="card mb-3 h-100">
                                                             <div class="card-body d-flex flex-column justify-content-between">
                                                                 <h5 class="card-title">Item Origin</h5>
-                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Standford Street, E. RODRIGUEZ CUBAO, 1102 QUEZON CITY NCR, SECOND DISTRICT PHILIPPINES</span></p>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Stanford, Quezon City, 1102 Metro Manila</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -529,7 +531,7 @@ $worker_id = $_SESSION['user_id'];
                                                         <div class="card mb-3 h-100">
                                                             <div class="card-body d-flex flex-column justify-content-between">
                                                                 <h5 class="card-title">Item Origin</h5>
-                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Standford Street, E. RODRIGUEZ CUBAO, 1102 QUEZON CITY NCR, SECOND DISTRICT PHILIPPINES</span></p>
+                                                                <p><strong>From:</strong> <span class="fw-bold text-primary">87 Stanford, Quezon City, 1102 Metro Manila </span></p>
                                                             </div>
                                                         </div>
                                                     </div>
