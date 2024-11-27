@@ -25,7 +25,17 @@
             $first_payment = $_POST['first_payment'];
             $agentmode = isset($_POST['agentmode'])? true:false;
   
-            
+if($is_custom == 0){
+    $updated_stocks = 0;
+    $stock_current = "SELECT * from products where ProductName = '$brand'"; 
+    $current_result = mysqli_query($conn , $stock_current);
+    $current_row = mysqli_fetch_assoc($current_result);
+    $currents_stocks = $current_row['stock'];
+    $updated_stocks = $currents_stocks - $quantity;
+    $stock_update = "UPDATE products SET stock='$updated_stocks' WHERE ProductName = '$brand'";
+    $update_result = mysqli_query($conn , $stock_update);
+}  
+
 // Create the SQL statement
 $sql = "INSERT INTO service_booking (
             user_id, 

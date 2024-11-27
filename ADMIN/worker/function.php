@@ -58,13 +58,11 @@ if(mysqli_num_rows($result) > 0){
     $status = $row['status'];
     $final_status = '';
     $service_from = $row['service_from'];
-    
+    $user_id = $row['client_id'];
     switch ($status) {
         case 'pick_up':
             
-            $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';
-    
-            
+            $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';   
             $book_id = isset($_POST['book_id']) ? $_POST['book_id'] : '';
             $working_id = isset($_POST['working_id']) ? $_POST['working_id'] : '';
             
@@ -102,12 +100,18 @@ if(mysqli_num_rows($result) > 0){
                     }
                 }
             }
-               
-           
+            $notification = "INSERT INTO notification (message, `from`, user_id)
+             VALUES ('Worker is on the way', 'from on going booking', '$user_id')";
+            $notification_result = mysqli_query($conn , $notification);
+            
             $final_status = 'delivery';
             $kanban_status = 'delivery';
           break;
             case 'delivery':
+                $notification = "INSERT INTO notification (message, `from`, user_id)
+                VALUES ('Worker just arrive at your pin location, please pay for second payment', 'from on going booking', '$user_id')";
+               $notification_result = mysqli_query($conn , $notification);
+
                 $final_status = 'arrive';
                 $kanban_status = 'arrive';
             break;
@@ -154,6 +158,9 @@ if(mysqli_num_rows($result) > 0){
                             }
                         }
             
+                        $notification = "INSERT INTO notification (message, `from`, user_id)
+                        VALUES ('Worker done checking materials needed', 'from ongoing booking', '$user_id')";
+                        $notification_result = mysqli_query($conn , $notification);
 
                     $final_status = 'ongoing_construction';
                     $kanban_status = 'ongoing_construction';
@@ -199,15 +206,18 @@ if(mysqli_num_rows($result) > 0){
                         
                         // Display message based on pending tasks
                         if ($pending_count == 0) {
+
+                            $notification = "INSERT INTO notification (message, `from`, user_id)
+                            VALUES ('worker is done, check the status', 'from ongoing booking', '$user_id')";
+                            $notification_result = mysqli_query($conn , $notification);
                             $final_status = 'checking';
                             $kanban_status = 'final_checking';
-                            // echo '<div class="alert alert-success" role="alert">
-                            //         <strong>Congratulations!</strong> All tasks are complete. You are done.
-                            //     </div>';
+                           
                         } else {
-                            // echo '<div class="alert alert-warning" role="alert">
-                            //         <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
-                            //     </div>';
+                            $notification = "INSERT INTO notification (message, `from`, user_id)
+                            VALUES ('work is ongoing, $pending_count left before done', 'from ongoing booking', '$user_id')";
+                            $notification_result = mysqli_query($conn , $notification);
+                            
                         }
                     } else {
                         // echo "Error preparing statement: " . $conn->error;
@@ -272,6 +282,9 @@ if(mysqli_num_rows($result) > 0){
                                     $worker_availability = "update worker_availability set is_available = '1' where user_id = '$worker_id'";
                                     $client_availability = "update service_count set service_count = 0 where user_id = '$client_id_maintenance'";
                                     $update_booking = "update service_booking set booking_status = 'completed' where booking_id = '$booking_id_maintenance'";
+                                    $notification = "INSERT INTO notification (message, `from`, user_id)
+                                    VALUES ('Worker done checking the project, please proceed for final payment', 'from ongoing booking', '$user_id')";
+                                    $notification_result = mysqli_query($conn , $notification);
                                     $result_worker = mysqli_query($conn , $worker_availability);
                                     $result_client = mysqli_query($conn , $client_availability);
                                     $result_booking = mysqli_query($conn , $update_booking);
@@ -279,14 +292,9 @@ if(mysqli_num_rows($result) > 0){
                                
                                
                    
-                                // echo '<div class="alert alert-success" role="alert">
-                                //         <strong>Congratulations!</strong> All tasks are complete. You are done.
-                                //     </div>';
                                 
                             } else {
-                                // echo '<div class="alert alert-warning" role="alert">
-                                //         <strong>Pending Tasks:</strong> You still have ' . $pending_count . ' task(s) left to complete.
-                                //     </div>';
+                                
                             }
                         } else {
                             // echo "Error preparing statement: " . $conn->error;
@@ -294,6 +302,9 @@ if(mysqli_num_rows($result) > 0){
                         
                         break;
                         case 'completed':
+                            $notification = "INSERT INTO notification (message, `from`, user_id)
+                            VALUES ('Project is completed, check for warranty and maintenance. Contact us through chaintercom for more details', 'from ongoing booking', '$user_id')";
+                            $notification_result = mysqli_query($conn , $notification);
                             // CREATE DATABASE THAT WILL STORE ALL FINISH WORKS WITH MAINTENANCE TIME
                             break;
     default:

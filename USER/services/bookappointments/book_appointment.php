@@ -4,7 +4,7 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 if (isset($_POST['submit'])) {
-   
+$stock = 0;
 //4 HIDDEN DATA
 $availability_id = $_POST['availability_id'];
 
@@ -12,6 +12,25 @@ $availability_id = $_POST['availability_id'];
 $pin_location = $_POST['location'];
 $service_type = $_POST['serviceType']; 
 $product_type = $_POST['productType'];   
+if ($service_type == 'tune-up' && $product_type == 'solar') {
+    // Output SweetAlert2 JavaScript for error
+    echo "TEST";
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Notice',
+                text: 'tune-up for solar is not available',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'book_requirements.php?availability_id=$availability_id';
+            });
+        </script>
+    ";
+ 
+}
 
 } 
 
@@ -316,6 +335,7 @@ $product_type = $_POST['productType'];
                                     <select name="serviceSelect1" id="serviceSelect" class="form-select py-2 sol_ins_prod1">
                                         <option value="">-- Select a Product --</option>
                                         <?php 
+                                       
                                         $query = "SELECT * FROM products WHERE availability = 1 AND ProductType = 'Solar Panel'";
                                         $result = mysqli_query($conn, $query);
                                         while ($row = mysqli_fetch_assoc($result)) : ?>
@@ -343,7 +363,13 @@ $product_type = $_POST['productType'];
                                     </select>
                                 </div>
                                 <label class="form-label">Quantity</label>
-                                <input type="number" name="quantity" class="form-control mb-5 sol_ins_quantity">
+                                <input type="number" 
+                                name="quantity" 
+                                class="form-control mb-5 sol_ins_quantity" 
+                                id="quantity-input" 
+                                max="<?php echo $available_quantity; ?>" 
+                                data-max="<?php echo $available_quantity; ?>" 
+                                placeholder="Enter quantity">
                                 <input type="hidden" name="installation_submit">
                                 <button type="submit" class="btn btn-primary d-flex ms-auto sol_ins_submit" id="" name="installation_submit">Proceed to payment</button>
                                 <!-- Hidden Inputs for Data -->

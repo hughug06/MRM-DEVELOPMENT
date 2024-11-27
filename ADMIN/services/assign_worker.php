@@ -14,13 +14,16 @@ if (isset($_POST['pick'])) {
     $sql2 = "UPDATE worker_availability SET is_available='0' WHERE user_id= $user_id";
     $sql3 = "UPDATE service_booking SET booking_status='ongoing' , payment_status = 'delivery_payment' WHERE booking_id= $booking_id";
     $sql4 = "UPDATE kanban SET kanban_status='pick_up' WHERE booking_id= $booking_id";
+     $notification = "INSERT INTO notification (message, `from`, user_id)
+             VALUES ('Booking approved', 'payment approved', '$user_id')";
 
     $result = mysqli_query($conn , $sql);
     $result2 = mysqli_query($conn , $sql2);
     $result3 = mysqli_query($conn , $sql3);
     $result4 = mysqli_query($conn , $sql4);
+    $result5 = mysqli_query($conn , $notification);
 
-    if($result && $result2 && $result3 && $result4){
+    if($result && $result2 && $result3 && $result4 && $result5){
         echo json_encode(['success' => true,]);
     }else{
         echo json_encode(['success' => false, 'message' => 'Error in SQL']);

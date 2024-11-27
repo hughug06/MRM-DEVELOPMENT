@@ -165,7 +165,9 @@ function formatMoney($number) {
                                                 <th class="wd-lg-8p"><span>Type</span></th>
                                                 <th class="wd-lg-20p"><span>Power output</span></th>
                                                 <th class="wd-lg-20p"><span>Price</span></th>                                               
-                                                <th class="wd-lg-20p"><span>Stock</span></th>  
+                                                <th class="wd-lg-20p"><span>Stock</span></th> 
+                                                <th class="wd-lg-20p"><span>Availability</span></th>
+                                                <th class="wd-lg-20p"><span>Image</span></th>
                                                 <th class="wd-lg-20p">Action</th>
                                             </tr>
                                         </thead>
@@ -186,7 +188,9 @@ function formatMoney($number) {
                                                 <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
                                                 ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
                                                     <?= $resultItem['stock']?>
-                                                </td>   
+                                                </td>
+                                                <td <?= $resultItem['Availability'] == 1 ? 'class="text-success"':'class="text-danger"'?>><?= $resultItem['Availability'] == 1 ? "Available":"Not Available"?></td>
+                                                <td><?= $resultItem['Image'] >= true?  explode('/',$resultItem['Image'])[1]: "No Image";?></td>   
                                                 <td>                                                 
                                                     <a href="item-edit-form.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-info"><i class="fe fe-edit-2"></i></a>
                                                     <!-- Add Stocks Button -->
@@ -200,6 +204,7 @@ function formatMoney($number) {
                                                         <i class="fe fe-minus"></i>
                                                     </a>
                                                     <a href="item-delete.php?id=<?= $resultItem['ProductID'];  ?>" data-id="<?= $resultItem['ProductID']; ?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                    <a href="product-Availability-switch.php?id=<?= $resultItem['ProductID'];  ?>" class="btn btn-sm btn-success avail-btn-Product"><i class="fe fe-plus-square"></i></a>
                                                 </td>
                                             </tr>
 

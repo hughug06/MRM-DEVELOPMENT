@@ -262,12 +262,13 @@
                                                                                     <button class="btn btn-primary" 
                                                                                             data-bs-toggle="modal" 
                                                                                             data-bs-target="#paymentLogModal"
-                                                                                            data-first-payment="<?php echo $row['first_payment']; ?>"
-                                                                                            data-second-payment="<?php echo $row['second_payment']; ?>"
-                                                                                            data-third-payment="<?php echo $row['third_payment']; ?>"
-                                                                                            data-first-reference="<?php echo $row['first_reference']; ?>"
-                                                                                            data-second-reference="<?php echo $row['second_reference']; ?>"
-                                                                                            data-third-reference="<?php echo $row['third_reference']; ?>">
+                                                                                            data-booking-id="<?= htmlspecialchars($row['booking_id']); ?>" 
+                                                                                            data-first-payment="<?= htmlspecialchars($row['first_payment']); ?>"
+                                                                                            data-second-payment="<?= htmlspecialchars($row['second_payment']); ?>"
+                                                                                            data-third-payment="<?= htmlspecialchars($row['third_payment']); ?>"
+                                                                                            data-first-reference="<?= htmlspecialchars($row['first_reference']); ?>"
+                                                                                            data-second-reference="<?= htmlspecialchars($row['second_reference']); ?>"
+                                                                                            data-third-reference="<?= htmlspecialchars($row['third_reference']); ?>">
                                                                                         <i class="fas fa-credit-card"></i> <!-- Payment icon from FontAwesome -->
                                                                                     </button>
                                                                                 </td>
@@ -281,81 +282,43 @@
 
                                                                     </table>
 
-                                                                               <!-- Modal -->
-                                                                        <div class="modal fade" id="paymentLogModal" tabindex="-1" aria-labelledby="paymentLogModalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog modal-lg">
-                                                                                <div class="modal-content">
+                                                                     
+                                                                    <!-- Modal for Payment Log -->
+                                                                    <div class="modal fade" id="paymentLogModal" tabindex="-1" aria-labelledby="paymentLogModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
                                                                                 <div class="modal-header">
                                                                                     <h5 class="modal-title" id="paymentLogModalLabel">Payment Log</h5>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                    <!-- Initial Payment Section -->
-                                                                                    <div class="payment-section">
-                                                                                    <h6 class="fw-bold">Initial Payment</h6>
-                                                                                    <p id="first-payment-status" class="text-muted"></p>
-                                                                                    <table class="table table-sm">
-                                                                                        <thead>
-                                                                                        <tr>
-                                                                                            <th scope="col">Reference Number</th>
-                                                                                            <th scope="col">Amount</th>
-                                                                                        </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                        <tr>
-                                                                                            <td id="first-reference"></td>
-                                                                                            <td id="first-payment"></td>
-                                                                                        </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    </div>
-
-                                                                                    <!-- Second Payment Section -->
-                                                                                    <div class="payment-section">
-                                                                                    <h6 class="fw-bold">Second Payment</h6>
-                                                                                    <p id="second-payment-status" class="text-muted"></p>
-                                                                                    <table class="table table-sm">
-                                                                                        <thead>
-                                                                                        <tr>
-                                                                                            <th scope="col">Reference Number</th>
-                                                                                            <th scope="col">Amount</th>
-                                                                                        </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                        <tr>
-                                                                                            <td id="second-reference"></td>
-                                                                                            <td id="second-payment"></td>
-                                                                                        </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    </div>
-
-                                                                                    <!-- Last Payment Section -->
-                                                                                    <div class="payment-section">
-                                                                                    <h6 class="fw-bold">Last Payment</h6>
-                                                                                    <p id="third-payment-status" class="text-muted"></p>
-                                                                                    <table class="table table-sm">
-                                                                                        <thead>
-                                                                                        <tr>
-                                                                                            <th scope="col">Reference Number</th>
-                                                                                            <th scope="col">Amount</th>
-                                                                                        </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                        <tr>
-                                                                                            <td id="third-reference"></td>
-                                                                                            <td id="third-payment"></td>
-                                                                                        </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    </div>
+                                                                                    <form id="paymentForm" action="update_payment.php" method="POST">
+                                                                                        <input type="hidden" id="booking_id" name="booking_id" value="">
+                                                                                        <div>
+                                                                                            <label for="first-reference">First Reference</label>
+                                                                                            <input type="text" id="first-reference" name="first_reference" class="form-control" disabled> <!-- Disabled by default -->
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <label for="second-reference">Second Reference</label>
+                                                                                            <input type="text" id="second-reference" name="second_reference" class="form-control" disabled> <!-- Disabled by default -->
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <label for="third-reference">Third Reference</label>
+                                                                                            <input type="text" id="third-reference" name="third_reference" class="form-control" disabled> <!-- Disabled by default -->
+                                                                                        </div>
+                                                                                        <button type="submit" class="btn btn-primary" id="updatePaymentBtn" disabled>Update Payment</button>
+                                                                                    </form>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                </div>
+                                                                                    <!-- Add hidden field for booking_id -->
+                                                                                    <input type="hidden" id="booking_id" value="">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                            
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                    </div>
+
+
 
 
 
@@ -463,14 +426,14 @@
                                         <!-- Hidden Inputs for Payment and Booking IDs -->
                                         <input type="hidden" class="paymentId" name="payment_id">
                                         <input type="hidden" class="bookingId" name="booking_id">
-                                        <input type="text" class="userId" name="user_id">
+                                        <input type="hidden" class="userId" name="user_id">
                                         <!-- Reason for Recovery -->
                                         <h5 class="card-title">Enter new reference number</h5>
                                         <input type="number" name="new_reference_number">
                                         
                                         <!-- Submit Button -->
                                         <div class="mt-3 text-end">
-                                            <button type="submit" class="btn btn-success">Recover</button>
+                                            <button type="submit" class="btn btn-success">Save</button>
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                         </div>
                                     </form>
@@ -502,10 +465,10 @@
                                                 <!-- Form for assigning a worker -->
                                                 <form class="assign_worker" action="assign_worker.php" method="POST">
                                                     <!-- Hidden inputs for booking, admin, client, and availability IDs -->
-                                                    <input type="text" data-value="" class="bookingId booking_id" name="booking_id">
-                                                    <input type="text" data-value="" class="adminId admin_id" name="admin_id">
-                                                    <input type="text" data-value="" class="clientId client_id" name="client_id">
-                                                    <input type="text" data-value="" class="availabilityId availability_id" name="availability_id">
+                                                    <input type="hidden" data-value="" class="bookingId booking_id" name="booking_id">
+                                                    <input type="hidden" data-value="" class="adminId admin_id" name="admin_id">
+                                                    <input type="hidden" data-value="" class="clientId client_id" name="client_id">
+                                                    <input type="hidden" data-value="" class="availabilityId availability_id" name="availability_id">
 
                                                     <div class="card" style="width: 18rem;">
                                                         <?php 
@@ -523,13 +486,13 @@
                                                                 
                                                                 <!-- Display Worker Name and Role -->
                                                                 <h5 class="card-title">NAME: <?= htmlspecialchars($resultitem['first_name'] . " " . $resultitem['last_name']) ?></h5>
-                                                                <p class="card-text">ROLE: <?= htmlspecialchars($resultitem['role']) ?></p>
+                                                                <p class="card-text">ROLE: <span class="text-info">worker</span></p>
                                                                 
                                                                 <!-- Submit Button -->
                                                                 <button type="submit" name="pick" class="btn btn-primary pick">Pick Worker</button>
                                                                 
                                                                 <!-- Hidden input for id of user -->
-                                                                <input type="text" class="user_id" name="user_id" data-user-id="<?= $resultitem['user_id'] ?>" value="<?= $resultitem['user_id'] ?>">
+                                                                <input type="hidden" class="user_id" name="user_id" data-user-id="<?= $resultitem['user_id'] ?>" value="<?= $resultitem['user_id'] ?>">
                                                             </div>
                                                         <?php
                                                             }
@@ -705,61 +668,59 @@
         </script>
 
 <script>
-  // JavaScript to populate modal with data when button is clicked
-  var paymentLogModal = document.getElementById('paymentLogModal');
-  paymentLogModal.addEventListener('show.bs.modal', function (event) {
+    
+// JavaScript to populate modal with data when button is clicked
+var paymentLogModal = document.getElementById('paymentLogModal');
+paymentLogModal.addEventListener('show.bs.modal', function (event) {
     // Get the button that triggered the modal
     var button = event.relatedTarget;
-
-    // Get data attributes from the button
-    var firstPayment = button.getAttribute('data-first-payment');
-    var secondPayment = button.getAttribute('data-second-payment');
-    var thirdPayment = button.getAttribute('data-third-payment');
+    var bookingId = button.getAttribute('data-booking-id'); // Get booking ID
+    document.getElementById('booking_id').value = bookingId; // Set the hidden field
+      // Get other data attributes as before
     var firstReference = button.getAttribute('data-first-reference');
     var secondReference = button.getAttribute('data-second-reference');
     var thirdReference = button.getAttribute('data-third-reference');
 
-    // Function to format payments as money with peso sign
-    function formatCurrency(amount) {
-      return new Intl.NumberFormat('en-PH', {
-        style: 'currency',
-        currency: 'PHP'
-      }).format(amount);
+    // Set the modal content dynamically for the first reference
+    if (firstReference && firstReference !== 'null' && firstReference !== '') {
+        document.getElementById('first-reference').value = firstReference;
+        document.getElementById('first-reference').disabled = false;  // Enable input field
+    } else {
+        document.getElementById('first-reference').value = '';
+        document.getElementById('first-reference').disabled = true;  // Disable input field
     }
 
-    // Set the modal content dynamically for the first payment
-    if (firstPayment === 'null' || firstPayment === '') {
-      document.getElementById('first-payment-status').textContent = 'The client has not paid';
-      document.getElementById('first-reference').textContent = '';
-      document.getElementById('first-payment').textContent = '';
+    // Set the modal content dynamically for the second reference
+    if (secondReference && secondReference !== 'null' && secondReference !== '') {
+        document.getElementById('second-reference').value = secondReference;
+        document.getElementById('second-reference').disabled = false;  // Enable input field
     } else {
-      document.getElementById('first-payment-status').textContent = '';
-      document.getElementById('first-reference').textContent = firstReference;
-      document.getElementById('first-payment').textContent = formatCurrency(parseFloat(firstPayment));
+        document.getElementById('second-reference').value = '';
+        document.getElementById('second-reference').disabled = true;  // Disable input field
     }
 
-    // Set the modal content dynamically for the second payment
-    if (secondPayment === 'null' || secondPayment === '') {
-      document.getElementById('second-payment-status').textContent = 'The client has not paid';
-      document.getElementById('second-reference').textContent = '';
-      document.getElementById('second-payment').textContent = '';
+    // Set the modal content dynamically for the third reference
+    if (thirdReference && thirdReference !== 'null' && thirdReference !== '') {
+        document.getElementById('third-reference').value = thirdReference;
+        document.getElementById('third-reference').disabled = false;  // Enable input field
     } else {
-      document.getElementById('second-payment-status').textContent = '';
-      document.getElementById('second-reference').textContent = secondReference;
-      document.getElementById('second-payment').textContent = formatCurrency(parseFloat(secondPayment));
+        document.getElementById('third-reference').value = '';
+        document.getElementById('third-reference').disabled = true;  // Disable input field
     }
 
-    // Set the modal content dynamically for the third payment
-    if (thirdPayment === 'null' || thirdPayment === '') {
-      document.getElementById('third-payment-status').textContent = 'The client has not paid';
-      document.getElementById('third-reference').textContent = '';
-      document.getElementById('third-payment').textContent = '';
+    // Enable or disable the Update button based on whether there are valid references
+    var updateButton = document.getElementById('updatePaymentBtn');
+    if (
+        (firstReference && firstReference !== 'null' && firstReference !== '') ||
+        (secondReference && secondReference !== 'null' && secondReference !== '') ||
+        (thirdReference && thirdReference !== 'null' && thirdReference !== '')
+    ) {
+        updateButton.disabled = false;  // Enable Update button if any reference is valid
     } else {
-      document.getElementById('third-payment-status').textContent = '';
-      document.getElementById('third-reference').textContent = thirdReference;
-      document.getElementById('third-payment').textContent = formatCurrency(parseFloat(thirdPayment));
+        updateButton.disabled = true;   // Disable Update button if no valid reference
     }
-  });
+});
+
 </script>
 
 <script>
@@ -851,12 +812,7 @@
             var availabilityId = $(".availability_id").val();
             var userId = cardBody.find(".user_id").val(); // Get the user_id for the worker in this card
 
-            // Debugging: Alert the retrieved values
-            alert("Booking ID: " + bookingId);
-            alert("Admin ID: " + adminId);
-            alert("Client ID: " + clientId);
-            alert("Availability ID: " + availabilityId);
-            alert("User ID: " + userId);
+          
 
             // Show confirmation dialog
             Swal.fire({

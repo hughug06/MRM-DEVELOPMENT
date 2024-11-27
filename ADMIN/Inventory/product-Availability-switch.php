@@ -16,7 +16,7 @@ if(isset($_GET['id'])){
   $sql = "update products set Availability= '$NewAvailability' where ProductID='$id'";
   $result = mysqli_query($conn , $sql);
     
-    header('location: marketing-product-control.php');
+    header('location: inventory-control.php');
     exit;
 }
 ?>

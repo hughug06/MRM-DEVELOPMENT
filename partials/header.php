@@ -591,9 +591,19 @@
         <!-- Start::header-element -->
         <div class="header-element notifications-dropdown">
             <!-- Start::header-link|dropdown-toggle -->
+             <?php 
+             $count_notification = "SELECT COUNT(*) AS total_notifications FROM notification WHERE user_id = '$userid'";
+             $result_notification = mysqli_query($conn, $count_notification);
+             
+             // Fetch the count result
+             $total_notifications = 0;
+             if ($count_row = mysqli_fetch_assoc($result_notification)) {
+                 $total_notifications = $count_row['total_notifications'];
+             }
+             ?>
             <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
                 <i class="fe fe-bell header-link-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notifications"></i>
-                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge">5</span>
+                <span class="badge bg-secondary header-icon-badge pulse pulse-secondary" id="notification-icon-badge"><?= $total_notifications ?></span>
             </a>
             <!-- End::header-link|dropdown-toggle -->
             <!-- Start::main-header-dropdown -->
@@ -607,7 +617,7 @@
                 <div class="dropdown-divider"></div>
                 <ul class="list-unstyled mb-0" id="header-notification-scroll">
                     <?php 
-                    $notification = "select * from notification where user_id = '$userid'";
+                    $notification = "SELECT * FROM notification WHERE user_id = '$userid' ORDER BY date_time DESC";
                     $result_notification = mysqli_query($conn , $notification);
                     while($notify = mysqli_fetch_assoc($result_notification)){             
                     ?>
