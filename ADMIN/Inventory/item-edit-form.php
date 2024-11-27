@@ -113,21 +113,29 @@ global $conn;
                                         <div class="col-xl-12 mb-3">
                                             <input type="hidden" id="id" value="<?php echo $id; ?>" class="form-control">
                                             <label class="form-label">Product Name</label>
-                                            <input type="text" id="Pname" class="form-control" placeholder="Full Name"
-                                                aria-label="Full Name" required value="<?= $item_name?>" disabled>
+                                            <input type="text" id="item_name" class="form-control" placeholder="Full Name"
+                                                aria-label="Full Name" required value="<?= $item_name?>">
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <label class="form-label">Type</label>
-                                            <select class="form-select py-2" disabled>
+                                            <select id="item_type" class="form-select py-2">
                                                 <option <?= $item_type == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
                                                 <option <?= $item_type == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        <div id="power_input_display" class="col-md-6 mb-3">
                                             <label class="form-label">Power Output (Watts/KVA)</label>
-                                            <select class="form-select py-2" disabled> 
+                                            <select id="power_list" class="form-select py-2"> 
                                                 <option><?= $power_output ?></option>
                                             </select>
+                                        </div>
+                                        <div class="col-md-6 col-6 mb-3" id="Custom_power_Container" style="display: none;">
+                                            <label class="form-label">Custom Power Output (Watts/KVA)</label>
+                                            <input type="number" class="form-control py-2" id="InputCustomPower" placeholder="Watts/KVA" name="custom_power_output">
+                                        </div>
+                                        <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
+                                            <input id="Custom" type="checkbox" value="1" onclick="toggleCustomWattsKVA()">
+                                            <label for="Custom" class="fw-bold">Custom</label>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label" required>Stocks</label>
@@ -175,17 +183,62 @@ global $conn;
 
     <script>
         $(document).ready(function() {
+            $('#item_type').change(function() {
+                $('#power_list').append('<option value="">Select Product Type</option>');
+                var item_type = $(this).val();
+                if (item_type) {
+                    $.ajax({
+                        url: 'function.php',
+                        type: 'POST',
+                        data: { PrType: item_type },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                $('#power_list').empty();
+                                var existingValues = []; // Array to track existing values
+                                
+                                $.each(response.data.Watts_KVA, function(index, item) {
+                                    // Check if the value is already in the existingValues array
+                                    if (!existingValues.includes(item.value)) {
+                                        $('#power_list').append('<option value="' + item.value + '">' + item.text + '</option>');
+                                        existingValues.push(item.value); // Add value to the array
+                                    }
+                                });
+                            } else {
+                                alert('No Watts/KVA found.');
+                                $('#power_list').empty();
+                            }
+                        }
+                    });
+                } else {
+                    $('#power_list').empty();
+                    $('#power_list').append('<option value="">Select Product Type</option>');
+                }
+            });
+
             $('#save').on('click', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
                 var item_id = document.getElementById("id");
+                var IName = document.getElementById("item_name");
+                var IType = document.getElementById("item_type");
+                var customCheckbox = document.getElementById("Custom");
+                var custom_ID = document.getElementById("Custom");
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
                 var stocks = document.getElementById("stocks");
                 var price = document.getElementById("price");
-                var Pname = document.getElementById("Pname");
-
+                var power_checker;
+                if(customCheckbox.checked){
+                    var PPower = document.getElementById("InputCustomPower");
+                }else {
+                    var PPower = document.getElementById("power_list");
+                }
                 var item_id_value = item_id.value;
+                var IType_value = IType.value;
+                var IName_value = IName.value;
+                var PPower_value = PPower.value;
+                var custom = custom_ID.value;
                 var stocks_value = parseFloat(stocks.value);
                 var price_value = parseFloat(price.value);
                 var specification_ID_value = specification_ID.value;
@@ -197,9 +250,14 @@ global $conn;
                     var availability_ID_value = 0;
                 }
                 var image = document.getElementById("image").files[0];
-                var Pname_value = Pname.value;
-
-                if(stocks.value == "" || price.value == ""){
+                if(IType_value == 'Solar Panel'){
+                    power_checker = 350;
+                }
+                else{
+                    power_checker = 20;
+                }
+                
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -210,6 +268,17 @@ global $conn;
                         }
                     });
                 }
+                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value < 350 && IType_value == 'Solar Panel'){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: IType_value+" Power output cannot be less than "+ power_checker +".",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                } 
                 else if(price_value <= 0){
                     Swal.fire({
                         title: 'ERROR',
@@ -245,13 +314,15 @@ global $conn;
                             var formData = new FormData();
                             formData.append('save', true);
                             formData.append('editType', 'item');
+                            formData.append('ProductName', IName_value);
                             formData.append('id', item_id_value);
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Specification', specification_ID_value);
                             formData.append('Description', description_ID_value);
                             formData.append('Availability', availability_ID_value);
-                            formData.append('ProductName', Pname_value);
+                            formData.append('WattsKVA', PPower_value);
+                            formData.append('ProductType', IType_value);
                             if (image) {
                                 formData.append('image', image);
                             } // Add the file to FormData
@@ -265,17 +336,26 @@ global $conn;
                                 contentType: false,
                                 success: function(response) {
                                     // Handle successful add
-                                    Swal.fire({
-                                        title: 'Product Edited!',
-                                        text: 'You have successfully edited the product.',
-                                        icon: 'success',
-                                        allowOutsideClick: false,
-                                        timer: 2000, // 2 seconds timer
-                                        showConfirmButton: false // Hide the confirm button
-                                    }).then(() => {
-                                        // Redirect after the timer ends
-                                        window.location.href = 'inventory-control.php';
-                                    });
+                                    if(response.success){
+                                        Swal.fire({
+                                            title: 'Product Edited!',
+                                            text: 'You have successfully edited the product.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'inventory-control.php';
+                                        });
+                                    }
+                                    else{
+                                        Swal.fire(
+                                        'Error!',
+                                        'There was an error Editing product.',
+                                        'error'
+                                    );
+                                    }
                                 },
                                 error: function(response) {
                                     // Handle error
@@ -291,6 +371,20 @@ global $conn;
                 }
             });
         });
+
+        function toggleCustomWattsKVA() {
+            var customCheckbox = document.getElementById("Custom");
+            var customWattsInput = document.getElementById("Custom_power_Container");
+            var power_input_display = document.getElementById("power_input_display");
+
+            if (customCheckbox.checked) {
+                customWattsInput.style.display = "block";
+                power_input_display.style.display = "none";
+            } else {
+                customWattsInput.style.display = "none";
+                power_input_display.style.display = "block";
+            }
+        }
     </script>
 
     

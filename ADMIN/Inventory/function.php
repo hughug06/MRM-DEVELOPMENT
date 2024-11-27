@@ -129,6 +129,8 @@ elseif(isset($_POST['save'])){
   $stocks = $_POST['stocks'];
   $price=$_POST['price'];
   $edit_type = $_POST['editType'];
+  $WattsKVA = $_POST['WattsKVA'];
+  $ProductType = $_POST['ProductType'];
   
   //WITH IMAGE SUBMISSION
   if(isset($_FILES['image']) && $_FILES['image']['size'] > 0){
@@ -144,7 +146,7 @@ elseif(isset($_POST['save'])){
           $upload = '../../assets/images/Product-Images/'.$ImageFileName;
           move_uploaded_file($ImageTempName,$upload);
 
-          $sql = "update products set Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
+          $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', Watts_KVA='$WattsKVA', Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
             //LOG FOR EDIT PRODUCT
@@ -173,7 +175,7 @@ elseif(isset($_POST['save'])){
   }
   //WITHOUT IMAGE SUBMISSION
   else{
-      $sql = "update products set Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
+      $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', Watts_KVA='$WattsKVA', Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
           //LOG FOR EDIT PRODUCT
