@@ -130,8 +130,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="/USER/solar/solar.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Mountains<span class="badge bg-primary float-end fs-10">New</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SLF20GF<span class="badge bg-primary float-end fs-10">New</span></h6>
+                                        <p class="card-text">Equipped with advanced engine technology and superior build quality</p>
                                     </div>
                                 </a>
                             </div>
@@ -139,8 +139,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SLF30GF<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Offer reliable and efficient power solutions for various applications</p>
                                     </div>
                                 </a>
                             </div>
@@ -148,8 +148,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SLF40GF<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Equipped with advanced engine technology and superior build quality</p>
                                     </div>
                                 </a>
                             </div>
@@ -157,8 +157,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg"" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SI20GFS<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Offer reliable and efficient power solutions for various applications</p>
                                     </div>
                                 </a>
                             </div>
@@ -166,8 +166,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen2.jpg"" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SI40GFS<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Equipped with advanced engine technology and superior build quality</p>
                                     </div>
                                 </a>
                             </div>
@@ -175,8 +175,8 @@ require_once '../../ADMIN/authetincation.php';
                                 <a class="card custom-card" href="/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
-                                        <h6 class="card-title fw-semibold mb-3">Product<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
-                                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                        <h6 class="card-title fw-semibold mb-3">SC350GFS<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
+                                        <p class="card-text">Equipped with advanced engine technology and superior build quality</p>
                                     </div>
                                 </a>
                             </div>
@@ -221,7 +221,7 @@ require_once '../../ADMIN/authetincation.php';
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
-                                <div class="card-title">Project 1</div>
+                                <div class="card-title">Project 2</div>
                             </div>
                             <div class="card-body">
                                 <img src="../../assets/images/mrm-images/dashboard-images/project-solar2.jpg" class="card-img mb-3" alt="...">
@@ -230,7 +230,7 @@ require_once '../../ADMIN/authetincation.php';
                         </div>
                         <div class="card custom-card">
                             <div class="card-header">
-                                <div class="card-title">Project 1</div>
+                                <div class="card-title">Project 3</div>
                             </div>
                             <div class="card-body">
                                 <img src="../../assets/images/mrm-images/dashboard-images/project-solar3.jpg" class="card-img mb-3" alt="...">
