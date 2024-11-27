@@ -73,7 +73,7 @@ include_once '../../Database/database.php';
                   INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
                   WHERE service_payment.date_done IS NOT NULL 
                   AND service_booking.booking_status = 'completed'
-                  AND ervice_from = 'agent'
+                  AND service_from = 'agent'
                  
               ";
               
