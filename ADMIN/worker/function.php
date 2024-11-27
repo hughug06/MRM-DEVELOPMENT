@@ -14,7 +14,7 @@ if(isset($_POST['sql']) && $status == 'arrive'){
     $sql_transfer = "SELECT unit, description, quantity FROM package_maintenance_generator";
     $exec = mysqli_query($conn , $sql_transfer);
     if ($exec->num_rows > 0) {
-        echo "TEST";
+        echo "TESTASDASD";
         $is_done = 0; // Default value (0 for not done)
             $updated_at = date('Y-m-d H:i:s'); // Current timestamp
         $sql_insert2 = "INSERT INTO ongoing_checklist (booking_id, description, is_done, quantity, unit, updated_at)
