@@ -73,8 +73,8 @@ include_once '../../Database/database.php';
                   INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
                   WHERE service_payment.date_done IS NOT NULL 
                   AND service_booking.booking_status = 'completed'
-                  AND worker_ongoing.service_from = 'agent'
-                  GROUP BY worker_ongoing.worker_id
+                  AND ervice_from = 'agent'
+                 
               ";
               
                     
