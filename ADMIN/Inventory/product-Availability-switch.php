@@ -7,8 +7,6 @@ if(isset($_GET['id'])){
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();
   while(!$row){
-    header("location: marketing-product-control.php");
-    exit;
   }
 
   $Availability = $row['Availability'];
@@ -16,7 +14,7 @@ if(isset($_GET['id'])){
   $sql = "update products set Availability= '$NewAvailability' where ProductID='$id'";
   $result = mysqli_query($conn , $sql);
     
-    header('location: inventory-control.php');
+    echo json_encode(['success' => true]);
     exit;
 }
 ?>
