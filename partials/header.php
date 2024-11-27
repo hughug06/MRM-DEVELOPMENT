@@ -760,7 +760,7 @@
                 if (result.isConfirmed) {
                     // If user confirms, send AJAX request for logout
                     $.ajax({
-                        url: '/MRM-DEVELOPMENT/ADMIN/logout/function.php',
+                        url: '/ADMIN/logout/function.php',
                         success: function(response) {
                             // Handle successful logout
                             Swal.fire({
