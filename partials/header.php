@@ -464,7 +464,7 @@
     </div>
 
     <div id="loader" >
-        <img src="../assets/images/media/media-79.svg" alt="">
+        <img src="/assets/images/media/media-79.svg" alt="">
     </div>
 
     <header class="app-header">

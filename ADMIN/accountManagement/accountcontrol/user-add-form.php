@@ -106,7 +106,7 @@ include_once '../../../Database/database.php';
                                         <div class="col-md-6 mb-3">
                                                 <label class="form-label">Role</label>
                                                 <select id="role" class="form-select" name="role">
-                                                    <option value="user">User</option>
+                                                    <option value="client">Client</option>
                                                 </select>
                                             </div>                                                       
                                         <div class="col-md-12 d-flex justify-content-end">
