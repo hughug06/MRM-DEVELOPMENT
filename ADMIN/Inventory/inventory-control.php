@@ -47,7 +47,19 @@ function formatMoney($number) {
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <style>
+    /* Hide spinners in Chrome, Safari, and Edge */
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
+    /* Hide spinners in Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    </style>
 
 </head>
 
@@ -85,7 +97,15 @@ function formatMoney($number) {
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" 
+                                        id="input_add_stocks" 
+                                        class="form-control flatpickr-date" 
+                                        placeholder="enter number of stocks" 
+                                        required 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                        >
+
+
                                     </div>
                                 </div>
                         
@@ -121,7 +141,12 @@ function formatMoney($number) {
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_dec_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" 
+                                        id="input_dec_stocks" 
+                                        class="form-control flatpickr-date" 
+                                        placeholder="enter number of stocks" 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                        required>
                                     </div>
                                 </div>
                         
@@ -529,6 +554,52 @@ function formatMoney($number) {
                 input.value = value;
             }
         });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $(".avail-btn-Product").click(function(event) {
+            event.preventDefault(); // Prevent the default action (navigating to the delete URL)
+            var availUrl = $(this).attr('href');
+            Swal.fire({
+                title: 'Confirmation',
+                html: "Are you sure?",
+                icon: 'warning',
+                confirmButtonText: 'Confirm',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, send AJAX request for deletion of product
+                    $.ajax({
+                        url: availUrl,
+                        type: 'GET', // Ensure you're using the correct method if the backend expects GET
+                        success: function(response) {
+                            // Handle successful deletion of product
+                            Swal.fire({
+                                title: 'Product updated!',
+                                text: 'You have successfully updated the product.',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 2000, // 2 seconds timer
+                                showConfirmButton: false // Hide the confirm button
+                            }).then(() => {
+                                // Redirect after the timer ends
+                                window.location.href = 'inventory-control.php';
+                            });
+                        },
+                        error: function() {
+                            // Handle error
+                            Swal.fire(
+                                'Error!',
+                                'There was an error updating the product. Please try again.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
     });
     </script>
 
