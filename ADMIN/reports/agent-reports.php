@@ -78,7 +78,7 @@ include_once '../../Database/database.php';
             WHERE service_payment.date_done IS NOT NULL 
             AND service_booking.booking_status = 'completed'
             AND worker_ongoing.service_from = ?
-            GROUP BY worker_ongoing.worker_id
+            
         ";
 
         // Prepare the statement
