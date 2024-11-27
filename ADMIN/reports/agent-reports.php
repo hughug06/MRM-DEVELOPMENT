@@ -62,19 +62,21 @@ include_once '../../Database/database.php';
                 <?php 
                   
                   $sql = "
-                  SELECT 
-                      user_info.first_name, 
-                      user_info.last_name,
-                      COUNT(kanban.kanban_id) AS total_kanban_count,
-                      GROUP_CONCAT(service_booking.booking_id) AS booking_ids
-                  FROM kanban
-                  INNER JOIN user_info ON user_info.user_id = kanban.user_id
-                  INNER JOIN service_booking ON service_booking.booking_id = kanban.booking_id
-                  INNER JOIN service_payment ON service_payment.booking_id = kanban.booking_id
-                  WHERE service_booking.booking_status = 'completed' AND
-                  date_done is not NULL
-                  GROUP BY kanban.user_id
-              ";
+                        SELECT 
+                            user_info.first_name, 
+                            user_info.last_name,
+                            COUNT(kanban.kanban_id) AS total_kanban_count,
+                            SUM(service_payment.total_cost) AS total_sales,
+                            GROUP_CONCAT(service_booking.booking_id) AS booking_ids
+                        FROM kanban
+                        INNER JOIN user_info ON user_info.user_id = kanban.user_id
+                        INNER JOIN service_booking ON service_booking.booking_id = kanban.booking_id
+                        INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
+                        WHERE service_booking.booking_status = 'completed' 
+                        AND service_payment.date_done IS NOT NULL
+                        GROUP BY kanban.user_id
+                    ";
+
               
 
                     $result = mysqli_query($conn, $sql);
@@ -84,8 +86,10 @@ include_once '../../Database/database.php';
 <div class="container-fluid">
     <div class="row mt-3">
     <?php 
+        // Execute the query to get the total kanban count, total sales, and booking IDs
         $result = mysqli_query($conn, $sql);
 
+        // Check if there are results
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 ?>
@@ -94,6 +98,7 @@ include_once '../../Database/database.php';
                         <div class="card-body">
                             <h5 class="card-title text-primary">Name: <?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></h5>
                             <p class="card-text"><strong>Total Kanban Count:</strong> <?php echo $row['total_kanban_count']; ?></p>
+                            <p class="card-text"><strong>Total Sales:</strong> <span class="text-success">$<?php echo number_format($row['total_sales'], 2); ?></span></p>
                             <p class="card-text"><strong>Booking IDs:</strong> <span class="badge bg-info"><?php echo htmlspecialchars($row['booking_ids']); ?></span></p>
                         </div>
                     </div>
@@ -106,6 +111,7 @@ include_once '../../Database/database.php';
     ?>
     </div>
 </div>
+
 
                     
                 </div>
