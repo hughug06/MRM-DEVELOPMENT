@@ -293,7 +293,7 @@
                                                 </div>
 
                                                    
-                                            <!-- Modal THIRD payment -->
+                                           <!-- Modal THIRD payment -->
                                             <div class="modal fade" id="paymentThirdModal" tabindex="-1" aria-labelledby="paymentThirdModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -302,15 +302,12 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Centered Blank Image Placeholder -->
                                                             <div class="text-center mb-3">
                                                                 <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
                                                             </div>
                                                             <div class="text-center mx-4">
-                                                                <!-- Displaying Total Cost and Booking ID -->
                                                                 <p id="Thirdpaymentnow">TOTAL: ₱0.00</p>
                                                                 <p id="ThirdtotalCostModal">TOTAL: ₱0.00</p>
-                                    
                                                             </div>
 
                                                             <form action="process_third_payment.php" method="POST" enctype="multipart/form-data">
@@ -319,8 +316,8 @@
                                                                         <label for="firstField" class="form-label">Reference Number</label>
                                                                         <input class="form-control" type="text" id="firstField2" name="reference_number" required>
                                                                     </div>                                                             
-                                                                </div>                                         
-               
+                                                                </div>
+
                                                                 <!-- Hidden input for total cost and booking ID (to submit in the form) -->
                                                                 <input type="hidden" id="booking_id_third" name="booking">
                                                                 <input type="hidden" id="duePayment_third" name="due" readonly>
@@ -334,6 +331,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
 
                                             </div>
 
@@ -929,22 +927,29 @@ document.getElementById('secondPaymentForm').addEventListener('submit', function
                 const firstField = document.querySelector('#firstField2').value;
                 const duePaymentInput = document.querySelector('#duePayment_third').value;
                 const booking_id_modal_input = document.querySelector('#booking_id_third').value;
-               
-                if(firstField == ""){
+
+                // Regular expression for validation
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=[\]{}|;:'",.<>/?\\/-]).{8,}$/;
+
+                // Check if reference number is valid
+                if (firstField === "") {
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
                     });
-                }
-                else{
+                } else if (!regex.test(firstField)) {
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Reference number must contain uppercase and lowercase letters, numbers, and special characters (excluding {!#$%^&';”}). It must not contain consecutive characters.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    });
+                } else {
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Are you sure to proceed in Payment?",
+                        html: "Are you sure to proceed with the Payment?",
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -963,11 +968,9 @@ document.getElementById('secondPaymentForm').addEventListener('submit', function
                                 contentType: false,
                                 success: function (response) {
                                     try {
-                                        // Parse response as JSON if necessary
                                         const jsonResponse = typeof response === 'string' ? JSON.parse(response) : response;
 
                                         if (jsonResponse.success) {
-                                            // Success alert
                                             Swal.fire({
                                                 title: 'Success!',
                                                 text: 'Payment submission successful.',
@@ -976,19 +979,16 @@ document.getElementById('secondPaymentForm').addEventListener('submit', function
                                                 timer: 2000, // 2 seconds timer
                                                 showConfirmButton: false // Hide the confirm button
                                             }).then(() => {
-                                                // Redirect after the timer ends
                                                 window.location.href = 'myappointments.php';
                                             });
                                         } else {
-                                            // Display error message from response
                                             Swal.fire(
                                                 'Error!',
-                                                jsonResponse.message || 'There was an error in adding the payment in the system. Please try again.',
+                                                jsonResponse.message || 'There was an error in adding the payment. Please try again.',
                                                 'error'
                                             );
                                         }
                                     } catch (error) {
-                                        // Handle unexpected response parsing error
                                         Swal.fire(
                                             'Error!',
                                             'An unexpected error occurred. Please try again.',
@@ -997,7 +997,6 @@ document.getElementById('secondPaymentForm').addEventListener('submit', function
                                     }
                                 },
                                 error: function () {
-                                    // AJAX error handler
                                     Swal.fire(
                                         'Error!',
                                         'There was an error in adding the payment. Please try again.',
@@ -1005,11 +1004,11 @@ document.getElementById('secondPaymentForm').addEventListener('submit', function
                                     );
                                 }
                             });
-
                         }
                     });
                 }
             });
+
         });
     </script>
 
