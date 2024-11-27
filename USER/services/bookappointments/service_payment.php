@@ -814,7 +814,7 @@ else if(isset($_POST['tuneup_submit'])){
                                         ?>
                                         <tr class="table-warning text-center">
                                             <td colspan="4"><strong>Total Price Vat Exclusive with Agent markup:</strong></td>
-                                            <td>₱<strong><?= htmlspecialchars($final_value_withagent) ?></strong></td>
+                                            <td>₱<strong><?= htmlspecialchars(number_format($final_value_withagent, 2)) ?></strong></td>
                                         </tr>
                                         <?php
                                             }
