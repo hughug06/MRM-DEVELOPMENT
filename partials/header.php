@@ -628,12 +628,12 @@
                              </div>
                              <div class="flex-grow-1 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <p class="mb-0"><a href="notifications-list.html" class="text-dark"><strong>Message:</strong><?= $notify['message'] ?></a></p>
+                                    <p class="mb-0"><strong class="text-info">Message:</strong><?= $notify['message'] ?></p>
                                     <span class="text-muted fw-normal fs-12 header-notification-text"><?= $notify['date_time'] ?></span><br>
                                     <span class="text-muted fw-normal fs-12 header-notification-text"><?= $notify['from'] ?></span>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
+                                 
                                 </div>
                              </div>
                         </div>
@@ -641,9 +641,7 @@
                    <?php  }?>
                 </ul>
                 <div class="p-3 empty-header-item1 border-top">
-                    <div class="d-grid">
-                        <a href="notifications-list.html" class="btn btn-primary">View All</a>
-                    </div>
+                    
                 </div>
                 <div class="p-5 empty-item1 d-none">
                     <div class="text-center">
