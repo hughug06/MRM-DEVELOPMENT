@@ -14,7 +14,6 @@ if(isset($_POST['sql']) && $status == 'arrive'){
     $sql_transfer = $sql_command;
     $exec = mysqli_query($conn , $sql_transfer);
     if ($exec->num_rows > 0) {
-        echo "TESTASDASD";
         $is_done = 0; // Default value (0 for not done)
             $updated_at = date('Y-m-d H:i:s'); // Current timestamp
         $sql_insert2 = "INSERT INTO ongoing_checklist (booking_id, description, is_done, quantity, unit, updated_at)
@@ -48,7 +47,7 @@ if(isset($_POST['sql']) && $status == 'arrive'){
         // echo "No data found in package_maintenance_generator";
     }
 }
-exit();
+
 
 $sql = "select * from worker_ongoing
 inner join service_booking on service_booking.booking_id = worker_ongoing.booking_id
