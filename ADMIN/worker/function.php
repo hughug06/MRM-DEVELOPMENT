@@ -11,7 +11,7 @@ $quantity_item = isset($_POST['quantity']) ? $_POST['quantity'] : null;
 $booking_id = isset($_POST['booking_id']) ? $_POST['booking_id'] : null;
 if(isset($_POST['sql']) && $status == 'arrive'){
     
-    $sql_transfer = "SELECT unit, description, quantity FROM package_maintenance_generator";
+    $sql_transfer = $sql_command;
     $exec = mysqli_query($conn , $sql_transfer);
     if ($exec->num_rows > 0) {
         echo "TESTASDASD";
