@@ -140,7 +140,7 @@ function email_verification($name,$email,$verify_token){
       // Email template
       $email_template = "
       <h1>MRM E-G  ELECTRIC POWER GENERATION </h1>
-       <p>Click here to verify your account<a href='mrm-eg.online/MRM-DEVELOPMENT/verify_email.php?token=$verify_token'>Verify Email</a></p>
+       <p>Click here to verify your account<a href='mrm-eg.online/verify_email.php?token=$verify_token'>Verify Email</a></p>
       
       ";
   
