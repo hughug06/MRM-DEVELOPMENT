@@ -142,67 +142,107 @@ GROUP BY
                                                 <div class="card-header">
                                                     <div class="card-title">Out of Stocks</div>
                                                 </div>
+
+                                                
                                                 <div class="card-body">
+                                                    <h5>Solar Panel</h5>
                                                     <div class="table-responsive userlist-table">
-                                                        <div class="row">
-                                                            <div class="col-xl-12 mb-3">
-                                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                                    <thead>Solar Panel</thead>
-                                                                    <tbody>
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                                <th class="wd-lg-20p"><span>Item Name</span></th>                                                    
+                                                                    <th class="wd-lg-20p"><span>Stock</span></th> 
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php 
+                                                            require '../../Database/database.php';                                          
+                                                            $select = "SELECT * FROM products WHERE stock <= 0 AND ProductType = 'Solar Panel'";
+                                                            $result = mysqli_query($conn , $select);
+                                                            if(mysqli_num_rows($result) > 0){
+                                                                foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                    <td><?= $resultItem['ProductID']?></td>  
+                                                                    <td><?= $resultItem['ProductName']?></td>                                            
+                                                                    <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
+                                                                    ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
+                                                                        <?= $resultItem['stock']?>
+                                                                    </td>
+                                                                </tr>
+
                                                                     <?php 
-                                                                        require '../../Database/database.php';                                          
-                                                                        $select = "Select * from products Where ProductType = 'Solar Panel' and stock =0";
-                                                                        $result = mysqli_query($conn , $select);
-                                                                        if(mysqli_num_rows($result) > 0){
-                                                                            foreach($result as $resultItem){
-                                                                                ?>
-                                                                                    <tr>
-                                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
-                                                                                    </tr>
-                                                                                <?php
-                                                                            }      
-                                                                        }
-                                                                        else{
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td>All items on Solar Panel have stocks</td>   
-                                                                            </tr>
-                                                                        <?php 
-                                                                            }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="col-xl-12 mb-3">
-                                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                                    <thead>Generator</thead>
-                                                                    <tbody>
-                                                                        <?php 
-                                                                        require '../../Database/database.php';                                          
-                                                                        $select = "Select * from products Where ProductType = 'Generator' and stock =0";
-                                                                        $result = mysqli_query($conn , $select);
-                                                                        if(mysqli_num_rows($result) > 0){
-                                                                            foreach($result as $resultItem){
-                                                                                ?>
-                                                                                    <tr>
-                                                                                        <td class="text-danger">Item: "<?php echo $resultItem['ProductName'] ?>" has 0 stock!</td>
-                                                                                    </tr>
-                                                                                <?php
-                                                                            }      
-                                                                        }
-                                                                        else{
-                                                                        ?>
-                                                                            <tr>
-                                                                            <td>All items on Generator have stocks</td>    
-                                                                            </tr>
-                                                                        <?php 
-                                                                            }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                                }
+                                                                
+                                                            }
+                                                            else{
+                                                                ?>
+                                                                
+                                                                <tr>
+                                                                    <td></td>  
+                                                                    <td>No out of stocks for Solar Panels</td>
+                                                                    <td></td> 
+                                                                </tr>
+                                                                
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                                        
+                                                            </tbody>
+                                                        </table>
                                                     </div>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <h5>Generator</h5>
+                                                    <div class="table-responsive userlist-table">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                                <th class="wd-lg-20p"><span>Item Name</span></th>                                                    
+                                                                    <th class="wd-lg-20p"><span>Stock</span></th> 
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php 
+                                                            require '../../Database/database.php';                                          
+                                                            $select = "SELECT * FROM products WHERE stock <= 0 AND ProductType = 'Generator'";
+                                                            $result = mysqli_query($conn , $select);
+                                                            if(mysqli_num_rows($result) > 0){
+                                                                foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                    <td><?= $resultItem['ProductID']?></td>  
+                                                                    <td><?= $resultItem['ProductName']?></td>                                            
+                                                                    <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
+                                                                    ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
+                                                                        <?= $resultItem['stock']?>
+                                                                    </td>
+                                                                </tr>
+
+                                                                    <?php 
+                                                                }
+                                                                
+                                                            }
+                                                            else{
+                                                                ?>
+                                                                
+                                                                <tr>
+                                                                    <td></td>  
+                                                                    <td>No out of stocks for Generators</td>
+                                                                    <td></td> 
+                                                                </tr>
+                                                                
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                                        
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -211,73 +251,109 @@ GROUP BY
                                                 <div class="card-header">
                                                     <div class="card-title">Stocks</div>
                                                 </div>
+                                                
+                                                
                                                 <div class="card-body">
+                                                    <h5>Solar Panel</h5>
                                                     <div class="table-responsive userlist-table">
-                                                        <div class="row">
-                                                            <div class="col-xl-12 mb-3">
-                                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                                    <thead>Total Solar Panel in Stocks</thead>
-                                                                    <tbody>
-                                                                        <?php 
-                                                                        require '../../Database/database.php';                                          
-                                                                        $select = "Select * from products Where ProductType = 'Solar Panel'";
-                                                                        $result = mysqli_query($conn , $select);
-                                                                        $total = 0.00;
-                                                                        if(mysqli_num_rows($result) > 0){
-                                                                            foreach($result as $resultItem){
-                                                                                $total = $total + $resultItem['stock'];
-                                                                            }      
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td><?php echo $total ?></td>
-                                                                            </tr>
-                                                                        <?php
-                                                                        }
-                                                                        else{
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td>Empty</td>   
-                                                                            </tr>
-                                                                        <?php 
-                                                                            }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="col-xl-12 mb-3">
-                                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-left">
-                                                                    <thead>Total Generator in Stocks</thead>
-                                                                    <tbody>
-                                                                        <?php 
-                                                                        require '../../Database/database.php';                                          
-                                                                        $select = "Select * from products Where ProductType = 'Generator'";
-                                                                        $result = mysqli_query($conn , $select);
-                                                                        $total = 0.00;
-                                                                        if(mysqli_num_rows($result) > 0){
-                                                                            foreach($result as $resultItem){
-                                                                                $total = $total + $resultItem['stock'];
-                                                                            }      
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td><?php echo $total ?></td>
-                                                                            </tr>
-                                                                        <?php
-                                                                        }
-                                                                        else{
-                                                                        ?>
-                                                                            <tr>
-                                                                                <td>Empty</td>   
-                                                                            </tr>
-                                                                        <?php 
-                                                                            }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                                <th class="wd-lg-20p"><span>Item Name</span></th>                                                    
+                                                                    <th class="wd-lg-20p"><span>Stock</span></th> 
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php 
+                                                            require '../../Database/database.php';                                          
+                                                            $select = "SELECT * FROM products WHERE ProductType = 'Solar Panel'";
+                                                            $result = mysqli_query($conn , $select);
+                                                            if(mysqli_num_rows($result) > 0){
+                                                                foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                    <td><?= $resultItem['ProductID']?></td>  
+                                                                    <td><?= $resultItem['ProductName']?></td>                                            
+                                                                    <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
+                                                                    ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
+                                                                        <?= $resultItem['stock']?>
+                                                                    </td>
+                                                                </tr>
+
+                                                                    <?php 
+                                                                }
+                                                                
+                                                            }
+                                                            else{
+                                                                ?>
+                                                                
+                                                                <tr>
+                                                                    <td></td>  
+                                                                    <td>No out of stocks for Solar Panels</td>
+                                                                    <td></td> 
+                                                                </tr>
+                                                                
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                                        
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
+
+                                                <div class="card-body">
+                                                    <h5>Generator</h5>
+                                                    <div class="table-responsive userlist-table">
+                                                        <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                            <thead>
+                                                                <tr>
+                                                                <th class="wd-lg-8p"><span>ID</span></th>
+                                                                <th class="wd-lg-20p"><span>Item Name</span></th>                                                    
+                                                                    <th class="wd-lg-20p"><span>Stock</span></th> 
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php 
+                                                            require '../../Database/database.php';                                          
+                                                            $select = "SELECT * FROM products WHERE ProductType = 'Generator'";
+                                                            $result = mysqli_query($conn , $select);
+                                                            if(mysqli_num_rows($result) > 0){
+                                                                foreach($result as $resultItem){
+                                                                    ?> 
+                                                                    <tr>
+                                                                    <td><?= $resultItem['ProductID']?></td>  
+                                                                    <td><?= $resultItem['ProductName']?></td>                                            
+                                                                    <td <?= $resultItem['stock'] == 0 ? 'class="text-danger"':  ($resultItem['stock'] <50 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Solar Panel'? 'class="text-warning"':
+                                                                    ($resultItem['stock'] <5 && $resultItem['stock'] >0 && $resultItem['ProductType'] == 'Generator'? 'class="text-warning"':''))?>>
+                                                                        <?= $resultItem['stock']?>
+                                                                    </td>
+                                                                </tr>
+
+                                                                    <?php 
+                                                                }
+                                                                
+                                                            }
+                                                            else{
+                                                                ?>
+                                                                
+                                                                <tr>
+                                                                    <td></td>  
+                                                                    <td>No out of stocks for Generators</td>
+                                                                    <td></td> 
+                                                                </tr>
+                                                                
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                                        
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+
                                             </div>      
                                         </div>
                                     </div>  
@@ -457,6 +533,15 @@ GROUP BY
                                             </table>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <!-- Download Report Buttons -->
+                                <div class="d-flex justify-content-center gap-3 my-3">
+                                    <button class="btn btn-outline-warning" onclick="downloadReport('weekly')">Download Weekly Report</button>
+                                    <button class="btn btn-outline-success" onclick="downloadReport('monthly')">Download Monthly Report</button>
+                                    <button class="btn btn-outline-info" onclick="downloadReport('yearly')">Download Yearly Report</button>
                                 </div>
                             </div>
                         </div>
@@ -660,6 +745,11 @@ GROUP BY
                 config2
             );
 
+
+            // Function to trigger download
+            function downloadReport(period) {
+                window.location.href = 'download_inventory-reports.php?period=' + period;
+            }
         </script>
 
     </body>
