@@ -114,9 +114,9 @@ require_once '../../ADMIN/authetincation.php';
                                         <div class="row align-items-center">
                                             <div class="offset-xl-3 offset-sm-6 col-xl-8 col-sm-6 col-12">
                                                 <h4 class="d-flex mb-3">
-                                                    <span class="fw-bold text-fixed-white ">Hello Marvie Placido!</span>
+                                                    <span class="fw-bold text-fixed-white ">Welcome to MRM-EG!</span>
                                                 </h4>
-                                                <p class="text-fixed-white mb-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto molestias pariatur laboriosam adipisci ab, velit expedita libero voluptatum sunt nihil nisi voluptates. Dignissimos aperiam harum praesentium distinctio necessitatibus recusandae corrupti!
+                                                <p class="text-fixed-white mb-1">We're excited to have you here. As your trusted partner in energy, we're committed to providing reliable, efficient, and sustainable power solutions. Whether you're looking to manage your energy usage, or learn more about our services, you’ve come to the right place.
                                                 </p>
                                             </div>
                                             <img src="../../assets/images/mrm-images/dashboard-banner.png" alt="user-img" style="width: 23rem;">
