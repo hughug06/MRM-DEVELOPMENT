@@ -129,7 +129,7 @@ require_once '../../ADMIN/authetincation.php';
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                 <a class="card custom-card" href="/USER/solar/solar.php">
                                     <div class="card-body">
-                                        <img src="../../assets/images/mrm-images/dashboard-images/project-solar1.jpg" class="card-img mb-3" alt="...">
+                                        <img src="../../assets/images/mrm-images/dashboard-images/gen1.jpg" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">Mountains<span class="badge bg-primary float-end fs-10">New</span></h6>
                                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                                     </div>
