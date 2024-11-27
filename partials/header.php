@@ -601,20 +601,26 @@
                 <div class="p-3">
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="mb-0 fs-17 fw-semibold">Notifications</p>
-                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">5 Unread</span>
+                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <ul class="list-unstyled mb-0" id="header-notification-scroll">
+                    <?php 
+                    $notification = "select * from notification where user_id = '$userid'";
+                    $result_notification = mysqli_query($conn , $notification);
+                    while($notify = mysqli_fetch_assoc($result_notification)){             
+                    ?>
                     <li class="dropdown-item">
                         <div class="d-flex align-items-start">
                              <div class="pe-2">
-                                 <span class="avatar avatar-md online bg-primary-transparent br-5"><img alt="avatar" src="../assets/images/faces/5.jpg"></span>
+                                 <span class="avatar avatar-md offline bg-secondary-transparent br-5"></span>
                              </div>
                              <div class="flex-grow-1 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <p class="mb-0"><a href="notifications-list.html" class="text-dark">Congratulate <strong>Olivia James</strong> for New template start</a></p>
-                                    <span class="text-muted fw-normal fs-12 header-notification-text">Oct 15 12:32pm</span>
+                                    <p class="mb-0"><a href="notifications-list.html" class="text-dark"><strong>Message:</strong><?= $notify['message'] ?></a></p>
+                                    <span class="text-muted fw-normal fs-12 header-notification-text"><?= $notify['date_time'] ?></span><br>
+                                    <span class="text-muted fw-normal fs-12 header-notification-text"><?= $notify['from'] ?></span>
                                 </div>
                                 <div>
                                     <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
@@ -622,70 +628,7 @@
                              </div>
                         </div>
                     </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md offline bg-secondary-transparent br-5"><img alt="avatar" src="../assets/images/faces/2.jpg"></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <p class="mb-0"><a href="notifications-list.html" class="text-dark"><strong>Joshua Gray</strong> New Message Received</a></p>
-                                    <span class="text-muted fw-normal fs-12 header-notification-text">Oct 13 02:56am</span>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                </div>
-                             </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md online bg-pink-transparent br-5"><img alt="avatar" src="../assets/images/faces/3.jpg"></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <p class="mb-0"><a href="notifications-list.html" class="text-dark"><strong>Elizabeth Lewis</strong> added new schedule realease</a></p>
-                                    <span class="text-muted fw-normal fs-12 header-notification-text">Oct 12 10:40pm</span>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                </div>
-                             </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md online bg-warning-transparent br-5"><img alt="avatar" src="../assets/images/faces/5.jpg"></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <p class="mb-0 fw-normal"><a href="notifications-list.html" class="text-dark">Delivered Successful to <strong>Micky</strong> </a></p>
-                                    <span class="text-muted fw-normal fs-12 header-notification-text">Order <span class="text-warning">ID: #005428</span> had been placed</span>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                </div>
-                             </div>
-                        </div>
-                    </li>
-                    <li class="dropdown-item">
-                        <div class="d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md offline bg-success-transparent br-5"><img alt="avatar" src="../assets/images/faces/1.jpg"></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <p class="mb-0 fw-normal"><a href="notifications-list.html" class="text-dark">You got 22 requests form <strong>Facebook</strong></a></p>
-                                    <span class="text-muted fw-normal fs-12 header-notification-text">Today at 08:08pm</span>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0);" class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i class="ti ti-x fs-16"></i></a>
-                                </div>
-                             </div>
-                        </div>
-                    </li>
+                   <?php  }?>
                 </ul>
                 <div class="p-3 empty-header-item1 border-top">
                     <div class="d-grid">
