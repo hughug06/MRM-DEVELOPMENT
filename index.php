@@ -9,12 +9,12 @@
           exit();
       }
       else if($role == 'worker'){
-        header("location: /MRM-DEVELOPMENT/ADMIN/worker/dashboard.php");
+        header("location: /ADMIN/worker/dashboard.php");
         exit();
       }
       
       else if($role == 'admin'){
-          header("location: /MRM-DEVELOPMENT/ADMIN/dashboard/admin-dashboard.php");
+          header("location: /ADMIN/dashboard/admin-dashboard.php");
           exit();
       }
     }

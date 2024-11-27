@@ -134,7 +134,7 @@
             
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
-                    <a href="/mrm-eg.online/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
+                    <a href="/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-solar-panel side-menu__icon"></i>
@@ -146,7 +146,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
-                    <a href="/mrm-eg.online/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
+                    <a href="/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="bi-bag side-menu__icon"></i> -->
