@@ -367,6 +367,16 @@ else if(isset($_POST['brand_edit'])){
   }
 }
 
+else if(isset($_POST['save_markup'])){
+  $id = $_POST['markup_id'];
+  $markup = $_POST['markup_percentage'];
+  $sql_update = "UPDATE service_markup SET markup_percentage = '$markup' WHERE markup_id = '$id'";
+
+  $result = mysqli_query($conn, $sql_update);
+    if($result){
+      echo json_encode(['success' => true]);
+    }
+  }
 
 
 

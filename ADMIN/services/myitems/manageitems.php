@@ -712,9 +712,57 @@
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="markup-disc">
-                                                <div class="card custom-card">
+                                            <div class="card custom-card">
+                                                    <div class="card-header border-bottom-0 d-block">                            
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <label class="main-content-label mb-0">MARK UP</label>                                   
+                                                        </div>
+                                                    </div>
                                                     <div class="card-body">
-                                                        <!-- content here -->
+                                                        <div class="table-responsive userlist-table">
+                                                            <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="wd-lg-8p"><span>ID</span></th>
+                                                                        <th class="wd-lg-20p"><span>Admin ID</span></th>
+                                                                        <th class="wd-lg-20p"><span>Percentage</span></th>
+                                                                        <th class="wd-lg-20p"><span>created_at</span></th>
+                                                                        <th class="wd-lg-20p"><span>Action</span></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php 
+                                                                $select = "SELECT * FROM service_markup";
+                                                                $result = mysqli_query($conn, $select);
+                                                                if (mysqli_num_rows($result) > 0) {
+                                                                    foreach ($result as $resultItem) {
+                                                                ?> 
+                                                                <tr>
+                                                                    <td><?= $resultItem['markup_id']?></td>
+                                                                    <td><?= $resultItem['admin_id']?></td>
+                                                                    <td><?= $resultItem['markup_percentage']?>%</td>
+                                                                    <td><?= $resultItem['date_created']?></td>
+                                                                    <td>
+                                                                        <button 
+                                                                            type="button" 
+                                                                            class="btn btn-sm btn-info" 
+                                                                            data-bs-toggle="modal" 
+                                                                            data-bs-target="#editPercentModal"                                 
+                                                                            data-markup-id="<?= $resultItem['markup_id'] ?>"
+                                                                            data-percent="<?= $resultItem['markup_percentage'] ?>"
+                                                                        >
+                                                                            <i class="fe fe-edit-2"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php 
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </tbody>
+
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -724,6 +772,34 @@
                             </div>
                         </div>
                     </div>
+                        <!-- Modal for Editing Markup Percentage -->
+                        <div class="modal fade" id="editPercentModal" tabindex="-1" aria-labelledby="editPercentModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editPercentModalLabel">Edit Markup Percentage</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editPercentForm" action="function.php" method="POST">
+                                            <div class="mb-3">
+                                                <label for="markup_id" class="form-label">Markup ID</label>
+                                                <input type="text" class="form-control" id="markup_id" name="markup_id" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="markup_percentage" class="form-label">Markup Percentage</label>
+                                                <input type="number" class="form-control" id="markup_percentage" name="markup_percentage" min="0" max="100" required>
+                                            </div>
+                                            <div class="text-center mt-3">
+                                                <button type="submit" id="markupbtn" class="btn btn-primary" name="save_markup">Save Changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                     <!-- Modal for Adding to tune up -->
                     <div class="modal fade" id="GeneratorTuneUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorTuneUpModalLabel" aria-hidden="true">
@@ -1354,6 +1430,24 @@
         </script>
 
         <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var editPercentModal = document.getElementById('editPercentModal');
+
+                editPercentModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;  // The button that triggered the modal
+                    var markupId = button.getAttribute('data-markup-id');
+                    var markupPercentage = button.getAttribute('data-percent');
+
+                    // Get the modal input fields
+                    var modalMarkupIdInput = editPercentModal.querySelector('#markup_id');
+                    var modalMarkupPercentageInput = editPercentModal.querySelector('#markup_percentage');
+
+                    // Set the values in the modal inputs
+                    modalMarkupIdInput.value = markupId;
+                    modalMarkupPercentageInput.value = markupPercentage;
+                });
+            });
 
             document.addEventListener('DOMContentLoaded', function () {
                 var editItemModal = document.getElementById('editItemModal');
@@ -2631,4 +2725,80 @@
             });
 
 
+
+            $('#markupbtn').on('click', function(e) {
+                    e.preventDefault();
+                    const markup_id  = document.getElementById("markup_id").value;
+                    const markup_percentage = document.getElementById("markup_percentage").value;
+                    if(markup_percentage == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Please Complete the Form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                    }
+                    else if(markup_percentage < 0 || markup_percentage > 100){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Amount cannot be less than 0 or greater than 100",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            title: 'Confirmation',
+                            html: "Are you sure to confirm?",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If user confirms, send AJAX request for Add product
+                                var formData = new FormData();
+                                formData.append('save_markup', true);
+                                formData.append('markup_id', markup_id);
+                                formData.append('markup_percentage', markup_percentage);
+                                    
+                                $.ajax({
+                                    url: 'function.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data:formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        // Handle successful add
+                                        Swal.fire({
+                                            title: 'Item Edited!',
+                                            text: 'You have successfully edited the brand.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'manageitems.php';
+                                        });
+                                    },
+                                    error: function(response) {
+                                        // Handle erro
+                                        Swal.fire(
+                                            'Error!',
+                                            'There was an error editing the brand. Please try again.',
+                                            'error'
+                                        );
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
         </script>

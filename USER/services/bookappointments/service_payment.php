@@ -4,6 +4,10 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
+$markup = "select * from service_markup";
+$markup_result = mysqli_query($conn , $markup);
+$row_mark = mysqli_fetch_assoc($markup_result);
+
 $service_type = $_POST['serviceType']; 
 $product_type = $_POST['productType'];
 $agent_mode = isset($_POST['agentmode']) ? true : false;
@@ -198,7 +202,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         while ($row = mysqli_fetch_assoc($result_solar)) {
@@ -269,7 +273,7 @@ else if(isset($_POST['tuneup_submit'])){
                             mysqli_data_seek($result_solar, 0); // Reset the $result_solar pointer to the start for the next loop
                             // Get the total amount of package_installation_solar + product itself and 10% mark-up
                             $quotation = $amount + $totalCost;
-                            $mark_up = $quotation * .1;
+                            $mark_up = $quotation * $row_mark['markup_percentage'];
                             $final_value = $quotation + $mark_up;
 
                             $agent_mark_up = $final_value * .05;
@@ -321,7 +325,7 @@ else if(isset($_POST['tuneup_submit'])){
                 mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                 // Get the total amount of package_installation_solar + product itself and 10% mark-up
                 $quotation = $amount + $totalCost;
-                $mark_up = $quotation * .1;
+                $mark_up = $quotation * $row_mark['markup_percentage'];
                 $final_value = $quotation + $mark_up;
                 
 
@@ -388,7 +392,7 @@ else if(isset($_POST['tuneup_submit'])){
                     mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                     // Get the total amount of package_installation_solar + product itself and 10% mark-up
                     $quotation = $amount + $totalCost;
-                    $mark_up = $quotation * .1;
+                    $mark_up = $quotation * $row_mark['markup_percentage'];
                     $final_value = $quotation + $mark_up;
                     $agent_mark_up = $final_value * .05;
                     $final_value_withagent = $final_value + $agent_mark_up;
@@ -458,7 +462,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         $agent_mark_up = $final_value * .05;
                         $final_value_withagent = $final_value + $agent_mark_up ;
@@ -506,7 +510,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         while ($row = mysqli_fetch_assoc($result_generator)) {
@@ -552,7 +556,7 @@ else if(isset($_POST['tuneup_submit'])){
                     mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                     // Get the total amount of package_installation_solar + product itself and 10% mark-up
                     $quotation = $amount + $totalCost;
-                    $mark_up = $quotation * .1;
+                    $mark_up = $quotation * $row_mark['markup_percentage'];
                     $final_value = $quotation + $mark_up;
                     
                     while ($row = mysqli_fetch_assoc($result_generator)) {
@@ -599,7 +603,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         while ($row = mysqli_fetch_assoc($result_generator)) {
@@ -645,7 +649,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         
@@ -695,7 +699,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         
@@ -745,7 +749,7 @@ else if(isset($_POST['tuneup_submit'])){
                         mysqli_data_seek($result_generator, 0); // Reset the $result_solar pointer to the start for the next loop
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
-                        $mark_up = $quotation * .1;
+                        $mark_up = $quotation * $row_mark['markup_percentage'];
                         $final_value = $quotation + $mark_up;
                         
                         

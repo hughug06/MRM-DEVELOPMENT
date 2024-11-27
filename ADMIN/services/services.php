@@ -372,7 +372,7 @@ include_once '../../Database/database.php';
                         },
                         error: function(response) {
                             Swal.fire({
-                                title: 'An error occured!',
+                                title: 'Current in use by other entity!',
                                 icon: 'error',
                                 allowOutsideClick: false,
                                 timer: 2000, // 2 seconds timer

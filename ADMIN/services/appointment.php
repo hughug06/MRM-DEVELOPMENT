@@ -520,9 +520,9 @@
                                         <div class="modal-body">
                                             <form id="reject_form" action="reject_payment.php" method="POST">
                                                 <!-- Hidden Inputs for Booking ID and User ID -->
-                                                <input type="text" id="bookingId" class="bookingId" name="booking_id">
-                                                <input type="text" id="user_id" class="userId" name="user_id">
-                                                <input type="text" id="availability_id" class="availabilityId" name="availability_id">
+                                                <input type="hidden" id="bookingId" class="bookingId" name="booking_id">
+                                                <input type="hidden" id="user_id" class="userId" name="user_id">
+                                                <input type="hidden" id="availability_id" class="availabilityId" name="availability_id">
 
                                                 <!-- Rejection Reason -->
                                                 <div class="mb-3">
