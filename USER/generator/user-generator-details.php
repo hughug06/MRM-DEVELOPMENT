@@ -129,9 +129,6 @@ global $conn;
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/25.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                             <div class="carousel-item"> <img src="../assets/images/pngs/23.png" alt="img" class="img-fluid mx-auto d-block"></div>
                                                         </div>
-                                                        <div class="text-center mt-4 mb-4 btn-list">
-                                                            <a href="ecommerce-cart.html" class="btn ripple btn-primary d-inline-flex align-items-center"><i class="fe fe-shopping-cart me-1"> </i> Add to cart</a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
