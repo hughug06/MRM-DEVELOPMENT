@@ -83,34 +83,34 @@ include_once '../../Database/database.php';
                     
                     
                 ?>
-<div class="container-fluid">
-    <div class="row mt-3">
-    <?php 
-        // Execute the query to get the total kanban count, total sales, and booking IDs
-        $result = mysqli_query($conn, $sql);
+                <div class="container-fluid">
+                    <div class="row mt-3">
+                    <?php 
+                        // Execute the query to get the total kanban count, total sales, and booking IDs
+                        $result = mysqli_query($conn, $sql);
 
-        // Check if there are results
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">Name: <?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></h5>
-                            <p class="card-text"><strong>Total Kanban Count:</strong> <?php echo $row['total_kanban_count']; ?></p>
-                            <p class="card-text"><strong>Total Sales:</strong> <span class="text-success">$<?php echo number_format($row['total_sales'], 2); ?></span></p>
-                            <p class="card-text"><strong>Booking IDs:</strong> <span class="badge bg-info"><?php echo htmlspecialchars($row['booking_ids']); ?></span></p>
-                        </div>
+                        // Check if there are results 
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                <div class="col-md-3 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-primary">Name: <?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></h5>
+                                            <p class="card-text"><strong>Total Kanban Count:</strong> <?php echo $row['total_kanban_count']; ?></p>
+                                            <p class="card-text"><strong>Total Sales:</strong> <span class="text-success">$<?php echo number_format($row['total_sales'], 2); ?></span></p>
+                                            <p class="card-text"><strong>Booking IDs:</strong> <span class="badge bg-info"><?php echo htmlspecialchars($row['booking_ids']); ?></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php 
+                            }
+                        } else {
+                            echo "<p>No data found for completed bookings.</p>";
+                        }
+                    ?>
                     </div>
                 </div>
-                <?php 
-            }
-        } else {
-            echo "<p>No data found for completed bookings.</p>";
-        }
-    ?>
-    </div>
-</div>
 
 
                     
