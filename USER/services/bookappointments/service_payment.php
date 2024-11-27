@@ -151,7 +151,21 @@ else if(isset($_POST['tuneup_submit'])){
                     
     
                     if($stocks < $quantity){
-                        echo "Product is out of stock"; // SHOW FALSE
+                        echo "";
+                        echo "
+                            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                            <script>
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Notice',
+                                    text: 'Out of stocks, please try again',
+                                    timer: 3000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = 'service.php';
+                                });
+                            </script>
+                        ";
                         exit();
                     }
     
@@ -206,8 +220,24 @@ else if(isset($_POST['tuneup_submit'])){
                         
         
                         if($stocks < $quantity){
-                            echo "Product is out of stock"; // SHOW FALSE
-                            exit();
+                            if($stocks < $quantity){
+                                echo "";
+                                echo "
+                                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                                    <script>
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Notice',
+                                            text: 'Out of stocks, please try again',
+                                            timer: 3000,
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            window.location.href = 'service.php';
+                                        });
+                                    </script>
+                                ";
+                                exit();
+                            }
                         }
         
                         // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
@@ -276,7 +306,7 @@ else if(isset($_POST['tuneup_submit'])){
 
                     while($row2 = mysqli_fetch_assoc($result_pricing)){
                         if($row2['quantity'] < $row['quantity']){
-                              // SHOW ERROR 
+                              
                             
                         }
                         
@@ -311,7 +341,21 @@ else if(isset($_POST['tuneup_submit'])){
                     $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                         
                     if($stocks < $quantity){
-                        echo "Product is out of stock"; // SHOW FALSE
+                        echo "";
+                        echo "
+                            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                            <script>
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Notice',
+                                    text: 'Out of stocks, please try again',
+                                    timer: 3000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href = 'service.php';
+                                });
+                            </script>
+                        ";
                         exit();
                     }
 
@@ -365,8 +409,24 @@ else if(isset($_POST['tuneup_submit'])){
                         $amount = $row['price'] * $quantity;  // TOTAL AMOUNT FOR WHAT CLIENT AVAIL
                             
                         if($stocks < $quantity){
-                            echo "Product is out of stock"; // SHOW FALSE
-                            exit();
+                            if($stocks < $quantity){
+                                echo "";
+                                echo "
+                                    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                                    <script>
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Notice',
+                                            text: 'Out of stocks, please try again',
+                                            timer: 3000,
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            window.location.href = 'service.php';
+                                        });
+                                    </script>
+                                ";
+                                exit();
+                            }
                         }
     
                         // CHECK IF THE PACKAGE IS AVAILABLE OR ON STOCK
@@ -767,7 +827,7 @@ else if(isset($_POST['tuneup_submit'])){
                                 </label>
 
                                 <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
-                                    Open Payment Confirmation
+                                    proceed for payment
                                 </button>
 
                                 <script>

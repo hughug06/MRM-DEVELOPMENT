@@ -160,155 +160,137 @@
                                                 </div>
                                             </div>           
                                             <div class="main-content-body tab-pane p-4 border-top-0 p-0" id="approved">
-                                                <div class="mb-4 main-content-label text-center">Approved Projects</div>
-                                                <div class="card border-0 shadow-sm">
-                                                    <div class="card-header bg-primary text-white border-bottom-0">
-                                                        <h5 class="mb-0">Ongoing Projects</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-hover table-bordered text-nowrap">
-                                                                <thead class="thead-light">
-                                                                    <tr>
-                                                                        <th>#</th>
-                                                                        <th>Worker Name</th>
-                                                                        <th>Location</th>
-                                                                        <th>Payment Status</th>
-                                                                        <th>Amount</th>
-                                                                        <th>Project Progress</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php 
-                                                                    $ongoing = "SELECT * FROM service_booking
-                                                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
-                                                                                INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
-                                                                                INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                                                                WHERE client_id = '$user_id' AND booking_status = 'ongoing' AND status != 'completed'";
-                                                                    $result_ongoing = mysqli_query($conn, $ongoing);
-
-                                                                    // Progress mapping for each enum status
-                                                                    $statusMap = [
-                                                                        'pick_up' => 16,
-                                                                        'delivery' => 33,
-                                                                        'arrive' => 50,
-                                                                        'ongoing_construction' => 66,
-                                                                        'checking' => 83,
-                                                                        'completed' => 100
-                                                                    ];
-
-                                                                    if (mysqli_num_rows($result_ongoing) > 0) {
-                                                                        while ($row = mysqli_fetch_assoc($result_ongoing)) {
-                                                                            $status = $row['status'];
-                                                                            $progressPercentage = $statusMap[$status] ?? 0;
-                                                                    ?>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td><?= htmlspecialchars($row['first_name']) . ' ' . htmlspecialchars($row['last_name']) ?></td>
-                                                                        <td><?= htmlspecialchars($row['pin_location']) ?></td>
-                                                                        <td>
-                                                                            <span class="badge <?= $row['payment_status'] == 'Paid' ? 'bg-success' : 'bg-warning' ?>">
-                                                                                <?= htmlspecialchars($row['payment_status']) ?>
-                                                                            </span>
-                                                                        </td>
-                                                                        <td>₱<?= number_format($row['total_cost'], 2) ?></td>
-                                                                        <td>
-                                                                            <div class="progress" style="height: 20px;">
-                                                                                <div class="progress-bar" role="progressbar" 
-                                                                                    style="width: <?= $progressPercentage; ?>%;" 
-                                                                                    aria-valuenow="<?= $progressPercentage; ?>" 
-                                                                                    aria-valuemin="0" aria-valuemax="100">
-                                                                                    <?= $progressPercentage; ?>%
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td class="text-center">
-                                                                            <span class="badge bg-<?= $status == 'completed' ? 'success' : 'primary' ?>">
-                                                                                <?= ucfirst($status) ?>
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <?php 
-                                                                    if($row['status'] == 'arrive' && $row['second_payment'] == null){
-                                                                        
-                                                                        ?> 
-                                                                      <!-- Displaying the total cost and booking ID on the page -->
-                                                                        <input type="hidden" id="total_cost_input" name="total_cost" value="<?= $row['total_cost'] ?>">
-                                                                        <input type="hidden" id="booking_id_input" name="booking_id" value="<?= $row['booking_id'] ?>">
-
-                                                                        <!-- Button to open the payment modal -->
-                                                                        <button class="btn btn-primary open-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentModal">
-                                                                            Payment
-                                                                        </button>
-                                                                        
-                                                                        <?php
-                                                                    }
-                                                                    else if($row['status'] == 'checking' && $row['third_payment'] == null){
-                                                                        ?> 
-                                                                                                   <!-- Displaying the total cost and booking ID on the page -->
-                                                                        <input type="text" id="total_cost_input_third" name="total_cost" value="<?= $row['total_cost'] ?>">
-                                                                        <input type="text" id="booking_id_input_third" name="booking_id" value="<?= $row['booking_id'] ?>">
-
-                                                                        <button type="button" class="btn btn-primary open-third-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
-                                                                            Payment
-                                                                        </button>
-
-                                                                        <?php
-                                                                    }
-                                                                    
-                                                                        }
-                                                                    }
-                                                                    ?>                                 
-                                                                </tbody>
-                                                            </table>
-                                                            
-                                                        </div>
-                                                    </div>
+                                                <div class="mb-4 main-content-label">Approved Projects</div>
+                                                <div class="card-header bg-primary text-white border-bottom-0">
+                                                    <h5 class="mb-0">Ongoing Projects</h5>
                                                 </div>
+                                                <div class="row">
+                                                    <?php 
+                                                    $ongoing = "SELECT * FROM service_booking
+                                                                INNER JOIN worker_ongoing ON service_booking.booking_id = worker_ongoing.booking_id
+                                                                INNER JOIN user_info ON user_info.user_id = worker_ongoing.worker_id    
+                                                                INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id 
+                                                                WHERE client_id = '$user_id' AND booking_status = 'ongoing' AND status != 'completed'";
+                                                    $result_ongoing = mysqli_query($conn, $ongoing);
 
-                                                
-                                            <!-- Modal SECOND payment -->
-                                            <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="paymentModalLabel">Second Payment Confirmation</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <!-- Centered Blank Image Placeholder -->
-                                                            <div class="text-center mb-3">
-                                                                <img src="../../../assets/images/payment_method/company_details.png" alt="Image Placeholder" class="img-fluid" style="max-height: 300px;">
+                                                    $statusMap = [
+                                                        'pick_up' => 16,
+                                                        'delivery' => 33,
+                                                        'arrive' => 50,
+                                                        'ongoing_construction' => 66,
+                                                        'checking' => 83,
+                                                        'completed' => 100
+                                                    ];
+
+                                                    if (mysqli_num_rows($result_ongoing) > 0) {
+                                                        while ($row = mysqli_fetch_assoc($result_ongoing)) {
+                                                            $status = $row['status'];
+                                                            $progressPercentage = $statusMap[$status] ?? 0;
+                                                    ?>
+                                                    <div class="col-12 mb-3">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong><?= htmlspecialchars($row['first_name']) . ' ' . htmlspecialchars($row['last_name']) ?></strong>
                                                             </div>
-                                                            <div class="text-center mx-4">
-                                                                <!-- Displaying Total Cost and Booking ID -->
-                                                                <p id="paymentnow">TOTAL: ₱0.00</p>
-                                                                <p id="totalCostModal">TOTAL: ₱0.00</p>
-                                                                <p id="bookingIdModal">Booking ID: N/A</p>
-                                                            </div>
-
-                                                            <form action="process_second_payment.php" method="POST" enctype="multipart/form-data">
-                                                                <div class="row mb-3">
-                                                                    <div class="col">
-                                                                        <label for="firstField" class="form-label">Reference Number</label>
-                                                                        <input class="form-control" type="text" id="firstField" name="reference_number" required>
-                                                                    </div>                                                             
-                                                                </div>                                         
-               
-                                                                <!-- Hidden input for total cost and booking ID (to submit in the form) -->
-                                                                <input type="hidden" id="booking_id_modal_input" name="booking_id">
-                                                                <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
-
-                                                                <!-- Submit Button -->
-                                                                <div class="text-center mt-3">
-                                                                    <button type="submit" class="btn btn-primary sec_pay" name="save_payment">Submit</button>
+                                                            <div class="card-body">
+                                                                <p><strong>Location:</strong> <?= htmlspecialchars($row['pin_location']) ?></p>
+                                                                <p>
+                                                                    <strong>Payment Status:</strong> 
+                                                                    <span class="badge <?= $row['payment_status'] == 'Paid' ? 'bg-success' : 'bg-warning' ?>">
+                                                                        <?= htmlspecialchars($row['payment_status']) ?>
+                                                                    </span>
+                                                                </p>
+                                                                <p><strong>Amount:</strong> ₱<?= number_format($row['total_cost'], 2) ?></p>
+                                                                <p><strong>Project Progress:</strong></p>
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar" role="progressbar" 
+                                                                        style="width: <?= $progressPercentage; ?>%;" 
+                                                                        aria-valuenow="<?= $progressPercentage; ?>" 
+                                                                        aria-valuemin="0" aria-valuemax="100">
+                                                                        <?= $progressPercentage; ?>%
+                                                                    </div>
                                                                 </div>
-                                                            </form>
+                                                                <div class="d-flex pt-3 justify-content-end ">
+                                                                    <p>
+                                                                        <strong>Status:</strong>
+                                                                        <span class="badge bg-<?= $status == 'completed' ? 'success' : 'primary' ?> ms-2">
+                                                                            <?= ucfirst($status) ?>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <?php if ($row['status'] == 'arrive' && $row['second_payment'] == null) { ?>
+                                                                    <input type="hidden" id="total_cost_input" name="total_cost" value="<?= $row['total_cost'] ?>">
+                                                                    <input type="hidden" id="booking_id_input" name="booking_id" value="<?= $row['booking_id'] ?>">
+                                                                    <div class="text-center">
+                                                                        <button class="btn btn-primary open-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                                                            Proceed to second payment
+                                                                        </button>
+                                                                    </div>
+                                                                <?php } else if ($row['status'] == 'checking' && $row['third_payment'] == null) { ?>
+                                                                    <input type="hidden" id="total_cost_input_third" name="total_cost" value="<?= $row['total_cost'] ?>">
+                                                                    <input type="hidden" id="booking_id_input_third" name="booking_id" value="<?= $row['booking_id'] ?>">
+                                                                    <div class="text-center">
+                                                                        <button type="button" class="btn btn-primary open-third-payment-modal-btn" data-bs-toggle="modal" data-bs-target="#paymentThirdModal">
+                                                                            Proceed to third payment
+                                                                        </button>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php 
+                                                        }
+                                                    }
+                                                    ?>
+                                                </div> 
+                                           <!-- Modal SECOND Payment -->
+                                                <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="paymentModalLabel">Second Payment Confirmation</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Centered Blank Image Placeholder -->
+                                                                <div class="text-center mb-3">
+                                                                    <img src="../../../assets/images/payment_method/company_details.png" 
+                                                                        alt="Image Placeholder" 
+                                                                        class="img-fluid" style="max-height: 300px;">
+                                                                </div>
+                                                                <div class="text-center mx-4">
+                                                                    <!-- Displaying Total Cost and Booking ID -->
+                                                                    <p id="paymentnow">TOTAL: ₱0.00</p>
+                                                                    <p id="totalCostModal">TOTAL: ₱0.00</p>
+                                                                </div>
+
+                                                                <!-- Form -->
+                                                                <form action="process_second_payment.php" method="POST" enctype="multipart/form-data" id="secondPaymentForm">
+                                                                    <div class="row mb-3">
+                                                                        <div class="col">
+                                                                            <label for="firstField" class="form-label">Reference Number</label>
+                                                                            <input 
+                                                                                class="form-control" 
+                                                                                type="text" 
+                                                                                id="firstField" 
+                                                                                name="reference_number" 
+                                                                                required
+                                                                                placeholder="Enter bank reference number">
+                                                                        </div>                                                             
+                                                                    </div>                                         
+                                                                    <!-- Hidden input for total cost and booking ID -->
+                                                                    <input type="hidden" id="booking_id_modal_input" name="booking_id">
+                                                                    <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
+
+                                                                    <!-- Submit Button -->
+                                                                    <div class="text-center mt-3">
+                                                                        <button type="submit" class="btn btn-primary sec_pay" name="save_payment">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
                                                    
                                             <!-- Modal THIRD payment -->
@@ -328,7 +310,7 @@
                                                                 <!-- Displaying Total Cost and Booking ID -->
                                                                 <p id="Thirdpaymentnow">TOTAL: ₱0.00</p>
                                                                 <p id="ThirdtotalCostModal">TOTAL: ₱0.00</p>
-                                                                <p id="ThirdbookingIdModal">Booking ID: N/A</p>
+                                    
                                                             </div>
 
                                                             <form action="process_third_payment.php" method="POST" enctype="multipart/form-data">
@@ -340,8 +322,8 @@
                                                                 </div>                                         
                
                                                                 <!-- Hidden input for total cost and booking ID (to submit in the form) -->
-                                                                <input type="text" id="booking_id_third" name="booking">
-                                                                <input type="text" id="duePayment_third" name="due" readonly>
+                                                                <input type="hidden" id="booking_id_third" name="booking">
+                                                                <input type="hidden" id="duePayment_third" name="due" readonly>
 
                                                                 <!-- Submit Button -->
                                                                 <div class="text-center mt-3">
@@ -447,16 +429,74 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p>The maintenance coverage includes the following:</p>
+                                                                    <p>The maintenance coverage includes the following for Solar Panels and Generators:</p>
+
+                                                                    <h5>Solar Panels</h5>
                                                                     <ul>
-                                                                        <li>Regular inspections and tune-ups</li>
-                                                                        <li>Repair of defects covered under the warranty</li>
-                                                                        <li>Replacement of parts as per the terms and conditions</li>
-                                                                        <li>Support for operational issues</li>
-                                                                        <li>Comprehensive warranty terms available in your service agreement</li>
+                                                                        <li>
+                                                                            <strong>Cleaning and Inspection:</strong>
+                                                                            <ul>
+                                                                                <li>Regular cleaning to remove dirt, debris, and bird droppings that reduce efficiency.</li>
+                                                                                <li>Inspection for physical damage, cracks, or loose connections.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Performance Monitoring:</strong>
+                                                                            <ul>
+                                                                                <li>Checking the energy output to ensure the panels are performing at optimal levels.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Electrical Component Maintenance:</strong>
+                                                                            <ul>
+                                                                                <li>Inspecting inverters, wiring, and junction boxes for wear and tear or malfunction.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Structural Checks:</strong>
+                                                                            <ul>
+                                                                                <li>Assessing mounting structures and ensuring they are secure and not corroded.</li>
+                                                                            </ul>
+                                                                        </li>
                                                                     </ul>
+
+                                                                    <h5>Generators</h5>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <strong>Mechanical Inspection:</strong>
+                                                                            <ul>
+                                                                                <li>Checking for leaks, wear, and damage in critical components like fuel lines and seals.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Fluid and Filter Changes:</strong>
+                                                                            <ul>
+                                                                                <li>Replacing engine oil, fuel, and air filters as per the manufacturer’s schedule.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Battery Maintenance:</strong>
+                                                                            <ul>
+                                                                                <li>Testing and replacing generator batteries to ensure reliable startups.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Load Testing:</strong>
+                                                                            <ul>
+                                                                                <li>Conducting periodic tests to confirm that the generator operates correctly under full load.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <strong>Exhaust System Check:</strong>
+                                                                            <ul>
+                                                                                <li>Inspecting for leaks or blockages in the exhaust system.</li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+
                                                                     <p>For detailed information, please contact our support team.</p>
                                                                 </div>
+
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                 </div>
@@ -652,7 +692,7 @@
         // Update the text content of the paymentnow and totalCostModal elements
         document.getElementById('paymentnow').innerText = 'Due payment: ' + formattedDuePayment;
         document.getElementById('totalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
-        document.getElementById('bookingIdModal').innerText = 'Booking ID: ' + bookingId;
+    
         
         // Optionally, populate the form with the total cost and booking ID
         document.getElementById('booking_id_modal_input').value = bookingId;
@@ -680,7 +720,7 @@
         // Update the text content of the Thirdpaymentnow, ThirdtotalCostModal, and ThirdbookingIdModal elements
         document.getElementById('Thirdpaymentnow').innerText = 'Due payment: ' + formattedDuePayment;
         document.getElementById('ThirdtotalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
-        document.getElementById('ThirdbookingIdModal').innerText = 'Booking ID: ' + bookingId;
+      
         
         // Populate the form with the total cost and booking ID
         document.getElementById('booking_id_third').value = bookingId;
@@ -733,14 +773,76 @@
 
 </script>
 <script>
+// JavaScript Validation
+document.getElementById('secondPaymentForm').addEventListener('submit', function(event) {
+    const referenceNumberField = document.getElementById('firstField');
+    const referenceNumber = referenceNumberField.value.trim();
+
+    // Validation rules
+    const referencePattern = /^(?!.*(.)\1)[A-Za-z0-9@&*()\[\]_+\-~]{7,20}$/;
+    const containsUppercase = /[A-Z]/.test(referenceNumber);
+    const containsLowercase = /[a-z]/.test(referenceNumber);
+    const containsNumber = /[0-9]/.test(referenceNumber);
+    const containsSpecialChar = /[@&*()\[\]_+\-~]/.test(referenceNumber);
+    const prohibitedChars = /[!#$%^&';”]/.test(referenceNumber);
+
+    if (
+        !referencePattern.test(referenceNumber) ||  // General pattern
+        !containsUppercase ||                      // At least one uppercase
+        !containsLowercase ||                      // At least one lowercase
+        !containsNumber ||                         // At least one number
+        !containsSpecialChar ||                    // At least one allowed special character
+        prohibitedChars                            // No prohibited characters
+    ) {
+        alert('Invalid reference number. Please ensure it:\n' +
+              '- Is 7-20 characters long\n' +
+              '- Contains uppercase and lowercase letters\n' +
+              '- Includes at least one number and one allowed special character (@, &, *, (, ), [, ], _, +, -, ~)\n' +
+              '- Does not have consecutive characters\n' +
+              '- Does not include prohibited characters (!, #, $, %, ^, &, \';”, etc.)');
+        referenceNumberField.focus();
+        event.preventDefault(); // Prevent form submission
+    }
+});
+</script>
+<script>
         $(document).ready(function() {
         //SOLAR INSTALLATION
         $('.sec_pay').on('click', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
+
                 const firstField = document.querySelector('#firstField').value;
                 const duePaymentInput = document.querySelector('#duePaymentInput').value;
                 const booking_id_third = document.querySelector('#booking_id_modal_input').value;
-                if(firstField == ""){
+
+                // Reference number validation
+                const referencePattern = /^(?!.*(.)\1)[A-Za-z0-9@&*()\[\]_+\-~]{7,20}$/;
+                const containsUppercase = /[A-Z]/.test(firstField);
+                const containsLowercase = /[a-z]/.test(firstField);
+                const containsNumber = /[0-9]/.test(firstField);
+                const containsSpecialChar = /[@&*()\[\]_+\-~]/.test(firstField);
+                const prohibitedChars = /[!#$%^&';”]/.test(firstField);
+
+                // If reference number does not match criteria
+                if (
+                    !referencePattern.test(firstField) || // General pattern
+                    !containsUppercase ||                  // At least one uppercase
+                    !containsLowercase ||                  // At least one lowercase
+                    !containsNumber ||                     // At least one number
+                    !containsSpecialChar ||                // At least one allowed special character
+                    prohibitedChars                        // No prohibited characters
+                ) {
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "Reference number must be between 7-20 characters, contain uppercase and lowercase letters, numbers, and special characters like @&*()[]_+-~, and should not contain consecutive characters or prohibited characters like !#$%^&';”.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    });
+                    return; // Exit the function if validation fails
+                }
+
+                // Proceed if reference number is valid
+                if (firstField == "") {
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form.",
@@ -748,13 +850,13 @@
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            // Handle confirmation if needed
                         }
                     });
-                }
-                else{
+                } else {
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Are you sure to proceed in Payment?",
+                        html: "Are you sure to proceed with the Payment?",
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -815,11 +917,11 @@
                                     );
                                 }
                             });
-
                         }
                     });
                 }
             }),
+
 
 
             $('.third_pay').on('click', function(e) {
@@ -827,7 +929,7 @@
                 const firstField = document.querySelector('#firstField2').value;
                 const duePaymentInput = document.querySelector('#duePayment_third').value;
                 const booking_id_modal_input = document.querySelector('#booking_id_third').value;
-                alert(firstField);
+               
                 if(firstField == ""){
                     Swal.fire({
                         title: 'ERROR',
