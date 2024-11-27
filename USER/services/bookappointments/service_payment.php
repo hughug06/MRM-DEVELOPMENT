@@ -944,11 +944,11 @@ else if(isset($_POST['tuneup_submit'])){
 
                                                                         
                                                                     ?>
-                                                                        <input type="text" name="name" value="<?php echo $_POST['name'] ?>">
-                                                                        <input type="text" name="email" value="<?php echo $_POST['email'] ?>">
-                                                                        <input type="text" name="product_id" value="<?php echo $_POST['product_id'] ?>">
-                                                                        <input type="text" name="contact" value="<?php echo $_POST['contact'] ?>">
-                                                                        <input type="text" name="agentmode" value="">
+                                                                        <input type="hidden" name="name" value="<?php echo $_POST['name'] ?>">
+                                                                        <input type="hidden" name="email" value="<?php echo $_POST['email'] ?>">
+                                                                        <input type="hidden" name="product_id" value="<?php echo $_POST['product_id'] ?>">
+                                                                        <input type="hidden" name="contact" value="<?php echo $_POST['contact'] ?>">
+                                                                        <input type="hidden" name="agentmode" value="">
                                                                     <?php
                                                                         }
                                                                        }
