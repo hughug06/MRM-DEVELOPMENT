@@ -158,19 +158,7 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
-                
-                <!-- Start::slide -->  
-                <li class="slide 
-                <?= $page == 'marketing-product-control.php'  || $page == 'product-edit-form.php' ? 'active open':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/marketing/marketing-product-control.php" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active':''?>" class="side-menu__item <?= $page == 'marketing-product-control.php' || $page == 'Category-Control.php' || $page == 'product-add-form.php' || $page == 'product-edit-form.php' ? 'active':''?>">
-                        <span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="fa-solid fa-box side-menu__icon"></i>
-                        <span class="side-menu__label">Products</span>
-                    </a>
-                </li>
-                <!-- End::slide -->
-
+                 
                 <!-- Start::slide -->  
                 <li class="slide has-sub <?= $page == 'services.php' || $page == 'appointment.php' ||  $page == 'manageitems.php' ?'active open':''?>">
                     <a href="javascript:void(0);" class="side-menu__item <?= $page == 'services.php' || $page == 'appointment.php' ? 'active':''?>">
