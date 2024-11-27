@@ -61,11 +61,19 @@ include_once '../../Database/database.php';
                 <div class="row mt-3">
                 <?php 
                   
-                    $sql = "SELECT * from kanban
-                          INNER JOIN user_info on user_info.user_id = kanban.user_id
-                          INNER JOIN service_booking on service_booking.booking_id = kanban.booking_id
-                          where service_booking.booking_status = 'completed'
-                    ";
+                  $sql = "
+                  SELECT 
+                      user_info.first_name, 
+                      user_info.last_name,
+                      COUNT(kanban.kanban_id) AS total_kanban_count,
+                      GROUP_CONCAT(service_booking.booking_id) AS booking_ids
+                  FROM kanban
+                  INNER JOIN user_info ON user_info.user_id = kanban.user_id
+                  INNER JOIN service_booking ON service_booking.booking_id = kanban.booking_id
+                  WHERE service_booking.booking_status = 'completed'
+                  GROUP BY kanban.user_id
+              ";
+              
 
                     $result = mysqli_query($conn, $sql);
                     
