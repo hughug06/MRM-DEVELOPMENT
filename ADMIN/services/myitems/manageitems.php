@@ -86,9 +86,9 @@
                                         <div class="tab-content">
                                             <div class="main-content-body tab-pane p-4 border-top-0 active" id="items">
                                                 <div class="mb-4 main-content-label"></div>
-                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                                                        <div class="card custom-card">
-                                                            <div class="card-header border-bottom-0 d-block">                            
+                                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+                                                    <div class="card custom-card">
+                                                        <div class="card-header border-bottom-0 d-block">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <label class="main-content-label mb-0">Items</label>
                                                             
@@ -96,68 +96,66 @@
                                                                     <i class="fe fe-download-cloud pe-2"></i>ADD ITEM
                                                                 </button>
                                                             </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="table-responsive userlist-table">
-                                                                    <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th class="wd-lg-8p"><span>ID</span></th>
-                                                                                <th class="wd-lg-20p"><span>Unit</span></th>
-                                                                                <th class="wd-lg-20p"><span>Description</span></th>
-                                                                                <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                                                <th class="wd-lg-20p"><span>Amount</span></th>
-                                                                                <th class="wd-lg-20p"><span>Action</span></th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <?php 
-                                                                            require '../../../Database/database.php';                                          
-                                                                            $select = "Select * from service_pricing";
-                                                                            $result = mysqli_query($conn , $select);
-                                                                            if(mysqli_num_rows($result) > 0){
-                                                                                foreach($result as $resultItem){
-                                                                            ?> 
-                                                                            <tr>
-                                                                                <td><?= $resultItem['pricingid']?></td>  
-                                                                                <td><?= $resultItem['unit']?></td>     
-                                                                                <td><?= $resultItem['description']?></td>                                       
-                                                                                <td><?= $resultItem['quantity']?></td>                       
-                                                                                <td><?= $resultItem['amount']?></td> 
-                                                                                <td>                                                 
-                                                                                <button 
-                                                                                    type="button" 
-                                                                                    class="btn btn-sm btn-info" 
-                                                                                    data-bs-toggle="modal" 
-                                                                                    data-bs-target="#editItemModal" 
-                                                                                    data-item-id="<?= $resultItem['pricingid'] ?>"
-                                                                                    data-item-unit="<?= $resultItem['unit'] ?>"
-                                                                                    data-item-description="<?= $resultItem['description'] ?>"
-                                                                                    data-item-quantity="<?= $resultItem['quantity'] ?>"
-                                                                                    data-item-amount="<?= $resultItem['amount'] ?>"              
-                                                                                    >
-                                                                                    <i class="fe fe-edit-2"></i>
-                                                                                </button>
-                                                                                <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
-                                                                                </td>
-                                                                            </tr>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive userlist-table">
+                                                                <table class="table card-table table-striped table-vcenter border text-nowrap mb-0 text-center">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="wd-lg-8p"><span>ID</span></th>
+                                                                            <th class="wd-lg-20p"><span>Unit</span></th>
+                                                                            <th class="wd-lg-20p"><span>Description</span></th>
+                                                                            <th class="wd-lg-20p"><span>Quantity</span></th>
+                                                                            <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                            <th class="wd-lg-20p"><span>Action</span></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php 
+                                                                        require '../../../Database/database.php';                                          
+                                                                        $select = "Select * from service_pricing";
+                                                                        $result = mysqli_query($conn , $select);
+                                                                        if(mysqli_num_rows($result) > 0){
+                                                                            foreach($result as $resultItem){
+                                                                        ?> 
+                                                                        <tr>
+                                                                            <td><?= $resultItem['pricingid']?></td>  
+                                                                            <td><?= $resultItem['unit']?></td>     
+                                                                            <td><?= $resultItem['description']?></td>                                       
+                                                                            <td><?= $resultItem['quantity']?></td>                       
+                                                                            <td><?= $resultItem['amount']?></td> 
+                                                                            <td>                                                 
+                                                                            <button 
+                                                                                type="button" 
+                                                                                class="btn btn-sm btn-info" 
+                                                                                data-bs-toggle="modal" 
+                                                                                data-bs-target="#editItemModal" 
+                                                                                data-item-id="<?= $resultItem['pricingid'] ?>"
+                                                                                data-item-unit="<?= $resultItem['unit'] ?>"
+                                                                                data-item-description="<?= $resultItem['description'] ?>"
+                                                                                data-item-quantity="<?= $resultItem['quantity'] ?>"
+                                                                                data-item-amount="<?= $resultItem['amount'] ?>"              
+                                                                                >
+                                                                                <i class="fe fe-edit-2"></i>
+                                                                            </button>
+                                                                            <a href="item-delete.php?id=<?= $resultItem['pricingid']?>" data-id="<?= $resultItem['pricingid']?>" class="btn btn-sm btn-danger delete-btn-Product"><i class="fe fe-trash"></i></a>
+                                                                            </td>
+                                                                        </tr>
 
-                                                                            <?php 
-                                                                                }
-                                                                        
+                                                                        <?php 
                                                                             }
-                                                                            else{
+                                                                    
+                                                                        }
+                                                                        else{
 
-                                                                            }
-                                                                            ?>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
-                                                        
                                                     </div>
-                                                
+                                                </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="solar">
                                                 <div class="col-md-12 col-lg-6">
@@ -769,21 +767,21 @@
                         </div>
                     </div>
 
-            <!-- Add Brand Modal -->
-            <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                    <!-- Add Brand Modal -->
+                    <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
                                     <!-- Name field -->
                                     <div class="mb-3">
                                         <label for="addbrandName" class="form-label">Brand Name</label>
                                         <input type="text" class="form-control" id="addbrandName" name="name" required>
                                     </div>
-                                   <!-- Type field -->
+                                    <!-- Type field -->
                                     <div class="mb-3">
                                         <label for="addbrandtype" class="form-label">Type</label>
                                         <select class="form-select" id="addbrandtype" name="type" required>
@@ -792,31 +790,28 @@
                                             <option value="Generator">Generator</option>
                                         </select>
                                     </div>
-
-
                                     <!-- Amount field -->
                                     <div class="mb-3">
                                         <label for="addbrandAmount" class="form-label">Amount</label>
                                         <input type="number" class="form-control" id="addbrandAmount" name="amount" required>
                                     </div>
-
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" id="addbrand">Add Brand</button>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                 <!-- Edit Brand Modal -->
-                 <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                    <!-- Edit Brand Modal -->
+                    <div class="modal fade" id="editBrandModal" tabindex="-1" aria-labelledby="editBrandModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editBrandModalLabel">Edit Brand</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
                                     <input type="hidden" id="brandId" name="brand_id">
                                     
                                     <div class="mb-3">
@@ -838,20 +833,20 @@
                                     </div>
 
                                     <button type="submit" name="brand_save" id="editbrand" class="btn btn-primary">Save Changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            <!-- Add Service Item Modal -->
-                <div class="modal fade" id="addServiceItemModal" tabindex="-1" aria-labelledby="addServiceItemModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addServiceItemModalLabel">Add New Service Item</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                    <!-- Add Service Item Modal -->
+                    <div class="modal fade" id="addServiceItemModal" tabindex="-1" aria-labelledby="addServiceItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addServiceItemModalLabel">Add New Service Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
                                     <!-- Unit selection dropdown -->
                                     <div class="mb-3">
                                         <label for="item_unit" class="form-label">Unit</label>
@@ -885,379 +880,371 @@
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary" id="item_add" name="serviceItem_save">Add Service Item</button>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                   <!-- Edit items Modal -->
-                        <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                            <!-- Hidden input for item ID -->
-                                            <input type="hidden" id="editItemId" name="item_id">
+                    <!-- Edit items Modal -->
+                    <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <!-- Hidden input for item ID -->
+                                        <input type="hidden" id="editItemId" name="item_id">
 
-                                             <!-- Unit field as a select input -->
-                                                <div class="mb-3">
-                                                    <label for="item_edit_unit" class="form-label">Unit</label>
-                                                    <select class="form-select" id="item_edit_unit" name="item_unit" required>
-                                                        <option value="items">Items</option>
-                                                        <option value="set">Set</option>
-                                                        <option value="job">Job</option>
-                                                        <option value="lot">Lot</option>
-                                                    </select>
-                                                </div>
-
-                                            <!-- Description field -->
+                                            <!-- Unit field as a select input -->
                                             <div class="mb-3">
-                                                <label for="item_edit_description" class="form-label">Description</label>
-                                                <input type="text" class="form-control" id="item_edit_description" name="item_description" required>
+                                                <label for="item_edit_unit" class="form-label">Unit</label>
+                                                <select class="form-select" id="item_edit_unit" name="item_unit" required>
+                                                    <option value="items">Items</option>
+                                                    <option value="set">Set</option>
+                                                    <option value="job">Job</option>
+                                                    <option value="lot">Lot</option>
+                                                </select>
                                             </div>
 
-                                            <!-- Quantity field -->
-                                            <div class="mb-3">
-                                                <label for="item_edit_quantity" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" id="item_edit_quantity" name="item_quantity" required>
-                                            </div>
+                                        <!-- Description field -->
+                                        <div class="mb-3">
+                                            <label for="item_edit_description" class="form-label">Description</label>
+                                            <input type="text" class="form-control" id="item_edit_description" name="item_description" required>
+                                        </div>
 
-                                            <!-- Amount field -->
-                                            <div class="mb-3">
-                                                <label for="item_edit_amount" class="form-label">Amount</label>
-                                                <input type="number" class="form-control" id="item_edit_amount" name="item_amount" required>
-                                            </div>
+                                        <!-- Quantity field -->
+                                        <div class="mb-3">
+                                            <label for="item_edit_quantity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="item_edit_quantity" name="item_quantity" required>
+                                        </div>
 
-                                            <div class="modal-footer">  
-                                                <button type="submit" class="btn btn-primary" id="item_edit" name="serviceItem_edit">Save Changes</button>
-                                            </div>
-                                    </div>
+                                        <!-- Amount field -->
+                                        <div class="mb-3">
+                                            <label for="item_edit_amount" class="form-label">Amount</label>
+                                            <input type="number" class="form-control" id="item_edit_amount" name="item_amount" required>
+                                        </div>
+
+                                        <div class="modal-footer">  
+                                            <button type="submit" class="btn btn-primary" id="item_edit" name="serviceItem_edit">Save Changes</button>
+                                        </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-
-
-
-                             <!-- Modal FOR ADD ITEM FOR SET PACKAGE FOR SOLAR  -->
-                             <div class="container-fluid">
-                                <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR SOLAR</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <form action="function.php" id="ins_solar" method="POST">        
-                                                             
-                                                            <table class="table table-bordered">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Item No.</th>
-                                                                        <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                                        <th>Description</th>
-                                                                        <th>Quantity</th>
-                                                                        <th>Amount</th>
-                                                                        <th>Total Cost</th>
-                                                                        <th>Action</th> <!-- Action Column for the close button -->
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="itemTableBody">
-                                                                    <!-- Rows will be added here dynamically -->
-                                                                </tbody>
-                                                            </table>
-
-                                                            <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
-                                                            <!-- Submit Button -->
-                                                            <button type="submit" class="btn btn-success mt-3" value="installation_save" name="installation_save">Submit</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- Modal FOR ADD ITEM FOR SET PACKAGE FOR SOLAR  -->
+                    <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR SOLAR</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="ins_solar" method="POST">        
+                                                    
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th> <!-- Action Column for the close button -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
 
-                                <!-- Modal FOR ADD SET PACKAGE FOR GENERATOR -->
-                             <div class="container-fluid">
-                                <div class="modal fade" id="GeneratorPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorPackageModal" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR GENERATOR</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <form action="function.php" id="ins_gen" method="POST">        
-                                                             
-                                                            <table class="table table-bordered">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Item No.</th>
-                                                                        <th>Unit</th> <!-- Unit Column next to Item No. -->
-                                                                        <th>Description</th>
-                                                                        <th>Quantity</th>
-                                                                        <th>Amount</th>
-                                                                        <th>Total Cost</th>
-                                                                        <th>Action</th> <!-- Action Column for the close button -->
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="itemTableBodyGenerator">
-                                                                    <!-- Rows will be added here dynamically -->
-                                                                </tbody>
-                                                            </table>
-
-                                                            <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
-                                                            <!-- Submit Button -->
-                                                            <button type="submit" class="btn btn-success mt-3" name="generator_save">Submit</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <button type="button" class="btn btn-primary" id="addItemButton">Add Item</button>
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-success mt-3" value="installation_save" name="installation_save">Submit</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal FOR ADD SET PACKAGE FOR GENERATOR -->
+                    <div class="modal fade" id="GeneratorPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorPackageModal" aria-hidden="true">
+                        <div class="modal-dialog modal-lg"> <!-- Make the modal larger -->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">SET PACKAGE FOR GENERATOR</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="ins_gen" method="POST">        
+                                                    
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th> <!-- Unit Column next to Item No. -->
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th> <!-- Action Column for the close button -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyGenerator">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+
+                                                <button type="button" class="btn btn-primary" id="addItemButtonGenerator">Add Item</button>
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-success mt-3" name="generator_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                
+                    <!-- Modal for Installation (Solar) -->
+                    <!-- <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="installationPackageModalLabel">SET PACKAGE FOR INSTALLATION (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyInstallation">
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButtonInstallation">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="installation_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- Modal for Tune-Up (Generator) -->
+                    <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="tuneupPackageModalLabel">SET PACKAGE FOR TUNE-UP (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="tnup_gen" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemTableBodyTuneup">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <!-- Modal for Maintenance (Solar) -->
+                    <div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SolarMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="main_solar" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemMaintenanceSolarTableBody">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addMaintenanceSolarItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="solar_maintenance_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal for Maintenance (Generator) -->
+                    <div class="modal fade" id="GeneratorMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorMaintenanceModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="GeneratorMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="main_gen" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemMaintenanceGeneratorTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addMaintenanceGeneratorItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="generator_maintenance_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             
+                    <!-- Modal for Repair (Solar) -->
+                    <div class="modal fade" id="SolarRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarRepairModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="SolarRepairModalLabel">SET PACKAGE FOR REPAIR (SOLAR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="rep_solar" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemRepairSolarTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addRepairSolarItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="solar_repair_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            
-
-
-                <!-- Modal for Installation (Solar) -->
-<!-- <div class="modal fade" id="installationPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="installationPackageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="installationPackageModalLabel">SET PACKAGE FOR INSTALLATION (SOLAR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemTableBodyInstallation">
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addItemButtonInstallation">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="installation_save">Submit</button>
-                        </form>
+                    <!-- Modal for Repair (Generator) -->
+                    <div class="modal fade" id="GeneratorRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorRepairModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="GeneratorRepairModalLabel">SET PACKAGE FOR REPAIR (GENERATOR)</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="function.php" id="rep_gen" method="POST">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item No.</th>
+                                                            <th>Unit</th>
+                                                            <th>Description</th>
+                                                            <th>Quantity</th>
+                                                            <th>Amount</th>
+                                                            <th>Total Cost</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="itemRepairGeneratorTableBody">
+                                                        <!-- Rows will be added here dynamically -->
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary" id="addRepairGeneratorItemButton">Add Item</button>
+                                                <button type="submit" class="btn btn-success mt-3" name="generator_repair_save">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- Modal for Tune-Up (Generator) -->
- <div class="modal fade" id="tuneupPackageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tuneupPackageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tuneupPackageModalLabel">SET PACKAGE FOR TUNE-UP (GENERATOR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" id="tnup_gen" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemTableBodyTuneup">
-                                    
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addItemButtonTuneup">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="tuneup_save">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
-<!-- Modal for Maintenance (Solar) -->
-<div class="modal fade" id="SolarMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarMaintenanceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="SolarMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (SOLAR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" id="main_solar" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemMaintenanceSolarTableBody">
-                                    
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addMaintenanceSolarItemButton">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="solar_maintenance_save">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal for Maintenance (Generator) -->
-<div class="modal fade" id="GeneratorMaintenanceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorMaintenanceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GeneratorMaintenanceModalLabel">SET PACKAGE FOR MAINTENANCE (GENERATOR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" id="main_gen" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemMaintenanceGeneratorTableBody">
-                                    <!-- Rows will be added here dynamically -->
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addMaintenanceGeneratorItemButton">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="generator_maintenance_save">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    
-<!-- Modal for Repair (Solar) -->
-<div class="modal fade" id="SolarRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SolarRepairModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="SolarRepairModalLabel">SET PACKAGE FOR REPAIR (SOLAR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" id="rep_solar" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemRepairSolarTableBody">
-                                    <!-- Rows will be added here dynamically -->
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addRepairSolarItemButton">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="solar_repair_save">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Repair (Generator) -->
-<div class="modal fade" id="GeneratorRepairModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="GeneratorRepairModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="GeneratorRepairModalLabel">SET PACKAGE FOR REPAIR (GENERATOR)</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="function.php" id="rep_gen" method="POST">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Item No.</th>
-                                        <th>Unit</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
-                                        <th>Total Cost</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemRepairGeneratorTableBody">
-                                    <!-- Rows will be added here dynamically -->
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-primary" id="addRepairGeneratorItemButton">Add Item</button>
-                            <button type="submit" class="btn btn-success mt-3" name="generator_repair_save">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
            
             <!-- Footer Start -->
@@ -1394,7 +1381,7 @@
                 });
             });
 
-        document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function () {
             
             //INSTALLATION SOLAR SUBMISSION VALIDATION
             const form_ins_solar = document.querySelector("#ins_solar");
@@ -1911,7 +1898,7 @@
                     }
                 });
             });
-        });
+            });
 
 
         
@@ -2280,368 +2267,368 @@
                 addNewRow('itemRepairSolarTableBody', itemCountRepairSolar, 'repairSolar');
             });
 
-    document.getElementById('addRepairGeneratorItemButton').addEventListener('click', function() {
-        addNewRow('itemRepairGeneratorTableBody', itemCountRepairGenerator, 'repairGenerator');
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        //FOR ADDING BRAND
-        $('#addbrand').on('click', function(e) {
-            e.preventDefault();
-            const addbrandname = document.getElementById("addbrandName").value;
-            const addbrandtype = document.getElementById("addbrandtype").value;
-            const addbrandAmount = parseFloat(document.getElementById("addbrandAmount").value);
+            document.getElementById('addRepairGeneratorItemButton').addEventListener('click', function() {
+            addNewRow('itemRepairGeneratorTableBody', itemCountRepairGenerator, 'repairGenerator');
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                //FOR ADDING BRAND
+                $('#addbrand').on('click', function(e) {
+                    e.preventDefault();
+                    const addbrandname = document.getElementById("addbrandName").value;
+                    const addbrandtype = document.getElementById("addbrandtype").value;
+                    const addbrandAmount = parseFloat(document.getElementById("addbrandAmount").value);
 
-            if(addbrandname == "" || addbrandtype == "" || addbrandAmount == ""){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Please Complete the Form",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    if(addbrandname == "" || addbrandtype == "" || addbrandAmount == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Please Complete the Form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(addbrandAmount < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Amount cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(addbrandAmount < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Amount cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else{
-                Swal.fire({
-                    title: 'Confirmation',
-                    html: "Are you sure to confirm?",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm',
-                    showCancelButton: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user confirms, send AJAX request for Add product
-                        var formData = new FormData();
-                        formData.append('brand_save', true);
-                        formData.append('name', addbrandname);
-                        formData.append('amount', addbrandAmount);
-                        formData.append('type', addbrandtype);
-                            
-                        $.ajax({
-                            url: 'function.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data:formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                // Handle successful add
-                                Swal.fire({
-                                    title: 'Brand Added!',
-                                    text: 'You have successfully added the Brand.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'manageitems.php';
+                    else{
+                        Swal.fire({
+                            title: 'Confirmation',
+                            html: "Are you sure to confirm?",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If user confirms, send AJAX request for Add product
+                                var formData = new FormData();
+                                formData.append('brand_save', true);
+                                formData.append('name', addbrandname);
+                                formData.append('amount', addbrandAmount);
+                                formData.append('type', addbrandtype);
+                                    
+                                $.ajax({
+                                    url: 'function.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data:formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        // Handle successful add
+                                        Swal.fire({
+                                            title: 'Brand Added!',
+                                            text: 'You have successfully added the Brand.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'manageitems.php';
+                                        });
+                                    },
+                                    error: function(response) {
+                                        // Handle erro
+                                        Swal.fire(
+                                            'Error!',
+                                            'There was an error Adding the brand. Please try again.',
+                                            'error'
+                                        );
+                                    }
                                 });
-                            },
-                            error: function(response) {
-                                // Handle erro
-                                Swal.fire(
-                                    'Error!',
-                                    'There was an error Adding the brand. Please try again.',
-                                    'error'
-                                );
                             }
                         });
                     }
                 });
-            }
-        });
 
 
-        //FOR EDITING BRAND
-        $('#editbrand').on('click', function(e) {
-            e.preventDefault();
-            const editbrandName = document.getElementById("editbrandName").value;
-            const brandId = document.getElementById("brandId").value;
-            const editbrandtype = document.getElementById("editbrandType").value;
-            const editbrandAmount = parseFloat(document.getElementById("editbrandAmount").value);
-            if(editbrandName == "" || editbrandtype == "" || editbrandAmount == ""){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Please Complete the Form",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                //FOR EDITING BRAND
+                $('#editbrand').on('click', function(e) {
+                    e.preventDefault();
+                    const editbrandName = document.getElementById("editbrandName").value;
+                    const brandId = document.getElementById("brandId").value;
+                    const editbrandtype = document.getElementById("editbrandType").value;
+                    const editbrandAmount = parseFloat(document.getElementById("editbrandAmount").value);
+                    if(editbrandName == "" || editbrandtype == "" || editbrandAmount == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Please Complete the Form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(editbrandAmount < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Amount cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(editbrandAmount < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Amount cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else{
-                Swal.fire({
-                    title: 'Confirmation',
-                    html: "Are you sure to confirm?",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm',
-                    showCancelButton: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user confirms, send AJAX request for Add product
-                        var formData = new FormData();
-                        formData.append('brand_edit', true);
-                        formData.append('id', brandId);
-                        formData.append('name', editbrandName);
-                        formData.append('amount', editbrandAmount);
-                        formData.append('type', editbrandtype);
-                            
-                        $.ajax({
-                            url: 'function.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data:formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                // Handle successful add
-                                Swal.fire({
-                                    title: 'Item Edited!',
-                                    text: 'You have successfully edited the brand.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'manageitems.php';
+                    else{
+                        Swal.fire({
+                            title: 'Confirmation',
+                            html: "Are you sure to confirm?",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If user confirms, send AJAX request for Add product
+                                var formData = new FormData();
+                                formData.append('brand_edit', true);
+                                formData.append('id', brandId);
+                                formData.append('name', editbrandName);
+                                formData.append('amount', editbrandAmount);
+                                formData.append('type', editbrandtype);
+                                    
+                                $.ajax({
+                                    url: 'function.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data:formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        // Handle successful add
+                                        Swal.fire({
+                                            title: 'Item Edited!',
+                                            text: 'You have successfully edited the brand.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'manageitems.php';
+                                        });
+                                    },
+                                    error: function(response) {
+                                        // Handle erro
+                                        Swal.fire(
+                                            'Error!',
+                                            'There was an error editing the brand. Please try again.',
+                                            'error'
+                                        );
+                                    }
                                 });
-                            },
-                            error: function(response) {
-                                // Handle erro
-                                Swal.fire(
-                                    'Error!',
-                                    'There was an error editing the brand. Please try again.',
-                                    'error'
-                                );
                             }
                         });
                     }
                 });
-            }
-        });
 
 
-        //FOR ADDING ITEMS
-        $('#item_add').on('click', function(e) {
-            e.preventDefault();
-            const item_unit = document.getElementById("item_unit").value;
-            const item_description = document.getElementById("item_description").value;
-            const item_quantity = parseFloat(document.getElementById("item_quantity").value);
-            const item_amount = parseFloat(document.getElementById("item_amount").value);
+                //FOR ADDING ITEMS
+                $('#item_add').on('click', function(e) {
+                    e.preventDefault();
+                    const item_unit = document.getElementById("item_unit").value;
+                    const item_description = document.getElementById("item_description").value;
+                    const item_quantity = parseFloat(document.getElementById("item_quantity").value);
+                    const item_amount = parseFloat(document.getElementById("item_amount").value);
 
-            if(item_unit == "" || item_description == "" || item_quantity == "" || item_amount == ""){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Please Complete the Form",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    if(item_unit == "" || item_description == "" || item_quantity == "" || item_amount == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Please Complete the Form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(item_amount < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Amount cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(item_amount < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Amount cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(item_quantity < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "quantity cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(item_quantity < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "quantity cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else{
-                Swal.fire({
-                    title: 'Confirmation',
-                    html: "Are you sure to confirm?",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm',
-                    showCancelButton: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user confirms, send AJAX request for Add product
-                        var formData = new FormData();
-                        formData.append('serviceItem_save', true);
-                        formData.append('service_unit', item_unit);
-                        formData.append('service_quantity', item_quantity);
-                        formData.append('service_description', item_description);
-                        formData.append('service_amount', item_amount);
-                            
-                        $.ajax({
-                            url: 'function.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data:formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                // Handle successful add
-                                Swal.fire({
-                                    title: 'Item Added!',
-                                    text: 'You have successfully added the item.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'manageitems.php';
+                    else{
+                        Swal.fire({
+                            title: 'Confirmation',
+                            html: "Are you sure to confirm?",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If user confirms, send AJAX request for Add product
+                                var formData = new FormData();
+                                formData.append('serviceItem_save', true);
+                                formData.append('service_unit', item_unit);
+                                formData.append('service_quantity', item_quantity);
+                                formData.append('service_description', item_description);
+                                formData.append('service_amount', item_amount);
+                                    
+                                $.ajax({
+                                    url: 'function.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data:formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        // Handle successful add
+                                        Swal.fire({
+                                            title: 'Item Added!',
+                                            text: 'You have successfully added the item.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'manageitems.php';
+                                        });
+                                    },
+                                    error: function(response) {
+                                        // Handle erro
+                                        Swal.fire(
+                                            'Error!',
+                                            'There was an error adding the item. Please try again.',
+                                            'error'
+                                        );
+                                    }
                                 });
-                            },
-                            error: function(response) {
-                                // Handle erro
-                                Swal.fire(
-                                    'Error!',
-                                    'There was an error adding the item. Please try again.',
-                                    'error'
-                                );
                             }
                         });
                     }
                 });
-            }
-        });
 
-        //FOR EDITING ITEMS
-        $('#item_edit').on('click', function(e) {
-            e.preventDefault();
-            const editItemId = document.getElementById("editItemId").value;
-            const item_edit_unit = document.getElementById("item_edit_unit").value;
-            const item_edit_description = document.getElementById("item_edit_description").value;
-            const item_edit_quantity = parseFloat(document.getElementById("item_edit_quantity").value);
-            const item_edit_amount = parseFloat(document.getElementById("item_edit_amount").value);
-            alert(editItemId);
-            alert(item_edit_unit);
-            alert(item_edit_description);
-            alert(item_edit_quantity);
-            alert(item_edit_amount);
+                //FOR EDITING ITEMS
+                $('#item_edit').on('click', function(e) {
+                    e.preventDefault();
+                    const editItemId = document.getElementById("editItemId").value;
+                    const item_edit_unit = document.getElementById("item_edit_unit").value;
+                    const item_edit_description = document.getElementById("item_edit_description").value;
+                    const item_edit_quantity = parseFloat(document.getElementById("item_edit_quantity").value);
+                    const item_edit_amount = parseFloat(document.getElementById("item_edit_amount").value);
+                    alert(editItemId);
+                    alert(item_edit_unit);
+                    alert(item_edit_description);
+                    alert(item_edit_quantity);
+                    alert(item_edit_amount);
 
-            if(item_edit_unit == "" || item_edit_description == "" || item_edit_quantity == "" || item_edit_amount == ""){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Please Complete the Form",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    if(item_edit_unit == "" || item_edit_description == "" || item_edit_quantity == "" || item_edit_amount == ""){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Please Complete the Form",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(item_edit_amount < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "Amount cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(item_edit_amount < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "Amount cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else if(item_edit_quantity < 0){
-                Swal.fire({
-                    title: 'ERROR',
-                    html: "quantity cannot be less than 0",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    else if(item_edit_quantity < 0){
+                        Swal.fire({
+                            title: 'ERROR',
+                            html: "quantity cannot be less than 0",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
                     }
-                });
-            }
-            else{
-                Swal.fire({
-                    title: 'Confirmation',
-                    html: "Are you sure to confirm?",
-                    icon: 'warning',
-                    confirmButtonText: 'Confirm',
-                    showCancelButton: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user confirms, send AJAX request for Add product
-                        var formData = new FormData();
-                        formData.append('serviceItem_edit', true);
-                        formData.append('item_unit', item_edit_unit);
-                        formData.append('item_id', editItemId);
-                        formData.append('item_quantity', item_edit_quantity);
-                        formData.append('item_description', item_edit_description);
-                        formData.append('item_amount', item_edit_amount);
-                            
-                        $.ajax({
-                            url: 'function.php',
-                            type: 'POST',
-                            dataType: 'json',
-                            data:formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                // Handle successful add
-                                Swal.fire({
-                                    title: 'Item Edited!',
-                                    text: 'You have successfully edited the item.',
-                                    icon: 'success',
-                                    allowOutsideClick: false,
-                                    timer: 2000, // 2 seconds timer
-                                    showConfirmButton: false // Hide the confirm button
-                                }).then(() => {
-                                    // Redirect after the timer ends
-                                    window.location.href = 'manageitems.php';
+                    else{
+                        Swal.fire({
+                            title: 'Confirmation',
+                            html: "Are you sure to confirm?",
+                            icon: 'warning',
+                            confirmButtonText: 'Confirm',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // If user confirms, send AJAX request for Add product
+                                var formData = new FormData();
+                                formData.append('serviceItem_edit', true);
+                                formData.append('item_unit', item_edit_unit);
+                                formData.append('item_id', editItemId);
+                                formData.append('item_quantity', item_edit_quantity);
+                                formData.append('item_description', item_edit_description);
+                                formData.append('item_amount', item_edit_amount);
+                                    
+                                $.ajax({
+                                    url: 'function.php',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data:formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                        // Handle successful add
+                                        Swal.fire({
+                                            title: 'Item Edited!',
+                                            text: 'You have successfully edited the item.',
+                                            icon: 'success',
+                                            allowOutsideClick: false,
+                                            timer: 2000, // 2 seconds timer
+                                            showConfirmButton: false // Hide the confirm button
+                                        }).then(() => {
+                                            // Redirect after the timer ends
+                                            window.location.href = 'manageitems.php';
+                                        });
+                                    },
+                                    error: function(response) {
+                                        // Handle erro
+                                        Swal.fire(
+                                            'Error!',
+                                            'There was an error editing the item. Please try again.',
+                                            'error'
+                                        );
+                                    }
                                 });
-                            },
-                            error: function(response) {
-                                // Handle erro
-                                Swal.fire(
-                                    'Error!',
-                                    'There was an error editing the item. Please try again.',
-                                    'error'
-                                );
                             }
                         });
                     }
                 });
-            }
-        });
-    });
+            });
 
 
-</script>
+        </script>
