@@ -455,8 +455,8 @@ if ($exec) {
                                     </div>                                         
                
                                     <!-- Hidden input for total cost and booking ID (to submit in the form) -->
-                                    <input type="text" id="booking_id_modal_input" name="booking_id">
-                                    <input type="text" id="duePaymentInput" name="due_payment" readonly>
+                                    <input type="hidden" id="booking_id_modal_input" name="booking_id">
+                                    <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
 
                                     <!-- Submit Button -->
                                     <div class="text-center mt-3">
