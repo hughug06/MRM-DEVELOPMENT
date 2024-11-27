@@ -5,7 +5,7 @@
       if($_SESSION['login'] == true)  {
         $role = $_SESSION['role'];
         if($role == 'client'){
-          header("location: /USER/dashboard/user-dashboard.php");
+          header("location: /USER/dashboard/user-home.php");
           exit();
       }
       else if($role == 'worker'){
