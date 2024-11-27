@@ -7,12 +7,12 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header border-0">
         <a href="#" class="header-logo d-flex" style="pointer-events: none">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-logo py-2" width="55px">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-logo py-2" width="55px">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-dark py-2" width="55px">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-dark py-2" width="55px">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="desktop-white py-2" width="55px">
-            <img src="/assets/images/mrm-images/logo_login.png" alt="logo" class="toggle-white py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-dark py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-white py-2" width="55px">
+            <img src="/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-white py-2" width="55px">
         </a>
     </div>
     <!-- End::main-sidebar-header -->
