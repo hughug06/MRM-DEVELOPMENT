@@ -39,7 +39,7 @@
                         <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
                         <!-- <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i> -->
                         <i class="fa-solid fa-house side-menu__icon"></i>
-                        <span class="side-menu__label">Dashboard</span>
+                        <span class="side-menu__label">Home</span>
                     </a>
                 </li>
 
