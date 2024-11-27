@@ -47,7 +47,7 @@ session_start();
                             $_SESSION['auth'] = "user";
                             $_SESSION['user_id'] = $user;
                             $_SESSION['account_id'] = $id;
-                            echo json_encode(['success' => true, 'redirect' => 'USER\dashboard\user-dashboard.php']);
+                            echo json_encode(['success' => true, 'redirect' => 'USER\dashboard\user-home.php']);
 
                         }
                         else if($role == 'agent'){
