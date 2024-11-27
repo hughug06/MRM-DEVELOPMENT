@@ -772,7 +772,7 @@
                                 showConfirmButton: false // Hide the confirm button
                             }).then(() => {
                                 // Redirect after the timer ends
-                                window.location.href = '/MRM-DEVELOPMENT/index.php';
+                                window.location.href = '/index.php';
                             });
                         },
                         error: function() {
