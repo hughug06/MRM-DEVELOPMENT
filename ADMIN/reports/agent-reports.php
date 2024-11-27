@@ -58,71 +58,42 @@ include_once '../../Database/database.php';
         <div class="page">
             <div class="main-content app-content">
             <div class="container-fluid">
-    <div class="row mt-3">
-    <?php 
+                <div class="row mt-3">
+                <?php 
+                  
+                    $sql = "SELECT * from kanban
+                          INNER JOIN user_info on user_info.user_id = kanban.user_id
+                          INNER JOIN service_booking on service_booking.booking_id = kanban.booking_id
+                          where service_booking.booking_status = 'completed'
+                    ";
 
-        // Example value for service_from filter. Replace this with dynamic input if needed.
-        $service_from_filter = 'agent'; // Adjust this value as needed.
+                    $result = mysqli_query($conn, $sql);
+                    
+                    // Check if there are results
+                    if(mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <div class="col-md-3 mb-4">
+                                <div class="card">                       
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Name: <?php echo htmlspecialchars($row['first_name']); ?></h5>
+                                    <p class="card-text"><strong>Number of works:</strong> <?php echo $row['works_done']; ?></p>
+                                    <p class="card-text"><strong>Total Sales:</strong> <span class="text-success">$<?php echo number_format($row['total_sales'], 2); ?></span></p>
+                                    <p class="card-text"><strong>Booking IDs:</strong> <span class="badge bg-info"><?php echo htmlspecialchars($row['booking_ids']); ?></span></p>
+                                </div>
 
-        // Update the SQL query to include service_from filter
-        $sql = "
-            SELECT 
-                user_info.first_name, 
-                COUNT(service_booking.booking_id) AS works_done, 
-                SUM(service_payment.total_cost) AS total_sales,
-                GROUP_CONCAT(service_booking.booking_id) AS booking_ids
-            FROM worker_ongoing
-            INNER JOIN user_info ON user_info.user_id = worker_ongoing.worker_id
-            INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
-            INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
-            WHERE service_payment.date_done IS NOT NULL 
-            AND service_booking.booking_status = 'completed'
-            AND worker_ongoing.service_from = ?
-            
-        ";
+                                </div>
+                            </div>
+                            <?php 
+                        }
+                    } else {
+                        echo "<p>No workers found with completed works.</p>";
+                    }
+                ?>
 
-        // Prepare the statement
-        $stmt = mysqli_prepare($conn, $sql);
-
-        if ($stmt) {
-            // Bind the service_from filter parameter
-            mysqli_stmt_bind_param($stmt, 's', $service_from_filter);
-
-            // Execute the statement
-            mysqli_stmt_execute($stmt);
-
-            // Get the result
-            $result = mysqli_stmt_get_result($stmt);
-
-            // Check if there are results
-            if(mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <div class="col-md-3 mb-4">
-                        <div class="card">                       
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">Name: <?php echo htmlspecialchars($row['first_name']); ?></h5>
-                            <p class="card-text"><strong>Number of works:</strong> <?php echo $row['works_done']; ?></p>
-                            <p class="card-text"><strong>Total Sales:</strong> <span class="text-success">$<?php echo number_format($row['total_sales'], 2); ?></span></p>
-                            <p class="card-text"><strong>Booking IDs:</strong> <span class="badge bg-info"><?php echo htmlspecialchars($row['booking_ids']); ?></span></p>
-                        </div>
-                        </div>
-                    </div>
-                    <?php 
-                }
-            } else {
-                echo "<p>No workers found with completed works for the specified service source.</p>";
-            }
-
-            // Close the statement
-            mysqli_stmt_close($stmt);
-        } else {
-            echo "<p>Failed to prepare the SQL query.</p>";
-        }
-    ?>
-    </div>
-</div>
-
+                    
+                </div>
+            </div>
 
             </div>
             <!-- Footer Start -->
