@@ -1285,7 +1285,6 @@ if ($exec) {
                 const firstField = document.querySelector('#firstField2').value;
                 const duePaymentInput = document.querySelector('#duePayment_third').value;
                 const booking_id_modal_input = document.querySelector('#booking_id_third').value;
-                alert(firstField);
                 if(firstField == ""){
                     Swal.fire({
                         title: 'ERROR',
