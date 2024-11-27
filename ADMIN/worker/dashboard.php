@@ -253,9 +253,16 @@ $worker_id = $_SESSION['user_id'];
                                                                                 <div class="d-flex gap-2">
                                                                                     <!-- Input for specifying damage -->
                                                                                     <input type="hidden" name="brand" value="<?=$row['brand']?>">
-                                                                                    <input type="text" class="form-control damage_input" name="damage_brand" id="damage_brand_<?=$row['brand']?>" placeholder="Specify damage (if any)">
+                                                                                    <input type="text" class="form-control damage_input" name="damage_brand" id="damage_brand_<?=$row['brand']?>" placeholder="Specify damage (if any)"  max="<?= htmlspecialchars($listing['quantity']); ?>" >
                                                                                     <!-- Input for number of damages -->
-                                                                                    <input type="number" class="form-control number_input" name="number_brand" id="number_brand_<?=$row['brand']?>" placeholder="No. of damages" disabled>
+                                                                                    <input 
+                                                                                    type="number" 
+                                                                                    class="form-control number_input" 
+                                                                                    name="number_brand" 
+                                                                                    id="number_brand_<?= $row['brand'] ?>" 
+                                                                                    placeholder="No. of damages" 
+                                                                                    disabled 
+                                                                                    max="<?= htmlspecialchars($row['quantity']); ?>">
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -287,7 +294,7 @@ $worker_id = $_SESSION['user_id'];
                                                                             </td>
                                                                         </tr>
                                                                     <?php } ?>
-                                                                    <input type="text" name="book_id" value="<?= $row['booking_id'] ?>">
+                                                                    <input type="hidden" name="book_id" value="<?= $row['booking_id'] ?>">
                                                                 </tbody>
                                                             </table>
 
@@ -296,18 +303,18 @@ $worker_id = $_SESSION['user_id'];
                                                                 if($row['second_reference'] == null && $status == 'arrive'){
                                                                     ?> 
                                                                     <p class="text-info">Note!:Inform user for second payment</p>
-                                                                    <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist aa</button>
+                                                                    <button type="button" class="btn btn-primary" id="submitBtn">Waiting for client payment</button>
                                                                     <?php
                                                                 }
                                                                 else if(!$row['second_reference'] == null){
                                                                     ?>
-                                                                    <input type="text" name="sql" value="<?= $command ?>">
-                                                                    <input type="text" name="status" value="<?= $status ?>">
-                                                                    <input type="text" name="brand" value="<?= $row['brand'] ?>">
-                                                                    <input type="text" name="quantity" value="<?= $row['quantity'] ?>">
-                                                                    <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
+                                                                    <input type="hidden" name="sql" value="<?= $command ?>">
+                                                                    <input type="hidden" name="status" value="<?= $status ?>">
+                                                                    <input type="hidden" name="brand" value="<?= $row['brand'] ?>">
+                                                                    <input type="hidden" name="quantity" value="<?= $row['quantity'] ?>">
+                                                                    <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
                                                                     <p class="text-info">Note: proceed to drop off</p>
-                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit aa Checklist</button>
+                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Submit checklist</button>
                                                                     <?php
                                                                 }
                                                                 else{
@@ -317,7 +324,7 @@ $worker_id = $_SESSION['user_id'];
                                                                 }
                                                                 ?>
                                                             </div>
-                                                            <input type="text" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
+                                                            <input type="hidden" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
                                                             <?php endif; ?>
                                                         </form>
                                     </ul>
@@ -497,7 +504,7 @@ $worker_id = $_SESSION['user_id'];
                                                             </table>
 
                                                             <div class="d-grid mt-3">
-                                                                <button type="submit" class="btn btn-primary ong_con">Submit Checklist</button>
+                                                                <button type="submit" class="btn btn-primary ong_con">Save checklist</button>
                                                                 <!-- Hidden data for booking_id and working_id -->
                                                                 <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
                                                                 <input type="hidden" name="working_id" value="<?= $working_id ?>">
@@ -560,7 +567,7 @@ $worker_id = $_SESSION['user_id'];
                                                 ?>
                                                 <div class="card mt-4">
                                                         <div class="card-header">
-                                                            <h5 class="mb-0">Check if the </h5>
+                                                            <h5 class="mb-0">Installation material inspection</h5>
                                                         </div>
                                                         <div class="card-body">
                                                     
@@ -610,17 +617,17 @@ $worker_id = $_SESSION['user_id'];
                                                                
                                                                     if($row['third_reference'] == null && $status == 'checking'){
                                                                         ?> 
-                                                                       <button type="button" class="btn btn-primary" id="submitBtn">Submit Checklist</button>
+                                                                       <button type="button" class="btn btn-primary" id="submitBtn">Waiting for client payment</button>
                                                                         <?php
                                                                     }
                                                                     else if(!$row['third_reference'] == null){
                                                                         
                                                                         ?>
-                                                                        <input type="text" name="booking_id" value="<?= $row['booking_id'] ?>">
-                                                                        <input type="text" name="client_id" value="<?= $row['client_id'] ?>">
-                                                                        <input type="text" name="working_id" value="<?= $row['working_id'] ?>">
-                                                                        <input type="text" name="worker_id" value="<?= $row['worker_id'] ?>">
-                                                                         <button type="submit" class="btn btn-primary checker">SubmitBBB Checklist</button>
+                                                                        <input type="hidden" name="booking_id" value="<?= $row['booking_id'] ?>">
+                                                                        <input type="hidden" name="client_id" value="<?= $row['client_id'] ?>">
+                                                                        <input type="hidden" name="working_id" value="<?= $row['working_id'] ?>">
+                                                                        <input type="hidden" name="worker_id" value="<?= $row['worker_id'] ?>">
+                                                                         <button type="submit" class="btn btn-primary checker">Submit Checklist</button>
                                                                         <?php
                                                                     }
                                                                     else{
@@ -909,8 +916,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Select all quantity input fields
+    const quantityInputs = document.querySelectorAll(".number_input");
+
+    quantityInputs.forEach(input => {
+        input.addEventListener("input", (event) => {
+            const maxQuantity = parseInt(event.target.getAttribute("max"), 10);
+            const currentQuantity = parseInt(event.target.value, 10);
+
+            if (currentQuantity > maxQuantity) {
+                // Show SweetAlert2 error
+                Swal.fire({
+                    icon: "error",
+                    title: "Exceeded Quantity",
+                    text: `You cannot input more than ${maxQuantity}.`,
+                });
+                // Reset input value to max
+                event.target.value = maxQuantity;
+            }
+        });
+    });
+});
 
 </script>
+
+
 <script>
     $(document).ready(function() {
         $('.submitcheckform').on('click', function(e) {
