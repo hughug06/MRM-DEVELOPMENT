@@ -7,12 +7,12 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header border-0">
         <a href="#" class="header-logo d-flex" style="pointer-events: none">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-dark py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-white py-2" width="55px">
-            <img src="/MRM-DEVELOPMENT/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-white py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-logo py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-logo py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-dark py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-dark py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="desktop-white py-2" width="55px">
+            <img src="/mrm-eg.online/assets/landing_assets/images/logo-mrm.png" alt="logo" class="toggle-white py-2" width="55px">
         </a>
     </div>
     <!-- End::main-sidebar-header -->
@@ -33,7 +33,7 @@
             
                 ?>
                 <li class="slide <?= $page == "user-dashboard.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/dashboard/user-dashboard.php" class="side-menu__item <?= $page == "user-dashboard.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="fa fa-address-book side-menu__icon"></i> -->
@@ -49,7 +49,7 @@
             
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-solar-panel side-menu__icon"></i>
@@ -61,7 +61,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="bi-bag side-menu__icon"></i> -->
@@ -85,10 +85,10 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == "service.php" ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/services/bookappointments/service.php" class="side-menu__item <?= $page == 'service.php' ? 'active':''?>">Services</a>
+                            <a href="/mrm-eg.online/USER/services/bookappointments/service.php" class="side-menu__item <?= $page == 'service.php' ? 'active':''?>">Services</a>
                         </li> 
                         <li class="slide <?= $page == 'myappointments.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/USER/services/myappointments/myappointments.php" class="side-menu__item <?= $page == 'myappointments.php' ? 'active':''?>">Appointments</a>
+                            <a href="/mrm-eg.online/USER/services/myappointments/myappointments.php" class="side-menu__item <?= $page == 'myappointments.php' ? 'active':''?>">Appointments</a>
                         </li>                                
                     </ul>
                 </li>
@@ -101,7 +101,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "profile.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-gears side-menu__icon"></i>
@@ -118,7 +118,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "admin-dashboard.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/dashboard/admin-dashboard.php" class="side-menu__item <?= $page == "admin-dashboard.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/dashboard/admin-dashboard.php" class="side-menu__item <?= $page == "admin-dashboard.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-house side-menu__icon"></i>
@@ -134,7 +134,7 @@
             
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/solar/solar.php" class="side-menu__item <?= $page == "solar.php" || $page == "solar-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-solar-panel side-menu__icon"></i>
@@ -146,7 +146,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/USER/generator/generator.php" class="side-menu__item <?= $page == "generator.php" || $page == "generator-filter.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="bi-bag side-menu__icon"></i> -->
@@ -170,13 +170,13 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == "services.php" ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/services/services.php" class="side-menu__item <?= $page == 'services.php' ? 'active':''?>">Time Management</a>
+                            <a href="/mrm-eg.online/ADMIN/services/services.php" class="side-menu__item <?= $page == 'services.php' ? 'active':''?>">Time Management</a>
                         </li> 
                         <li class="slide <?= $page == 'appointment.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/services/appointment.php" class="side-menu__item <?= $page == 'appointment.php' ? 'active':''?>">Appointment</a>
+                            <a href="/mrm-eg.online/ADMIN/services/appointment.php" class="side-menu__item <?= $page == 'appointment.php' ? 'active':''?>">Appointment</a>
                         </li>          
                         <li class="slide <?= $page == 'manageitems.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/services/myitems/manageitems.php" class="side-menu__item <?= $page == 'manageitems.php' ? 'active':''?>">Items Management</a>
+                            <a href="/mrm-eg.online/ADMIN/services/myitems/manageitems.php" class="side-menu__item <?= $page == 'manageitems.php' ? 'active':''?>">Items Management</a>
                         </li>                                              
                     </ul>
                 </li>
@@ -193,10 +193,10 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == 'user-management.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == 'user-management.php' ? 'active':''?>">Client</a>
+                            <a href="/mrm-eg.online/ADMIN/accountManagement/accountcontrol/user-management.php" class="side-menu__item <?= $page == 'user-management.php' ? 'active':''?>">Client</a>
                         </li> 
                         <li class="slide <?= $page == "admin_management.php" ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/accountManagement/admin/admin_management.php" class="side-menu__item <?= $page == "admin_management.php" ? 'active':''?>">Admin</a>
+                            <a href="/mrm-eg.online/ADMIN/accountManagement/admin/admin_management.php" class="side-menu__item <?= $page == "admin_management.php" ? 'active':''?>">Admin</a>
                         </li>                                
                     </ul>
                 </li>
@@ -214,10 +214,10 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == 'inventory-control.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-control.php" class="side-menu__item <?= $page == 'inventory-control.php' ? 'active':''?>">Inventory Control</a>
+                            <a href="/mrm-eg.online/ADMIN/Inventory/inventory-control.php" class="side-menu__item <?= $page == 'inventory-control.php' ? 'active':''?>">Inventory Control</a>
                         </li> 
                         <li class="slide <?= $page == 'inventory-logs.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/Inventory/inventory-logs.php" class="side-menu__item <?= $page == 'inventory-logs.php' ? 'active':''?>">Inventory Logs</a>
+                            <a href="/mrm-eg.online/ADMIN/Inventory/inventory-logs.php" class="side-menu__item <?= $page == 'inventory-logs.php' ? 'active':''?>">Inventory Logs</a>
                         </li>                                
                     </ul>
                 </li>
@@ -233,19 +233,19 @@
                     </a>
                     <ul class="slide-menu child1">
                         <li class="slide <?= $page == 'sales-reports.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/sales-reports.php" class="side-menu__item <?= $page == 'sales-reports.php' ? 'active':''?>">Sales Reports</a>
+                            <a href="/mrm-eg.online/ADMIN/reports/sales-reports.php" class="side-menu__item <?= $page == 'sales-reports.php' ? 'active':''?>">Sales Reports</a>
                         </li> 
                         <li class="slide <?= $page == 'damage-reports.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/damage-reports.php" class="side-menu__item <?= $page == 'damage-reports.php' ? 'active':''?>">Damage Reports</a>
+                            <a href="/mrm-eg.online/ADMIN/reports/damage-reports.php" class="side-menu__item <?= $page == 'damage-reports.php' ? 'active':''?>">Damage Reports</a>
                         </li>           
                         <li class="slide <?= $page == 'inventory-reports.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/inventory-reports.php" class="side-menu__item <?= $page == 'inventory-reports.php' ? 'active':''?>">Inventory Reports</a>
+                            <a href="/mrm-eg.online/ADMIN/reports/inventory-reports.php" class="side-menu__item <?= $page == 'inventory-reports.php' ? 'active':''?>">Inventory Reports</a>
                         </li>     
                         <li class="slide <?= $page == 'agent-reports.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/agent-reports.php" class="side-menu__item <?= $page == 'agent-reports.php' ? 'active':''?>">Agent Reports</a>
+                            <a href="/mrm-eg.online/ADMIN/reports/agent-reports.php" class="side-menu__item <?= $page == 'agent-reports.php' ? 'active':''?>">Agent Reports</a>
                         </li>      
                         <li class="slide <?= $page == 'worker-reports.php' ? 'active':''?>">
-                            <a href="/MRM-DEVELOPMENT/ADMIN/reports/worker-reports.php" class="side-menu__item <?= $page == 'worker-reports.php' ? 'active':''?>">Worker Reports</a>
+                            <a href="/mrm-eg.online/ADMIN/reports/worker-reports.php" class="side-menu__item <?= $page == 'worker-reports.php' ? 'active':''?>">Worker Reports</a>
                         </li>                           
                     </ul>
                 </li>
@@ -253,7 +253,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "system-logs.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/system-logs/system-logs.php" class="side-menu__item <?= $page == "system-logs.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/system-logs/system-logs.php" class="side-menu__item <?= $page == "system-logs.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-house side-menu__icon"></i>
@@ -264,7 +264,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "landing-customize.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/landingPage/landing-customize.php" class="side-menu__item <?= $page == "landing-customize.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/landingPage/landing-customize.php" class="side-menu__item <?= $page == "landing-customize.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-house side-menu__icon"></i>
@@ -283,7 +283,7 @@
                 <!-- End::slide__category -->
 
                 <li class="slide <?= $page == "dashboard.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/worker/dashboard.php" class="side-menu__item <?= $page == "dashboard.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/worker/dashboard.php" class="side-menu__item <?= $page == "dashboard.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-chart-line side-menu__icon"></i>
@@ -292,7 +292,7 @@
                 </li>
 
                 <li class="slide <?= $page == "completed.php" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/worker/completed.php" class="side-menu__item <?= $page == "completed.php" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/worker/completed.php" class="side-menu__item <?= $page == "completed.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-screwdriver-wrench side-menu__icon"></i>
@@ -312,7 +312,7 @@
                 <!-- End::slide__category -->
 
                 <li class="slide <?= $page == "kanban.php" || $page == "" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/agent/kanban.php" class="side-menu__item <?= $page == "kanban.php" || $page == "" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/agent/kanban.php" class="side-menu__item <?= $page == "kanban.php" || $page == "" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="bi-bag side-menu__icon"></i> -->
@@ -321,7 +321,7 @@
                     </a>
                 </li>
                 <li class="slide <?= $page == "completed.php" || $page == "" ? 'active':''?>">
-                    <a href="/MRM-DEVELOPMENT/ADMIN/agent/completed.php" class="side-menu__item <?= $page == "completed.php" || $page == "" ? 'active':''?>">
+                    <a href="/mrm-eg.online/ADMIN/agent/completed.php" class="side-menu__item <?= $page == "completed.php" || $page == "" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <!-- <i class="bi-bag side-menu__icon"></i> -->
