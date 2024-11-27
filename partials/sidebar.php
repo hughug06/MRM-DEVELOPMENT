@@ -321,6 +321,15 @@
                         <span class="side-menu__label">Kanban</span>
                     </a>
                 </li>
+                <li class="slide <?= $page == "completed.php" || $page == "" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/agent/completed.php" class="side-menu__item <?= $page == "completed.php" || $page == "" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <!-- <i class="bi-bag side-menu__icon"></i> -->
+                        <i class="fa-solid fa-clipboard-list side-menu__icon"></i>
+                        <span class="side-menu__label">Completed</span>
+                    </a>
+                </li>
                     <?php 
                      }
                     ?>

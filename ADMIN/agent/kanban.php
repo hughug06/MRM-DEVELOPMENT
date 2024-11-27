@@ -446,7 +446,7 @@ if ($exec) {
                                     <p id="bookingIdModal">Booking ID: N/A</p>
                                 </div>
 
-                                <form action="../../USER/services/myappointments/process_second_payment.php" method="POST" enctype="multipart/form-data">
+                                <form id="sec_pay" action="../../USER/services/myappointments/process_second_payment.php" method="POST" enctype="multipart/form-data">
                                     <div class="row mb-3">
                                         <div class="col">
                                             <label for="firstField" class="form-label">Reference Number</label>
@@ -455,12 +455,12 @@ if ($exec) {
                                     </div>                                         
                
                                     <!-- Hidden input for total cost and booking ID (to submit in the form) -->
-                                    <input type="hidden" id="booking_id_modal_input" name="booking_id">
-                                    <input type="hidden" id="duePaymentInput" name="due_payment" readonly>
+                                    <input type="text" id="booking_id_modal_input" name="booking_id">
+                                    <input type="text" id="duePaymentInput" name="due_payment" readonly>
 
                                     <!-- Submit Button -->
                                     <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                        <button type="submit" class="btn btn-primary sec_pay" name="save_payment">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -489,21 +489,21 @@ if ($exec) {
                                     <p id="ThirdbookingIdModal">Booking ID: N/A</p>
                                 </div>
 
-                                <form action="../../USER/services/myappointments/process_third_payment.php" method="POST" enctype="multipart/form-data">
+                                <form id="third_pay" action="../../USER/services/myappointments/process_third_payment.php" method="POST" enctype="multipart/form-data">
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <label for="firstField" class="form-label">Reference Number</label>
-                                            <input class="form-control" type="text" id="firstField" name="reference_number" required>
+                                            <label for="firstField2" class="form-label">Reference Number</label>
+                                            <input class="form-control" type="text" id="firstField2" name="reference_number" required>
                                         </div>                                                             
                                     </div>                                         
                
                                     <!-- Hidden input for total cost and booking ID (to submit in the form) -->
                                     <input type="text" id="booking_id_third" name="booking">
-                                    <input type="text" id="booking_id_input_third" name="due" readonly>
+                                    <input type="text" id="duePayment_third" name="due" readonly>
 
                                     <!-- Submit Button -->
                                     <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-primary" name="save_payment">Submit</button>
+                                        <button type="submit" class="btn btn-primary third_pay" name="save_payment">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -1187,6 +1187,184 @@ if ($exec) {
 
                 }
 
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+        //SOLAR INSTALLATION
+        $('.sec_pay').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const firstField = document.querySelector('#firstField').value;
+                const duePaymentInput = document.querySelector('#duePaymentInput').value;
+                const booking_id_third = document.querySelector('#booking_id_modal_input').value;
+                if(firstField == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var formData = new FormData();
+                            formData.append('booking_id', booking_id_third);
+                            formData.append('reference_number', firstField);
+                            formData.append('due_payment', duePaymentInput);
+
+                            $.ajax({
+                                url: '../../USER/services/myappointments/process_second_payment.php',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+                                    try {
+                                        // Parse response as JSON if necessary
+                                        const jsonResponse = typeof response === 'string' ? JSON.parse(response) : response;
+
+                                        if (jsonResponse.success) {
+                                            // Success alert
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'Payment submission successful.',
+                                                icon: 'success',
+                                                allowOutsideClick: false,
+                                                timer: 2000, // 2 seconds timer
+                                                showConfirmButton: false // Hide the confirm button
+                                            }).then(() => {
+                                                // Redirect after the timer ends
+                                                window.location.href = 'kanban.php';
+                                            });
+                                        } else {
+                                            // Display error message from response
+                                            Swal.fire(
+                                                'Error!',
+                                                jsonResponse.message || 'There was an error in adding the payment in the system. Please try again.',
+                                                'error'
+                                            );
+                                        }
+                                    } catch (error) {
+                                        // Handle unexpected response parsing error
+                                        Swal.fire(
+                                            'Error!',
+                                            'An unexpected error occurred. Please try again.',
+                                            'error'
+                                        );
+                                    }
+                                },
+                                error: function () {
+                                    // AJAX error handler
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error in adding the payment. Please try again.',
+                                        'error'
+                                    );
+                                }
+                            });
+
+                        }
+                    });
+                }
+            }),
+
+
+            $('.third_pay').on('click', function(e) {
+                e.preventDefault(); // Prevent the default link behavior
+                const firstField = document.querySelector('#firstField2').value;
+                const duePaymentInput = document.querySelector('#duePayment_third').value;
+                const booking_id_modal_input = document.querySelector('#booking_id_third').value;
+                alert(firstField);
+                if(firstField == ""){
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: "There seems to be missing information. Please complete the form.",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Are you sure to proceed in Payment?",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var formData = new FormData();
+                            formData.append('booking', booking_id_modal_input);
+                            formData.append('reference_number', firstField);
+                            formData.append('due', duePaymentInput);
+
+                            $.ajax({
+                                url: '../../USER/services/myappointments/process_third_payment.php',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+                                    try {
+                                        // Parse response as JSON if necessary
+                                        const jsonResponse = typeof response === 'string' ? JSON.parse(response) : response;
+
+                                        if (jsonResponse.success) {
+                                            // Success alert
+                                            Swal.fire({
+                                                title: 'Success!',
+                                                text: 'Payment submission successful.',
+                                                icon: 'success',
+                                                allowOutsideClick: false,
+                                                timer: 2000, // 2 seconds timer
+                                                showConfirmButton: false // Hide the confirm button
+                                            }).then(() => {
+                                                // Redirect after the timer ends
+                                                window.location.href = 'kanban.php';
+                                            });
+                                        } else {
+                                            // Display error message from response
+                                            Swal.fire(
+                                                'Error!',
+                                                jsonResponse.message || 'There was an error in adding the payment in the system. Please try again.',
+                                                'error'
+                                            );
+                                        }
+                                    } catch (error) {
+                                        // Handle unexpected response parsing error
+                                        Swal.fire(
+                                            'Error!',
+                                            'An unexpected error occurred. Please try again.',
+                                            'error'
+                                        );
+                                    }
+                                },
+                                error: function () {
+                                    // AJAX error handler
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error in adding the payment. Please try again.',
+                                        'error'
+                                    );
+                                }
+                            });
+
+                        }
+                    });
+                }
             });
         });
     </script>

@@ -205,7 +205,7 @@ $worker_id = $_SESSION['user_id'];
                                                             <h5 class="mb-0">Requirements Checklist</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <form action="function.php" method="POST">
+                                                        <form id="checkingform" action="function.php" method="POST">
                                                             <table class="table table-striped">
                                                                 <thead>
                                                                     <tr>
@@ -312,7 +312,7 @@ $worker_id = $_SESSION['user_id'];
                                                                 }
                                                                 else{
                                                                     ?> 
-                                                                    <button id="submitButton" type="submit" class="btn btn-primary" disabled>Save and proceed to delivery</button>
+                                                                    <button id="submitButton" type="submit" class="btn btn-primary submitcheckform" disabled>Save and proceed to delivery</button>
                                                                     <?php
                                                                 }
                                                                 ?>
@@ -394,9 +394,9 @@ $worker_id = $_SESSION['user_id'];
                                                 </div>
                                     
                                             
-                                            <form action="function.php" method="POST">
+                                            <form id="del" action="function.php" method="POST">
                                                 <div class="d-grid mt-3">
-                                                    <button type="submit" class="btn btn-primary">Drop off now</button>
+                                                    <button type="submit" class="btn btn-primary submitdel">Drop off now</button>
                                                     <!-- hidden data for booking_id -->
                                                     <input type="hidden" name="booking_id" value="<?= htmlspecialchars($row['booking_id']); ?>">
                                                     <input type="hidden" name="working_id" value="<?= htmlspecialchars($row['working_id']); ?>">
@@ -410,7 +410,7 @@ $worker_id = $_SESSION['user_id'];
                                     }
                                     else if($status == 'ongoing_construction'){
                                         ?> 
-                                        <form action="function.php" method="POST">
+                                        <form id="ong_con" action="function.php" method="POST">
                                         <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
                                             <div class="row mt-4">
                                                     <!-- First Card: Where the item is from -->
@@ -459,7 +459,7 @@ $worker_id = $_SESSION['user_id'];
                                                             <h5 class="mb-0">Check if the construction of material is done</h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <form action="process_requirements.php" method="POST">
+                                                        
                                                             <table class="table table-striped">
                                                                 <thead>
                                                                     <tr>
@@ -497,12 +497,12 @@ $worker_id = $_SESSION['user_id'];
                                                             </table>
 
                                                             <div class="d-grid mt-3">
-                                                                <button type="submit" class="btn btn-primary">Submit Checklist</button>
+                                                                <button type="submit" class="btn btn-primary ong_con">Submit Checklist</button>
                                                                 <!-- Hidden data for booking_id and working_id -->
                                                                 <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
                                                                 <input type="hidden" name="working_id" value="<?= $working_id ?>">
                                                             </div>
-                                                        </form>
+                                                        
 
                                                         </div>
                                                     </div>                                                                               
@@ -514,7 +514,7 @@ $worker_id = $_SESSION['user_id'];
                                     }
                                     else if($status == 'checking'){
                                         ?> 
-                                        <form action="function.php" method="POST">
+                                        <form id="checker" action="function.php" method="POST">
                                         <?php if (isset($result_list) && mysqli_num_rows($result_list) > 0): ?>
                                             <div class="row mt-4">
                                                     <!-- First Card: Where the item is from -->
@@ -563,7 +563,7 @@ $worker_id = $_SESSION['user_id'];
                                                             <h5 class="mb-0">Check if the </h5>
                                                         </div>
                                                         <div class="card-body">
-                                                        <form action="process_requirements.php" method="POST">
+                                                    
                                                             <table class="table table-striped">
                                                                 <thead>
                                                                     <tr>
@@ -620,13 +620,13 @@ $worker_id = $_SESSION['user_id'];
                                                                         <input type="text" name="client_id" value="<?= $row['client_id'] ?>">
                                                                         <input type="text" name="working_id" value="<?= $row['working_id'] ?>">
                                                                         <input type="text" name="worker_id" value="<?= $row['worker_id'] ?>">
-                                                                         <button type="submit" class="btn btn-primary">SubmitBBB Checklist</button>
+                                                                         <button type="submit" class="btn btn-primary checker">SubmitBBB Checklist</button>
                                                                         <?php
                                                                     }
                                                                     else{
                                                                         ?> 
                                                                         
-                                                                        <button type="submit" class="btn btn-primary">SubmitBBB Checklist</button>
+                                                                        <button type="submit" class="btn btn-primary checker">SubmitBBB Checklist</button>
                                                                         <?php
                                                                     }
                                                                   
@@ -634,7 +634,7 @@ $worker_id = $_SESSION['user_id'];
                                                                 }
                                                                 else if($pending_count >= 1){
                                                                     ?> 
-                                                                     <button type="submit" class="btn btn-primary">Save checklist</button>
+                                                                     <button type="submit" class="btn btn-primary checker">Save checklist</button>
                                                                     <?php
                                                                 }     
                                                                 
@@ -644,7 +644,7 @@ $worker_id = $_SESSION['user_id'];
                                                                 <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
                                                                 <input type="hidden" name="working_id" value="<?= $working_id ?>">
                                                             </div>
-                                                        </form>
+                                                        
 
                                                         </div>
                                                     </div>                                                                               
@@ -910,4 +910,71 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+</script>
+<script>
+    $(document).ready(function() {
+        $('.submitcheckform').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to proceed?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("checkingform").submit();
+                    }
+                });
+            
+        });
+
+        $('.submitdel').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to proceed?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("del").submit();
+                    }
+                });
+            
+        });
+
+        $('.ong_con').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to proceed?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("ong_con").submit();
+                    }
+                });
+            
+        });
+
+        $('.checker').on('click', function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+                Swal.fire({
+                    title: 'Confirmation',
+                    html: "Are you sure to proceed?",
+                    icon: 'warning',
+                    confirmButtonText: 'Confirm',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById("checker").submit();
+                    }
+                });
+            
+        });
+    });
 </script>
