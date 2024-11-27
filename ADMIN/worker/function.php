@@ -10,6 +10,7 @@ $status = isset($_POST['status']) ? $_POST['status'] : null;
 $quantity_item = isset($_POST['quantity']) ? $_POST['quantity'] : null;
 $booking_id = isset($_POST['booking_id']) ? $_POST['booking_id'] : null;
 if(isset($_POST['sql']) && $status == 'arrive'){
+    echo "TEST";
     $sql_transfer = "SELECT unit, description, quantity FROM package_maintenance_generator";
     $exec = mysqli_query($conn , $sql_transfer);
     if ($exec->num_rows > 0) {
@@ -46,6 +47,7 @@ if(isset($_POST['sql']) && $status == 'arrive'){
         // echo "No data found in package_maintenance_generator";
     }
 }
+exit();
 
 $sql = "select * from worker_ongoing
 inner join service_booking on service_booking.booking_id = worker_ongoing.booking_id
