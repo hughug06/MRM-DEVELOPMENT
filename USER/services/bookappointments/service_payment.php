@@ -767,9 +767,8 @@ else if(isset($_POST['tuneup_submit'])){
                         <div class="card custom-card my-5 p-5">
                             <div class="card-body">
                                 <div class="text-center mb-4">
-                                    <h4>Address: Aguilar Pangasinan</h4>
-                                    <h5>Supply & Installation of Solar Pump and Solar Panel</h5>
-                                    <h6>Bugallon Pangasinan</h6>
+                                    <h4>Address: <?= $pin_location?></h4>
+                                    <h5>Supply & <?= $service_type ?> of <?= $product_type ?></h5>                   
                                 </div>
                                 <table class="table table-bordered">
                                     <thead class="table-warning text-center">
@@ -822,7 +821,7 @@ else if(isset($_POST['tuneup_submit'])){
                                         ?>
                                     </tfoot>
                                 </table>
-                                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and installation of Solar Panel and Pump for Bugallon Pangasinan site.</small></p>
+                                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and <?= $service_type ?> of <?= $product_type ?> for <?= $pin_location ?></small></p>
                                 <!-- Checkbox for accepting terms and conditions -->
                                 <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
                                 <label>
