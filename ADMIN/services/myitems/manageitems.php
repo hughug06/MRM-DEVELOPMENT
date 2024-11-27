@@ -62,23 +62,23 @@
                     <div class="row row-square">
                         <div class="pt-3 col-lg-12 col-md-12">
                             <div class="card custom-card">
-                                <!-- <nav class="nav main-nav-line p-3 tabs-menu">
+                                <nav class="nav main-nav-line p-3 tabs-menu">
                                     <a class="nav-link active" data-bs-toggle="tab" id="about-tab" href="#items">Items
                                         <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solar">Solar
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generator">Generator 
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#brand">Brand
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
                                     <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#markup-disc">Markup / Discount
-                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                        <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                     </a>
-                                </nav> -->
+                                </nav>
                             </div>
                             <div class="row row-sm">
                                 <div class="col-lg-12 col-md-12">
@@ -158,21 +158,21 @@
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="solar">
-                                                <!-- <div class="col-md-12 col-lg-6">
+                                                <div class="col-md-12 col-lg-6">
                                                     <div class="card custom-card">
                                                         <nav class="nav main-nav-line p-3">
                                                             <a class="nav-link active" data-bs-toggle="tab" id="about-tab" href="#solarInstallation">Installation
                                                                 <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                             <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solarMaintenance">Maintenance
-                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                             <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#solarRepair">Repair
-                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                         </nav>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                                 <div class="row row-sm">
                                                     <div class="tab-content">
                                                         <div class="main-content-body tab-pane p-0 border-top-0 active" id="solarInstallation">
@@ -379,13 +379,13 @@
                                                                 <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                             <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorMaintenance">Maintenance
-                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                             <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorRepair">Repair
-                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                             <a class="nav-link" data-bs-toggle="tab" id="about-tab" href="#generatorTuneup">Tune-up
-                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data">0</span>
+                                                                <span class="badge bg-secondary rounded-pill" id="notifiation-data"></span>
                                                             </a>
                                                         </nav>
                                                     </div>
