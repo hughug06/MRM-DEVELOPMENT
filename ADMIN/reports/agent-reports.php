@@ -61,20 +61,22 @@ include_once '../../Database/database.php';
                 <div class="row mt-3">
                 <?php 
                   
-                    $sql = "
-                        SELECT 
-                            user_info.first_name, 
-                            COUNT(service_booking.booking_id) AS works_done, 
-                            SUM(service_payment.total_cost) AS total_sales,
-                            GROUP_CONCAT(service_booking.booking_id) AS booking_ids
-                        FROM worker_ongoing
-                        INNER JOIN user_info ON user_info.user_id = worker_ongoing.worker_id
-                        INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
-                        INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
-                        WHERE service_payment.date_done IS NOT NULL 
-                        AND service_booking.booking_status = 'completed'
-                        GROUP BY worker_ongoing.worker_id
-                    ";
+                  $sql = "
+                  SELECT 
+                      user_info.first_name, 
+                      COUNT(service_booking.booking_id) AS deals_closed, 
+                      SUM(service_payment.total_cost) AS total_revenue,
+                      GROUP_CONCAT(service_booking.booking_id) AS booking_ids
+                  FROM worker_ongoing
+                  INNER JOIN user_info ON user_info.user_id = worker_ongoing.worker_id
+                  INNER JOIN service_booking ON service_booking.booking_id = worker_ongoing.booking_id
+                  INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
+                  WHERE service_payment.date_done IS NOT NULL 
+                  AND service_booking.booking_status = 'completed'
+                  AND worker_ongoing.service_from = 'agent'
+                  GROUP BY worker_ongoing.worker_id
+              ";
+              
                     
                     $result = mysqli_query($conn, $sql);
                     
