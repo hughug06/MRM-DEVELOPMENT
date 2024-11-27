@@ -101,7 +101,7 @@
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "profile.php" ? 'active':''?>">
-                    <a href="/mrm-eg.online/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
+                    <a href="/USER/profile/profile.php" class="side-menu__item <?= $page == "profile.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-gears side-menu__icon"></i>
