@@ -113,7 +113,7 @@
                 }
                 else if($_SESSION['auth'] == "admin")
                 {
-            
+                
                 ?>
 
                 <!-- Start::slide -->
@@ -158,7 +158,7 @@
                 <!-- Start::slide__category -->
                 <li class="slide__category"><span class="category-name">ADMIN</span></li>
                 <!-- End::slide__category -->
-                 
+
                 <!-- Start::slide -->  
                 <li class="slide has-sub <?= $page == 'services.php' || $page == 'appointment.php' ||  $page == 'manageitems.php' ?'active open':''?>">
                     <a href="javascript:void(0);" class="side-menu__item <?= $page == 'services.php' || $page == 'appointment.php' ? 'active':''?>">
@@ -250,6 +250,17 @@
                     </ul>
                 </li>
                 <!-- End::slide -->       
+
+                <!-- Start::slide -->
+                <li class="slide <?= $page == "system-logs.php" ? 'active':''?>">
+                    <a href="/MRM-DEVELOPMENT/ADMIN/system-logs/system-logs.php" class="side-menu__item <?= $page == "system-logs.php" ? 'active':''?>">
+                        <span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="fa-solid fa-house side-menu__icon"></i>
+                        <span class="side-menu__label">System Logs</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
 
                 <!-- Start::slide -->
                 <li class="slide <?= $page == "landing-customize.php" ? 'active':''?>">
