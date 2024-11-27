@@ -47,7 +47,19 @@ function formatMoney($number) {
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <style>
+    /* Hide spinners in Chrome, Safari, and Edge */
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
+    /* Hide spinners in Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    </style>
 
 </head>
 
@@ -85,7 +97,15 @@ function formatMoney($number) {
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_add_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" 
+                                        id="input_add_stocks" 
+                                        class="form-control flatpickr-date" 
+                                        placeholder="enter number of stocks" 
+                                        required 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                        >
+
+
                                     </div>
                                 </div>
                         
@@ -121,7 +141,12 @@ function formatMoney($number) {
                                         <span class="input-group-text bg-primary text-white">
                                             <i class="bi bi-calendar3"></i>
                                         </span>
-                                        <input type="number" id="input_dec_stocks" class="form-control flatpickr-date" placeholder="enter number of stocks" required>
+                                        <input type="number" 
+                                        id="input_dec_stocks" 
+                                        class="form-control flatpickr-date" 
+                                        placeholder="enter number of stocks" 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                        required>
                                     </div>
                                 </div>
                         
