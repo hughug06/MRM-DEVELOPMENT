@@ -70,7 +70,9 @@ include_once '../../Database/database.php';
                   FROM kanban
                   INNER JOIN user_info ON user_info.user_id = kanban.user_id
                   INNER JOIN service_booking ON service_booking.booking_id = kanban.booking_id
-                  WHERE service_booking.booking_status = 'completed'
+                  INNER JOIN service_payment ON service_payment.booking_id = kanban.booking_id
+                  WHERE service_booking.booking_status = 'completed' AND
+                  date_done is not NULL
                   GROUP BY kanban.user_id
               ";
               
