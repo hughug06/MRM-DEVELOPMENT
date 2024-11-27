@@ -135,12 +135,12 @@ function email_verification($name,$email,$verify_token){
   
       // Content
       $mail->isHTML(true);                                        // Set email format to HTML
-      $mail->Subject = 'Email Verification from ARIES TESTING';
+      $mail->Subject = 'Email Verification';
       
       // Email template
       $email_template = "
       <h1>MRM E-G  ELECTRIC POWER GENERATION </h1>
-       <p>Click here to verify your account<a href='http://localhost/MRM-DEVELOPMENT/verify_email.php?token=$verify_token'>Verify Email</a></p>
+       <p>Click here to verify your account<a href='mrm-eg.online/MRM-DEVELOPMENT/verify_email.php?token=$verify_token'>Verify Email</a></p>
       
       ";
   
