@@ -93,7 +93,7 @@ if(isset($_POST['AddItem']))
 elseif (isset($_POST['PrType'])) {
   $PrType = $_POST['PrType'];
   // Use a prepared statement to prevent SQL injection
-  $sql = "SELECT Watts_KVA FROM products WHERE ProductType = ?";
+  $sql = "SELECT DISTINCT Watts_KVA FROM products WHERE ProductType = ? ORDER BY Watts_KVA ASC";
   if ($stmt = $conn->prepare($sql)) {
       // Bind parameters
       $stmt->bind_param("s", $PrType);
