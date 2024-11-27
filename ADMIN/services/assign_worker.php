@@ -15,7 +15,7 @@ if (isset($_POST['pick'])) {
     $sql3 = "UPDATE service_booking SET booking_status='ongoing' , payment_status = 'delivery_payment' WHERE booking_id= $booking_id";
     $sql4 = "UPDATE kanban SET kanban_status='pick_up' WHERE booking_id= $booking_id";
      $notification = "INSERT INTO notification (message, `from`, user_id)
-             VALUES ('Booking approved', 'payment approved', '$user_id')";
+             VALUES ('Booking approved', 'payment approved', '$client_id')";
 
     $result = mysqli_query($conn , $sql);
     $result2 = mysqli_query($conn , $sql2);
