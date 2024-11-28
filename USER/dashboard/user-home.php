@@ -145,7 +145,7 @@ require_once '../../ADMIN/authetincation.php';
                                 </a>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                <a class="card custom-card" href="USER/generator/generator.php">
+                                <a class="card custom-card" href="/USER/generator/generator.php">
                                     <div class="card-body">
                                         <img src="../../assets/images/mrm-images/dashboard-images/gen3.jpg"" class="card-img mb-3" alt="...">
                                         <h6 class="card-title fw-semibold mb-3">SLF40GF<span class="badge bg-secondary float-end fs-10">Hot</span></h6>
