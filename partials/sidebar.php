@@ -252,14 +252,14 @@
                 <!-- End::slide -->       
 
                 <!-- Start::slide -->
-                <li class="slide <?= $page == "system-logs.php" ? 'active':''?>">
+                <!-- <li class="slide <?= $page == "system-logs.php" ? 'active':''?>">
                     <a href="/ADMIN/system-logs/system-logs.php" class="side-menu__item <?= $page == "system-logs.php" ? 'active':''?>">
                         <span class="shape1"></span>
                         <span class="shape2"></span>
                         <i class="fa-solid fa-house side-menu__icon"></i>
                         <span class="side-menu__label">System Logs</span>
                     </a>
-                </li>
+                </li> -->
                 <!-- End::slide -->
 
                 <!-- Start::slide -->
