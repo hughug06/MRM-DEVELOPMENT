@@ -50,7 +50,6 @@ include_once '../../Database/database.php';
             event.preventDefault(); 
             event.returnValue = ''; // This is required for the warning dialog to appear
         });
-        alert(<?php echo $about ?>);
     </script>
 
 </head>
