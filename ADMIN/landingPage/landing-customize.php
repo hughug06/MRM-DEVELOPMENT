@@ -45,7 +45,20 @@ include_once '../../Database/database.php';
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
     <script>
+        let isSubmittingForm = false;
+
+        // Listen for form submission and set the flag
+        document.querySelector("form").addEventListener("submit", function() {
+            isSubmittingForm = true;
+        });
+
+        // Add the beforeunload event listener
         window.addEventListener('beforeunload', function (event) {
+            if (isSubmittingForm) {
+                // If a form is being submitted, don't show the warning
+                return;
+            }
+
             // Custom message (only supported in some browsers like Chrome)
             event.preventDefault(); 
             event.returnValue = ''; // This is required for the warning dialog to appear
