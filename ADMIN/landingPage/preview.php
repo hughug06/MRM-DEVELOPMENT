@@ -767,7 +767,7 @@
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-1.jpg"
+                src="../../assets/landing_assets/images/testimonial-1.jpg"
                 alt=""
                 class="rounded-circle"
                 width="120"
