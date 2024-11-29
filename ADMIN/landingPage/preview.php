@@ -1073,26 +1073,8 @@
 
     <script>
       function goBack() {
-        // Create a form element
-        var form = document.createElement('form');
-        form.method = 'POST'; // Set method to POST
-        form.action = document.referrer; // Set the action to the previous page (document.referrer)
-
-        // Create a hidden input for the POST data
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'return'; // The name of the POST variable
-        input.value = 'true'; // The value to send with the POST request
-
-        // Append the input to the form
-        form.appendChild(input);
-
-        // Append the form to the body (it’s not visible on the page)
-        document.body.appendChild(form);
-
-        // Submit the form
-        form.submit();
-    }
+            window.history.back(); // Takes the user to the previous page in their browsing history
+        }
 
 
       document.addEventListener("DOMContentLoaded", () => {
