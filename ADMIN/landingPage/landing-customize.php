@@ -44,6 +44,15 @@ include_once '../../Database/database.php';
     <!-- Choices Css -->
     <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <script>
+        window.addEventListener('beforeunload', function (event) {
+            // Custom message (only supported in some browsers like Chrome)
+            event.preventDefault(); 
+            event.returnValue = ''; // This is required for the warning dialog to appear
+        });
+        alert(<?php echo $about ?>);
+    </script>
+
 </head>
 
 <body>
