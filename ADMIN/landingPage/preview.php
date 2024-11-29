@@ -97,27 +97,6 @@
   </head>
   <body>
 
-      <?php 
-        require '../../Database/database.php'; 
-        $sql = "SELECT * FROM landing_page_info WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $id = 1;
-        $stmt->bind_param("i", $id); // Replace $productId with the actual ID or dynamic ID
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $stmt->close();
-        $conn->close();
-
-            $titles = json_decode($row["title"], true);
-            $descs = json_decode($row["description"], true);
-            $goals = json_decode($row["goals"], true);
-            $faqs = json_decode($row["faq"], true);
-            $projects = json_decode($row["projects"], true);
-            $user_experience = json_decode($row["user_experience"], true);
-
-      ?>
-
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
       <div class="container">
           <h1 class="my-auto">
