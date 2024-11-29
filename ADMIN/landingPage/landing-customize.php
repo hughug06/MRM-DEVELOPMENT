@@ -262,9 +262,9 @@ include_once '../../Database/database.php';
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 1</h4>
                                                 <label class="form-label">Title</label>
-                                                <input type="text" class="form-control mb-2 text-black" name="title1" id="title1" value="<?php echo $title1_f? $title1_f : $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
+                                                <input type="text" class="form-control mb-2 text-black" name="title1" id="title1" value="<?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
                                                 <label class="form-label">Content</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc1" id="desc1"><?php echo $desc1? $desc1 : $descs["desc1"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc1" id="desc1"><?php echo $descs["desc1"] ?></textarea>
                                             
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
