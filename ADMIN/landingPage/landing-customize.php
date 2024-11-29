@@ -47,27 +47,42 @@ include_once '../../Database/database.php';
     <script>
         let isSubmittingForm = false;
 
-        // Listen for form submission and set the flag
-        document.querySelector("form").addEventListener("submit", function() {
-            isSubmittingForm = true;
-        });
+    // Listen for form submission and set the flag
+    document.querySelector("form").addEventListener("submit", function() {
+        isSubmittingForm = true;
+    });
 
-        // Add the beforeunload event listener
-        window.addEventListener('beforeunload', function (event) {
-            if (isSubmittingForm) {
-                // If a form is being submitted, don't show the warning
-                return;
-            }
+    // Add the beforeunload event listener
+    window.addEventListener('beforeunload', function (event) {
+        if (isSubmittingForm) {
+            // If a form is being submitted, don't show the warning
+            return;
+        }
 
-            // Custom message (only supported in some browsers like Chrome)
-            event.preventDefault(); 
-            event.returnValue = ''; // This is required for the warning dialog to appear
-        });
+        // Custom message (only supported in some browsers like Chrome)
+        event.preventDefault(); 
+        event.returnValue = ''; // This is required for the warning dialog to appear
+    });
     </script>
 
 </head>
 
 <body>
+    <?php 
+        if($_POST['return']){
+            ?>
+                <script>
+                    const modal = document.getElementById("editmodal");
+
+                    // Show the modal when the page loads
+                    window.onload = function () {
+                        modal.style.display = "flex"; // Use flex to center the modal
+                    };
+                </script>
+            <?php
+        }
+        else{}
+    ?>
     <div class="page">
 
             <!-- app-header -->
