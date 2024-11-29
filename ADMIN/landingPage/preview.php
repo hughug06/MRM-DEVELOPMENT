@@ -44,6 +44,9 @@
     </script>
   </head>
   <body>
+  <header>
+        <button onclick="goBack()">Go Back</button>
+    </header>
 
       <?php 
         require '../../Database/database.php'; 
@@ -1006,6 +1009,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
+      function goBack() {
+            window.history.back(); // Takes the user to the previous page in their browsing history
+        }
+
+
       document.addEventListener("DOMContentLoaded", () => {
         let lastScrollTop = window.pageYOffset;
         const sections = document.querySelectorAll('.reveal');
