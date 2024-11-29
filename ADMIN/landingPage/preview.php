@@ -1,4 +1,57 @@
 <?php 
+
+$title1_f = $_POST['title1_f'];
+    $title1_d = $_POST['title1_d'];
+    $title1_l = $_POST['title1_l'];
+    $desc1 = $_POST['desc1'];
+    $title2 = $_POST['title2'];
+    $desc2 = $_POST['desc2'];
+    $goal1 = $_POST['goal1'];
+    $goal2 = $_POST['goal2'];
+    $goal3 = $_POST['goal3'];
+    $goal4 = $_POST['goal4'];
+    $desc3 = $_POST['desc3'];
+    $desc4 = $_POST['desc4'];
+    $faqdesc = $_POST['faqdesc'];
+    $faq_q1 = $_POST['faq_q1'];
+    $faq_a1 = $_POST['faq_a1'];
+    $faq_q2 = $_POST['faq_q2'];
+    $faq_a2 = $_POST['faq_a2'];
+    $faq_q3 = $_POST['faq_q3'];
+    $faq_a3 = $_POST['faq_a3'];
+    $faq_q4 = $_POST['faq_q4'];
+    $faq_a4 = $_POST['faq_a4'];
+    $faq_q5 = $_POST['faq_q5'];
+    $faq_a5 = $_POST['faq_a5'];
+    $faq_q6 = $_POST['faq_q6'];
+    $faq_a6 = $_POST['faq_a6'];
+    $faq_q7 = $_POST['faq_q7'];
+    $faq_a7 = $_POST['faq_a7'];
+    $faq_q8 = $_POST['faq_q8'];
+    $faq_a8 = $_POST['faq_a8'];
+    $faq_q9 = $_POST['faq_q9'];
+    $faq_a9 = $_POST['faq_a9'];
+    $faq_q10 = $_POST['faq_q10'];
+    $faq_a10 = $_POST['faq_a10'];
+    $pj1_title = $_POST['pj1_title'];
+    $pj1_desc = $_POST['pj1_desc'];
+    $pj2_title = $_POST['pj2_title'];
+    $pj2_desc = $_POST['pj2_desc'];
+    $pj3_title = $_POST['pj3_title'];
+    $pj3_desc = $_POST['pj3_desc'];
+    $pj4_title = $_POST['pj4_title'];
+    $pj4_desc = $_POST['pj4_desc'];
+    $pj5_title = $_POST['pj5_title'];
+    $pj5_desc = $_POST['pj5_desc'];
+    $pj6_title = $_POST['pj6_title'];
+    $pj6_desc = $_POST['pj6_desc'];
+    $xp1_name = $_POST['xp1_name'];
+    $xp1_comment = $_POST['xp1_comment'];
+    $xp2_name = $_POST['xp2_name'];
+    $xp2_comment = $_POST['xp2_comment'];
+    $xp3_name = $_POST['xp3_name'];
+    $xp3_comment = $_POST['xp3_comment'];
+    $about = $_POST['about'];
 ?>
 
 <!DOCTYPE html>
@@ -150,12 +203,12 @@
           <div class="col-lg-6">
             <div class="mt-6">
               <h1 class="xl-text">
-                <span class="text-secondary"><?php echo $titles["title1_f"] ?> </span> 
-                <span><?php echo $titles["title1_d"] ?> </span> 
-                <span class="text-primary"><?php echo $titles["title1_l"] ?></span>
+                <span class="text-secondary"><?php echo $title1_f ?> </span> 
+                <span><?php echo $title1_d ?> </span> 
+                <span class="text-primary"><?php echo $title1_l ?></span>
               </h1>
               <p class="lead mb-4">
-              <?php echo $descs["desc1"] ?>
+              <?php echo $desc1 ?>
                 
               </p>
               <a class="btn btn-primary btn-lg m-2">
@@ -204,11 +257,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 text-center">
-            <h2 class="mb-4"><?php echo $titles["title2"] ?>
+            <h2 class="mb-4"><?php echo $title2 ?>
                <span class="text-secondary"></span> 
             </h2>
             <p class="fs-5">
-            <?php echo $descs["desc2"] ?>
+            <?php echo $desc2 ?>
               
             </p>
           </div>
@@ -245,28 +298,28 @@
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal1"] ?>
+                  <?php echo $goal1 ?>
                     
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal2"] ?>
+                  <?php echo $goal2 ?>
                     
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal3"] ?>
+                  <?php echo $goal3 ?>
                     
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal4"] ?>
+                  <?php echo $goal4 ?>
                     
                   </p>
                 </li>
@@ -286,7 +339,7 @@
                 <span class="text-secondary">Services</span> that we offer
               </h2>
               <p>
-              <?php echo $descs["desc3"] ?>
+              <?php echo $desc3 ?>
                 
               </p>
             </div>
@@ -342,7 +395,7 @@
                 </span>
               </h2>
               <p>
-              <?php echo $descs["desc4"] ?>
+              <?php echo $desc4 ?>
                 
               </p>
               <a href="" class="mt-5 btn btn-secondary text-white"
@@ -385,7 +438,7 @@
               We are here to <span class="text-secondary">help</span> you
             </h2>
             <p>
-            <?php echo $faqs["faqdesc"] ?>
+            <?php echo $faqdesc ?>
               
             </p>
             <div class="accordion" id="accordionFAQ2">
@@ -399,7 +452,7 @@
                     aria-expanded="false"
                     aria-controls="firstcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">01.</span><?php echo $faqs["faq_q1"] ?>
+                    <span class="me-3 fs-18 fw-bold">01.</span><?php echo $faq_q1 ?>
                   </button>
                 </h2>
                 <div
@@ -410,7 +463,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a1"] ?>
+                    <?php echo $faq_a1 ?>
                       
                     </p>
                   </div>
@@ -426,7 +479,7 @@
                     aria-expanded="false"
                     aria-controls="secondcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">02.</span><?php echo $faqs["faq_q2"] ?>
+                    <span class="me-3 fs-18 fw-bold">02.</span><?php echo $faq_q2 ?>
                   </button>
                 </h2>
                 <div
@@ -437,7 +490,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a2"] ?>
+                    <?php echo $faq_a2 ?>
                       
                     </p>
                   </div>
@@ -453,7 +506,7 @@
                     aria-expanded="false"
                     aria-controls="thirdcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">03.</span><?php echo $faqs["faq_q3"] ?>
+                    <span class="me-3 fs-18 fw-bold">03.</span><?php echo $faq_q3 ?>
                   </button>
                 </h2>
                 <div
@@ -464,7 +517,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a3"] ?>
+                    <?php echo $faq_a3 ?>
                       
                     </p>
                   </div>
@@ -480,7 +533,7 @@
                     aria-expanded="false"
                     aria-controls="fourthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">04.</span><?php echo $faqs["faq_q4"] ?>
+                    <span class="me-3 fs-18 fw-bold">04.</span><?php echo $faq_a4 ?>
                   </button>
                 </h2>
                 <div
@@ -491,7 +544,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a4"] ?>
+                    <?php echo $faq_a4 ?>
                       
                     </p>
                   </div>
@@ -507,7 +560,7 @@
                     aria-expanded="false"
                     aria-controls="fifthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">05.</span><?php echo $faqs["faq_q5"] ?>
+                    <span class="me-3 fs-18 fw-bold">05.</span><?php echo $faq_q5 ?>
                   </button>
                 </h2>
                 <div
@@ -518,7 +571,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a5"] ?>
+                    <?php echo $faq_a5 ?>
                       
                     </p>
                   </div>
@@ -534,7 +587,7 @@
                     aria-expanded="false"
                     aria-controls="sixthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">06.</span><?php echo $faqs["faq_q6"] ?>
+                    <span class="me-3 fs-18 fw-bold">06.</span><?php echo $faq_q6 ?>
                   </button>
                 </h2>
                 <div
@@ -545,7 +598,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a6"] ?>
+                    <?php echo $faq_a6 ?>
                       
                     </p>
                   </div>
@@ -561,7 +614,7 @@
                     aria-expanded="false"
                     aria-controls="seventhcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">07.</span><?php echo $faqs["faq_q7"] ?>
+                    <span class="me-3 fs-18 fw-bold">07.</span><?php echo $faq_q7 ?>
                   </button>
                 </h2>
                 <div
@@ -572,7 +625,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a7"] ?>
+                    <?php echo $faq_a7 ?>
                       
                     </p>
                   </div>
@@ -588,7 +641,7 @@
                     aria-expanded="false"
                     aria-controls="eighthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">08.</span><?php echo $faqs["faq_q8"] ?>
+                    <span class="me-3 fs-18 fw-bold">08.</span><?php echo $faq_q8 ?>
                   </button>
                 </h2>
                 <div
@@ -599,7 +652,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a8"] ?>
+                    <?php echo $faq_a8 ?>
                       
                     </p>
                   </div>
@@ -615,7 +668,7 @@
                     aria-expanded="false"
                     aria-controls="ninthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">09.</span><?php echo $faqs["faq_q9"] ?>
+                    <span class="me-3 fs-18 fw-bold">09.</span><?php echo $faq_q9 ?>
                   </button>
                 </h2>
                 <div
@@ -626,7 +679,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a9"] ?>
+                    <?php echo $faq_a9 ?>
                     
                     </p>
                   </div>
@@ -642,7 +695,7 @@
                     aria-expanded="false"
                     aria-controls="tenthcard"
                   >
-                    <span class="me-3 fs-18 fw-bold">10.</span><?php echo $faqs["faq_q10"] ?>
+                    <span class="me-3 fs-18 fw-bold">10.</span><?php echo $faq_q10 ?>
                   </button>
                 </h2>
                 <div
@@ -653,7 +706,7 @@
                 >
                   <div class="accordion-body">
                     <p>
-                    <?php echo $faqs["faq_a10"] ?>
+                    <?php echo $faq_a10 ?>
                      
                     </p>
                   </div>
@@ -688,9 +741,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj1_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj1_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj1_desc"] ?>
+                <?php echo $pj1_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -704,9 +757,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj2_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj2_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj2_desc"] ?>
+                <?php echo $pj2_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -720,9 +773,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj3_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj3_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj3_desc"] ?>
+                <?php echo $pj3_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -738,9 +791,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj4_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj4_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj4_desc"] ?>
+                <?php echo $pj4_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -754,9 +807,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj5_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj5_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj5_desc"] ?>
+                <?php echo $pj5_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -770,9 +823,9 @@
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj6_title"] ?></h5>
+                <h5 class="card-title"><?php echo $pj6_title ?></h5>
                 <p class="card-text">
-                <?php echo $projects["pj6_desc"] ?>
+                <?php echo $pj6_desc ?>
                   <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
@@ -796,10 +849,10 @@
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp1_comment"] ?>
+              <?php echo $xp1_comment ?>
                 
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp1_name"] ?></div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $xp1_name ?></div>
               <!-- <div>General Manager - Marvie</div> -->
             </div>
           </div>
@@ -814,10 +867,10 @@
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp2_comment"] ?>
+              <?php echo $xp2_comment ?>
                 
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp2_name"] ?>Alyssa Rivera</div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $xp2_name ?>Alyssa Rivera</div>
               <!-- <div>Team Leader - Marvie</div> -->
             </div>
           </div>
@@ -832,10 +885,10 @@
                 width="120"
               />
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp3_comment"] ?>
+              <?php echo $xp3_comment ?>
                 
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp3_name"] ?></div>
+              <div class="fw-bold fs-5 mt-4"><?php echo $xp3_name ?></div>
               <!-- <div>Product Manager - Marvie</div> -->
             </div>
           </div>
@@ -953,7 +1006,7 @@
           <div class="col-md-4 my-3">
             <h6>About MRM-EG</h6>
             <p>
-            <?php echo $descs["about"] ?>
+            <?php echo $about ?>
               
             </p>
           </div>
