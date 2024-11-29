@@ -1,8 +1,15 @@
 <?php 
 
-$title1_f = $_POST['title1_f'];
-    $title1_d = $_POST['title1_d'];
-    $title1_l = $_POST['title1_l'];
+    $title = $_POST['title1'];
+
+    $title1_f = strtok($title, " ");
+    $title1_l = substr(strrchr($title, " "), 1);
+
+    $words = explode(" ", $title); // Split the sentence into an array of words
+    array_shift($words); // Remove the first word
+    array_pop($words); // Remove the last word
+    $title1_d = implode(" ", $words);
+
     $desc1 = $_POST['desc1'];
     $title2 = $_POST['title2'];
     $desc2 = $_POST['desc2'];

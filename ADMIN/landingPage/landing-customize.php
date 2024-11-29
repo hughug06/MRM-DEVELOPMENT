@@ -2,60 +2,6 @@
 require_once '../authetincation.php';
 include_once '../../Database/database.php';
 
-if(isset($_POST['return'])){
-    $title1_f = $_POST['title1_f'];
-    $title1_d = $_POST['title1_d'];
-    $title1_l = $_POST['title1_l'];
-    $desc1 = $_POST['desc1'];
-    $title2 = $_POST['title2'];
-    $desc2 = $_POST['desc2'];
-    $goal1 = $_POST['goal1'];
-    $goal2 = $_POST['goal2'];
-    $goal3 = $_POST['goal3'];
-    $goal4 = $_POST['goal4'];
-    $desc3 = $_POST['desc3'];
-    $desc4 = $_POST['desc4'];
-    $faqdesc = $_POST['faqdesc'];
-    $faq_q1 = $_POST['faq_q1'];
-    $faq_a1 = $_POST['faq_a1'];
-    $faq_q2 = $_POST['faq_q2'];
-    $faq_a2 = $_POST['faq_a2'];
-    $faq_q3 = $_POST['faq_q3'];
-    $faq_a3 = $_POST['faq_a3'];
-    $faq_q4 = $_POST['faq_q4'];
-    $faq_a4 = $_POST['faq_a4'];
-    $faq_q5 = $_POST['faq_q5'];
-    $faq_a5 = $_POST['faq_a5'];
-    $faq_q6 = $_POST['faq_q6'];
-    $faq_a6 = $_POST['faq_a6'];
-    $faq_q7 = $_POST['faq_q7'];
-    $faq_a7 = $_POST['faq_a7'];
-    $faq_q8 = $_POST['faq_q8'];
-    $faq_a8 = $_POST['faq_a8'];
-    $faq_q9 = $_POST['faq_q9'];
-    $faq_a9 = $_POST['faq_a9'];
-    $faq_q10 = $_POST['faq_q10'];
-    $faq_a10 = $_POST['faq_a10'];
-    $pj1_title = $_POST['pj1_title'];
-    $pj1_desc = $_POST['pj1_desc'];
-    $pj2_title = $_POST['pj2_title'];
-    $pj2_desc = $_POST['pj2_desc'];
-    $pj3_title = $_POST['pj3_title'];
-    $pj3_desc = $_POST['pj3_desc'];
-    $pj4_title = $_POST['pj4_title'];
-    $pj4_desc = $_POST['pj4_desc'];
-    $pj5_title = $_POST['pj5_title'];
-    $pj5_desc = $_POST['pj5_desc'];
-    $pj6_title = $_POST['pj6_title'];
-    $pj6_desc = $_POST['pj6_desc'];
-    $xp1_name = $_POST['xp1_name'];
-    $xp1_comment = $_POST['xp1_comment'];
-    $xp2_name = $_POST['xp2_name'];
-    $xp2_comment = $_POST['xp2_comment'];
-    $xp3_name = $_POST['xp3_name'];
-    $xp3_comment = $_POST['xp3_comment'];
-    $about = $_POST['about'];
-}
 
 ?>
 
@@ -101,7 +47,21 @@ if(isset($_POST['return'])){
 </head>
 
 <body>
+    <?php 
+        if($_POST['return']){
+            ?>
+                <script>
+                    const modal = document.getElementById("editmodal");
 
+                    // Show the modal when the page loads
+                    window.onload = function () {
+                        modal.style.display = "flex"; // Use flex to center the modal
+                    };
+                </script>
+            <?php
+        }
+        else{}
+    ?>
     <div class="page">
 
             <!-- app-header -->
@@ -281,7 +241,7 @@ if(isset($_POST['return'])){
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 1</h4>
                                                 <label class="form-label">Title</label>
-                                                <input type="text" class="form-control mb-2 text-black" id="title1" value="<?php echo $title1_f? $title1_f : $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
+                                                <input type="text" class="form-control mb-2 text-black" name="title1" id="title1" value="<?php echo $title1_f? $title1_f : $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
                                                 <label class="form-label">Content</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc1"><?php echo $desc1? $desc1 : $descs["desc1"] ?></textarea>
                                             
