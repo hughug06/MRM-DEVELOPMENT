@@ -94,6 +94,7 @@ $title1_f = $_POST['title1_f'];
             event.preventDefault(); 
             event.returnValue = ''; // This is required for the warning dialog to appear
         });
+        alert(<?php echo $about ?>);
     </script>
   </head>
   <body>
