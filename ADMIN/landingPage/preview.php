@@ -73,7 +73,7 @@
           </h1>
           <button onclick="goBack()">
             <h1 class="my-auto">
-              <span class="text-secondary navbar-brand d-flex">Go back</span>
+              <span class="navbar-brand d-flex">Go back</span>
             </h1>
           </button>
         </a>
