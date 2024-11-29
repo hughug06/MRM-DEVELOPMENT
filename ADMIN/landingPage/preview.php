@@ -75,9 +75,6 @@
             <span onclick="goBack()" class="text-secondary navbar-brand d-flex">Go back</span>
           </h1>
         </a>
-
-          <span class="navbar-toggler-icon"></span>
-        </button>
       </div>
     </nav>
   
