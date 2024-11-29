@@ -35,7 +35,7 @@
 
     </style>
 
-<script>
+  <script>
         window.addEventListener('beforeunload', function (event) {
             // Custom message (only supported in some browsers like Chrome)
             event.preventDefault(); 
@@ -144,10 +144,10 @@
               <?php echo $descs["desc1"] ?>
                 
               </p>
-              <a href="#introduction" class="btn btn-primary btn-lg m-2">
+              <a class="btn btn-primary btn-lg m-2">
                 More Details
               </a>
-              <a href="#contact" class="btn btn-outline-secondary btn-lg m-2">
+              <a class="btn btn-outline-secondary btn-lg m-2">
                 Contact Us
               </a>
             </div>
@@ -331,7 +331,7 @@
               <?php echo $descs["desc4"] ?>
                 
               </p>
-              <a href="article.html" class="mt-5 btn btn-secondary text-white"
+              <a href="" class="mt-5 btn btn-secondary text-white"
                 >Get Started</a
               >
             </div>
@@ -956,8 +956,8 @@
               </li>
               <li>
                 Menu: <a href="#Home">Home</a>, <a href="#Details">Details</a>,
-                <a href="#Services">Services</a>
-                <a href="#Register">Register</a>
+                <a href="">Services</a>
+                <a href="">Register</a>
               </li>
             </ul>
           </div>
