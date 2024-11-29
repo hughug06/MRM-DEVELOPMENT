@@ -71,9 +71,11 @@
           <h1 class="my-auto">
             <span class="text-secondary navbar-brand d-flex">This is just a preview of the landing page based on what you have entered</span>
           </h1>
-          <h1 class="my-auto">
-            <span onclick="goBack()" class="text-secondary navbar-brand d-flex">Go back</span>
-          </h1>
+          <button onclick="goBack()">
+            <h1 class="my-auto">
+              <span class="text-secondary navbar-brand d-flex">Go back</span>
+            </h1>
+          </button>
         </a>
       </div>
     </nav>
