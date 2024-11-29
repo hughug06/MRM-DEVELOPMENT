@@ -32,7 +32,16 @@
         transform: translateY(0);
       }
 
+
     </style>
+
+<script>
+        window.addEventListener('beforeunload', function (event) {
+            // Custom message (only supported in some browsers like Chrome)
+            event.preventDefault(); 
+            event.returnValue = ''; // This is required for the warning dialog to appear
+        });
+    </script>
   </head>
   <body>
 
