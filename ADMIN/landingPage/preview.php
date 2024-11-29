@@ -44,9 +44,6 @@
     </script>
   </head>
   <body>
-  <header>
-        <button onclick="goBack()">Go Back</button>
-    </header>
 
       <?php 
         require '../../Database/database.php'; 
@@ -68,6 +65,21 @@
             $user_experience = json_decode($row["user_experience"], true);
 
       ?>
+
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light">
+      <div class="container">
+          <h1 class="my-auto">
+            <span class="text-secondary navbar-brand d-flex">This is just a preview of the landing page based on what you have entered</span>
+          </h1>
+          <h1 class="my-auto">
+            <span onclick="goBack()" class="text-secondary navbar-brand d-flex">Go back</span>
+          </h1>
+        </a>
+
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
   
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
       <div class="container">
