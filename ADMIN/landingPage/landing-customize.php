@@ -72,12 +72,10 @@ include_once '../../Database/database.php';
         if($_POST['return']){
             ?>
                 <script>
-                    const modal = document.getElementById("editmodal");
-
+                    $(document).ready(function() {
+                        $('#editmodal').show();
+                    });
                     // Show the modal when the page loads
-                    window.onload = function () {
-                        modal.style.display = "flex"; // Use flex to center the modal
-                    };
                 </script>
             <?php
         }
