@@ -264,96 +264,96 @@ include_once '../../Database/database.php';
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control mb-2 text-black" name="title1" id="title1" value="<?php echo $title1_f? $title1_f : $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
                                                 <label class="form-label">Content</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc1"><?php echo $desc1? $desc1 : $descs["desc1"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc1" id="desc1"><?php echo $desc1? $desc1 : $descs["desc1"] ?></textarea>
                                             
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 2</h4>
                                                 <label class="form-label">Title</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $titles["title2"]?>" id="title2"></input>
+                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $titles["title2"]?>" name="title2" id="title2"></input>
                                                 <label class="form-label">Content</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc2"><?php echo $descs["desc2"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc2" id="desc2"><?php echo $descs["desc2"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 3</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="The Goal of Solar Energy" disabled></input>
                                                 <label class="form-label">Contents</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal1"><?php echo $goals["goal1"] ?></textarea>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal2"><?php echo $goals["goal2"] ?></textarea>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" id="goal3"><?php echo $goals["goal3"] ?></textarea>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="goal4"><?php echo $goals["goal4"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal1" id="goal1"><?php echo $goals["goal1"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal2" id="goal2"><?php echo $goals["goal2"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal3" id="goal3"><?php echo $goals["goal3"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="goal4" id="goal4"><?php echo $goals["goal4"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 4</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="Services that we offer" disabled></input>
                                                 <label class="form-label">Content</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc3"><?php echo $descs["desc3"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc3" id="desc3"><?php echo $descs["desc3"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 5</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="Unlock Your Independence with SunSparkPower!" disabled></input>
                                                 <label class="form-label">Content</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="desc4"><?php echo $descs["desc4"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc4" id="desc4"><?php echo $descs["desc4"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>Section 6</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="FAQ'S ? We are here to help you" disabled></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faqdesc" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
                                                 
                                                 <label class="form-label">Question 1</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q1"] ?>" id="faq_q1"></input>
+                                                <input type="text" class="form-control text-black mb-2"  name="faq_q1" value="<?php echo $faqs["faq_q1"] ?>" id="faq_q1"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a1" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
 
                                                 <label class="form-label">Question 2</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q2"] ?>" id="faq_q2"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q2" value="<?php echo $faqs["faq_q2"] ?>" id="faq_q2"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a2" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
 
                                                 <label class="form-label">Question 3</label>  
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q3"] ?>" id="faq_q3"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q3" value="<?php echo $faqs["faq_q3"] ?>" id="faq_q3"></input>
                                                 <label class="form-label">Answer</label>    
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a3" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
 
                                                 <label class="form-label">Question 4</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q4"] ?>" id="faq_q4"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q4" value="<?php echo $faqs["faq_q4"] ?>" id="faq_q4"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a4" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
 
                                                 <label class="form-label">Question 5</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q5"] ?>" id="faq_q5"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q5" value="<?php echo $faqs["faq_q5"] ?>" id="faq_q5"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a5" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
 
                                                 <label class="form-label">Question 6</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q6"] ?>" id="faq_q6"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q6" value="<?php echo $faqs["faq_q6"] ?>" id="faq_q6"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a6" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
 
                                                 <label class="form-label">Question 7</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q7"] ?>" id="faq_q7"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q7" value="<?php echo $faqs["faq_q7"] ?>" id="faq_q7"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a7" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
 
                                                 <label class="form-label">Question 8</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q8"] ?>" id="faq_q8"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q8" value="<?php echo $faqs["faq_q8"] ?>" id="faq_q8"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a8" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
 
                                                 <label class="form-label">Question 9</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q9"] ?>" id="faq_q9"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q9" value="<?php echo $faqs["faq_q9"] ?>" id="faq_q9"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a9" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
 
                                                 <label class="form-label">Question 10</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $faqs["faq_q10"] ?>" id="faq_q10"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="faq_q10" value="<?php echo $faqs["faq_q10"] ?>" id="faq_q10"></input>
                                                 <label class="form-label">Answer</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="faq_a10" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
 
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
@@ -362,51 +362,51 @@ include_once '../../Database/database.php';
                                                 <input type="text" class="form-control text-black mb-2" value="Some of our Projects" disabled></input>
 
                                                 <label class="form-label">Project 1</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj1_title"] ?>" id="pj1_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj1_title" value="<?php echo $projects["pj1_title"] ?>" id="pj1_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj1_desc" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
                                                 <label class="form-label">Project 2</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj2_title"] ?>" id="pj2_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj2_title" value="<?php echo $projects["pj2_title"] ?>" id="pj2_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj2_desc" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
                                                 <label class="form-label">Project 3</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj3_title"] ?>" id="pj3_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj3_title" value="<?php echo $projects["pj3_title"] ?>" id="pj3_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj3_desc" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
                                                 <label class="form-label">Project 4</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj4_title"] ?>" id="pj4_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj4_title" value="<?php echo $projects["pj4_title"] ?>" id="pj4_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj4_desc" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
                                                 <label class="form-label">Project 5</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj5_title"] ?>" id="pj5_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj5_title" value="<?php echo $projects["pj5_title"] ?>" id="pj5_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj5_desc" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
                                                 <label class="form-label">Project 6</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $projects["pj6_title"] ?>" id="pj6_title"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="pj6_title" value="<?php echo $projects["pj6_title"] ?>" id="pj6_title"></input>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="pj6_desc" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h5>User Experience</h5>
                                                 <label class="form-label">Client 1</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp1_name"] ?>" id="xp1_name"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="xp1_name" value="<?php echo $user_experience["xp1_name"] ?>" id="xp1_name"></input>
                                                 <label class="form-label">Statement</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp1_comment" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
 
                                                 <label class="form-label">Client 2</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="xp2_name" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
                                                 <label class="form-label">Statement</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp2_comment" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
 
                                                 <label class="form-label">Client 3</label>
-                                                <input type="text" class="form-control text-black mb-2" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
+                                                <input type="text" class="form-control text-black mb-2" name="xp3_name" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
                                                 <label class="form-label">Statement</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="xp3_comment" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
                                             </div>
                                             <div class="border p-3 rounded-3">
                                                 <h5>About</h5>
                                                 <label class="form-label">Description</label>
-                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" id="about"><?php echo $descs["about"] ?></textarea>
+                                                <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="about" id="about"><?php echo $descs["about"] ?></textarea>
                                             </div>
                                         </div>
                                     </div>
