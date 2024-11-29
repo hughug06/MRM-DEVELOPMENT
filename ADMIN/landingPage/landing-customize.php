@@ -68,19 +68,6 @@ include_once '../../Database/database.php';
 </head>
 
 <body>
-    <?php 
-        if($_POST['return']){
-            ?>
-                <script>
-                    $(document).ready(function() {
-                        $('#editmodal').show();
-                    });
-                    // Show the modal when the page loads
-                </script>
-            <?php
-        }
-        else{}
-    ?>
     <div class="page">
 
             <!-- app-header -->
