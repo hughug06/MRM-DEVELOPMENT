@@ -94,15 +94,6 @@
 
 
     </style>
-
-  <script>
-        window.addEventListener('beforeunload', function (event) {
-            // Custom message (only supported in some browsers like Chrome)
-            event.preventDefault(); 
-            event.returnValue = ''; // This is required for the warning dialog to appear
-        });
-        alert(<?php echo $about ?>);
-    </script>
   </head>
   <body>
 
