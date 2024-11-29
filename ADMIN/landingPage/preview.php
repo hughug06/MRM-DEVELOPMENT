@@ -1,5 +1,4 @@
 <?php 
-include_once '../../Database/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,11 +13,11 @@ include_once '../../Database/database.php';
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="assets/css/icons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/landing_assets/css/font-awesome.css" />
-    <link rel="stylesheet" href="assets/landing_assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/landing_assets/css/styles.css" />
-    <link rel="icon" href="assets/landing_assets/images/logo-mrm.png" />
+    <link href="../../assets/css/icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/landing_assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../assets/landing_assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../assets/landing_assets/css/styles.css" />
+    <link rel="icon" href="../../assets/landing_assets/images/logo-mrm.png" />
     <title>
     MRM-EG Company</title>
     <style>
@@ -38,7 +37,7 @@ include_once '../../Database/database.php';
   <body>
 
       <?php 
-        require 'Database/database.php'; 
+        require '../../Database/database.php'; 
         $sql = "SELECT * FROM landing_page_info WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $id = 1;
@@ -62,7 +61,7 @@ include_once '../../Database/database.php';
       <div class="container">
         <a href="#" class="navbar-brand d-flex">
           <img
-            src="assets/landing_assets/images/logo-mrm.png"
+            src="../../assets/landing_assets/images/logo-mrm.png"
             alt=""
             width="65"
           />
@@ -113,12 +112,12 @@ include_once '../../Database/database.php';
 
     <header class="header position-relative mt-3 mb-6 overflow-hidden">
       <img
-        src="assets/landing_assets/images/decoraiton-star-circle.svg"
+        src="../../assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
         class="decoration-star position-absolute"
       />
       <img
-        src="assets/landing_assets/images/decoraiton-star-circle.svg"
+        src="../../assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
         class="decoration-star-2 position-absolute"
       />
@@ -147,7 +146,7 @@ include_once '../../Database/database.php';
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/hero-img.png"
+                src="../../assets/landing_assets/images/hero-img.png"
                 alt=""
                 class="img-fluid"
               />
@@ -199,7 +198,7 @@ include_once '../../Database/database.php';
       class="details position-relative my-6 overflow-hidden reveal"
     >
       <img
-        src="assets/landing_assets/images/decoration-leaves.svg"
+        src="../../assets/landing_assets/images/decoration-leaves.svg"
         class="decoration-star position-absolute"
         alt=""
       />
@@ -208,7 +207,7 @@ include_once '../../Database/database.php';
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="assets/landing_assets/images/mrm_images/details-2.png"
+                src="../../assets/landing_assets/images/mrm_images/details-2.png"
                 alt=""
                 class="img-fluit"
               />
@@ -303,7 +302,7 @@ include_once '../../Database/database.php';
 
     <section class="details-2 position-relative my-6 overflow-hidden reveal">
       <img
-        src="assets/landing_assets/images/decoraiton-star-circle.svg"
+        src="../../assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
         class="decoration-star position-absolute"
       />
@@ -331,7 +330,7 @@ include_once '../../Database/database.php';
           <div class="col-lg-6">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/details-2.png"
+                src="../../assets/landing_assets/images/details-2.png"
                 class="img-fluid"
               />
             </div>
@@ -642,7 +641,7 @@ include_once '../../Database/database.php';
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/article-details-small.jpg"
+                src="../../assets/landing_assets/images/article-details-small.jpg"
                 alt=""
                 class="img-fluid rounded-3"
               />
@@ -661,7 +660,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-1.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-1.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -677,7 +676,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-2.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-2.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -693,7 +692,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-3.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-3.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -711,7 +710,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-4.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-4.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -727,7 +726,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-5.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-5.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -743,7 +742,7 @@ include_once '../../Database/database.php';
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-6.jpg"
+                src="../../assets/landing_assets/images/mrm_images/project-6.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -786,7 +785,7 @@ include_once '../../Database/database.php';
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-2.jpg"
+                src="../../assets/landing_assets/images/testimonial-2.jpg"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -804,7 +803,7 @@ include_once '../../Database/database.php';
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-3.jpg"
+                src="../../assets/landing_assets/images/testimonial-3.jpg"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -839,7 +838,7 @@ include_once '../../Database/database.php';
 
     <section id="register" class="register my-6 reveal">
       <img
-        src="assets/landing_assets/images/decoraiton-star-circle.svg"
+        src="../../assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
         class="decoration-star position-absolute"
       />
@@ -849,7 +848,7 @@ include_once '../../Database/database.php';
           <div class="col-lg-6 d-none d-md-block">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/contact.png"
+                src="../../assets/landing_assets/images/contact.png"
                 alt=""
                 class="img-fluid"
               />
@@ -980,346 +979,6 @@ include_once '../../Database/database.php';
     <?php
     ?>
 
-    <!-- Login Modal -->
-    <div
-      class="modal fade"
-      id="signinmodal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="signinmodal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <button
-            type="button"
-            class="btn-close position-absolute top-0 end-0 m-2"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            style="
-              z-index: 1050;
-              background-color: white;
-              border-radius: 50%;
-              padding: 0.5rem;
-            "
-          ></button>
-          <div class="card mb-0 border-0">
-            <div class="row row-sm gx-0">
-              <div
-                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-secondary details rounded-start"
-              >
-                <div class="d-flex align-items-center">
-                  <h1 class="text-white px-4">WELCOME BACK</h1>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="col-lg-7 col-xl-7 col-xs-12 col-sm-12 login_form">
-                <div class="main-container container-fluid">
-                  <div class="row row-sm gx-0">
-                    <div class="card-body p-5">
-                      <div class="clearfix"></div>
-                      <form
-                        action="user/signin/function.php"
-                        id="signinform"
-                        method="POST"
-                      >
-                        <h1
-                          class="text-start pb-4 d-flex justify-content-center text-secondary"
-                        >
-                          LOGIN
-                        </h1>
-                        <div class="form-group text-start pb-3">
-                          <i class="ri-mail-fill icon icon-a"></i>
-                          <label class="form-label">Email Address</label>
-                          <input
-                            class="form-control py-2 rounded-2"
-                            placeholder=""
-                            type="text"
-                            name="email"
-                            id="signin_email"
-                          />
-                        </div>
-                        <div class="form-group text-start">
-                          <i class="ri-lock-fill icon icon-b"></i>
-                          <label class="form-label">Password</label>
-                          <input
-                            class="form-control py-2 rounded-2"
-                            placeholder=""
-                            type="password"
-                            name="password"
-                            id="signin_password"
-                          />
-                        </div>
-                        <div class="form-check d-flex mt-2 pb-5 gap-2">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="invalidCheck"
-                          />
-                          <label class="form-check-label" for="invalidCheck">
-                            <small class="text-secondary">Remember me</small>
-                          </label>
-                          <a
-                            href="forgot_password.php"
-                            class="text-secondary ms-auto text-decoration-none"
-                            ><small>Forgot password?</small></a
-                          >
-                        </div>
-                        <div class="d-grid pb-2">
-                          <button
-                            name="login"
-                            type="submit"
-                            class="btn btn-secondary text-white py-2 fw-bold"
-                          >
-                            Login
-                          </button>
-                        </div>
-                      </form>
-                      <div class="d-flex justify-content-center mt-3 gap-1">
-                        Don't have an account?<a
-                          class="text-secondary"
-                          href="signup.php"
-                          data-bs-toggle="modal"
-                          data-bs-target="#signupmodal"
-                          >Register Here</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-    <!-- Sign up Modal  -->
-    <div
-      class="modal fade"
-      id="signupmodal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="signupmodal"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-          <button
-            type="button"
-            class="btn-close position-absolute top-0 end-0 m-2"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            style="
-              z-index: 1050;
-              background-color: white;
-              border-radius: 50%;
-              padding: 0.5rem;
-            "
-          ></button>
-          <div class="card mb-0 border-0">
-            <div class="row row-sm gx-0">
-              <div
-                class="col-lg-5 col-xl-5 d-lg-flex d-none text-center bg-secondary details rounded-start"
-              >
-                <div class="d-flex align-items-center">
-                  <h3 class="text-white px-4">
-                    WELCOME TO MRM! JOIN NOW FOR A BRIGHTER FUTURE
-                  </h3>
-                </div>
-              </div>
-              <div class="col-lg-7 col-xl-7 col-xs-12 col-sm-12 login_form">
-                <div class="main-container container-fluid">
-                  <div class="row row-sm gx-0">
-                    <div class="card-body p-5">
-                      <form
-                        id="signupForm"
-                        method="POST"
-                        action="user/signup/function.php"
-                      >
-                        <h1
-                          class="text-start pb-4 d-flex justify-content-center text-secondary fw-bold"
-                        >
-                          SIGN UP
-                        </h1>
-
-                        <!-- First Name, Last Name, Middle Name Row -->
-                        <div class="row">
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="firstname"
-                              id="su_firstname"
-                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                            />
-                            <label for="su_firstname" class="text-muted"
-                              >First Name</label
-                            >
-                          </div>
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="lastname"
-                              id="su_lastname"
-                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                            />
-                            <label for="su_lastname" class="text-muted"
-                              >Last Name</label
-                            >
-                          </div>
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="middlename"
-                              id="su_middlename"
-                              oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
-                            />
-                            <label for="su_middlename" class="text-muted"
-                              >Middle Name</label
-                            >
-                          </div>
-                        </div>
-
-                        <!-- Email and Password Row -->
-                        <div class="row">
-                          <div class="col-md-6 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="email"
-                              name="email"
-                              id="su_email"
-                            />
-                            <label for="su_email" class="text-muted">Email Address</label>
-                          </div>
-                          <div class="col-md-6 form-floating text-start mb-3">
-                            <i
-                              class="ri-eye-fill icon icon-c"
-                              id="toggle_Pass"
-                            ></i>
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="password"
-                              name="password"
-                              id="su_password"
-                            />
-                            <label for="su_password" class="text-muted">Password</label>
-                          </div>
-                        </div>
-
-                        <!-- Address Row -->
-                        <div class="form-floating text-start mb-3">
-                          <input
-                            class="form-control rounded-2"
-                            placeholder=""
-                            type="text"
-                            name="address"
-                            id="su_address"
-                          />
-                          <label for="su_address" class="text-muted">Address</label>
-                        </div>
-
-                        <!-- City, Province, ZIP Code Row -->
-                        <div class="row">
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="city"
-                              id="su_city"
-                            />
-                            <label for="su_city" class="text-muted">City</label>
-                          </div>
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="province"
-                              id="su_province"
-                            />
-                            <label for="su_province" class="text-muted">Province</label>
-                          </div>
-                          <div class="col-md-4 form-floating text-start mb-3">
-                            <input
-                              class="form-control rounded-2"
-                              placeholder=""
-                              type="text"
-                              name="zipcode"
-                              id="su_zipcode"
-                              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                            />
-                            <label for="su_zipcode" class="text-muted">ZIP Code</label>
-                          </div>
-                        </div>
-
-                        <!-- Radio Buttons for Organization or Individual -->
-                        <div class="form-check form-check-inline mb-3">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="user_type"
-                            id="individual"
-                            value="individual"
-                            checked
-                          />
-                          <label class="form-check-label" for="individual">Individual</label>
-                        </div>
-                        <div class="form-check form-check-inline mb-3">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="user_type"
-                            id="organization"
-                            value="organization"
-                          />
-                          <label class="form-check-label" for="organization">Organization</label>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="d-grid pb-2">
-                          <button
-                            type="submit"
-                            name="signup"
-                            class="btn btn-secondary text-white py-2 fw-bold"
-                          >
-                            Register
-                          </button>
-                        </div>
-                      </form>
-                      <div
-                        class="d-flex justify-content-center mt-3 gap-1 text-muted"
-                      >
-                        Already have an account?<a
-                          class="text-secondary"
-                          href="signin.php"
-                          data-bs-toggle="modal"
-                          data-bs-target="#signinmodal"
-                          >Login Here</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
 
 
 
@@ -1331,8 +990,8 @@ include_once '../../Database/database.php';
       
     </div>
 
-    <script src="assets/landing_assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/landing_assets/js/script.js"></script>
+    <script src="../../assets/landing_assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/landing_assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
