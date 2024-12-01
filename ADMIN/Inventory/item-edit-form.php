@@ -274,7 +274,7 @@ global $conn;
                         }
                     });
                 }
-                else if(PPower_value < 20 && IType_value == 'Generator' ||  PPower_value <= 3 && IType_value == 'Solar Panel' ) {
+                else if(PPower_value < 20 && IType_value == 'Generator' ||  PPower_value < 3 && IType_value == 'Solar Panel' ) {
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker +".",
