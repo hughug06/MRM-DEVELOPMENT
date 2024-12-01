@@ -81,7 +81,7 @@ include_once '../../Database/database.php';
                                             <input type="text" id="item_name" class="form-control" placeholder="Product Name" aria-label="Full Name" name="item_name" required>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Type</label>
+                                            <label class="form-label">Product Type (Solar Panel or Generator):</label>
                                             <select id="item_type" class="form-select py-2" required>
                                                 <option value="">Select Type</option>
                                                 <option value="Generator">Generator</option>
@@ -89,12 +89,13 @@ include_once '../../Database/database.php';
                                             </select>
                                         </div>
                                         <div id="power_input_display" class="col-md-6 col-6 mb-3">
-                                            <label class="form-label">Power Output (Watts/KVA)</label>
+                                            <label class="form-label">Power Output of the product (Watts/KVA)</label>
                                             <select id="power_list" class="form-select py-2" name="power_output">
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3" id="Custom_power_Container" style="display: none;">
-                                            <label class="form-label">Custom Power Output (Watts/KVA)</label>
+                                            <label class="form-label">Custom Power Output of the product (Watts/KVA)</label>
+                                            <p>Note: In Solar Panel, this form accepts Kilowatts up to 100kVa. And Generators accepts Watts from 50,000W to 750,000W</p>
                                             <input type="number" class="form-control py-2" id="InputCustomPower" placeholder="Watts/KVA" name="custom_power_output">
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
@@ -102,7 +103,7 @@ include_once '../../Database/database.php';
                                             <label for="Custom" class="fw-bold">Custom</label>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Stocks</label>
+                                            <label class="form-label" required>Stocks  of the product</label>
                                             <input type="number" class="form-control py-2"  placeholder="Stocks" id="stocks">
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
@@ -221,7 +222,7 @@ include_once '../../Database/database.php';
                 }
                 var image = document.getElementById("image").files[0];
                 if(IType_value == 'Solar Panel'){
-                    power_checker = 350;
+                    power_checker = 9;
                 }
                 else{
                     power_checker = 20;
@@ -237,7 +238,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value < 350 && IType_value == 'Solar Panel'){
+                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value < 9 && IType_value == 'Solar Panel'){
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker +".",
@@ -248,6 +249,12 @@ include_once '../../Database/database.php';
                         }
                     });
                 } 
+                else if(PPower_value < 100 && PPower_value >= 10 && IType_value == 'Solar Panel'){
+                    PPower_value * 1000;
+                }
+                else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
+                    PPower_value / 1000;
+                }
                 else if(price_value <= 0){
                     Swal.fire({
                         title: 'ERROR',
