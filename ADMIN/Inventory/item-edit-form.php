@@ -124,7 +124,7 @@ global $conn;
                                             </select>
                                         </div>
                                         <div id="power_input_display" class="col-md-6 mb-3">
-                                            <label class="form-label">Power Output of the product (Watts/KVA)</label>
+                                            <label class="form-label">Select Power Output of the product (Watts/KVA)</label>
                                             <select id="power_list" class="form-select py-2"> 
                                                 <option><?= $power_output ?></option>
                                             </select>
@@ -136,33 +136,34 @@ global $conn;
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
                                             <input id="Custom" type="checkbox" value="1" onclick="toggleCustomWattsKVA()">
-                                            <label for="Custom" class="fw-bold">Custom</label>
+                                            <label for="Custom" class="fw-bold">Custom Power Output</label>
+                                            <p>Check this box if you want to manually input the Power Output</p>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label" required>Stocks of the product</label>
                                             <input type="number" value="<?= $stocks ?>" class="form-control py-2" id="stocks">
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Price</label>
+                                            <label class="form-label" required>Price of the product</label>
                                             <input type="number" value="<?= $price ?>" class="form-control py-2" id="price">
                                         </div>
                                         <div class="col-xl-12  mb-3">
-                                            <label class="form-label">Description</label>
+                                            <label class="form-label">Description of the product</label>
                                             <textarea id="Description" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Description?></textarea>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Specification</label>
+                                            <label class="form-label">Specification of the product</label>
                                             <textarea id="Specification" class="col-xl-12 col-md-12 col-12" rows="6"><?= $Specification?></textarea>                            
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox" <?= $Availability == true ? 'checked' : ''?>>
-                                            <label for="availability">Availability</label>
+                                            <label for="availability">Enable availability display of the product</label>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <input type="file" id="image">
                                         </div>
                                         <div class="col-xl-12 d-flex justify-content-end">
-                                            <button id="save" type="submit" class="btn btn-primary">Save</button>
+                                            <button id="save" type="submit" class="btn btn-primary">Save Product</button>
                                         </div>
                                     </div>
                                 </form>

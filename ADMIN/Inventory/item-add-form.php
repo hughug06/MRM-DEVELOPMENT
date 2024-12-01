@@ -81,7 +81,7 @@ include_once '../../Database/database.php';
                                             <input type="text" id="item_name" class="form-control" placeholder="Product Name" aria-label="Full Name" name="item_name" required>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Product Type (Solar Panel or Generator):</label>
+                                            <label class="form-label">Select Product Type (Solar Panel or Generator):</label>
                                             <select id="item_type" class="form-select py-2" required>
                                                 <option value="">Select Type</option>
                                                 <option value="Generator">Generator</option>
@@ -100,33 +100,34 @@ include_once '../../Database/database.php';
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
                                             <input id="Custom" type="checkbox" value="1" onclick="toggleCustomWattsKVA()">
-                                            <label for="Custom" class="fw-bold">Custom</label>
+                                            <label for="Custom" class="fw-bold">Custom Power Output</label>
+                                            <p>Check this box if you want to manually input the Power Output</p>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label" required>Stocks  of the product</label>
                                             <input type="number" class="form-control py-2"  placeholder="Stocks" id="stocks">
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
-                                            <label class="form-label" required>Price</label>
+                                            <label class="form-label" required>Price of the product</label>
                                             <input type="number" id="price" class="form-control py-2"  placeholder="Price">
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Description</label>
+                                            <label class="form-label">Description of the product</label>
                                             <textarea id="Description" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label class="form-label">Specification</label>
+                                            <label class="form-label">Specification of the product</label>
                                             <textarea id="Specs" rows="6" class="col-xl-12 col-md-12 col-12"></textarea>                              
                                         </div>
                                         <div class="col-xl-12 mb-3 d-flex gap-2 justify-content-end">
                                             <input id="availability" type="checkbox" name="Availability">
-                                            <label for="availability" class="fw-bold">Availability</label>
+                                            <label for="availability" class="fw-bold">Enable availability display of the product</label>
                                         </div>
                                         <div class="col-xl-12 mb-3">
                                             <input id="image" type="file">
                                         </div> 
                                         <div class="col-md-12">
-                                            <button id="ConfirmAdd" type="submit" class="btn btn-primary">Add</button>
+                                            <button id="ConfirmAdd" type="submit" class="btn btn-primary">Add product</button>
                                         </div>
                                     </div>
                                 </form>
