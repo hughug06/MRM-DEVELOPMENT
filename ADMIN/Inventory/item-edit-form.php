@@ -256,9 +256,8 @@ global $conn;
                 }
                 else{
                     power_checker = 20;
-                    power_checker2 = 50000;
-                    power_checker3 = 1000;
-                    power_checker4 = 50000;
+                    power_checker3 = 50000;
+                    power_checker4 = 750000;
                 }
                 if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
                     Swal.fire({
@@ -285,7 +284,7 @@ global $conn;
                 else if( PPower_value > 1000 && PPower_value < 50000 && IType_value == 'Generator') {
                     Swal.fire({
                         title: 'ERROR',
-                        html: IType_value+" Power output cannot be less than "+ power_checker3 +" or greater than " + power_checker4 + ".",
+                        html: IType_value+" Power output cannot be less than "+ power_checker3 +" or greater than " + power_checker4 + " Watts.",
                         icon: 'warning',
                         confirmButtonText: 'Confirm'
                     }).then((result) => {
