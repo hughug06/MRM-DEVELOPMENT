@@ -104,7 +104,7 @@ elseif (isset($_POST['PrType'])) {
       if ($result->num_rows > 0) {
           $Watts_KVA = [];
           while ($row = $result->fetch_assoc()) {
-              $Watts_KVA[] = ['value' => $row['Watts_KVA'],'text' => $PrType];
+              $Watts_KVA[] = ['value' => $row['Watts_KVA'],'text' => $row['Watts_KVA']];
           }
           echo json_encode(['success' => true, 'data' => ['Watts_KVA' => $Watts_KVA]]);
       } else {

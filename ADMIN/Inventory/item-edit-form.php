@@ -308,6 +308,7 @@ global $conn;
                     }
                     else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
                         PPower_value / 1000;
+                        alert("working");
                     }
                     Swal.fire({
                         title: 'Confirmation',
