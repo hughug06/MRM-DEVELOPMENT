@@ -302,17 +302,11 @@ global $conn;
                         }
                     });
                 }
-                else{
-                    if(PPower_value < 100 && PPower_value >= 10 && IType_value == 'Solar Panel'){
-                    PPower_value * 1000;
-                    }
-                    else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
-                        PPower_value / 1000;
-                        alert("working");
-                    }
+                else if(PPower_value < 100 && PPower_value >= 10 && IType_value == 'Solar Panel'){
+                    PPower_value = PPower_value * 1000;
                     Swal.fire({
                         title: 'Confirmation',
-                        html: "Please Confirm the details of the Product!<br>Stocks: "+stocks_value+"<br>Price: "+price_value,
+                        html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
                         icon: 'warning',
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
@@ -320,15 +314,13 @@ global $conn;
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
-                            formData.append('save', true);
-                            formData.append('editType', 'item');
+                            formData.append('AddItem', true);
                             formData.append('ProductName', IName_value);
-                            formData.append('id', item_id_value);
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
-                            formData.append('Specification', specification_ID_value);
-                            formData.append('Description', description_ID_value);
-                            formData.append('Availability', availability_ID_value);
+                            formData.append('Availability', availability);
+                            formData.append('Description', description);
+                            formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
                             formData.append('ProductType', IType_value);
                             if (image) {
@@ -344,32 +336,81 @@ global $conn;
                                 contentType: false,
                                 success: function(response) {
                                     // Handle successful add
-                                    if(response.success){
-                                        Swal.fire({
-                                            title: 'Product Edited!',
-                                            text: 'You have successfully edited the product.',
-                                            icon: 'success',
-                                            allowOutsideClick: false,
-                                            timer: 2000, // 2 seconds timer
-                                            showConfirmButton: false // Hide the confirm button
-                                        }).then(() => {
-                                            // Redirect after the timer ends
-                                            window.location.href = 'inventory-control.php';
-                                        });
-                                    }
-                                    else{
-                                        Swal.fire(
-                                        'Error!',
-                                        'There was an error Editing product.',
-                                        'error'
-                                    );
-                                    }
+                                    Swal.fire({
+                                        title: 'Product Added!',
+                                        text: 'You have successfully added the product.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'inventory-control.php';
+                                    });
                                 },
                                 error: function(response) {
-                                    // Handle error
+                                    // Handle erro
                                     Swal.fire(
                                         'Error!',
-                                        'There was an error Editing product. Please try again.',
+                                        'There was an error Adding product. Please try again.',
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+                else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
+                    PPower_value = PPower_value / 1000;
+                    Swal.fire({
+                        title: 'Confirmation',
+                        html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm',
+                        showCancelButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If user confirms, send AJAX request for Add product
+                            var formData = new FormData();
+                            formData.append('AddItem', true);
+                            formData.append('ProductName', IName_value);
+                            formData.append('stocks', stocks_value);
+                            formData.append('price', price_value);
+                            formData.append('Availability', availability);
+                            formData.append('Description', description);
+                            formData.append('Specification', specification);
+                            formData.append('WattsKVA', PPower_value);
+                            formData.append('ProductType', IType_value);
+                            if (image) {
+                                formData.append('image', image);
+                            } // Add the file to FormData
+                            
+                            $.ajax({
+                                url: 'function.php',
+                                type: 'POST',
+                                dataType: 'json',
+                                data:formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    // Handle successful add
+                                    Swal.fire({
+                                        title: 'Product Added!',
+                                        text: 'You have successfully added the product.',
+                                        icon: 'success',
+                                        allowOutsideClick: false,
+                                        timer: 2000, // 2 seconds timer
+                                        showConfirmButton: false // Hide the confirm button
+                                    }).then(() => {
+                                        // Redirect after the timer ends
+                                        window.location.href = 'inventory-control.php';
+                                    });
+                                },
+                                error: function(response) {
+                                    // Handle erro
+                                    Swal.fire(
+                                        'Error!',
+                                        'There was an error Adding product. Please try again.',
                                         'error'
                                     );
                                 }
