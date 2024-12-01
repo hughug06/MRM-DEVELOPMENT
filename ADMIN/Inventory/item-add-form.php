@@ -272,7 +272,7 @@ include_once '../../Database/database.php';
                     });
                 }
                 else if(PPower_value < 100 && PPower_value >= 10 && IType_value == 'Solar Panel'){
-                    PPower_value * 1000;
+                    PPower_value = PPower_value * 1000;
                     Swal.fire({
                         title: 'Confirmation',
                         html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
@@ -330,7 +330,7 @@ include_once '../../Database/database.php';
                     });
                 }
                 else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
-                    PPower_value / 1000;
+                    PPower_value = PPower_value / 1000;
                     Swal.fire({
                         title: 'Confirmation',
                         html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
