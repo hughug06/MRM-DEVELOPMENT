@@ -222,14 +222,10 @@ include_once '../../Database/database.php';
                 }
                 var image = document.getElementById("image").files[0];
                 if(IType_value == 'Solar Panel'){
-                    power_checker = 3;
-                    power_checker2 = 10;
-                    power_checker3 = 10;
-                    power_checker4 = 350;
+                    power_checker = 350;
                 }
                 else{
                     power_checker = 20;
-                    power_checker2 = 50000;
                     power_checker3 = 1000;
                     power_checker4 = 50000;
                 }
@@ -244,7 +240,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value < 20 && IType_value == 'Generator' ||  PPower_value < 3 && IType_value == 'Solar Panel' ) {
+                else if(PPower_value < 20 && IType_value == 'Generator' ||  PPower_value < 350 && IType_value == 'Solar Panel') {
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker +".",
@@ -255,7 +251,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 } 
-                else if( PPower_value > 1000 && PPower_value < 50000 && IType_value == 'Generator' ||  PPower_value >= 11 && PPower_value <= 349 && IType_value == 'Solar Panel') {
+                else if( PPower_value > 1000 && PPower_value < 50000 && IType_value == 'Generator') {
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker3 +" or greater than " + power_checker4 + ".",
@@ -288,8 +284,8 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value <= 10 && IType_value == 'Solar Panel'){
-                    PPower_value = PPower_value * 1000;
+                else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
+                    PPower_value = PPower_value / 1000;
                     Swal.fire({
                         title: 'Confirmation',
                         html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
@@ -346,8 +342,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value >= 50000 && PPower_value <= 750000 && IType_value == 'Generator'){
-                    PPower_value = PPower_value / 1000;
+                else{
                     Swal.fire({
                         title: 'Confirmation',
                         html: "Please Confirm the details of the Product!<br>Product Name: "+IName_value+"<br>Product Type: "+IType_value+"<br>Power Output: "+PPower_value,
