@@ -238,7 +238,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value < 9 && IType_value == 'Solar Panel'){
+                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value <= 3 && IType_value == 'Solar Panel'){
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker +".",
@@ -271,7 +271,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value < 100 && PPower_value >= 10 && IType_value == 'Solar Panel'){
+                else if(PPower_value <= 10 && IType_value == 'Solar Panel'){
                     PPower_value = PPower_value * 1000;
                     Swal.fire({
                         title: 'Confirmation',
