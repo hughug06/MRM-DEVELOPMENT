@@ -226,8 +226,8 @@ include_once '../../Database/database.php';
                 }
                 else{
                     power_checker = 20;
-                    power_checker3 = 1000;
-                    power_checker4 = 50000;
+                    power_checker3 = 50000;
+                    power_checker4 = 750000;
                 }
                 if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
                     Swal.fire({
