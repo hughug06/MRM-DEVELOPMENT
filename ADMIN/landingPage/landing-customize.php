@@ -133,18 +133,21 @@ include_once '../../Database/database.php';
                             <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 1: 1st Introduction Section / Company Introduction)</h4>
                                         <h5><?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?></h5>
                                         <p><?php echo $descs["desc1"] ?> (editable)</p>
                                     </div>
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 2: 2nd Introduction Section / Company Content)</h4>
                                         <h5><?php echo $titles["title2"]?></h5>
                                         <p><?php echo $descs["desc2"] ?> (editable)</p>
                                     </div>
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 3: Goals Section / 10 Goals at a time)</h4>
                                         <h5>The Goal of Solar Energy</h5>
                                         <p><?php echo $goals["goal1"] ?> (editable)</p>
                                         <p><?php echo $goals["goal2"] ?> (editable)</p>
@@ -154,18 +157,21 @@ include_once '../../Database/database.php';
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 4: Service Introduction Section)</h4>
                                         <h5>Services that we offer</h5>
                                         <p><?php echo $descs["desc3"] ?> (editable)</p>
                                     </div>
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 5: Website Introduction Section)</h4>
                                         <h5>Unlock Your Independence with SunSparkPower!</h5>
                                         <p><?php echo $descs["desc4"] ?> (editable)</p>
                                     </div>
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 6: FAQ's Section / 10 Faq's at a time)</h4>
                                         <h5><span>FAQ'S ?
                                         We are here to help you</span></h5>
                                         <p><?php echo $faqs["faqdesc"] ?> (editable)</p>
@@ -202,6 +208,7 @@ include_once '../../Database/database.php';
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 7: Project Showcase Section / 6 Projects at a time)</h4>
                                         <h5>Some of our Projects</h5>
                                         <p><?php echo $projects["pj1_title"] ?> (editable)</p>
                                         <p><?php echo $projects["pj1_desc"] ?> (editable)</p>
@@ -224,6 +231,7 @@ include_once '../../Database/database.php';
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 8: User Experience Section)</h4>
                                         <h5>User Experience</h5>
                                         <p><?php echo $user_experience["xp1_name"] ?> (editable)</p>
                                         <p><?php echo $user_experience["xp1_comment"] ?> (editable)</p>
@@ -237,6 +245,7 @@ include_once '../../Database/database.php';
                                 </div>
                                 <div class="card custom-card">
                                     <div class="card-body">
+                                        <h4>(Section 9: About / Basic information on the company)</h4>
                                         <h5>About</h5>
                                         <p><?php echo $descs["about"] ?> (editable)</p>
                                     </div>
@@ -260,151 +269,155 @@ include_once '../../Database/database.php';
                                     <div class="card custom-card">
                                         <div class="card-body">
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 1</h4>
+                                                <h4>(Section 1: 1st Introduction Section / Company Introduction)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control mb-2 text-black" name="title1" id="title1" value="<?php echo $titles["title1_f"]." ".$titles["title1_d"]." ".$titles["title1_l"] ?>"></input>
-                                                <label class="form-label">Content</label>
+                                                <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc1" id="desc1"><?php echo $descs["desc1"] ?></textarea>
                                             
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 2</h4>
+                                                <h4>(Section 2: 2nd Introduction Section / Company Content)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="<?php echo $titles["title2"]?>" name="title2" id="title2"></input>
-                                                <label class="form-label">Content</label>
+                                                <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc2" id="desc2"><?php echo $descs["desc2"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 3</h4>
+                                                <h4>(Section 3: Goals Section / 4 Goals at a time)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="The Goal of Solar Energy" disabled></input>
-                                                <label class="form-label">Contents</label>
+                                                <label class="form-label">Content description</label>
+                                                <h5>Goal 1 Content:</h5>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal1" id="goal1"><?php echo $goals["goal1"] ?></textarea>
+                                                <h5>Goal 2 Content:</h5>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal2" id="goal2"><?php echo $goals["goal2"] ?></textarea>
+                                                <h5>Goal 3 Content:</h5>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-2" name="goal3" id="goal3"><?php echo $goals["goal3"] ?></textarea>
+                                                <h5>Goal 4 Content:</h5>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="goal4" id="goal4"><?php echo $goals["goal4"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 4</h4>
+                                                <h4>(Section 4: Service Introduction Section)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="Services that we offer" disabled></input>
-                                                <label class="form-label">Content</label>
+                                                <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc3" id="desc3"><?php echo $descs["desc3"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 5</h4>
+                                                <h4>(Section 5: Website Introduction Section)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="Unlock Your Independence with SunSparkPower!" disabled></input>
-                                                <label class="form-label">Content</label>
+                                                <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc4" id="desc4"><?php echo $descs["desc4"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 6</h4>
+                                                <h4>(Section 6: FAQ's Section / 10 Faq's at a time)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="FAQ'S ? We are here to help you" disabled></input>
                                                 <label class="form-label">Description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faqdesc" id="faqdesc"><?php echo $faqs["faqdesc"] ?></textarea>
                                                 
-                                                <label class="form-label">Question 1</label>
+                                                <label class="form-label">Question 1::</label>
                                                 <input type="text" class="form-control text-black mb-2"  name="faq_q1" value="<?php echo $faqs["faq_q1"] ?>" id="faq_q1"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 1:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a1" id="faq_a1"><?php echo $faqs["faq_a1"] ?></textarea>
 
-                                                <label class="form-label">Question 2</label>
+                                                <label class="form-label">Question 2:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q2" value="<?php echo $faqs["faq_q2"] ?>" id="faq_q2"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 2:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a2" id="faq_a2"><?php echo $faqs["faq_a2"] ?></textarea>
 
-                                                <label class="form-label">Question 3</label>  
+                                                <label class="form-label">Question 3:</label>  
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q3" value="<?php echo $faqs["faq_q3"] ?>" id="faq_q3"></input>
-                                                <label class="form-label">Answer</label>    
+                                                <label class="form-label">Answer for question 3:</label>    
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a3" id="faq_a3"><?php echo $faqs["faq_a3"] ?></textarea>
 
-                                                <label class="form-label">Question 4</label>
+                                                <label class="form-label">Question 4:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q4" value="<?php echo $faqs["faq_q4"] ?>" id="faq_q4"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 4:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a4" id="faq_a4"><?php echo $faqs["faq_a4"] ?></textarea>
 
-                                                <label class="form-label">Question 5</label>
+                                                <label class="form-label">Question 5:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q5" value="<?php echo $faqs["faq_q5"] ?>" id="faq_q5"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 5:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a5" id="faq_a5"><?php echo $faqs["faq_a5"] ?></textarea>
 
-                                                <label class="form-label">Question 6</label>
+                                                <label class="form-label">Question 6:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q6" value="<?php echo $faqs["faq_q6"] ?>" id="faq_q6"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 6:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a6" id="faq_a6"><?php echo $faqs["faq_a6"] ?></textarea>
 
-                                                <label class="form-label">Question 7</label>
+                                                <label class="form-label">Question 7:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q7" value="<?php echo $faqs["faq_q7"] ?>" id="faq_q7"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 7:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a7" id="faq_a7"><?php echo $faqs["faq_a7"] ?></textarea>
 
-                                                <label class="form-label">Question 8</label>
+                                                <label class="form-label">Question 8:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q8" value="<?php echo $faqs["faq_q8"] ?>" id="faq_q8"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 8:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a8" id="faq_a8"><?php echo $faqs["faq_a8"] ?></textarea>
 
-                                                <label class="form-label">Question 9</label>
+                                                <label class="form-label">Question 9:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q9" value="<?php echo $faqs["faq_q9"] ?>" id="faq_q9"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 9:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="faq_a9" id="faq_a9"><?php echo $faqs["faq_a9"] ?></textarea>
 
-                                                <label class="form-label">Question 10</label>
+                                                <label class="form-label">Question 10:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="faq_q10" value="<?php echo $faqs["faq_q10"] ?>" id="faq_q10"></input>
-                                                <label class="form-label">Answer</label>
+                                                <label class="form-label">Answer for question 10:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="faq_a10" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
 
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h4>Section 7</h4>
+                                                <h4>(Section 7: Project Showcase Section / 6 Projects at a time)</h4>
                                                 <label class="form-label">Title</label>
                                                 <input type="text" class="form-control text-black mb-2" value="Some of our Projects" disabled></input>
 
-                                                <label class="form-label">Project 1</label>
+                                                <label class="form-label">Project 1 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj1_title" value="<?php echo $projects["pj1_title"] ?>" id="pj1_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 1:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj1_desc" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
-                                                <label class="form-label">Project 2</label>
+                                                <label class="form-label">Project 2 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj2_title" value="<?php echo $projects["pj2_title"] ?>" id="pj2_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 2:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj2_desc" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
-                                                <label class="form-label">Project 3</label>
+                                                <label class="form-label">Project 3 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj3_title" value="<?php echo $projects["pj3_title"] ?>" id="pj3_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 3:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj3_desc" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
-                                                <label class="form-label">Project 4</label>
+                                                <label class="form-label">Project 4 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj4_title" value="<?php echo $projects["pj4_title"] ?>" id="pj4_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 4:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj4_desc" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
-                                                <label class="form-label">Project 5</label>
+                                                <label class="form-label">Project 5 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj5_title" value="<?php echo $projects["pj5_title"] ?>" id="pj5_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 5:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj5_desc" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
-                                                <label class="form-label">Project 6</label>
+                                                <label class="form-label">Project 6 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj6_title" value="<?php echo $projects["pj6_title"] ?>" id="pj6_title"></input>
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description for project 6:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="pj6_desc" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
-                                                <h5>User Experience</h5>
-                                                <label class="form-label">Client 1</label>
+                                                <h4>(Section 8: User Experience Section)</h4>
+                                                <label class="form-label">Client name 1:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="xp1_name" value="<?php echo $user_experience["xp1_name"] ?>" id="xp1_name"></input>
-                                                <label class="form-label">Statement</label>
+                                                <label class="form-label">Statement for client 1:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp1_comment" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
 
-                                                <label class="form-label">Client 2</label>
+                                                <label class="form-label">Client name 2:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="xp2_name" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
-                                                <label class="form-label">Statement</label>
+                                                <label class="form-label">Statement for client 2:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp2_comment" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
-
-                                                <label class="form-label">Client 3</label>
+ name:
+                                                <label class="form-label">Client name 3:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="xp3_name" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
-                                                <label class="form-label">Statement</label>
+                                                <label class="form-label">Statement for client 3:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="xp3_comment" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
                                             </div>
                                             <div class="border p-3 rounded-3">
-                                                <h5>About</h5>
+                                                <h4>(Section 9: About / Basic information on the company)</h4>
                                                 <label class="form-label">Description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="about" id="about"><?php echo $descs["about"] ?></textarea>
                                             </div>
