@@ -222,10 +222,16 @@ include_once '../../Database/database.php';
                 }
                 var image = document.getElementById("image").files[0];
                 if(IType_value == 'Solar Panel'){
-                    power_checker = 9;
+                    power_checker = 3;
+                    power_checker2 = 10;
+                    power_checker3 = 10;
+                    power_checker4 = 350;
                 }
                 else{
                     power_checker = 20;
+                    power_checker2 = 50000;
+                    power_checker3 = 1000;
+                    power_checker4 = 50000;
                 }
                 if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
                     Swal.fire({
@@ -238,7 +244,7 @@ include_once '../../Database/database.php';
                         }
                     });
                 }
-                else if(PPower_value < 20 && IType_value == 'Generator' || PPower_value <= 3 && IType_value == 'Solar Panel'){
+                else if(PPower_value < 20 && IType_value == 'Generator' ||  PPower_value <= 3 && IType_value == 'Solar Panel' ) {
                     Swal.fire({
                         title: 'ERROR',
                         html: IType_value+" Power output cannot be less than "+ power_checker +".",
@@ -249,6 +255,17 @@ include_once '../../Database/database.php';
                         }
                     });
                 } 
+                else if( PPower_value > 1000 && PPower_value < 50000 && IType_value == 'Generator' ||  PPower_value >= 11 && PPower_value <= 349 && IType_value == 'Solar Panel') {
+                    Swal.fire({
+                        title: 'ERROR',
+                        html: IType_value+" Power output cannot be less than "+ power_checker3 +" or greater than " + power_checker4 + ".",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
                 else if(price_value <= 0){
                     Swal.fire({
                         title: 'ERROR',
