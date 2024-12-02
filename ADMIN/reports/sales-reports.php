@@ -223,22 +223,6 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                                                             <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
                                                                         </div>
                                                                     </div>
-                                                                    <!-- Note -->
-                                                                    <div class="row mb-3">
-                                                                        <div class="col-12">
-                                                                            <strong>Note:</strong>
-                                                                            <p class="text-muted">
-                                                                                Contact us through Chaintercom or email for maintenance/warranty issues. 
-                                                                                <a href="#" class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#maintenanceCoverageModal">Click me to know what is the coverage of maintenance</a>.
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Receipt Button -->
-                                                                    <button 
-                                                                        class="btn btn-primary position-absolute bottom-0 end-0 m-3" 
-                                                                        onclick="generateReceipt('<?= $row_completed['total_cost']; ?>')">
-                                                                        Download Receipt
-                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
