@@ -108,6 +108,7 @@ if(mysqli_num_rows($result) > 0){
             
             $final_status = 'delivery';
             $kanban_status = 'delivery';
+            $status_name = 'pick_up';
           break;
             case 'delivery':
                 $notification = "INSERT INTO notification (message, `from`, user_id)
@@ -116,6 +117,7 @@ if(mysqli_num_rows($result) > 0){
 
                 $final_status = 'arrive';
                 $kanban_status = 'arrive';
+                $status_name = 'delivery';
             break;
                 case 'arrive':
                     //CREATE FUNCTION THAT WILL INSERT ALL THE CHECKLIST TO DATABASE
@@ -166,6 +168,7 @@ if(mysqli_num_rows($result) > 0){
 
                     $final_status = 'ongoing_construction';
                     $kanban_status = 'ongoing_construction';
+                    $status_name = 'arrive';
                 break;
                 case 'ongoing_construction':
                         // Loop through the submitted tasks (checkboxes)
@@ -214,6 +217,7 @@ if(mysqli_num_rows($result) > 0){
                             $notification_result = mysqli_query($conn , $notification);
                             $final_status = 'checking';
                             $kanban_status = 'final_checking';
+                            $status_name = 'ongoing_construction';
                            
                         } else {
                             $notification = "INSERT INTO notification (message, `from`, user_id)
@@ -279,6 +283,7 @@ if(mysqli_num_rows($result) > 0){
                                     $maintenance_result = mysqli_query($conn , $maintenance);
                                     $final_status = 'completed';
                                     $kanban_status = 'completed';
+                                    $status_name = 'checking';
 
                                     //UPDATE WORKER_AVAILABILITY , AND CLIENT AVAILABILITY
                                     $worker_availability = "update worker_availability set is_available = '1' where user_id = '$worker_id'";
@@ -290,6 +295,8 @@ if(mysqli_num_rows($result) > 0){
                                     $result_worker = mysqli_query($conn , $worker_availability);
                                     $result_client = mysqli_query($conn , $client_availability);
                                     $result_booking = mysqli_query($conn , $update_booking);
+                                    $sql_history = "UPDATE service_history SET 'completed' = NOW() WHERE booking_id = '$booking_id_maintenance'";
+                                    mysqli_query($conn , $sql_history);
                                 }   
                                
                                
@@ -314,6 +321,7 @@ if(mysqli_num_rows($result) > 0){
     }
     if(!$final_status == null){
         $upd = "UPDATE worker_ongoing SET status='$final_status' WHERE working_id = '$working_id' AND worker_id = '$worker_id'";
+        $upd2 = "UPDATE service_history SET `$status_name` = NOW() WHERE working_id = '$working_id'";
         $result_upd = mysqli_query($conn ,$upd);
 
         if($service_from = "agent"){
