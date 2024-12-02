@@ -345,6 +345,7 @@
                                                         INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
                                                         INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                                                         INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
+                                                        INNER JOIN service_history on service_history.booking_id = service_booking.booking_id
                                                         WHERE booking_status = 'completed' and service_booking.user_id = '$user_id'";
                                                     $result_completed = mysqli_query($conn, $completed);
                                                     if (mysqli_num_rows($result_completed)) {
@@ -387,6 +388,29 @@
                                                                             <strong>Start Time:</strong>
                                                                             <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
                                                                         </div>
+
+
+                                                                        <div class="col-md-6">
+                                                                            <strong>Pick-up completion time:</strong>
+                                                                            <p id="pick_up_time"><?= htmlspecialchars($row_completed['pick_up']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>Delivery completion time:</strong>
+                                                                            <p id="delivery_time"><?= htmlspecialchars($row_completed['delivery']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>Arrival completion time:</strong>
+                                                                            <p id="arrive_time"><?= htmlspecialchars($row_completed['arrive']); ?></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <strong>Construction completion time:</strong>
+                                                                            <p id="ongoing_construction_time"><?= htmlspecialchars($row_completed['ongoing_construction']); ?></p>
+                                                                        </div><div class="col-md-6">
+                                                                            <strong>Final checking completion time:</strong>
+                                                                            <p id="checking_time"><?= htmlspecialchars($row_completed['checking']); ?></p>
+                                                                        </div>
+
+
                                                                         <div class="col-md-6">
                                                                             <strong>End Time:</strong>
                                                                             <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
