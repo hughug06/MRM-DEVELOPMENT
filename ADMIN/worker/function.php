@@ -322,7 +322,7 @@ if(mysqli_num_rows($result) > 0){
     if(!$final_status == null){
         $upd = "UPDATE worker_ongoing SET status='$final_status' WHERE working_id = '$working_id' AND worker_id = '$worker_id'";
         $upd2 = "UPDATE service_history SET `$status_name` = NOW() WHERE working_id = '$working_id'";
-        $result_upd = mysqli_query($conn ,$upd);
+        $result_upd = mysqli_query($conn ,$upd2);
 
         if($service_from = "agent"){
             // Assuming $conn is your database connection
