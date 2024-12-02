@@ -21,8 +21,8 @@ if (isset($_POST['pick'])) {
              VALUES ('Booking approved', 'payment approved', '$client_id')";
 
     
-    $sql5 = "INSERT INTO `service_history`(`booking_id`, `working_id`, `pick_up`)
-            VALUES ('$booking_id','$working_work_id', NOW())";
+    $sql5 = "INSERT INTO `service_history`(`booking_id`, `working_id`)
+            VALUES ('$booking_id','$working_work_id')";
              
 
     $result2 = mysqli_query($conn , $sql2);
