@@ -63,6 +63,7 @@ $worker_id = $_SESSION['user_id'];
                      INNER JOIN user_info on user_info.user_id = worker_ongoing.client_id  
                      INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                      INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
+                     INNER JOIN service_history on service_history.booking_id = service_booking.booking_id
                      WHERE booking_status = 'completed' and worker_ongoing.worker_id = '$worker_id'";
                      $result_completed = mysqli_query($conn, $completed);
                     if(mysqli_num_rows($result_completed) > 0){
@@ -89,6 +90,40 @@ $worker_id = $_SESSION['user_id'];
                                         <label class="form-label">Start Time</label>
                                         <div class="form-control" readonly>
                                         <?= $row['start_time'] ?>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Pick-up completion time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['pick_up'] ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Delivery completion time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['delivery'] ?>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Arrival time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['arrive'] ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Construction completion time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['ongoing_construction'] ?>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Final checking completion time</label>
+                                        <div class="form-control" readonly>
+                                        <?= $row['checking'] ?>
                                         </div>
                                     </div>
 
