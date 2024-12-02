@@ -332,6 +332,7 @@
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
                                                 <div class="mb-4 main-content-label">Completed</div>
                                                 <div class="card-body border">
+                                                    <div class="row">
                                                 <?php 
                                                     $completed = "SELECT * FROM service_booking
                                                         INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
@@ -434,6 +435,7 @@
                                                     ?>
 
                                             
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="main-content-body tab-pane p-4 border-top-0" id="cancel">
