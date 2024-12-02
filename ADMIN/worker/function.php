@@ -295,8 +295,6 @@ if(mysqli_num_rows($result) > 0){
                                     $result_worker = mysqli_query($conn , $worker_availability);
                                     $result_client = mysqli_query($conn , $client_availability);
                                     $result_booking = mysqli_query($conn , $update_booking);
-                                    $sql_history = "UPDATE service_history SET 'completed' = NOW() WHERE booking_id = '$booking_id_maintenance'";
-                                    mysqli_query($conn , $sql_history);
                                 }   
                                
                                
