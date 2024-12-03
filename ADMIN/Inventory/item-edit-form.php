@@ -401,6 +401,7 @@ global $conn;
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
+                            alert("worjk2");
                             formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
@@ -410,7 +411,6 @@ global $conn;
                                 formData.append('image', image);
                             } // Add the file to FormData
 
-                            alert("worjk2");
                             
                             $.ajax({
                                 url: 'function.php',
