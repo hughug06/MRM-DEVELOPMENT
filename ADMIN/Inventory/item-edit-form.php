@@ -238,9 +238,9 @@ global $conn;
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
-                var phase = document.getElementById("item_phase").value;
                 var stocks = document.getElementById("stocks");
                 var price = document.getElementById("price");
+                var phase = document.getElementById("item_phase").value;
                 var power_checker;
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomPower");
@@ -346,7 +346,7 @@ global $conn;
                             formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
-                            formData.append('WattsKVA', PPower_value);
+                            
                             formData.append('ProductType', IType_value);
                             if (image) {
                                 formData.append('image', image);
@@ -405,7 +405,6 @@ global $conn;
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
-                            alert("worjk3");
                             formData.append('ProductType', IType_value);
                             if (image) {
                                 formData.append('image', image);
