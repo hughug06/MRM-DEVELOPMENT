@@ -275,9 +275,7 @@ include_once '../../Database/database.php';
                                                 <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc1" id="desc1"><?php echo $descs["desc1"] ?></textarea>
                                                 <h5>Images for company introduction Section 1:</h5>
-                                                <input type="file" name="section1_image1" id="section1_image1">
-                                                <input type="file" name="section1_image2" id="section1_image2">
-                                                <input type="file" name="section1_image3" id="section1_image3">
+                                                <input type="file" name="section1_image1" id="section1_image" required>
                                             
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
@@ -301,7 +299,7 @@ include_once '../../Database/database.php';
                                                 <h5>Goal 4 Content:</h5>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="goal4" id="goal4"><?php echo $goals["goal4"] ?></textarea>
                                                 <h5>Image for goals section 3:</h5>
-                                                <input type="file" name="section3_image" id="section3_image" >
+                                                <input type="file" name="section3_image" id="section3_image" required>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>(Section 4: Service Introduction Section)</h4>
@@ -317,7 +315,7 @@ include_once '../../Database/database.php';
                                                 <label class="form-label">Content description</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="desc4" id="desc4"><?php echo $descs["desc4"] ?></textarea>
                                                 <h5>Image for Service Introduction Section 4:</h5>
-                                                <input type="file" name="section5_image" id="section5_image" >
+                                                <input type="file" name="section5_image" id="section5_image" required>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>(Section 6: FAQ's Section / 10 Faq's at a time)</h4>
@@ -377,7 +375,7 @@ include_once '../../Database/database.php';
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="faq_a10" id="faq_a10"><?php echo $faqs["faq_a10"] ?></textarea>
 
                                                 <h5>Image for FAQs:</h5>
-                                                <input type="file" name="section6_image" id="section6_image" >
+                                                <input type="file" name="section6_image" id="section6_image" required>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>(Section 7: Project Showcase Section / 6 Projects at a time)</h4>
@@ -389,42 +387,42 @@ include_once '../../Database/database.php';
                                                 <label class="form-label">Description for project 1:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj1_desc" id="pj1_desc"><?php echo $projects["pj1_desc"] ?></textarea>
                                                 <h5>Image for project 1:</h5>
-                                                <input type="file" name="section7_image1" id="section7_image1" >
+                                                <input type="file" name="section7_image1" id="section7_image1" required>
 
                                                 <label class="form-label">Project 2 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj2_title" value="<?php echo $projects["pj2_title"] ?>" id="pj2_title"></input>
                                                 <label class="form-label">Description for project 2:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj2_desc" id="pj2_desc"><?php echo $projects["pj2_desc"] ?></textarea>
                                                 <h5>Image for project 2:</h5>
-                                                <input type="file" name="section7_image2" id="section7_image2" >
+                                                <input type="file" name="section7_image2" id="section7_image2" required>
 
                                                 <label class="form-label">Project 3 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj3_title" value="<?php echo $projects["pj3_title"] ?>" id="pj3_title"></input>
                                                 <label class="form-label">Description for project 3:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj3_desc" id="pj3_desc"><?php echo $projects["pj3_desc"] ?></textarea>
                                                 <h5>Image for project 3:</h5>
-                                                <input type="file" name="section7_image3" id="section7_image3" >
+                                                <input type="file" name="section7_image3" id="section7_image3" required>
 
                                                 <label class="form-label">Project 4 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj4_title" value="<?php echo $projects["pj4_title"] ?>" id="pj4_title"></input>
                                                 <label class="form-label">Description for project 4:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj4_desc" id="pj4_desc"><?php echo $projects["pj4_desc"] ?></textarea>
                                                 <h5>Image for project 4:</h5>
-                                                <input type="file" name="section7_image4" id="section7_image4">
+                                                <input type="file" name="section7_image4" id="section7_image4" required>
 
                                                 <label class="form-label">Project 5 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj5_title" value="<?php echo $projects["pj5_title"] ?>" id="pj5_title"></input>
                                                 <label class="form-label">Description for project 5:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="pj5_desc" id="pj5_desc"><?php echo $projects["pj5_desc"] ?></textarea>
                                                 <h5>Image for project 5:</h5>
-                                                <input type="file" name="section7_image5" id="section7_image5">
+                                                <input type="file" name="section7_image5" id="section7_image5" required>
 
                                                 <label class="form-label">Project 6 name:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="pj6_title" value="<?php echo $projects["pj6_title"] ?>" id="pj6_title"></input>
                                                 <label class="form-label">Description for project 6:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="pj6_desc" id="pj6_desc"><?php echo $projects["pj6_desc"] ?></textarea>
                                                 <h5>Image for project 6:</h5>
-                                                <input type="file" name="section7_image6" id="section7_image6" >
+                                                <input type="file" name="section7_image6" id="section7_image6" required>
                                             </div>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>(Section 8: User Experience Section)</h4>
@@ -433,21 +431,21 @@ include_once '../../Database/database.php';
                                                 <label class="form-label">Statement for client 1:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp1_comment" id="xp1_comment"><?php echo $user_experience["xp1_comment"] ?></textarea>
                                                 <h5>Image for user experience 1:</h5>
-                                                <input type="file" name="section8_image1" id="section8_image1" >
+                                                <input type="file" name="section8_image1" id="section8_image1" required>
                                                 
                                                 <label class="form-label">Client name 2:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="xp2_name" value="<?php echo $user_experience["xp2_name"] ?>" id="xp2_name"></input>
                                                 <label class="form-label">Statement for client 2:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black mb-4" name="xp2_comment" id="xp2_comment"><?php echo $user_experience["xp2_comment"] ?></textarea>
                                                 <h5>Image for user experience 2:</h5>
-                                                <input type="file" name="section8_image2" id="section8_image2" >
+                                                <input type="file" name="section8_image2" id="section8_image2" required>
 
                                                 <label class="form-label">Client name 3:</label>
                                                 <input type="text" class="form-control text-black mb-2" name="xp3_name" value="<?php echo $user_experience["xp3_name"] ?>" id="xp3_name"></input>
                                                 <label class="form-label">Statement for client 3:</label>
                                                 <textarea rows="6" class="col-xl-12 col-md-12 col-12 form-control text-black" name="xp3_comment" id="xp3_comment"><?php echo $user_experience["xp3_comment"] ?></textarea>
                                                 <h5>Image for user experience 3:</h5>
-                                                <input type="file" name="section8_image3" id="section8_image3" >
+                                                <input type="file" name="section8_image3" id="section8_image3" required>
                                             </div>
                                             <div class="border p-3 rounded-3">
                                                 <h4>(Section 9: About / Basic information on the company)</h4>

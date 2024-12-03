@@ -59,6 +59,31 @@
     $xp3_name = $_POST['xp3_name'];
     $xp3_comment = $_POST['xp3_comment'];
     $about = $_POST['about'];
+
+
+    // Store uploaded image paths
+    $uploadedImages = [];
+
+    // Loop through the $_FILES array
+    foreach ($_FILES as $key => $file) {
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            // Generate a unique name for the file
+            $uploadDir = '../../assets/images/temp/';
+            $fileName = basename($file['name']);
+            $uniqueFilePath = $uploadDir . uniqid() . '_' . $fileName;
+
+            // Ensure the upload directory exists
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            // Move the file to the upload directory
+            if (move_uploaded_file($file['tmp_name'], $uniqueFilePath)) {
+                // Store the file path for displaying later
+                $uploadedImages[] = $uniqueFilePath;
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -175,7 +200,7 @@
         alt=""
         class="decoration-star-2 position-absolute"
       />
-
+      
       <div class="container position-relative z-3">
         <div class="row">
           <div class="col-lg-6">
@@ -199,8 +224,9 @@
           </div>
           <div class="col-lg-6 my-auto">
             <div class="image-container">
+              
               <img
-                src="../../assets/landing_assets/images/hero-img.png"
+                src="<?php echo htmlspecialchars($uploadedImages[0]); ?>"
                 alt=""
                 class="img-fluid"
               />
@@ -261,7 +287,7 @@
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="../../assets/landing_assets/images/mrm_images/details-2.png"
+                src="<?php echo htmlspecialchars($uploadedImages[1]); ?>"
                 alt=""
                 class="img-fluit"
               />
@@ -384,7 +410,7 @@
           <div class="col-lg-6">
             <div class="image-container">
               <img
-                src="../../assets/landing_assets/images/details-2.png"
+                src="<?php echo htmlspecialchars($uploadedImages[2]); ?>"
                 class="img-fluid"
               />
             </div>
@@ -695,7 +721,7 @@
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="../../assets/landing_assets/images/article-details-small.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[3]); ?>"
                 alt=""
                 class="img-fluid rounded-3"
               />
@@ -714,7 +740,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-1.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[4]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -730,7 +756,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-2.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[5]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -746,7 +772,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-3.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[6]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -764,7 +790,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-4.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[7]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -780,7 +806,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-5.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[8]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -796,7 +822,7 @@
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="../../assets/landing_assets/images/mrm_images/project-6.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[9]); ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -821,7 +847,7 @@
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="../../assets/landing_assets/images/testimonial-1.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[10]); ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -839,7 +865,7 @@
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="../../assets/landing_assets/images/testimonial-2.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[11]); ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -857,7 +883,7 @@
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="../../assets/landing_assets/images/testimonial-3.jpg"
+                src="<?php echo htmlspecialchars($uploadedImages[12]); ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
