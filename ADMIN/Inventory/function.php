@@ -12,7 +12,9 @@ if(isset($_POST['AddItem']))
   $Description = $_POST['Description'];
   $phase = $_POST['item_phase'];
   $Specification = $_POST['Specification'];
-  $price = $_POST['price'];
+  $temp_price = $_POST['price'];
+  $markup = $temp_price * 0.1;
+  $price = $temp_price + $markup;
   $WattsKVA = $_POST['WattsKVA'];
 
   if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
@@ -129,7 +131,9 @@ elseif(isset($_POST['save'])){
   $phase=$_POST['item_phase'];
   $Specification=$_POST['Specification'];
   $stocks = $_POST['stocks'];
-  $price=$_POST['price'];
+  $temp_price = $_POST['price'];
+  $markup = $temp_price * 0.1;
+  $price = $temp_price + $markup;
   $edit_type = $_POST['editType'];
   $WattsKVA = $_POST['WattsKVA'];
   $ProductType = $_POST['ProductType'];
