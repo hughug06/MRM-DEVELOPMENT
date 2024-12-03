@@ -402,10 +402,10 @@ global $conn;
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
                             formData.append('item_phase', phase);
-                            alert("worjk2");
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
+                            alert("worjk3");
                             formData.append('ProductType', IType_value);
                             if (image) {
                                 formData.append('image', image);
