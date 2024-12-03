@@ -154,13 +154,12 @@ if(isset($_POST['save'])){
     $json_xp = json_encode($xp);
 
     $images = [];
-    // Loop through POST data
-    foreach ($_POST as $key => $value) {
-        // Only process keys that start with 'image' (these represent images)
-        if (strpos($key, 'image') === 0 && isset($_FILES[$key])) {
-            // Handle the image upload from $_FILES based on the 'image' key
 
-            $file = $_FILES[$key];
+    // Loop through the files in $_FILES
+    foreach ($_FILES as $key => $file) {
+        // Only process keys that start with 'image' (these represent images)
+        if (strpos($key, 'image') === 0 && $file['error'] === UPLOAD_ERR_OK) {
+            // Handle the image upload from $_FILES based on the 'image' key
 
             // Check if there is an uploaded file and no errors
             if ($file['error'] === UPLOAD_ERR_OK) {
@@ -185,6 +184,8 @@ if(isset($_POST['save'])){
             }
         }
     }
+
+    // Convert the images array to JSON
     $imagesJson = json_encode($images);
 
 
