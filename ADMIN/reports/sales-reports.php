@@ -147,13 +147,28 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                                 <div class="card-body border">
                                                     <div class="row">
                                                 <?php 
-                                                    $completed = "SELECT * FROM service_booking
-                                                        INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
-                                                        INNER JOIN user_info on user_info.user_id = service_booking.user_id  
-                                                        INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
-                                                        INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
-                                                        INNER JOIN service_history on service_history.booking_id = service_booking.booking_id
-                                                        WHERE booking_status = 'completed'";
+                                                    $completed = "SELECT 
+    service_booking.*,
+    worker_ongoing.*,
+    worker_info.user_id AS worker_id,
+    worker_info.name AS worker_name,
+    worker_info.email AS worker_email,
+    client_info.user_id AS client_id,
+    client_info.name AS client_name,
+    client_info.email AS client_email,
+    service_payment.*,
+    maintenance_complete.*,
+    service_history.*
+FROM 
+    service_booking
+    INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id
+    INNER JOIN user_info AS worker_info ON worker_info.user_id = worker_ongoing.worker_id
+    INNER JOIN user_info AS client_info ON client_info.user_id = service_booking.client_id
+    INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
+    INNER JOIN maintenance_complete ON maintenance_complete.booking_id = service_booking.booking_id
+    INNER JOIN service_history ON service_history.booking_id = service_booking.booking_id
+WHERE 
+    service_booking.booking_status = 'completed'";
                                                     $result_completed = mysqli_query($conn, $completed);
                                                     if (mysqli_num_rows($result_completed)) {
                                                         while ($row_completed = mysqli_fetch_assoc($result_completed)) {
