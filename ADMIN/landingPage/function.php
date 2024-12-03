@@ -189,7 +189,7 @@ if(isset($_POST['save'])){
 
 
     // Prepare the SQL query with placeholders
-$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? images=? WHERE id=?";
+$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? WHERE id=?";
 
 // Prepare the statement
 $stmt = mysqli_prepare($conn, $sql);
@@ -197,7 +197,7 @@ $stmt = mysqli_prepare($conn, $sql);
 // Bind the parameters
 mysqli_stmt_bind_param(
     $stmt, 
-    'ssssssis',  // 's' for string (for json data), 'i' for integer (for the id)
+    'ssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
     $json_title, 
     $json_desc, 
     $json_goals, 
@@ -205,7 +205,6 @@ mysqli_stmt_bind_param(
     $json_projects, 
     $json_xp, 
     $id,
-    $imagesJson
 );
 
 // Execute the query
