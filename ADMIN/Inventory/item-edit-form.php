@@ -399,13 +399,15 @@ global $conn;
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('save', true);
+                            formData.append('id', item_id_value);
                             formData.append('ProductName', IName_value);
+                            formData.append('editType', 'item');
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
-                            formData.append('Availability', availability);
+                            formData.append('Availability', availability_ID_value);
                             formData.append('item_phase', phase);
-                            formData.append('Description', description);
-                            formData.append('Specification', specification);
+                            formData.append('Description', description_ID_value);
+                            formData.append('Specification', specification_ID_value);
                             formData.append('WattsKVA', PPower_value);
                             formData.append('ProductType', IType_value);
                             if (image) {
