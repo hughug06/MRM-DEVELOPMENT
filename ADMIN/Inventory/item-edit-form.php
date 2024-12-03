@@ -364,8 +364,8 @@ global $conn;
                                 success: function(response) {
                                     // Handle successful add
                                     Swal.fire({
-                                        title: 'Product Added!',
-                                        text: 'You have successfully added the product.',
+                                        title: 'Product Edited!',
+                                        text: 'You have successfully Edited the product.',
                                         icon: 'success',
                                         allowOutsideClick: false,
                                         timer: 2000, // 2 seconds timer
@@ -379,7 +379,7 @@ global $conn;
                                     // Handle erro
                                     Swal.fire(
                                         'Error!',
-                                        'There was an error Adding product. Please try again.',
+                                        'There was an error Editing the product. Please try again.',
                                         'error'
                                     );
                                 }
@@ -425,8 +425,8 @@ global $conn;
                                 success: function(response) {
                                     // Handle successful add
                                     Swal.fire({
-                                        title: 'Product Added!',
-                                        text: 'You have successfully added the product.',
+                                        title: 'Product Edited!',
+                                        text: 'You have successfully Edited the product.',
                                         icon: 'success',
                                         allowOutsideClick: false,
                                         timer: 2000, // 2 seconds timer
@@ -440,7 +440,7 @@ global $conn;
                                     // Handle erro
                                     Swal.fire(
                                         'Error!',
-                                        'There was an error Adding product. Please try again.',
+                                        'There was an error Editing the product. Please try again.',
                                         'error'
                                     );
                                 }
