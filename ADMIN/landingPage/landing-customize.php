@@ -584,13 +584,6 @@ include_once '../../Database/database.php';
 
                 var images = document.querySelectorAll('.img_get');
 
-                images.forEach(function (img, index) {
-                    // Get the image source (src attribute)
-                    var imgSrc = img.src;
-
-                    // Append each image source to the FormData object
-                    formData.append('image' + index, imgSrc);
-                });
 
                 const array_checker = [
                     title1, title2, desc1, desc2, desc3, desc4, goal1, goal2, goal3, goal4,
@@ -653,6 +646,13 @@ include_once '../../Database/database.php';
                             formData.append('xp1_name', xp1_name); formData.append('xp2_name', xp2_name); formData.append('xp3_name', xp3_name);
                             formData.append('xp1_comment', xp1_comment); formData.append('xp2_comment', xp2_comment); formData.append('xp3_comment', xp3_comment);
                             formData.append('about', about);
+                            images.forEach(function (img, index) {
+                                // Get the image source (src attribute)
+                                var imgSrc = img.src;
+
+                                // Append each image source to the FormData object
+                                formData.append('image' + index, imgSrc);
+                            });
                             
                             $.ajax({
                                 url: 'function.php',
