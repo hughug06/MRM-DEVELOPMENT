@@ -129,8 +129,8 @@ global $conn;
                                             <label class="form-label">Select Product Phase:</label>
                                             <select id="item_phase" class="form-select py-2" required>
                                                 <option value="">Select Phase</option>
-                                                <option <?= $item_phase == "2phase"? 'selected value="2phase"':'value="2phase"'?>>2-Phase</option>
-                                                <option <?= $item_phase == "3phase"? 'selected value="3phase"':'value="3phase"'?>>3-Phase</option>
+                                                <option <?= $phase == "2phase"? 'selected value="2phase"':'value="2phase"'?>>2-Phase</option>
+                                                <option <?= $phase == "3phase"? 'selected value="3phase"':'value="3phase"'?>>3-Phase</option>
                                             </select>
                                         </div>
                                         <div id="power_input_display" class="col-md-6 mb-3">
