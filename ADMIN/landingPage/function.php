@@ -154,10 +154,35 @@ if(isset($_POST['save'])){
     $json_xp = json_encode($xp);
 
     $images = [];
+    // Loop through POST data
     foreach ($_POST as $key => $value) {
         // Only process keys that start with 'image' (these represent images)
-        if (strpos($key, 'image') === 0) {
-            $images[] = $value; // Append the image URL to the images array
+        if (strpos($key, 'image') === 0 && isset($_FILES[$key])) {
+            // Handle the image upload from $_FILES based on the 'image' key
+
+            $file = $_FILES[$key];
+
+            // Check if there is an uploaded file and no errors
+            if ($file['error'] === UPLOAD_ERR_OK) {
+                // Generate a unique name for the file
+                $uploadDir = '../../assets/images/landing/';
+                $fileName = basename($file['name']);
+                $uniqueFilePath = $uploadDir . uniqid() . '_' . $fileName;
+
+                // Ensure the upload directory exists
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                // Move the uploaded file to the specified directory
+                if (move_uploaded_file($file['tmp_name'], $uniqueFilePath)) {
+                    // Store the file path in the images array
+                    $images[] = $uniqueFilePath;
+                }
+            } else {
+                // If there's an error, you can add a message or handle the error as needed
+                echo "Error uploading the file: " . $file['name'];
+            }
         }
     }
     $imagesJson = json_encode($images);
