@@ -238,7 +238,7 @@ global $conn;
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
-                var phase = document.getElementById("item_phase").value;
+                // var phase = document.getElementById("item_phase").value;
                 var stocks = document.getElementById("stocks");
                 var price = document.getElementById("price");
                 var power_checker;
@@ -271,7 +271,7 @@ global $conn;
                     power_checker3 = 50000;
                     power_checker4 = 750000;
                 }
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" || phase == ""){
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -343,7 +343,7 @@ global $conn;
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
-                            formData.append('item_phase', phase);
+                            // formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
