@@ -338,7 +338,7 @@ global $conn;
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
-                            formData.append('AddItem', true);
+                            formData.append('save', true);
                             formData.append('ProductName', IName_value);
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
