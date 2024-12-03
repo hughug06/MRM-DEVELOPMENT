@@ -153,9 +153,18 @@ if(isset($_POST['save'])){
     $json_projects = json_encode($projects);
     $json_xp = json_encode($xp);
 
+    $images = [];
+    foreach ($_POST as $key => $value) {
+        // Only process keys that start with 'image' (these represent images)
+        if (strpos($key, 'image') === 0) {
+            $images[] = $value; // Append the image URL to the images array
+        }
+    }
+    $imagesJson = json_encode($images);
+
 
     // Prepare the SQL query with placeholders
-$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? WHERE id=?";
+$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? images=? WHERE id=?";
 
 // Prepare the statement
 $stmt = mysqli_prepare($conn, $sql);
@@ -163,14 +172,15 @@ $stmt = mysqli_prepare($conn, $sql);
 // Bind the parameters
 mysqli_stmt_bind_param(
     $stmt, 
-    'ssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
+    'ssssssis',  // 's' for string (for json data), 'i' for integer (for the id)
     $json_title, 
     $json_desc, 
     $json_goals, 
     $json_faqs, 
     $json_projects, 
     $json_xp, 
-    $id
+    $id,
+    $imagesJson
 );
 
 // Execute the query
