@@ -394,7 +394,6 @@ global $conn;
                         showCancelButton: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            alert("worjk2");
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
                             formData.append('AddItem', true);
@@ -410,6 +409,8 @@ global $conn;
                             if (image) {
                                 formData.append('image', image);
                             } // Add the file to FormData
+
+                            alert("worjk2");
                             
                             $.ajax({
                                 url: 'function.php',
