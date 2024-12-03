@@ -335,6 +335,7 @@ global $conn;
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
                     }).then((result) => {
+                        alert("worjk1");
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
@@ -393,6 +394,7 @@ global $conn;
                         confirmButtonText: 'Confirm',
                         showCancelButton: true
                     }).then((result) => {
+                        alert("worjk2");
                         if (result.isConfirmed) {
                             // If user confirms, send AJAX request for Add product
                             var formData = new FormData();
