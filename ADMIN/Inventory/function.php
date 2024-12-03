@@ -13,8 +13,18 @@ if(isset($_POST['AddItem']))
   $phase = $_POST['item_phase'];
   $Specification = $_POST['Specification'];
   $temp_price = $_POST['price'];
-  $markup = $temp_price * 0.1;
-  $price = $temp_price + $markup;
+
+  $sqlgetmarkup = "SELECT markup_percentage FROM service_markup WHERE markup_id = 1";
+  $result = mysqli_query($conn, $sqlgetmarkup);
+  if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $markup_value = $row['markup_percentage'] / 100;
+}
+  
+
+$markup = $temp_price * $markup_value;
+$price = $temp_price + $markup;
+
   $WattsKVA = $_POST['WattsKVA'];
 
   if($ProductName != '' || $WattsKVA != '' || $ProductType != ''){  
@@ -132,8 +142,17 @@ elseif(isset($_POST['save'])){
   $Specification=$_POST['Specification'];
   $stocks = $_POST['stocks'];
   $temp_price = $_POST['price'];
-  $markup = $temp_price * 0.1;
+  $sqlgetmarkup = "SELECT markup_percentage FROM service_markup WHERE markup_id = 1";
+  $result = mysqli_query($conn, $sqlgetmarkup);
+  if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $markup_value = $row['markup_percentage'] / 100;
+}
+  
+
+  $markup = $temp_price * $markup_value;
   $price = $temp_price + $markup;
+
   $edit_type = $_POST['editType'];
   $WattsKVA = $_POST['WattsKVA'];
   $ProductType = $_POST['ProductType'];
