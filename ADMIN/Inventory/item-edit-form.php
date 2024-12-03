@@ -11,6 +11,7 @@ global $conn;
   $success="";
   $price="";
   $power_output="";
+  $phase="";
 
   if($_SERVER["REQUEST_METHOD"]=='GET'){
     if(!isset($_GET['id'])){
