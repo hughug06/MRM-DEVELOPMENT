@@ -345,8 +345,7 @@ global $conn;
                             formData.append('Availability', availability);
                             formData.append('item_phase', phase);
                             formData.append('Description', description);
-                            formData.append('Specification', specification);
-                            
+                            formData.append('WattsKVA', PPower_value);
                             formData.append('ProductType', IType_value);
                             if (image) {
                                 formData.append('image', image);
