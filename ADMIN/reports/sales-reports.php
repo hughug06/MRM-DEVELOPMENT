@@ -149,7 +149,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                                 <?php 
                                                     $completed = "SELECT * FROM service_booking
                                                         INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id  
-                                                        INNER JOIN user_info on user_info.user_id = worker_ongoing.worker_id    
+                                                        INNER JOIN user_info on user_info.user_id = service_booking.user_id  
                                                         INNER JOIN service_payment on service_payment.booking_id = service_booking.booking_id 
                                                         INNER JOIN maintenance_complete on maintenance_complete.booking_id = service_booking.booking_id 
                                                         INNER JOIN service_history on service_history.booking_id = service_booking.booking_id
