@@ -189,7 +189,7 @@ if(isset($_POST['save'])){
 
 
     // Prepare the SQL query with placeholders
-$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? images=? WHERE id=?";
+$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=?, images=? WHERE id=?";
 
 // Prepare the statement
 $stmt = mysqli_prepare($conn, $sql);
