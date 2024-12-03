@@ -197,7 +197,7 @@ $stmt = mysqli_prepare($conn, $sql);
 // Bind the parameters
 mysqli_stmt_bind_param(
     $stmt, 
-    'ssssssis',  // 's' for string (for json data), 'i' for integer (for the id)
+    'sssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
     $json_title, 
     $json_desc, 
     $json_goals, 
