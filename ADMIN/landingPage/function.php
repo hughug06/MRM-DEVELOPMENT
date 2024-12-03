@@ -205,7 +205,7 @@ mysqli_stmt_bind_param(
     $json_projects, 
     $json_xp, 
     $imagesJson,
-    $id,
+    $id
 );
 
 // Execute the query
