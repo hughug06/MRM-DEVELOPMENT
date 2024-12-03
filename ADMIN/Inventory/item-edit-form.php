@@ -28,6 +28,7 @@ global $conn;
 
     $item_name=$row["ProductName"];
     $Availability = $row["Availability"];
+    $phase = $row["item_phase"];
     $Image = $row["Image"];
     $Description = $row["Description"];
     $Specification = $row["Specification"];
@@ -121,6 +122,14 @@ global $conn;
                                             <select id="item_type" class="form-select py-2">
                                                 <option <?= $item_type == "Generator"? 'selected value="Generator"':'value="Generator"'?>>Generator</option>
                                                 <option <?= $item_type == "Solar Panel"? 'selected value="Solar Panel"':'value="Solar Panel"'?>>Solar Panel</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Select Product Phase:</label>
+                                            <select id="item_phase" class="form-select py-2" required>
+                                                <option value="">Select Phase</option>
+                                                <option <?= $item_phase == "2phase"? 'selected value="2phase"':'value="2phase"'?>>2-Phase</option>
+                                                <option <?= $item_phase == "3phase"? 'selected value="3phase"':'value="3phase"'?>>3-Phase</option>
                                             </select>
                                         </div>
                                         <div id="power_input_display" class="col-md-6 mb-3">
@@ -228,6 +237,7 @@ global $conn;
                 var specification_ID = document.getElementById("Specification");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
+                var phase = document.getElementById("item_phase").value;
                 var stocks = document.getElementById("stocks");
                 var price = document.getElementById("price");
                 var power_checker;
@@ -260,7 +270,7 @@ global $conn;
                     power_checker3 = 50000;
                     power_checker4 = 750000;
                 }
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" || phase == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -332,6 +342,7 @@ global $conn;
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
+                            formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
@@ -389,6 +400,7 @@ global $conn;
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
+                            formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);

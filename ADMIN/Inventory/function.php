@@ -10,6 +10,7 @@ if(isset($_POST['AddItem']))
   $stocks = $_POST['stocks'];
   $Availability = $_POST['Availability'] == true ? 1:0;
   $Description = $_POST['Description'];
+  $phase = $_POST['item_phase'];
   $Specification = $_POST['Specification'];
   $price = $_POST['price'];
   $WattsKVA = $_POST['WattsKVA'];
@@ -28,8 +29,8 @@ if(isset($_POST['AddItem']))
         $upload = '../../assets/images/Product-Images/'.$ImageFileName;
         move_uploaded_file($ImageTempName,$upload);
 
-        $sql_insert = "insert into products (ProductName,ProductType, Watts_KVA ,Availability, Image, Description, Specification, stock, price) 
-                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$price')";
+        $sql_insert = "insert into products (ProductName,ProductType, item_phase, Watts_KVA ,Availability, Image, Description, Specification, stock, price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$phase' ,  '$WattsKVA' , '$Availability', '$uploadedImage', '$Description' , '$Specification', '$stocks', '$price')";
           if (mysqli_query($conn, $sql_insert)) {
             $user_id = $_SESSION['user_id'];
             $sql_get_userinfo = "select * from user_info where user_id = $user_id";
@@ -57,8 +58,8 @@ if(isset($_POST['AddItem']))
     }
     //WITHOUT IMAGE SUBMISSION
     else{                                                               
-      $sql_insert = "INSERT INTO products (ProductName,ProductType,Watts_KVA,Availability, Image, Description, Specification, stock, price) 
-                          VALUES ('$ProductName' , '$ProductType' , '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$price')";
+      $sql_insert = "INSERT INTO products (ProductName,ProductType, item_phase , Watts_KVA,Availability, Image, Description, Specification, stock, price) 
+                          VALUES ('$ProductName' , '$ProductType' , '$phase' ,   '$WattsKVA' , '$Availability', NULL, '$Description', '$Specification', '$stocks', '$price')";
           if (mysqli_query($conn, $sql_insert)) {
               $user_id = $_SESSION['user_id'];
               $sql_get_userinfo = "select * from user_info where user_id = $user_id";
@@ -125,6 +126,7 @@ elseif(isset($_POST['save'])){
   $ProductName = $_POST["ProductName"];
   $Availability = $_POST['Availability'] == true ? 1:0;
   $Description=$_POST['Description'];
+  $phase=$_POST['item_phase'];
   $Specification=$_POST['Specification'];
   $stocks = $_POST['stocks'];
   $price=$_POST['price'];
@@ -146,7 +148,7 @@ elseif(isset($_POST['save'])){
           $upload = '../../assets/images/Product-Images/'.$ImageFileName;
           move_uploaded_file($ImageTempName,$upload);
 
-          $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', Watts_KVA='$WattsKVA', Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
+          $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', item_phase='$phase' ,  Watts_KVA='$WattsKVA', Availability= '$Availability', Image= '$uploadedImage', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
             //LOG FOR EDIT PRODUCT
@@ -175,7 +177,7 @@ elseif(isset($_POST['save'])){
   }
   //WITHOUT IMAGE SUBMISSION
   else{
-      $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', Watts_KVA='$WattsKVA', Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
+      $sql = "update products set ProductName= '$ProductName', ProductType ='$ProductType', item_phase='$phase' , Watts_KVA='$WattsKVA', Availability= '$Availability', Description='$Description', Specification='$Specification', stock='$stocks', price='$price' where ProductID='$id'";
           $result = mysqli_query($conn , $sql);
           
           //LOG FOR EDIT PRODUCT

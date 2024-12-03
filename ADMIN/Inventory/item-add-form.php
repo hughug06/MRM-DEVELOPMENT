@@ -88,6 +88,14 @@ include_once '../../Database/database.php';
                                                 <option value="Solar Panel">Solar Panel</option>
                                             </select>
                                         </div>
+                                        <div class="col-xl-12 mb-3">
+                                            <label class="form-label">Select Product Phase:</label>
+                                            <select id="item_phase" class="form-select py-2" required>
+                                                <option value="">Select Phase</option>
+                                                <option value="2phase">2-Phase</option>
+                                                <option value="3phase">3-Phase</option>
+                                            </select>
+                                        </div>
                                         <div id="power_input_display" class="col-md-6 col-6 mb-3">
                                             <label class="form-label">Power Output of the product (Watts/KVA)</label>
                                             <select id="power_list" class="form-select py-2" name="power_output">
@@ -201,6 +209,7 @@ include_once '../../Database/database.php';
                 var specification_ID = document.getElementById("Specs");
                 var description_ID = document.getElementById("Description");
                 var availability_ID = document.getElementById("availability");
+                var phase = document.getElementById("item_phase").value;
                 var power_checker;
                 if(customCheckbox.checked){
                     var PPower = document.getElementById("InputCustomPower");
@@ -230,7 +239,7 @@ include_once '../../Database/database.php';
                     power_checker3 = 50000;
                     power_checker4 = 750000;
                 }
-                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" ){
+                if(IName_value == "" || IType_value == "" || PPower_value == "" || stocks.value == "" || price.value == "" || phase == ""){
                     Swal.fire({
                         title: 'ERROR',
                         html: "There seems to be missing information. Please complete the form",
@@ -302,6 +311,7 @@ include_once '../../Database/database.php';
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
+                            formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
@@ -359,6 +369,7 @@ include_once '../../Database/database.php';
                             formData.append('stocks', stocks_value);
                             formData.append('price', price_value);
                             formData.append('Availability', availability);
+                            formData.append('item_phase', phase);
                             formData.append('Description', description);
                             formData.append('Specification', specification);
                             formData.append('WattsKVA', PPower_value);
