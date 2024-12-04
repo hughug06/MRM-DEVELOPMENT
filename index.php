@@ -85,7 +85,7 @@ if (isset($_SESSION['success_message'])) {
             $faqs = json_decode($row["faq"], true);
             $projects = json_decode($row["projects"], true);
             $user_experience = json_decode($row["user_experience"], true);
-            $imageNamesString = json_decode($row['image_names']);
+            $imageNamesString = json_decode($row["images"]);
 
               // Split the comma-separated string into an array
               $imageNames = explode(',', $imageNamesString);
