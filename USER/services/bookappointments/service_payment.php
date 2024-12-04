@@ -17,7 +17,7 @@ if($agent_mode){
     $pin_location = $_POST['location'];
     $availability_id = $_POST['availability_id'];
     $totalCost = 0;
-    $sql = 'SELECT ProductName FROM products where ProductID = ?';
+    $sql = 'SELECT * FROM products where ProductID = ?';
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("i", $product_id);
         $stmt->execute();
