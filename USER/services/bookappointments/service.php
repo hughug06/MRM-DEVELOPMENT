@@ -199,6 +199,9 @@ $count = mysqli_fetch_assoc($result3);
 
                         }
                         ?>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
                         Avail Now
                         </button>
