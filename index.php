@@ -181,7 +181,7 @@ if (isset($_SESSION['success_message'])) {
                 
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
-                More Details
+                More Details  <?php echo $imageNames[0] ?>
               </a>
               <a href="#contact" class="btn btn-outline-secondary btn-lg m-2">
                 Contact Us
