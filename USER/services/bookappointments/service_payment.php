@@ -1,132 +1,80 @@
 <?php
 //get the data from service.php after the book trigger
-session_start();
+
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'save') {
-    $user_id = $_POST['user_id'];
-    $page_data = $_POST['page_data'];
-    $current_time = date('Y-m-d H:i:s');
+$markup = "select * from service_markup";
+$markup_result = mysqli_query($conn , $markup);
+$row_mark = mysqli_fetch_assoc($markup_result);
 
-    // Check if there's an existing saved page for the user
-    $sql = "SELECT * FROM saved_pages WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Update existing saved page
-        $sql_update = "UPDATE saved_pages SET page_data = ?, updated_at = ? WHERE user_id = ?";
-        $stmt_update = $conn->prepare($sql_update);
-        $stmt_update->bind_param('ssi', $page_data, $current_time, $user_id);
-        $stmt_update->execute();
-    } else {
-        // Insert new saved page
-        $sql_insert = "INSERT INTO saved_pages (user_id, page_data, updated_at) VALUES (?, ?, ?)";
-        $stmt_insert = $conn->prepare($sql_insert);
-        $stmt_insert->bind_param('iss', $user_id, $page_data, $current_time);
-        $stmt_insert->execute();
-    }
-
-    echo json_encode(['status' => 'success']);
-}
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_POST['user_id'];
-
-    // Retrieve the saved page data for the user
-    $sql = "SELECT * FROM saved_pages WHERE user_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo json_encode(['page_data' => $row['page_data']]);
-    } else {
-        echo json_encode(['page_data' => null]);
-    }
-}
-
-
-else{
-
-    $markup = "select * from service_markup";
-    $markup_result = mysqli_query($conn , $markup);
-    $row_mark = mysqli_fetch_assoc($markup_result);
-
-    $service_type = $_POST['serviceType']; 
-    $product_type = $_POST['productType'];
-    $agent_mode = isset($_POST['agentmode']) ? true : false;
-    if($agent_mode){
-        $product_id = $_POST['product_id'];
-        $quantity = $_POST['quantity']; 
-        $pin_location = $_POST['location'];
-        $availability_id = $_POST['availability_id'];
-        $totalCost = 0;
-        $sql = 'SELECT * FROM products where ProductID = ?';
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("i", $product_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $brand = $row['ProductName'];
-                    
-                }
+$service_type = $_POST['serviceType']; 
+$product_type = $_POST['productType'];
+$agent_mode = isset($_POST['agentmode']) ? true : false;
+if($agent_mode){
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity']; 
+    $pin_location = $_POST['location'];
+    $availability_id = $_POST['availability_id'];
+    $totalCost = 0;
+    $sql = 'SELECT * FROM products where ProductID = ?';
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $brand = $row['ProductName'];
+                
             }
         }
     }
+}
 
-    //NOT CUSTOM
-    $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
-    //CUSTOM INPUT
-    $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
-    if($option1){
-        $is_custom = 0;
-        $brand = $option1;
-    }
-    else if($option2){
-        $is_custom = 1;
-        $brand = $option2;
-    }
+ //NOT CUSTOM
+ $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
+ //CUSTOM INPUT
+ $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
+ if($option1){
+    $is_custom = 0;
+    $brand = $option1;
+ }
+ else if($option2){
+    $is_custom = 1;
+    $brand = $option2;
+ }
 
 
-    if (isset($_POST['installation_submit'])) {
-    
-            $totalCost = 0;
-        //4 HIDDEN DATA
-            $availability_id = $_POST['availability_id'];
+if (isset($_POST['installation_submit'])) {
+ 
+        $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
 
-            //user input
-            $pin_location = $_POST['location'];
-            $quantity = $_POST['quantity'];  
-            $get_price = "select * from products where ProductName = '$brand'";
-            $price_exec = mysqli_query($conn , $get_price);
-            $price = mysqli_fetch_assoc($price_exec); 
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $get_price = "select * from products where ProductName = '$brand'";
+        $price_exec = mysqli_query($conn , $get_price);
+        $price = mysqli_fetch_assoc($price_exec); 
+       
+
         
 
-            
+}
+else if(isset($_POST['tuneup_submit'])){
+    $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
 
-    }
-    else if(isset($_POST['tuneup_submit'])){
-        $totalCost = 0;
-        //4 HIDDEN DATA
-            $availability_id = $_POST['availability_id'];
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $kva = $_POST['kva'];
+        $running_hours = $_POST['running_hours'];
+        $brand = $_POST['brand'];
+        
 
-            //user input
-            $pin_location = $_POST['location'];
-            $quantity = $_POST['quantity'];  
-            $kva = $_POST['kva'];
-            $running_hours = $_POST['running_hours'];
-            $brand = $_POST['brand'];
-            
-
-    }
 }
 ?>
 
@@ -1186,52 +1134,6 @@ else{
         }
 
     });
-</script>
-
-<script>
-    // Flag to ensure data is not saved when proceeding with payment
-    let isProceedingWithPayment = false;
-
-    // Detect page unload event
-    window.addEventListener('beforeunload', function (e) {
-        if (!isProceedingWithPayment) {
-            savePageData();
-        }
-    });
-
-    // Function to handle saving page data when user leaves
-    function savePageData() {
-        const pageData = {
-            service_type: '<?= $service_type ?>',
-            product_type: '<?= $product_type ?>',
-            pin_location: '<?= $pin_location ?>',
-            total_amount: '<?= htmlspecialchars(number_format($final_value, 2)) ?>',
-            rows_generator: <?= json_encode($rows_generator) ?>,
-        };
-
-        // Send AJAX request to save the page data
-        $.ajax({
-            url: 'save_page_data.php',
-            method: 'POST',
-            data: {
-                action: 'save',
-                page_data: JSON.stringify(pageData),
-                user_id: '<?= $_SESSION['user_id'] ?>' // Assuming user_id is stored in session
-            },
-            success: function(response) {
-                console.log('Page data saved successfully');
-            },
-            error: function(xhr, status, error) {
-                console.log('Error saving page data:', error);
-            }
-        });
-    }
-
-    // Set flag when user proceeds with payment (to prevent saving data)
-    function proceedWithPayment() {
-        isProceedingWithPayment = true;
-        // Additional code for processing payment can go here
-    }
 </script>
 
 

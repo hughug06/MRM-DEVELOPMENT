@@ -195,7 +195,6 @@ $count = mysqli_fetch_assoc($result3);
                         <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
                         Avail Now
                         </button>
-                        <button id="loadSavedPageBtn" class="btn btn-primary" onclick="loadSavedPage()">Load Saved Data</button>
                         <?php
 
                         }
@@ -391,33 +390,6 @@ $count = mysqli_fetch_assoc($result3);
 
 
 
-<script>
-    // Function to load the saved data when the button is pressed
-    function loadSavedPage() {
-        $.ajax({
-            url: 'load_saved_page.php',
-            method: 'POST',
-            data: {
-                user_id: '<?= $_SESSION['user_id'] ?>' // Assuming user_id is stored in session
-            },
-            success: function(response) {
-                const data = JSON.parse(response);
-                if (data.page_data) {
-                    const savedData = JSON.parse(data.page_data);
 
-                    // Example: Populate fields with saved data
-                    document.getElementById('service_type').value = savedData.service_type;
-                    document.getElementById('product_type').value = savedData.product_type;
-                    document.getElementById('pin_location').value = savedData.pin_location;
-                    document.getElementById('total_amount').innerText = savedData.total_amount;
-                    // Populate other fields similarly...
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Error loading saved page data:', error);
-            }
-        });
-    }
-</script>
 
 
