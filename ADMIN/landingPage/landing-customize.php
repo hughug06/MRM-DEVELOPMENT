@@ -270,6 +270,7 @@ include_once '../../Database/database.php';
                                 <div class="col-xl-12">
                                     <div class="card custom-card">
                                         <div class="card-body">
+                                            <h5>Note: Changing images require all images to be uploaded again</h5>
                                             <div class="mb-4 border p-3 rounded-3">
                                                 <h4>(Section 1: 1st Introduction Section / Company Introduction)</h4>
                                                 <label class="form-label">Title</label>
@@ -521,39 +522,39 @@ include_once '../../Database/database.php';
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-        // Get all file input elements
-        const fileInputs = document.querySelectorAll('input[type="file"]');
+            // Get all file input elements
+            const fileInputs = document.querySelectorAll('input[type="file"]');
 
-        // Function to check if any file input has a file selected
-        function checkFileInputs() {
-            let anyFileSelected = false;
+            // Function to check if any file input has a file selected
+            function checkFileInputs() {
+                let anyFileSelected = false;
 
-            // Loop through all file inputs
+                // Loop through all file inputs
+                fileInputs.forEach(function(input) {
+                    // Check if the input has a file selected
+                    if (input.files.length > 0) {
+                        anyFileSelected = true;
+                    }
+                });
+
+                // If any file is selected, set all inputs as required
+                fileInputs.forEach(function(input) {
+                    if (anyFileSelected) {
+                        input.setAttribute('required', 'required');
+                    } else {
+                        input.removeAttribute('required');
+                    }
+                });
+            }
+
+            // Attach an event listener for file changes on each file input
             fileInputs.forEach(function(input) {
-                // Check if the input has a file selected
-                if (input.files.length > 0) {
-                    anyFileSelected = true;
-                }
+                input.addEventListener('change', checkFileInputs);
             });
 
-            // If any file is selected, set all inputs as required
-            fileInputs.forEach(function(input) {
-                if (anyFileSelected) {
-                    input.setAttribute('required', 'required');
-                } else {
-                    input.removeAttribute('required');
-                }
-            });
-        }
-
-        // Attach an event listener for file changes on each file input
-        fileInputs.forEach(function(input) {
-            input.addEventListener('change', checkFileInputs);
+            // Call the check function on page load (in case files are pre-selected)
+            checkFileInputs();
         });
-
-        // Call the check function on page load (in case files are pre-selected)
-        checkFileInputs();
-    });
 
         $(document).ready(function() {
             $(document).on('click', '#save', function(e) {
