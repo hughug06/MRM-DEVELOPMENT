@@ -106,7 +106,7 @@
                                                                             <th class="wd-lg-20p"><span>Unit</span></th>
                                                                             <th class="wd-lg-20p"><span>Description</span></th>
                                                                             <th class="wd-lg-20p"><span>Quantity</span></th>
-                                                                            <th class="wd-lg-20p"><span>Amount</span></th>
+                                                                            <th class="wd-lg-20p"><span>Service fee</span></th>
                                                                             <th class="wd-lg-20p"><span>Action</span></th>
                                                                         </tr>
                                                                     </thead>
