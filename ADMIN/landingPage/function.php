@@ -186,33 +186,60 @@ foreach ($_FILES as $key => $file) {
     }
 }
 
-    // Convert the images array to JSON
-    $imagesJson = json_encode($images);
+    if(!empty($images)){
+        // Convert the images array to JSON
+        $imagesJson = json_encode($images);
+        
 
+        // Prepare the SQL query with placeholders
+        $sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=?, images=? WHERE id=?";
 
-    // Prepare the SQL query with placeholders
-$sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=?, images=? WHERE id=?";
+        // Prepare the statement
+        $stmt = mysqli_prepare($conn, $sql);
 
-// Prepare the statement
-$stmt = mysqli_prepare($conn, $sql);
+        // Bind the parameters
+        mysqli_stmt_bind_param(
+            $stmt, 
+            'sssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
+            $json_title, 
+            $json_desc, 
+            $json_goals, 
+            $json_faqs, 
+            $json_projects, 
+            $json_xp, 
+            $imagesJson,
+            $id
+        );
 
-// Bind the parameters
-mysqli_stmt_bind_param(
-    $stmt, 
-    'sssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
-    $json_title, 
-    $json_desc, 
-    $json_goals, 
-    $json_faqs, 
-    $json_projects, 
-    $json_xp, 
-    $imagesJson,
-    $id
-);
+        // Execute the query
+        $result = mysqli_stmt_execute($stmt);
+        echo json_encode(['success' => true]);
+    }
+    else{
+        // Prepare the SQL query with placeholders
+        $sql = "UPDATE landing_page_info SET title=?, description=?, goals=?, faq=?, projects=?, user_experience=? WHERE id=?";
 
-// Execute the query
-$result = mysqli_stmt_execute($stmt);
-    echo json_encode(['success' => true]);
+        // Prepare the statement
+        $stmt = mysqli_prepare($conn, $sql);
+
+        // Bind the parameters
+        mysqli_stmt_bind_param(
+            $stmt, 
+            'ssssssi',  // 's' for string (for json data), 'i' for integer (for the id)
+            $json_title, 
+            $json_desc, 
+            $json_goals, 
+            $json_faqs, 
+            $json_projects, 
+            $json_xp, 
+            $id
+        );
+
+        // Execute the query
+        $result = mysqli_stmt_execute($stmt);
+        echo json_encode(['success' => true]);
+    }
+
   
 }
 
