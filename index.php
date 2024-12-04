@@ -126,8 +126,6 @@ if (isset($_SESSION['success_message'])) {
                   $imageName11 = $imageNames[11];
                   $imagePath11 = 'assets/images/landing/' . $imageName11;
 
-                  $imageName12 = $imageNames[12];
-                  $imagePath12 = 'assets/images/landing/' . $imageName12;
           
                   // Display the image (you can customize the HTML as needed)
                   // echo "<img src='$imagePath' alt='$imageName' />";
