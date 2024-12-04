@@ -797,7 +797,8 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= htmlspecialchars($row['description']) ?></td>
                                             <td><?= htmlspecialchars($row['unit']) ?></td>
                                             <td><?= htmlspecialchars($row['quantity']) ?></td>
-                                            <td></td>
+                                            <td><?= htmlspecialchars($row['amount']) ?></td>
+                                           
                                         </tr>
                                         <?php 
                                         endforeach;
