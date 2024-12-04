@@ -5,14 +5,17 @@ require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 $user_id = $_SESSION['user_id'];
 
-// Save the entire page state
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
+    // Retrieve page state sent from the client (JavaScript)
     $page_state = $_POST['page_state'] ?? null;
 
     if (!$page_state) {
         echo json_encode(['error' => 'No page state data provided']);
         exit;
     }
+
+    // Convert the page state to a JSON string
+    $page_state_json = json_encode($page_state);
 
     // Check if a record already exists for this user
     $check_query = "SELECT id FROM saved_pages WHERE user_id = ?";
@@ -25,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
         // Update the existing record
         $update_query = "UPDATE saved_pages SET page_data = ?, updated_at = NOW() WHERE user_id = ?";
         $stmt = $conn->prepare($update_query);
-        $stmt->bind_param("si", $page_state, $user_id);
+        $stmt->bind_param("si", $page_state_json, $user_id);
         $stmt->execute();
         echo json_encode(['success' => 'Page state updated successfully']);
     } else {
-        // Insert a new record
+        // Insert a new record if no existing record found
         $insert_query = "INSERT INTO saved_pages (user_id, page_data) VALUES (?, ?)";
         $stmt = $conn->prepare($insert_query);
-        $stmt->bind_param("is", $user_id, $page_state);
+        $stmt->bind_param("is", $user_id, $page_state_json);
         $stmt->execute();
         echo json_encode(['success' => 'Page state saved successfully']);
     }
@@ -41,8 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
 }
 
 // Load the saved page state
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['load_page_state'])) {
-    // Retrieve saved data for the user
+// Check if the request is to load the saved transaction
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_page_state'])) {
+    // Query to fetch saved page data for the user
     $load_query = "SELECT page_data FROM saved_pages WHERE user_id = ?";
     $stmt = $conn->prepare($load_query);
     $stmt->bind_param("i", $user_id);
@@ -52,31 +56,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['load_page_state'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $page_data = $row['page_data'];
-        
-        // Decode page data into an associative array
+
+        // Decode the page state from JSON
         $page_state = json_decode($page_data, true);
-        
-        // Loop through the decoded page state and output hidden PHP variables for JS to process
+
+        // Pass the decoded page state to the JavaScript on the page
         echo "<script>";
         foreach ($page_state as $name => $value) {
             echo "document.querySelector('[name=\"$name\"]').value = " . json_encode($value) . ";";
         }
-        
-        // Handle checkbox/radio buttons (if any)
-        foreach ($page_state as $name => $value) {
-            echo "if (document.querySelector('[name=\"$name\"]') && (document.querySelector('[name=\"$name\"]').type === 'checkbox' || document.querySelector('[name=\"$name\"]').type === 'radio')) {";
-            echo "document.querySelector('[name=\"$name\"]').checked = " . json_encode($value) . ";";
-            echo "}";
-        }
+        // Handle any dynamic content (payment values, etc.)
+        echo "document.querySelector('#payment_now').innerText = " . json_encode($page_state['payment_now']) . ";";
+        echo "document.querySelector('#upon_delivery').innerText = " . json_encode($page_state['upon_delivery']) . ";";
+        echo "document.querySelector('#after_installation').innerText = " . json_encode($page_state['after_installation']) . ";";
+        echo "document.querySelector('#total').innerHTML = " . json_encode($page_state['total']) . ";";
         echo "</script>";
-
     } else {
-        // Handle if no saved state is found
-        echo "<script>alert('No saved page state found');</script>";
+        // No saved data found for the user
+        echo "<script>alert('No saved transaction found');</script>";
     }
 
-    exit;
+    exit; // Exit after processing the POST request
 }
+
 else{
 
     $markup = "select * from service_markup";
@@ -1212,61 +1214,92 @@ else{
     });
 </script>
 <script>
-        // Function to save the page state
-        function savePageState() {
-        console.log("Beforeunload triggered");
-        // Capture the entire state of the page
-        const pageState = {};
-        const inputs = document.querySelectorAll("input, select, textarea");
+        // Function to save the page state when the user exits or navigates away
+function savePageState() {
+    // Capture the relevant input and calculated values from the page
+    const pageState = {};
 
-        inputs.forEach(input => {
-            if (input.type === "checkbox" || input.type === "radio") {
-                pageState[input.name] = input.checked;
-            } else {
-                pageState[input.name] = input.value;
-            }
-        });
-
-        // Send the state to the server
-        const formData = new FormData();
-        formData.append("save_page_state", true);
-        formData.append("page_state", JSON.stringify(pageState));
-
-        navigator.sendBeacon("service_payment.php", formData);
-    }
-
-    // Attach the save function to the `beforeunload` event
-    window.addEventListener("beforeunload", savePageState);
-
-
-
-
-
-
-    // Function to restore the page state
-    async function restorePageState() {
-        const response = await fetch("service_payment.php?load_page_state=true");
-        const result = await response.json();
-
-        if (result.success) {
-            const pageState = JSON.parse(result.data);
-
-            // Restore all inputs
-            const inputs = document.querySelectorAll("input, select, textarea");
-            inputs.forEach(input => {
-                if (input.type === "checkbox" || input.type === "radio") {
-                    input.checked = pageState[input.name] || false;
-                } else {
-                    input.value = pageState[input.name] || "";
-                }
-            });
+    // Collect form input data (hidden inputs, checkboxes, text, etc.)
+    const inputs = document.querySelectorAll("input, select, textarea");
+    inputs.forEach(input => {
+        if (input.type === "checkbox" || input.type === "radio") {
+            pageState[input.name] = input.checked;
         } else {
-            console.error(result.error);
+            pageState[input.name] = input.value;
+        }
+    });
+
+    // Collect dynamic data (payment breakdown, total, etc.)
+    pageState['payment_now'] = document.querySelector('#payment_now').innerText;
+    pageState['upon_delivery'] = document.querySelector('#upon_delivery').innerText;
+    pageState['after_installation'] = document.querySelector('#after_installation').innerText;
+    pageState['total'] = document.querySelector('#total').innerText;
+
+    // Send the page state to the server using fetch API
+    fetch("service_payment.php", {
+        method: "POST",
+        body: JSON.stringify({ save_page_state: true, page_state: pageState }),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+}
+
+// Save page state before the user leaves or reloads
+window.addEventListener("beforeunload", savePageState);
+
+
+
+
+
+
+    // Function to load the saved transaction when the user clicks the "Load Saved Transaction" button
+function loadSavedTransaction() {
+    fetch("service_payment.php?load_page_state=true")
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                const pageState = JSON.parse(result.data);
+                
+                // Restore form fields and dynamic content (payment breakdown, etc.)
+                restorePageState(pageState);
+            } else {
+                alert('No saved transaction found');
+            }
+        })
+        .catch(err => console.error('Error loading saved transaction:', err));
+}
+
+// Function to restore the page state from the saved data
+function restorePageState(pageState) {
+    // Populate form fields (hidden inputs, checkboxes, text, etc.)
+    for (let name in pageState) {
+        const value = pageState[name];
+        let input = document.querySelector(`[name="${name}"]`);
+
+        if (input) {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+                input.checked = value;
+            } else {
+                input.value = value;
+            }
+        }
+
+        // Handle dynamic content like payment breakdown
+        if (name === 'payment_now') {
+            document.querySelector('#payment_now').innerText = value;
+        }
+        if (name === 'upon_delivery') {
+            document.querySelector('#upon_delivery').innerText = value;
+        }
+        if (name === 'after_installation') {
+            document.querySelector('#after_installation').innerText = value;
+        }
+        if (name === 'total') {
+            document.querySelector('#total').innerHTML = value;
         }
     }
-
-    // Call the restore function on page load
-    document.addEventListener("DOMContentLoaded", restorePageState);
+}
 </script>
 
 

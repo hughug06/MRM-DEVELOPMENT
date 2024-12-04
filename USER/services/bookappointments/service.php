@@ -207,9 +207,10 @@ $count = mysqli_fetch_assoc($result3);
                         if($showbtn == true){
                     ?>
 
-                        <form action="service_payment.php" method="GET">
-                            <button type="submit" name="load_page_state" value="1">Load Last Transaction</button>
-                        </form>
+                    <form action="service_payment.php" method="POST">
+                        <input type="hidden" name="load_page_state" value="true">
+                        <button type="submit">Load Saved Transaction</button>
+                    </form>
 
                     <?php
                         }
