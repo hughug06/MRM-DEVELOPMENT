@@ -1,158 +1,80 @@
 <?php
 //get the data from service.php after the book trigger
-session_start();
+
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
-$user_id = $_SESSION['user_id'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
-    // Retrieve page state sent from the client (JavaScript)
-    $page_state = $_POST['page_state'] ?? null;
+$markup = "select * from service_markup";
+$markup_result = mysqli_query($conn , $markup);
+$row_mark = mysqli_fetch_assoc($markup_result);
 
-    if (!$page_state) {
-        echo json_encode(['error' => 'No page state data provided']);
-        exit;
-    }
-
-    // Convert the page state to a JSON string
-    $page_state_json = json_encode($page_state);
-
-    // Check if a record already exists for this user
-    $check_query = "SELECT id FROM saved_pages WHERE user_id = ?";
-    $stmt = $conn->prepare($check_query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Update the existing record
-        $update_query = "UPDATE saved_pages SET page_data = ?, updated_at = NOW() WHERE user_id = ?";
-        $stmt = $conn->prepare($update_query);
-        $stmt->bind_param("si", $page_state_json, $user_id);
+$service_type = $_POST['serviceType']; 
+$product_type = $_POST['productType'];
+$agent_mode = isset($_POST['agentmode']) ? true : false;
+if($agent_mode){
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity']; 
+    $pin_location = $_POST['location'];
+    $availability_id = $_POST['availability_id'];
+    $totalCost = 0;
+    $sql = 'SELECT * FROM products where ProductID = ?';
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $product_id);
         $stmt->execute();
-        echo json_encode(['success' => 'Page state updated successfully']);
-    } else {
-        // Insert a new record if no existing record found
-        $insert_query = "INSERT INTO saved_pages (user_id, page_data) VALUES (?, ?)";
-        $stmt = $conn->prepare($insert_query);
-        $stmt->bind_param("is", $user_id, $page_state_json);
-        $stmt->execute();
-        echo json_encode(['success' => 'Page state saved successfully']);
-    }
-
-    exit;
-}
-
-// Load the saved page state
-// Check if the request is to load the saved transaction
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['load_page_state'])) {
-    // Query to fetch saved page data for the user
-    $load_query = "SELECT page_data FROM saved_pages WHERE user_id = ?";
-    $stmt = $conn->prepare($load_query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $page_data = $row['page_data'];
-
-        // Decode the page state from JSON
-        $page_state = json_decode($page_data, true);
-
-        // Pass the decoded page state to the JavaScript on the page
-        echo "<script>";
-        foreach ($page_state as $name => $value) {
-            echo "document.querySelector('[name=\"$name\"]').value = " . json_encode($value) . ";";
-        }
-        // Handle any dynamic content (payment values, etc.)
-        echo "document.querySelector('#payment_now').innerText = " . json_encode($page_state['payment_now']) . ";";
-        echo "document.querySelector('#upon_delivery').innerText = " . json_encode($page_state['upon_delivery']) . ";";
-        echo "document.querySelector('#after_installation').innerText = " . json_encode($page_state['after_installation']) . ";";
-        echo "document.querySelector('#total').innerHTML = " . json_encode($page_state['total']) . ";";
-        echo "</script>";
-    } else {
-        // No saved data found for the user
-        echo "<script>alert('No saved transaction found');</script>";
-    }
-
-    exit; // Exit after processing the POST request
-}
-
-else{
-
-    $markup = "select * from service_markup";
-    $markup_result = mysqli_query($conn , $markup);
-    $row_mark = mysqli_fetch_assoc($markup_result);
-
-    $service_type = $_POST['serviceType']; 
-    $product_type = $_POST['productType'];
-    $agent_mode = isset($_POST['agentmode']) ? true : false;
-    if($agent_mode){
-        $product_id = $_POST['product_id'];
-        $quantity = $_POST['quantity']; 
-        $pin_location = $_POST['location'];
-        $availability_id = $_POST['availability_id'];
-        $totalCost = 0;
-        $sql = 'SELECT * FROM products where ProductID = ?';
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("i", $product_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $brand = $row['ProductName'];
-                    
-                }
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $brand = $row['ProductName'];
+                
             }
         }
     }
+}
 
-    //NOT CUSTOM
-    $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
-    //CUSTOM INPUT
-    $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
-    if($option1){
-        $is_custom = 0;
-        $brand = $option1;
-    }
-    else if($option2){
-        $is_custom = 1;
-        $brand = $option2;
-    }
+ //NOT CUSTOM
+ $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
+ //CUSTOM INPUT
+ $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
+ if($option1){
+    $is_custom = 0;
+    $brand = $option1;
+ }
+ else if($option2){
+    $is_custom = 1;
+    $brand = $option2;
+ }
 
 
-    if (isset($_POST['installation_submit'])) {
-    
-            $totalCost = 0;
-        //4 HIDDEN DATA
-            $availability_id = $_POST['availability_id'];
+if (isset($_POST['installation_submit'])) {
+ 
+        $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
 
-            //user input
-            $pin_location = $_POST['location'];
-            $quantity = $_POST['quantity'];  
-            $get_price = "select * from products where ProductName = '$brand'";
-            $price_exec = mysqli_query($conn , $get_price);
-            $price = mysqli_fetch_assoc($price_exec); 
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $get_price = "select * from products where ProductName = '$brand'";
+        $price_exec = mysqli_query($conn , $get_price);
+        $price = mysqli_fetch_assoc($price_exec); 
+       
+
         
 
-            
+}
+else if(isset($_POST['tuneup_submit'])){
+    $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
 
-    }
-    else if(isset($_POST['tuneup_submit'])){
-        $totalCost = 0;
-        //4 HIDDEN DATA
-            $availability_id = $_POST['availability_id'];
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $kva = $_POST['kva'];
+        $running_hours = $_POST['running_hours'];
+        $brand = $_POST['brand'];
+        
 
-            //user input
-            $pin_location = $_POST['location'];
-            $quantity = $_POST['quantity'];  
-            $kva = $_POST['kva'];
-            $running_hours = $_POST['running_hours'];
-            $brand = $_POST['brand'];
-            
-
-    }
 }
 ?>
 
@@ -1212,94 +1134,6 @@ else{
         }
 
     });
-</script>
-<script>
-        // Function to save the page state when the user exits or navigates away
-function savePageState() {
-    // Capture the relevant input and calculated values from the page
-    const pageState = {};
-
-    // Collect form input data (hidden inputs, checkboxes, text, etc.)
-    const inputs = document.querySelectorAll("input, select, textarea");
-    inputs.forEach(input => {
-        if (input.type === "checkbox" || input.type === "radio") {
-            pageState[input.name] = input.checked;
-        } else {
-            pageState[input.name] = input.value;
-        }
-    });
-
-    // Collect dynamic data (payment breakdown, total, etc.)
-    pageState['payment_now'] = document.querySelector('#payment_now').innerText;
-    pageState['upon_delivery'] = document.querySelector('#upon_delivery').innerText;
-    pageState['after_installation'] = document.querySelector('#after_installation').innerText;
-    pageState['total'] = document.querySelector('#total').innerText;
-
-    // Send the page state to the server using fetch API
-    fetch("service_payment.php", {
-        method: "POST",
-        body: JSON.stringify({ save_page_state: true, page_state: pageState }),
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
-}
-
-// Save page state before the user leaves or reloads
-window.addEventListener("beforeunload", savePageState);
-
-
-
-
-
-
-    // Function to load the saved transaction when the user clicks the "Load Saved Transaction" button
-function loadSavedTransaction() {
-    fetch("service_payment.php?load_page_state=true")
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                const pageState = JSON.parse(result.data);
-                
-                // Restore form fields and dynamic content (payment breakdown, etc.)
-                restorePageState(pageState);
-            } else {
-                alert('No saved transaction found');
-            }
-        })
-        .catch(err => console.error('Error loading saved transaction:', err));
-}
-
-// Function to restore the page state from the saved data
-function restorePageState(pageState) {
-    // Populate form fields (hidden inputs, checkboxes, text, etc.)
-    for (let name in pageState) {
-        const value = pageState[name];
-        let input = document.querySelector(`[name="${name}"]`);
-
-        if (input) {
-            if (input.type === 'checkbox' || input.type === 'radio') {
-                input.checked = value;
-            } else {
-                input.value = value;
-            }
-        }
-
-        // Handle dynamic content like payment breakdown
-        if (name === 'payment_now') {
-            document.querySelector('#payment_now').innerText = value;
-        }
-        if (name === 'upon_delivery') {
-            document.querySelector('#upon_delivery').innerText = value;
-        }
-        if (name === 'after_installation') {
-            document.querySelector('#after_installation').innerText = value;
-        }
-        if (name === 'total') {
-            document.querySelector('#total').innerHTML = value;
-        }
-    }
-}
 </script>
 
 
