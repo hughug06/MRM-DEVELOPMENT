@@ -25,6 +25,7 @@ if($agent_mode){
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $brand = $row['ProductName'];
+                $brand_price = $row['price'];
             }
         }
     }
@@ -50,7 +51,7 @@ if (isset($_POST['installation_submit'])) {
         //user input
         $pin_location = $_POST['location'];
         $quantity = $_POST['quantity'];  
-
+        
        
 
         
@@ -786,7 +787,7 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= $brand ?></td>
                                             <td>items</td>
                                             <td><?= $quantity?></td>
-                                            <td></td>
+                                            <td><?= $brand_price ?></td>
                                         </tr>
                                         <?php 
                                         $totalitem = 2;
