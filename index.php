@@ -93,6 +93,42 @@ if (isset($_SESSION['success_message'])) {
           
                   $imageName = $imageNames[0];
                   $imagePath = 'assets/images/landing/' . $imageName;
+
+                  $imageName1 = $imageNames[1];
+                  $imagePath1 = 'assets/images/landing/' . $imageName1;
+
+                  $imageName2 = $imageNames[2];
+                  $imagePath2 = 'assets/images/landing/' . $imageName2;
+
+                  $imageName3 = $imageNames[3];
+                  $imagePath3 = 'assets/images/landing/' . $imageName3;
+
+                  $imageName4 = $imageNames[4];
+                  $imagePath4 = 'assets/images/landing/' . $imageName4;
+
+                  $imageName5 = $imageNames[5];
+                  $imagePath5 = 'assets/images/landing/' . $imageName5;
+
+                  $imageName6 = $imageNames[6];
+                  $imagePath6 = 'assets/images/landing/' . $imageName6;
+
+                  $imageName7 = $imageNames[7];
+                  $imagePath7 = 'assets/images/landing/' . $imageName7;
+
+                  $imageName8 = $imageNames[8];
+                  $imagePath8 = 'assets/images/landing/' . $imageName8;
+
+                  $imageName9 = $imageNames[9];
+                  $imagePath9 = 'assets/images/landing/' . $imageName9;
+
+                  $imageName10 = $imageNames[10];
+                  $imagePath10 = 'assets/images/landing/' . $imageName10;
+
+                  $imageName11 = $imageNames[11];
+                  $imagePath11 = 'assets/images/landing/' . $imageName11;
+
+                  $imageName12 = $imageNames[12];
+                  $imagePath12 = 'assets/images/landing/' . $imageName12;
           
                   // Display the image (you can customize the HTML as needed)
                   // echo "<img src='$imagePath' alt='$imageName' />";
@@ -181,7 +217,7 @@ if (isset($_SESSION['success_message'])) {
                 
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
-                More Details  <?php echo $imageNames[0] ?>
+                More Details
               </a>
               <a href="#contact" class="btn btn-outline-secondary btn-lg m-2">
                 Contact Us
@@ -191,7 +227,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src=<?php echo 'assets/images/landing/'. $imageNames[0] ?>
+                src=<?php echo $imagePath ?>
                 alt=""
                 class="img-fluid"
               />
