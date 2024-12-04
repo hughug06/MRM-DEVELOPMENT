@@ -831,12 +831,13 @@ else if(isset($_POST['tuneup_submit'])){
                                         ?>
                                     </tfoot>
                                 </table>
-                                <div class="text-center mx-4">
-                                                                    <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2) ?></p>
-                                                                    <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
-                                                                    <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
-                                                                    <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
-                                                                </div>
+                                <div class="text-center mx-4" style="border: 1px solid #ccc; margin-top: 20px; padding: 10px; border-radius: 5px;">
+                                    <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2) ?></p>
+                                    <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
+                                    <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
+                                    <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
+                                </div>
+
                                 <p class="text-muted mt-3"><small>NOTE: The price above is for supply and <?= $service_type ?> of <?= $product_type ?> for <?= $pin_location ?></small></p>
                                 <!-- Checkbox for accepting terms and conditions -->
                                 <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
