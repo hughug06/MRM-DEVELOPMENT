@@ -88,43 +88,43 @@ if (isset($_SESSION['success_message'])) {
             $imageNamesString = json_decode($row["images"]);
 
               // Split the comma-separated string into an array
-              $imageNames = explode(',', $imageNamesString);
+              // $imageNames = explode(',', $imageNamesString);
           
-                  $imageName = $imageNames[0];
-                  $imagePath = 'assets/images/landing/' . $imageName;
+              //     $imageName = $imageNames[0];
+              //     $imagePath = 'assets/images/landing/' . $imageName;
 
-                  $imageName1 = $imageNames[1];
-                  $imagePath1 = 'assets/images/landing/' . $imageName1;
+              //     $imageName1 = $imageNames[1];
+              //     $imagePath1 = 'assets/images/landing/' . $imageName1;
 
-                  $imageName2 = $imageNames[2];
-                  $imagePath2 = 'assets/images/landing/' . $imageName2;
+              //     $imageName2 = $imageNames[2];
+              //     $imagePath2 = 'assets/images/landing/' . $imageName2;
 
-                  $imageName3 = $imageNames[3];
-                  $imagePath3 = 'assets/images/landing/' . $imageName3;
+              //     $imageName3 = $imageNames[3];
+              //     $imagePath3 = 'assets/images/landing/' . $imageName3;
 
-                  $imageName4 = $imageNames[4];
-                  $imagePath4 = 'assets/images/landing/' . $imageName4;
+              //     $imageName4 = $imageNames[4];
+              //     $imagePath4 = 'assets/images/landing/' . $imageName4;
 
-                  $imageName5 = $imageNames[5];
-                  $imagePath5 = 'assets/images/landing/' . $imageName5;
+              //     $imageName5 = $imageNames[5];
+              //     $imagePath5 = 'assets/images/landing/' . $imageName5;
 
-                  $imageName6 = $imageNames[6];
-                  $imagePath6 = 'assets/images/landing/' . $imageName6;
+              //     $imageName6 = $imageNames[6];
+              //     $imagePath6 = 'assets/images/landing/' . $imageName6;
 
-                  $imageName7 = $imageNames[7];
-                  $imagePath7 = 'assets/images/landing/' . $imageName7;
+              //     $imageName7 = $imageNames[7];
+              //     $imagePath7 = 'assets/images/landing/' . $imageName7;
 
-                  $imageName8 = $imageNames[8];
-                  $imagePath8 = 'assets/images/landing/' . $imageName8;
+              //     $imageName8 = $imageNames[8];
+              //     $imagePath8 = 'assets/images/landing/' . $imageName8;
 
-                  $imageName9 = $imageNames[9];
-                  $imagePath9 = 'assets/images/landing/' . $imageName9;
+              //     $imageName9 = $imageNames[9];
+              //     $imagePath9 = 'assets/images/landing/' . $imageName9;
 
-                  $imageName10 = $imageNames[10];
-                  $imagePath10 = 'assets/images/landing/' . $imageName10;
+              //     $imageName10 = $imageNames[10];
+              //     $imagePath10 = 'assets/images/landing/' . $imageName10;
 
-                  $imageName11 = $imageNames[11];
-                  $imagePath11 = 'assets/images/landing/' . $imageName11;
+              //     $imageName11 = $imageNames[11];
+              //     $imagePath11 = 'assets/images/landing/' . $imageName11;
 
           
                   // Display the image (you can customize the HTML as needed)
@@ -210,6 +210,7 @@ if (isset($_SESSION['success_message'])) {
               </h1>
               <p class="lead mb-4">
               <?php echo $descs["desc1"] ?>
+              
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
