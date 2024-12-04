@@ -559,6 +559,19 @@ include_once '../../Database/database.php';
         $(document).ready(function() {
             $(document).on('click', '#save', function(e) {
                 e.preventDefault(); // Prevent the default link behavior
+
+                const fileInputs = document.querySelectorAll('input[type="file"]');
+            
+            // Check if each file input has a file selected
+            for (const fileInput of fileInputs) {
+                if (!fileInput.files.length) {
+                    // Alert if a file is not selected
+                    alert("Please upload an image in all file inputs!");
+                    // Prevent form submission
+                    event.preventDefault();
+                    return;
+                }
+            }
                 const title1 = document.getElementById('title1').value;
                 const title2 = document.getElementById('title2').value;
 
