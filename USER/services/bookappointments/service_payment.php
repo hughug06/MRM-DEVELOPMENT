@@ -1195,7 +1195,7 @@ else{
 <script>
         // Function to save the page state
         function savePageState() {
-        alert("working");
+        console.log("Beforeunload triggered");
         // Capture the entire state of the page
         const pageState = {};
         const inputs = document.querySelectorAll("input, select, textarea");
