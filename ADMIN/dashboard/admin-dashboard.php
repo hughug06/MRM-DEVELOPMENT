@@ -176,7 +176,21 @@ GROUP BY
             <!-- End::app-sidebar -->
 
 
-            <h1>Admin Chat Interface</h1>
+
+            <div class="main-content app-content">
+                <div class="container-fluid">
+                    <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                        <div>
+                            <h2 class="main-content-title fs-24 mb-1">Welcome To Dashboard</h2>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Project Dashboard</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="row row-sm">
+                    <h1>Admin Chat Interface</h1>
   <div id="admin-chat-container">
     <div id="chat-messages">
       <!-- Chat messages will appear here -->
@@ -241,18 +255,6 @@ GROUP BY
       messageInput.value = "";
     }
   </script>
-
-
-            <div class="main-content app-content">
-                <div class="container-fluid">
-                    <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                        <div>
-                            <h2 class="main-content-title fs-24 mb-1">Welcome To Dashboard</h2>
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Project Dashboard</li>
-                            </ol>
-                        </div>
                     </div>
 
                     <div class="row row-sm">
@@ -844,7 +846,7 @@ GROUP BY
                             </div>
                         </div>
                     </div>      
-                </div>
+                </>
             </div>
 
             <!-- Footer Start -->
