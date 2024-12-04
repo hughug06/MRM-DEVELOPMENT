@@ -212,7 +212,6 @@ if (isset($_SESSION['success_message'])) {
               </h1>
               <p class="lead mb-4">
               <?php echo $descs["desc1"] ?>
-              <?php echo $imagePath ?>
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
@@ -225,7 +224,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="<?php echo $imagePath ?>"
+                src=""
                 alt=""
                 class="img-fluid"
               />
