@@ -9,8 +9,38 @@ $savedData = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the request is to load saved page data
-    if (isset($_POST['action']) && $_POST['action'] == 'load_saved_data') {
-        // The user is requesting saved page data
+    if (isset($_POST['action']) && $_POST['action'] === 'save_page_data') {
+        // Action: Save page data
+        $user_id = $_POST['user_id'];
+        $page_data = $_POST['page_data']; // JSON-encoded page data
+
+        // Check if an entry already exists for this user
+        $sql = "SELECT id FROM saved_pages WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            // Update existing saved data
+            $sql = "UPDATE saved_pages SET page_data = ?, updated_at = NOW() WHERE user_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('si', $page_data, $user_id);
+        } else {
+            // Insert new saved data
+            $sql = "INSERT INTO saved_pages (user_id, page_data, updated_at) VALUES (?, ?, NOW())";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('is', $user_id, $page_data);
+        }
+
+        if ($stmt->execute()) {
+            echo json_encode(['status' => 'success', 'message' => 'Page data saved successfully.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to save page data.']);
+        }
+        exit();
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'load_saved_data') {
+        // Action: Load saved data
         $user_id = $_POST['user_id'];
 
         // Retrieve the saved page data for the user
@@ -22,15 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $savedData = $row['page_data']; // Fetch the saved data
-            // Optionally store the data in the session or pass it to JavaScript
-            $_SESSION['savedPageData'] = $savedData; // Store in session (if needed)
-            echo json_encode(['page_data' => $savedData]); // Send the data to JavaScript
+            echo json_encode(['status' => 'success', 'page_data' => $row['page_data']]);
         } else {
-            echo json_encode(['page_data' => null]); // No saved data
+            echo json_encode(['status' => 'error', 'message' => 'No saved data found.']);
         }
-        exit(); // Make sure no other code is executed
-    } else {
+        exit();
+    }
+     else {
         // Handle new transaction (normal case)
         // Your new transaction logic goes here (e.g., saving new transaction data)
 
@@ -1172,48 +1200,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     });
 </script>
 <script>
-    // Save page data when the user leaves the page (beforeunload event)
-window.addEventListener('beforeunload', function(event) {
-    const serviceType = document.getElementById('service_type').value;
-    const productType = document.getElementById('product_type').value;
-    const pinLocation = document.getElementById('pin_location').value;
-    const totalAmount = document.getElementById('total_amount').innerText;
+        // Function to save page data when the user leaves the page
+        function savePageData() {
+            const pageData = {
+                service_type: document.getElementById('service_type').value,
+                product_type: document.getElementById('product_type').value,
+                pin_location: document.getElementById('pin_location').value,
+                total_amount: document.getElementById('total_amount').innerText
+            };
 
-    const pageData = {
-        service_type: serviceType,
-        product_type: productType,
-        pin_location: pinLocation,
-        total_amount: totalAmount,
-    };
-
-    fetch('save_page_data.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            user_id: '<?= $_SESSION['user_id'] ?>', // Assuming the user is logged in and has a session
-            page_data: pageData,
-        }),
-    });
-});
-
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if there is saved data in sessionStorage
-        const savedData = sessionStorage.getItem('savedPageData');
-        
-        if (savedData) {
-            const data = JSON.parse(savedData);
-
-            // Populate the form with saved data
-            document.getElementById('service_type').value = data.service_type || '';
-            document.getElementById('product_type').value = data.product_type || '';
-            document.getElementById('pin_location').value = data.pin_location || '';
-            document.getElementById('total_amount').innerText = data.total_amount || '';
-        } else {
-            // If no saved data, the page will be empty or initialized normally for a new transaction
+            // Send an AJAX request to save the data
+            $.ajax({
+                url: 'service_payment.php',
+                method: 'POST',
+                data: {
+                    action: 'save_page_data',
+                    user_id: '<?= $_SESSION['user_id'] ?>',
+                    page_data: JSON.stringify(pageData)
+                },
+                success: function(response) {
+                    const data = JSON.parse(response);
+                    if (data.status === 'success') {
+                        console.log('Page data saved successfully.');
+                    } else {
+                        console.log('Error saving page data:', data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error saving page data:', error);
+                }
+            });
         }
-    });
-</script>
 
+        // Save page data when the user leaves the page
+        window.addEventListener('beforeunload', function(event) {
+            savePageData();
+        });
+
+        // Load saved page data on page load (if requested)
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('load') === 'true') {
+                $.ajax({
+                    url: 'service_payment.php',
+                    method: 'POST',
+                    data: {
+                        action: 'load_saved_data',
+                        user_id: '<?= $_SESSION['user_id'] ?>'
+                    },
+                    success: function(response) {
+                        const data = JSON.parse(response);
+                        if (data.status === 'success' && data.page_data) {
+                            const savedData = JSON.parse(data.page_data);
+
+                            // Populate the form with saved data
+                            document.getElementById('service_type').value = savedData.service_type || '';
+                            document.getElementById('product_type').value = savedData.product_type || '';
+                            document.getElementById('pin_location').value = savedData.pin_location || '';
+                            document.getElementById('total_amount').innerText = savedData.total_amount || '';
+                        } else {
+                            console.log('No saved data to load.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error loading saved page data:', error);
+                    }
+                });
+            }
+        });
+    </script>
