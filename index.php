@@ -68,6 +68,7 @@ if (isset($_SESSION['success_message'])) {
 
       <?php 
         require 'Database/database.php'; 
+        $imageNamesString = '';
         $sql = "SELECT * FROM landing_page_info WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $id = 1;
@@ -84,6 +85,20 @@ if (isset($_SESSION['success_message'])) {
             $faqs = json_decode($row["faq"], true);
             $projects = json_decode($row["projects"], true);
             $user_experience = json_decode($row["user_experience"], true);
+            $imageNamesString = $row['image_names'];
+
+            if (!empty($imageNamesString)) {
+              // Split the comma-separated string into an array
+              $imageNames = explode(',', $imageNamesString);
+          
+                  $imageName = $imageNames[0];
+                  $imagePath = 'assets/images/landing/' . $imageName;
+          
+                  // Display the image (you can customize the HTML as needed)
+                  // echo "<img src='$imagePath' alt='$imageName' />";
+              
+          }
+
 
       ?>
   
@@ -176,7 +191,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/hero-img.png"
+                src=<?php echo 'assets/images/landing/'. $imageNames[0] ?>
                 alt=""
                 class="img-fluid"
               />
