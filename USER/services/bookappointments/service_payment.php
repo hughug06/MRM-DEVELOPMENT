@@ -12,7 +12,7 @@ $service_type = $_POST['serviceType'];
 $product_type = $_POST['productType'];
 $agent_mode = isset($_POST['agentmode']) ? true : false;
 if($agent_mode){
-    
+    $product_id = $_POST['product_id'];
     $quantity = $_POST['quantity']; 
     $pin_location = $_POST['location'];
     $availability_id = $_POST['availability_id'];
@@ -44,19 +44,6 @@ if($agent_mode){
     $brand = $option2;
  }
 
- $product_id = $_POST['product_id'];
- $sql = 'SELECT * FROM products where ProductID = ?';
- if ($stmt = $conn->prepare($sql)) {
-     $stmt->bind_param("i", $product_id);
-     $stmt->execute();
-     $result = $stmt->get_result();
-     if ($result->num_rows > 0) {
-         while ($row = $result->fetch_assoc()) {
-             $price = $row['price'];
-             
-         }
-     }
- }
 
 if (isset($_POST['installation_submit'])) {
  
@@ -67,7 +54,9 @@ if (isset($_POST['installation_submit'])) {
         //user input
         $pin_location = $_POST['location'];
         $quantity = $_POST['quantity'];  
-        
+        $get_price = "select * from products where ProductName = '$brand'";
+        $price_exec = mysqli_query($conn , $get_price);
+        $price = mysqli_fetch_assoc($price_exec); 
        
 
         
@@ -803,7 +792,7 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= $brand ?></td>
                                             <td>items</td>
                                             <td><?= $quantity?></td>
-                                            <td><?= $price ?></td>
+                                            <td><?= $price['price'] ?></td>
                                         </tr>
                                         <?php 
                                         $totalitem = 2;
