@@ -3,7 +3,7 @@
 
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
-
+$user_id = $_SESSION['user_id'];
 
 // Save the entire page state
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
