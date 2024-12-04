@@ -153,37 +153,38 @@ if(isset($_POST['save'])){
     $json_projects = json_encode($projects);
     $json_xp = json_encode($xp);
 
-    $images = [];
+    $images = []; // Initialize an array to hold the names of the images for database storage
 
-    // Loop through the files in $_FILES
-    foreach ($_FILES as $key => $file) {
-        // Only process keys that start with 'image' (these represent images)
-        if (strpos($key, 'image') === 0 && $file['error'] === UPLOAD_ERR_OK) {
-            // Handle the image upload from $_FILES based on the 'image' key
+foreach ($_FILES as $key => $file) {
+    // Only process keys that start with 'image' (these represent images)
+    if (strpos($key, 'image') === 0 && $file['error'] === UPLOAD_ERR_OK) {
+        // Check if there is an uploaded file and no errors
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            // Generate a unique name for the file
+            $uploadDir = '../../assets/images/landing/';
+            $fileName = basename($file['name']);
+            $uniqueFileName = uniqid() . '_' . $fileName; // Unique file name for storage
+            $uniqueFilePath = $uploadDir . $uniqueFileName; // Full file path for uploading
 
-            // Check if there is an uploaded file and no errors
-            if ($file['error'] === UPLOAD_ERR_OK) {
-                // Generate a unique name for the file
-                $uploadDir = '../../assets/images/landing/';
-                $fileName = basename($file['name']);
-                $uniqueFilePath = $uploadDir . uniqid() . '_' . $fileName;
-
-                // Ensure the upload directory exists
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
-
-                // Move the uploaded file to the specified directory
-                if (move_uploaded_file($file['tmp_name'], $uniqueFilePath)) {
-                    // Store the file path in the images array
-                    $images[] = $uniqueFilePath;
-                }
-            } else {
-                // If there's an error, you can add a message or handle the error as needed
-                echo "Error uploading the file: " . $file['name'];
+            // Ensure the upload directory exists
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
             }
+
+            // Move the uploaded file to the specified directory
+            if (move_uploaded_file($file['tmp_name'], $uniqueFilePath)) {
+                // Store only the file name (without the path) for the database
+                $images[] = $uniqueFileName;
+            } else {
+                // Handle the error during file upload
+                echo "Failed to upload file: {$file['name']}";
+            }
+        } else {
+            // Handle file upload errors
+            echo "Error with file: {$file['name']}";
         }
     }
+}
 
     // Convert the images array to JSON
     $imagesJson = json_encode($images);
