@@ -51,9 +51,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['load_page_state'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo json_encode(['success' => true, 'data' => $row['page_data']]);
+        $page_data = $row['page_data'];
+        
+        // Decode page data into an associative array
+        $page_state = json_decode($page_data, true);
+        
+        // Loop through the decoded page state and output hidden PHP variables for JS to process
+        echo "<script>";
+        foreach ($page_state as $name => $value) {
+            echo "document.querySelector('[name=\"$name\"]').value = " . json_encode($value) . ";";
+        }
+        
+        // Handle checkbox/radio buttons (if any)
+        foreach ($page_state as $name => $value) {
+            echo "if (document.querySelector('[name=\"$name\"]') && (document.querySelector('[name=\"$name\"]').type === 'checkbox' || document.querySelector('[name=\"$name\"]').type === 'radio')) {";
+            echo "document.querySelector('[name=\"$name\"]').checked = " . json_encode($value) . ";";
+            echo "}";
+        }
+        echo "</script>";
+
     } else {
-        echo json_encode(['error' => 'No saved page state found']);
+        // Handle if no saved state is found
+        echo "<script>alert('No saved page state found');</script>";
     }
 
     exit;
