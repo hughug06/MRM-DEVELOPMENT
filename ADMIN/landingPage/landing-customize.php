@@ -657,6 +657,7 @@ include_once '../../Database/database.php';
                             
                             images.forEach((input, index) => {
                                 if (input.files.length > 0) {
+                                    alert(`image_${index}`, input.files[0]);
                                     // Add each file to FormData with a unique key
                                     formData.append(`image_${index}`, input.files[0]);
                                 }
