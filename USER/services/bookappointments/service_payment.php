@@ -209,7 +209,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         while ($row = mysqli_fetch_assoc($result_solar)) {
                             $rows_generator[] = $row;
@@ -280,7 +280,7 @@ else if(isset($_POST['tuneup_submit'])){
                             // Get the total amount of package_installation_solar + product itself and 10% mark-up
                             $quotation = $amount + $totalCost;
                             $mark_up = ($row_mark['markup_percentage'] / 100);
-                            $final_value = $quotation + $mark_up;
+                            $final_value = ($quotation * $mark_up) + $quotation;
 
                             $agent_mark_up = $final_value * .05;
                             $final_value_withagent = $final_value + $agent_mark_up ;
@@ -332,7 +332,7 @@ else if(isset($_POST['tuneup_submit'])){
                 // Get the total amount of package_installation_solar + product itself and 10% mark-up
                 $quotation = $amount + $totalCost;
                 $mark_up = ($row_mark['markup_percentage'] / 100);
-                $final_value = $quotation * $mark_up;
+                $final_value = ($quotation * $mark_up) + $quotation;
                 
 
                 while ($row = mysqli_fetch_assoc($result_generator)) {
@@ -517,7 +517,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         while ($row = mysqli_fetch_assoc($result_generator)) {
                             $rows_generator[] = $row;
@@ -563,7 +563,7 @@ else if(isset($_POST['tuneup_submit'])){
                     // Get the total amount of package_installation_solar + product itself and 10% mark-up
                     $quotation = $amount + $totalCost;
                     $mark_up = ($row_mark['markup_percentage'] / 100);
-                    $final_value = $quotation * $mark_up;
+                    $final_value = ($quotation * $mark_up) + $quotation;
                     
                     while ($row = mysqli_fetch_assoc($result_generator)) {
                         $rows_generator[] = $row;
@@ -610,7 +610,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         while ($row = mysqli_fetch_assoc($result_generator)) {
                             $rows_generator[] = $row;
@@ -656,7 +656,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         
                     
@@ -706,7 +706,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         
                     
@@ -756,7 +756,7 @@ else if(isset($_POST['tuneup_submit'])){
                         // Get the total amount of package_installation_solar + product itself and 10% mark-up
                         $quotation = $amount + $totalCost;
                         $mark_up = ($row_mark['markup_percentage'] / 100);
-                        $final_value = $quotation * $mark_up;
+                        $final_value = ($quotation * $mark_up) + $quotation;
                         
                         
                     
