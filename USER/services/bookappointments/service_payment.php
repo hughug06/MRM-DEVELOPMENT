@@ -1194,6 +1194,7 @@ else{
 
     // Function to save the page state
     function savePageState() {
+        alert("working");
         // Capture the entire state of the page
         const pageState = {};
         const inputs = document.querySelectorAll("input, select, textarea");
