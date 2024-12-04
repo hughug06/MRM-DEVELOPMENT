@@ -87,7 +87,6 @@ if (isset($_SESSION['success_message'])) {
             $user_experience = json_decode($row["user_experience"], true);
             $imageNamesString = json_decode($row['image_names']);
 
-            if (!empty($imageNamesString)) {
               // Split the comma-separated string into an array
               $imageNames = explode(',', $imageNamesString);
           
@@ -133,7 +132,6 @@ if (isset($_SESSION['success_message'])) {
                   // Display the image (you can customize the HTML as needed)
                   // echo "<img src='$imagePath' alt='$imageName' />";
               
-          }
 
 
       ?>
