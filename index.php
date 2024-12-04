@@ -93,38 +93,38 @@ if (isset($_SESSION['success_message'])) {
                 $imageName = $imageNames[0];
                 $imagePath = 'assets/images/landing/' . $imageName;
 
-              //     $imageName1 = $imageNames[1];
-              //     $imagePath1 = 'assets/images/landing/' . $imageName1;
+                   $imageName1 = $imageNames[1];
+                   $imagePath1 = 'assets/images/landing/' . $imageName1;
 
-              //     $imageName2 = $imageNames[2];
-              //     $imagePath2 = 'assets/images/landing/' . $imageName2;
+                   $imageName2 = $imageNames[2];
+                   $imagePath2 = 'assets/images/landing/' . $imageName2;
 
-              //     $imageName3 = $imageNames[3];
-              //     $imagePath3 = 'assets/images/landing/' . $imageName3;
+                   $imageName3 = $imageNames[3];
+                   $imagePath3 = 'assets/images/landing/' . $imageName3;
 
-              //     $imageName4 = $imageNames[4];
-              //     $imagePath4 = 'assets/images/landing/' . $imageName4;
+                   $imageName4 = $imageNames[4];
+                   $imagePath4 = 'assets/images/landing/' . $imageName4;
 
-              //     $imageName5 = $imageNames[5];
-              //     $imagePath5 = 'assets/images/landing/' . $imageName5;
+                   $imageName5 = $imageNames[5];
+                   $imagePath5 = 'assets/images/landing/' . $imageName5;
 
-              //     $imageName6 = $imageNames[6];
-              //     $imagePath6 = 'assets/images/landing/' . $imageName6;
+                   $imageName6 = $imageNames[6];
+                   $imagePath6 = 'assets/images/landing/' . $imageName6;
 
-              //     $imageName7 = $imageNames[7];
-              //     $imagePath7 = 'assets/images/landing/' . $imageName7;
+                   $imageName7 = $imageNames[7];
+                   $imagePath7 = 'assets/images/landing/' . $imageName7;
 
-              //     $imageName8 = $imageNames[8];
-              //     $imagePath8 = 'assets/images/landing/' . $imageName8;
+                   $imageName8 = $imageNames[8];
+                   $imagePath8 = 'assets/images/landing/' . $imageName8;
 
-              //     $imageName9 = $imageNames[9];
-              //     $imagePath9 = 'assets/images/landing/' . $imageName9;
+                   $imageName9 = $imageNames[9];
+                   $imagePath9 = 'assets/images/landing/' . $imageName9;
 
-              //     $imageName10 = $imageNames[10];
-              //     $imagePath10 = 'assets/images/landing/' . $imageName10;
+                   $imageName10 = $imageNames[10];
+                   $imagePath10 = 'assets/images/landing/' . $imageName10;
 
-              //     $imageName11 = $imageNames[11];
-              //     $imagePath11 = 'assets/images/landing/' . $imageName11;
+                   $imageName11 = $imageNames[11];
+                   $imagePath11 = 'assets/images/landing/' . $imageName11;
 
           
                   // Display the image (you can customize the HTML as needed)
@@ -210,7 +210,6 @@ if (isset($_SESSION['success_message'])) {
               </h1>
               <p class="lead mb-4">
               <?php echo $descs["desc1"] ?>
-              <?php echo $imagePath ?>
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
@@ -284,7 +283,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="assets/landing_assets/images/mrm_images/details-2.png"
+                src="<?php echo $imagePath1 ?>"
                 alt=""
                 class="img-fluit"
               />
@@ -407,7 +406,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/details-2.png"
+                src="<?php echo $imagePath2 ?>"
                 class="img-fluid"
               />
             </div>
@@ -718,7 +717,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="assets/landing_assets/images/article-details-small.jpg"
+                src="<?php echo $imagePath3 ?>"
                 alt=""
                 class="img-fluid rounded-3"
               />
@@ -737,7 +736,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-1.jpg"
+                src="<?php echo $imagePath4 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -753,7 +752,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-2.jpg"
+                src="<?php echo $imagePath5 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -769,7 +768,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-3.jpg"
+                src="<?php echo $imagePath6 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -787,7 +786,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-4.jpg"
+                src="<?php echo $imagePath7 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -803,7 +802,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-5.jpg"
+                src="<?php echo $imagePath8 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -819,7 +818,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_images/project-6.jpg"
+                src="<?php echo $imagePath9 ?>"
                 alt=""
                 class="rounded-4"
               />
@@ -844,7 +843,7 @@ if (isset($_SESSION['success_message'])) {
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-1.jpg"
+                src="<?php echo $imagePath10 ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -862,7 +861,7 @@ if (isset($_SESSION['success_message'])) {
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-2.jpg"
+                src="<?php echo $imagePath11 ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
@@ -880,7 +879,7 @@ if (isset($_SESSION['success_message'])) {
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
               <img
-                src="assets/landing_assets/images/testimonial-3.jpg"
+                src="<?php echo $imagePath12 ?>"
                 alt=""
                 class="rounded-circle"
                 width="120"
