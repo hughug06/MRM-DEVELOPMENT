@@ -787,7 +787,7 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= $brand ?></td>
                                             <td>items</td>
                                             <td><?= $quantity?></td>
-                                            <td><?= $brand_price ?></td>
+                                            <td><?= 12312321 ?></td>
                                         </tr>
                                         <?php 
                                         $totalitem = 2;
