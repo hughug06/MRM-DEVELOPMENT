@@ -540,7 +540,7 @@ include_once '../../Database/database.php';
                 // If any file is selected, set all inputs as required
                 fileInputs.forEach(function(input) {
                     if (anyFileSelected) {
-                        input.setAttribute('required');
+                        input.setAttribute('required', 'required');
                     } else {
                         input.removeAttribute('required');
                     }
