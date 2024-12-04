@@ -562,16 +562,21 @@ include_once '../../Database/database.php';
 
                 const fileInputs = document.querySelectorAll('input[type="file"]');
             
-            // Check if each file input has a file selected
-            for (const fileInput of fileInputs) {
-                if (!fileInput.files.length) {
-                    // Alert if a file is not selected
-                    alert("Please upload an image in all file inputs!");
-                    // Prevent form submission
-                    event.preventDefault();
-                    return;
+                // Check if each file input has a file selected
+                for (const fileInput of fileInputs) {
+                    if (!fileInput.files.length) {
+                        // Alert if a file is not selected
+                        Swal.fire({
+                        title: 'ERROR',
+                        html: "It seems you are about to change a photo, Please upload the other image input as well",
+                        icon: 'warning',
+                        confirmButtonText: 'Confirm'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                    }
                 }
-            }
                 const title1 = document.getElementById('title1').value;
                 const title2 = document.getElementById('title2').value;
 
