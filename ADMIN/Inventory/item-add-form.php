@@ -108,8 +108,8 @@ include_once '../../Database/database.php';
                                         </div>
                                         <div class="col-md-6 col-6 d-flex pt-2 align-items-center gap-2">
                                             <input id="Custom" type="checkbox" value="1" onclick="toggleCustomWattsKVA()">
-                                            <label for="Custom" class="fw-bold">Custom Power Output</label>
-                                            <p>Check this box if you want to manually input the Power Output</p>
+                                            <label for="Custom" class="fw-bold">Custom Power Output | Check this box if you want to manually input the Power Output</label>
+                                            <p></p>
                                         </div>
                                         <div class="col-md-6 col-6 mb-3">
                                             <label class="form-label" required>Stocks  of the product</label>
