@@ -195,11 +195,11 @@ $count = mysqli_fetch_assoc($result3);
                         <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
                         Avail Now
                         </button>
-                        <button type="button" id="loadSavedPageBtn" class="btn btn-primary" onclick="loadSavedPage()">Load Saved Data</button>
                         <?php
 
                         }
                         ?>
+                        <button type="button" id="loadSavedPageBtn" class="btn btn-primary" onclick="loadSavedPage()">Load Saved Data</button>
                     </div>
                 <!--APP-CONTENT CLOSE-->
                 </div>   
