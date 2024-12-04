@@ -832,7 +832,7 @@ else if(isset($_POST['tuneup_submit'])){
                                     </tfoot>
                                 </table>
                                 <div class="text-center mx-4" style="border: 1px solid #ccc; margin-top: 20px; padding: 10px; border-radius: 5px;">
-                                    <p>PAYMENT NOW: ₱<?= $row_mark['markup_percentage'] ?></p>
+                                    <p>PAYMENT NOW: ₱<?= $row_mark['markup_percentage'] * 100 ?></p>
                                     <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
                                     <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
                                     <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
