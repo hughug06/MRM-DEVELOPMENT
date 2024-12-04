@@ -227,7 +227,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src=<?php echo $imagePath ?>
+                src="<?php echo $imagePath ?>"
                 alt=""
                 class="img-fluid"
               />
