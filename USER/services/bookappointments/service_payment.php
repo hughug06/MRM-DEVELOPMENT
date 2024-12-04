@@ -25,7 +25,23 @@ if($agent_mode){
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $brand = $row['ProductName'];
-                $brand_price = $row['price'];
+                
+            }
+        }
+    }
+}
+else{
+    $product_id = $_POST['product_id'];
+    $totalCost = 0;
+    $sql = 'SELECT * FROM products where ProductID = ?';
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $price = $row['price'];
+                
             }
         }
     }
@@ -787,7 +803,7 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= $brand ?></td>
                                             <td>items</td>
                                             <td><?= $quantity?></td>
-                                            <td><?= 12312321 ?></td>
+                                            <td><?= $price ?></td>
                                         </tr>
                                         <?php 
                                         $totalitem = 2;
