@@ -100,18 +100,148 @@ GROUP BY
         <!-- Choices Css -->
         <link rel="stylesheet" href="../../assets/libs/choices.js/public/assets/styles/choices.min.css">
 
+
+        <script type="text/javascript">
+    // Load Tawk.to Widget
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/6730d9822480f5b4f59b5f52/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    #admin-chat-container {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    #chat-messages {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    #chat-messages p {
+      margin: 5px 0;
+    }
+    #admin-input {
+      display: flex;
+      gap: 10px;
+    }
+    #admin-input input {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    #admin-input button {
+      padding: 8px 12px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #admin-input button:hover {
+      background-color: #218838;
+    }
+  </style>
     </head>
 
     <body>
 
+
         <div class="page">
             
+
+
+
             <!-- app-header -->
             <?php include_once('../../partials/header.php') ?>
             <!-- /app-header -->
             <!-- Start::app-sidebar -->
             <?php include_once('../../partials/sidebar.php') ?>
             <!-- End::app-sidebar -->
+
+
+            <h1>Admin Chat Interface</h1>
+  <div id="admin-chat-container">
+    <div id="chat-messages">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div id="admin-input">
+      <input type="text" id="message" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // Tawk.to Admin Chat API Logic
+    document.addEventListener("DOMContentLoaded", function() {
+      // Tawk.to's onLoad event
+      Tawk_API.onLoad = function() {
+        console.log("Tawk.to widget loaded successfully.");
+        listenForMessages();
+      };
+    });
+
+    // Listen for incoming messages
+    function listenForMessages() {
+      Tawk_API.onChatMaximized = function() {
+        console.log("Chat opened by client.");
+      };
+
+      Tawk_API.onChatMinimized = function() {
+        console.log("Chat minimized by client.");
+      };
+
+      Tawk_API.onChatMessageSent = function(message) {
+        addMessageToChat("Admin", message);
+      };
+
+      Tawk_API.onChatMessageReceived = function(message) {
+        addMessageToChat("Client", message);
+      };
+    }
+
+    // Display messages in the chat box
+    function addMessageToChat(sender, message) {
+      const chatMessages = document.getElementById("chat-messages");
+      const newMessage = document.createElement("p");
+      newMessage.textContent = `${sender}: ${message}`;
+      chatMessages.appendChild(newMessage);
+
+      // Auto-scroll to the latest message
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Send a message from the admin
+    function sendMessage() {
+      const messageInput = document.getElementById("message");
+      const message = messageInput.value;
+
+      if (message.trim() === "") return;
+
+      // Send message via Tawk.to API
+      Tawk_API.addMessage(message);
+
+      // Clear the input field
+      messageInput.value = "";
+    }
+  </script>
+
 
             <div class="main-content app-content">
                 <div class="container-fluid">
