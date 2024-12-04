@@ -792,7 +792,10 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= $brand ?></td>
                                             <td>items</td>
                                             <td><?= $quantity?></td>
-                                            <td><?= $price['price'] ?></td>
+                                            <td>
+                                                <?= htmlspecialchars(number_format($price['price'], 2)) ?>
+                                            </td>
+
                                         </tr>
                                         <?php 
                                         $totalitem = 2;
@@ -803,7 +806,7 @@ else if(isset($_POST['tuneup_submit'])){
                                             <td><?= htmlspecialchars($row['description']) ?></td>
                                             <td><?= htmlspecialchars($row['unit']) ?></td>
                                             <td><?= htmlspecialchars($row['quantity']) ?></td>
-                                            <td><?= htmlspecialchars($row['amount']) ?></td>
+                                            <td><?= htmlspecialchars(number_format($row['amount'], 2)) ?></td>
                                            
                                         </tr>
                                         <?php 
