@@ -646,13 +646,20 @@ include_once '../../Database/database.php';
                             formData.append('xp1_name', xp1_name); formData.append('xp2_name', xp2_name); formData.append('xp3_name', xp3_name);
                             formData.append('xp1_comment', xp1_comment); formData.append('xp2_comment', xp2_comment); formData.append('xp3_comment', xp3_comment);
                             formData.append('about', about);
-                            images.forEach(function (img, index) {
-                                // Get the image source (src attribute)
-                                var imgSrc = img.src;
-                                alert(imgSrc);
+                            // images.forEach(function (img, index) {
+                            //     // Get the image source (src attribute)
+                            //     var imgSrc = img.src;
+                            //     alert(imgSrc);
 
-                                // Append each image source to the FormData object
-                                formData.append('image' + index, imgSrc);
+                            //     // Append each image source to the FormData object
+                            //     formData.append('image' + index, imgSrc);
+                            // });
+                            
+                            images.forEach((input, index) => {
+                                if (input.files.length > 0) {
+                                    // Add each file to FormData with a unique key
+                                    formData.append(`image_${index}`, input.files[0]);
+                                }
                             });
                             
                             $.ajax({
