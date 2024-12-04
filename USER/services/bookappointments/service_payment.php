@@ -1,145 +1,81 @@
 <?php
 //get the data from service.php after the book trigger
-session_start();
+
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
+$markup = "select * from service_markup";
+$markup_result = mysqli_query($conn , $markup);
+$row_mark = mysqli_fetch_assoc($markup_result);
 
-$savedData = null;
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Check if the request is to load saved page data
-    if (isset($_POST['action']) && $_POST['action'] === 'save_page_data') {
-        // Action: Save page data
-        $user_id = $_POST['user_id'];
-        $page_data = $_POST['page_data']; // JSON-encoded page data
-
-        // Check if an entry already exists for this user
-        $sql = "SELECT id FROM saved_pages WHERE user_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i', $user_id);
+$service_type = $_POST['serviceType']; 
+$product_type = $_POST['productType'];
+$agent_mode = isset($_POST['agentmode']) ? true : false;
+if($agent_mode){
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity']; 
+    $pin_location = $_POST['location'];
+    $availability_id = $_POST['availability_id'];
+    $totalCost = 0;
+    $sql = 'SELECT * FROM products where ProductID = ?';
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("i", $product_id);
         $stmt->execute();
         $result = $stmt->get_result();
-
         if ($result->num_rows > 0) {
-            // Update existing saved data
-            $sql = "UPDATE saved_pages SET page_data = ?, updated_at = NOW() WHERE user_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('si', $page_data, $user_id);
-        } else {
-            // Insert new saved data
-            $sql = "INSERT INTO saved_pages (user_id, page_data, updated_at) VALUES (?, ?, NOW())";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('is', $user_id, $page_data);
-        }
-
-        if ($stmt->execute()) {
-            echo json_encode(['status' => 'success', 'message' => 'Page data saved successfully.']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save page data.']);
-        }
-        exit();
-    } elseif (isset($_POST['action']) && $_POST['action'] === 'load_saved_data') {
-        // Action: Load saved data
-        $user_id = $_POST['user_id'];
-
-        // Retrieve the saved page data for the user
-        $sql = "SELECT * FROM saved_pages WHERE user_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('i', $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            echo json_encode(['status' => 'success', 'page_data' => $row['page_data']]);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'No saved data found.']);
-        }
-        exit();
-    }
-     else {
-        // Handle new transaction (normal case)
-        // Your new transaction logic goes here (e.g., saving new transaction data)
-
-        $markup = "select * from service_markup";
-        $markup_result = mysqli_query($conn , $markup);
-        $row_mark = mysqli_fetch_assoc($markup_result);
-
-        $service_type = $_POST['serviceType']; 
-        $product_type = $_POST['productType'];
-        $agent_mode = isset($_POST['agentmode']) ? true : false;
-        if($agent_mode){
-            $product_id = $_POST['product_id'];
-            $quantity = $_POST['quantity']; 
-            $pin_location = $_POST['location'];
-            $availability_id = $_POST['availability_id'];
-            $totalCost = 0;
-            $sql = 'SELECT * FROM products where ProductID = ?';
-            if ($stmt = $conn->prepare($sql)) {
-                $stmt->bind_param("i", $product_id);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $brand = $row['ProductName'];
-                        
-                    }
-                }
+            while ($row = $result->fetch_assoc()) {
+                $brand = $row['ProductName'];
+                
             }
-        }
-
-        //NOT CUSTOM
-        $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
-        //CUSTOM INPUT
-        $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
-        if($option1){
-            $is_custom = 0;
-            $brand = $option1;
-        }
-        else if($option2){
-            $is_custom = 1;
-            $brand = $option2;
-        }
-
-
-        if (isset($_POST['installation_submit'])) {
-        
-                $totalCost = 0;
-            //4 HIDDEN DATA
-                $availability_id = $_POST['availability_id'];
-
-                //user input
-                $pin_location = $_POST['location'];
-                $quantity = $_POST['quantity'];  
-                $get_price = "select * from products where ProductName = '$brand'";
-                $price_exec = mysqli_query($conn , $get_price);
-                $price = mysqli_fetch_assoc($price_exec); 
-            
-
-                
-
-        }
-        else if(isset($_POST['tuneup_submit'])){
-            $totalCost = 0;
-            //4 HIDDEN DATA
-                $availability_id = $_POST['availability_id'];
-
-                //user input
-                $pin_location = $_POST['location'];
-                $quantity = $_POST['quantity'];  
-                $kva = $_POST['kva'];
-                $running_hours = $_POST['running_hours'];
-                $brand = $_POST['brand'];
-                
-
         }
     }
 }
 
+ //NOT CUSTOM
+ $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
+ //CUSTOM INPUT
+ $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
+ if($option1){
+    $is_custom = 0;
+    $brand = $option1;
+ }
+ else if($option2){
+    $is_custom = 1;
+    $brand = $option2;
+ }
 
 
+if (isset($_POST['installation_submit'])) {
+ 
+        $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
 
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $get_price = "select * from products where ProductName = '$brand'";
+        $price_exec = mysqli_query($conn , $get_price);
+        $price = mysqli_fetch_assoc($price_exec); 
+       
+
+        
+
+}
+else if(isset($_POST['tuneup_submit'])){
+    $totalCost = 0;
+    //4 HIDDEN DATA
+        $availability_id = $_POST['availability_id'];
+
+        //user input
+        $pin_location = $_POST['location'];
+        $quantity = $_POST['quantity'];  
+        $kva = $_POST['kva'];
+        $running_hours = $_POST['running_hours'];
+        $brand = $_POST['brand'];
+        
+
+}
 ?>
 
 
@@ -1199,73 +1135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     });
 </script>
-<script>
-        // Function to save page data when the user leaves the page
-        function savePageData() {
-            const pageData = {
-                service_type: document.getElementById('service_type').value,
-                product_type: document.getElementById('product_type').value,
-                pin_location: document.getElementById('pin_location').value,
-                total_amount: document.getElementById('total_amount').innerText
-            };
 
-            // Send an AJAX request to save the data
-            $.ajax({
-                url: 'service_payment.php',
-                method: 'POST',
-                data: {
-                    action: 'save_page_data',
-                    user_id: '<?= $_SESSION['user_id'] ?>',
-                    page_data: JSON.stringify(pageData)
-                },
-                success: function(response) {
-                    const data = JSON.parse(response);
-                    if (data.status === 'success') {
-                        console.log('Page data saved successfully.');
-                    } else {
-                        console.log('Error saving page data:', data.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error saving page data:', error);
-                }
-            });
-        }
 
-        // Save page data when the user leaves the page
-        window.addEventListener('beforeunload', function(event) {
-            savePageData();
-        });
 
-        // Load saved page data on page load (if requested)
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('load') === 'true') {
-                $.ajax({
-                    url: 'service_payment.php',
-                    method: 'POST',
-                    data: {
-                        action: 'load_saved_data',
-                        user_id: '<?= $_SESSION['user_id'] ?>'
-                    },
-                    success: function(response) {
-                        const data = JSON.parse(response);
-                        if (data.status === 'success' && data.page_data) {
-                            const savedData = JSON.parse(data.page_data);
 
-                            // Populate the form with saved data
-                            document.getElementById('service_type').value = savedData.service_type || '';
-                            document.getElementById('product_type').value = savedData.product_type || '';
-                            document.getElementById('pin_location').value = savedData.pin_location || '';
-                            document.getElementById('total_amount').innerText = savedData.total_amount || '';
-                        } else {
-                            console.log('No saved data to load.');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('Error loading saved page data:', error);
-                    }
-                });
-            }
-        });
-    </script>
