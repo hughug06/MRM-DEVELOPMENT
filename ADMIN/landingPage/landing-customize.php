@@ -649,6 +649,7 @@ include_once '../../Database/database.php';
                             images.forEach(function (img, index) {
                                 // Get the image source (src attribute)
                                 var imgSrc = img.src;
+                                alert(imgSrc);
 
                                 // Append each image source to the FormData object
                                 formData.append('image' + index, imgSrc);
