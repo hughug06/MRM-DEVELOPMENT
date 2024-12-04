@@ -4,77 +4,134 @@
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 
-$markup = "select * from service_markup";
-$markup_result = mysqli_query($conn , $markup);
-$row_mark = mysqli_fetch_assoc($markup_result);
 
-$service_type = $_POST['serviceType']; 
-$product_type = $_POST['productType'];
-$agent_mode = isset($_POST['agentmode']) ? true : false;
-if($agent_mode){
-    $product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity']; 
-    $pin_location = $_POST['location'];
-    $availability_id = $_POST['availability_id'];
-    $totalCost = 0;
-    $sql = 'SELECT * FROM products where ProductID = ?';
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("i", $product_id);
+// Save the entire page state
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_page_state'])) {
+    $page_state = $_POST['page_state'] ?? null;
+
+    if (!$page_state) {
+        echo json_encode(['error' => 'No page state data provided']);
+        exit;
+    }
+
+    // Check if a record already exists for this user
+    $check_query = "SELECT id FROM saved_pages WHERE user_id = ?";
+    $stmt = $conn->prepare($check_query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Update the existing record
+        $update_query = "UPDATE saved_pages SET page_data = ?, updated_at = NOW() WHERE user_id = ?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("si", $page_state, $user_id);
         $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $brand = $row['ProductName'];
-                
+        echo json_encode(['success' => 'Page state updated successfully']);
+    } else {
+        // Insert a new record
+        $insert_query = "INSERT INTO saved_pages (user_id, page_data) VALUES (?, ?)";
+        $stmt = $conn->prepare($insert_query);
+        $stmt->bind_param("is", $user_id, $page_state);
+        $stmt->execute();
+        echo json_encode(['success' => 'Page state saved successfully']);
+    }
+
+    exit;
+}
+
+// Load the saved page state
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['load_page_state'])) {
+    // Retrieve saved data for the user
+    $load_query = "SELECT page_data FROM saved_pages WHERE user_id = ?";
+    $stmt = $conn->prepare($load_query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo json_encode(['success' => true, 'data' => $row['page_data']]);
+    } else {
+        echo json_encode(['error' => 'No saved page state found']);
+    }
+
+    exit;
+}
+else{
+
+    $markup = "select * from service_markup";
+    $markup_result = mysqli_query($conn , $markup);
+    $row_mark = mysqli_fetch_assoc($markup_result);
+
+    $service_type = $_POST['serviceType']; 
+    $product_type = $_POST['productType'];
+    $agent_mode = isset($_POST['agentmode']) ? true : false;
+    if($agent_mode){
+        $product_id = $_POST['product_id'];
+        $quantity = $_POST['quantity']; 
+        $pin_location = $_POST['location'];
+        $availability_id = $_POST['availability_id'];
+        $totalCost = 0;
+        $sql = 'SELECT * FROM products where ProductID = ?';
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("i", $product_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $brand = $row['ProductName'];
+                    
+                }
             }
         }
     }
-}
 
- //NOT CUSTOM
- $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
- //CUSTOM INPUT
- $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
- if($option1){
-    $is_custom = 0;
-    $brand = $option1;
- }
- else if($option2){
-    $is_custom = 1;
-    $brand = $option2;
- }
+    //NOT CUSTOM
+    $option1 = isset($_POST['serviceSelect1']) ? $_POST['serviceSelect1'] : false;
+    //CUSTOM INPUT
+    $option2 = isset($_POST['serviceSelect2']) ? $_POST['serviceSelect2'] : false;
+    if($option1){
+        $is_custom = 0;
+        $brand = $option1;
+    }
+    else if($option2){
+        $is_custom = 1;
+        $brand = $option2;
+    }
 
 
-if (isset($_POST['installation_submit'])) {
- 
+    if (isset($_POST['installation_submit'])) {
+    
+            $totalCost = 0;
+        //4 HIDDEN DATA
+            $availability_id = $_POST['availability_id'];
+
+            //user input
+            $pin_location = $_POST['location'];
+            $quantity = $_POST['quantity'];  
+            $get_price = "select * from products where ProductName = '$brand'";
+            $price_exec = mysqli_query($conn , $get_price);
+            $price = mysqli_fetch_assoc($price_exec); 
+        
+
+            
+
+    }
+    else if(isset($_POST['tuneup_submit'])){
         $totalCost = 0;
-    //4 HIDDEN DATA
-        $availability_id = $_POST['availability_id'];
+        //4 HIDDEN DATA
+            $availability_id = $_POST['availability_id'];
 
-        //user input
-        $pin_location = $_POST['location'];
-        $quantity = $_POST['quantity'];  
-        $get_price = "select * from products where ProductName = '$brand'";
-        $price_exec = mysqli_query($conn , $get_price);
-        $price = mysqli_fetch_assoc($price_exec); 
-       
+            //user input
+            $pin_location = $_POST['location'];
+            $quantity = $_POST['quantity'];  
+            $kva = $_POST['kva'];
+            $running_hours = $_POST['running_hours'];
+            $brand = $_POST['brand'];
+            
 
-        
-
-}
-else if(isset($_POST['tuneup_submit'])){
-    $totalCost = 0;
-    //4 HIDDEN DATA
-        $availability_id = $_POST['availability_id'];
-
-        //user input
-        $pin_location = $_POST['location'];
-        $quantity = $_POST['quantity'];  
-        $kva = $_POST['kva'];
-        $running_hours = $_POST['running_hours'];
-        $brand = $_POST['brand'];
-        
-
+    }
 }
 ?>
 
@@ -1134,6 +1191,61 @@ else if(isset($_POST['tuneup_submit'])){
         }
 
     });
+
+    // Function to save the page state
+    function savePageState() {
+        // Capture the entire state of the page
+        const pageState = {};
+        const inputs = document.querySelectorAll("input, select, textarea");
+
+        inputs.forEach(input => {
+            if (input.type === "checkbox" || input.type === "radio") {
+                pageState[input.name] = input.checked;
+            } else {
+                pageState[input.name] = input.value;
+            }
+        });
+
+        // Send the state to the server
+        const formData = new FormData();
+        formData.append("save_page_state", true);
+        formData.append("page_state", JSON.stringify(pageState));
+
+        navigator.sendBeacon("service_payment.php", formData);
+    }
+
+    // Attach the save function to the `beforeunload` event
+    window.addEventListener("beforeunload", savePageState);
+
+
+
+
+
+
+    // Function to restore the page state
+    async function restorePageState() {
+        const response = await fetch("service_payment.php?load_page_state=true");
+        const result = await response.json();
+
+        if (result.success) {
+            const pageState = JSON.parse(result.data);
+
+            // Restore all inputs
+            const inputs = document.querySelectorAll("input, select, textarea");
+            inputs.forEach(input => {
+                if (input.type === "checkbox" || input.type === "radio") {
+                    input.checked = pageState[input.name] || false;
+                } else {
+                    input.value = pageState[input.name] || "";
+                }
+            });
+        } else {
+            console.error(result.error);
+        }
+    }
+
+    // Call the restore function on page load
+    document.addEventListener("DOMContentLoaded", restorePageState);
 </script>
 
 

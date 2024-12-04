@@ -4,6 +4,12 @@ require_once '../../../Database/database.php';
 
 $user_id = $_SESSION['user_id'];
 $service_count = "select * from service_count where user_id = '$user_id'";
+$checklast = "SELECT * FROM saved_pages WHERE user_id = '$user_id'";
+$resultcheck = mysqli_query($conn , $checklast);
+$showbtn = false;
+if(mysqli_num_rows($resultcheck) > 0){
+    $showbtn = true;
+}
 $result3 = mysqli_query($conn , $service_count);
 $count = mysqli_fetch_assoc($result3);
 
@@ -198,13 +204,16 @@ $count = mysqli_fetch_assoc($result3);
                         <?php
 
                         }
+                        if($showbtn == true){
+                    ?>
+
+                        <form action="service_payment.php" method="GET">
+                            <button type="submit" name="load_page_state" value="1">Load Last Transaction</button>
+                        </form>
+
+                    <?php
+                        }
                         ?>
-                    </div>
-                    <div class="d-flex mt-4">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger mb-5" onclick="showMaxServiceModal()">
-                        Avail Now
-                        </button>
                     </div>
                 <!--APP-CONTENT CLOSE-->
                 </div>   
