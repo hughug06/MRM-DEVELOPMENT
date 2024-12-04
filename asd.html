@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tawk.to Admin Chat</title>
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {};
+      var Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/6730d9822480f5b4f59b5f52/default";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <style>
+      /* Styles */
+    </style>
+  </head>
+  <body>
+    <h1>Admin Chat Interface</h1>
+    <div id="admin-chat-container">
+      <div id="chat-messages">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div id="admin-input">
+        <input type="text" id="message" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        Tawk_API.onLoad = function () {
+          console.log("Tawk.to widget loaded successfully.");
+        };
+
+        Tawk_API.onChatMessageSent = function (message) {
+          addMessageToChat("Admin", message.text);
+        };
+
+        Tawk_API.onChatMessageReceived = function (message) {
+          addMessageToChat("Client", message.text);
+        };
+      });
+
+      function addMessageToChat(sender, message) {
+        const chatMessages = document.getElementById("chat-messages");
+        const newMessage = document.createElement("p");
+        newMessage.textContent = `${sender}: ${message}`;
+        chatMessages.appendChild(newMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function sendMessage() {
+        const messageInput = document.getElementById("message");
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        // Tawk.to doesn't provide an API to send messages from the admin side via script.
+        console.warn(
+          "Messages can be sent through the Tawk.to dashboard only."
+        );
+
+        messageInput.value = "";
+      }
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tawk.to Admin Chat</title>
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {};
+      var Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/6730d9822480f5b4f59b5f52/default";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <style>
+      /* Styles */
+    </style>
+  </head>
+  <body>
+    <h1>Admin Chat Interface</h1>
+    <div id="admin-chat-container">
+      <div id="chat-messages">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div id="admin-input">
+        <input type="text" id="message" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        Tawk_API.onLoad = function () {
+          console.log("Tawk.to widget loaded successfully.");
+        };
+
+        Tawk_API.onChatMessageSent = function (message) {
+          addMessageToChat("Admin", message.text);
+        };
+
+        Tawk_API.onChatMessageReceived = function (message) {
+          addMessageToChat("Client", message.text);
+        };
+      });
+
+      function addMessageToChat(sender, message) {
+        const chatMessages = document.getElementById("chat-messages");
+        const newMessage = document.createElement("p");
+        newMessage.textContent = `${sender}: ${message}`;
+        chatMessages.appendChild(newMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function sendMessage() {
+        const messageInput = document.getElementById("message");
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        // Tawk.to doesn't provide an API to send messages from the admin side via script.
+        console.warn(
+          "Messages can be sent through the Tawk.to dashboard only."
+        );
+
+        messageInput.value = "";
+      }
+    </script>
+  </body>
+</html>
