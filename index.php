@@ -88,10 +88,10 @@ if (isset($_SESSION['success_message'])) {
             $imageNamesString = json_decode($row["images"]);
 
               // Split the comma-separated string into an array
-              // $imageNames = explode(',', $imageNamesString);
+               $imageNames = explode(',', $imageNamesString);
           
-              //     $imageName = $imageNames[0];
-              //     $imagePath = 'assets/images/landing/' . $imageName;
+                   $imageName = $imageNames[0];
+                   $imagePath = 'assets/images/landing/' . $imageName;
 
               //     $imageName1 = $imageNames[1];
               //     $imagePath1 = 'assets/images/landing/' . $imageName1;
