@@ -112,7 +112,7 @@ GROUP BY
     <button onclick="sendMessage()">Send</button>
   </div>
     <script>
-    const API_KEY = 'YOUR_API_KEY';
+    const API_KEY = 'e4730e657c6b73df37127bf837d471500676dff2';
     const API_URL = 'https://api.tawk.to';
 
     // Fetch active chats
