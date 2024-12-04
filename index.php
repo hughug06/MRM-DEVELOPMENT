@@ -85,10 +85,10 @@ if (isset($_SESSION['success_message'])) {
             $faqs = json_decode($row["faq"], true);
             $projects = json_decode($row["projects"], true);
             $user_experience = json_decode($row["user_experience"], true);
-            $imageNamesString = $row["images"];
+            $imageNamesString = $row["images"]; // The JSON-like string of image names
 
-              // Split the comma-separated string into an array
-                $imageNames = explode(',', $imageNamesString);
+            // Decode the JSON string into a PHP array
+            $imageNames = json_decode($imageNamesString, true);
           
                 $imageName = $imageNames[0];
                 $imagePath = 'assets/images/landing/' . $imageName;
