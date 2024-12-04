@@ -225,6 +225,7 @@ if (isset($_SESSION['success_message'])) {
             </div>
           </div>
           <div class="col-lg-6 my-auto">
+            <p><?php echo $imagePath ?></p>
             <div class="image-container">
               <img
                 src="<?php echo $imagePath ?>"
