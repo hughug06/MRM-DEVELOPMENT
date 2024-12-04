@@ -1,6 +1,6 @@
 <?php
 //get the data from service.php after the book trigger
-
+session_start();
 require_once '../../../Database/database.php';
 require_once '../../../ADMIN/authetincation.php';
 $user_id = $_SESSION['user_id'];
