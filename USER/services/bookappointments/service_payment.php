@@ -838,7 +838,7 @@ else if(isset($_POST['tuneup_submit'])){
                 </button>
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-success" onclick="downloadReceiptPDF()">Download Receipt as PDF</button>
+                <button class="btn btn-success" onclick="downloadReceiptPDF()">Download as PDF</button>
             </div>
         </div>
     </div>
