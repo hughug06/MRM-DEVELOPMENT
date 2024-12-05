@@ -113,18 +113,6 @@ GROUP BY
             <?php include_once('../../partials/sidebar.php') ?>
             <!-- End::app-sidebar -->
 
-            <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/6744c1904304e3196ae86e53/1idi987he';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-
             <div class="main-content app-content">
                 <div class="container-fluid">
                     <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
