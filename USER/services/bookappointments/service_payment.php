@@ -770,12 +770,11 @@ else if(isset($_POST['tuneup_submit'])){
                     ?>
                 </div>
                     <div class="container-fluid">
-                    <div class="card custom-card my-5 p-5" id="receiptToDownload">
+                    <div class="card custom-card my-5 p-5" id="cardToDownload">
     <div class="card-body">
         <div class="text-center mb-4">
-            <h2>Receipt</h2>
-            <p><strong>Address:</strong> <?= $pin_location ?></p>
-            <p><strong>Transaction Type:</strong> Supply & <?= $service_type ?> of <?= $product_type ?></p>                   
+            <h4>Address: <?= $pin_location?></h4>
+            <h5>Supply & <?= $service_type ?> of <?= $product_type ?></h5>                   
         </div>
         <table class="table table-bordered">
             <thead class="table-warning text-center">
@@ -784,49 +783,55 @@ else if(isset($_POST['tuneup_submit'])){
                     <th>Description</th>
                     <th>Unit</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td><?= htmlspecialchars($brand) ?></td>
+                    <td><?= 1 ?></td>
+                    <td><?= $brand ?></td>
                     <td>items</td>
-                    <td><?= htmlspecialchars($quantity) ?></td>
-                    <td>₱<?= htmlspecialchars(number_format($price['price'], 2)) ?></td>
+                    <td><?= $quantity?></td>
+                    <td>
+                        <?= htmlspecialchars(number_format($price['price'], 2)) ?>
+                    </td>
                 </tr>
                 <?php 
                 $totalitem = 2;
-                foreach ($rows_generator as $row): ?>
+                foreach ($rows_generator as $row):
+                ?>
                 <tr>
                     <td><?= $totalitem++ ?></td>
                     <td><?= htmlspecialchars($row['description']) ?></td>
                     <td><?= htmlspecialchars($row['unit']) ?></td>
                     <td><?= htmlspecialchars($row['quantity']) ?></td>
-                    <td>₱<?= htmlspecialchars(number_format($row['amount'], 2)) ?></td>
+                    <td><?= htmlspecialchars(number_format($row['amount'], 2)) ?></td>
                 </tr>
-                <?php endforeach; ?>
+                <?php 
+                endforeach;
+                ?>
             </tbody>
             <tfoot>
                 <tr class="table-warning text-center">
-                    <td colspan="4"><strong>Total (VAT Exclusive):</strong></td>
-                    <td>₱<?= htmlspecialchars(number_format($final_value, 2)) ?></td>
+                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                    <td>₱<strong><?= htmlspecialchars(number_format($final_value, 2)) ?></strong></td>
                 </tr>
-                <?php if ($agent_mode): ?>
+                <?php if($agent_mode){ ?>
                 <tr class="table-warning text-center">
-                    <td colspan="4"><strong>Total with Agent Markup:</strong></td>
-                    <td>₱<?= htmlspecialchars(number_format($final_value_withagent, 2)) ?></td>
+                    <td colspan="4"><strong>Total Price Vat Exclusive with Agent markup:</strong></td>
+                    <td>₱<strong><?= htmlspecialchars(number_format($final_value_withagent, 2)) ?></strong></td>
                 </tr>
-                <?php endif; ?>
+                <?php } ?>
             </tfoot>
         </table>
-        <div class="text-center mx-4 mt-4" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
-            <p><strong>Payment Breakdown:</strong></p>
-            <p>Now: ₱<?= number_format($final_value * 0.45, 2) ?></p>
-            <p>Upon Delivery: ₱<?= number_format($final_value * 0.4, 2) ?></p>
-            <p>After Installation: ₱<?= number_format($final_value * 0.15, 2) ?></p>
-            <p><strong>Total: ₱<?= number_format($final_value, 2) ?></strong></p>
+        <div class="text-center mx-4" style="border: 1px solid #ccc; margin-top: 20px; padding: 10px; border-radius: 5px;">
+            <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2) ?></p>
+            <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
+            <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
+            <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
         </div>
+        <p class="text-muted mt-3"><small>NOTE: The price above is for supply and <?= $service_type ?> of <?= $product_type ?> for <?= $pin_location ?></small></p>
+        <!-- Checkbox for accepting terms and conditions -->
         <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
             <label>
                 <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
@@ -837,7 +842,7 @@ else if(isset($_POST['tuneup_submit'])){
             </button>
         </div>
         <div class="text-center mt-3">
-            <button class="btn btn-success" onclick="downloadReceiptPDF()">Download Receipt as PDF</button>
+            <button class="btn btn-success" onclick="downloadPDF()">Download as PDF</button>
         </div>
     </div>
 </div>
@@ -1119,18 +1124,24 @@ else if(isset($_POST['tuneup_submit'])){
 <!-- Include html2pdf.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-    function downloadReceiptPDF() {
-        const element = document.getElementById('receiptToDownload');
+    function downloadPDF() {
+        const element = document.getElementById('cardToDownload');
         const opt = {
-            margin: [0.5, 0.5, 0.5, 0.5],
-            filename: 'receipt.pdf',
+            margin: 1,
+            filename: 'Quotation.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1.5 },
+            html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
-
         html2pdf().set(opt).from(element).save();
     }
+
+    function toggleAvailButton() {
+        const checkbox = document.getElementById('acceptTerms');
+        const button = document.getElementById('paymentButton');
+        button.disabled = !checkbox.checked; // Enable if checked, disable if not
+    }
 </script>
+
 
 
