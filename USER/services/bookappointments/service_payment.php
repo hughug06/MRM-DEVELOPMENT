@@ -770,97 +770,82 @@ else if(isset($_POST['tuneup_submit'])){
                     ?>
                 </div>
                     <div class="container-fluid">
-                        <div class="card custom-card my-5 p-5">
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <h4>Address: <?= $pin_location?></h4>
-                                    <h5>Supply & <?= $service_type ?> of <?= $product_type ?></h5>                   
-                                </div>
-                                <table class="table table-bordered">
-                                    <thead class="table-warning text-center">
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Description</th>
-                                            <th>Unit</th>
-                                            <th>Qty</th>
-                                            <th>Remarks</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><?= 1 ?></td>
-                                            <td><?= $brand ?></td>
-                                            <td>items</td>
-                                            <td><?= $quantity?></td>
-                                            <td>
-                                                <?= htmlspecialchars(number_format($price['price'], 2)) ?>
-                                            </td>
-
-                                        </tr>
-                                        <?php 
-                                        $totalitem = 2;
-                                        foreach ($rows_generator as $row):
-                                        ?>
-                                        <tr>
-                                            <td><?= $totalitem++ ?></td>
-                                            <td><?= htmlspecialchars($row['description']) ?></td>
-                                            <td><?= htmlspecialchars($row['unit']) ?></td>
-                                            <td><?= htmlspecialchars($row['quantity']) ?></td>
-                                            <td><?= htmlspecialchars(number_format($row['amount'], 2)) ?></td>
-                                           
-                                        </tr>
-                                        <?php 
-                                        endforeach;
-                                        ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="table-warning text-center">
-                                            <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
-                                            <td>₱<strong><?= htmlspecialchars(number_format($final_value, 2)) ?></strong></td>
-
-                                        </tr>
-                                        <?php if($agent_mode){
-                                        
-                                        ?>
-                                        <tr class="table-warning text-center">
-                                            <td colspan="4"><strong>Total Price Vat Exclusive with Agent markup:</strong></td>
-                                            <td>₱<strong><?= htmlspecialchars(number_format($final_value_withagent, 2)) ?></strong></td>
-                                        </tr>
-                                        <?php
-                                            }
-                                        ?>
-                                    </tfoot>
-                                </table>
-                                <div class="text-center mx-4" style="border: 1px solid #ccc; margin-top: 20px; padding: 10px; border-radius: 5px;">
-                                    <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2)  ?></p>
-                                    <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
-                                    <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
-                                    <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
-                                </div>
-                                <p class="text-muted mt-3"><small>NOTE: The price above is for supply and <?= $service_type ?> of <?= $product_type ?> for <?= $pin_location ?></small></p>
-                                <!-- Checkbox for accepting terms and conditions -->
-                                <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
-                                <label>
-                                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                                    I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                                </label>
-
-                                <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
-                                    proceed for payment
-                                </button>
-
-                                <script>
-                                    // Function to toggle the button's disabled state
-                                    function toggleAvailButton() {
-                                        const checkbox = document.getElementById('acceptTerms');
-                                        const button = document.getElementById('paymentButton');
-                                        button.disabled = !checkbox.checked; // Enable if checked, disable if not
-                                    }
-                                </script>
-
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card custom-card my-5 p-5" id="cardToDownload">
+    <div class="card-body">
+        <div class="text-center mb-4">
+            <h4>Address: <?= $pin_location?></h4>
+            <h5>Supply & <?= $service_type ?> of <?= $product_type ?></h5>                   
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-warning text-center">
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Unit</th>
+                    <th>Qty</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?= 1 ?></td>
+                    <td><?= $brand ?></td>
+                    <td>items</td>
+                    <td><?= $quantity?></td>
+                    <td>
+                        <?= htmlspecialchars(number_format($price['price'], 2)) ?>
+                    </td>
+                </tr>
+                <?php 
+                $totalitem = 2;
+                foreach ($rows_generator as $row):
+                ?>
+                <tr>
+                    <td><?= $totalitem++ ?></td>
+                    <td><?= htmlspecialchars($row['description']) ?></td>
+                    <td><?= htmlspecialchars($row['unit']) ?></td>
+                    <td><?= htmlspecialchars($row['quantity']) ?></td>
+                    <td><?= htmlspecialchars(number_format($row['amount'], 2)) ?></td>
+                </tr>
+                <?php 
+                endforeach;
+                ?>
+            </tbody>
+            <tfoot>
+                <tr class="table-warning text-center">
+                    <td colspan="4"><strong>Total Price Vat Exclusive:</strong></td>
+                    <td>₱<strong><?= htmlspecialchars(number_format($final_value, 2)) ?></strong></td>
+                </tr>
+                <?php if($agent_mode){ ?>
+                <tr class="table-warning text-center">
+                    <td colspan="4"><strong>Total Price Vat Exclusive with Agent markup:</strong></td>
+                    <td>₱<strong><?= htmlspecialchars(number_format($final_value_withagent, 2)) ?></strong></td>
+                </tr>
+                <?php } ?>
+            </tfoot>
+        </table>
+        <div class="text-center mx-4" style="border: 1px solid #ccc; margin-top: 20px; padding: 10px; border-radius: 5px;">
+            <p>PAYMENT NOW: ₱<?= number_format($final_value * 0.45, 2) ?></p>
+            <p>UPON DELIVERY: ₱<?= number_format($final_value * 0.4, 2) ?></p>
+            <p>AFTER INSTALLATION: ₱<?= number_format($final_value * 0.15, 2) ?></p>
+            <p>TOTAL: ₱<strong><?= number_format($final_value, 2) ?></strong></p>
+        </div>
+        <p class="text-muted mt-3"><small>NOTE: The price above is for supply and <?= $service_type ?> of <?= $product_type ?> for <?= $pin_location ?></small></p>
+        <!-- Checkbox for accepting terms and conditions -->
+        <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
+            <label>
+                <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+            </label>
+            <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
+                Proceed for Payment
+            </button>
+        </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-success" onclick="downloadPDF()">Download as PDF</button>
+        </div>
+    </div>
+</div>
                     </div>
                 </div>
             </div>
@@ -1136,6 +1121,27 @@ else if(isset($_POST['tuneup_submit'])){
     });
 </script>
 
+<!-- Include html2pdf.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    function downloadPDF() {
+        const element = document.getElementById('cardToDownload');
+        const opt = {
+            margin: 1,
+            filename: 'card-details.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+
+    function toggleAvailButton() {
+        const checkbox = document.getElementById('acceptTerms');
+        const button = document.getElementById('paymentButton');
+        button.disabled = !checkbox.checked; // Enable if checked, disable if not
+    }
+</script>
 
 
 
