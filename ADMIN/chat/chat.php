@@ -1,7 +1,6 @@
 
 <?php 
-require_once '../authetincation.php';
-include_once '../../Database/database.php';
+
 ?>
 
 
@@ -56,10 +55,7 @@ include_once '../../Database/database.php';
     <div class="page">
 
             <!-- app-header -->
-            <?php include_once( __DIR__.'../../../partials/header.php')?>
-            <!-- /app-header -->
-            <!-- Start::app-sidebar -->
-            <?php include_once(__DIR__.'../../../partials/sidebar.php')?>
+            
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
@@ -76,16 +72,16 @@ include_once '../../Database/database.php';
                             <iframe src="https://dashboard.tawk.to/"></iframe>
                            
                                 <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function() {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/YOUR_PROPERTY_ID/default';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
+                                    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+                                    (function() {
+                                        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                                        s1.async = true;
+                                        s1.src = 'https://embed.tawk.to/YOUR_PROPERTY_ID/default';
+                                        s1.charset = 'UTF-8';
+                                        s1.setAttribute('crossorigin', '*');
+                                        s0.parentNode.insertBefore(s1, s0);
+                                    })();
+                                </script>
                         </div>
                     </div><!-- COL END -->
                 </div>
@@ -98,7 +94,7 @@ include_once '../../Database/database.php';
 
         
         <!-- Footer Start -->
-        <?php include_once(__DIR__.'../../../partials/footer.php') ?>
+        
         <!-- Footer End -->  
     </div>
 
