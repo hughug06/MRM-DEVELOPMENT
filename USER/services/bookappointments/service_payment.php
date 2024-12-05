@@ -827,17 +827,20 @@ else if(isset($_POST['tuneup_submit'])){
             <p><strong>Total: ₱<?= number_format($final_value, 2) ?></strong></p>
         </div>
         <p class="text-muted mt-3"><small>Thank you for your business! If you have any questions about this receipt, please contact us at <?= $contact_info ?? 'our support line' ?>.</small></p>
-        <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
-            <label>
-                <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
-                I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-            </label>
-            <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
-                Proceed for Payment
-            </button>
-        </div>
-        <div class="text-center mt-3">
-            <button class="btn btn-success" onclick="downloadReceiptPDF()">Download Receipt as PDF</button>
+        <!-- Buttons and Checkbox for web display -->
+        <div class="web-only">
+            <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
+                <label>
+                    <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
+                    I accept the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                </label>
+                <button type="button" class="btn btn-primary" id="paymentButton" data-bs-toggle="modal" data-bs-target="#paymentModal" disabled>
+                    Proceed for Payment
+                </button>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-success" onclick="downloadReceiptPDF()">Download Receipt as PDF</button>
+            </div>
         </div>
     </div>
 </div>
@@ -1117,24 +1120,22 @@ else if(isset($_POST['tuneup_submit'])){
 </script>
 
 <!-- Include html2pdf.js -->
+<!-- Include html2pdf.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
     function downloadReceiptPDF() {
         const element = document.getElementById('receiptToDownload');
+        const webOnlyElements = document.querySelectorAll('.web-only');
 
-        // Temporary styles to optimize the print layout
+        // Temporarily hide web-only elements
+        webOnlyElements.forEach(el => el.style.display = 'none');
+
+        // Temporary styles to optimize print layout
         const style = document.createElement('style');
         style.innerHTML = `
             body {
                 background: #fff !important;
                 color: #000 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            .dark-mode, .light-mode {
-                display: none !important;
-            }
-            .card {
                 margin: 0 !important;
                 padding: 0 !important;
             }
@@ -1150,6 +1151,8 @@ else if(isset($_POST['tuneup_submit'])){
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
+            // Restore the display of web-only elements
+            webOnlyElements.forEach(el => el.style.display = '');
             document.head.removeChild(style); // Clean up temporary styles
         });
     }
@@ -1160,6 +1163,5 @@ else if(isset($_POST['tuneup_submit'])){
         button.disabled = !checkbox.checked;
     }
 </script>
-
 
 
