@@ -65,8 +65,6 @@
 
                 <!--  SHOW INVENTORY -->
                 <div class="row row-sm mt-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
-                        <div class="card custom-card">
                             
                             <!-- Embed Tawk.to Admin Dashboard -->
                             <iframe src="https://dashboard.tawk.to/"></iframe>
@@ -82,8 +80,7 @@
                                         s0.parentNode.insertBefore(s1, s0);
                                     })();
                                 </script>
-                        </div>
-                    </div><!-- COL END -->
+
                 </div>
 
 
