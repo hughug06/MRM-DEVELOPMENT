@@ -770,8 +770,8 @@ else if(isset($_POST['tuneup_submit'])){
                     ?>
                 </div>
                     <div class="container-fluid">
-                    <div class="card custom-card my-5 p-5" id="receiptToDownload">
-    <div class="card-body">
+                    <div class="card custom-card my-5 p-5" id="receiptToDownload" style="margin: 0; padding: 0;">
+    <div class="card-body" style="padding: 20px;">
         <div class="text-center mb-4">
             <h2>Receipt</h2>
             <p><strong>Address:</strong> <?= $pin_location ?></p>
@@ -1122,30 +1122,36 @@ else if(isset($_POST['tuneup_submit'])){
 <script>
     function downloadReceiptPDF() {
         const element = document.getElementById('receiptToDownload');
-        
-        // Temporarily add print-specific styles
+
+        // Temporary styles to optimize the print layout
         const style = document.createElement('style');
         style.innerHTML = `
             body {
                 background: #fff !important;
                 color: #000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             .dark-mode, .light-mode {
                 display: none !important;
+            }
+            .card {
+                margin: 0 !important;
+                padding: 0 !important;
             }
         `;
         document.head.appendChild(style);
 
         const opt = {
-            margin: [0.5, 0.5, 0.5, 0.5],
+            margin: [0, 0, 0, 0], // Minimize margins
             filename: 'receipt.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 1.5 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
-            document.head.removeChild(style); // Clean up the temporary styles
+            document.head.removeChild(style); // Clean up temporary styles
         });
     }
 
