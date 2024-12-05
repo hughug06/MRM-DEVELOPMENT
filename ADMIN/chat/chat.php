@@ -59,8 +59,7 @@
             <!-- End::app-sidebar -->
 
             <!--APP-CONTENT START-->
-            <div class="main-content app-content">
-                <div class="container-fluid">   
+            <div class="main-content app-content"> 
 
 
 
@@ -83,7 +82,6 @@
 
 
                 
-               </div>
             </div>
             <!--APP-CONTENT CLOSE-->
 
