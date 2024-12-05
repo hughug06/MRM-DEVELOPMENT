@@ -63,8 +63,7 @@
                 <div class="container-fluid">   
 
 
-                <!--  SHOW INVENTORY -->
-                <div class="row row-sm mt-3">
+
                             
                             <!-- Embed Tawk.to Admin Dashboard -->
                             <iframe src="https://dashboard.tawk.to/"></iframe>
@@ -81,7 +80,6 @@
                                     })();
                                 </script>
 
-                </div>
 
 
                 
