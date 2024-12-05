@@ -826,7 +826,6 @@ else if(isset($_POST['tuneup_submit'])){
             <p>After Installation: ₱<?= number_format($final_value * 0.15, 2) ?></p>
             <p><strong>Total: ₱<?= number_format($final_value, 2) ?></strong></p>
         </div>
-        <p class="text-muted mt-3"><small>Thank you for your business! If you have any questions about this receipt, please contact us at <?= $contact_info ?? 'our support line' ?>.</small></p>
         <!-- Buttons and Checkbox for web display -->
         <div class="web-only">
             <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
@@ -1144,7 +1143,7 @@ else if(isset($_POST['tuneup_submit'])){
 
         const opt = {
             margin: [0, 0, 0, 0], // Minimize margins
-            filename: 'receipt.pdf',
+            filename: 'quotation.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
