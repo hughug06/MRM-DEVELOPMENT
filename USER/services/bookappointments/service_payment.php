@@ -773,9 +773,8 @@ else if(isset($_POST['tuneup_submit'])){
                     <div class="card custom-card my-5 p-5" id="receiptToDownload" style="margin: 0; padding: 0;">
     <div class="card-body" style="padding: 20px;">
         <div class="text-center mb-4">
-            <h2>Receipt</h2>
-            <p><strong>Address:</strong> <?= $pin_location ?></p>
-            <p><strong>Transaction Type:</strong> Supply & <?= $service_type ?> of <?= $product_type ?></p>                   
+        <h4>Address: <?= $pin_location?></h4>
+        <h5>Supply & <?= $service_type ?> of <?= $product_type ?></h5>               
         </div>
         <table class="table table-bordered">
             <thead class="table-warning text-center">
