@@ -770,8 +770,8 @@ else if(isset($_POST['tuneup_submit'])){
                     ?>
                 </div>
                     <div class="container-fluid">
-                    <div class="card custom-card my-5 p-5" id="receiptToDownload">
-    <div class="card-body">
+                    <div class="card custom-card my-5 p-5">
+    <div class="card-body" id="receiptToDownload">
         <div class="text-center mb-4">
             <h2>Receipt</h2>
             <p><strong>Address:</strong> <?= $pin_location ?></p>
