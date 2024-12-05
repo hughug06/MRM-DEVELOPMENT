@@ -770,8 +770,8 @@ else if(isset($_POST['tuneup_submit'])){
                     ?>
                 </div>
                     <div class="container-fluid">
-                    <div class="card custom-card my-5 p-5">
-    <div class="card-body" id="receiptToDownload">
+                    <div class="card custom-card my-5 p-5" id="receiptToDownload">
+    <div class="card-body">
         <div class="text-center mb-4">
             <h2>Receipt</h2>
             <p><strong>Address:</strong> <?= $pin_location ?></p>
@@ -828,7 +828,6 @@ else if(isset($_POST['tuneup_submit'])){
             <p><strong>Total: ₱<?= number_format($final_value, 2) ?></strong></p>
         </div>
         <p class="text-muted mt-3"><small>Thank you for your business! If you have any questions about this receipt, please contact us at <?= $contact_info ?? 'our support line' ?>.</small></p>
-        <!-- Checkbox for accepting terms and conditions -->
         <div class="form-check text-center mt-4 d-flex justify-content-center flex-column align-items-center gap-3">
             <label>
                 <input class="form-check-input" type="checkbox" id="acceptTerms" onclick="toggleAvailButton()">
@@ -1119,11 +1118,24 @@ else if(isset($_POST['tuneup_submit'])){
 </script>
 
 <!-- Include html2pdf.js -->
-<!-- Include html2pdf.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
     function downloadReceiptPDF() {
         const element = document.getElementById('receiptToDownload');
+        
+        // Temporarily add print-specific styles
+        const style = document.createElement('style');
+        style.innerHTML = `
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            .dark-mode, .light-mode {
+                display: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+
         const opt = {
             margin: [0.5, 0.5, 0.5, 0.5],
             filename: 'receipt.pdf',
@@ -1132,7 +1144,9 @@ else if(isset($_POST['tuneup_submit'])){
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
 
-        html2pdf().set(opt).from(element).save();
+        html2pdf().set(opt).from(element).save().then(() => {
+            document.head.removeChild(style); // Clean up the temporary styles
+        });
     }
 
     function toggleAvailButton() {
