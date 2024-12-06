@@ -1,69 +1,83 @@
 <?php
-include_once '../../Database/database.php';
+// Include the database connection
+include_once('../../Database/database.php');
 
-// Check if a POST request is made
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['report_type'])) {
-    $reportType = $_POST['report_type'];
+// Get the report type (weekly, monthly, or yearly)
+$reportType = isset($_POST['report_type']) ? $_POST['report_type'] : 'daily';
 
-    // Determine date range based on the report type
-    switch ($reportType) {
-        case 'weekly':
-            $startDate = date('Y-m-d', strtotime('-1 week'));
-            break;
-        case 'monthly':
-            $startDate = date('Y-m-d', strtotime('-1 month'));
-            break;
-        case 'yearly':
-            $startDate = date('Y-m-d', strtotime('-1 year'));
-            break;
-        default:
-            die("Invalid report type");
-    }
-    $endDate = date('Y-m-d'); // Current date
-
-    // Fetch sales data within the date range
-    $query = "
-        SELECT DATE(date_done) AS sale_date, 
-               GROUP_CONCAT(booking_id) AS booking_ids, 
-               SUM(total_cost) AS daily_sales 
-        FROM service_payment 
-        WHERE date_done BETWEEN ? AND ?
-          AND first_reference IS NOT NULL 
-          AND second_reference IS NOT NULL 
-          AND third_reference IS NOT NULL 
-        GROUP BY DATE(date_done) 
-        ORDER BY sale_date ASC
-    ";
-
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('ss', $startDate, $endDate);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Prepare data for the report
-    $salesData = [];
-    while ($row = $result->fetch_assoc()) {
-        $salesData[] = $row;
-    }
-
-    // Generate CSV content
-    $filename = "sales_report_{$reportType}.csv";
-    header('Content-Type: text/csv');
-    header("Content-Disposition: attachment; filename={$filename}");
-
-    $output = fopen('php://output', 'w');
-
-    // Add CSV headers
-    fputcsv($output, ['Date', 'Booking IDs', 'Total Sales (₱)']);
-
-    // Add sales data rows
-    foreach ($salesData as $data) {
-        fputcsv($output, [$data['sale_date'], $data['booking_ids'], number_format($data['daily_sales'], 2)]);
-    }
-
-    fclose($output);
-    exit;
+// Set date condition based on report type
+if ($reportType == 'weekly') {
+    $dateCondition = "AND YEARWEEK(date_done, 1) = YEARWEEK(CURDATE(), 1)"; // For current week
+} elseif ($reportType == 'monthly') {
+    $dateCondition = "AND MONTH(date_done) = MONTH(CURDATE())"; // For current month
+} elseif ($reportType == 'yearly') {
+    $dateCondition = "AND YEAR(date_done) = YEAR(CURDATE())"; // For current year
 } else {
-    echo "Invalid request.";
+    $dateCondition = ""; // Default to daily report
 }
+
+// Fetch sales data
+$query = "SELECT DATE(date_done) AS sale_date, SUM(total_cost) AS daily_sales
+          FROM service_payment
+          WHERE first_reference IS NOT NULL 
+          AND second_reference IS NOT NULL 
+          AND third_reference IS NOT NULL
+          $dateCondition
+          GROUP BY DATE(date_done) 
+          ORDER BY sale_date ASC";
+
+$result = $conn->query($query);
+$salesData = [];
+while ($row = $result->fetch_assoc()) {
+    $salesData[] = $row;
+}
+
+// Prepare HTML content for the PDF
+$html = "
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1 style='text-align: center;'>Sales Report - " . ucfirst($reportType) . " Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total Sales (₱)</th>
+            </tr>
+        </thead>
+        <tbody>";
+
+// Add sales data rows
+foreach ($salesData as $data) {
+    $html .= "
+            <tr>
+                <td>" . $data['sale_date'] . "</td>
+                <td>" . number_format($data['daily_sales'], 2) . "</td>
+            </tr>";
+}
+
+$html .= "
+        </tbody>
+    </table>
+</body>
+</html>";
+
+// Include the HTML2PDF library (if not using external libraries, use PHP's in-built features)
+echo $html;
+
+// The following steps would normally save to a PDF file (without external libraries, you would generate the HTML yourself).
+
+// Output the HTML as a file for download
+header("Content-type: application/pdf");
+header("Content-Disposition: attachment; filename=sales_report_" . $reportType . ".pdf");
+echo $html;
+
 ?>
