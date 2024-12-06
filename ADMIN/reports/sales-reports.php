@@ -270,18 +270,9 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-center gap-3 my-3">
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="weekly">
-                                <button type="submit" class="btn btn-outline-primary">Download Weekly Report</button>
-                            </form>
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="monthly">
-                                <button type="submit" class="btn btn-outline-success">Download Monthly Report</button>
-                            </form>
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="yearly">
-                                <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
-                            </form>
+                        <button class="btn btn-outline-primary" id="downloadWeeklyReport" onclick="downloadReport('weekly')">Download Weekly Report</button>
+                        <button class="btn btn-outline-primary" id="downloadMonthlyReport" onclick="downloadReport('monthly')">Download Monthly Report</button>
+                        <button class="btn btn-outline-primary" id="downloadYearlyReport" onclick="downloadReport('yearly')">Download Yearly Report</button>
                         </div>
                     </div>
                 </div>
@@ -378,4 +369,13 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
     </body>
 
+    <script>
+    function downloadReport(reportType) {
+        // Create a new link to trigger the PDF download
+        var link = document.createElement('a');
+        link.href = 'sales_download.php?reportType=' + reportType;
+        link.target = '_blank';  // Open the PDF in a new tab
+        link.click();
+    }
+</script>
 </html>
