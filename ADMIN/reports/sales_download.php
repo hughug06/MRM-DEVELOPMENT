@@ -1,66 +1,70 @@
 <?php
-include 'sales-reports.php'; // Include sales data source
+require_once '../authentication.php';
+include_once '../../Database/database.php';
 
-// Validate the report type passed from the form
-$report_type = isset($_POST['report_type']) ? $_POST['report_type'] : 'daily';
-$report_title = "Sales Report - " . ucfirst($report_type);
+// Check if a POST request is made
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['report_type'])) {
+    $reportType = $_POST['report_type'];
 
-// Group sales data dynamically based on the report type
-$groupedData = [];
-if ($report_type === 'daily') {
-    $groupedData = $salesData; // Assume sales-reports.php provides daily data
-} elseif ($report_type === 'weekly' || $report_type === 'yearly') {
+    // Determine date range based on the report type
+    switch ($reportType) {
+        case 'weekly':
+            $startDate = date('Y-m-d', strtotime('-1 week'));
+            break;
+        case 'monthly':
+            $startDate = date('Y-m-d', strtotime('-1 month'));
+            break;
+        case 'yearly':
+            $startDate = date('Y-m-d', strtotime('-1 year'));
+            break;
+        default:
+            die("Invalid report type");
+    }
+    $endDate = date('Y-m-d'); // Current date
+
+    // Fetch sales data within the date range
+    $query = "
+        SELECT DATE(date_done) AS sale_date, 
+               GROUP_CONCAT(booking_id) AS booking_ids, 
+               SUM(total_cost) AS daily_sales 
+        FROM service_payment 
+        WHERE date_done BETWEEN ? AND ?
+          AND first_reference IS NOT NULL 
+          AND second_reference IS NOT NULL 
+          AND third_reference IS NOT NULL 
+        GROUP BY DATE(date_done) 
+        ORDER BY sale_date ASC
+    ";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ss', $startDate, $endDate);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Prepare data for the report
+    $salesData = [];
+    while ($row = $result->fetch_assoc()) {
+        $salesData[] = $row;
+    }
+
+    // Generate CSV content
+    $filename = "sales_report_{$reportType}.csv";
+    header('Content-Type: text/csv');
+    header("Content-Disposition: attachment; filename={$filename}");
+
+    $output = fopen('php://output', 'w');
+
+    // Add CSV headers
+    fputcsv($output, ['Date', 'Booking IDs', 'Total Sales (₱)']);
+
+    // Add sales data rows
     foreach ($salesData as $data) {
-        $key = ($report_type === 'weekly') 
-            ? date('o-W', strtotime($data['sale_date']))  // Weekly format: Year-Week
-            : date('Y', strtotime($data['sale_date']));   // Yearly format: Year
-        if (!isset($groupedData[$key])) {
-            $groupedData[$key] = ['sale_period' => $key, 'total_sales' => 0, 'booking_ids' => []];
-        }
-        $groupedData[$key]['total_sales'] += $data['daily_sales'];
-        $groupedData[$key]['booking_ids'] = array_merge($groupedData[$key]['booking_ids'], explode(',', $data['booking_ids']));
+        fputcsv($output, [$data['sale_date'], $data['booking_ids'], number_format($data['daily_sales'], 2)]);
     }
+
+    fclose($output);
+    exit;
+} else {
+    echo "Invalid request.";
 }
-
-// Set headers for PDF download
-header("Content-type: application/pdf");
-header("Content-Disposition: attachment; filename=sales_report_$report_type.pdf");
-
-// Start raw PDF creation
-$pdf_content = "%PDF-1.4\n";
-$pdf_content .= "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n";
-$pdf_content .= "2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n";
-$pdf_content .= "3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >> endobj\n";
-
-// Add header
-$content = "BT /F1 24 Tf 100 750 Td (" . $report_title . ") Tj ET\n";
-$y_position = 700;
-
-// Add table headers
-$content .= "BT /F1 12 Tf 50 $y_position Td (Date/Period) Tj ET\n";
-$content .= "BT /F1 12 Tf 200 $y_position Td (Booking IDs) Tj ET\n";
-$content .= "BT /F1 12 Tf 400 $y_position Td (Total Sales (₱)) Tj ET\n";
-$y_position -= 30;
-
-// Add sales data rows
-foreach ($groupedData as $data) {
-    $content .= "BT /F1 12 Tf 50 $y_position Td (" . ($data['sale_date'] ?? $data['sale_period']) . ") Tj ET\n";
-    $content .= "BT /F1 12 Tf 200 $y_position Td (" . implode(', ', $data['booking_ids']) . ") Tj ET\n";
-    $content .= "BT /F1 12 Tf 400 $y_position Td (" . number_format($data['total_sales'], 2) . ") Tj ET\n";
-    $y_position -= 20;
-
-    // Ensure the content stays within the page
-    if ($y_position < 50) {
-        $content .= "BT /F1 12 Tf 100 50 Td (Continued...) Tj ET\n";
-        break; // For simplicity, we limit content length here
-    }
-}
-
-// Complete PDF
-$pdf_content .= "4 0 obj << /Length " . strlen($content) . " >> stream\n$content\nendstream endobj\n";
-$pdf_content .= "xref\n0 5\n0000000000 65535 f\n0000000010 00000 n\n0000000061 00000 n\n0000000112 00000 n\n";
-$pdf_content .= "0000000220 00000 n\ntrailer << /Root 1 0 R /Size 5 >> startxref\n300\n%%EOF";
-
-// Output the PDF content
-echo $pdf_content;
 ?>
