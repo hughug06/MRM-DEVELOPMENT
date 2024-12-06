@@ -1,5 +1,4 @@
 <?php
-require_once '../authentication.php';
 include_once '../../Database/database.php';
 
 // Check if a POST request is made
