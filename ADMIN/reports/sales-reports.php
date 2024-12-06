@@ -2,7 +2,68 @@
 require_once '../authetincation.php';
 include_once '../../Database/database.php';
 
+// Handle the form submission for generating reports
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $reportType = $_POST['report_type'];
 
+    // Fetch sales data based on the report type (weekly, monthly, or yearly)
+    $dateCondition = "";
+    if ($reportType === 'weekly') {
+        $dateCondition = "AND YEARWEEK(date_done, 1) = YEARWEEK(CURDATE(), 1)";
+    } elseif ($reportType === 'monthly') {
+        $dateCondition = "AND MONTH(date_done) = MONTH(CURDATE()) AND YEAR(date_done) = YEAR(CURDATE())";
+    } elseif ($reportType === 'yearly') {
+        $dateCondition = "AND YEAR(date_done) = YEAR(CURDATE())";
+    }
+
+    $salesQuery = "SELECT DATE(date_done) AS sale_date, 
+                          GROUP_CONCAT(booking_id) AS booking_ids, 
+                          SUM(total_cost) AS daily_sales 
+                   FROM service_payment 
+                   WHERE first_reference IS NOT NULL 
+                   AND second_reference IS NOT NULL 
+                   AND third_reference IS NOT NULL 
+                   $dateCondition
+                   GROUP BY DATE(date_done) 
+                   ORDER BY sale_date ASC";
+
+    $salesResult = $conn->query($salesQuery);
+    $salesData = [];
+    while ($row = $salesResult->fetch_assoc()) {
+        $salesData[] = $row;
+    }
+
+    // Generate the PDF
+    header("Content-type: application/pdf");
+    header("Content-Disposition: inline; filename=sales_report_$reportType.pdf");
+
+    echo "<html>";
+    echo "<head>";
+    echo "<style>";
+    echo "body { font-family: Arial, sans-serif; font-size: 12pt; }";
+    echo "table { width: 100%; border-collapse: collapse; margin-top: 20px; }";
+    echo "th, td { padding: 8px; border: 1px solid black; text-align: center; }";
+    echo "th { background-color: #f2f2f2; }";
+    echo "</style>";
+    echo "</head>";
+    echo "<body>";
+    echo "<h2>Sales Report ($reportType)</h2>";
+    echo "<table>";
+    echo "<tr><th>Date</th><th>Booking IDs</th><th>Total Sales (₱)</th></tr>";
+
+    // Table data
+    foreach ($salesData as $data) {
+        echo "<tr>";
+        echo "<td>" . htmlspecialchars($data['sale_date']) . "</td>";
+        echo "<td>" . htmlspecialchars($data['booking_ids']) . "</td>";
+        echo "<td>" . number_format($data['daily_sales'], 2) . "</td>";
+        echo "</tr>";
+    }
+
+    echo "</table>";
+    echo "</body>";
+    echo "</html>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -270,15 +331,15 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-center gap-3 my-3">
-                            <form action="sales_download.php" method="post">
+                            <form action="sales-reports.php" method="post">
                                 <input type="hidden" name="report_type" value="weekly">
                                 <button type="submit" class="btn btn-outline-primary">Download Weekly Report</button>
                             </form>
-                            <form action="sales_download.php" method="post">
+                            <form action="sales-reports.php" method="post">
                                 <input type="hidden" name="report_type" value="monthly">
                                 <button type="submit" class="btn btn-outline-success">Download Monthly Report</button>
                             </form>
-                            <form action="sales_download.php" method="post">
+                            <form action="sales-reports.php" method="post">
                                 <input type="hidden" name="report_type" value="yearly">
                                 <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
                             </form>
