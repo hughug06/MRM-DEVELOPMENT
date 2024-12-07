@@ -701,24 +701,25 @@
     // Function to open the modal and populate with the total cost and booking ID
     function openPaymentModal() {
         // Get the total cost and booking ID from the hidden input and text input fields
-        var totalCost = parseInt(document.getElementById('total_cost_input').value, 10);
-        var bookingId = parseInt(document.getElementById('booking_id_input').value, 10);
+        // Get the total cost and booking ID from the hidden input and text input fields
+        var totalCost = parseInt(document.getElementById('total_cost_input').value, 10); // Convert totalCost to an integer
+        var bookingId = document.getElementById('booking_id_input').value;
 
         // Calculate 40% of the total cost
         var duePayment = totalCost * 0.40;
 
         // Format the amounts with commas as thousand separators
         var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
-        var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+        var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP', minimumFractionDigits: 2 });
 
         // Update the text content of the paymentnow and totalCostModal elements
         document.getElementById('paymentnow').innerText = 'Due payment: ' + formattedDuePayment;
         document.getElementById('totalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
-    
-        
+
         // Optionally, populate the form with the total cost and booking ID
         document.getElementById('booking_id_modal_input').value = bookingId;
-        document.getElementById('duePaymentInput').value = duePayment.toFixed(2); 
+        document.getElementById('duePaymentInput').value = duePayment.toFixed(2);
+
     }
 
     // Event listener for button click to open the modal
