@@ -731,23 +731,28 @@
         // Get the total cost and booking ID from the input fields
         var totalCost = document.getElementById('total_cost_input_third').value;
         var bookingId = document.getElementById('booking_id_input_third').value;
-        
-        // Calculate 40% of the total cost
+
+        // Convert totalCost to an integer using parseInt and calculate 15% of the total cost
+        totalCost = parseInt(totalCost, 10); // Ensure totalCost is an integer
         var duePayment = totalCost * 0.15;
-        var totalCost = parseFloat(totalCost);
-        
-        // Format the amounts with commas as thousand separators
+
+        // Format the amounts with commas as thousand separators and display .00
         var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
-        var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+        var formattedTotalCost = totalCost.toLocaleString('en-PH', { 
+            style: 'currency', 
+            currency: 'PHP', 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        });
 
         // Update the text content of the Thirdpaymentnow, ThirdtotalCostModal, and ThirdbookingIdModal elements
         document.getElementById('Thirdpaymentnow').innerText = 'Due payment: ' + formattedDuePayment;
         document.getElementById('ThirdtotalCostModal').innerText = 'TOTAL: ' + formattedTotalCost;
-      
-        
+
         // Populate the form with the total cost and booking ID
         document.getElementById('booking_id_third').value = bookingId;
-        document.getElementById('duePayment_third').value = duePayment.toFixed(2); 
+        document.getElementById('duePayment_third').value = duePayment.toFixed(2);
+
     }
 
     // Event listener for button click to open the third payment modal
