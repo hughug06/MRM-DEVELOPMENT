@@ -809,7 +809,7 @@ else if(isset($_POST['tuneup_submit'])){
             <tfoot>
                 <tr class="table-warning text-center">
                     <td colspan="4"><strong>Total (VAT Exclusive):</strong></td>
-                    <td>₱<?= htmlspecialchars(number_format($final_value, 2)) ?></td>
+                    <td>₱<?= htmlspecialchars(number_format(intval($final_value), 2)) ?></td>
                 </tr>
                 <?php if ($agent_mode): ?>
                 <tr class="table-warning text-center">
