@@ -701,12 +701,12 @@
     // Function to open the modal and populate with the total cost and booking ID
     function openPaymentModal() {
         // Get the total cost and booking ID from the hidden input and text input fields
-        var totalCost = document.getElementById('total_cost_input').value;
-        var bookingId = document.getElementById('booking_id_input').value;
-        
+        var totalCost = parseInt(document.getElementById('total_cost_input').value, 10);
+        var bookingId = parseInt(document.getElementById('booking_id_input').value, 10);
+
         // Calculate 40% of the total cost
         var duePayment = totalCost * 0.40;
-        var totalCost = parseFloat(document.getElementById('total_cost_input').value);
+
         // Format the amounts with commas as thousand separators
         var formattedDuePayment = duePayment.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
         var formattedTotalCost = totalCost.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
