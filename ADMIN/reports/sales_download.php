@@ -2,12 +2,27 @@
 // Database connection
 include_once('../Database/database.php');
 
-// Fetch sales data from the database
+// Default report type to weekly
+$reportType = isset($_POST['report_type']) ? $_POST['report_type'] : 'weekly';
+
+// Fetch sales data based on the report type
+if ($reportType == 'weekly') {
+    $dateCondition = "AND WEEK(date_done) = WEEK(CURDATE())";
+} elseif ($reportType == 'monthly') {
+    $dateCondition = "AND MONTH(date_done) = MONTH(CURDATE())";
+} elseif ($reportType == 'yearly') {
+    $dateCondition = "AND YEAR(date_done) = YEAR(CURDATE())";
+} else {
+    $dateCondition = '';
+}
+
+// Query to fetch sales data based on the selected report type
 $query = "SELECT DATE(date_done) AS sale_date, SUM(total_cost) AS daily_sales 
           FROM service_payment 
           WHERE first_reference IS NOT NULL 
           AND second_reference IS NOT NULL 
           AND third_reference IS NOT NULL 
+          $dateCondition
           GROUP BY DATE(date_done) 
           ORDER BY sale_date ASC";
 $result = $conn->query($query);
@@ -16,12 +31,12 @@ $result = $conn->query($query);
 $salesData = [];
 while ($row = $result->fetch_assoc()) {
     $salesData[] = $row;
-}
 
 // Close the database connection
 $conn->close();
-?>
+}
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +44,6 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Report</title>
     <style>
-        /* Basic styling for the report */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -99,6 +113,7 @@ $conn->close();
         <!-- Date range or report generation date -->
         <div class="date-range">
             <p>Report Generated on: <?php echo date("F j, Y"); ?></p>
+            <p>Report Type: <?php echo ucfirst($reportType); ?></p>
         </div>
         
         <!-- Sales data table -->
@@ -143,7 +158,7 @@ $conn->close();
             // Set options for the PDF generation
             const opt = {
                 margin: [0, 0, 0, 0], // Minimize margins
-                filename: 'sales_report.pdf',
+                filename: 'sales_report_<?php echo $reportType; ?>.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
