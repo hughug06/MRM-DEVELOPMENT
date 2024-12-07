@@ -2,7 +2,7 @@
 // Database connection
 include_once('../Database/database.php');
 
-// Default report type to weekly
+// Default report type to weekly if not set
 $reportType = isset($_POST['report_type']) ? $_POST['report_type'] : 'weekly';
 
 // Fetch sales data based on the report type
@@ -31,12 +31,12 @@ $result = $conn->query($query);
 $salesData = [];
 while ($row = $result->fetch_assoc()) {
     $salesData[] = $row;
+}
 
 // Close the database connection
 $conn->close();
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,7 +165,9 @@ $conn->close();
             };
 
             // Generate and download the PDF automatically when the page loads
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).save().then(function() {
+                window.location.href = 'sales_download.php'; // Redirect after download (optional)
+            });
         };
     </script>
 </body>
