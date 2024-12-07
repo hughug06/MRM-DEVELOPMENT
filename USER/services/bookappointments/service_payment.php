@@ -809,7 +809,7 @@ else if(isset($_POST['tuneup_submit'])){
             <tfoot>
                 <tr class="table-warning text-center">
                     <td colspan="4"><strong>Total (VAT Exclusive):</strong></td>
-                    <td>₱<?= htmlspecialchars(number_format($final_value, 2)) ?></td>
+                    <td>₱<?= htmlspecialchars(number_format(intval($final_value), 2)) ?></td>
                 </tr>
                 <?php if ($agent_mode): ?>
                 <tr class="table-warning text-center">
@@ -821,10 +821,10 @@ else if(isset($_POST['tuneup_submit'])){
         </table>
         <div class="text-center mx-4 mt-4" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
             <p><strong>Payment Breakdown:</strong></p>
-            <p>Now: ₱<?= number_format($final_value * 0.45, 2) ?></p>
-            <p>Upon Delivery: ₱<?= number_format($final_value * 0.4, 2) ?></p>
-            <p>After Installation: ₱<?= number_format($final_value * 0.15, 2) ?></p>
-            <p><strong>Total: ₱<?= number_format($final_value, 2) ?></strong></p>
+            <p>Now: ₱<?= number_format(intval($final_value * 0.45), 2) ?></p>
+            <p>Upon Delivery: ₱<?= number_format(intval($final_value * 0.4), 2) ?></p>
+            <p>After Installation: ₱<?= number_format(intval($final_value * 0.15), 2) ?></p>
+            <p><strong>Total: ₱<?= number_format(intval($final_value), 2) ?></strong></p>
         </div>
         <!-- Buttons and Checkbox for web display -->
         <div class="web-only">
