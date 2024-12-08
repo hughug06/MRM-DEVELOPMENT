@@ -383,9 +383,9 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
 
         <script>
-           document.addEventListener("DOMContentLoaded", function () {
-    // Function to download completed report as PDF in landscape
-    async function downloadCompletedReportsAsPDF() {
+          document.addEventListener("DOMContentLoaded", function () {
+    // Function to download completed report and sales data as PDF in landscape
+    async function downloadReportAsPDF() {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF('landscape'); // Set orientation to landscape
 
@@ -454,23 +454,57 @@ while ($row = $salesByDateResult->fetch_assoc()) {
             styles: { fontSize: 10 },
         });
 
+        // Add a space between the two tables
+        let currentY = pdf.lastAutoTable.finalY + 10; // Calculate the end position of the last table
+
+        // Title for Sales Data Table
+        pdf.setFontSize(16);
+        pdf.text("Sales Data", 10, currentY);
+
+        // Array to hold sales data
+        const salesData = [];
+
+        // Loop through sales data and populate the salesData array
+        // Assuming that you have the data available in your JavaScript as a variable
+        const salesTableRows = document.querySelectorAll('.sales-data-table tbody tr');
+        
+        salesTableRows.forEach(row => {
+            const date = row.querySelector('td:nth-child(1)').innerText;
+            const bookingIds = row.querySelector('td:nth-child(2)').innerText;
+            const totalSales = row.querySelector('td:nth-child(3)').innerText;
+
+            salesData.push([date, bookingIds, totalSales]);
+        });
+
+        // Add Sales Data Table to the PDF
+        pdf.autoTable({
+            startY: currentY + 10, // Positioning after the title and space
+            head: [
+                ["Date", "Booking IDs", "Total Sales (₱)"]
+            ],
+            body: salesData,
+            theme: "grid", // Use grid style
+            styles: { fontSize: 10 },
+        });
+
         // Save the PDF
-        pdf.save("CompletedReports.pdf");
+        pdf.save("ReportWithCompletedAndSalesData.pdf");
     }
 
     // Create download button
     const downloadButton = document.createElement("button");
-    downloadButton.innerText = "Download Completed Reports PDF";
+    downloadButton.innerText = "Download Report PDF";
     downloadButton.className = "btn btn-primary";
     downloadButton.style.margin = "10px";
     downloadButton.addEventListener("click", function () {
-        downloadCompletedReportsAsPDF();
+        downloadReportAsPDF();
     });
 
     // Append the button to the container
     const container = document.querySelector(".main-content"); // Or another container element
     container.appendChild(downloadButton);
 });
+
         </script>
 
 
