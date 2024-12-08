@@ -34,10 +34,10 @@ if ($reportType) {
     // Add grouping
     // $query .= "GROUP BY DATE(date_done)";
 
-    echo($query);
 
     // Execute query
     $results = $conn->query($query);
+    echo($query);
 
     // Generate HTML content for PDF
     $html = '<h1>Reservation Reports</h1>';
