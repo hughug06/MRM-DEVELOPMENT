@@ -286,9 +286,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     </div>
 
                     <!-- Button to Generate PDF -->
-                    <div class="text-center">
-                        <button onclick="generateOrganizedPDF()" class="btn btn-primary">Download Organized PDF</button>
-                    </div>
+                   
                 </div>
             </div>
         </div>
