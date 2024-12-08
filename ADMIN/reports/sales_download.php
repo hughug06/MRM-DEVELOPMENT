@@ -37,7 +37,6 @@ if ($reportType) {
 
     // Execute query
     $results = $conn->query($query);
-    echo($query);
 
     // Generate HTML content for PDF
     $html = '<h1>Reservation Reports</h1>';
@@ -73,6 +72,8 @@ if ($reportType) {
 
 
     $html .= '</tbody></table>';
+
+    echo($html);
 
     // Create PDF
     $dompdf = new Dompdf();
