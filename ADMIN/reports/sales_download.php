@@ -40,7 +40,7 @@ if ($reportType) {
 
     // Generate HTML content for PDF
     $html = '<h1>Sales Reports</h1>';
-    $html .= '<table border="1" style="width:100%; border-collapse: collapse;">';
+    $html .= '<table border="1" style="width:50%; border-collapse: collapse;">';
     $html .= '<thead>
                 <tr>
                     <th>Booking ID</th>
