@@ -181,7 +181,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                                         if (mysqli_num_rows($result_completed) > 0) {
                                                             while ($row_completed = mysqli_fetch_assoc($result_completed)) {
                                                         ?>
-                                                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 completed-report-card">
                                                                     <div class="card h-100">
                                                                         <div class="card-body">
                                                                             <!-- Client and Worker Names -->
