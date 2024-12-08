@@ -5,7 +5,6 @@ use Dompdf\Dompdf;
 // Get report type
 $reportType = $_POST['report_type'] ?? '';
 
-echo($reportType);
 if ($reportType) {
     $query = "";
     $fileName = "";
@@ -64,7 +63,7 @@ if ($reportType) {
                   GROUP BY DATE(date_done)";
         $fileName = "yearly_sales_report.pdf";
     } else {
-        die("Invalid report type provided.");
+        echo("Invalid report type provided.");
     }
 
     // Execute query
