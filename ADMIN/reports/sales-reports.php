@@ -284,7 +284,8 @@ include_once '../../Database/database.php';
                             </form>
                         </div>
                     </div>
-                    <button id="downloadPdf" class="btn btn-danger">Download Report as PDF</button>
+                    <button id="downloadPdf" class="btn btn-danger" onclick="downloadPDF()">Download Report as PDF</button>
+
                 </div>
             </div>
         </div>
@@ -388,65 +389,30 @@ include_once '../../Database/database.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-        <script>
-            document.getElementById("downloadPdf").addEventListener("click", function () {
-    // Import jsPDF and autoTable plugin
-    const { jsPDF } = window.jspdf;
+<script>
+    async function downloadPDF() {
+        const { jsPDF } = window.jspdf; // Import jsPDF
+        const doc = new jsPDF();
 
-    // Initialize jsPDF instance
-    const pdf = new jsPDF();
+        // Select the content you want to export
+        const content = document.querySelector(".container-fluid");
 
-    // Add title
-    pdf.setFontSize(16);
-    pdf.text("Sales Report", 14, 15);
+        // Use html2canvas to capture the content as an image
+        const canvas = await html2canvas(content, { scale: 2 });
+        const imgData = canvas.toDataURL("image/png");
 
-    // Extract the sales table
-    const salesTable = document.querySelector(".table.table-bordered");
+        // Add the image to the PDF
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    if (salesTable) {
-        pdf.autoTable({
-            html: salesTable, // Convert table directly to PDF
-            startY: 25,
-            theme: "striped",
-            styles: {
-                fontSize: 10,
-            },
-            headStyles: {
-                fillColor: [0, 123, 255], // Blue header background
-                textColor: [255, 255, 255], // White header text
-            },
-        });
-    } else {
-        console.error("Sales table not found.");
+        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+        // Save the PDF
+        doc.save("report.pdf");
     }
+</script>
 
-    // Extract completed bookings data
-    const completedBookings = document.querySelectorAll(".card-body.border > .row > .col-lg-4");
-
-    if (completedBookings.length > 0) {
-        let startY = pdf.previousAutoTable.finalY + 10 || 40; // Place below the table or at 40px
-        pdf.setFontSize(12);
-        pdf.text("Completed Bookings", 14, startY);
-
-        completedBookings.forEach((card, index) => {
-            startY += 10;
-            pdf.setFontSize(10);
-            pdf.text(`Booking ${index + 1}:`, 14, startY);
-
-            const text = card.innerText.trim().split("\n").join(" ");
-            pdf.setFontSize(8);
-            pdf.text(text, 14, startY + 5, { maxWidth: 180 });
-            startY += 15;
-        });
-    } else {
-        console.warn("No completed bookings found.");
-    }
-
-    // Save the PDF
-    pdf.save("Sales_Report.pdf");
-});
-
-        </script>
 
     </body>
 
