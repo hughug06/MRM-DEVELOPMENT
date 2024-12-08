@@ -48,6 +48,7 @@ include_once '../../Database/database.php';
         <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 
     </head>
@@ -104,6 +105,8 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                 <div class="row">
                     <!-- Total Sales -->
                     <div class="col-lg-4">
+                    <button id="download-pdf" class="btn btn-outline-primary">Download Full Report as PDF</button>
+
                         <div class="card text-white bg-primary mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Total Sales</h5>
@@ -285,7 +288,6 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                 <input type="hidden" name="report_type" value="yearly">
                                 <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
                             </form>
-                            <button id="download-pdf" class="btn btn-outline-primary">Download Table as PDF</button>
                         </div>
                     </div>
                 </div>
@@ -379,37 +381,45 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
         <!-- Custom JS -->
         <script src="../../assets/js/custom.js"></script>
+
         <script>
-    document.getElementById('download-pdf').addEventListener('click', function() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+document.getElementById('download-pdf').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        // Get the table element
-        const table = document.querySelector('table');
-        
-        // Convert the table to an image (using HTML2Canvas)
-        html2pdf(table, {
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            margin: { top: 20, left: 20, bottom: 20 },
-            filename: 'sales_report.pdf',
-            html2canvas: { scale: 2 }
-        });
-    });
+    // Select the container that holds the page content excluding the chart
+    const content = document.querySelector('.container-fluid');
 
-    // Optionally, include the html2pdf.js library for table-to-pdf functionality
-    function html2pdf(element, options) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.html(element, {
-            callback: function (doc) {
-                doc.save(options.filename);
-            },
-            margin: options.margin,
-            jsPDF: options.jsPDF,
-        });
+    // Exclude the chart (canvas element)
+    const chart = document.querySelector('canvas');
+    if (chart) {
+        chart.style.display = 'none'; // Temporarily hide the chart
     }
+
+    // Use html2canvas to convert the content into an image
+    html2canvas(content, {
+        useCORS: true,  // Handle cross-origin images if any
+        scale: 2,       // Increase scale for better quality
+        logging: true   // Optional, useful for debugging
+    }).then(function(canvas) {
+        // Revert back the chart visibility after capture
+        if (chart) {
+            chart.style.display = 'block';
+        }
+
+        // Convert the canvas to a base64 image
+        const imgData = canvas.toDataURL('image/png');
+
+        // Add the captured content as an image to the PDF
+        doc.addImage(imgData, 'PNG', 10, 10, 180, 0);  // Adjust dimensions as needed
+
+        // Save the PDF
+        doc.save('sales_report.pdf');
+    }).catch(function(error) {
+        console.error('Error generating PDF:', error);
+    });
+});
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 
     </body>
