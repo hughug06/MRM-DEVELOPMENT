@@ -390,30 +390,62 @@ include_once '../../Database/database.php';
 
         <script>
             document.getElementById("downloadPdf").addEventListener("click", function () {
-    // Import jsPDF
+    // Import jsPDF and autoTable plugin
     const { jsPDF } = window.jspdf;
 
-    // Create a new jsPDF instance
+    // Initialize jsPDF instance
     const pdf = new jsPDF();
 
-    // Add title to the PDF
+    // Add title
+    pdf.setFontSize(16);
     pdf.text("Sales Report", 14, 15);
 
-    // Get table from the DOM
-    const table = document.querySelector(".table.table-bordered");
+    // Extract the sales table
+    const salesTable = document.querySelector(".table.table-bordered");
 
-    // Use autoTable plugin to generate a table in PDF
-    pdf.autoTable({
-        html: table,
-        startY: 20,
-        styles: { fontSize: 8 },
-        theme: "striped",
-        headStyles: { fillColor: [22, 160, 133] },
-    });
+    if (salesTable) {
+        pdf.autoTable({
+            html: salesTable, // Convert table directly to PDF
+            startY: 25,
+            theme: "striped",
+            styles: {
+                fontSize: 10,
+            },
+            headStyles: {
+                fillColor: [0, 123, 255], // Blue header background
+                textColor: [255, 255, 255], // White header text
+            },
+        });
+    } else {
+        console.error("Sales table not found.");
+    }
+
+    // Extract completed bookings data
+    const completedBookings = document.querySelectorAll(".card-body.border > .row > .col-lg-4");
+
+    if (completedBookings.length > 0) {
+        let startY = pdf.previousAutoTable.finalY + 10 || 40; // Place below the table or at 40px
+        pdf.setFontSize(12);
+        pdf.text("Completed Bookings", 14, startY);
+
+        completedBookings.forEach((card, index) => {
+            startY += 10;
+            pdf.setFontSize(10);
+            pdf.text(`Booking ${index + 1}:`, 14, startY);
+
+            const text = card.innerText.trim().split("\n").join(" ");
+            pdf.setFontSize(8);
+            pdf.text(text, 14, startY + 5, { maxWidth: 180 });
+            startY += 15;
+        });
+    } else {
+        console.warn("No completed bookings found.");
+    }
 
     // Save the PDF
     pdf.save("Sales_Report.pdf");
 });
+
         </script>
 
     </body>
