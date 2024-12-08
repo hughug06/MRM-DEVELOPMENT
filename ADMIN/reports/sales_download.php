@@ -39,7 +39,7 @@ if ($reportType) {
     $results = $conn->query($query);
 
     // Generate HTML content for PDF
-    $html = '<h1>Reservation Reports</h1>';
+    $html = '<h1>Sales Reports</h1>';
     $html .= '<table border="1" style="width:100%; border-collapse: collapse;">';
     $html .= '<thead>
                 <tr>
