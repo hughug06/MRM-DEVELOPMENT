@@ -34,6 +34,8 @@ if ($reportType) {
     // Add grouping
     $query .= "GROUP BY DATE(date_done)";
 
+    echo($query);
+
     // Execute query
     $results = $conn->query($query);
 
