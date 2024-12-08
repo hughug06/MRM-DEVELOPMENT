@@ -1,6 +1,6 @@
 <?php
 require_once '../../Database/database.php';
-// use Dompdf\Dompdf;
+use Dompdf\Dompdf;
 
 // // Get report type
 // $reportType = $_POST['report_type'] ?? '';
