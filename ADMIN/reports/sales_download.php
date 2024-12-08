@@ -65,7 +65,7 @@ if ($reportType) {
                         <td>' . htmlentities($row['bank_name']) . '</td>
                         <td>' . htmlentities($row['payment_method']) . '</td>
                         <td>' . htmlentities($row['payment_date']) . '</td>
-                        <td>' . htmlentities(intval($row['total_cost'])) . '</td>
+                        <td>' . htmlentities(intval($row['total_cost'] . ".00")) . '</td>
                     </tr>';
         }
     }else {
