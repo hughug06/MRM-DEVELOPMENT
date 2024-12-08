@@ -9,16 +9,9 @@ if ($reportType) {
     $query = "";
     $fileName = "";
 
+    // Determine query and file name based on report type
     // Base query
-    $query = "SELECT 
-                DATE(date_done) AS sale_date, 
-                SUM(total_cost) AS total_sales,
-                GROUP_CONCAT(service_payment.booking_id) AS booking_ids,
-                GROUP_CONCAT(service_booking.service_type) AS service_types,
-                GROUP_CONCAT(service_booking.product_type) AS product_types,
-                GROUP_CONCAT(service_booking.pin_location) AS pin_locations,
-                GROUP_CONCAT(service_booking.bank_name) AS bank_names,
-                GROUP_CONCAT(service_payment.payment_method) AS payment_methods
+    $query = "SELECT *
               FROM service_payment
               INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
               WHERE booking_status = 'completed' ";
@@ -39,7 +32,8 @@ if ($reportType) {
     }
 
     // Add grouping
-    $query .= "GROUP BY DATE(date_done)";
+     $query .= "GROUP BY DATE(date_done)";
+
 
     // Execute query
     $results = $conn->query($query);
@@ -49,14 +43,13 @@ if ($reportType) {
     $html .= '<table border="1" style="width:100%; border-collapse: collapse;">';
     $html .= '<thead>
                 <tr>
-                    <th>Sale Date</th>
-                    <th>Total Sales</th>
-                    <th>Booking IDs</th>
-                    <th>Service Types</th>
-                    <th>Product Types</th>
-                    <th>Locations</th>
-                    <th>Bank Names</th>
-                    <th>Payment Methods</th>
+                    <th>Booking ID</th>
+                    <th>Service Type</th>
+                    <th>Product Type</th>
+                    <th>Location</th>
+                    <th>Bank used</th>
+                    <th>Payment Method</th>
+                    <th>Date of Sale</th>
                 </tr>
               </thead>';
     $html .= '<tbody>';
@@ -64,23 +57,24 @@ if ($reportType) {
     if ($results->num_rows > 0) {
         while ($row = $results->fetch_assoc()) {
             $html .= '<tr>
-                        <td>' . htmlentities($row['sale_date']) . '</td>
-                        <td>' . htmlentities($row['total_sales']) . '</td>
-                        <td>' . htmlentities($row['booking_ids']) . '</td>
-                        <td>' . htmlentities($row['service_types']) . '</td>
-                        <td>' . htmlentities($row['product_types']) . '</td>
-                        <td>' . htmlentities($row['pin_locations']) . '</td>
-                        <td>' . htmlentities($row['bank_names']) . '</td>
-                        <td>' . htmlentities($row['payment_methods']) . '</td>
-                      </tr>';
+                        <td>' . htmlentities($row['booking_id']) . '</td>
+                        <td>' . htmlentities($row['service_type']) . '</td>
+                        <td>' . htmlentities($row['product_type']) . '</td>
+                        <td>' . htmlentities($row['pin_location']) . '</td>
+                        <td>' . htmlentities($row['bank_name']) . '</td>
+                        <td>' . htmlentities($row['payment_method']) . '</td>
+                        <td>' . htmlentities($row['payment_date']) . '</td>
+                    </tr>';
         }
-    } else {
+    }else {
         $html .= '<tr><td colspan="8">No data available</td></tr>';
     }
+
 
     $html .= '</tbody></table>';
 
     echo($html);
+
     // Create PDF
     $dompdf = new Dompdf();
     $dompdf->loadHtml($html);
