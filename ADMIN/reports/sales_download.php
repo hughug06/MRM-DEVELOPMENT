@@ -80,6 +80,7 @@ if ($reportType) {
 
     $html .= '</tbody></table>';
 
+    echo($html);
     // Create PDF
     $dompdf = new Dompdf();
     $dompdf->loadHtml($html);
