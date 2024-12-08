@@ -65,10 +65,10 @@ if ($reportType) {
     } else {
         echo("Invalid report type provided.");
     }
-    echo("Invalid report type provided.");
     // Execute query
     $results = $conn->query($query);
 
+    echo("Invalid report type provided.");
     // Generate HTML content for PDF
     $html = '<h1>Reservation Reports</h1>';
     $html .= '<table border="1" style="width:100%; border-collapse: collapse;">';
