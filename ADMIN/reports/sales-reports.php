@@ -61,41 +61,41 @@ include_once '../../Database/database.php';
             <div class="main-content app-content">
             <?php
 
-            // Fetch total sales
-            $totalSalesQuery = "SELECT SUM(total_cost) AS total_sales 
-                                FROM service_payment 
-                                WHERE first_reference IS NOT NULL 
-                                AND second_reference IS NOT NULL 
-                                AND third_reference IS NOT NULL";
-            $totalSalesResult = $conn->query($totalSalesQuery);
-            $totalSales = $totalSalesResult->fetch_assoc()['total_sales'] ?? 0;
+// Fetch total sales
+$totalSalesQuery = "SELECT SUM(total_cost) AS total_sales 
+                    FROM service_payment 
+                    WHERE first_reference IS NOT NULL 
+                    AND second_reference IS NOT NULL 
+                    AND third_reference IS NOT NULL";
+$totalSalesResult = $conn->query($totalSalesQuery);
+$totalSales = $totalSalesResult->fetch_assoc()['total_sales'] ?? 0;
 
-            // Fetch total transactions
-            $totalTransactionsQuery = "SELECT COUNT(*) AS total_transactions 
-                                    FROM service_payment 
-                                    WHERE first_reference IS NOT NULL 
-                                    AND second_reference IS NOT NULL 
-                                    AND third_reference IS NOT NULL";
-            $totalTransactionsResult = $conn->query($totalTransactionsQuery);
-            $totalTransactions = $totalTransactionsResult->fetch_assoc()['total_transactions'] ?? 0;
+// Fetch total transactions
+$totalTransactionsQuery = "SELECT COUNT(*) AS total_transactions 
+                           FROM service_payment 
+                           WHERE first_reference IS NOT NULL 
+                           AND second_reference IS NOT NULL 
+                           AND third_reference IS NOT NULL";
+$totalTransactionsResult = $conn->query($totalTransactionsQuery);
+$totalTransactions = $totalTransactionsResult->fetch_assoc()['total_transactions'] ?? 0;
 
-            // Fetch sales by date
-            $salesByDateQuery = "SELECT DATE(date_done) AS sale_date, 
-                                        GROUP_CONCAT(booking_id) AS booking_ids, 
-                                        SUM(total_cost) AS daily_sales 
-                                FROM service_payment 
-                                WHERE first_reference IS NOT NULL 
-                                AND second_reference IS NOT NULL 
-                                AND third_reference IS NOT NULL 
-                                GROUP BY DATE(date_done) 
-                                ORDER BY sale_date ASC";
-            $salesByDateResult = $conn->query($salesByDateQuery);
-            $salesData = [];
-            while ($row = $salesByDateResult->fetch_assoc()) {
-                $salesData[] = $row;
-            }
+// Fetch sales by date
+$salesByDateQuery = "SELECT DATE(date_done) AS sale_date, 
+                            GROUP_CONCAT(booking_id) AS booking_ids, 
+                            SUM(total_cost) AS daily_sales 
+                     FROM service_payment 
+                     WHERE first_reference IS NOT NULL 
+                     AND second_reference IS NOT NULL 
+                     AND third_reference IS NOT NULL 
+                     GROUP BY DATE(date_done) 
+                     ORDER BY sale_date ASC";
+$salesByDateResult = $conn->query($salesByDateQuery);
+$salesData = [];
+while ($row = $salesByDateResult->fetch_assoc()) {
+    $salesData[] = $row;
+}
 
-            ?>
+?>
 
             <div class="container-fluid">
                 <div class="row">
@@ -118,146 +118,146 @@ include_once '../../Database/database.php';
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Booking IDs</th>
-                                            <th>Total Sales (₱)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($salesData as $data): ?>
-                                        <tr>
-                                            <td><?php echo $data['sale_date']; ?></td>
-                                            <td><?php echo $data['booking_ids']; ?></td>
-                                            <td><?php echo number_format($data['daily_sales'], 2); ?></td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Booking IDs</th>
+                                                <th>Total Sales (₱)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($salesData as $data): ?>
+                                            <tr>
+                                                <td><?php echo $data['sale_date']; ?></td>
+                                                <td><?php echo $data['booking_ids']; ?></td>
+                                                <td><?php echo number_format($data['daily_sales'], 2); ?></td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
-                        <div class="mb-4 main-content-label">Completed</div>
-                        <div class="card-body border">
-                            <div class="row">
-                            <?php
-                                $completed = "SELECT 
-                                    service_booking.*,
-                                    worker_ongoing.*,
-                                    worker_info.user_id AS worker_id,
-                                    worker_info.first_name AS worker_first_name,
-                                    worker_info.last_name AS worker_last_name,
-                                    worker_info.email AS worker_email,
-                                    client_info.user_id AS client_id,
-                                    client_info.first_name AS client_first_name,
-                                    client_info.last_name AS client_last_name,
-                                    client_info.email AS client_email,
-                                    service_payment.*,
-                                    maintenance_complete.*,
-                                    service_history.*
-                                FROM 
-                                    service_booking
-                                    INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id
-                                    INNER JOIN user_info AS worker_info ON worker_info.user_id = worker_ongoing.worker_id
-                                    INNER JOIN user_info AS client_info ON client_info.user_id = service_booking.user_id
-                                    INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
-                                    INNER JOIN maintenance_complete ON maintenance_complete.booking_id = service_booking.booking_id
-                                    INNER JOIN service_history ON service_history.booking_id = service_booking.booking_id
-                                WHERE 
-                                    service_booking.booking_status = 'completed'";
+                        <div class="main-content-body tab-pane p-4 border-top-0" id="completed">
+                                                <div class="mb-4 main-content-label">Completed</div>
+                                                <div class="card-body border">
+                                                    <div class="row">
+                                                    <?php
+                                                        $completed = "SELECT 
+                                                            service_booking.*,
+                                                            worker_ongoing.*,
+                                                            worker_info.user_id AS worker_id,
+                                                            worker_info.first_name AS worker_first_name,
+                                                            worker_info.last_name AS worker_last_name,
+                                                            worker_info.email AS worker_email,
+                                                            client_info.user_id AS client_id,
+                                                            client_info.first_name AS client_first_name,
+                                                            client_info.last_name AS client_last_name,
+                                                            client_info.email AS client_email,
+                                                            service_payment.*,
+                                                            maintenance_complete.*,
+                                                            service_history.*
+                                                        FROM 
+                                                            service_booking
+                                                            INNER JOIN worker_ongoing ON worker_ongoing.booking_id = service_booking.booking_id
+                                                            INNER JOIN user_info AS worker_info ON worker_info.user_id = worker_ongoing.worker_id
+                                                            INNER JOIN user_info AS client_info ON client_info.user_id = service_booking.user_id
+                                                            INNER JOIN service_payment ON service_payment.booking_id = service_booking.booking_id
+                                                            INNER JOIN maintenance_complete ON maintenance_complete.booking_id = service_booking.booking_id
+                                                            INNER JOIN service_history ON service_history.booking_id = service_booking.booking_id
+                                                        WHERE 
+                                                            service_booking.booking_status = 'completed'";
 
-                                $result_completed = mysqli_query($conn, $completed);
+                                                        $result_completed = mysqli_query($conn, $completed);
 
-                                if (!$result_completed) {
-                                    die("Error in query: " . mysqli_error($conn)); // Error handling for query execution
-                                }
+                                                        if (!$result_completed) {
+                                                            die("Error in query: " . mysqli_error($conn)); // Error handling for query execution
+                                                        }
 
-                                if (mysqli_num_rows($result_completed) > 0) {
-                                    while ($row_completed = mysqli_fetch_assoc($result_completed)) {
-                                ?>
-                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <!-- Client and Worker Names -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <strong>Client Name:</strong>
-                                                            <p id="client_name"><?= htmlspecialchars($row_completed['client_first_name'] . " " . $row_completed['client_last_name']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Worker Name:</strong>
-                                                            <p id="worker_name"><?= htmlspecialchars($row_completed['worker_first_name'] . " " . $row_completed['worker_last_name']); ?></p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Location -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-12">
-                                                            <strong>Location:</strong>
-                                                            <p id="location"><?= htmlspecialchars($row_completed['pin_location']); ?></p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Service Type and Product Type -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <strong>Service Type:</strong>
-                                                            <p id="service_type"><?= htmlspecialchars($row_completed['service_type']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Product Type:</strong>
-                                                            <p id="product_type"><?= htmlspecialchars($row_completed['product_type']); ?></p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Start and Completion Times -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <strong>Start Time:</strong>
-                                                            <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Pick-up Completion Time:</strong>
-                                                            <p id="pick_up_time"><?= htmlspecialchars($row_completed['pick_up']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Delivery Completion Time:</strong>
-                                                            <p id="delivery_time"><?= htmlspecialchars($row_completed['delivery']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Arrival Completion Time:</strong>
-                                                            <p id="arrive_time"><?= htmlspecialchars($row_completed['arrive']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Construction Completion Time:</strong>
-                                                            <p id="ongoing_construction_time"><?= htmlspecialchars($row_completed['ongoing_construction']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>Final Checking Completion Time:</strong>
-                                                            <p id="checking_time"><?= htmlspecialchars($row_completed['checking']); ?></p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <strong>End Time:</strong>
-                                                            <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
-                                                        </div>
+                                                        if (mysqli_num_rows($result_completed) > 0) {
+                                                            while ($row_completed = mysqli_fetch_assoc($result_completed)) {
+                                                        ?>
+                                                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                                                    <div class="card h-100">
+                                                                        <div class="card-body">
+                                                                            <!-- Client and Worker Names -->
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Client Name:</strong>
+                                                                                    <p id="client_name"><?= htmlspecialchars($row_completed['client_first_name'] . " " . $row_completed['client_last_name']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Worker Name:</strong>
+                                                                                    <p id="worker_name"><?= htmlspecialchars($row_completed['worker_first_name'] . " " . $row_completed['worker_last_name']); ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Location -->
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-12">
+                                                                                    <strong>Location:</strong>
+                                                                                    <p id="location"><?= htmlspecialchars($row_completed['pin_location']); ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Service Type and Product Type -->
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Service Type:</strong>
+                                                                                    <p id="service_type"><?= htmlspecialchars($row_completed['service_type']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Product Type:</strong>
+                                                                                    <p id="product_type"><?= htmlspecialchars($row_completed['product_type']); ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Start and Completion Times -->
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Start Time:</strong>
+                                                                                    <p id="start_time"><?= htmlspecialchars($row_completed['start_time']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Pick-up Completion Time:</strong>
+                                                                                    <p id="pick_up_time"><?= htmlspecialchars($row_completed['pick_up']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Delivery Completion Time:</strong>
+                                                                                    <p id="delivery_time"><?= htmlspecialchars($row_completed['delivery']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Arrival Completion Time:</strong>
+                                                                                    <p id="arrive_time"><?= htmlspecialchars($row_completed['arrive']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Construction Completion Time:</strong>
+                                                                                    <p id="ongoing_construction_time"><?= htmlspecialchars($row_completed['ongoing_construction']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>Final Checking Completion Time:</strong>
+                                                                                    <p id="checking_time"><?= htmlspecialchars($row_completed['checking']); ?></p>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <strong>End Time:</strong>
+                                                                                    <p id="end_time"><?= htmlspecialchars($row_completed['end_time']); ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        <?php 
+                                                            }
+                                                        } else {
+                                                            echo "<p>No completed bookings found.</p>"; // Handle no data scenario
+                                                        }
+                                                        ?>
+
+                                            
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                <?php 
-                                    }
-                                } else {
-                                    echo "<p>No completed bookings found.</p>"; // Handle no data scenario
-                                }
-                                ?>
-
-                    
-                            </div>
-                        </div>
-                    </div>
                     <!-- Sales Chart -->
                     <div class="col-lg-12">
                         <div class="card mb-3">
@@ -266,6 +266,24 @@ include_once '../../Database/database.php';
                                 <canvas id="salesChart"></canvas>
                             </div>
                         </div>
+                        <table id="salesTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Booking IDs</th>
+                                    <th>Total Sales (₱)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($salesData as $data): ?>
+                                <tr>
+                                    <td><?php echo $data['sale_date']; ?></td>
+                                    <td><?php echo $data['booking_ids']; ?></td>
+                                    <td><?php echo number_format($data['daily_sales'], 2); ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
@@ -284,24 +302,62 @@ include_once '../../Database/database.php';
                             </form>
                         </div>
                     </div>
-                    <button id="downloadPdf" class="btn btn-danger" onclick="downloadPDF()">Download Report as PDF</button>
-
                 </div>
             </div>
         </div>
+</div>
 
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const salesData = <?php echo json_encode($salesData); ?>;
+    const labels = salesData.map(item => item.sale_date);
+    const data = salesData.map(item => item.daily_sales);
 
-
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales (₱)',
+                data: data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Sales Amount (₱)'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
             </div>
             <!-- Footer Start -->
             <?php include_once('../../partials/footer.php') ?>
             <!-- Footer End -->  
         </div>
-
-
-
 
         <!-- Scroll To Top -->
         <div class="scrollToTop d-none">
@@ -310,54 +366,6 @@ include_once '../../Database/database.php';
         <div id="responsive-overlay"></div>
         <!-- Scroll To Top -->
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-        <script>
-            const salesData = <?php echo json_encode($salesData); ?>;
-            const labels = salesData.map(item => item.sale_date);
-            const data = salesData.map(item => item.daily_sales);
-
-            const ctx = document.getElementById('salesChart').getContext('2d');
-            const salesChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Sales (₱)',
-                        data: data,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Sales Amount (₱)'
-                            },
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
-
-        
         <!-- Popper JS -->
         <script src="../../assets/libs/@popperjs/core/umd/popper.min.js"></script>
 
@@ -385,33 +393,59 @@ include_once '../../Database/database.php';
 
         <!-- Custom JS -->
         <script src="../../assets/js/custom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+    // Function to download table as PDF
+    async function downloadTableAsPDF(tableId, filename) {
+        const { jsPDF } = window.jspdf; // Get jsPDF instance
+        const pdf = new jsPDF();
 
-<script>
-    async function downloadPDF() {
-        const { jsPDF } = window.jspdf; // Import jsPDF
-        const doc = new jsPDF();
+        const table = document.getElementById(tableId);
+        if (!table) {
+            alert("Table not found!");
+            return;
+        }
 
-        // Select the content you want to export
-        const content = document.querySelector(".container-fluid");
+        // Extract table data
+        const rows = Array.from(table.querySelectorAll("tr")).map((row) =>
+            Array.from(row.querySelectorAll("th, td")).map((cell) => cell.innerText)
+        );
 
-        // Use html2canvas to capture the content as an image
-        const canvas = await html2canvas(content, { scale: 2 });
-        const imgData = canvas.toDataURL("image/png");
-
-        // Add the image to the PDF
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-        doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        // Add content to the PDF
+        const margin = 10;
+        const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
+        pdf.setFontSize(12);
+        pdf.text("Sales Report", margin, 10);
+        pdf.autoTable({
+            startY: 20,
+            head: [rows[0]], // The first row is the header
+            body: rows.slice(1), // Remaining rows are the body
+            theme: "grid",
+            styles: { fontSize: 10 },
+            tableWidth: pageWidth,
+        });
 
         // Save the PDF
-        doc.save("report.pdf");
+        pdf.save(filename);
     }
-</script>
+
+    // Create download button
+    const downloadButton = document.createElement("button");
+    downloadButton.innerText = "Download PDF Report";
+    downloadButton.className = "btn btn-primary";
+    downloadButton.style.margin = "10px";
+    downloadButton.addEventListener("click", function () {
+        downloadTableAsPDF("salesTable", "SalesReport.pdf"); // Pass the table ID and desired filename
+    });
+
+    // Append the button to the container
+    const container = document.querySelector(".main-content");
+    container.appendChild(downloadButton);
+});
+
+        </script>
 
 
     </body>
