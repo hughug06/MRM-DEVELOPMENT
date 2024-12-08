@@ -65,7 +65,7 @@ if ($reportType) {
     } else {
         echo("Invalid report type provided.");
     }
-
+    echo("Invalid report type provided.");
     // Execute query
     $results = $conn->query($query);
 
