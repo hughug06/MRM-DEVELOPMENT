@@ -50,6 +50,7 @@ if ($reportType) {
                     <th>Bank used</th>
                     <th>Payment Method</th>
                     <th>Date of Sale</th>
+                    <th>Sale Amount</th>
                 </tr>
               </thead>';
     $html .= '<tbody>';
@@ -64,6 +65,7 @@ if ($reportType) {
                         <td>' . htmlentities($row['bank_name']) . '</td>
                         <td>' . htmlentities($row['payment_method']) . '</td>
                         <td>' . htmlentities($row['payment_date']) . '</td>
+                        <td>' . htmlentities($row['total_cost']) . '</td>
                     </tr>';
         }
     }else {
