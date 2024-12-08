@@ -284,6 +284,12 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                             </form>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="d-flex justify-content-center gap-3 my-3">
+                            <a href="generate_pdf.php" class="btn btn-outline-danger">Download PDF Report</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
