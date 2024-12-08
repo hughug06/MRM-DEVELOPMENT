@@ -10,65 +10,42 @@ if ($reportType) {
     $fileName = "";
 
     // Determine query and file name based on report type
-    // Determine query and file name based on report type
+    // Base query
+    $query = "SELECT DATE(date_done) AS sale_date, 
+                     GROUP_CONCAT(booking_id) AS booking_ids, 
+                     SUM(total_cost) AS total_sales,
+                     GROUP_CONCAT(service_type) AS service_types,
+                     GROUP_CONCAT(product_type) AS product_types,
+                     GROUP_CONCAT(pin_location) AS pin_locations,
+                     GROUP_CONCAT(bank_name) AS bank_names,
+                     GROUP_CONCAT(payment_method) AS payment_methods
+              FROM service_payment 
+              INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
+              WHERE first_reference IS NOT NULL 
+              AND second_reference IS NOT NULL 
+              AND third_reference IS NOT NULL ";
+
+    // Append condition based on report type
     if ($reportType === 'weekly') {
-        $query = "SELECT DATE(date_done) AS sale_date, 
-                         GROUP_CONCAT(booking_id) AS booking_ids, 
-                         SUM(total_cost) AS total_sales,
-                         GROUP_CONCAT(service_type) AS service_types,
-                         GROUP_CONCAT(product_type) AS product_types,
-                         GROUP_CONCAT(pin_location) AS pin_locations,
-                         GROUP_CONCAT(bank_name) AS bank_names,
-                         GROUP_CONCAT(payment_method) AS payment_methods
-                  FROM service_payment 
-                  INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
-                  WHERE first_reference IS NOT NULL 
-                  AND second_reference IS NOT NULL 
-                  AND third_reference IS NOT NULL 
-                  AND WEEK(date_done) = WEEK(CURDATE()) 
-                  GROUP BY DATE(date_done)";
+        $query .= "AND WEEK(date_done) = WEEK(CURDATE()) ";
         $fileName = "weekly_sales_report.pdf";
     } elseif ($reportType === 'monthly') {
-        $query = "SELECT DATE(date_done) AS sale_date, 
-                         GROUP_CONCAT(booking_id) AS booking_ids, 
-                         SUM(total_cost) AS total_sales,
-                         GROUP_CONCAT(service_type) AS service_types,
-                         GROUP_CONCAT(product_type) AS product_types,
-                         GROUP_CONCAT(pin_location) AS pin_locations,
-                         GROUP_CONCAT(bank_name) AS bank_names,
-                         GROUP_CONCAT(payment_method) AS payment_methods
-                  FROM service_payment 
-                  INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
-                  WHERE first_reference IS NOT NULL 
-                  AND second_reference IS NOT NULL 
-                  AND third_reference IS NOT NULL 
-                  AND MONTH(date_done) = MONTH(CURDATE()) 
-                  GROUP BY DATE(date_done)";
+        $query .= "AND MONTH(date_done) = MONTH(CURDATE()) ";
         $fileName = "monthly_sales_report.pdf";
     } elseif ($reportType === 'yearly') {
-        $query = "SELECT DATE(date_done) AS sale_date, 
-                         GROUP_CONCAT(booking_id) AS booking_ids, 
-                         SUM(total_cost) AS total_sales,
-                         GROUP_CONCAT(service_type) AS service_types,
-                         GROUP_CONCAT(product_type) AS product_types,
-                         GROUP_CONCAT(pin_location) AS pin_locations,
-                         GROUP_CONCAT(bank_name) AS bank_names,
-                         GROUP_CONCAT(payment_method) AS payment_methods
-                  FROM service_payment 
-                  INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
-                  WHERE first_reference IS NOT NULL 
-                  AND second_reference IS NOT NULL 
-                  AND third_reference IS NOT NULL 
-                  AND YEAR(date_done) = YEAR(CURDATE()) 
-                  GROUP BY DATE(date_done)";
+        $query .= "AND YEAR(date_done) = YEAR(CURDATE()) ";
         $fileName = "yearly_sales_report.pdf";
     } else {
         echo("Invalid report type provided.");
+        exit;
     }
+
+    // Add grouping
+    $query .= "GROUP BY DATE(date_done)";
+
     // Execute query
     $results = $conn->query($query);
 
-    echo("Invalid report type provided.");
     // Generate HTML content for PDF
     $html = '<h1>Reservation Reports</h1>';
     $html .= '<table border="1" style="width:100%; border-collapse: collapse;">';
