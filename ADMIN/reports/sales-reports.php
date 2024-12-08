@@ -435,7 +435,6 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                         startY: yPosition,
                         head: [["Field", "Details"]],
                         body: [
-                            ["Client Name", clientName],
                             ["Worker Name", workerName],
                             ["Location", location],
                             ["Service Type", serviceType],
