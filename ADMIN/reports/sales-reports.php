@@ -270,7 +270,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-center gap-3 my-3">
-                            
+                            <div id="download-pdf"></div>
                         </div>
                     </div>
                 </div>
@@ -500,7 +500,7 @@ function createDownloadButton(containerSelector) {
 }
 
 // Example usage: create the button and place it inside a div with class "main-content"
-createDownloadButton(".main-content"); // You can change this selector to the desired container
+createDownloadButton(".download-pdf"); // You can change this selector to the desired container
 
 
         </script>
