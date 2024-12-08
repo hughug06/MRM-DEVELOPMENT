@@ -270,18 +270,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-center gap-3 my-3">
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="weekly">
-                                <button type="submit" class="btn btn-outline-primary">Download Weekly Report</button>
-                            </form>
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="monthly">
-                                <button type="submit" class="btn btn-outline-success">Download Monthly Report</button>
-                            </form>
-                            <form action="sales_download.php" method="post">
-                                <input type="hidden" name="report_type" value="yearly">
-                                <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
-                            </form>
+                            <div id="main-content"></div>
                         </div>
                     </div>
                 </div>
@@ -376,123 +365,123 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         <!-- Custom JS -->
         <script src="../../assets/js/custom.js"></script>
         <!-- Include jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- Include jsPDF AutoTable plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+        <!-- Include jsPDF AutoTable plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
 
         <script>
-          document.addEventListener("DOMContentLoaded", function () {
-    // Function to download completed report and sales data as PDF in landscape
-    async function downloadReportAsPDF() {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('landscape'); // Set orientation to landscape
+        // Function to generate and download the report as a PDF
+async function downloadReportAsPDF() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('landscape'); // Set orientation to landscape
 
-        // Title of the PDF
-        pdf.setFontSize(16);
-        pdf.text("Completed Reports", 10, 10);
+    // Title of the PDF
+    pdf.setFontSize(16);
+    pdf.text("Completed Reports", 10, 10);
 
-        // Array to hold completed report data
-        const completedReports = [];
+    // Array to hold completed report data
+    const completedReports = [];
 
-        // Select all completed report cards in the document
-        const completedReportCards = document.querySelectorAll(".completed-report-card");
+    // Select all completed report cards in the document
+    const completedReportCards = document.querySelectorAll(".completed-report-card");
 
-        completedReportCards.forEach(card => {
-            const clientName = card.querySelector("#client_name").innerText;
-            const workerName = card.querySelector("#worker_name").innerText;
-            const location = card.querySelector("#location").innerText;
-            const serviceType = card.querySelector("#service_type").innerText;
-            const productType = card.querySelector("#product_type").innerText;
-            const startTime = card.querySelector("#start_time").innerText;
-            const pickUpTime = card.querySelector("#pick_up_time").innerText;
-            const deliveryTime = card.querySelector("#delivery_time").innerText;
-            const arrivalTime = card.querySelector("#arrive_time").innerText;
-            const constructionTime = card.querySelector("#ongoing_construction_time").innerText;
-            const checkingTime = card.querySelector("#checking_time").innerText;
-            const endTime = card.querySelector("#end_time").innerText;
+    completedReportCards.forEach(card => {
+        const clientName = card.querySelector("#client_name").innerText;
+        const workerName = card.querySelector("#worker_name").innerText;
+        const location = card.querySelector("#location").innerText;
+        const serviceType = card.querySelector("#service_type").innerText;
+        const productType = card.querySelector("#product_type").innerText;
+        const startTime = card.querySelector("#start_time").innerText;
+        const pickUpTime = card.querySelector("#pick_up_time").innerText;
+        const deliveryTime = card.querySelector("#delivery_time").innerText;
+        const arrivalTime = card.querySelector("#arrive_time").innerText;
+        const constructionTime = card.querySelector("#ongoing_construction_time").innerText;
+        const checkingTime = card.querySelector("#checking_time").innerText;
+        const endTime = card.querySelector("#end_time").innerText;
 
-            // Push each completed report as an array into the completedReports array
-            completedReports.push([
-                clientName,
-                workerName,
-                location,
-                serviceType,
-                productType,
-                startTime,
-                pickUpTime,
-                deliveryTime,
-                arrivalTime,
-                constructionTime,
-                checkingTime,
-                endTime,
-            ]);
-        });
+        // Push each completed report as an array into the completedReports array
+        completedReports.push([
+            clientName,
+            workerName,
+            location,
+            serviceType,
+            productType,
+            startTime,
+            pickUpTime,
+            deliveryTime,
+            arrivalTime,
+            constructionTime,
+            checkingTime,
+            endTime,
+        ]);
+    });
 
-        // Add Completed Reports Table to the PDF
-        pdf.autoTable({
-            startY: 20, // Start below the title
-            head: [
-                [
-                    "Client Name", 
-                    "Worker Name", 
-                    "Location", 
-                    "Service Type", 
-                    "Product Type", 
-                    "Start Time", 
-                    "Pick-up Time", 
-                    "Delivery Time", 
-                    "Arrival Time", 
-                    "Construction Time", 
-                    "Final Checking Time", 
-                    "End Time"
-                ]
-            ],
-            body: completedReports,
-            theme: "grid", // Use grid style
-            styles: { fontSize: 10 },
-        });
+    // Add Completed Reports Table to the PDF
+    pdf.autoTable({
+        startY: 20, // Start below the title
+        head: [
+            [
+                "Client Name", 
+                "Worker Name", 
+                "Location", 
+                "Service Type", 
+                "Product Type", 
+                "Start Time", 
+                "Pick-up Time", 
+                "Delivery Time", 
+                "Arrival Time", 
+                "Construction Time", 
+                "Final Checking Time", 
+                "End Time"
+            ]
+        ],
+        body: completedReports,
+        theme: "grid", // Use grid style
+        styles: { fontSize: 10 },
+    });
 
-        // Add a space between the two tables
-        let currentY = pdf.lastAutoTable.finalY + 10; // Calculate the end position of the last table
+    // Add a space between the two tables
+    let currentY = pdf.lastAutoTable.finalY + 10; // Calculate the end position of the last table
 
-        // Title for Sales Data Table
-        pdf.setFontSize(16);
-        pdf.text("Sales Data", 10, currentY);
+    // Title for Sales Data Table
+    pdf.setFontSize(16);
+    pdf.text("Sales Data", 10, currentY);
 
-        // Array to hold sales data
-        const salesData = [];
+    // Array to hold sales data
+    const salesData = [];
 
-        // Select the sales data table rows
-        const salesTableRows = document.querySelectorAll('.table.table-bordered tbody tr');
+    // Select the sales data table rows
+    const salesTableRows = document.querySelectorAll('.table.table-bordered tbody tr');
+    
+    salesTableRows.forEach(row => {
+        // Extract the data for each column in the row
+        const date = row.querySelector('td:nth-child(1)').innerText.trim(); // Date
+        const bookingIds = row.querySelector('td:nth-child(2)').innerText.trim(); // Booking IDs
+        const totalSales = row.querySelector('td:nth-child(3)').innerText.trim(); // Total Sales
         
-        salesTableRows.forEach(row => {
-            // Extract the data for each column in the row
-            const date = row.querySelector('td:nth-child(1)').innerText.trim(); // Date
-            const bookingIds = row.querySelector('td:nth-child(2)').innerText.trim(); // Booking IDs
-            const totalSales = row.querySelector('td:nth-child(3)').innerText.trim(); // Total Sales
-            
-            // Push the data into the salesData array
-            salesData.push([date, bookingIds, totalSales]);
-        });
+        // Push the data into the salesData array
+        salesData.push([date, bookingIds, totalSales]);
+    });
 
-        // Add Sales Data Table to the PDF
-        pdf.autoTable({
-            startY: currentY + 10, // Positioning after the title and space
-            head: [
-                ["Date", "Booking IDs", "Total Sales (₱)"]
-            ],
-            body: salesData,
-            theme: "grid", // Use grid style
-            styles: { fontSize: 10 },
-        });
+    // Add Sales Data Table to the PDF
+    pdf.autoTable({
+        startY: currentY + 10, // Positioning after the title and space
+        head: [
+            ["Date", "Booking IDs", "Total Sales (₱)"]
+        ],
+        body: salesData,
+        theme: "grid", // Use grid style
+        styles: { fontSize: 10 },
+    });
 
-        // Save the PDF
-        pdf.save("ReportWithCompletedAndSalesData.pdf");
-    }
+    // Save the PDF
+    pdf.save("ReportWithCompletedAndSalesData.pdf");
+}
 
-    // Create download button
+// Function to create a downloadable button for the report
+function createDownloadButton(containerSelector) {
     const downloadButton = document.createElement("button");
     downloadButton.innerText = "Download Report PDF";
     downloadButton.className = "btn btn-primary";
@@ -501,14 +490,20 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         downloadReportAsPDF();
     });
 
-    // Append the button to the container
-    const container = document.querySelector(".main-content"); // Or another container element
-    container.appendChild(downloadButton);
-});
+    // Append the button to the specified container
+    const container = document.querySelector(containerSelector); // Pass the container selector
+    if (container) {
+        container.appendChild(downloadButton);
+    } else {
+        console.error("Container not found!");
+    }
+}
+
+// Example usage: create the button and place it inside a div with class "main-content"
+createDownloadButton(".main-content"); // You can change this selector to the desired container
 
 
         </script>
-
 
     </body>
 
