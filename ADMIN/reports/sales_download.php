@@ -43,6 +43,7 @@ if ($reportType) {
     // Add grouping
     $query .= "GROUP BY DATE(date_done)";
 
+    echo("asdasd");
     // Execute query
     $results = $conn->query($query);
 
