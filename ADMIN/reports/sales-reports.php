@@ -402,81 +402,91 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
         <script>
            document.addEventListener("DOMContentLoaded", function () {
-    // Function to download table as PDF
-    async function downloadTableAsPDF(tableId, filename) {
-        const { jsPDF } = window.jspdf; // Get jsPDF instance
+    // Function to download completed report as PDF
+    async function downloadCompletedReportsAsPDF() {
+        const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
 
-        // Extract sales table data
-        const table = document.getElementById(tableId);
-        if (!table) {
-            alert("Table not found!");
-            return;
-        }
+        // Title of the PDF
+        pdf.setFontSize(16);
+        pdf.text("Completed Reports", 10, 10);
 
-        // Extract table rows
-        const rows = Array.from(table.querySelectorAll("tr")).map((row) =>
-            Array.from(row.querySelectorAll("th, td")).map((cell) => cell.innerText)
-        );
-
-        // Add content to the PDF (sales report)
-        const margin = 10;
-        const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
-        pdf.setFontSize(12);
-        pdf.text("Sales Report", margin, 10);
-
-        // Add Sales Data Table
-        pdf.autoTable({
-            startY: 20,
-            head: [rows[0]], // The first row is the header
-            body: rows.slice(1), // Remaining rows are the body
-            theme: "grid",
-            styles: { fontSize: 10 },
-            tableWidth: pageWidth,
-        });
-
-        // Add Completed Reports
+        // Array to hold completed report data
         const completedReports = [];
+
+        // Select all completed report cards in the document
         const completedReportCards = document.querySelectorAll(".completed-report-card");
 
         completedReportCards.forEach(card => {
-            const clientName = card.querySelector(".client-name").innerText;
-            const workerName = card.querySelector(".worker-name").innerText;
-            const location = card.querySelector(".location").innerText;
-            const serviceType = card.querySelector(".service-type").innerText;
-            const productType = card.querySelector(".product-type").innerText;
+            const clientName = card.querySelector("#client_name").innerText;
+            const workerName = card.querySelector("#worker_name").innerText;
+            const location = card.querySelector("#location").innerText;
+            const serviceType = card.querySelector("#service_type").innerText;
+            const productType = card.querySelector("#product_type").innerText;
+            const startTime = card.querySelector("#start_time").innerText;
+            const pickUpTime = card.querySelector("#pick_up_time").innerText;
+            const deliveryTime = card.querySelector("#delivery_time").innerText;
+            const arrivalTime = card.querySelector("#arrive_time").innerText;
+            const constructionTime = card.querySelector("#ongoing_construction_time").innerText;
+            const checkingTime = card.querySelector("#checking_time").innerText;
+            const endTime = card.querySelector("#end_time").innerText;
 
-            completedReports.push([clientName, workerName, location, serviceType, productType]);
+            // Push each completed report as an array into the completedReports array
+            completedReports.push([
+                clientName,
+                workerName,
+                location,
+                serviceType,
+                productType,
+                startTime,
+                pickUpTime,
+                deliveryTime,
+                arrivalTime,
+                constructionTime,
+                checkingTime,
+                endTime,
+            ]);
         });
 
-        // Add Completed Reports Title
-        pdf.text("Completed Reports", margin, pdf.lastAutoTable.finalY + 10);
-
-        // Add Completed Reports Table
+        // Add Completed Reports Table to the PDF
         pdf.autoTable({
-            startY: pdf.lastAutoTable.finalY + 20,
-            head: [["Client Name", "Worker Name", "Location", "Service Type", "Product Type"]],
+            startY: 20, // Start below the title
+            head: [
+                [
+                    "Client Name", 
+                    "Worker Name", 
+                    "Location", 
+                    "Service Type", 
+                    "Product Type", 
+                    "Start Time", 
+                    "Pick-up Time", 
+                    "Delivery Time", 
+                    "Arrival Time", 
+                    "Construction Time", 
+                    "Final Checking Time", 
+                    "End Time"
+                ]
+            ],
             body: completedReports,
-            theme: "grid",
+            theme: "grid", // Use grid style
             styles: { fontSize: 10 },
-            tableWidth: pageWidth,
         });
 
         // Save the PDF
-        pdf.save(filename);
+        pdf.save("CompletedReports.pdf");
     }
 
     // Create download button
     const downloadButton = document.createElement("button");
-    downloadButton.innerText = "Download PDF Report";
+    downloadButton.innerText = "Download Completed Reports PDF";
     downloadButton.className = "btn btn-primary";
     downloadButton.style.margin = "10px";
     downloadButton.addEventListener("click", function () {
-        downloadTableAsPDF("salesTable", "SalesReport.pdf"); // Pass the table ID and desired filename
+        downloadCompletedReportsAsPDF();
     });
 
     // Append the button to the container
-    const container = document.querySelector(".main-content");
+    const container = document.querySelector(".main-content"); // Or another container element
     container.appendChild(downloadButton);
 });
 
