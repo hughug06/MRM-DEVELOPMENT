@@ -10,11 +10,16 @@ if ($reportType) {
     $fileName = "";
 
     // Determine query and file name based on report type
+    // Determine query and file name based on report type
     if ($reportType === 'weekly') {
         $query = "SELECT DATE(date_done) AS sale_date, 
                          GROUP_CONCAT(booking_id) AS booking_ids, 
                          SUM(total_cost) AS total_sales,
-                         service_type, product_type, pin_location, bank_name, payment_method
+                         GROUP_CONCAT(service_type) AS service_types,
+                         GROUP_CONCAT(product_type) AS product_types,
+                         GROUP_CONCAT(pin_location) AS pin_locations,
+                         GROUP_CONCAT(bank_name) AS bank_names,
+                         GROUP_CONCAT(payment_method) AS payment_methods
                   FROM service_payment 
                   INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
                   WHERE first_reference IS NOT NULL 
@@ -22,12 +27,16 @@ if ($reportType) {
                   AND third_reference IS NOT NULL 
                   AND WEEK(date_done) = WEEK(CURDATE()) 
                   GROUP BY DATE(date_done)";
-        $fileName = "weekly_sales_report.csv";
+        $fileName = "weekly_sales_report.pdf";
     } elseif ($reportType === 'monthly') {
         $query = "SELECT DATE(date_done) AS sale_date, 
                          GROUP_CONCAT(booking_id) AS booking_ids, 
-                         SUM(total_cost) AS total_sales ,
-                         service_type, product_type, pin_location, bank_name, payment_method
+                         SUM(total_cost) AS total_sales,
+                         GROUP_CONCAT(service_type) AS service_types,
+                         GROUP_CONCAT(product_type) AS product_types,
+                         GROUP_CONCAT(pin_location) AS pin_locations,
+                         GROUP_CONCAT(bank_name) AS bank_names,
+                         GROUP_CONCAT(payment_method) AS payment_methods
                   FROM service_payment 
                   INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
                   WHERE first_reference IS NOT NULL 
@@ -35,12 +44,16 @@ if ($reportType) {
                   AND third_reference IS NOT NULL 
                   AND MONTH(date_done) = MONTH(CURDATE()) 
                   GROUP BY DATE(date_done)";
-        $fileName = "monthly_sales_report.csv";
+        $fileName = "monthly_sales_report.pdf";
     } elseif ($reportType === 'yearly') {
         $query = "SELECT DATE(date_done) AS sale_date, 
                          GROUP_CONCAT(booking_id) AS booking_ids, 
-                         SUM(total_cost) AS total_sales ,
-                         service_type, product_type, pin_location, bank_name, payment_method
+                         SUM(total_cost) AS total_sales,
+                         GROUP_CONCAT(service_type) AS service_types,
+                         GROUP_CONCAT(product_type) AS product_types,
+                         GROUP_CONCAT(pin_location) AS pin_locations,
+                         GROUP_CONCAT(bank_name) AS bank_names,
+                         GROUP_CONCAT(payment_method) AS payment_methods
                   FROM service_payment 
                   INNER JOIN service_booking ON service_booking.booking_id = service_payment.booking_id
                   WHERE first_reference IS NOT NULL 
@@ -48,21 +61,13 @@ if ($reportType) {
                   AND third_reference IS NOT NULL 
                   AND YEAR(date_done) = YEAR(CURDATE()) 
                   GROUP BY DATE(date_done)";
-        $fileName = "yearly_sales_report.csv";
+        $fileName = "yearly_sales_report.pdf";
+    } else {
+        die("Invalid report type provided.");
     }
 
     // Execute query
     $results = $conn->query($query);
-
-    // Prepare CSV content
-    header('Content-Type: text/csv');
-    header('Content-Disposition: attachment; filename="' . $fileName . '"');
-
-    if ($results->num_rows > 0) {
-        while ($row = $results->fetch_assoc()) {
-            
-        }
-    }
 
     // Generate HTML content for PDF
     $html = '<h1>Reservation Reports</h1>';
@@ -81,23 +86,23 @@ if ($reportType) {
               </thead>';
     $html .= '<tbody>';
 
-    if (!empty($results)) {
-        $cnt = 1;
-        foreach ($results as $row) {
+    if ($results->num_rows > 0) {
+        while ($row = $results->fetch_assoc()) {
             $html .= '<tr>
-                        <td>' . htmlentities($row['booking_id']) . '</td>
-                        <td>' . htmlentities($row['service_type']) . '</td>
-                        <td>' . htmlentities($row['product_type']) . '</td>
-                        <td>' . htmlentities($row['pin_location']) . '</td>
-                        <td>' . htmlentities($row['bank_name']) . '</td>
-                        <td>' . htmlentities($row['payment_method']) . '</td>
+                        <td>' . htmlentities($row['booking_ids']) . '</td>
+                        <td>' . htmlentities($row['service_types']) . '</td>
+                        <td>' . htmlentities($row['product_types']) . '</td>
+                        <td>' . htmlentities($row['pin_locations']) . '</td>
+                        <td>' . htmlentities($row['bank_names']) . '</td>
+                        <td>' . htmlentities($row['payment_methods']) . '</td>
                         <td>' . htmlentities($row['sale_date']) . '</td>
                         <td>' . htmlentities($row['total_sales']) . '</td>
-                      </tr>';
+                    </tr>';
         }
-    } else {
-        $html .= '<tr><td colspan="11">No data available</td></tr>';
+    }else {
+        $html .= '<tr><td colspan="8">No data available</td></tr>';
     }
+
 
     $html .= '</tbody></table>';
 
