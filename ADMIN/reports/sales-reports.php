@@ -385,76 +385,81 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
         <script>
-            // Include this script at the end of your HTML file
-
-// Add jsPDF and jsPDF-Autotable via CDN in your HTML
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const generatePDF = () => {
+             // Function to generate a well-organized PDF
+    function generateOrganizedPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Add title
+        // Title and Header
         doc.setFontSize(18);
-        doc.text("Sales Report", 14, 20);
+        doc.text("Sales and Completed Bookings Report", 105, 15, { align: "center" });
         doc.setFontSize(12);
-        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 28);
+        doc.text(`Generated on: ${new Date().toLocaleString()}`, 10, 25);
 
-        // Data for Total Sales and Transactions
-        const totalSales = document.querySelector(".bg-primary .card-text").innerText;
-        const totalTransactions = document.querySelector(".bg-success .card-text").innerText;
-        doc.text("Summary:", 14, 40);
-        doc.text(`Total Sales: ${totalSales}`, 14, 48);
-        doc.text(`Total Transactions: ${totalTransactions}`, 14, 56);
-
-        // Add table data from the sales report
-        const table = document.querySelector("table");
-        const tableRows = [...table.rows].map(row =>
-            [...row.cells].map(cell => cell.innerText)
-        );
-
-        // Add table to PDF
+        // Sales Table Section
+        doc.text("Sales by Date", 10, 35);
+        const salesTable = document.querySelector(".table");
+        const salesRows = [];
+        salesTable.querySelectorAll("tbody tr").forEach((row) => {
+            const rowData = Array.from(row.querySelectorAll("td")).map((cell) => cell.textContent.trim());
+            salesRows.push(rowData);
+        });
         doc.autoTable({
-            head: [tableRows[0]], // Table headers
-            body: tableRows.slice(1), // Table data excluding headers
-            startY: 70, // Position to start rendering table
+            head: [["Date", "Booking IDs", "Total Sales (₱)"]],
+            body: salesRows,
+            startY: 40,
+            theme: "striped",
+            styles: { fontSize: 10 },
         });
 
-        // Generate completed bookings section
-        const completedCards = document.querySelectorAll("#completed .card-body .card");
-        if (completedCards.length > 0) {
-            doc.addPage(); // Add a new page for completed bookings
-            doc.text("Completed Bookings:", 14, 20);
+        // Move to the next section
+        let yPosition = doc.lastAutoTable.finalY + 10;
 
-            completedCards.forEach((card, index) => {
-                const clientName = card.querySelector("#client_name").innerText;
-                const workerName = card.querySelector("#worker_name").innerText;
-                const location = card.querySelector("#location").innerText;
-                const serviceType = card.querySelector("#service_type").innerText;
-                const productType = card.querySelector("#product_type").innerText;
+        // Completed Bookings Section
+        doc.text("Completed Bookings", 10, yPosition);
+        yPosition += 5;
+        const completedBookings = document.querySelectorAll(".col-lg-4 .card-body");
 
-                doc.text(`${index + 1}. Client: ${clientName}`, 14, doc.lastAutoTable.finalY + 10);
-                doc.text(`    Worker: ${workerName}`, 14, doc.lastAutoTable.finalY + 16);
-                doc.text(`    Location: ${location}`, 14, doc.lastAutoTable.finalY + 22);
-                doc.text(`    Service Type: ${serviceType}`, 14, doc.lastAutoTable.finalY + 28);
-                doc.text(`    Product Type: ${productType}`, 14, doc.lastAutoTable.finalY + 34);
+        completedBookings.forEach((card, index) => {
+            const clientName = card.querySelector("#client_name").textContent;
+            const workerName = card.querySelector("#worker_name").textContent;
+            const location = card.querySelector("#location").textContent;
+            const serviceType = card.querySelector("#service_type").textContent;
+            const productType = card.querySelector("#product_type").textContent;
+            const startTime = card.querySelector("#start_time").textContent;
+            const endTime = card.querySelector("#end_time").textContent;
+
+            // Add each completed booking details
+            doc.autoTable({
+                startY: yPosition,
+                head: [["Field", "Details"]],
+                body: [
+                    ["Client Name", clientName],
+                    ["Worker Name", workerName],
+                    ["Location", location],
+                    ["Service Type", serviceType],
+                    ["Product Type", productType],
+                    ["Start Time", startTime],
+                    ["End Time", endTime],
+                ],
+                theme: "grid",
+                styles: { fontSize: 10 },
+                margin: { top: 10, left: 10, right: 10 },
             });
-        }
+
+            // Move to the next section
+            yPosition = doc.lastAutoTable.finalY + 10;
+
+            // Prevent content from overlapping on the same page
+            if (yPosition + 30 > doc.internal.pageSize.height) {
+                doc.addPage();
+                yPosition = 10;
+            }
+        });
 
         // Save the PDF
-        doc.save("sales_report.pdf");
-    };
-
-    // Attach to a button
-    const downloadButton = document.createElement("button");
-    downloadButton.textContent = "Download PDF Report";
-    downloadButton.className = "btn btn-primary my-3";
-    downloadButton.addEventListener("click", generatePDF);
-
-    // Append the button to the DOM
-    document.querySelector(".container-fluid").appendChild(downloadButton);
-});
+        doc.save("Organized_Report.pdf");
+    }
 
         </script>
 
