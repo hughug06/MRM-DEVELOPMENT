@@ -116,4 +116,5 @@ if ($reportType) {
     $dompdf->stream($fileName, ["Attachment" => true]);
     exit;
 }
+echo("test");
 ?>
