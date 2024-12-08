@@ -401,34 +401,62 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+           document.addEventListener("DOMContentLoaded", function () {
     // Function to download table as PDF
     async function downloadTableAsPDF(tableId, filename) {
         const { jsPDF } = window.jspdf; // Get jsPDF instance
         const pdf = new jsPDF();
 
+        // Extract sales table data
         const table = document.getElementById(tableId);
         if (!table) {
             alert("Table not found!");
             return;
         }
 
-        // Extract table data
+        // Extract table rows
         const rows = Array.from(table.querySelectorAll("tr")).map((row) =>
             Array.from(row.querySelectorAll("th, td")).map((cell) => cell.innerText)
         );
 
-        // Add content to the PDF
+        // Add content to the PDF (sales report)
         const margin = 10;
         const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
         pdf.setFontSize(12);
         pdf.text("Sales Report", margin, 10);
 
-        // Now using autoTable correctly
+        // Add Sales Data Table
         pdf.autoTable({
             startY: 20,
             head: [rows[0]], // The first row is the header
             body: rows.slice(1), // Remaining rows are the body
+            theme: "grid",
+            styles: { fontSize: 10 },
+            tableWidth: pageWidth,
+        });
+
+        // Add Completed Reports
+        const completedReports = [];
+        const completedReportCards = document.querySelectorAll(".completed-report-card");
+
+        completedReportCards.forEach(card => {
+            const clientName = card.querySelector(".client-name").innerText;
+            const workerName = card.querySelector(".worker-name").innerText;
+            const location = card.querySelector(".location").innerText;
+            const serviceType = card.querySelector(".service-type").innerText;
+            const productType = card.querySelector(".product-type").innerText;
+
+            completedReports.push([clientName, workerName, location, serviceType, productType]);
+        });
+
+        // Add Completed Reports Title
+        pdf.text("Completed Reports", margin, pdf.lastAutoTable.finalY + 10);
+
+        // Add Completed Reports Table
+        pdf.autoTable({
+            startY: pdf.lastAutoTable.finalY + 20,
+            head: [["Client Name", "Worker Name", "Location", "Service Type", "Product Type"]],
+            body: completedReports,
             theme: "grid",
             styles: { fontSize: 10 },
             tableWidth: pageWidth,
@@ -451,6 +479,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
     const container = document.querySelector(".main-content");
     container.appendChild(downloadButton);
 });
+
 
 
         </script>
