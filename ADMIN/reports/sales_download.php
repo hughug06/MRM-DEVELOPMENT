@@ -5,6 +5,7 @@ use Dompdf\Dompdf;
 // Get report type
 $reportType = $_POST['report_type'] ?? '';
 
+echo($reportType);
 if ($reportType) {
     $query = "";
     $fileName = "";
@@ -116,5 +117,4 @@ if ($reportType) {
     $dompdf->stream($fileName, ["Attachment" => true]);
     exit;
 }
-echo("test");
 ?>
