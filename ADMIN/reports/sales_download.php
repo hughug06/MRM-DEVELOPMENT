@@ -63,7 +63,7 @@ if ($reportType) {
                         <td>' . htmlentities($row['pin_location']) . '</td>
                         <td>' . htmlentities($row['bank_name']) . '</td>
                         <td>' . htmlentities($row['payment_method']) . '</td>
-                        <td>' . htmlentities($row['sale_date']) . '</td>
+                        <td>' . htmlentities($row['payment_date']) . '</td>
                     </tr>';
         }
     }else {
