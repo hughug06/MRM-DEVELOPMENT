@@ -282,6 +282,9 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                 <input type="hidden" name="report_type" value="yearly">
                                 <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
                             </form>
+                            <div class="text-center">
+                        <button onclick="generateOrganizedPDF()" class="btn btn-primary">Download Organized PDF</button>
+                    </div>
                         </div>
                     </div>
 
