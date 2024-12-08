@@ -49,7 +49,6 @@ if ($reportType) {
                     <th>Location</th>
                     <th>Bank used</th>
                     <th>Payment Method</th>
-                    <th>Date of Sale</th>
                 </tr>
               </thead>';
     $html .= '<tbody>';
@@ -63,7 +62,6 @@ if ($reportType) {
                         <td>' . htmlentities($row['pin_location']) . '</td>
                         <td>' . htmlentities($row['bank_name']) . '</td>
                         <td>' . htmlentities($row['payment_method']) . '</td>
-                        <td>' . htmlentities($row['payment_date']) . '</td>
                     </tr>';
         }
     }else {
