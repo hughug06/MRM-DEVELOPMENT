@@ -32,7 +32,7 @@ if ($reportType) {
     }
 
     // Add grouping
-    $query .= "GROUP BY DATE(date_done)";
+    // $query .= "GROUP BY DATE(date_done)";
 
     echo($query);
 
