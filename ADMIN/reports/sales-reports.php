@@ -393,7 +393,12 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
         <!-- Custom JS -->
         <script src="../../assets/js/custom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <!-- Include jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Include jsPDF AutoTable plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -418,6 +423,8 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         const pageWidth = pdf.internal.pageSize.getWidth() - margin * 2;
         pdf.setFontSize(12);
         pdf.text("Sales Report", margin, 10);
+
+        // Now using autoTable correctly
         pdf.autoTable({
             startY: 20,
             head: [rows[0]], // The first row is the header
@@ -444,6 +451,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
     const container = document.querySelector(".main-content");
     container.appendChild(downloadButton);
 });
+
 
         </script>
 
