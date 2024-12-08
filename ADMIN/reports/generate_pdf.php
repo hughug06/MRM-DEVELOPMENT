@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 require_once '../../Database/database.php';
 require_once '../../vendor/autoload.php';
 
-use Dompdf\Dompdf;
+use dompdf\dompdf;
 
 // Sample HTML for testing
 $html = '
