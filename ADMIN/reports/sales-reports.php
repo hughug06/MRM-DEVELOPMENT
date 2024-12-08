@@ -270,7 +270,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-center gap-3 my-3">
-                            <div id="main-content"></div>
+                            
                         </div>
                     </div>
                 </div>
