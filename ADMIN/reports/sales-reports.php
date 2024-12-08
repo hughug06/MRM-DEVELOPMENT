@@ -464,15 +464,16 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         // Array to hold sales data
         const salesData = [];
 
-        // Loop through sales data and populate the salesData array
-        // Assuming that you have the data available in your JavaScript as a variable
-        const salesTableRows = document.querySelectorAll('.sales-data-table tbody tr');
+        // Select the sales data table rows
+        const salesTableRows = document.querySelectorAll('.table.table-bordered tbody tr');
         
         salesTableRows.forEach(row => {
-            const date = row.querySelector('td:nth-child(1)').innerText;
-            const bookingIds = row.querySelector('td:nth-child(2)').innerText;
-            const totalSales = row.querySelector('td:nth-child(3)').innerText;
-
+            // Extract the data for each column in the row
+            const date = row.querySelector('td:nth-child(1)').innerText.trim(); // Date
+            const bookingIds = row.querySelector('td:nth-child(2)').innerText.trim(); // Booking IDs
+            const totalSales = row.querySelector('td:nth-child(3)').innerText.trim(); // Total Sales
+            
+            // Push the data into the salesData array
             salesData.push([date, bookingIds, totalSales]);
         });
 
@@ -504,6 +505,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
     const container = document.querySelector(".main-content"); // Or another container element
     container.appendChild(downloadButton);
 });
+
 
         </script>
 
