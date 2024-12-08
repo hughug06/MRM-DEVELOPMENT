@@ -47,6 +47,9 @@ include_once '../../Database/database.php';
         <!-- Prism CSS -->
         <link rel="stylesheet" href="../../assets/libs/prismjs/themes/prism-coy.min.css">
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
     </head>
 
     <body>
@@ -282,6 +285,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                 <input type="hidden" name="report_type" value="yearly">
                                 <button type="submit" class="btn btn-outline-warning">Download Yearly Report</button>
                             </form>
+                            <button id="download-pdf" class="btn btn-outline-primary">Download Table as PDF</button>
                         </div>
                     </div>
                 </div>
@@ -375,6 +379,38 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
         <!-- Custom JS -->
         <script src="../../assets/js/custom.js"></script>
+        <script>
+    document.getElementById('download-pdf').addEventListener('click', function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Get the table element
+        const table = document.querySelector('table');
+        
+        // Convert the table to an image (using HTML2Canvas)
+        html2pdf(table, {
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            margin: { top: 20, left: 20, bottom: 20 },
+            filename: 'sales_report.pdf',
+            html2canvas: { scale: 2 }
+        });
+    });
+
+    // Optionally, include the html2pdf.js library for table-to-pdf functionality
+    function html2pdf(element, options) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.html(element, {
+            callback: function (doc) {
+                doc.save(options.filename);
+            },
+            margin: options.margin,
+            jsPDF: options.jsPDF,
+        });
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 
     </body>
 
