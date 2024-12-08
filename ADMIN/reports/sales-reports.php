@@ -422,7 +422,7 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                 const completedBookings = document.querySelectorAll(".col-lg-4 .card-body");
 
                 completedBookings.forEach((card, index) => {
-                    const clientName = card.querySelector("#client_name").textContent;
+                    // const clientName = card.querySelector("#client_name").textContent;
                     const workerName = card.querySelector("#worker_name").textContent;
                     const location = card.querySelector("#location").textContent;
                     const serviceType = card.querySelector("#service_type").textContent;
