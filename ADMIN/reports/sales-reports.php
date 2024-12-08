@@ -386,81 +386,81 @@ while ($row = $salesByDateResult->fetch_assoc()) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
         <script>
-             // Function to generate a well-organized PDF
-    function generateOrganizedPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+            // Function to generate a well-organized PDF
+            function generateOrganizedPDF() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
 
-        // Title and Header
-        doc.setFontSize(18);
-        doc.text("Sales and Completed Bookings Report", 105, 15, { align: "center" });
-        doc.setFontSize(12);
-        doc.text(`Generated on: ${new Date().toLocaleString()}`, 10, 25);
+                // Title and Header
+                doc.setFontSize(18);
+                doc.text("Sales and Completed Bookings Report", 105, 15, { align: "center" });
+                doc.setFontSize(12);
+                doc.text(`Generated on: ${new Date().toLocaleString()}`, 10, 25);
 
-        // Sales Table Section
-        doc.text("Sales by Date", 10, 35);
-        const salesTable = document.querySelector(".table");
-        const salesRows = [];
-        salesTable.querySelectorAll("tbody tr").forEach((row) => {
-            const rowData = Array.from(row.querySelectorAll("td")).map((cell) => cell.textContent.trim());
-            salesRows.push(rowData);
-        });
-        doc.autoTable({
-            head: [["Date", "Booking IDs", "Total Sales (₱)"]],
-            body: salesRows,
-            startY: 40,
-            theme: "striped",
-            styles: { fontSize: 10 },
-        });
+                // Sales Table Section
+                doc.text("Sales by Date", 10, 35);
+                const salesTable = document.querySelector(".table");
+                const salesRows = [];
+                salesTable.querySelectorAll("tbody tr").forEach((row) => {
+                    const rowData = Array.from(row.querySelectorAll("td")).map((cell) => cell.textContent.trim());
+                    salesRows.push(rowData);
+                });
+                doc.autoTable({
+                    head: [["Date", "Booking IDs", "Total Sales (₱)"]],
+                    body: salesRows,
+                    startY: 40,
+                    theme: "striped",
+                    styles: { fontSize: 10 },
+                });
 
-        // Move to the next section
-        let yPosition = doc.lastAutoTable.finalY + 10;
+                // Move to the next section
+                let yPosition = doc.lastAutoTable.finalY + 10;
 
-        // Completed Bookings Section
-        doc.text("Completed Bookings", 10, yPosition);
-        yPosition += 5;
-        const completedBookings = document.querySelectorAll(".col-lg-4 .card-body");
+                // Completed Bookings Section
+                doc.text("Completed Bookings", 10, yPosition);
+                yPosition += 5;
+                const completedBookings = document.querySelectorAll(".col-lg-4 .card-body");
 
-        completedBookings.forEach((card, index) => {
-            const clientName = card.querySelector("#client_name").textContent;
-            const workerName = card.querySelector("#worker_name").textContent;
-            const location = card.querySelector("#location").textContent;
-            const serviceType = card.querySelector("#service_type").textContent;
-            const productType = card.querySelector("#product_type").textContent;
-            const startTime = card.querySelector("#start_time").textContent;
-            const endTime = card.querySelector("#end_time").textContent;
+                completedBookings.forEach((card, index) => {
+                    const clientName = card.querySelector("#client_name").textContent;
+                    const workerName = card.querySelector("#worker_name").textContent;
+                    const location = card.querySelector("#location").textContent;
+                    const serviceType = card.querySelector("#service_type").textContent;
+                    const productType = card.querySelector("#product_type").textContent;
+                    const startTime = card.querySelector("#start_time").textContent;
+                    const endTime = card.querySelector("#end_time").textContent;
 
-            // Add each completed booking details
-            doc.autoTable({
-                startY: yPosition,
-                head: [["Field", "Details"]],
-                body: [
-                    ["Client Name", clientName],
-                    ["Worker Name", workerName],
-                    ["Location", location],
-                    ["Service Type", serviceType],
-                    ["Product Type", productType],
-                    ["Start Time", startTime],
-                    ["End Time", endTime],
-                ],
-                theme: "grid",
-                styles: { fontSize: 10 },
-                margin: { top: 10, left: 10, right: 10 },
-            });
+                    // Add each completed booking details
+                    doc.autoTable({
+                        startY: yPosition,
+                        head: [["Field", "Details"]],
+                        body: [
+                            ["Client Name", clientName],
+                            ["Worker Name", workerName],
+                            ["Location", location],
+                            ["Service Type", serviceType],
+                            ["Product Type", productType],
+                            ["Start Time", startTime],
+                            ["End Time", endTime],
+                        ],
+                        theme: "grid",
+                        styles: { fontSize: 10 },
+                        margin: { top: 10, left: 10, right: 10 },
+                    });
 
-            // Move to the next section
-            yPosition = doc.lastAutoTable.finalY + 10;
+                    // Move to the next section
+                    yPosition = doc.lastAutoTable.finalY + 10;
 
-            // Prevent content from overlapping on the same page
-            if (yPosition + 30 > doc.internal.pageSize.height) {
-                doc.addPage();
-                yPosition = 10;
+                    // Prevent content from overlapping on the same page
+                    if (yPosition + 30 > doc.internal.pageSize.height) {
+                        doc.addPage();
+                        yPosition = 10;
+                    }
+                });
+
+                // Save the PDF
+                doc.save("Organized_Report.pdf");
             }
-        });
-
-        // Save the PDF
-        doc.save("Organized_Report.pdf");
-    }
 
         </script>
 
