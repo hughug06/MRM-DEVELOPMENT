@@ -266,24 +266,6 @@ while ($row = $salesByDateResult->fetch_assoc()) {
                                 <canvas id="salesChart"></canvas>
                             </div>
                         </div>
-                        <table id="salesTable" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Booking IDs</th>
-                                    <th>Total Sales (₱)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($salesData as $data): ?>
-                                <tr>
-                                    <td><?php echo $data['sale_date']; ?></td>
-                                    <td><?php echo $data['booking_ids']; ?></td>
-                                    <td><?php echo number_format($data['daily_sales'], 2); ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
                     </div>
                     <!-- Download Buttons -->
                     <div class="col-lg-12">
@@ -402,10 +384,10 @@ while ($row = $salesByDateResult->fetch_assoc()) {
 
         <script>
            document.addEventListener("DOMContentLoaded", function () {
-    // Function to download completed report as PDF
+    // Function to download completed report as PDF in landscape
     async function downloadCompletedReportsAsPDF() {
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
+        const pdf = new jsPDF('landscape'); // Set orientation to landscape
 
         // Title of the PDF
         pdf.setFontSize(16);
@@ -489,9 +471,6 @@ while ($row = $salesByDateResult->fetch_assoc()) {
     const container = document.querySelector(".main-content"); // Or another container element
     container.appendChild(downloadButton);
 });
-
-
-
         </script>
 
 
