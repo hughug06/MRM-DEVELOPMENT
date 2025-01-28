@@ -173,7 +173,7 @@ if (isset($_SESSION['success_message'])) {
             <li class="nav-item">
               <a href="#Projects" class="nav-link">Projects</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
               <a
                 class="nav-link btn btn-outline-secondary px-4 mx-4"
                 href=""
