@@ -173,7 +173,7 @@ if (isset($_SESSION['success_message'])) {
             <li class="nav-item">
               <a href="#Projects" class="nav-link">Projects</a>
             </li>
-            <li class="nav-item d-none">
+            <!-- <li class="nav-item d-none">
               <a
                 class="nav-link btn btn-outline-secondary px-4 mx-4"
                 href=""
@@ -181,7 +181,7 @@ if (isset($_SESSION['success_message'])) {
                 data-bs-target="#signinmodal"
                 >Login</a
               >
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
