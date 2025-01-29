@@ -134,7 +134,7 @@ if (isset($_SESSION['success_message'])) {
 
       ?>
   
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light">
+    <!-- <nav class="navbar navbar-expand-lg sticky-top navbar-light">
       <div class="container">
         <a href="#" class="navbar-brand d-flex">
           <img
@@ -173,7 +173,7 @@ if (isset($_SESSION['success_message'])) {
             <li class="nav-item">
               <a href="#Projects" class="nav-link">Projects</a>
             </li>
-            <!-- <li class="nav-item d-none">
+            <li class="nav-item d-none">
               <a
                 class="nav-link btn btn-outline-secondary px-4 mx-4"
                 href=""
@@ -181,11 +181,11 @@ if (isset($_SESSION['success_message'])) {
                 data-bs-target="#signinmodal"
                 >Login</a
               >
-            </li> -->
+            </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> -->
 
     <header class="header position-relative mt-3 mb-6 overflow-hidden">
       <img
