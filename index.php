@@ -733,16 +733,19 @@ if (isset($_SESSION['success_message'])) {
         <div class="row mb-4">
           <div class="col-md-4">
             <div class="card border-0">
-              <img
+              
+              <a href="assets/landing_assets/images/mrm_permits/img5.jpg">
+                <img
                 src="assets/landing_assets/images/mrm_permits/img5.jpg"
                 alt=""
                 class="rounded-4"
-              />
+                />
+              </a>
               <div class="card-body">
                 <h5 class="card-title"><?php echo $projects["pj1_title"] ?></h5>
                 <p class="card-text">
                 <?php echo $projects["pj1_desc"] ?>
-                  <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html">...Read More</a>
+                  <a href="" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
