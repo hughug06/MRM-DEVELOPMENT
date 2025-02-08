@@ -283,9 +283,9 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="<?php echo $imagePath1 ?>"
+                src="assets/landing_assets/images/mrm_images/img4.jpg"
                 alt=""
-                class="img-fluit"
+                class="img-fluid"
               />
             </div>
           </div>
