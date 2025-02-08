@@ -738,13 +738,8 @@ if (isset($_SESSION['success_message'])) {
                 alt=""
                 class="rounded-4"
               />
-              <a href="assets/landing_assets/images/mrm_permits/img5.jpg"></a>
               <div class="card-body">
-                <!-- <h5 class="card-title"><?php echo $projects["pj1_title"] ?></h5> -->
-                <!-- <p class="card-text"> -->
-                <!-- <?php echo $projects["pj1_desc"] ?> -->
                   <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html btn btn-secondary d-flex mx-auto text-light">View Image</a>
-                </p>
               </div>
             </div>
           </div>
