@@ -283,7 +283,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="image-container d-flex justify-content-center">
               <img
-                src="assets/landing_assets/images/mrm_images/img4.jpg"
+                src="assets/landing_assets/images/mrm_images/img4.png"
                 alt=""
                 class="img-fluid"
               />
