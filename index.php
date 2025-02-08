@@ -778,6 +778,7 @@ if (isset($_SESSION['success_message'])) {
                 src="assets/landing_assets/images/mrm_permits/img10.jpg"
                 alt=""
                 class="rounded-4"
+                height="500"
               />
               <div class="card-body">
                 <a href="assets/landing_assets/images/mrm_permits/img10.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
@@ -790,6 +791,7 @@ if (isset($_SESSION['success_message'])) {
                 src="assets/landing_assets/images/mrm_permits/img11.jpg"
                 alt=""
                 class="rounded-4"
+                height="500"
               />
               <div class="card-body">
                 <a href="assets/landing_assets/images/mrm_permits/img11.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
@@ -802,6 +804,7 @@ if (isset($_SESSION['success_message'])) {
                 src="assets/landing_assets/images/mrm_permits/img12.jpg"
                 alt=""
                 class="rounded-4"
+                height="500"
               />
               <div class="card-body">
                 <a href="assets/landing_assets/images/mrm_permits/img12.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
