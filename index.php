@@ -742,7 +742,7 @@ if (isset($_SESSION['success_message'])) {
                 <h5 class="card-title"><?php echo $projects["pj1_title"] ?></h5>
                 <p class="card-text">
                 <?php echo $projects["pj1_desc"] ?>
-                  <a href="" class="article.html">...Read More</a>
+                  <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html">...Read More</a>
                 </p>
               </div>
             </div>
