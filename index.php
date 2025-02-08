@@ -171,7 +171,7 @@ if (isset($_SESSION['success_message'])) {
               <a href="#Services" class="nav-link">Services</a>
             </li>
             <li class="nav-item">
-              <a href="#Projects" class="nav-link">Projects</a>
+              <a href="#Projects" class="nav-link">Permits</a>
             </li>
             <!-- <li class="nav-item d-none">
               <a
