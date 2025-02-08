@@ -780,43 +780,31 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj4_title"] ?></h5>
-                <p class="card-text">
-                <?php echo $projects["pj4_desc"] ?>
-                  <a href="" class="article.html">...Read More</a>
-                </p>
+                <a href="assets/landing_assets/images/mrm_permits/img10.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_permits/img10.jpg"
+                src="assets/landing_assets/images/mrm_permits/img11.jpg"
                 alt=""
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj5_title"] ?></h5>
-                <p class="card-text">
-                <?php echo $projects["pj5_desc"] ?>
-                  <a href="" class="article.html">...Read More</a>
-                </p>
+                <a href="assets/landing_assets/images/mrm_permits/img11.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="<?php echo $imagePath9 ?>"
+                src="assets/landing_assets/images/mrm_permits/img12.jpg"
                 alt=""
                 class="rounded-4"
               />
               <div class="card-body">
-                <h5 class="card-title"><?php echo $projects["pj6_title"] ?></h5>
-                <p class="card-text">
-                <?php echo $projects["pj6_desc"] ?>
-                  <a href="" class="article.html">...Read More</a>
-                </p>
+                <a href="assets/landing_assets/images/mrm_permits/img12.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
               </div>
             </div>
           </div>
