@@ -739,7 +739,7 @@ if (isset($_SESSION['success_message'])) {
                 class="rounded-4"
               />
               <div class="card-body">
-                  <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html btn btn-secondary d-flex mx-auto text-light">View Image</a>
+                  <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html btn btn-secondary d-flex mx-auto text-light text-center">View Image</a>
               </div>
             </div>
           </div>
