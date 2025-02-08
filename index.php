@@ -737,7 +737,7 @@ if (isset($_SESSION['success_message'])) {
                 src="assets/landing_assets/images/mrm_permits/img5.jpg"
                 alt=""
                 class="rounded-4"
-                height="350"
+                height="500"
               />
               <div class="card-body">
                   <a href="assets/landing_assets/images/mrm_permits/img5.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
