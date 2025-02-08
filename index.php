@@ -750,7 +750,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_permits/img8.jpg"
+                src="assets/landing_assets/images/mrm_permits/img9.jpg"
                 alt=""
                 class="rounded-4"
               />
@@ -766,7 +766,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="assets/landing_assets/images/mrm_permits/img9.jpg"
+                src="assets/landing_assets/images/mrm_permits/img8.jpg"
                 alt=""
                 class="rounded-4"
               />
