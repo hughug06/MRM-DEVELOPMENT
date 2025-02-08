@@ -1,7 +1,7 @@
 <?php
 
 // FOR UP WEBSITE
-$conn = new mysqli('localhost', 'u103590962_mrm_db', 'Wecandoit010', 'u103590962_mrm_db');
+$conn = new mysqli('localhost', 'u103590962_mrm_db', '9~zVM]qkA;&', 'u103590962_mrm_db');
 
 // Check the connection
 if ($conn->connect_error) {
