@@ -729,14 +729,12 @@ if (isset($_SESSION['success_message'])) {
 
     <section id="Projects" class="py-6 reveal">
       <div class="container">
-        <h2 class="text-center pb-4">
-          Some of our <span class="text-secondary">Projects</span>
-        </h2>
+        <h2 class="text-center pb-4">Business <span class="text-secondary">Permits</span></h2>
         <div class="row mb-4">
           <div class="col-md-4">
             <div class="card border-0">
               <img
-                src="<?php echo $imagePath4 ?>"
+                src="assets/landing_assets/images/mrm_permits/img5.jpg"
                 alt=""
                 class="rounded-4"
               />
