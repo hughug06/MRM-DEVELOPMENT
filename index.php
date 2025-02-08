@@ -980,7 +980,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <footer class="bg-light py-6">
+    <footer class="bg-light py-6" id="contact">
       <div class="container">
         <div class="row">
           <div class="col-md-4 my-3">
