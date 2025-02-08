@@ -811,19 +811,6 @@ if (isset($_SESSION['success_message'])) {
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card border-0">
-              <img
-                src="assets/landing_assets/images/mrm_permits/img13.jpg"
-                alt=""
-                class="rounded-4"
-                height="500"
-              />
-              <div class="card-body">
-                <a href="assets/landing_assets/images/mrm_permits/img13.jpg" class="article.html btn btn-secondary d-flex justify-content-center text-light">View Image</a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
