@@ -222,7 +222,7 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6 my-auto">
             <div class="image-container">
               <img
-                src="<?php echo $imagePath ?>"
+                src="assets/landing_assets/images/mrm_images/hero-img-mrm.jpg"
                 alt=""
                 class="img-fluid"
               />
