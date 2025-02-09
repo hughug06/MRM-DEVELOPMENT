@@ -831,22 +831,22 @@ if (isset($_SESSION['success_message'])) {
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
               <?php echo $user_experience["xp1_comment"] ?>
               </p>
-              <div>CEO - Ruby Chavez</div>
+              <div class="fw-bold fs-5 mt-4">CEO - Ruby Chavez</div>
+              <!-- <div>CEO - Ruby Chavez</div> -->
             </div>
           </div>
           <div class="carousel-item">
             <div
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
-              <img
-                src="<?php echo $imagePath11 ?>"
+              <!-- <img
+                src=""
                 alt=""
                 class="rounded-circle"
                 width="120"
-              />
+              /> -->
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
               <?php echo $user_experience["xp2_comment"] ?>
-                
               </p>
               <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp2_name"] ?>Alyssa Rivera</div>
               <!-- <div>Team Leader - Marvie</div> -->
@@ -1011,19 +1011,21 @@ if (isset($_SESSION['success_message'])) {
               <a href="https://www.facebook.com/share/19nNaPGh9V/" class="text-decoration-none">
                 <i class="fab fa-facebook fa-3x text-dark mx-2"></i>
               </a>
-              <a href="" class="text-decoration-none">
+              <!-- <a href="" class="text-decoration-none">
                 <i class="fab fa-instagram fa-3x text-dark mx-2"></i>
-              </a>
-              <a href="" class="text-decoration-none">
+              </a> -->
+              <!-- <a href="" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-dark mx-2"></i>
-              </a>
-              <a href="" class="text-decoration-none">
+              </a> -->
+              <!-- <a href="" class="text-decoration-none">
                 <i class="fab fa-google fa-3x text-dark mx-2"></i>
-              </a>
+              </a> -->
             </div>
             <p>
               We would love to hear from you
-              <a href=""><strong>mrm-eg@site.com</strong></a>
+              <a href=""><strong>mrm.eg.sales@gmail.com</strong></a>
+              <a href="https://www.facebook.com/share/19nNaPGh9V/"><strong>MRM Electric Power Generation Services.</strong></a>
+              <a href=""><strong>mrm.eg.sales@gmail.com</strong></a>
             </p>
           </div>
         </div>
