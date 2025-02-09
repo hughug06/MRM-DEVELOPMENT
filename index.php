@@ -263,8 +263,11 @@ if (isset($_SESSION['success_message'])) {
                <span class="text-secondary">Vision</span> 
             </h2>
             <p class="fs-5">
-            <?php echo $descs["desc2"] ?>
-              
+              Leading the world’s most compelling energy power, alleviating climate change, 
+              and ending poverty allowing next generation to see the country. Execute clean 
+              and renewable energy projects all over in the Philippines, through innovative 
+              and profitable production processes, aligned with environmental protection 
+              and the development of the communities in which we operate.
             </p>
           </div>
         </div>
