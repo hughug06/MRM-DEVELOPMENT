@@ -209,7 +209,9 @@ if (isset($_SESSION['success_message'])) {
                 <span class="text-primary"><?php echo $titles["title1_l"] ?></span>
               </h1>
               <p class="lead mb-4">
-              <?php echo $descs["desc1"] ?>
+              MRM E-G COMPANY is the sole proprietorship managed by Ms. Ruby Anne Chavez, a young Entrepreneur 
+              who has experience of almost 8 years in Generator and Solar Industry. 
+              MRM Company also engages sub-contract with (Triple A Companies) for private and government projects.
               </p>
               <a href="#introduction" class="btn btn-primary btn-lg m-2">
                 More Details
@@ -989,28 +991,28 @@ if (isset($_SESSION['success_message'])) {
             </p>
           </div>
           <div class="col-md-4 my-3">
-            <h6>Links</h6>
+            <h6>Locations</h6>
             <ul class="list-unstyled">
               <li>
-                Important: <a href="">Terms & Conditions</a>,
-                <a href="">Privacy Policy</a>
+                Main Office: 87 Stanford St. Cubao Quezon City 1102
+                <!-- <a href="">Privacy Policy</a> -->
               </li>
               <li>
-                Useful: <a href="">About</a>,
-                <a href="">Company</a>
+                Warehouse: F.Lazaro St. Brgy Canuway West. Valenzuela City
+                <!-- <a href="">Company</a> -->
               </li>
-              <li>
+              <!-- <li>
                 Menu: <a href="#Home">Home</a>, <a href="#Details">Details</a>,
                 <a href="#Services">Services</a>
                 <a href="#Register">Register</a>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="col-md-4 my-3">
             <h6>We would love to hear from you</h6>
             <ul class="list-unstyled">
               <li>
-                Facebook Page: <a href="https://www.facebook.com/share/19nNaPGh9V/">MRM Electric Power Generation Services.</a>,
+                Facebook <a href="https://www.facebook.com/share/19nNaPGh9V/">MRM Electric Power Generation Services.</a>
                 <!-- <a href="">Privacy Policy</a> -->
               </li>
               <li>
