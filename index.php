@@ -1007,6 +1007,22 @@ if (isset($_SESSION['success_message'])) {
             </ul>
           </div>
           <div class="col-md-4 my-3">
+            <h6>We would love to hear from you</h6>
+            <ul class="list-unstyled">
+              <li>
+                Facebook Page: <a href="https://www.facebook.com/share/19nNaPGh9V/">MRM Electric Power Generation Services.</a>,
+                <!-- <a href="">Privacy Policy</a> -->
+              </li>
+              <li>
+                Gmail: mrm.eg.sales@gmail.com
+                <!-- <a href="">Company</a> -->
+              </li>
+              <li>
+                Contact No.: <a href="">mrm.eg.sales@gmail.com</a>,
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 my-3">
             <div class="mb-4">
               <a href="https://www.facebook.com/share/19nNaPGh9V/" class="text-decoration-none">
                 <i class="fab fa-facebook fa-3x text-dark mx-2"></i>
