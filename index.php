@@ -822,18 +822,16 @@ if (isset($_SESSION['success_message'])) {
             <div
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
-              <img
-                src="<?php echo $imagePath10 ?>"
+              <!-- <img
+                src=""
                 alt=""
                 class="rounded-circle"
                 width="120"
-              />
+              /> -->
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
               <?php echo $user_experience["xp1_comment"] ?>
-                
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp1_name"] ?></div>
-              <!-- <div>General Manager - Marvie</div> -->
+              <div>CEO - Ruby Chavez</div>
             </div>
           </div>
           <div class="carousel-item">
@@ -1010,7 +1008,7 @@ if (isset($_SESSION['success_message'])) {
           </div>
           <div class="col-md-4 my-3">
             <div class="mb-4">
-              <a href="" class="text-decoration-none">
+              <a href="https://www.facebook.com/share/19nNaPGh9V/" class="text-decoration-none">
                 <i class="fab fa-facebook fa-3x text-dark mx-2"></i>
               </a>
               <a href="" class="text-decoration-none">
