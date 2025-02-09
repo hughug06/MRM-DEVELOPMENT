@@ -1018,15 +1018,15 @@ if (isset($_SESSION['success_message'])) {
                 <!-- <a href="">Company</a> -->
               </li>
               <li>
-                Contact No.: <a href="">mrm.eg.sales@gmail.com</a>,
+                Contact No.: 02 8641-7494 / 0951-931-7281,
               </li>
             </ul>
           </div>
-          <div class="col-md-4 my-3">
+          <!-- <div class="col-md-4 my-3">
             <div class="mb-4">
               <a href="https://www.facebook.com/share/19nNaPGh9V/" class="text-decoration-none">
                 <i class="fab fa-facebook fa-3x text-dark mx-2"></i>
-              </a>
+              </a> -->
               <!-- <a href="" class="text-decoration-none">
                 <i class="fab fa-instagram fa-3x text-dark mx-2"></i>
               </a> -->
@@ -1036,14 +1036,14 @@ if (isset($_SESSION['success_message'])) {
               <!-- <a href="" class="text-decoration-none">
                 <i class="fab fa-google fa-3x text-dark mx-2"></i>
               </a> -->
-            </div>
-            <p>
+            <!-- </div> -->
+            <!-- <p>
               We would love to hear from you
               <a href=""><strong>mrm.eg.sales@gmail.com</strong></a>
               <a href="https://www.facebook.com/share/19nNaPGh9V/"><strong>MRM Electric Power Generation Services.</strong></a>
               <a href=""><strong>mrm.eg.sales@gmail.com</strong></a>
-            </p>
-          </div>
+            </p> -->
+          <!-- </div> -->
         </div>
       </div>
     </footer>
