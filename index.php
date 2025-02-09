@@ -316,7 +316,6 @@ if (isset($_SESSION['success_message'])) {
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal3"] ?>
                   Offer sustainable, clean energy solutions.
                   </p>
                 </li>
