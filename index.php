@@ -839,7 +839,7 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               /> -->
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp1_comment"] ?>
+
               </p>
               <div class="fw-bold fs-5 mt-4">CEO - Ruby Chavez</div>
               <!-- <div>CEO - Ruby Chavez</div> -->
@@ -856,9 +856,9 @@ if (isset($_SESSION['success_message'])) {
                 width="120"
               /> -->
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp2_comment"] ?>
+
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp2_name"] ?>Alyssa Rivera</div>
+              <div class="fw-bold fs-5 mt-4">Alyssa Rivera</div>
               <!-- <div>Team Leader - Marvie</div> -->
             </div>
           </div>
@@ -866,17 +866,17 @@ if (isset($_SESSION['success_message'])) {
             <div
               class="d-flex flex-column justify-content-center align-items-center text-center"
             >
-              <img
-                src="<?php echo $imagePath12 ?>"
+              <!-- <img
+                src=""
                 alt=""
                 class="rounded-circle"
                 width="120"
-              />
+              /> -->
               <p class="w-50 my-4 fst-italic fs-4 mb-4">
-              <?php echo $user_experience["xp3_comment"] ?>
+
                 
               </p>
-              <div class="fw-bold fs-5 mt-4"><?php echo $user_experience["xp3_name"] ?></div>
+              <div class="fw-bold fs-5 mt-4"></div>
               <!-- <div>Product Manager - Marvie</div> -->
             </div>
           </div>
