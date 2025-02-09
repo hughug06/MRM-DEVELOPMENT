@@ -259,8 +259,8 @@ if (isset($_SESSION['success_message'])) {
       <div class="container">
         <div class="row">
           <div class="col-md-8 offset-md-2 text-center">
-            <h2 class="mb-4"><?php echo $titles["title2"] ?>
-               <span class="text-secondary"></span> 
+            <h2 class="mb-4">Our
+               <span class="text-secondary">Vision</span> 
             </h2>
             <p class="fs-5">
             <?php echo $descs["desc2"] ?>
@@ -1012,7 +1012,7 @@ if (isset($_SESSION['success_message'])) {
             <h6>We would love to hear from you</h6>
             <ul class="list-unstyled">
               <li>
-                Facebook <a href="https://www.facebook.com/share/19nNaPGh9V/">MRM Electric Power Generation Services.</a>
+                Facebook <a href="https://www.facebook.com/share/19nNaPGh9V/">MRM Electric Power Generation Services</a>
                 <!-- <a href="">Privacy Policy</a> -->
               </li>
               <li>
@@ -1020,7 +1020,7 @@ if (isset($_SESSION['success_message'])) {
                 <!-- <a href="">Company</a> -->
               </li>
               <li>
-                Contact No.: 02 8641-7494 / 0951-931-7281,
+                Contact No.: 02 8641-7494 / 0951-931-7281
               </li>
             </ul>
           </div>
