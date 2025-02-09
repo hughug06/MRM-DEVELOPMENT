@@ -297,20 +297,19 @@ if (isset($_SESSION['success_message'])) {
           <div class="col-lg-6">
             <div class="mt-4">
               <h2 class="mb-5">
-                The <span class="text-secondary">Goal</span> of Solar Energy
+                <span class="text-secondary">Mission</span> 
               </h2>
               <ul class="list-unstyled">
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal1"] ?>
-                    
+                  Provide the highest quality, cost-effective renewable energy power products and services.
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal2"] ?>
+                  Serve customers interested in reducing energy costs.
                     
                   </p>
                 </li>
@@ -318,13 +317,20 @@ if (isset($_SESSION['success_message'])) {
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
                   <?php echo $goals["goal3"] ?>
+                  Offer sustainable, clean energy solutions.
+                  </p>
+                </li>
+                <li class="d-flex mb-3">
+                  <i class="fas fa-check text-primary fa-2x mx-4"></i>
+                  <p>
+                  Provide affordable solutions to address the environmental crisis.
                     
                   </p>
                 </li>
                 <li class="d-flex mb-3">
                   <i class="fas fa-check text-primary fa-2x mx-4"></i>
                   <p>
-                  <?php echo $goals["goal4"] ?>
+                  Contribute to a better future for the country.
                     
                   </p>
                 </li>
