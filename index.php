@@ -900,7 +900,7 @@ if (isset($_SESSION['success_message'])) {
       </div>
     </section>
 
-    <section id="register" class="register my-6 reveal">
+    <section id="register" class="register my-6 reveal d-none">
       <img
         src="assets/landing_assets/images/decoraiton-star-circle.svg"
         alt=""
